@@ -1,6 +1,6 @@
 [build]
   command = "pnpm build"
-  publish = "dist/chess-playground/browser"
+  publish = "dist/cheesy/browser"
 
 [build.environment]
   NODE_VERSION = "26.10.0"

@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "chess-playground": {
+    "cheesy": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -69,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "chess-playground:build:production"
+              "buildTarget": "cheesy:build:production"
             },
             "development": {
-              "buildTarget": "chess-playground:build:development"
+              "buildTarget": "cheesy:build:development"
             }
           },
           "defaultConfiguration": "development"
