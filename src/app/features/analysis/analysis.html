@@ -47,8 +47,10 @@
         {{ i18n.t().engine.toggle }}
       </label>
 
+      <!-- Always in the page, so screen readers announce every change of its text. -->
+      <p class="engine-status" role="status">{{ engineMessage() }}</p>
+
       @if (engineOn()) {
-        <p class="engine-status" role="status">{{ engineMessage() }}</p>
         @if (engine.status() === 'error') {
           <button type="button" class="button retry" (click)="retry()">
             {{ i18n.t().engine.retry }}

@@ -74,6 +74,10 @@
   min-height: 1.5em;
 }
 
+.engine-status:empty {
+  min-height: 0;
+}
+
 .retry {
   justify-self: start;
 }

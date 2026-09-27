@@ -168,6 +168,27 @@ describe('Analysis', () => {
       expect(game.moves()).toHaveLength(1);
     });
 
+    it('should jump through the game with the navigation buttons and the move list', async () => {
+      for (const san of ['e4', 'e5', 'Nf3']) game.playSan(san);
+      await render();
+
+      button('First move').click();
+      await render();
+      expect(game.ply()).toBe(0);
+
+      button('Next move').click();
+      await render();
+      expect(game.ply()).toBe(1);
+
+      button('Last move').click();
+      await render();
+      expect(game.ply()).toBe(3);
+
+      element.querySelector<HTMLButtonElement>('app-move-list button')?.click();
+      await render();
+      expect(game.ply()).toBe(1);
+    });
+
     it('should remove the last move when undo is pressed', async () => {
       game.playSan('e4');
       await render();
@@ -232,6 +253,13 @@ describe('Analysis', () => {
       expect(engines).toHaveLength(0);
       expect(element.querySelector('app-eval-bar')).toBeNull();
       expect(element.textContent).toContain('Downloads about 2 MB the first time.');
+    });
+
+    it('should keep the engine status region in the page, empty, while the engine is off', () => {
+      const region = element.querySelector('.engine-status');
+
+      expect(region?.getAttribute('role')).toBe('status');
+      expect(region?.textContent?.trim()).toBe('');
     });
 
     it('should load the engine and announce it when turned on', async () => {
@@ -409,6 +437,17 @@ describe('Analysis', () => {
 
   describe('shared link', () => {
     const ENDGAME = '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1';
+
+    it('should never pass engine commands hidden in the link to the engine', async () => {
+      await open(`/analysis?fen=${encodeURIComponent(`${AFTER_E4}\ngo infinite\nquit`)}`);
+      await startEngine();
+
+      expect(engine().sent).not.toContain('quit');
+      expect(engine().sent.filter((command) => command.startsWith('go'))).toEqual(['go depth 20']);
+      expect(engine().sent.some((command) => /[\r\n]/.test(command))).toBe(false);
+      // Extra fields make it an invalid FEN: the link is ignored and the initial position stays.
+      expect(positionsSent()).toEqual([`position fen ${INITIAL_FEN}`]);
+    });
 
     it('should load the position of the link', async () => {
       await open(`/analysis?fen=${encodeURIComponent(ENDGAME)}`);

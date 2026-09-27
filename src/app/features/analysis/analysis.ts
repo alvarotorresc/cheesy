@@ -90,6 +90,7 @@ export class Analysis {
 
   protected readonly engineMessage = computed(() => {
     const t = this.i18n.t().engine;
+    if (!this.engineOn()) return '';
     if (this.outcome()) return t.noLegalMoves;
     switch (this.engine.status()) {
       case 'loading':
