@@ -63,5 +63,109 @@
       "es": "Las negras preparan ...d5 con ...c6 para disputar el centro sin encerrar a su alfil de casillas claras.",
       "en": "Black prepares ...d5 with ...c6 to contest the centre without locking in the light-squared bishop."
     }
+  },
+  {
+    "id": "scotch-game",
+    "name": {
+      "es": "Apertura Escocesa",
+      "en": "Scotch Game"
+    },
+    "eco": "C44-C45",
+    "side": "white",
+    "description": {
+      "es": "Las blancas abren el centro con 3.d4 y cambian su peón de d por el de e5: juego de piezas libre y algo más de espacio.",
+      "en": "White opens the centre with 3.d4 and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+    }
+  },
+  {
+    "id": "petrov-defence",
+    "name": {
+      "es": "Defensa Petrov (Rusa)",
+      "en": "Petrov's Defence (Russian Game)"
+    },
+    "eco": "C42-C43",
+    "side": "black",
+    "description": {
+      "es": "Las negras contraatacan e4 en lugar de defender e5: una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel.",
+      "en": "Black counterattacks e4 instead of defending e5: a symmetrical, very solid defence valued for its reliability at top level."
+    }
+  },
+  {
+    "id": "kings-gambit",
+    "name": {
+      "es": "Gambito de Rey",
+      "en": "King's Gambit"
+    },
+    "eco": "C30-C39",
+    "side": "white",
+    "description": {
+      "es": "Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un centro con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.",
+      "en": "White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a centre with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+    }
+  },
+  {
+    "id": "sicilian-dragon",
+    "name": {
+      "es": "Defensa Siciliana, Variante del Dragón",
+      "en": "Sicilian Defence, Dragon Variation"
+    },
+    "eco": "B70-B79",
+    "side": "black",
+    "description": {
+      "es": "Las negras colocan el alfil en fianchetto en g7 para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos.",
+      "en": "Black fianchettoes the bishop on g7 to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+    }
+  },
+  {
+    "id": "sicilian-sveshnikov",
+    "name": {
+      "es": "Defensa Siciliana, Variante Sveshnikov",
+      "en": "Sicilian Defence, Sveshnikov Variation"
+    },
+    "eco": "B33",
+    "side": "black",
+    "description": {
+      "es": "Las negras aceptan un agujero permanente en d5 y un peón retrasado en d6 a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel.",
+      "en": "Black accepts a permanent hole on d5 and a backward d6 pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+    }
+  },
+  {
+    "id": "sicilian-alapin",
+    "name": {
+      "es": "Defensa Siciliana, Variante Alapin",
+      "en": "Sicilian Defence, Alapin Variation"
+    },
+    "eco": "B22",
+    "side": "white",
+    "description": {
+      "es": "Con 2.c3 las blancas preparan d4 para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas.",
+      "en": "With 2.c3 White prepares d4 to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+    }
+  },
+  {
+    "id": "scandinavian-defence",
+    "name": {
+      "es": "Defensa Escandinava",
+      "en": "Scandinavian Defence"
+    },
+    "eco": "B01",
+    "side": "black",
+    "description": {
+      "es": "Las negras atacan e4 en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender.",
+      "en": "Black hits e4 on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+    }
+  },
+  {
+    "id": "pirc-defence",
+    "name": {
+      "es": "Defensa Pirc",
+      "en": "Pirc Defence"
+    },
+    "eco": "B07-B09",
+    "side": "black",
+    "description": {
+      "es": "Las negras permiten un centro blanco amplio para socavarlo después con ...c5 o ...e5 y la presión del alfil de g7.",
+      "en": "Black allows a broad white centre and undermines it later with ...c5 or ...e5 and pressure from the g7 bishop."
+    }
   }
 ]

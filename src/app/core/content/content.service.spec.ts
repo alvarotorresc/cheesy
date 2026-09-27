@@ -10,6 +10,14 @@ const OPENING_IDS = [
   'sicilian-najdorf',
   'french-defence',
   'caro-kann-defence',
+  'scotch-game',
+  'petrov-defence',
+  'kings-gambit',
+  'sicilian-dragon',
+  'sicilian-sveshnikov',
+  'sicilian-alapin',
+  'scandinavian-defence',
+  'pirc-defence',
 ];
 
 const summaryOf = ({ id, name, eco, side, description }: OpeningTree): OpeningSummary => ({

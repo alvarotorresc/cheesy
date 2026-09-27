@@ -1,0 +1,470 @@
+{
+  "id": "scandinavian-defence",
+  "name": {
+    "es": "Defensa Escandinava",
+    "en": "Scandinavian Defence"
+  },
+  "eco": "B01",
+  "side": "black",
+  "description": {
+    "es": "Las negras atacan e4 en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender.",
+    "en": "Black hits e4 on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+  },
+  "root": [
+    {
+      "san": "e4",
+      "main": true,
+      "children": [
+        {
+          "san": "d5",
+          "name": {
+            "es": "Defensa Escandinava",
+            "en": "Scandinavian Defence"
+          },
+          "comment": {
+            "es": "Ataca e4 de inmediato: las negras aceptan sacar pronto la dama.",
+            "en": "Attacks e4 at once: Black accepts an early queen sortie."
+          },
+          "main": true,
+          "children": [
+            {
+              "san": "exd5",
+              "main": true,
+              "children": [
+                {
+                  "san": "Qxd5",
+                  "comment": {
+                    "es": "La dama recupera el peón, pero será perseguida con Cc3.",
+                    "en": "The queen regains the pawn but will be chased by Nc3."
+                  },
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Qa5",
+                          "name": {
+                            "es": "Defensa Escandinava, línea principal",
+                            "en": "Scandinavian Defence, Main Line"
+                          },
+                          "comment": {
+                            "es": "Desde a5 la dama está a salvo y clava el caballo de c3 en cuanto avance el peón de d.",
+                            "en": "On a5 the queen is safe and pins the c3 knight once the d-pawn advances."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "d4",
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "c6",
+                                          "comment": {
+                                            "es": "Da a la dama una casilla de retirada en c7 y prepara ...Af5.",
+                                            "en": "Gives the queen a retreat square on c7 and prepares ...Bf5."
+                                          },
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "Bc4",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "Bf5",
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "Bd2",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "e6",
+                                                          "comment": {
+                                                            "es": "Estructura sólida de tipo Caro-Kann con el alfil de c8 ya fuera de la cadena.",
+                                                            "en": "A solid Caro-Kann-like structure with the c8 bishop already outside the chain."
+                                                          },
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "Qe2",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bb4",
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O-O",
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nbd7",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "a3",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bxc3",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bxc3",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Qc7",
+                                                                                          "comment": {
+                                                                                            "es": "Las negras ceden el alfil para aliviar la presión y la dama queda a salvo en c7.",
+                                                                                            "en": "Black gives up the bishop to ease the pressure and the queen is safe on c7."
+                                                                                          },
+                                                                                          "main": true,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "san": "Bf5",
+                                          "name": {
+                                            "es": "Variante Clásica",
+                                            "en": "Classical Variation"
+                                          },
+                                          "comment": {
+                                            "es": "Desarrolla el alfil antes de ...c6.",
+                                            "en": "Develops the bishop before ...c6."
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "Bd2",
+                                              "children": [
+                                                {
+                                                  "san": "c6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bc4",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nbd7",
+                                                          "children": [
+                                                            {
+                                                              "san": "Qe2",
+                                                              "comment": {
+                                                                "es": "Las blancas preparan el enroque largo y la ruptura d5; las negras completan el desarrollo con ...Dc7 y ...e6.",
+                                                                "en": "White prepares long castling and the d5 break; Black completes development with ...Qc7 and ...e6."
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "san": "Qc7",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O-O",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "e6",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Qd6",
+                          "name": {
+                            "es": "Defensa Gubinsky-Melts",
+                            "en": "Gubinsky–Melts Defence"
+                          },
+                          "comment": {
+                            "es": "Planteamiento moderno: desde d6 la dama controla e5 y puede replegarse a defender.",
+                            "en": "A modern setup: from d6 the queen controls e5 and can drop back to defend."
+                          },
+                          "children": [
+                            {
+                              "san": "d4",
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "children": [
+                                        {
+                                          "san": "a6",
+                                          "name": {
+                                            "es": "Variante Bronstein",
+                                            "en": "Bronstein Variation"
+                                          },
+                                          "comment": {
+                                            "es": "Prepara ...b5 o ...Cc6 sin temer Cb5.",
+                                            "en": "Prepares ...b5 or ...Nc6 without fearing Nb5."
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "g3",
+                                              "children": [
+                                                {
+                                                  "san": "Bg4",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg2",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "children": [
+                                                                {
+                                                                  "san": "O-O-O",
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Qd8",
+                          "name": {
+                            "es": "Variante Valenciana",
+                            "en": "Valencian Variation"
+                          },
+                          "comment": {
+                            "es": "Retirada completa: la dama queda a salvo a costa de algo de tiempo.",
+                            "en": "A full retreat: the queen is safe at the cost of some time."
+                          },
+                          "children": [
+                            {
+                              "san": "d4",
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "children": [
+                                        {
+                                          "san": "Bg4",
+                                          "name": {
+                                            "es": "Variante Valenciana, línea principal",
+                                            "en": "Valencian Variation, Main Line"
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "h3",
+                                              "children": [
+                                                {
+                                                  "san": "Bxf3",
+                                                  "children": [
+                                                    {
+                                                      "san": "Qxf3",
+                                                      "children": [
+                                                        {
+                                                          "san": "c6",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "Nf6",
+                  "name": {
+                    "es": "Variante Moderna",
+                    "en": "Modern Variation"
+                  },
+                  "comment": {
+                    "es": "Las negras recuperarán el peón con el caballo en lugar de con la dama.",
+                    "en": "Black will regain the pawn with the knight rather than the queen."
+                  },
+                  "children": [
+                    {
+                      "san": "d4",
+                      "children": [
+                        {
+                          "san": "Nxd5",
+                          "name": {
+                            "es": "Variante Marshall",
+                            "en": "Marshall Variation"
+                          },
+                          "comment": {
+                            "es": "El caballo recupera el peón; las blancas ganarán tiempo con c4.",
+                            "en": "The knight regains the pawn; White gains time with c4."
+                          },
+                          "children": [
+                            {
+                              "san": "c4",
+                              "children": [
+                                {
+                                  "san": "Nb6",
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "children": [
+                                        {
+                                          "san": "g6",
+                                          "children": [
+                                            {
+                                              "san": "Nc3",
+                                              "children": [
+                                                {
+                                                  "san": "Bg7",
+                                                  "children": [
+                                                    {
+                                                      "san": "h3",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Bg4",
+                          "name": {
+                            "es": "Gambito Portugués",
+                            "en": "Portuguese Gambit"
+                          },
+                          "comment": {
+                            "es": "Las negras desarrollan el alfil antes de recuperar el peón de d5.",
+                            "en": "Black develops the bishop before regaining the d5 pawn."
+                          },
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "name": {
+                                "es": "Gambito Portugués, variante clásica",
+                                "en": "Portuguese Gambit, Classical Variation"
+                              },
+                              "comment": {
+                                "es": "Desarrollo sencillo: las blancas devuelven el peón y las negras recuperan d5 con la dama.",
+                                "en": "Simple development: White lets the pawn go and Black regains d5 with the queen."
+                              },
+                              "children": [
+                                {
+                                  "san": "Qxd5",
+                                  "children": [
+                                    {
+                                      "san": "Be2",
+                                      "children": [
+                                        {
+                                          "san": "Nc6",
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

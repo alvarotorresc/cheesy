@@ -1,0 +1,451 @@
+{
+  "id": "petrov-defence",
+  "name": {
+    "es": "Defensa Petrov (Rusa)",
+    "en": "Petrov's Defence (Russian Game)"
+  },
+  "eco": "C42-C43",
+  "side": "black",
+  "description": {
+    "es": "Las negras contraatacan e4 en lugar de defender e5: una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel.",
+    "en": "Black counterattacks e4 instead of defending e5: a symmetrical, very solid defence valued for its reliability at top level."
+  },
+  "root": [
+    {
+      "san": "e4",
+      "main": true,
+      "children": [
+        {
+          "san": "e5",
+          "main": true,
+          "children": [
+            {
+              "san": "Nf3",
+              "main": true,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "name": {
+                    "es": "Defensa Petrov",
+                    "en": "Petrov's Defence"
+                  },
+                  "comment": {
+                    "es": "Respuesta simétrica: en lugar de defender e5, las negras atacan e4.",
+                    "en": "The symmetrical reply: instead of defending e5, Black attacks e4."
+                  },
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nxe5",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "d6",
+                          "comment": {
+                            "es": "Primero se expulsa al caballo: tomar e4 de inmediato permite De2 y las negras pasan apuros para igualar.",
+                            "en": "Kick the knight first: taking on e4 at once allows Qe2, and Black struggles to equalise."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "Nxe4",
+                                  "comment": {
+                                    "es": "Las negras recuperan el peón con una posición simétrica y sólida.",
+                                    "en": "Black regains the pawn with a symmetrical, solid position."
+                                  },
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "d4",
+                                      "name": {
+                                        "es": "Ataque Clásico",
+                                        "en": "Classical Attack"
+                                      },
+                                      "comment": {
+                                        "es": "Gana espacio en el centro y prepara Ad3 para desafiar al caballo de e4.",
+                                        "en": "Gains central space and prepares Bd3 to challenge the e4 knight."
+                                      },
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "d5",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "Bd3",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "Nc6",
+                                                  "name": {
+                                                    "es": "Variante Mason-Showalter",
+                                                    "en": "Mason–Showalter Variation"
+                                                  },
+                                                  "comment": {
+                                                    "es": "Desarrolla y prepara ...Ae7 y ...0-0 manteniendo el caballo en e4.",
+                                                    "en": "Develops and prepares ...Be7 and ...O-O while keeping the knight on e4."
+                                                  },
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "c4",
+                                                              "name": {
+                                                                "es": "Variante Jaenisch",
+                                                                "en": "Jaenisch Variation"
+                                                              },
+                                                              "comment": {
+                                                                "es": "Ataca d5, el apoyo del caballo de e4.",
+                                                                "en": "Hits d5, the support of the e4 knight."
+                                                              },
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nb4",
+                                                                  "comment": {
+                                                                    "es": "El caballo ataca al alfil de d3, que apuntaba al enroque negro.",
+                                                                    "en": "The knight attacks the d3 bishop, which was aiming at Black’s king."
+                                                                  },
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Be2",
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "O-O",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nc3",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bf5",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "a3",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nxc3",
+                                                                                          "main": true,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "bxc3",
+                                                                                              "main": true,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "Nc6",
+                                                                                                  "comment": {
+                                                                                                    "es": "Posición típica de la línea principal: las blancas presionan con Te1 y Af4; las negras siguen sólidas.",
+                                                                                                    "en": "A typical main-line position: White presses with Re1 and Bf4 while Black stays solid."
+                                                                                                  },
+                                                                                                  "main": true,
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "san": "Re1",
+                                                                                                      "main": true,
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "san": "Re8",
+                                                                                                          "main": true,
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "san": "Bf4",
+                                                                                                              "main": true,
+                                                                                                              "children": []
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "san": "Bd6",
+                                                  "name": {
+                                                    "es": "Variante Marshall",
+                                                    "en": "Marshall Variation"
+                                                  },
+                                                  "comment": {
+                                                    "es": "Desarrollo más activo del alfil, que apunta hacia el flanco de rey blanco.",
+                                                    "en": "A more active bishop development, eyeing White’s kingside."
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": [
+                                                            {
+                                                              "san": "c4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "c6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Re1",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Bf5",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Nc3",
+                                      "name": {
+                                        "es": "Ataque Nimzowitsch",
+                                        "en": "Nimzowitsch Attack"
+                                      },
+                                      "comment": {
+                                        "es": "Fuerza el cambio de caballos; tras dxc3 las blancas suelen enrocar largo y atacar.",
+                                        "en": "Forces a knight trade; after dxc3 White usually castles long and attacks."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "Nxc3",
+                                          "children": [
+                                            {
+                                              "san": "dxc3",
+                                              "children": [
+                                                {
+                                                  "san": "Be7",
+                                                  "children": [
+                                                    {
+                                                      "san": "Be3",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "children": [
+                                                            {
+                                                              "san": "Qd2",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "O-O-O",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Qd7",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "Qe2",
+                                      "name": {
+                                        "es": "Ataque Cozio",
+                                        "en": "Cozio Attack"
+                                      },
+                                      "comment": {
+                                        "es": "Clava el caballo y fuerza el cambio de damas: una línea muy tranquila.",
+                                        "en": "Pins the knight and forces a queen trade: a very quiet line."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "Qe7",
+                                          "children": [
+                                            {
+                                              "san": "d3",
+                                              "children": [
+                                                {
+                                                  "san": "Nf6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg5",
+                                                      "children": [
+                                                        {
+                                                          "san": "Qxe2+",
+                                                          "children": [
+                                                            {
+                                                              "san": "Bxe2",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Be7",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nc3",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "c6",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "d4",
+                      "name": {
+                        "es": "Ataque Moderno",
+                        "en": "Modern Attack"
+                      },
+                      "comment": {
+                        "es": "Abre el centro de inmediato en lugar de capturar en e5.",
+                        "en": "Opens the centre at once instead of capturing on e5."
+                      },
+                      "children": [
+                        {
+                          "san": "Nxe4",
+                          "children": [
+                            {
+                              "san": "Bd3",
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "comment": {
+                                    "es": "Apoya el caballo de e4 y mantiene una posición sólida.",
+                                    "en": "Supports the e4 knight and keeps a solid position."
+                                  },
+                                  "children": [
+                                    {
+                                      "san": "Nxe5",
+                                      "children": [
+                                        {
+                                          "san": "Nd7",
+                                          "children": [
+                                            {
+                                              "san": "Nxd7",
+                                              "children": [
+                                                {
+                                                  "san": "Bxd7",
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bd6",
+                                                          "children": [
+                                                            {
+                                                              "san": "c4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "c6",
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
