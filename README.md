@@ -1,4 +1,4 @@
-# Chess Playground
+# Cheesy
 
 A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no tracking.
 
@@ -47,7 +47,7 @@ Then open `http://localhost:4200`.
 | Script                   | What it does                                                                     |
 | ------------------------ | -------------------------------------------------------------------------------- |
 | `pnpm dev`               | Starts the development server (`pnpm start` is the same)                         |
-| `pnpm build`             | Builds the production bundle into `dist/chess-playground/browser`                |
+| `pnpm build`             | Builds the production bundle into `dist/cheesy/browser`                          |
 | `pnpm test`              | Runs the unit tests and the fast content checks once                             |
 | `pnpm test:coverage`     | Runs the unit tests with a coverage report in `coverage/`                        |
 | `pnpm lint`              | Lints TypeScript and templates                                                   |
