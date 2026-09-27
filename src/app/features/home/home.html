@@ -1,0 +1,15 @@
+<section class="intro">
+  <h1>{{ i18n.t().home.title }}</h1>
+  <p>{{ i18n.t().home.intro }}</p>
+</section>
+
+<ul class="sections">
+  @for (section of sections; track section) {
+    <li>
+      <a class="card" [routerLink]="['/', section]">
+        <h2>{{ i18n.t().nav[section] }}</h2>
+        <p>{{ i18n.t().home[section] }}</p>
+      </a>
+    </li>
+  }
+</ul>
