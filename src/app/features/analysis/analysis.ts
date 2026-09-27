@@ -7,6 +7,7 @@ import { I18nService } from '../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../shared/board';
 import { EngineLines } from '../../shared/engine-lines';
 import { EvalBar, type EvalOutcome } from '../../shared/eval-bar';
+import { gameEndMessage } from '../../shared/game-end';
 import { isFormField } from '../../shared/keyboard';
 import { MoveList } from '../../shared/move-list';
 import { ImportPanel } from './import-panel/import-panel';
@@ -53,24 +54,25 @@ export class Analysis {
   protected readonly invalidLink = signal(false);
 
   protected readonly status = computed(() => {
-    const t = this.i18n.t().analysis;
     const result = this.game.result();
-    if (result?.reason === 'checkmate') {
-      return result.winner === 'white' ? t.checkmateWhiteWins : t.checkmateBlackWins;
-    }
-    if (result?.reason === 'stalemate') return t.stalemate;
-    if (result?.reason === 'insufficient-material') return t.insufficientMaterial;
+    if (result) return gameEndMessage(result, this.i18n.t().gameEnd);
+    const t = this.i18n.t().analysis;
     const turn = this.game.turn() === 'white' ? t.whiteToMove : t.blackToMove;
     return this.game.isCheck() ? `${t.check}. ${turn}` : turn;
   });
 
-  /** Result of a position without legal moves, which the engine has nothing to say about. */
+  /** Result of a finished game, shown on the bar instead of the engine's score. */
   protected readonly outcome = computed<EvalOutcome | undefined>(() => {
     const result = this.game.result();
-    if (result?.reason === 'checkmate') return result.winner;
-    if (result?.reason === 'stalemate') return 'draw';
-    return undefined;
+    return result && (result.winner ?? 'draw');
   });
+
+  /**
+   * Checkmate and stalemate leave nothing to analyse. The other draws (repetition, fifty moves,
+   * insufficient material) end the game by rule but leave legal moves, and this free board lets
+   * the user keep playing them: the engine goes on analysing those moves.
+   */
+  protected readonly hasNoLegalMoves = computed(() => this.game.dests().size === 0);
 
   /** Whether the engine's lines belong to the displayed position. */
   private readonly isAnalysisCurrent = computed(
@@ -87,7 +89,7 @@ export class Analysis {
   protected readonly engineMessage = computed(() => {
     const t = this.i18n.t().engine;
     if (!this.engineOn()) return '';
-    if (this.outcome()) return t.noLegalMoves;
+    if (this.hasNoLegalMoves()) return t.noLegalMoves;
     switch (this.engine.status()) {
       case 'loading':
         return t.loading;

@@ -2,7 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import type { Color } from 'chessops';
 import { formatScore, whiteWinningChance, type EngineScore } from '../../core/engine';
 
-/** Result of a position without legal moves: the winner, or a draw. */
+/** Result of a finished game: the winner, or a draw. */
 export type EvalOutcome = Color | 'draw';
 
 const OUTCOMES: Record<EvalOutcome, { text: string; whiteShare: number }> = {
@@ -24,8 +24,8 @@ export class EvalBar {
   /** Evaluation from White's point of view. Undefined while there is none. */
   readonly score = input<EngineScore | undefined>(undefined);
   /**
-   * Result of a finished position (checkmate or stalemate), shown instead of the score: a mate
-   * already delivered has no engine score to show.
+   * Result of a finished game (checkmate or a draw), shown instead of the score: a mate already
+   * delivered has no engine score to show, and a draw by rule is settled whatever the score.
    */
   readonly outcome = input<EvalOutcome | undefined>(undefined);
   /** Side shown at the bottom of the board; the bar follows it. */

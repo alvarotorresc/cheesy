@@ -55,7 +55,7 @@
           <button type="button" class="button retry" (click)="retry()">
             {{ i18n.t().engine.retry }}
           </button>
-        } @else if (!outcome()) {
+        } @else if (!hasNoLegalMoves()) {
           <app-engine-lines
             class="lines"
             [lines]="lines()"

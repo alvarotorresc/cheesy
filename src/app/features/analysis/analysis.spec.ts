@@ -14,6 +14,11 @@ const AFTER_E4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
 const FOOLS_MATE = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3';
 const BACK_RANK_MATE = '3R2k1/5ppp/8/8/8/8/5PPP/6K1 b - - 1 1';
 const STALEMATE = '7k/5Q2/6K1/8/8/8/8/8 b - - 0 1';
+/** A hundred half-moves without a capture or a pawn move: drawn, with legal moves left. */
+const FIFTY_MOVES = '4k3/8/8/8/8/8/8/R3K3 w - - 100 80';
+const BARE_KINGS = '4k3/8/8/8/8/8/8/4K3 w - - 0 1';
+/** Knights out and back, twice: the initial position appears for the third time. */
+const REPETITION = ['Nf3', 'Nf6', 'Ng1', 'Ng8', 'Nf3', 'Nf6', 'Ng1', 'Ng8'];
 
 describe('Analysis', () => {
   let harness: RouterTestingHarness;
@@ -406,6 +411,35 @@ describe('Analysis', () => {
       expect(element.querySelector('app-engine-lines')).toBeNull();
       expect(engines).toHaveLength(0);
     });
+  });
+
+  describe('draws with legal moves left', () => {
+    it.each([
+      ['a threefold repetition', INITIAL_FEN, REPETITION, 'Threefold repetition. Draw.'],
+      [
+        'the fifty-move rule',
+        FIFTY_MOVES,
+        [],
+        'Fifty moves without a capture or a pawn move. Draw.',
+      ],
+      ['insufficient material', BARE_KINGS, [], 'Insufficient material. Draw.'],
+    ])(
+      'should show the draw by %s and keep analysing the legal moves',
+      async (_, fen, moves, text) => {
+        await open(`/analysis?fen=${encodeURIComponent(fen)}`);
+        for (const san of moves) game.playSan(san);
+        const fake = await startEngine();
+
+        fake.emit('info depth 12 multipv 1 score cp 0 pv e1d1');
+        await render();
+
+        expect(status()).toBe(text);
+        expect(barText()).toBe('½-½');
+        expect(engineStatus()).not.toBe('No legal moves: nothing to analyse.');
+        expect(positionsSent()).toEqual([`position fen ${game.fen()}`]);
+        expect(element.querySelector('app-engine-lines')).not.toBeNull();
+      },
+    );
   });
 
   describe('shared link', () => {

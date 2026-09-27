@@ -9,12 +9,23 @@ import { OpeningSession, REPLY_DELAY_MS } from '../opening-session';
 import { fakeEngineFactory } from '../../../core/engine/testing';
 import { testLoaders, testTree } from '../testing/test-opening';
 import { By } from '@angular/platform-browser';
-import { en } from '../../../core/i18n/dictionaries/en';
 import { BoardComponent } from '../../../shared/board';
-import { OpeningPlay, resultMessage } from './opening-play';
+import { OpeningPlay } from './opening-play';
 
 const OTHER = testTree({ id: 'other-opening', name: { es: 'Otra', en: 'Other' }, side: 'black' });
 const EMPTY = testTree({ id: 'empty-tree', side: 'black', root: [] });
+
+/** Knights out and back, twice: the initial position appears for the third time. */
+const REPETITION = ['g1f3', 'g8f6', 'f3g1', 'f6g8', 'g1f3', 'g8f6', 'f3g1', 'f6g8'];
+/** A hundred half-moves from the initial position without a capture, a pawn move or a repetition. */
+const FIFTY_QUIET_MOVES = (
+  'b1a3 b8a6 a1b1 a6b4 b1a1 b4d5 a1b1 d5c3 b1a1 c3b1 g1f3 b1c3 a1b1 c3a4 b1a1 a4c5 a1b1 c5b3 ' +
+  'b1a1 b3d4 a1b1 d4b5 b1a1 b5d6 a1b1 d6c4 b1a1 c4e3 a1b1 e3g4 b1a1 g4e5 a1b1 e5c6 b1a1 c6b4 ' +
+  'a1b1 b4d5 b1a1 d5f4 a1b1 f4h3 b1a1 h3g1 a1b1 a8b8 b1a1 g1h3 a1b1 h3f4 b1a1 f4d5 a1b1 d5c3 ' +
+  'b1a1 c3b1 h1g1 b1c3 a1b1 c3a4 b1a1 a4c5 a1b1 c5b3 b1a1 b3d4 a1b1 d4b5 b1a1 b5d6 a1b1 d6c4 ' +
+  'b1a1 c4e3 a1b1 e3g4 b1a1 g4e5 a1b1 e5c6 b1a1 c6b4 a1b1 b4d5 b1a1 d5f4 a1b1 f4h3 b1a1 h3g5 ' +
+  'a1b1 g5e4 b1a1 e4g3 a1b1 g3h1 b1a1 b8a8 a1b1 h1g3'
+).split(' ');
 
 describe('OpeningPlay', () => {
   let fixture: ComponentFixture<OpeningPlay>;
@@ -315,6 +326,29 @@ describe('OpeningPlay', () => {
       expect(text('.status')).toBe('Checkmate. You win.');
     });
 
+    it.each([
+      ['a threefold repetition', REPETITION, 'Threefold repetition. Draw.'],
+      [
+        'the fifty-move rule',
+        FIFTY_QUIET_MOVES,
+        'Fifty moves without a capture or a pawn move. Draw.',
+      ],
+    ])('should announce a draw by %s', async (_, moves, expected) => {
+      // Stockfish plays White and the player Black, one move each.
+      for (const [index, uci] of moves.entries()) {
+        if (index % 2 === 0) {
+          engines.last().answer(uci);
+          await settle(REPLY_DELAY_MS);
+        } else {
+          session.play({ from: uci.slice(0, 2), to: uci.slice(2, 4) });
+          await settle();
+        }
+      }
+
+      expect(game.moves()).toHaveLength(moves.length);
+      expect(text('.status')).toBe(expected);
+    });
+
     it('should say check when the player is in check', async () => {
       engines.last().answer('e2e4');
       await settle(REPLY_DELAY_MS);
@@ -324,25 +358,6 @@ describe('OpeningPlay', () => {
       await settle(REPLY_DELAY_MS);
 
       expect(text('.status')).toBe('Check. Your move');
-    });
-  });
-
-  describe('resultMessage', () => {
-    it.each([
-      [{ reason: 'checkmate', winner: 'white' }, 'white', 'Checkmate. You win.'],
-      [{ reason: 'checkmate', winner: 'white' }, 'black', 'Checkmate. You lose.'],
-      [{ reason: 'stalemate', winner: undefined }, 'white', 'Stalemate. Draw.'],
-      [
-        { reason: 'insufficient-material', winner: undefined },
-        'black',
-        'Insufficient material. Draw.',
-      ],
-    ] as const)('should describe %o for %s as %j', (result, color, expected) => {
-      expect(resultMessage(result, color, en)).toBe(expected);
-    });
-
-    it('should call any other ending a draw', () => {
-      expect(resultMessage(undefined, 'white', en)).toBe('Draw.');
     });
   });
 });

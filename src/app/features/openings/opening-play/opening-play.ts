@@ -1,12 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import type { Color } from 'chessops';
 import { EngineService } from '../../../core/engine';
 import { GameService } from '../../../core/game';
-import type { GameResult } from '../../../core/game';
-import { I18nService, type Messages } from '../../../core/i18n';
+import { I18nService } from '../../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { gameEndMessage } from '../../../shared/game-end';
 import { isFormField } from '../../../shared/keyboard';
 import { MoveList } from '../../../shared/move-list';
 import { OpeningSession, type OpponentMode } from '../opening-session';
@@ -23,24 +22,6 @@ export const STRENGTH_LEVELS = [
 ] as const;
 
 const OPPONENT_MODES: readonly OpponentMode[] = ['book', 'engine'];
-
-/** How the game ended, told from the player's side. */
-export const resultMessage = (
-  result: GameResult | undefined,
-  playerColor: Color,
-  t: Messages,
-): string => {
-  switch (result?.reason) {
-    case 'checkmate':
-      return result.winner === playerColor ? t.openings.youWin : t.openings.youLose;
-    case 'stalemate':
-      return t.analysis.stalemate;
-    case 'insufficient-material':
-      return t.analysis.insufficientMaterial;
-    default:
-      return t.openings.draw;
-  }
-};
 
 /**
  * Play page of an opening (`/openings/:id`). The id in the URL is untrusted: the session checks
@@ -71,10 +52,13 @@ export class OpeningPlay {
   protected readonly isReviewing = computed(() => this.game.ply() < this.game.moves().length);
 
   protected readonly status = computed(() => {
+    // The game is over exactly when it has a result.
+    const result = this.session.result();
+    if (result) {
+      return gameEndMessage(result, this.i18n.t().gameEnd, this.session.playerColor());
+    }
     const t = this.i18n.t().openings;
     switch (this.session.phase()) {
-      case 'game-over':
-        return resultMessage(this.session.result(), this.session.playerColor(), this.i18n.t());
       case 'deviation':
         return t.deviationChoice;
       case 'engine-error':

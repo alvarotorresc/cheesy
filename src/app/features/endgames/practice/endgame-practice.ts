@@ -17,6 +17,7 @@ import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { gameEndMessage } from '../../../shared/game-end';
 import { isFormField } from '../../../shared/keyboard';
 import { MoveList } from '../../../shared/move-list';
 import { fill } from '../endgame-goal';
@@ -77,14 +78,7 @@ export class EndgamePractice {
     const t = this.i18n.t().endgames;
     const result = this.game.result();
     if (result) {
-      const reason = {
-        checkmate:
-          result.winner === this.session.playerSide() ? t.checkmateYouWin : t.checkmateYouLose,
-        stalemate: t.stalemate,
-        'insufficient-material': t.insufficientMaterial,
-        'threefold-repetition': t.threefoldRepetition,
-        'fifty-move-rule': t.fiftyMoveRule,
-      }[result.reason];
+      const reason = gameEndMessage(result, this.i18n.t().gameEnd, this.session.playerSide());
       return `${reason} ${this.session.goal() === 'achieved' ? t.goalAchieved : t.goalFailed}`;
     }
     if (this.session.engineFailed()) return t.engineError;
