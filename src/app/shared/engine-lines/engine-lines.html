@@ -1,0 +1,22 @@
+<section class="engine-lines" [attr.aria-label]="label()">
+  @if (rows().length === 0) {
+    <p class="empty">{{ emptyLabel() }}</p>
+  } @else {
+    <p class="depth">{{ depthLabel() }} {{ depth() }}</p>
+    <ol class="lines">
+      @for (row of rows(); track row.multipv) {
+        <li>
+          <button
+            type="button"
+            class="line"
+            [attr.aria-label]="row.score + ' ' + row.moves"
+            (click)="selectMove.emit(row.move)"
+          >
+            <span class="score">{{ row.score }}</span>
+            <span class="moves">{{ row.moves }}</span>
+          </button>
+        </li>
+      }
+    </ol>
+  }
+</section>
