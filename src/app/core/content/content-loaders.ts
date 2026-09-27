@@ -1,4 +1,5 @@
 import { DOCUMENT, inject, InjectionToken } from '@angular/core';
+import { isContentId } from './content-id';
 import type {
   CuratedPosition,
   EndgamePosition,
@@ -17,9 +18,6 @@ export interface ContentLoaders {
 
 /** Folder the build copies the content files to (see `angular.json`). */
 export const CONTENT_PATH = 'content/';
-
-/** Kebab-case, like every content id. Nothing else becomes part of a file path. */
-const CONTENT_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -52,7 +50,8 @@ export const createFetchContentLoaders = (baseUrl: string): ContentLoaders => {
   return {
     openingCatalog: () => download(file('opening-catalog.json'), (data) => isListOf(data, 'id')),
     opening: async (id) => {
-      if (!CONTENT_ID.test(id)) throw new Error(`Invalid opening id: ${id}`);
+      // Nothing but a content id becomes part of a file path.
+      if (!isContentId(id)) throw new Error(`Invalid opening id: ${id}`);
       return download(
         file(`openings/${id}.json`),
         (data) => isRecord(data) && data['id'] === id && Array.isArray(data['root']),

@@ -109,6 +109,8 @@ describe('createFetchContentLoaders', () => {
 
     await expect(loaders.opening('../endgames')).rejects.toThrow();
     await expect(loaders.opening('https://evil.example/x')).rejects.toThrow();
+    await expect(loaders.opening('a--b')).rejects.toThrow();
+    await expect(loaders.opening('a'.repeat(65))).rejects.toThrow();
     expect(fetchMock).not.toHaveBeenCalled();
   });
 });

@@ -11,7 +11,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
-import { ContentService } from '../../../core/content';
+import { ContentService, isContentId } from '../../../core/content';
 import { EngineService } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
@@ -21,9 +21,6 @@ import { MoveList } from '../../../shared/move-list';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
 import { EndgameSession } from './endgame-session';
-
-/** Ids are kebab-case; anything else in the URL is not looked up at all. */
-const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
 
 export const TABLEBASE_VISIBLE_STORAGE_KEY = 'cheesy.endgames.tablebase';
 
@@ -56,7 +53,8 @@ export class EndgamePractice {
   protected readonly endgame = resource({
     params: () => ({ id: this.id() }),
     loader: ({ params }) =>
-      ID_PATTERN.test(params.id) ? this.content.endgame(params.id) : Promise.resolve(undefined),
+      // Anything in the URL but a content id is not looked up at all.
+      isContentId(params.id) ? this.content.endgame(params.id) : Promise.resolve(undefined),
   });
 
   /** Shown by default: the tablebase is the reference that makes an endgame learnable. */

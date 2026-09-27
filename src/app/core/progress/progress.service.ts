@@ -1,11 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import {
-  applyResult,
-  isOpeningIdValue,
-  isValidResult,
-  parseLineProgress,
-  progressKey,
-} from './progress-record';
+import { isContentId } from '../content/content-id';
+import { applyResult, isValidResult, parseLineProgress, progressKey } from './progress-record';
 import { PROGRESS_STORE_LOADER, type ProgressStore } from './progress-store';
 import type { LineProgress, LineResult } from './progress.types';
 
@@ -43,7 +38,7 @@ export class ProgressService {
 
   /** Every valid row of one opening. */
   async forOpening(openingId: string): Promise<LineProgress[]> {
-    if (!isOpeningIdValue(openingId)) return [];
+    if (!isContentId(openingId)) return [];
     return (await this.all()).filter((progress) => progress.openingId === openingId);
   }
 

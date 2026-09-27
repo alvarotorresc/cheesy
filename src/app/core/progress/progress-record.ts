@@ -1,9 +1,8 @@
+import { isContentId } from '../content/content-id';
 import type { LineProgress, LineResult, ProgressColor } from './progress.types';
 
 /** A move in standard UCI, castling written as the king move: e2e4, e1g1, e7e8q. */
 const UCI_MOVE = /^[a-h][1-8][a-h][1-8][qrbn]?$/;
-const OPENING_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const MAX_OPENING_ID_LENGTH = 64;
 /** Far longer than any opening line: a guard against oversized rows, not a content limit. */
 const MAX_LINE_MOVES = 200;
 
@@ -21,9 +20,6 @@ export const lineIdOf = (moves: readonly { readonly uci: string }[]): string =>
 /** Key of a stored row: the same line practised with each colour is kept apart. */
 export const progressKey = (openingId: string, color: ProgressColor, lineId: string): string =>
   `${openingId}/${color}/${lineId}`;
-
-export const isOpeningIdValue = (value: unknown): value is string =>
-  typeof value === 'string' && value.length <= MAX_OPENING_ID_LENGTH && OPENING_ID.test(value);
 
 export const isProgressColor = (value: unknown): value is ProgressColor =>
   value === 'white' || value === 'black';
@@ -52,7 +48,7 @@ export const parseLineProgress = (value: unknown): LineProgress | undefined => {
   if (typeof value !== 'object' || value === null) return undefined;
   const row = value as Record<string, unknown>;
   const { key, openingId, color, lineId, practiced, clean, lastPracticed, bestMistakes } = row;
-  if (!isOpeningIdValue(openingId) || !isProgressColor(color) || !isLineId(lineId)) {
+  if (!isContentId(openingId) || !isProgressColor(color) || !isLineId(lineId)) {
     return undefined;
   }
   if (key !== progressKey(openingId, color, lineId)) return undefined;
@@ -64,7 +60,7 @@ export const parseLineProgress = (value: unknown): LineProgress | undefined => {
 
 /** Checks a result before it is stored: it comes from the app, but a bad one must not be saved. */
 export const isValidResult = (result: LineResult): boolean =>
-  isOpeningIdValue(result.openingId) &&
+  isContentId(result.openingId) &&
   isProgressColor(result.color) &&
   isLineId(result.lineId) &&
   isCount(result.mistakes);

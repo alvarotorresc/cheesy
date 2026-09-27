@@ -2,6 +2,7 @@ import { computed, DestroyRef, effect, inject, Injectable, signal, untracked } f
 import type { Color } from 'chessops';
 import {
   ContentService,
+  isContentId,
   type BookNode,
   type OpeningBook,
   type OpeningSummary,
@@ -9,7 +10,6 @@ import {
 import { GameService, type MoveInput } from '../../../core/game';
 import type { Localized } from '../../../core/i18n';
 import { isMastered, lineIdOf, ProgressService, type LineProgress } from '../../../core/progress';
-import { isOpeningId } from '../opening-id';
 import {
   addMistake,
   advance,
@@ -194,7 +194,7 @@ export class DrillSession {
     this.stopRun();
     this.current.set(undefined);
     this.progressRows.set([]);
-    if (!isOpeningId(id)) {
+    if (!isContentId(id)) {
       this.loadStatus.set('not-found');
       return;
     }

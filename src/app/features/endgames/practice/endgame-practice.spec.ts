@@ -100,12 +100,15 @@ describe('EndgamePractice', () => {
     expect(engines.engines).toHaveLength(0);
   });
 
-  it('should not even look up an id with unexpected characters', async () => {
-    await open('%3Cscript%3E');
+  it.each(['%3Cscript%3E', '-lucena', 'lucena--position', 'lucena-'])(
+    'should not even look up the id %s, which is not kebab-case',
+    async (id) => {
+      await open(id);
 
-    expect(loadEndgames).not.toHaveBeenCalled();
-    expect(text()).toContain('This endgame does not exist.');
-  });
+      expect(loadEndgames).not.toHaveBeenCalled();
+      expect(text()).toContain('This endgame does not exist.');
+    },
+  );
 
   it('should play the engine answer after a player move', async () => {
     await open('lucena-position');

@@ -1,9 +1,13 @@
 import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
 import type { Color } from 'chessops';
-import { ContentService, type OpeningBook, type OpeningSummary } from '../../core/content';
+import {
+  ContentService,
+  isContentId,
+  type OpeningBook,
+  type OpeningSummary,
+} from '../../core/content';
 import { EngineService } from '../../core/engine';
 import { GameService, type GameResult, type MoveInput } from '../../core/game';
-import { isOpeningId } from './opening-id';
 import { describeTheory, type Theory, type TheoryDeviation } from './opening-theory';
 
 /** How the rival answers while the game is still in the tree. Out of it, the engine always plays. */
@@ -123,7 +127,7 @@ export class OpeningSession {
     this.cancelReply();
     this.current.set(undefined);
     this.game.reset();
-    if (!isOpeningId(id)) {
+    if (!isContentId(id)) {
       this.loadStatus.set('not-found');
       return;
     }
