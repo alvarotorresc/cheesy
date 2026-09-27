@@ -2,7 +2,7 @@ import type { Messages } from './en';
 
 export const es: Messages = {
   app: {
-    name: 'Chess Playground',
+    name: 'Cheesy',
     skipToContent: 'Saltar al contenido',
     mainNavigation: 'Navegación principal',
     language: 'Idioma',

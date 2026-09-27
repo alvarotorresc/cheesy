@@ -1,0 +1,18 @@
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <rect width="64" height="64" fill="#ffffff" />
+  <path
+    fill="#1a1a1a"
+    d="M16 0h16v16H16zM48 0h16v16H48zM0 16h16v16H0zM32 16h16v16H32zM16 32h16v16H16zM48 32h16v16H48zM0 48h16v16H0zM32 48h16v16H32z"
+  />
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#1a1a1a" stroke-width="2" />
+  <path
+    transform="translate(32 32.5) scale(0.82) translate(-31.5 -31)"
+    fill="#000000"
+    fill-rule="evenodd"
+    stroke="#ffffff"
+    stroke-width="3.5"
+    stroke-linejoin="round"
+    paint-order="stroke"
+    d="M19 51C19 43 23 37.5 29 33.5C25 33.5 21.5 35.5 18.5 37.5C15 39.5 11 38.5 10 35.5C9 32.5 10 30 12 28L21.5 17.5C23 15.5 24 13.5 25 11L26.5 5.5L30.5 10C41.5 10.5 50 18.5 50 32C50 40 47.5 45 47.5 51ZM13 57C13 53 15 51 18 51H48C51 51 53 53 53 57ZM22.6 18.5a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0-3.8 0Z"
+  />
+</svg>

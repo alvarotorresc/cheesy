@@ -1,6 +1,6 @@
 export const en = {
   app: {
-    name: 'Chess Playground',
+    name: 'Cheesy',
     skipToContent: 'Skip to content',
     mainNavigation: 'Main navigation',
     language: 'Language',
