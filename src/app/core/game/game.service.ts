@@ -36,12 +36,53 @@ interface GameState {
   ply: number;
 }
 
-const resultOf = (pos: Chess): GameResult | undefined => {
+/** Half-moves without a capture or a pawn move after which the game is drawn. */
+const FIFTY_MOVE_LIMIT = 100;
+
+/**
+ * The part of a FEN that identifies a position for repetition: board, side to move, castling
+ * rights and en passant square. chessops only writes the en passant square when the capture is
+ * legal, which is what the repetition rule requires.
+ */
+const repetitionKey = (fen: string): string => fen.split(' ').slice(0, 4).join(' ');
+
+/**
+ * Whether the last of `fens` (every position of the game, oldest first) has occurred three times.
+ * Only the last `halfmoves` positions can repeat it: a capture or a pawn move makes earlier ones
+ * unreachable, and only every other one has the same side to move.
+ */
+const isThreefoldRepetition = (fens: readonly string[], halfmoves: number): boolean => {
+  const current = repetitionKey(fens[fens.length - 1]);
+  const first = Math.max(0, fens.length - 1 - halfmoves);
+  let occurrences = 0;
+  for (let index = fens.length - 1; index >= first; index -= 2) {
+    if (repetitionKey(fens[index]) === current) occurrences++;
+    if (occurrences >= 3) return true;
+  }
+  return false;
+};
+
+/**
+ * How the game has ended at the last of `fens`, if it has. The fifty-move rule and threefold
+ * repetition end the game at once, as most online servers do, instead of waiting for a claim.
+ * Checkmate takes precedence over both.
+ */
+const resultOf = (pos: Chess, fens: readonly string[]): GameResult | undefined => {
   if (pos.isCheckmate()) return { reason: 'checkmate', winner: opposite(pos.turn) };
   if (pos.isStalemate()) return { reason: 'stalemate', winner: undefined };
   if (pos.isInsufficientMaterial()) return { reason: 'insufficient-material', winner: undefined };
+  if (pos.halfmoves >= FIFTY_MOVE_LIMIT) return { reason: 'fifty-move-rule', winner: undefined };
+  if (isThreefoldRepetition(fens, pos.halfmoves)) {
+    return { reason: 'threefold-repetition', winner: undefined };
+  }
   return undefined;
 };
+
+/** FEN of every position from the start up to the move being viewed. */
+const fensUpTo = ({ startFen, moves, ply }: GameState): string[] => [
+  startFen,
+  ...moves.slice(0, ply).map((move) => move.fenAfter),
+];
 
 /**
  * Holds the state of a single chess game: start position, move history and the move being viewed.
@@ -72,7 +113,7 @@ export class GameService {
 
   readonly turn = computed(() => this.position().turn);
   readonly isCheck = computed(() => this.position().isCheck());
-  readonly result = computed(() => resultOf(this.position()));
+  readonly result = computed(() => resultOf(this.position(), fensUpTo(this.state())));
   readonly isGameOver = computed(() => this.result() !== undefined);
 
   /** Legal destinations per origin square, in the format chessground expects. */
@@ -195,9 +236,10 @@ export class GameService {
     setStartingPosition(game.headers, start);
     if (game.headers.has('FEN')) game.headers.set('SetUp', '1');
 
-    const finalFen = moves.at(-1)?.fenAfter ?? startFen;
-    const final = parsePosition(finalFen) ?? start;
-    game.headers.set('Result', makeOutcome(final.outcome()));
+    const final = { startFen, moves, ply: moves.length };
+    const finalPosition = parsePosition(fensUpTo(final).at(-1) ?? startFen) ?? start;
+    const result = resultOf(finalPosition, fensUpTo(final));
+    game.headers.set('Result', makeOutcome(result && { winner: result.winner }));
 
     extend(
       game.moves,

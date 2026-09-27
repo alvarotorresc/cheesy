@@ -177,6 +177,147 @@ describe('GameService', () => {
     });
   });
 
+  describe('threefold repetition', () => {
+    const KNIGHT_SHUFFLE = ['Nf3', 'Nf6', 'Ng1', 'Ng8'];
+
+    it('should report a draw when the same position occurs for the third time', () => {
+      playAll(game, [...KNIGHT_SHUFFLE, ...KNIGHT_SHUFFLE]);
+
+      expect(game.result()).toEqual({ reason: 'threefold-repetition', winner: undefined });
+      expect(game.isGameOver()).toBe(true);
+    });
+
+    it('should not report a draw when the position has occurred only twice', () => {
+      playAll(game, [...KNIGHT_SHUFFLE, 'Nf3', 'Nf6', 'Ng1']);
+
+      expect(game.result()).toBeUndefined();
+
+      playAll(game, ['Ng8']);
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+
+    it('should count a repetition of a position reached after the start', () => {
+      playAll(game, ['e4', 'e5', ...KNIGHT_SHUFFLE, ...KNIGHT_SHUFFLE]);
+
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+
+    it('should not count positions whose castling rights differ', () => {
+      game.loadFen('4k3/8/8/8/8/8/8/R3K3 w Q - 0 1');
+
+      playAll(game, ['Ke2', 'Ke7', 'Ke1', 'Ke8', 'Ke2', 'Ke7', 'Ke1', 'Ke8']);
+
+      // The start had queenside castling; the later ones do not, so only two are equal.
+      expect(game.result()).toBeUndefined();
+
+      playAll(game, ['Ke2', 'Ke7', 'Ke1', 'Ke8']);
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+
+    it('should tell apart the same board with and without a legal en passant capture', () => {
+      const cycle = ['Kd8', 'Kd1', 'Kd7', 'Kd2', 'Ke8', 'Ke1'];
+      game.loadFen('4k3/8/8/8/1p6/8/P7/4K3 w - - 0 1');
+
+      // After a2-a4 black could capture en passant; the later positions on the same board cannot.
+      playAll(game, ['a4', ...cycle, ...cycle]);
+
+      expect(game.result()).toBeUndefined();
+
+      playAll(game, cycle);
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+
+    it('should stop reporting the draw when navigating back before the third occurrence', () => {
+      playAll(game, [...KNIGHT_SHUFFLE, ...KNIGHT_SHUFFLE]);
+
+      game.goBack();
+
+      expect(game.result()).toBeUndefined();
+
+      game.goToEnd();
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+
+    it('should stop reporting the draw when the repeating move is undone', () => {
+      playAll(game, [...KNIGHT_SHUFFLE, ...KNIGHT_SHUFFLE]);
+
+      game.undo();
+
+      expect(game.result()).toBeUndefined();
+    });
+
+    it('should forget earlier occurrences when a new FEN is loaded', () => {
+      playAll(game, [...KNIGHT_SHUFFLE, ...KNIGHT_SHUFFLE.slice(0, 3)]);
+
+      game.loadFen(game.fen());
+      playAll(game, ['Ng8']);
+
+      expect(game.result()).toBeUndefined();
+    });
+
+    it('should report the draw when a loaded PGN ends in a threefold repetition', () => {
+      game.loadPgn('1. Nf3 Nf6 2. Ng1 Ng8 3. Nf3 Nf6 4. Ng1 Ng8 *');
+
+      expect(game.result()?.reason).toBe('threefold-repetition');
+    });
+  });
+
+  describe('fifty-move rule', () => {
+    const NEAR_LIMIT = '4k3/8/8/8/8/8/4P3/R3K3 w - - 99 80';
+
+    it('should report a draw when fifty moves pass without a capture or a pawn move', () => {
+      game.loadFen(NEAR_LIMIT);
+
+      game.playSan('Ra2');
+
+      expect(game.result()).toEqual({ reason: 'fifty-move-rule', winner: undefined });
+      expect(game.isGameOver()).toBe(true);
+    });
+
+    it('should not report a draw one half-move before the limit', () => {
+      game.loadFen(NEAR_LIMIT);
+
+      expect(game.result()).toBeUndefined();
+    });
+
+    it('should reset the count when a pawn moves', () => {
+      game.loadFen(NEAR_LIMIT);
+
+      game.playSan('e4');
+
+      expect(game.result()).toBeUndefined();
+      expect(game.fen().split(' ')[4]).toBe('0');
+    });
+
+    it('should reset the count when a piece is captured', () => {
+      game.loadFen('4k3/8/8/8/8/8/r7/R3K3 w - - 99 80');
+
+      game.playSan('Rxa2');
+
+      expect(game.result()).toBeUndefined();
+    });
+
+    it('should report checkmate instead of a draw when the hundredth half-move mates', () => {
+      game.loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 99 80');
+
+      game.playSan('Ra8#');
+
+      expect(game.result()).toEqual({ reason: 'checkmate', winner: 'white' });
+    });
+
+    it('should stop reporting the draw when navigating back or undoing', () => {
+      game.loadFen(NEAR_LIMIT);
+      game.playSan('Ra2');
+
+      game.goBack();
+      expect(game.result()).toBeUndefined();
+
+      game.goForward();
+      game.undo();
+      expect(game.result()).toBeUndefined();
+    });
+  });
+
   describe('navigation', () => {
     beforeEach(() => {
       playAll(game, ['e4', 'e5', 'Nf3']);
@@ -316,6 +457,19 @@ describe('GameService', () => {
 
       expect(pgn).toContain('[Result "1-0"]');
       expect(pgn).toContain('1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0');
+    });
+
+    it('should export a drawn result when the game ends in a threefold repetition', () => {
+      playAll(game, ['Nf3', 'Nf6', 'Ng1', 'Ng8', 'Nf3', 'Nf6', 'Ng1', 'Ng8']);
+
+      expect(game.exportPgn()).toContain('[Result "1/2-1/2"]');
+    });
+
+    it('should export a drawn result when the game ends by the fifty-move rule', () => {
+      game.loadFen('4k3/8/8/8/8/8/4P3/R3K3 w - - 99 80');
+      game.playSan('Ra2');
+
+      expect(game.exportPgn()).toContain('[Result "1/2-1/2"]');
     });
 
     it('should export the whole game when navigated back', () => {

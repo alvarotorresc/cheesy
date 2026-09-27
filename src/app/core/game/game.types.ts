@@ -29,7 +29,14 @@ export type PgnLoadError =
 
 export type PgnLoadResult = { ok: true } | { ok: false; error: PgnLoadError };
 
-export type GameEndReason = 'checkmate' | 'stalemate' | 'insufficient-material';
+export type GameEndReason =
+  | 'checkmate'
+  | 'stalemate'
+  | 'insufficient-material'
+  /** The same position (board, side to move, castling and en passant rights) occurred three times. */
+  | 'threefold-repetition'
+  /** Fifty moves by each side (100 half-moves) without a capture or a pawn move. */
+  | 'fifty-move-rule';
 
 export interface GameResult {
   reason: GameEndReason;
