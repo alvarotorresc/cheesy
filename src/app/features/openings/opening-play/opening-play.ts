@@ -7,6 +7,7 @@ import { GameService } from '../../../core/game';
 import type { GameResult } from '../../../core/game';
 import { I18nService, type Messages } from '../../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { isFormField } from '../../../shared/keyboard';
 import { MoveList } from '../../../shared/move-list';
 import { OpeningSession, type OpponentMode } from '../opening-session';
 import { numberedMove } from '../opening-theory';
@@ -40,12 +41,6 @@ export const resultMessage = (
       return t.openings.draw;
   }
 };
-
-/** Keys typed into these elements are not moves through the game. */
-const isFormField = (target: EventTarget | null): boolean =>
-  target instanceof HTMLInputElement ||
-  target instanceof HTMLSelectElement ||
-  target instanceof HTMLTextAreaElement;
 
 /**
  * Play page of an opening (`/openings/:id`). The id in the URL is untrusted: the session checks

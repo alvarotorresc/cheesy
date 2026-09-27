@@ -128,6 +128,25 @@ describe('EndgamePractice', () => {
     expect(status()).toBe('Your move.');
   });
 
+  it('should browse the moves with the arrow keys, but not from a form field', async () => {
+    await open('lucena-position');
+    move('d1', 'd4');
+    await settle();
+    engines.last().answer('c2c1');
+    await settle();
+    const field = document.body.appendChild(document.createElement('input'));
+
+    try {
+      field.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+      expect(game().ply()).toBe(2);
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+      expect(game().ply()).toBe(1);
+    } finally {
+      field.remove();
+    }
+  });
+
   it('should undo the engine answer together with the player move', async () => {
     await open('lucena-position');
     move('d1', 'd4');

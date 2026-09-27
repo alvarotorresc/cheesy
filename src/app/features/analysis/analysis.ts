@@ -7,6 +7,7 @@ import { I18nService } from '../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../shared/board';
 import { EngineLines } from '../../shared/engine-lines';
 import { EvalBar, type EvalOutcome } from '../../shared/eval-bar';
+import { isFormField } from '../../shared/keyboard';
 import { MoveList } from '../../shared/move-list';
 import { ImportPanel } from './import-panel/import-panel';
 import { SharePanel } from './share-panel/share-panel';
@@ -19,11 +20,6 @@ const LINE_COUNT = 3;
  * enough for a free board. Stopping saves battery; any move starts a new analysis.
  */
 const ANALYSIS_DEPTH = 20;
-
-/** Arrow keys typed in a text field move the caret, not the game. */
-const isEditable = (target: EventTarget | null): boolean =>
-  target instanceof Element &&
-  target.closest('input, textarea, select, [contenteditable]') !== null;
 
 /**
  * Free board: both sides can move, with history navigation, an optional engine that follows the
@@ -142,7 +138,7 @@ export class Analysis {
   }
 
   protected onArrowKey(event: Event, step: -1 | 1): void {
-    if (isEditable(event.target)) return;
+    if (isFormField(event.target)) return;
     if (step < 0) {
       this.game.goBack();
     } else {

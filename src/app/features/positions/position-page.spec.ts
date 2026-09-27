@@ -223,6 +223,17 @@ describe('PositionPage', () => {
       ).toBe('1. Qg8+');
     });
 
+    it('should leave the arrow keys to a form field', () => {
+      const field = document.body.appendChild(document.createElement('select'));
+
+      try {
+        field.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+        expect(game().ply()).toBe(0);
+      } finally {
+        field.remove();
+      }
+    });
+
     it('should jump to the end and the start with End and Home inside the controls', async () => {
       const controls = element().querySelector('[role="group"]') as HTMLElement;
 

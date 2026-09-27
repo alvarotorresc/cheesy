@@ -17,6 +17,7 @@ import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
 import { BoardComponent } from '../../shared/board';
+import { isFormField } from '../../shared/keyboard';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { PositionList } from './position-list';
 import { PositionTrainer } from './position-trainer';
@@ -43,8 +44,8 @@ interface StepView {
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
   host: {
-    '(document:keydown.arrowleft)': 'trainer.goBack()',
-    '(document:keydown.arrowright)': 'trainer.goForward()',
+    '(document:keydown.arrowleft)': 'browse($event, -1)',
+    '(document:keydown.arrowright)': 'browse($event, 1)',
   },
 })
 export class PositionPage {
@@ -165,6 +166,12 @@ export class PositionPage {
       if (this.wasReplay !== undefined && replay !== this.wasReplay && lost) status?.focus();
       this.wasReplay = replay;
     });
+  }
+
+  protected browse(event: Event, step: -1 | 1): void {
+    if (isFormField(event.target)) return;
+    if (step < 0) this.trainer.goBack();
+    else this.trainer.goForward();
   }
 
   protected onReplayKey(event: Event, target: 'start' | 'end'): void {

@@ -17,6 +17,7 @@ import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { isFormField } from '../../../shared/keyboard';
 import { MoveList } from '../../../shared/move-list';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
@@ -32,8 +33,8 @@ export const TABLEBASE_VISIBLE_STORAGE_KEY = 'cheesy.endgames.tablebase';
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',
   host: {
-    '(document:keydown.arrowleft)': 'game.goBack()',
-    '(document:keydown.arrowright)': 'game.goForward()',
+    '(document:keydown.arrowleft)': 'browse($event, -1)',
+    '(document:keydown.arrowright)': 'browse($event, 1)',
   },
 })
 export class EndgamePractice {
@@ -137,6 +138,11 @@ export class EndgamePractice {
 
   protected onMove(move: BoardMove): void {
     this.session.play(move);
+  }
+
+  protected browse(event: Event, step: -1 | 1): void {
+    if (isFormField(event.target)) return;
+    this.game.goTo(this.game.ply() + step);
   }
 
   protected retryTablebase(): void {

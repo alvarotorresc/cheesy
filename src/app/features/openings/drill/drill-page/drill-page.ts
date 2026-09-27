@@ -12,16 +12,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GameService } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../../../shared/board';
+import { isFormField } from '../../../../shared/keyboard';
 import { MoveList } from '../../../../shared/move-list';
 import { numberedMove } from '../../opening-theory';
 import { DrillSession, type DrillPhase } from '../drill-session';
 import { DrillSetup } from '../drill-setup/drill-setup';
-
-/** Keys typed into these elements are not moves through the game. */
-const isFormField = (target: EventTarget | null): boolean =>
-  target instanceof HTMLInputElement ||
-  target instanceof HTMLSelectElement ||
-  target instanceof HTMLTextAreaElement;
 
 /**
  * Drill page of an opening (`/openings/:id/drill`): choose colour and line, then play the line
