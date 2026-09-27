@@ -11,7 +11,9 @@
   z-index: 100;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius);
-  background: var(--color-surface);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 700;
   transform: translateY(-200%);
 }
 
@@ -19,76 +21,116 @@
   transform: none;
 }
 
+/* Ink band: the only dark block of the page in light mode. */
 .header {
+  --color-focus: var(--color-accent);
+
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
 }
 
 .header-inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'brand lang'
+    'nav nav';
   align-items: center;
-  gap: var(--space-2) var(--space-6);
+  gap: var(--space-2) var(--space-4);
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-4) 0;
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.125rem;
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-self: start;
+  min-height: var(--tap);
+  border-radius: var(--radius-sm);
   text-decoration: none;
+}
+
+.logo {
+  width: 2.25rem;
+}
+
+.wordmark {
+  color: var(--color-accent);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  /* Bricolage's display cut: tighter and quirkier than its text sizes. */
+  font-variation-settings: 'opsz' 96;
 }
 
 .nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  order: 3;
-  width: 100%;
+  grid-area: nav;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .nav-link {
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius);
-  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-1);
+  color: var(--color-on-ink-muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
   text-decoration: none;
+  transition: color var(--duration-fast) ease;
 }
 
 .nav-link:hover {
-  background: var(--color-surface-hover);
-  color: var(--color-text);
+  color: var(--color-on-ink);
 }
 
 .nav-link.active {
-  color: var(--color-text);
-  font-weight: 600;
-  box-shadow: inset 0 -2px 0 var(--color-accent);
+  color: var(--color-on-ink);
+  box-shadow: inset 0 -4px 0 var(--color-accent);
+}
+
+.nav-link:focus-visible {
+  outline-offset: -3px;
 }
 
 .lang {
+  grid-area: lang;
   display: flex;
-  margin-left: auto;
-  border: 1px solid var(--color-border);
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--color-on-ink-muted);
   border-radius: var(--radius);
-  overflow: hidden;
 }
 
 .lang-button {
-  min-width: 2.75rem;
-  min-height: 2.25rem;
+  min-width: var(--tap);
+  min-height: 2.5rem;
   border: 0;
+  border-radius: calc(var(--radius) - 3px);
   background: transparent;
-  color: var(--color-text-muted);
+  color: var(--color-on-ink-muted);
   font: inherit;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
+}
+
+.lang-button:hover {
+  color: var(--color-on-ink);
 }
 
 .lang-button[aria-pressed='true'] {
   background: var(--color-accent);
   color: var(--color-on-accent);
-  font-weight: 600;
 }
 
 .main {
@@ -96,7 +138,7 @@
   width: 100%;
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-5) var(--space-4) var(--space-12);
 }
 
 .main:focus {
@@ -104,8 +146,29 @@
 }
 
 @media (min-width: 48rem) {
+  .header-inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'brand nav lang';
+    gap: var(--space-8);
+    padding: 0 var(--space-6);
+  }
+
+  .brand {
+    min-height: 4rem;
+  }
+
   .nav {
-    order: 0;
-    width: auto;
+    display: flex;
+    gap: var(--space-2);
+    align-self: stretch;
+  }
+
+  .nav-link {
+    padding: 0 var(--space-3);
+    font-size: var(--text-md);
+  }
+
+  .main {
+    padding: var(--space-8) var(--space-6) var(--space-12);
   }
 }
