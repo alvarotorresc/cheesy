@@ -6,7 +6,7 @@
     <textarea
       #source
       id="import-source"
-      class="source"
+      class="source textarea"
       rows="4"
       spellcheck="false"
       autocomplete="off"
@@ -14,7 +14,7 @@
       aria-describedby="import-feedback"
       [attr.aria-invalid]="hasError()"
     ></textarea>
-    <button type="submit" class="button load">{{ i18n.t().importer.load }}</button>
+    <button type="submit" class="button primary load">{{ i18n.t().importer.load }}</button>
     <p id="import-feedback" class="feedback" role="status" [class.error]="hasError()">
       {{ message() }}
     </p>

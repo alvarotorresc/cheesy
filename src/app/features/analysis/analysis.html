@@ -1,7 +1,7 @@
 <h1 class="visually-hidden">{{ i18n.t().analysis.title }}</h1>
 
-<div class="layout">
-  <div class="board-column" [class.with-bar]="engineOn()">
+<div class="play-layout">
+  <div class="play-board board-column" [class.with-bar]="engineOn()">
     @if (engineOn()) {
       <app-eval-bar
         [score]="evaluation()"
@@ -23,11 +23,11 @@
     />
   </div>
 
-  <div class="panel">
-    <p class="status" role="status">{{ status() }}</p>
+  <div class="play-panel">
+    <p class="status play-status" role="status">{{ status() }}</p>
 
     @if (invalidLink()) {
-      <div class="notice" role="alert">
+      <div class="notice surface" role="alert">
         <p>{{ i18n.t().share.invalidLink }}</p>
         <button type="button" class="button" (click)="invalidLink.set(false)">
           {{ i18n.t().share.dismiss }}
@@ -35,7 +35,7 @@
       </div>
     }
 
-    <section class="engine" [attr.aria-label]="i18n.t().engine.toggle">
+    <section class="engine surface" [attr.aria-label]="i18n.t().engine.toggle">
       <label class="switch">
         <input
           #engineSwitch
@@ -67,12 +67,12 @@
           />
         }
       } @else {
-        <p class="hint">{{ i18n.t().engine.downloadHint }}</p>
+        <p class="hint muted small">{{ i18n.t().engine.downloadHint }}</p>
       }
     </section>
 
     <div class="controls" role="group" [attr.aria-label]="i18n.t().analysis.controls">
-      <div class="nav-buttons">
+      <div class="step-buttons">
         <button
           type="button"
           class="button"
@@ -115,7 +115,7 @@
         </button>
       </div>
 
-      <div class="action-buttons">
+      <div class="button-row">
         <button type="button" class="button" [disabled]="!game.canGoBack()" (click)="game.undo()">
           {{ i18n.t().analysis.undo }}
         </button>
@@ -128,9 +128,9 @@
       </div>
     </div>
 
-    <h2 class="moves-title">{{ i18n.t().analysis.moves }}</h2>
+    <h2 class="panel-title">{{ i18n.t().analysis.moves }}</h2>
     <app-move-list
-      class="moves"
+      class="play-moves"
       [moves]="sans()"
       [currentPly]="game.ply()"
       [startPly]="game.startPly()"

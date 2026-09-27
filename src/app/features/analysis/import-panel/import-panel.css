@@ -1,12 +1,37 @@
 :host {
   display: block;
+  border-top: 1px solid var(--color-border);
 }
 
 summary {
-  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
   padding: var(--space-2) 0;
-  font-weight: 600;
+  font-weight: 700;
+  list-style: none;
   cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron: points right when closed, down when open. */
+summary::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline: 0.125rem var(--space-1);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+details[open] summary::before {
+  transform: rotate(45deg);
 }
 
 .form {
@@ -15,27 +40,17 @@ summary {
 }
 
 .label {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
 }
 
 .source {
-  width: 100%;
   min-height: 6rem;
-  padding: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  /* 16px keeps mobile browsers from zooming into the field. */
-  font:
-    1rem / 1.4 ui-monospace,
-    monospace;
-  resize: vertical;
 }
 
 .source[aria-invalid='true'] {
   border-width: 2px;
-  border-color: var(--color-text);
+  border-color: var(--color-danger);
 }
 
 .load {
@@ -49,6 +64,6 @@ summary {
 }
 
 .feedback.error {
-  color: var(--color-text);
+  color: var(--color-danger);
   font-weight: 600;
 }

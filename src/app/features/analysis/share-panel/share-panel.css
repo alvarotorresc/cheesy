@@ -7,34 +7,8 @@
   gap: var(--space-2);
 }
 
-.title {
-  font-size: 1rem;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.buttons .button {
-  flex: 1 1 auto;
-}
-
 .feedback {
   min-height: 1.5em;
   color: var(--color-text-muted);
-}
-
-.fallback {
-  width: 100%;
-  padding: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font:
-    1rem / 1.4 ui-monospace,
-    monospace;
-  resize: vertical;
+  font-size: var(--text-sm);
 }
