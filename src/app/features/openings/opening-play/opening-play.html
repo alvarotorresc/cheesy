@@ -1,6 +1,13 @@
-<a class="back" routerLink="/openings">
-  <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
-</a>
+<nav class="topbar">
+  <a class="back" routerLink="/openings">
+    <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+  </a>
+  @if (session.opening(); as opening) {
+    <a class="back" [routerLink]="['/openings', opening.id, 'drill']">
+      {{ i18n.t().drill.fromPlay }}
+    </a>
+  }
+</nav>
 
 @switch (session.loadState()) {
   @case ('loading') {

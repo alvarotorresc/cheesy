@@ -3,8 +3,14 @@
   gap: var(--space-4);
 }
 
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
 .back {
-  justify-self: start;
   color: var(--color-text-muted);
   text-decoration: none;
 }
