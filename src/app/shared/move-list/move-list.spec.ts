@@ -15,6 +15,8 @@ describe('MoveList', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MoveList);
+    fixture.componentRef.setInput('label', 'Moves');
+    fixture.componentRef.setInput('emptyLabel', 'No moves yet.');
     element = fixture.nativeElement as HTMLElement;
   });
 

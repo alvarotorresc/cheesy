@@ -25,8 +25,10 @@ export class MoveList {
   readonly currentPly = input(0);
   /** Plies played before the first move: 0 from the initial position, odd when black starts. */
   readonly startPly = input(0);
-  readonly label = input('Moves');
-  readonly emptyLabel = input('No moves yet.');
+  /** Accessible name of the list, already translated. */
+  readonly label = input.required<string>();
+  /** Text shown when there are no moves, already translated. */
+  readonly emptyLabel = input.required<string>();
 
   /** Emits the ply to display after selecting a move. */
   readonly selectPly = output<number>();
