@@ -24,13 +24,13 @@
 
 .line {
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  align-items: baseline;
+  grid-template-columns: 3.75rem 1fr;
+  align-items: center;
   width: 100%;
-  min-height: 2.25rem;
+  min-height: var(--tap);
   padding: var(--space-1) var(--space-2);
   border: 0;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-text);
   font: inherit;
@@ -48,7 +48,7 @@
 }
 
 .score {
-  font-weight: 600;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
