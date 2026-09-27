@@ -8,6 +8,7 @@ import {
   ElementRef,
   inject,
   input,
+  linkedSignal,
   output,
   signal,
   viewChild,
@@ -66,7 +67,14 @@ export class BoardComponent {
 
   protected readonly promotionRoles = PROMOTION_ROLES;
   protected readonly glyphs = PROMOTION_GLYPHS;
-  protected readonly pendingPromotion = signal<PendingPromotion | undefined>(undefined);
+  /**
+   * Promotion waiting for the user to pick a piece. A new position (the user browsed the moves, or
+   * the game changed) closes it: its squares belong to the position it was opened on.
+   */
+  protected readonly pendingPromotion = linkedSignal<string, PendingPromotion | undefined>({
+    source: this.fen,
+    computation: () => undefined,
+  });
 
   private readonly boardElement = viewChild.required<ElementRef<HTMLElement>>('board');
   private readonly promotionButtons =

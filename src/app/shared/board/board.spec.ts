@@ -1,7 +1,7 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { Api } from '@lichess-org/chessground/api';
 import { BoardComponent } from './board';
-import type { BoardLabels } from './board.types';
+import type { BoardLabels, BoardMove } from './board.types';
 
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const KINGS_ONLY_FEN = '4k3/8/8/8/8/8/8/4K3 w - - 0 1';
@@ -87,5 +87,48 @@ describe('BoardComponent', () => {
 
   it('should not show the promotion picker when no promotion is pending', () => {
     expect(element.querySelector('[role="dialog"]')).toBeNull();
+  });
+
+  describe('promotion', () => {
+    const PAWN_ON_SEVENTH = '4k3/P7/8/8/8/8/8/4K3 w - - 0 1';
+    const LATER_POSITION = '4k3/P7/8/8/8/8/8/3K4 b - - 1 1';
+
+    /** Drops the white pawn on a8 as the user would, which opens the picker. */
+    const pushPawn = async (): Promise<void> => {
+      fixture.componentRef.setInput('fen', PAWN_ON_SEVENTH);
+      fixture.componentRef.setInput('dests', new Map([['a7', ['a8']]]));
+      await fixture.whenStable();
+      const { api } = fixture.componentInstance as unknown as { api: Api };
+      api.move('a7', 'a8');
+      api.state.movable.events.after?.('a7', 'a8', { premove: false });
+      await fixture.whenStable();
+    };
+
+    const choice = (label: string): HTMLButtonElement | null =>
+      element.querySelector(`[role="dialog"] button[aria-label="${label}"]`);
+
+    it('should ask for the piece and report the move with it', async () => {
+      const moves: BoardMove[] = [];
+      fixture.componentInstance.move.subscribe((move) => moves.push(move));
+      await pushPawn();
+
+      choice('Knight')?.click();
+
+      expect(moves).toEqual([{ from: 'a7', to: 'a8', promotion: 'knight' }]);
+    });
+
+    it('should close the picker when the position changes before a piece is chosen', async () => {
+      const moves: BoardMove[] = [];
+      fixture.componentInstance.move.subscribe((move) => moves.push(move));
+      await pushPawn();
+      expect(element.querySelector('[role="dialog"]')).not.toBeNull();
+
+      // The user browses to another position, with the arrow keys or the move list.
+      fixture.componentRef.setInput('fen', LATER_POSITION);
+      await fixture.whenStable();
+
+      expect(element.querySelector('[role="dialog"]')).toBeNull();
+      expect(moves).toEqual([]);
+    });
   });
 });
