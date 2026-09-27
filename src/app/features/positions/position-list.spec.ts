@@ -1,9 +1,8 @@
-import { DOCUMENT } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { en } from '../../core/i18n/dictionaries/en';
 import { sideToPlayLabel, tagLabel } from './position-labels';
-import { PAGE_RELOAD, PositionList } from './position-list';
+import { PositionList } from './position-list';
 
 const POSITION: CuratedPosition = {
   id: 'one',
@@ -15,15 +14,11 @@ const POSITION: CuratedPosition = {
   tags: ['back-rank'],
 };
 
-const reload = vi.fn<() => void>();
-
 const setup = (positions: ContentLoaders['positions']): PositionList => {
-  reload.mockReset();
   TestBed.configureTestingModule({
     providers: [
       PositionList,
       { provide: CONTENT_LOADERS, useValue: { positions } as Partial<ContentLoaders> },
-      { provide: PAGE_RELOAD, useValue: reload },
     ],
   });
   return TestBed.inject(PositionList);
@@ -38,7 +33,7 @@ describe('PositionList', () => {
     expect(list.positions()).toEqual([POSITION]);
   });
 
-  it('should report an error and load again without reloading the page when retried', async () => {
+  it('should report an error and load again when retried', async () => {
     const positions = vi
       .fn<ContentLoaders['positions']>()
       .mockRejectedValueOnce(new Error('offline'))
@@ -51,32 +46,25 @@ describe('PositionList', () => {
     expect(list.status()).toBe('loading');
     await vi.waitFor(() => expect(list.status()).toBe('ready'));
     expect(list.positions()).toEqual([POSITION]);
-    expect(reload).not.toHaveBeenCalled();
   });
 
-  it('should reload the page when a retry fails again', async () => {
-    const list = setup(() => Promise.reject(new Error('offline')));
+  it('should ask again on every retry and show the error again when it still fails', async () => {
+    const positions = vi.fn<ContentLoaders['positions']>(() =>
+      Promise.reject(new Error('offline')),
+    );
+    const list = setup(positions);
     await vi.waitFor(() => expect(list.status()).toBe('error'));
 
     list.retry();
 
-    await vi.waitFor(() => expect(reload).toHaveBeenCalledTimes(1));
     expect(list.status()).toBe('loading');
-  });
-});
+    await vi.waitFor(() => expect(list.status()).toBe('error'));
+    expect(positions).toHaveBeenCalledTimes(2);
 
-describe('PAGE_RELOAD', () => {
-  it('should reload the window of the document by default', () => {
-    const reloadWindow = vi.fn();
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: DOCUMENT, useValue: { defaultView: { location: { reload: reloadWindow } } } },
-      ],
-    });
+    list.retry();
 
-    TestBed.inject(PAGE_RELOAD)();
-
-    expect(reloadWindow).toHaveBeenCalledTimes(1);
+    await vi.waitFor(() => expect(positions).toHaveBeenCalledTimes(3));
+    await vi.waitFor(() => expect(list.status()).toBe('error'));
   });
 });
 
