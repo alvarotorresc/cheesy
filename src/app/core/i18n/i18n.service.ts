@@ -3,7 +3,7 @@ import { en, type Messages } from './dictionaries/en';
 import { es } from './dictionaries/es';
 import { isLang, resolveLocalized, type Lang, type Localized } from './i18n.types';
 
-export const LANG_STORAGE_KEY = 'chess-playground.lang';
+export const LANG_STORAGE_KEY = 'cheesy.lang';
 
 const DICTIONARIES: Record<Lang, Messages> = { es, en };
 

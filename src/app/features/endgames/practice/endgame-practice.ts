@@ -25,7 +25,7 @@ import { EndgameSession } from './endgame-session';
 /** Ids are kebab-case; anything else in the URL is not looked up at all. */
 const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
 
-export const TABLEBASE_VISIBLE_STORAGE_KEY = 'chess-playground.endgames.tablebase';
+export const TABLEBASE_VISIBLE_STORAGE_KEY = 'cheesy.endgames.tablebase';
 
 /** One endgame: the player plays their side against the engine, with an optional tablebase. */
 @Component({

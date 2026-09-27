@@ -1,7 +1,7 @@
 import Dexie, { type DexieOptions, type EntityTable } from 'dexie';
 import type { ProgressStore, StoredLineProgress } from './progress-store';
 
-export const PROGRESS_DB_NAME = 'chess-playground';
+export const PROGRESS_DB_NAME = 'cheesy';
 
 type ProgressDatabase = Dexie & { lines: EntityTable<StoredLineProgress, 'key'> };
 
