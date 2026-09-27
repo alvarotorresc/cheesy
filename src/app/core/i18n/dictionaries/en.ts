@@ -44,6 +44,27 @@ export const en = {
     flip: 'Flip board',
     reset: 'Reset',
   },
+  openings: {
+    title: 'Openings',
+    intro:
+      'Pick an opening and play it. Your rival answers with the lines we cover, and you can leave them at any moment.',
+    loading: 'Loading openings…',
+    loadError: 'The openings could not be loaded.',
+    retry: 'Try again',
+    empty: 'No openings yet.',
+    forWhite: 'For White',
+    forBlack: 'For Black',
+    families: {
+      openGames: '1.e4 e5: open games',
+      sicilian: 'Sicilian Defence',
+      otherE4: 'Other defences to 1.e4',
+      closedGames: '1.d4 d5: closed games',
+      indian: 'Indian defences',
+      otherD4: 'Other defences to 1.d4',
+      flank: 'Flank openings',
+      other: 'Other openings',
+    },
+  },
   board: {
     promotion: 'Choose promotion piece',
     queen: 'Queen',

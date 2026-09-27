@@ -46,6 +46,27 @@ export const es: Messages = {
     flip: 'Girar tablero',
     reset: 'Reiniciar',
   },
+  openings: {
+    title: 'Aperturas',
+    intro:
+      'Elige una apertura y juégala. El rival responde con las líneas que cubrimos y puedes salirte de ellas cuando quieras.',
+    loading: 'Cargando aperturas…',
+    loadError: 'No se han podido cargar las aperturas.',
+    retry: 'Reintentar',
+    empty: 'Todavía no hay aperturas.',
+    forWhite: 'Para blancas',
+    forBlack: 'Para negras',
+    families: {
+      openGames: '1.e4 e5: juegos abiertos',
+      sicilian: 'Defensa Siciliana',
+      otherE4: 'Otras defensas contra 1.e4',
+      closedGames: '1.d4 d5: juegos cerrados',
+      indian: 'Defensas indias',
+      otherD4: 'Otras defensas contra 1.d4',
+      flank: 'Aperturas de flanco',
+      other: 'Otras aperturas',
+    },
+  },
   board: {
     promotion: 'Elige la pieza de promoción',
     queen: 'Dama',

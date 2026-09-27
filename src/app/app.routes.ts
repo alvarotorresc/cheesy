@@ -8,7 +8,8 @@ export const routes: Routes = [
   },
   {
     path: 'openings',
-    loadComponent: () => import('./features/openings/openings').then((m) => m.Openings),
+    loadChildren: () =>
+      import('./features/openings/openings.routes').then((m) => m.OPENINGS_ROUTES),
   },
   {
     path: 'endgames',
