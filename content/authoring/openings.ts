@@ -1,5 +1,6 @@
 import type { OpeningSpec } from './tree-builder.ts';
 import { e4Openings } from './openings-e4.ts';
+import { d4Openings } from './openings-d4.ts';
 
 const RUY = 'e4 e5 Nf3 Nc6 Bb5';
 const RUY_CLOSED = `${RUY} a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3`;
@@ -495,4 +496,12 @@ export const caroKann: OpeningSpec = {
   },
 };
 
-export const allOpenings = [ruyLopez, italian, najdorf, french, caroKann, ...e4Openings];
+export const allOpenings = [
+  ruyLopez,
+  italian,
+  najdorf,
+  french,
+  caroKann,
+  ...e4Openings,
+  ...d4Openings,
+];

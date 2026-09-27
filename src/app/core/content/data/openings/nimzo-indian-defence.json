@@ -1,0 +1,509 @@
+{
+  "id": "nimzo-indian-defence",
+  "name": {
+    "es": "Defensa Nimzoindia",
+    "en": "Nimzo-Indian Defence"
+  },
+  "eco": "E20-E59",
+  "side": "black",
+  "description": {
+    "es": "Con 3...Ab4 las negras clavan el caballo de c3 para impedir e4, y a menudo cambian el alfil por el caballo para dañar la estructura blanca.",
+    "en": "With 3...Bb4 Black pins the c3 knight to stop e4, often trading bishop for knight to damage White's pawn structure."
+  },
+  "root": [
+    {
+      "san": "d4",
+      "main": true,
+      "children": [
+        {
+          "san": "Nf6",
+          "main": true,
+          "children": [
+            {
+              "san": "c4",
+              "main": true,
+              "children": [
+                {
+                  "san": "e6",
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Bb4",
+                          "name": {
+                            "es": "Defensa Nimzoindia",
+                            "en": "Nimzo-Indian Defence"
+                          },
+                          "comment": {
+                            "es": "Clava el caballo de c3 para impedir e4; las negras están dispuestas a ceder el alfil a cambio de dañar la estructura blanca.",
+                            "en": "Pins the c3 knight to stop e4; Black is ready to give up the bishop to damage White's structure."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "e3",
+                              "name": {
+                                "es": "Sistema Rubinstein",
+                                "en": "Rubinstein System"
+                              },
+                              "comment": {
+                                "es": "Desarrollo sólido: las blancas completan el flanco de rey antes de decidir su plan.",
+                                "en": "Solid development: White completes the kingside before choosing a plan."
+                              },
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "Bd3",
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "d5",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "c5",
+                                                  "name": {
+                                                    "es": "Sistema Gligoric",
+                                                    "en": "Gligoric System"
+                                                  },
+                                                  "comment": {
+                                                    "es": "Las negras golpean en el centro con ambos peones.",
+                                                    "en": "Black strikes in the centre with both pawns."
+                                                  },
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "name": {
+                                                            "es": "Defensa Bernstein",
+                                                            "en": "Bernstein Defence"
+                                                          },
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "a3",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bxc3",
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "bxc3",
+                                                                      "comment": {
+                                                                        "es": "Las blancas obtienen la pareja de alfiles y un centro de peones a cambio de los peones doblados en c.",
+                                                                        "en": "White gets the bishop pair and a pawn centre in exchange for doubled c-pawns."
+                                                                      },
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "dxc4",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Bxc4",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Qc7",
+                                                                                  "comment": {
+                                                                                    "es": "Prepara ...e5 para disputar el centro.",
+                                                                                    "en": "Prepares ...e5 to contest the centre."
+                                                                                  },
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bd3",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "e5",
+                                                                                          "main": true,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Qc2",
+                                                                                              "main": true,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "Re8",
+                                                                                                  "main": true,
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "san": "c5",
+                                  "children": [
+                                    {
+                                      "san": "Bd3",
+                                      "children": [
+                                        {
+                                          "san": "Nc6",
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "children": [
+                                                {
+                                                  "san": "Bxc3+",
+                                                  "children": [
+                                                    {
+                                                      "san": "bxc3",
+                                                      "children": [
+                                                        {
+                                                          "san": "d6",
+                                                          "name": {
+                                                            "es": "Variante Hübner",
+                                                            "en": "Hübner Variation"
+                                                          },
+                                                          "comment": {
+                                                            "es": "Estructura cerrada con ...e5: los caballos negros luchan contra los alfiles blancos.",
+                                                            "en": "A closed structure with ...e5: Black's knights take on White's bishops."
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Qc2",
+                              "name": {
+                                "es": "Variante Clásica",
+                                "en": "Classical Variation"
+                              },
+                              "comment": {
+                                "es": "Recapturará en c3 con la dama para evitar los peones doblados.",
+                                "en": "White will recapture on c3 with the queen to avoid doubled pawns."
+                              },
+                              "children": [
+                                {
+                                  "san": "O-O",
+                                  "children": [
+                                    {
+                                      "san": "a3",
+                                      "children": [
+                                        {
+                                          "san": "Bxc3+",
+                                          "children": [
+                                            {
+                                              "san": "Qxc3",
+                                              "children": [
+                                                {
+                                                  "san": "b6",
+                                                  "name": {
+                                                    "es": "Defensa Keres",
+                                                    "en": "Keres Defence"
+                                                  },
+                                                  "comment": {
+                                                    "es": "El alfil irá a b7 para controlar e4.",
+                                                    "en": "The bishop goes to b7 to control e4."
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg5",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bb7",
+                                                          "children": [
+                                                            {
+                                                              "san": "e3",
+                                                              "children": [
+                                                                {
+                                                                  "san": "d6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nf3",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nbd7",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "san": "d5",
+                                  "name": {
+                                    "es": "Variante Noa",
+                                    "en": "Noa Variation"
+                                  },
+                                  "comment": {
+                                    "es": "Golpe central inmediato.",
+                                    "en": "An immediate central strike."
+                                  },
+                                  "children": [
+                                    {
+                                      "san": "cxd5",
+                                      "children": [
+                                        {
+                                          "san": "exd5",
+                                          "children": [
+                                            {
+                                              "san": "Bg5",
+                                              "children": [
+                                                {
+                                                  "san": "h6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bh4",
+                                                      "children": [
+                                                        {
+                                                          "san": "c5",
+                                                          "children": [
+                                                            {
+                                                              "san": "dxc5",
+                                                              "children": [
+                                                                {
+                                                                  "san": "g5",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bg3",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Ne4",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "Nf3",
+                              "name": {
+                                "es": "Variante de los Tres Caballos",
+                                "en": "Three Knights Variation"
+                              },
+                              "comment": {
+                                "es": "Desarrollo flexible que mantiene abiertas varias estructuras.",
+                                "en": "Flexible development that keeps several structures open."
+                              },
+                              "children": [
+                                {
+                                  "san": "c5",
+                                  "children": [
+                                    {
+                                      "san": "g3",
+                                      "children": [
+                                        {
+                                          "san": "cxd4",
+                                          "children": [
+                                            {
+                                              "san": "Nxd4",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg2",
+                                                      "children": [
+                                                        {
+                                                          "san": "d5",
+                                                          "children": [
+                                                            {
+                                                              "san": "cxd5",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nxd5",
+                                                                  "name": {
+                                                                    "es": "Híbrido Inglés",
+                                                                    "en": "English Hybrid"
+                                                                  },
+                                                                  "comment": {
+                                                                    "es": "Posición abierta de tipo Inglesa: el alfil de g2 presiona la gran diagonal.",
+                                                                    "en": "An open, English-like position: the g2 bishop presses the long diagonal."
+                                                                  },
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "a3",
+                              "name": {
+                                "es": "Variante Sämisch",
+                                "en": "Sämisch Variation"
+                              },
+                              "comment": {
+                                "es": "Fuerza el cambio en c3: las blancas obtienen la pareja de alfiles a cambio de peones doblados.",
+                                "en": "Forces the trade on c3: White gets the bishop pair in exchange for doubled pawns."
+                              },
+                              "children": [
+                                {
+                                  "san": "Bxc3+",
+                                  "children": [
+                                    {
+                                      "san": "bxc3",
+                                      "children": [
+                                        {
+                                          "san": "c5",
+                                          "children": [
+                                            {
+                                              "san": "e3",
+                                              "children": [
+                                                {
+                                                  "san": "Nc6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bd3",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": [
+                                                            {
+                                                              "san": "Ne2",
+                                                              "children": [
+                                                                {
+                                                                  "san": "b6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "e4",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Ne8",
+                                                                          "comment": {
+                                                                            "es": "Maniobra típica: el caballo evita la clavada Ag5 y prepara ...f5.",
+                                                                            "en": "A typical manoeuvre: the knight sidesteps the Bg5 pin and prepares ...f5."
+                                                                          },
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
