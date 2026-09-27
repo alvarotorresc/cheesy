@@ -300,6 +300,8 @@ export const es: Messages = {
     mateAgainstYou: 'Recibes mate en {n}',
     dtz: '{n} medias jugadas hasta la próxima captura o jugada de peón',
     bestMove: 'Mejor jugada',
+    drawingMove: 'Una jugada que mantiene las tablas',
+    bestDefence: 'Defensa más tenaz',
     moveChanged: 'Tu jugada {move} ha cambiado el resultado teórico: de {before} a {after}.',
     outcomeWin: 'victoria',
     outcomeDraw: 'tablas',

@@ -50,6 +50,16 @@ describe('TablebasePanel', () => {
     expect(text()).toContain('You mate in 17');
     expect(text()).toContain('5 half-moves to the next capture or pawn move');
     expect(element.querySelector('.move')?.textContent?.trim()).toBe('Rd5');
+    expect(text()).toContain('Best move');
+  });
+
+  it('should call the first move of a lost position the most stubborn defence', async () => {
+    const result = { ...LUCENA_RESULT, category: 'loss' as const, dtm: -20 };
+
+    await show({ status: 'ready', fen: LUCENA_FEN, result }, 'white', 'white');
+
+    expect(text()).toContain('Most stubborn defence');
+    expect(text()).toContain('You are mated in 10');
   });
 
   it('should show the result from the player side when the opponent is to move', async () => {
@@ -67,6 +77,8 @@ describe('TablebasePanel', () => {
     expect(text()).not.toContain('mate');
     expect(text()).not.toContain('half-moves');
     expect(element.querySelector('.move')?.textContent?.trim()).toBe('Kf4');
+    expect(text()).toContain('A move that holds the draw');
+    expect(text()).not.toContain('Best move');
   });
 
   it.each([

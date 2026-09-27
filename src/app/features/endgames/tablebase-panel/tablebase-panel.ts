@@ -35,6 +35,7 @@ interface ResultView {
   mate: string | undefined;
   zeroing: string | undefined;
   bestMove: string | undefined;
+  bestMoveLabel: string;
 }
 
 /**
@@ -79,6 +80,9 @@ export class TablebasePanel {
       zeroing:
         result.dtz && category !== 'draw' ? fill(t.dtz, { n: Math.abs(result.dtz) }) : undefined,
       bestMove: playerToMove && category !== 'unknown' ? result.moves[0]?.san : undefined,
+      // In a draw many moves are equally good, and in a loss the move only delays the end.
+      bestMoveLabel:
+        outcome === 'draw' ? t.drawingMove : outcome === 'loss' ? t.bestDefence : t.bestMove,
     };
   });
 

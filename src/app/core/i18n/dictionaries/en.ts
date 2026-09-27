@@ -294,6 +294,8 @@ export const en = {
     mateAgainstYou: 'You are mated in {n}',
     dtz: '{n} half-moves to the next capture or pawn move',
     bestMove: 'Best move',
+    drawingMove: 'A move that holds the draw',
+    bestDefence: 'Most stubborn defence',
     moveChanged: 'Your move {move} changed the theoretical result from {before} to {after}.',
     outcomeWin: 'a win',
     outcomeDraw: 'a draw',
