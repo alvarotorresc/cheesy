@@ -1,14 +1,14 @@
 @let t = i18n.t().drill;
 
 <section class="setup" aria-labelledby="setup-title">
-  <h2 id="setup-title">{{ t.setupTitle }}</h2>
+  <h2 id="setup-title" class="panel-title">{{ t.setupTitle }}</h2>
   <p class="intro">{{ t.intro }}</p>
 
   <fieldset>
     <legend>{{ t.color }}</legend>
     <div class="colors">
       @for (color of colors; track color) {
-        <label class="option">
+        <label class="option color">
           <input
             type="radio"
             name="drill-color"
@@ -66,7 +66,9 @@
     </ul>
   </fieldset>
 
-  <button type="button" class="primary start" (click)="session.start()">{{ t.start }}</button>
+  <button type="button" class="button primary start" (click)="session.start()">
+    {{ t.start }}
+  </button>
 
   <app-progress-note [hasProgress]="session.hasProgress()" />
 </section>
