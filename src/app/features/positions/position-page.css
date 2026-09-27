@@ -8,31 +8,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: var(--space-2) var(--space-4);
+  gap: 0 var(--space-4);
 }
 
-.topbar a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  color: var(--color-text-muted);
-}
-
-.layout {
-  display: grid;
-  gap: var(--space-6);
-}
-
-.board-column {
-  width: 100%;
-  max-width: 40rem;
-  margin: 0 auto;
-}
-
-.panel,
 .meta,
-.feedback,
-.state {
+.feedback {
   display: grid;
   align-content: start;
   justify-items: start;
@@ -40,43 +20,37 @@
   min-width: 0;
 }
 
-.panel {
-  gap: var(--space-4);
-  justify-items: stretch;
+.side {
+  font-weight: 700;
 }
 
-h2 {
-  font-size: 1rem;
-}
-
-.side,
-.status {
-  font-weight: 600;
-}
-
-.muted,
 .hint,
 .opponent {
   color: var(--color-text-muted);
 }
 
+/* Right and wrong answers differ by colour and by the style of their bar. */
 .status {
-  padding-left: var(--space-3);
-  border-left: 4px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: inset 4px 0 0 var(--color-control);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .status.right {
-  border-color: var(--color-accent);
+  box-shadow: inset 6px 0 0 var(--color-accent);
 }
 
 .status.wrong {
-  border-color: var(--color-text-muted);
-  border-left-style: dashed;
+  border: 2px dashed var(--color-danger);
+  box-shadow: none;
 }
 
 .tags,
-.steps,
-.actions {
+.steps {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
@@ -85,60 +59,25 @@ h2 {
   list-style: none;
 }
 
-.tags li {
-  padding: 0 var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
+.steps .button {
+  padding-inline: var(--space-3);
 }
 
 .steps span {
-  display: inline-block;
-  padding: var(--space-2) var(--space-1);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  font-weight: 600;
 }
 
-.replay {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-2);
-}
-
-button {
-  min-height: 2.75rem;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-  cursor: pointer;
-}
-
-button:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--color-surface-hover);
-}
-
-/* Replay buttons stay focusable at the ends of the line, so the keyboard focus is never lost. */
-button:disabled,
-button[aria-disabled='true'] {
-  opacity: 0.45;
-  cursor: default;
-}
-
-button[aria-current='step'] {
+.steps .button[aria-current='step'] {
   border-color: var(--color-accent);
   background: var(--color-accent);
   color: var(--color-on-accent);
 }
 
-@media (min-width: 60rem) {
-  .layout {
-    grid-template-columns: minmax(0, 40rem) minmax(16rem, 1fr);
-    align-items: start;
-  }
-
-  .board-column {
-    margin: 0;
-  }
+.step {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
