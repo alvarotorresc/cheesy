@@ -389,9 +389,10 @@ describe('OpeningSession', () => {
       await vi.advanceTimersByTimeAsync(0);
       const engine = engines.last();
 
+      // The search ends on its own and its move is on its way when the player undoes: the stop
+      // reaches an idle engine, and the move arrives after it.
+      engine.answer('e7e5');
       session.undo();
-      // The search had just ended on its own: its move arrives after the stop.
-      engine.emit('bestmove e7e5');
       await waitForReply();
 
       expect(engine.sent).toContain('stop');
