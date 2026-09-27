@@ -41,14 +41,19 @@ Then open `http://localhost:4200`.
 
 ## Scripts
 
-| Script              | What it does                                                      |
-| ------------------- | ----------------------------------------------------------------- |
-| `pnpm dev`          | Starts the development server (`pnpm start` is the same)          |
-| `pnpm build`        | Builds the production bundle into `dist/chess-playground/browser` |
-| `pnpm test`         | Runs the unit tests once                                          |
-| `pnpm lint`         | Lints TypeScript and templates                                    |
-| `pnpm format`       | Formats the code with Prettier                                    |
-| `pnpm format:check` | Checks formatting without writing                                 |
+| Script                   | What it does                                                                     |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| `pnpm dev`               | Starts the development server (`pnpm start` is the same)                         |
+| `pnpm build`             | Builds the production bundle into `dist/chess-playground/browser`                |
+| `pnpm test`              | Runs the unit tests and the fast content checks once                             |
+| `pnpm test:coverage`     | Runs the unit tests with a coverage report in `coverage/`                        |
+| `pnpm lint`              | Lints TypeScript and templates                                                   |
+| `pnpm format`            | Formats the code with Prettier                                                   |
+| `pnpm format:check`      | Checks formatting without writing                                                |
+| `pnpm content:build`     | Regenerates the content JSON files from their sources                            |
+| `pnpm content:test`      | Runs the fast content checks: schema and legal moves                             |
+| `pnpm content:typecheck` | Type-checks the content tooling                                                  |
+| `pnpm content:verify`    | Checks the content against Stockfish and the Lichess tablebase (slow, not in CI) |
 
 A pre-commit hook, installed with `pnpm install`, lints and formats the staged files.
 
@@ -56,10 +61,13 @@ A pre-commit hook, installed with `pnpm install`, lints and formats the staged f
 
 ```
 src/app/
-  core/       game state (chessops) and translations
+  core/       game state (chessops), translations and content loading
   shared/     presentational components: board and move list
   features/   one folder per section, loaded lazily
+content/      sources and checks of the openings, endgames and positions
 ```
+
+The content is fixed and validated before it reaches the app: see [content/README.md](content/README.md).
 
 ## License
 
@@ -70,3 +78,5 @@ src/app/
 - [chessground](https://github.com/lichess-org/chessground), the board used by Lichess, licensed under GPL-3.0-or-later.
 - [chessops](https://github.com/niklasf/chessops), chess rules and notation, licensed under GPL-3.0-or-later.
 - [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
+- [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), names and ECO codes of openings used to check the content, dedicated to the public domain under CC0.
+- The [Lichess tablebase](https://tablebase.lichess.ovh) and [Stockfish](https://stockfishchess.org), used to verify the endgames and the positions.
