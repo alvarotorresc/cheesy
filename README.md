@@ -26,7 +26,7 @@ The analysis board is available now. The other sections are in progress.
 
 ## Local development
 
-Requirements: pnpm 9.7 or newer, running on Node.js 22 or newer. Nothing else has to be installed:
+Requirements: pnpm 10 or newer, running on Node.js 22 or newer. Nothing else has to be installed:
 
 - pnpm switches itself to the version pinned in `packageManager` (12.6.0).
 - Node.js 26.10.0 is pinned in `devEngines.runtime`. `pnpm install` downloads it and every `pnpm`
