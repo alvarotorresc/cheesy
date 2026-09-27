@@ -78,6 +78,29 @@ describe('EvalBar', () => {
     expect(meter().style.getPropertyValue('--white-share')).toBe('1');
   });
 
+  it('should fill the bar and write 1-0 when White has won, whatever the score', async () => {
+    await render({ score: { type: 'cp', value: -300 }, outcome: 'white' });
+
+    expect(value()).toBe('1-0');
+    expect(meter().getAttribute('aria-valuenow')).toBe('100');
+    expect(meter().getAttribute('aria-valuetext')).toBe('1-0');
+  });
+
+  it('should empty the bar and write 0-1 when Black has won', async () => {
+    await render({ outcome: 'black' });
+
+    expect(value()).toBe('0-1');
+    expect(meter().getAttribute('aria-valuenow')).toBe('0');
+    expect(element.querySelector('.value')?.classList).not.toContain('on-white');
+  });
+
+  it('should split the bar and write ½-½ when the game is drawn', async () => {
+    await render({ outcome: 'draw' });
+
+    expect(value()).toBe('½-½');
+    expect(meter().getAttribute('aria-valuenow')).toBe('50');
+  });
+
   it('should flip when the board shows Black at the bottom', async () => {
     await render({ orientation: 'black' });
 

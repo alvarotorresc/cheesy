@@ -1,1 +1,1 @@
-export { EvalBar } from './eval-bar';
+export { EvalBar, type EvalOutcome } from './eval-bar';
