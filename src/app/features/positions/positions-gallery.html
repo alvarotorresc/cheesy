@@ -30,7 +30,7 @@
 } @else if (list.status() === 'error') {
   <div class="state" role="alert">
     <p>{{ t.loadError }}</p>
-    <button type="button" (click)="list.load()">{{ t.retry }}</button>
+    <button type="button" (click)="list.retry()">{{ t.retry }}</button>
   </div>
 } @else {
   <p class="state" role="status">{{ t.loading }}</p>
