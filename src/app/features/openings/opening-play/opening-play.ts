@@ -81,7 +81,7 @@ export class OpeningPlay {
       case 'game-over':
         return resultMessage(this.session.result(), this.session.playerColor(), this.i18n.t());
       case 'deviation':
-        return t.deviationTitle;
+        return t.deviationChoice;
       case 'engine-error':
         return t.engineError;
       case 'opponent':
