@@ -224,6 +224,29 @@ describe('OpeningList', () => {
 
       expect(element.querySelectorAll('a.card')).toHaveLength(3);
       expect(element.querySelector('a.card .progress')).toBeNull();
+      expect(element.querySelector('app-progress-note button')?.textContent?.trim()).toBe(
+        'Delete progress',
+      );
+    });
+
+    it('should show the progress of the openings that loaded when another one fails', async () => {
+      store(saved('ruy', 'e2e4 e7e5 d2d4'), saved('french', 'e2e4 e7e5 d2d4', 'black'));
+      const opening = loaders.opening;
+      loaders = {
+        ...loaders,
+        opening: (id) => (id === 'french' ? Promise.reject(new Error('offline')) : opening(id)),
+      };
+      await create();
+      await settle();
+
+      const cards = Array.from(element.querySelectorAll('a.card'));
+      expect(cards[0].querySelector('.progress')?.textContent?.trim()).toBe(
+        '1 of 3 lines practised, 0 mastered',
+      );
+      expect(cards[1].querySelector('.progress')).toBeNull();
+      expect(element.querySelector('app-progress-note button')?.textContent?.trim()).toBe(
+        'Delete progress',
+      );
     });
   });
 });

@@ -56,26 +56,29 @@ export class OpeningList {
 
   /**
    * Only the openings with saved progress are downloaded, to count their lines as they are now.
-   * Progress is a bonus: if any of this fails, the list is shown without it.
+   * Progress is a bonus: an opening that cannot be downloaded is shown without it, and the saved
+   * progress can still be deleted.
    */
   private async loadProgress(): Promise<void> {
     const generation = ++this.progressGeneration;
     const rows = await this.progressService.all();
+    if (generation !== this.progressGeneration) return;
+    this.hasProgress.set(rows.length > 0);
     const byOpening = new Map<string, LineProgress[]>();
     for (const row of rows)
       byOpening.set(row.openingId, [...(byOpening.get(row.openingId) ?? []), row]);
-    try {
-      const entries = await Promise.all(
-        [...byOpening].map(async ([id, openingRows]) => {
-          const book = await this.content.openingBook(id);
-          return book ? ([id, summarizeProgress(book, openingRows)] as const) : undefined;
-        }),
-      );
-      if (generation !== this.progressGeneration) return;
-      this.progress.set(new Map(entries.filter((entry) => entry !== undefined)));
-      this.hasProgress.set(rows.length > 0);
-    } catch (error) {
-      console.error(error);
+    const results = await Promise.allSettled(
+      [...byOpening].map(async ([id, openingRows]) => {
+        const book = await this.content.openingBook(id);
+        return book ? ([id, summarizeProgress(book, openingRows)] as const) : undefined;
+      }),
+    );
+    if (generation !== this.progressGeneration) return;
+    const entries: (readonly [string, OpeningProgress])[] = [];
+    for (const result of results) {
+      if (result.status === 'rejected') console.error(result.reason);
+      else if (result.value) entries.push(result.value);
     }
+    this.progress.set(new Map(entries));
   }
 }
