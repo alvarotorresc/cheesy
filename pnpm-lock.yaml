@@ -182,8 +182,8 @@ importers:
         specifier: ^22.2.0
         version: 22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(rxjs@7.8.2)
       '@lichess-org/chessground':
-        specifier: ^9.10.3
-        version: 9.10.3
+        specifier: ^10.2.0
+        version: 10.2.0
       chessops:
         specifier: ^0.15.1
         version: 0.15.1
@@ -919,8 +919,9 @@ packages:
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
-  '@lichess-org/chessground@9.10.3':
-    resolution: {integrity: sha512-Ig9fTOxva+ifW7GLOls7ZcBTP6ODHlYGdhjoAas34/X3BYL9nMoQplJO3a9RGq/XB3LoAXrCe2FgBw41DkDvPg==}
+  '@lichess-org/chessground@10.2.0':
+    resolution: {integrity: sha512-XScWn76u2A+5uNHUfyf9P1DAImGcVs0WjjkGz3tJPXnzsoNVriRXuxm6hpN02DY5LNk/jkCXKeW0raEOXGxPig==}
+    engines: {node: '>=24', pnpm: '>=12'}
 
   '@listr2/prompt-adapter-inquirer@4.2.7':
     resolution: {integrity: sha512-k180vxSv2KqmnDxoato6pCqEJsov4U5C0EVmldZkAdNeVBxY48A/LM6TCNPGIzDK/iZSfsZP0Mw+gbWc5hXLyA==}
@@ -3541,7 +3542,7 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
-  '@lichess-org/chessground@9.10.3': {}
+  '@lichess-org/chessground@10.2.0': {}
 
   '@listr2/prompt-adapter-inquirer@4.2.7(@inquirer/prompts@8.7.2)(listr2@11.1.0)':
     dependencies:

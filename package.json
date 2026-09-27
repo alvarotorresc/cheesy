@@ -31,7 +31,7 @@
     "@angular/core": "^22.2.0",
     "@angular/platform-browser": "^22.2.0",
     "@angular/router": "^22.2.0",
-    "@lichess-org/chessground": "^9.10.3",
+    "@lichess-org/chessground": "^10.2.0",
     "chessops": "^0.15.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
