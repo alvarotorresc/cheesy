@@ -29,6 +29,22 @@
   @if (exercise() === 'unplayable') {
     <p class="state" role="alert">{{ t.unplayable }}</p>
   } @else if (exercise() === 'ready') {
+    <div class="feedback">
+      <p
+        #statusMessage
+        class="status"
+        role="status"
+        tabindex="-1"
+        [class.wrong]="trainer.feedback()?.kind === 'wrong'"
+        [class.right]="trainer.feedback()?.kind === 'correct'"
+      >
+        {{ status() }}
+      </p>
+      @if (hintText(); as hint) {
+        <p class="hint">{{ hint }}</p>
+      }
+    </div>
+
     <div class="layout">
       <div class="board-column">
         <app-board
@@ -57,21 +73,7 @@
           </ul>
         </div>
 
-        <p
-          #statusMessage
-          class="status"
-          role="status"
-          tabindex="-1"
-          [class.wrong]="trainer.feedback()?.kind === 'wrong'"
-          [class.right]="trainer.feedback()?.kind === 'correct'"
-        >
-          {{ status() }}
-        </p>
-
         @if (!trainer.isReplay()) {
-          @if (hintText(); as hint) {
-            <p class="hint">{{ hint }}</p>
-          }
           <div class="actions">
             <button type="button" [attr.aria-disabled]="!!hintText()" (click)="trainer.showHint()">
               {{ t.hint }}
