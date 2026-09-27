@@ -1,0 +1,68 @@
+# Chess Playground
+
+A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no tracking.
+
+The board is always playable. You can make any legal move and the app reacts to it; it never blocks you.
+
+The interface is available in English and Spanish.
+
+## Sections
+
+- **Openings**: play an opening and drill its main lines.
+- **Endgames**: convert winning endgames and hold the drawn ones.
+- **Positions**: find the best move in tactical positions.
+- **Analysis**: a free board to explore any idea, with move history navigation.
+
+The analysis board is available now. The other sections are in progress.
+
+## Tech stack
+
+- [Angular](https://angular.dev) 22: standalone components, signals, zoneless change detection
+- [chessground](https://github.com/lichess-org/chessground) for the board
+- [chessops](https://github.com/niklasf/chessops) for chess rules, SAN, FEN and PGN
+- [Vitest](https://vitest.dev) for unit tests
+- ESLint, Prettier and Lefthook for code quality
+- Static hosting on Netlify
+
+## Local development
+
+Requirements: Node.js 22.22.3 or newer (Angular 22 requires it) and pnpm 10.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Then open `http://localhost:4200`.
+
+## Scripts
+
+| Script              | What it does                                                      |
+| ------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`          | Starts the development server (`pnpm start` is the same)          |
+| `pnpm build`        | Builds the production bundle into `dist/chess-playground/browser` |
+| `pnpm test`         | Runs the unit tests once                                          |
+| `pnpm lint`         | Lints TypeScript and templates                                    |
+| `pnpm format`       | Formats the code with Prettier                                    |
+| `pnpm format:check` | Checks formatting without writing                                 |
+
+A pre-commit hook, installed with `pnpm install`, lints and formats the staged files.
+
+## Project structure
+
+```
+src/app/
+  core/       game state (chessops) and translations
+  shared/     presentational components: board and move list
+  features/   one folder per section, loaded lazily
+```
+
+## License
+
+[GPL-3.0](LICENSE).
+
+## Credits
+
+- [chessground](https://github.com/lichess-org/chessground), the board used by Lichess, licensed under GPL-3.0-or-later.
+- [chessops](https://github.com/niklasf/chessops), chess rules and notation, licensed under GPL-3.0-or-later.
+- [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
