@@ -8,13 +8,15 @@
   @if (progress.status() === 'unavailable') {
     <p class="warning">{{ t.unavailable }}</p>
   } @else if (clearState() === 'confirming' || clearState() === 'clearing') {
-    <div class="confirm" role="group" [attr.aria-label]="t.clear">
+    <div class="confirm surface" role="group" [attr.aria-label]="t.clear">
       <p>{{ t.confirmClear }}</p>
-      <div class="actions">
-        <button #cancelButton type="button" (click)="cancel()">{{ t.cancel }}</button>
+      <div class="actions button-row">
+        <button #cancelButton type="button" class="button" (click)="cancel()">
+          {{ t.cancel }}
+        </button>
         <button
           type="button"
-          class="danger"
+          class="button danger"
           [disabled]="clearState() === 'clearing'"
           (click)="confirmClear()"
         >
@@ -23,7 +25,9 @@
       </div>
     </div>
   } @else if (hasProgress()) {
-    <button #clearButton type="button" class="link" (click)="askToClear()">{{ t.clear }}</button>
+    <button #clearButton type="button" class="text-button" (click)="askToClear()">
+      {{ t.clear }}
+    </button>
   }
   <p #result class="result" role="status" tabindex="-1">
     @if (clearState() === 'cleared') {
