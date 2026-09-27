@@ -13,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'endgames',
-    loadComponent: () => import('./features/endgames/endgames').then((m) => m.Endgames),
+    loadChildren: () => import('./features/endgames/endgames.routes').then((m) => m.ENDGAME_ROUTES),
   },
   {
     path: 'positions',

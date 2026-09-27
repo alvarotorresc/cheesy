@@ -1,0 +1,114 @@
+@let t = i18n.t().endgames;
+<p class="back">
+  <a routerLink="/endgames">&larr; {{ t.backToCatalog }}</a>
+</p>
+
+@if (endgame.isLoading()) {
+  <p class="note" role="status">{{ t.loading }}</p>
+} @else if (endgame.error()) {
+  <div class="note" role="alert">
+    <p>{{ t.loadError }}</p>
+    <button type="button" (click)="endgame.reload()">{{ t.retry }}</button>
+  </div>
+} @else if (session.endgame(); as current) {
+  <div class="layout">
+    <div class="board-column">
+      <app-board
+        [fen]="game.fen()"
+        [orientation]="session.playerSide()"
+        [turnColor]="game.turn()"
+        [dests]="session.dests()"
+        [lastMove]="game.lastMove()"
+        [check]="game.isCheck()"
+        [labels]="i18n.t().board"
+        (move)="onMove($event)"
+      />
+    </div>
+
+    <div class="side">
+      <header class="heading">
+        <h1>{{ i18n.localize(current.name) }}</h1>
+        <p class="goal">{{ goalText() }}</p>
+      </header>
+
+      <p class="status" role="status" [attr.data-goal]="session.goal()">{{ status() }}</p>
+
+      @if (session.engineFailed()) {
+        <button type="button" (click)="session.retryEngine()">{{ t.engineRetry }}</button>
+      }
+
+      <div class="change" role="status">
+        @if (resultChangeText(); as text) {
+          <p>{{ text }}</p>
+        }
+      </div>
+
+      <div class="controls" role="group" [attr.aria-label]="t.controls">
+        <button
+          type="button"
+          [disabled]="!game.canGoBack()"
+          [attr.aria-label]="t.previous"
+          [title]="t.previous"
+          (click)="game.goBack()"
+        >
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+        <button
+          type="button"
+          [disabled]="!game.canGoForward()"
+          [attr.aria-label]="t.next"
+          [title]="t.next"
+          (click)="game.goForward()"
+        >
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button type="button" [disabled]="!session.canUndo()" (click)="session.undo()">
+          {{ t.undo }}
+        </button>
+        <button type="button" (click)="session.restart()">{{ t.restart }}</button>
+      </div>
+
+      <section class="tablebase" aria-labelledby="tablebase-title">
+        <div class="tablebase-header">
+          <h2 id="tablebase-title">{{ i18n.t().tablebase.title }}</h2>
+          <button
+            type="button"
+            class="toggle"
+            aria-controls="tablebase-body"
+            [attr.aria-expanded]="tablebaseVisible()"
+            (click)="toggleTablebase()"
+          >
+            {{ tablebaseVisible() ? i18n.t().tablebase.hide : i18n.t().tablebase.show }}
+          </button>
+        </div>
+        @if (tablebaseVisible() && !game.isGameOver()) {
+          <app-tablebase-panel
+            id="tablebase-body"
+            [state]="panelState()"
+            [perspective]="session.playerSide()"
+            [turn]="game.turn()"
+            (retry)="retryTablebase()"
+          />
+        }
+      </section>
+
+      <section class="idea" aria-labelledby="idea-title">
+        <h2 id="idea-title">{{ t.keyIdea }}</h2>
+        <p>{{ i18n.localize(current.explanation) }}</p>
+      </section>
+
+      <h2 class="moves-title">{{ t.moves }}</h2>
+      <app-move-list
+        class="moves"
+        [moves]="sans()"
+        [currentPly]="game.ply()"
+        [startPly]="game.startPly()"
+        [label]="t.moves"
+        [emptyLabel]="t.noMoves"
+        (selectPly)="game.goTo($event)"
+      />
+    </div>
+  </div>
+} @else if (endgame.status() === 'resolved' && !endgame.value()) {
+  <p class="note" role="alert">{{ t.notFound }}</p>
+}

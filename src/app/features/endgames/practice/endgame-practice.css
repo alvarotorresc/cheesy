@@ -1,0 +1,140 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.back a {
+  color: var(--color-text-muted);
+}
+
+.note {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.board-column {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.side {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.heading h1 {
+  font-size: 1.5rem;
+}
+
+.goal {
+  color: var(--color-text-muted);
+}
+
+.status {
+  font-weight: 600;
+}
+
+.status[data-goal='achieved'] {
+  color: var(--color-accent);
+}
+
+.change:empty {
+  display: none;
+}
+
+.change p {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--color-focus);
+  background: var(--color-surface);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) repeat(2, minmax(0, 2fr));
+  gap: var(--space-2);
+}
+
+button {
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.tablebase {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.tablebase-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+.toggle {
+  background: transparent;
+}
+
+.idea {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.idea p {
+  color: var(--color-text-muted);
+}
+
+.moves {
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 60rem) {
+  .layout {
+    grid-template-columns: minmax(0, 40rem) minmax(18rem, 1fr);
+    align-items: start;
+  }
+
+  .board-column {
+    margin: 0;
+  }
+}

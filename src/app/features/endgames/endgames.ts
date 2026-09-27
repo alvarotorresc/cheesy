@@ -1,13 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, resource } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContentService } from '../../core/content';
 import { I18nService } from '../../core/i18n';
+import { groupByCategory } from './endgame-catalog';
 
+/** Catalogue of endgames grouped by category, each one linking to its practice page. */
 @Component({
   selector: 'app-endgames',
-  template: `
-    <h1>{{ i18n.t().nav.endgames }}</h1>
-    <p>{{ i18n.t().placeholder.comingSoon }}</p>
-  `,
+  imports: [RouterLink],
+  templateUrl: './endgames.html',
+  styleUrl: './endgames.css',
 })
 export class Endgames {
   protected readonly i18n = inject(I18nService);
+  private readonly content = inject(ContentService);
+
+  protected readonly endgames = resource({ loader: () => this.content.endgames() });
+
+  protected readonly categories = computed(() =>
+    this.endgames.hasValue() ? groupByCategory(this.endgames.value()) : [],
+  );
 }
