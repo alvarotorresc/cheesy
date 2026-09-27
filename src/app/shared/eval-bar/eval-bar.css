@@ -29,7 +29,8 @@
   right: 0;
   left: 0;
   color: var(--color-piece-white);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
+  letter-spacing: -0.02em;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-align: center;
