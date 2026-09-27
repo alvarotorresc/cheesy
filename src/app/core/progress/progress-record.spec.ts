@@ -122,6 +122,7 @@ describe('parseLineProgress', () => {
     ['more clean runs than runs', { clean: 4 }],
     ['an invalid date', { lastPracticed: Number.NaN }],
     ['an infinite date', { lastPracticed: Number.POSITIVE_INFINITY }],
+    ['a date beyond the range of Date', { lastPracticed: 1e20 }],
     ['clean runs with mistakes as best', { bestMistakes: 2 }],
     ['a perfect best without clean runs', { clean: 0 }],
   ])('should reject a row with %s', (_name, overrides) => {

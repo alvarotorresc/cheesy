@@ -37,8 +37,11 @@ export const isLineId = (value: unknown): value is string => {
 const isCount = (value: unknown): value is number =>
   typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
 
+/** Latest time a JavaScript `Date` can hold: anything later cannot be shown. */
+const MAX_DATE = 8.64e15;
+
 const isDate = (value: unknown): value is number =>
-  typeof value === 'number' && Number.isFinite(value) && value >= 0;
+  typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= MAX_DATE;
 
 /**
  * Checks a row read from the database, which the user can edit with the browser tools. Anything
