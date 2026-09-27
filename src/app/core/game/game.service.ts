@@ -12,7 +12,7 @@ import {
 } from 'chessops';
 import { castlingSide, normalizeMove } from 'chessops/chess';
 import { chessgroundDests } from 'chessops/compat';
-import { INITIAL_FEN, makeFen, parseFen } from 'chessops/fen';
+import { INITIAL_FEN, makeFen } from 'chessops/fen';
 import {
   defaultGame,
   extend,
@@ -25,6 +25,7 @@ import {
 } from 'chessops/pgn';
 import { makeSanAndPlay, parseSan } from 'chessops/san';
 import type { GameResult, MoveInput, PlayedMove } from './game.types';
+import { parsePosition } from './position';
 
 interface GameState {
   startFen: string;
@@ -32,14 +33,6 @@ interface GameState {
   /** Number of moves applied to reach the displayed position (0 = start position). */
   ply: number;
 }
-
-const parsePosition = (fen: string): Chess | undefined =>
-  parseFen(fen)
-    .chain((setup) => Chess.fromSetup(setup))
-    .unwrap(
-      (pos) => pos,
-      () => undefined,
-    );
 
 const resultOf = (pos: Chess): GameResult | undefined => {
   if (pos.isCheckmate()) return { reason: 'checkmate', winner: opposite(pos.turn) };
