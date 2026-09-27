@@ -141,7 +141,8 @@ export class EngineService {
   /**
    * Asks for the move to play in a position. Resolves with undefined when there is no legal move.
    * Rejects with an `EngineError` if the position is invalid, the request is replaced by another
-   * one or stopped, the service is destroyed or the engine fails. Stops any running analysis.
+   * one or stopped, the service is destroyed or the engine fails. When it reaches the engine it
+   * replaces the running analysis, whose last lines stay in `lines`.
    */
   bestMove(fen: string, options: BestMoveOptions = {}): Promise<EngineMove | undefined> {
     const position = parsePosition(fen.trim());

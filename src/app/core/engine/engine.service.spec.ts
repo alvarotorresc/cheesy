@@ -1,4 +1,4 @@
-import { Injector } from '@angular/core';
+import { Component, inject, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { INITIAL_FEN } from 'chessops/fen';
 import { EngineError, EngineService } from './engine.service';
@@ -671,6 +671,21 @@ describe('EngineService', () => {
       const fake = startAnalysis();
 
       injector.destroy();
+
+      expect(fake.terminated).toBe(true);
+    });
+
+    it('should terminate the engine when the component that provides it is destroyed', () => {
+      @Component({ template: '', providers: [EngineService] })
+      class Host {
+        readonly engine = inject(EngineService);
+      }
+      const fixture = TestBed.createComponent(Host);
+      fixture.componentInstance.engine.analyze(INITIAL_FEN);
+      const fake = engine();
+      fake.boot();
+
+      fixture.destroy();
 
       expect(fake.terminated).toBe(true);
     });
