@@ -18,7 +18,6 @@ import type { Api } from '@lichess-org/chessground/api';
 import type { Config } from '@lichess-org/chessground/config';
 import type { Color, Dests, Key } from '@lichess-org/chessground/types';
 import {
-  DEFAULT_BOARD_LABELS,
   PROMOTION_ROLES,
   type BoardLabels,
   type BoardMove,
@@ -54,8 +53,10 @@ export class BoardComponent {
   readonly lastMove = input<readonly Key[] | undefined>(undefined);
   /** Highlights the king of the side to move. */
   readonly check = input(false);
+  /** Shows the position without letting the user move. Can be toggled at any time. */
   readonly viewOnly = input(false);
-  readonly labels = input<BoardLabels>(DEFAULT_BOARD_LABELS);
+  /** Texts of the promotion picker, already translated. */
+  readonly labels = input.required<BoardLabels>();
 
   readonly move = output<BoardMove>();
 
@@ -79,11 +80,14 @@ export class BoardComponent {
       turnColor: this.turnColor(),
       check: this.check(),
       lastMove: lastMove ? [...lastMove] : undefined,
-      viewOnly,
+      // Chessground's own `viewOnly` only takes effect at creation (it skips binding the input
+      // events), so view-only mode is emulated with settings that can change later.
       movable: {
         color: viewOnly ? undefined : this.turnColor(),
         dests: new Map(this.dests()),
       },
+      draggable: { enabled: !viewOnly },
+      selectable: { enabled: !viewOnly },
     };
   });
 
@@ -97,7 +101,7 @@ export class BoardComponent {
         ...this.config(),
         animation: { enabled: true, duration: 200 },
         premovable: { enabled: false },
-        draggable: { showGhost: true },
+        draggable: { ...this.config().draggable, showGhost: true },
         movable: {
           ...this.config().movable,
           free: false,

@@ -1,8 +1,17 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardComponent } from './board';
+import type { BoardLabels } from './board.types';
 
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const KINGS_ONLY_FEN = '4k3/8/8/8/8/8/8/4K3 w - - 0 1';
+const LABELS: BoardLabels = {
+  promotion: 'Choose promotion piece',
+  queen: 'Queen',
+  rook: 'Rook',
+  bishop: 'Bishop',
+  knight: 'Knight',
+  cancel: 'Cancel',
+};
 
 const nextFrame = (): Promise<void> =>
   new Promise((resolve) => requestAnimationFrame(() => resolve()));
@@ -17,6 +26,7 @@ describe('BoardComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(BoardComponent);
     fixture.componentRef.setInput('fen', INITIAL_FEN);
+    fixture.componentRef.setInput('labels', LABELS);
     element = fixture.nativeElement as HTMLElement;
     await fixture.whenStable();
   });
@@ -47,6 +57,20 @@ describe('BoardComponent', () => {
     await nextFrame();
 
     expect(element.querySelectorAll('square.last-move')).toHaveLength(2);
+  });
+
+  it('should keep the board interactive when it starts in view-only mode', async () => {
+    const viewOnlyFixture = TestBed.createComponent(BoardComponent);
+    viewOnlyFixture.componentRef.setInput('fen', INITIAL_FEN);
+    viewOnlyFixture.componentRef.setInput('labels', LABELS);
+    viewOnlyFixture.componentRef.setInput('viewOnly', true);
+    await viewOnlyFixture.whenStable();
+
+    viewOnlyFixture.componentRef.setInput('viewOnly', false);
+    await viewOnlyFixture.whenStable();
+
+    const wrap = (viewOnlyFixture.nativeElement as HTMLElement).querySelector('.cg-wrap');
+    expect(wrap?.classList).toContain('manipulable');
   });
 
   it('should not show the promotion picker when no promotion is pending', () => {

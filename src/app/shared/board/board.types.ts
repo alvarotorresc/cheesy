@@ -19,12 +19,3 @@ export interface PendingPromotion {
 
 /** Texts shown by the board. The parent passes them already translated. */
 export type BoardLabels = Record<PromotionRole | 'promotion' | 'cancel', string>;
-
-export const DEFAULT_BOARD_LABELS: BoardLabels = {
-  promotion: 'Choose promotion piece',
-  queen: 'Queen',
-  rook: 'Rook',
-  bishop: 'Bishop',
-  knight: 'Knight',
-  cancel: 'Cancel',
-};
