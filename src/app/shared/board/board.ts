@@ -111,7 +111,18 @@ export class BoardComponent {
       });
       this.api = api;
 
+      // Chessground caches where the board is and only refreshes it on scroll and resize. When
+      // content above the board grows (a message after a move), the board moves without either,
+      // and clicks would land on the wrong square. Refresh it before chessground reads it.
+      const wrap = this.boardElement().nativeElement;
+      const refreshBounds = () => api.state.dom.bounds.clear();
+      const options = { capture: true, passive: true };
+      wrap.addEventListener('mousedown', refreshBounds, options);
+      wrap.addEventListener('touchstart', refreshBounds, options);
+
       this.destroyRef.onDestroy(() => {
+        wrap.removeEventListener('mousedown', refreshBounds, options);
+        wrap.removeEventListener('touchstart', refreshBounds, options);
         api.destroy();
         this.api = undefined;
       });

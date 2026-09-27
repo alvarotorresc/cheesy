@@ -1,4 +1,5 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { Api } from '@lichess-org/chessground/api';
 import { BoardComponent } from './board';
 import type { BoardLabels } from './board.types';
 
@@ -42,6 +43,17 @@ describe('BoardComponent', () => {
     await nextFrame();
 
     expect(renderedPieces(element)).toHaveLength(2);
+  });
+
+  it('should measure the board again on every press, in case the page moved it', () => {
+    const board = element.querySelector('cg-board') as HTMLElement;
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+    const clear = vi.spyOn(api.state.dom.bounds, 'clear');
+
+    board.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    board.dispatchEvent(new TouchEvent('touchstart', { bubbles: true }));
+
+    expect(clear).toHaveBeenCalledTimes(2);
   });
 
   it('should flip the board when the orientation input changes', async () => {
