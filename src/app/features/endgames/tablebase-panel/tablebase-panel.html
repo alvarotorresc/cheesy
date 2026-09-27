@@ -12,7 +12,7 @@
     }
     @case ('error') {
       <p class="note">{{ errorText() }}</p>
-      <button type="button" class="retry" (click)="retry.emit()">{{ t.retry }}</button>
+      <button type="button" class="button retry" (click)="retry.emit()">{{ t.retry }}</button>
     }
     @case ('ready') {
       @if (view(); as result) {
@@ -38,4 +38,4 @@
     }
   }
 </div>
-<p class="source">{{ t.source }}</p>
+<p class="source muted">{{ t.source }}</p>

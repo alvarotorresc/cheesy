@@ -1,18 +1,18 @@
 @let t = i18n.t().endgames;
 <p class="back">
-  <a routerLink="/endgames">&larr; {{ t.backToCatalog }}</a>
+  <a class="back-link" routerLink="/endgames">&larr; {{ t.backToCatalog }}</a>
 </p>
 
 @if (endgame.isLoading()) {
-  <p class="note" role="status">{{ t.loading }}</p>
+  <p class="note state-message" role="status">{{ t.loading }}</p>
 } @else if (endgame.error()) {
-  <div class="note" role="alert">
+  <div class="note state-message" role="alert">
     <p>{{ t.loadError }}</p>
-    <button type="button" (click)="endgame.reload()">{{ t.retry }}</button>
+    <button type="button" class="button" (click)="endgame.reload()">{{ t.retry }}</button>
   </div>
 } @else if (session.endgame(); as current) {
-  <div class="layout">
-    <div class="board-column">
+  <div class="play-layout">
+    <div class="play-board">
       <app-board
         [fen]="game.fen()"
         [orientation]="session.playerSide()"
@@ -25,16 +25,20 @@
       />
     </div>
 
-    <div class="side">
+    <div class="side play-panel">
       <header class="heading">
         <h1>{{ i18n.localize(current.name) }}</h1>
         <p class="goal">{{ goalText() }}</p>
       </header>
 
-      <p class="status" role="status" [attr.data-goal]="session.goal()">{{ status() }}</p>
+      <p class="status play-status" role="status" [attr.data-goal]="session.goal()">
+        {{ status() }}
+      </p>
 
       @if (session.engineFailed()) {
-        <button type="button" (click)="session.retryEngine()">{{ t.engineRetry }}</button>
+        <button type="button" class="button" (click)="session.retryEngine()">
+          {{ t.engineRetry }}
+        </button>
       }
 
       <div class="change" role="status">
@@ -46,6 +50,7 @@
       <div class="controls" role="group" [attr.aria-label]="t.controls">
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoBack()"
           [attr.aria-label]="t.previous"
           [title]="t.previous"
@@ -55,6 +60,7 @@
         </button>
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoForward()"
           [attr.aria-label]="t.next"
           [title]="t.next"
@@ -62,18 +68,23 @@
         >
           <span aria-hidden="true">&rsaquo;</span>
         </button>
-        <button type="button" [disabled]="!session.canUndo()" (click)="session.undo()">
+        <button
+          type="button"
+          class="button"
+          [disabled]="!session.canUndo()"
+          (click)="session.undo()"
+        >
           {{ t.undo }}
         </button>
-        <button type="button" (click)="session.restart()">{{ t.restart }}</button>
+        <button type="button" class="button" (click)="session.restart()">{{ t.restart }}</button>
       </div>
 
-      <section class="tablebase" aria-labelledby="tablebase-title">
+      <section class="tablebase surface" aria-labelledby="tablebase-title">
         <div class="tablebase-header">
-          <h2 id="tablebase-title">{{ i18n.t().tablebase.title }}</h2>
+          <h2 id="tablebase-title" class="panel-title">{{ i18n.t().tablebase.title }}</h2>
           <button
             type="button"
-            class="toggle"
+            class="toggle button quiet"
             aria-controls="tablebase-body"
             [attr.aria-expanded]="tablebaseVisible()"
             (click)="toggleTablebase()"
@@ -93,13 +104,13 @@
       </section>
 
       <section class="idea" aria-labelledby="idea-title">
-        <h2 id="idea-title">{{ t.keyIdea }}</h2>
+        <h2 id="idea-title" class="panel-title">{{ t.keyIdea }}</h2>
         <p>{{ i18n.localize(current.explanation) }}</p>
       </section>
 
-      <h2 class="moves-title">{{ t.moves }}</h2>
+      <h2 class="panel-title">{{ t.moves }}</h2>
       <app-move-list
-        class="moves"
+        class="play-moves"
         [moves]="sans()"
         [currentPly]="game.ply()"
         [startPly]="game.startPly()"
@@ -110,5 +121,5 @@
     </div>
   </div>
 } @else if (endgame.status() === 'resolved' && !endgame.value()) {
-  <p class="note" role="alert">{{ t.notFound }}</p>
+  <p class="note state-message" role="alert">{{ t.notFound }}</p>
 }

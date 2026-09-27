@@ -1,30 +1,37 @@
 @let t = i18n.t().endgames;
-<section class="intro">
+<section class="page-intro">
   <h1>{{ t.title }}</h1>
   <p>{{ t.intro }}</p>
 </section>
 
 @if (endgames.isLoading()) {
-  <p class="note" role="status">{{ t.loading }}</p>
+  <p class="note state-message" role="status">{{ t.loading }}</p>
 } @else if (endgames.error()) {
-  <div class="note" role="alert">
+  <div class="note state-message" role="alert">
     <p>{{ t.loadError }}</p>
-    <button type="button" (click)="endgames.reload()">{{ t.retry }}</button>
+    <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
   </div>
 } @else {
   @for (category of categories(); track category.key) {
     <section class="category" [attr.aria-labelledby]="'category-' + $index">
       <h2 [id]="'category-' + $index">{{ i18n.localize(category.name) }}</h2>
-      <ul class="list">
+      <ul class="entry-grid">
         @for (endgame of category.endgames; track endgame.id) {
           <li>
-            <a class="card" [routerLink]="[endgame.id]">
-              <span class="name">{{ i18n.localize(endgame.name) }}</span>
-              <span class="meta">
+            <a class="card entry" [routerLink]="[endgame.id]">
+              <span class="name entry-title">{{ i18n.localize(endgame.name) }}</span>
+              <span class="entry-meta">
                 <span class="goal" [attr.data-goal]="endgame.goal">{{
                   endgame.goal === 'win' ? t.goalWin : t.goalDraw
                 }}</span>
-                <span>{{ endgame.playerSide === 'white' ? t.playWhite : t.playBlack }}</span>
+                <span
+                  ><span
+                    class="side-swatch"
+                    [class.black]="endgame.playerSide === 'black'"
+                    aria-hidden="true"
+                  ></span>
+                  {{ endgame.playerSide === 'white' ? t.playWhite : t.playBlack }}</span
+                >
               </span>
             </a>
           </li>
