@@ -134,6 +134,10 @@ describe('PositionPage', () => {
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
     });
 
+    it('should name the browser tab after the position', () => {
+      expect(document.title).toBe('Smothered mate · Cheesy');
+    });
+
     it('should show the position from the side to play with its details', () => {
       expect(board().orientation()).toBe('white');
       expect(board().viewOnly()).toBe(false);

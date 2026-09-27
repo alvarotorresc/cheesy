@@ -96,6 +96,7 @@ describe('OpeningPlay', () => {
       await create('test-opening');
 
       expect(text('h1')).toBe('Test Opening');
+      expect(document.title).toBe('Test Opening · Cheesy');
       expect(text('.meta')).toBe('C20 You play White');
       expect(text('app-theory-panel .comment')).toBe('A tree built for the tests.');
       expect(element.querySelector('app-board cg-board')).not.toBeNull();

@@ -11,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GameService } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
+import { PageTitle } from '../../../../core/page-title';
 import { BoardComponent, type BoardMove } from '../../../../shared/board';
 import { isFormField } from '../../../../shared/keyboard';
 import { MoveList } from '../../../../shared/move-list';
@@ -106,6 +107,10 @@ export class DrillPage {
   private lastPhase: DrillPhase | undefined;
 
   constructor() {
+    inject(PageTitle).showDetail(() => {
+      const opening = this.session.opening();
+      return opening && this.i18n.t().drill.drillLinkLabel(this.i18n.localize(opening.name));
+    });
     inject(ActivatedRoute)
       .paramMap.pipe(takeUntilDestroyed())
       .subscribe((params) => void this.session.load(params.get('id') ?? ''));

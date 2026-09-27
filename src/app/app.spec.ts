@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
+import { appConfig } from './app.config';
 import { I18nService } from './core/i18n';
 
 describe('App', () => {
@@ -13,6 +15,21 @@ describe('App', () => {
   afterEach(() => {
     vi.restoreAllMocks();
     localStorage.clear();
+  });
+
+  it('should name the browser tab after the section of each route', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/analysis');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('Analysis · Cheesy');
+
+    TestBed.inject(I18nService).setLang('es');
+    await harness.navigateByUrl('/');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('Inicio · Cheesy');
   });
 
   it('should link to the four sections when rendered', async () => {

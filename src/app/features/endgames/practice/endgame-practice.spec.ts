@@ -84,6 +84,7 @@ describe('EndgamePractice', () => {
     await open('lucena-position');
 
     expect(element().querySelector('h1')?.textContent).toBe('Lucena position');
+    expect(document.title).toBe('Lucena position · Cheesy');
     expect(text()).toContain('Goal: win with White.');
     expect(text()).toContain('Build the bridge.');
     expect(status()).toBe('Your move.');

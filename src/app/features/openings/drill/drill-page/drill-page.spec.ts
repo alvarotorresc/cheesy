@@ -120,6 +120,12 @@ describe('DrillPage', () => {
       expect(text('h1')).toBe('Test Opening: Drill');
     });
 
+    it('should name the browser tab after the drill of the opening', async () => {
+      await create();
+
+      expect(document.title).toBe('Drill Test Opening · Cheesy');
+    });
+
     it('should reload when the id in the URL changes', async () => {
       await create();
       params.next(convertToParamMap({ id: 'unknown' }));

@@ -1,9 +1,11 @@
 import type { Routes } from '@angular/router';
+import type { PageSection } from './core/page-title';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    title: 'home' satisfies PageSection,
     loadComponent: () => import('./features/home/home').then((m) => m.Home),
   },
   {
@@ -22,6 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'analysis',
+    title: 'analysis' satisfies PageSection,
     loadComponent: () => import('./features/analysis/analysis').then((m) => m.Analysis),
   },
   { path: '**', redirectTo: '' },

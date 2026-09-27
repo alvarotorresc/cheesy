@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EngineService } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { isFormField } from '../../../shared/keyboard';
@@ -83,6 +84,10 @@ export class OpeningPlay {
   });
 
   constructor() {
+    inject(PageTitle).showDetail(() => {
+      const opening = this.session.opening();
+      return opening && this.i18n.localize(opening.name);
+    });
     inject(ActivatedRoute)
       .paramMap.pipe(takeUntilDestroyed())
       .subscribe((params) => void this.session.load(params.get('id') ?? ''));

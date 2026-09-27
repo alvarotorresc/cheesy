@@ -16,6 +16,7 @@ import { map } from 'rxjs';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
+import { PageTitle } from '../../core/page-title';
 import { BoardComponent } from '../../shared/board';
 import { isFormField } from '../../shared/keyboard';
 import { sideToPlayLabel, tagLabel } from './position-labels';
@@ -140,6 +141,10 @@ export class PositionPage {
   private wasReplay: boolean | undefined;
 
   constructor() {
+    inject(PageTitle).showDetail(() => {
+      const position = this.position();
+      return position && this.i18n.localize(position.title);
+    });
     effect(() => {
       const position = this.position();
       if (position) {

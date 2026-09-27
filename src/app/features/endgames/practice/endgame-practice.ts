@@ -15,6 +15,7 @@ import { ContentService, isContentId } from '../../../core/content';
 import { EngineService } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
@@ -116,6 +117,10 @@ export class EndgamePractice {
   );
 
   constructor() {
+    inject(PageTitle).showDetail(() => {
+      const endgame = this.session.endgame();
+      return endgame && this.i18n.localize(endgame.name);
+    });
     effect(() => {
       const endgame = this.endgame.hasValue() ? this.endgame.value() : undefined;
       if (endgame) untracked(() => this.session.start(endgame));
