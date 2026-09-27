@@ -3,32 +3,38 @@
   gap: var(--space-2);
   padding: var(--space-4);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background: var(--color-surface);
 }
 
 h2 {
   color: var(--color-text-muted);
-  font-size: 0.8125rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .variation {
-  font-weight: 600;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .comment {
   color: var(--color-text-muted);
 }
 
+/* In our lines: cheddar bar. Away from them: a neutral one. */
 .state {
-  padding-left: var(--space-3);
-  border-left: 3px solid var(--color-accent);
-  font-size: 0.9375rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+  box-shadow: inset 4px 0 0 var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
 }
 
 .state.away {
-  border-left-color: var(--color-border);
+  box-shadow: inset 4px 0 0 var(--color-control);
 }

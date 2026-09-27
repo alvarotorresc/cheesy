@@ -1,9 +1,9 @@
 <nav class="topbar">
-  <a class="back" routerLink="/openings">
+  <a class="back back-link" routerLink="/openings">
     <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
   </a>
   @if (session.opening(); as opening) {
-    <a class="back" [routerLink]="['/openings', opening.id, 'drill']">
+    <a class="back back-link" [routerLink]="['/openings', opening.id, 'drill']">
       {{ i18n.t().drill.fromPlay }}
     </a>
   }
@@ -11,15 +11,17 @@
 
 @switch (session.loadState()) {
   @case ('loading') {
-    <p class="notice" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+    <p class="notice state-message" role="status">{{ i18n.t().openings.loadingOpening }}</p>
   }
   @case ('not-found') {
-    <p class="notice" role="alert">{{ i18n.t().openings.notFound }}</p>
+    <p class="notice state-message" role="alert">{{ i18n.t().openings.notFound }}</p>
   }
   @case ('error') {
-    <div class="notice" role="alert">
+    <div class="notice state-message" role="alert">
       <p>{{ i18n.t().openings.openingError }}</p>
-      <button type="button" (click)="session.retryLoad()">{{ i18n.t().openings.retry }}</button>
+      <button type="button" class="button" (click)="session.retryLoad()">
+        {{ i18n.t().openings.retry }}
+      </button>
     </div>
   }
 }
@@ -36,8 +38,8 @@
     </p>
   </header>
 
-  <div class="layout">
-    <div class="board-column">
+  <div class="play-layout">
+    <div class="play-board">
       <app-board
         [fen]="game.fen()"
         [orientation]="session.playerColor()"
@@ -51,13 +53,13 @@
       />
     </div>
 
-    <div class="panel">
+    <div class="play-panel">
       <div class="status-row">
-        <p class="status" role="status">{{ status() }}</p>
+        <p class="status play-status" role="status">{{ status() }}</p>
         @if (isReviewing()) {
           <p class="reviewing">
             {{ i18n.t().openings.reviewing }}
-            <button type="button" class="link" (click)="game.goToEnd()">
+            <button type="button" class="text-button" (click)="game.goToEnd()">
               {{ i18n.t().openings.backToGame }}
             </button>
           </p>
@@ -65,8 +67,8 @@
       </div>
 
       @if (deviationMoves(); as moves) {
-        <div class="alert" role="group" aria-labelledby="deviation-title">
-          <h2 id="deviation-title">{{ i18n.t().openings.deviationTitle }}</h2>
+        <div class="alert surface" role="group" aria-labelledby="deviation-title">
+          <h2 id="deviation-title" class="panel-title">{{ i18n.t().openings.deviationTitle }}</h2>
           <p>
             {{ i18n.t().openings.deviationText }} <strong>{{ moves.expected }}</strong
             >.
@@ -75,12 +77,12 @@
               >.
             }
           </p>
-          <p class="note">{{ i18n.t().openings.deviationNote }}</p>
-          <div class="alert-actions">
-            <button type="button" (click)="session.undo()">
+          <p class="note muted small">{{ i18n.t().openings.deviationNote }}</p>
+          <div class="button-row">
+            <button type="button" class="button" (click)="session.undo()">
               {{ i18n.t().openings.takeBack }}
             </button>
-            <button type="button" class="primary" (click)="session.continueOutOfBook()">
+            <button type="button" class="button primary" (click)="session.continueOutOfBook()">
               {{ i18n.t().openings.keepPlaying }}
             </button>
           </div>
@@ -88,8 +90,8 @@
       }
 
       @if (session.phase() === 'engine-error') {
-        <div class="alert">
-          <button type="button" (click)="session.retryReply()">
+        <div class="alert surface">
+          <button type="button" class="button" (click)="session.retryReply()">
             {{ i18n.t().openings.retry }}
           </button>
         </div>
@@ -104,9 +106,10 @@
       }
 
       <div class="controls" role="group" [attr.aria-label]="i18n.t().openings.controls">
-        <div class="nav-buttons">
+        <div class="step-buttons">
           <button
             type="button"
+            class="button"
             [disabled]="!game.canGoBack()"
             [attr.aria-label]="i18n.t().analysis.first"
             [title]="i18n.t().analysis.first"
@@ -116,6 +119,7 @@
           </button>
           <button
             type="button"
+            class="button"
             [disabled]="!game.canGoBack()"
             [attr.aria-label]="i18n.t().analysis.previous"
             [title]="i18n.t().analysis.previous"
@@ -125,6 +129,7 @@
           </button>
           <button
             type="button"
+            class="button"
             [disabled]="!game.canGoForward()"
             [attr.aria-label]="i18n.t().analysis.next"
             [title]="i18n.t().analysis.next"
@@ -134,6 +139,7 @@
           </button>
           <button
             type="button"
+            class="button"
             [disabled]="!game.canGoForward()"
             [attr.aria-label]="i18n.t().analysis.last"
             [title]="i18n.t().analysis.last"
@@ -143,22 +149,27 @@
           </button>
         </div>
 
-        <div class="action-buttons">
-          <button type="button" [disabled]="!session.canUndo()" (click)="session.undo()">
+        <div class="button-row">
+          <button
+            type="button"
+            class="button"
+            [disabled]="!session.canUndo()"
+            (click)="session.undo()"
+          >
             {{ i18n.t().openings.undo }}
           </button>
-          <button type="button" (click)="session.restart()">
+          <button type="button" class="button" (click)="session.restart()">
             {{ i18n.t().openings.restart }}
           </button>
-          <button type="button" (click)="session.switchColor()">
+          <button type="button" class="button" (click)="session.switchColor()">
             {{ i18n.t().openings.switchColor }}
           </button>
         </div>
       </div>
 
-      <h2 class="moves-title">{{ i18n.t().analysis.moves }}</h2>
+      <h2 class="panel-title">{{ i18n.t().analysis.moves }}</h2>
       <app-move-list
-        class="moves"
+        class="play-moves"
         [moves]="sans()"
         [currentPly]="game.ply()"
         [startPly]="game.startPly()"
@@ -168,7 +179,7 @@
       />
 
       <section class="settings" aria-labelledby="settings-title">
-        <h2 id="settings-title">{{ i18n.t().openings.settings }}</h2>
+        <h2 id="settings-title" class="panel-title">{{ i18n.t().openings.settings }}</h2>
         <fieldset>
           <legend>{{ i18n.t().openings.opponent }}</legend>
           @for (mode of opponentModes; track mode) {
@@ -185,11 +196,11 @@
               }}
             </label>
           }
-          <p class="hint">{{ i18n.t().openings.opponentNote }}</p>
+          <p class="hint muted small">{{ i18n.t().openings.opponentNote }}</p>
         </fieldset>
         <label class="field">
           <span>{{ i18n.t().openings.strength }}</span>
-          <select (change)="onStrengthChange($event)">
+          <select class="select" (change)="onStrengthChange($event)">
             @for (level of strengthLevels; track level.key) {
               <option [value]="level.skill" [selected]="session.skillLevel() === level.skill">
                 {{ i18n.t().openings.strengthLevels[level.key] }}

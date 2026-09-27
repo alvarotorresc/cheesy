@@ -1,18 +1,18 @@
 @let t = i18n.t().drill;
 
-<section class="intro">
+<section class="page-intro">
   <h1>{{ i18n.t().openings.title }}</h1>
   <p>{{ i18n.t().openings.intro }}</p>
 </section>
 
 @switch (state().status) {
   @case ('loading') {
-    <p class="notice" role="status">{{ i18n.t().openings.loading }}</p>
+    <p class="notice state-message" role="status">{{ i18n.t().openings.loading }}</p>
   }
   @case ('error') {
-    <div class="notice error" role="alert">
+    <div class="notice state-message" role="alert">
       <p>{{ i18n.t().openings.loadError }}</p>
-      <button type="button" (click)="load()">{{ i18n.t().openings.retry }}</button>
+      <button type="button" class="button" (click)="load()">{{ i18n.t().openings.retry }}</button>
     </div>
   }
 }
@@ -22,18 +22,25 @@
     @for (group of current.groups; track group.family) {
       <section class="family" [attr.aria-labelledby]="'family-' + group.family">
         <h2 [id]="'family-' + group.family">{{ i18n.t().openings.families[group.family] }}</h2>
-        <ul class="openings">
+        <ul class="entry-grid">
           @for (opening of group.openings; track opening.id) {
             <li>
-              <a class="card" [routerLink]="['/openings', opening.id]">
-                <h3>{{ i18n.localize(opening.name) }}</h3>
-                <p class="meta">
+              <a class="card entry" [routerLink]="['/openings', opening.id]">
+                <h3 class="entry-title">{{ i18n.localize(opening.name) }}</h3>
+                <p class="entry-meta">
                   <span class="eco">{{ opening.eco }}</span>
-                  <span>{{
-                    opening.side === 'white'
-                      ? i18n.t().openings.forWhite
-                      : i18n.t().openings.forBlack
-                  }}</span>
+                  <span>
+                    <span
+                      class="side-swatch"
+                      [class.black]="opening.side === 'black'"
+                      aria-hidden="true"
+                    ></span>
+                    {{
+                      opening.side === 'white'
+                        ? i18n.t().openings.forWhite
+                        : i18n.t().openings.forBlack
+                    }}</span
+                  >
                 </p>
                 <p class="description">{{ i18n.localize(opening.description) }}</p>
                 @if (progress().get(opening.id); as done) {
@@ -54,7 +61,7 @@
         </ul>
       </section>
     } @empty {
-      <p class="notice">{{ i18n.t().openings.empty }}</p>
+      <p class="notice state-message">{{ i18n.t().openings.empty }}</p>
     }
 
     <app-progress-note [hasProgress]="hasProgress()" [note]="t.listNote" />
