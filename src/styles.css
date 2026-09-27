@@ -89,7 +89,7 @@
   --board-dark: #8aa1b1;
   --board-coord: #13222d;
   --board-edge: #13222d;
-  --board-last-move: rgb(244 197 66 / 62%);
+  --board-last-move: rgb(244 197 66 / 72%);
   --board-selected: rgb(244 197 66 / 90%);
   --board-dest: rgb(19 34 45 / 38%);
   --board-dest-hover: rgb(244 197 66 / 55%);
@@ -126,7 +126,12 @@
     --color-on-square-dark-muted: #a7b8c2;
 
     --shadow-board: 0 18px 44px -22px rgb(0 0 0 / 70%);
-    --board-edge: #05090c;
+
+    /* Slightly dimmer squares, so the board does not glare on a dark page. */
+    --board-light: #cfd8de;
+    --board-dark: #7f97a7;
+    --board-edge: #2e4856;
+    --color-promotion-bg: #cfd8de;
   }
 }
 
@@ -251,7 +256,11 @@ a {
 
 .step-buttons .button {
   padding-inline: 0;
-  font-size: var(--text-lg);
+  /* The arrows come from the system font: the text face draws them too small. */
+  font-family: system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .button-row {
