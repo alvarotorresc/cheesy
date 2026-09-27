@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import type { Role } from 'chessops';
-import { bundledContentLoaders } from '../../core/content';
+import { bundledContentLoaders } from '../../core/content/testing';
 import { GameService, type MoveInput } from '../../core/game';
 import { en } from '../../core/i18n/dictionaries/en';
 import { es } from '../../core/i18n/dictionaries/es';

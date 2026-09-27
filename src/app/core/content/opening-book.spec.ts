@@ -1,4 +1,4 @@
-import { bundledContentLoaders } from './content-loaders';
+import { bundledContentLoaders } from './testing';
 import type { Localized, OpeningNode, OpeningTree } from './content.types';
 import { OpeningBook } from './opening-book';
 

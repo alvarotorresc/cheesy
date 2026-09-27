@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { bundledContentLoaders, CONTENT_LOADERS, type ContentLoaders } from './content-loaders';
+import { CONTENT_LOADERS, type ContentLoaders } from './content-loaders';
+import { bundledContentLoaders } from './testing';
 import { ContentService } from './content.service';
 import type { OpeningSummary, OpeningTree } from './content.types';
 import { OpeningBook } from './opening-book';

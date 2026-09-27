@@ -15,19 +15,6 @@ export interface ContentLoaders {
   positions(): Promise<readonly CuratedPosition[]>;
 }
 
-/**
- * The content files imported straight from the source tree, each one as its own lazy chunk. Tests
- * use them to read the real content without a server. The app does not: browsers such as Chrome
- * remember a failed dynamic import and never request that file again, so a retry could not recover.
- */
-export const bundledContentLoaders: ContentLoaders = {
-  openingCatalog: async () =>
-    (await import('./data/opening-catalog.json')).default as OpeningSummary[],
-  opening: async (id) => (await import(`./data/openings/${id}.json`)).default as OpeningTree,
-  endgames: async () => (await import('./data/endgames.json')).default as EndgamePosition[],
-  positions: async () => (await import('./data/positions.json')).default as CuratedPosition[],
-};
-
 /** Folder the build copies the content files to (see `angular.json`). */
 export const CONTENT_PATH = 'content/';
 

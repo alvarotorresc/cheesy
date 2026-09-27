@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { bundledContentLoaders, CONTENT_LOADERS } from '../../../core/content';
+import { CONTENT_LOADERS } from '../../../core/content';
+import { bundledContentLoaders } from '../../../core/content/testing';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';

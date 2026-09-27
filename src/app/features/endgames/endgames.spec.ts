@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { bundledContentLoaders, CONTENT_LOADERS } from '../../core/content';
+import { CONTENT_LOADERS } from '../../core/content';
+import { bundledContentLoaders } from '../../core/content/testing';
 import { I18nService } from '../../core/i18n';
 import { groupByCategory } from './endgame-catalog';
 import { fill, goalStatus } from './endgame-goal';

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import type { Color, Role } from 'chessops';
-import { bundledContentLoaders, OpeningBook, type BookNode } from '../../../core/content';
+import { OpeningBook, type BookNode } from '../../../core/content';
+import { bundledContentLoaders } from '../../../core/content/testing';
 import { GameService, type MoveInput } from '../../../core/game';
 import { lineIdOf, progressKey } from '../../../core/progress';
 import {

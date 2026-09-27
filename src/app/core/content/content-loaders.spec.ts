@@ -1,4 +1,5 @@
-import { bundledContentLoaders, createFetchContentLoaders } from './content-loaders';
+import { createFetchContentLoaders } from './content-loaders';
+import { bundledContentLoaders } from './testing';
 
 const BASE = 'https://chess.example/app/';
 
