@@ -112,7 +112,7 @@
 
 .lang-button {
   min-width: var(--tap);
-  min-height: 2.5rem;
+  min-height: var(--tap);
   border: 0;
   border-radius: calc(var(--radius) - 3px);
   background: transparent;
