@@ -3,6 +3,7 @@ import type { Color } from 'chessops';
 import { ContentService, type OpeningBook, type OpeningSummary } from '../../core/content';
 import { EngineService } from '../../core/engine';
 import { GameService, type GameResult, type MoveInput } from '../../core/game';
+import { isOpeningId } from './opening-id';
 import { describeTheory, type Theory, type TheoryDeviation } from './opening-theory';
 
 /** How the rival answers while the game is still in the tree. Out of it, the engine always plays. */
@@ -25,10 +26,6 @@ export const ENGINE_MOVETIME_MS = 800;
 export const MIN_SKILL_LEVEL = 0;
 export const MAX_SKILL_LEVEL = 20;
 export const DEFAULT_SKILL_LEVEL = 10;
-
-/** Ids come from the URL: only kebab-case of a sensible length reaches the content service. */
-const OPENING_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const MAX_ID_LENGTH = 64;
 
 const sideToMoveAfter = (plies: number): Color => (plies % 2 === 0 ? 'white' : 'black');
 
@@ -126,7 +123,7 @@ export class OpeningSession {
     this.cancelReply();
     this.current.set(undefined);
     this.game.reset();
-    if (id.length > MAX_ID_LENGTH || !OPENING_ID.test(id)) {
+    if (!isOpeningId(id)) {
       this.loadStatus.set('not-found');
       return;
     }
