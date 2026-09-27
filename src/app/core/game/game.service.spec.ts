@@ -286,6 +286,16 @@ describe('GameService', () => {
       expect(game.moves()).toHaveLength(1);
     });
 
+    it('should compute the start ply when the FEN starts later in the game', () => {
+      game.loadFen('4k3/8/8/8/8/8/8/4K3 b - - 0 10');
+
+      expect(game.startPly()).toBe(19);
+    });
+
+    it('should report a start ply of zero when starting from the initial position', () => {
+      expect(game.startPly()).toBe(0);
+    });
+
     it('should return false when the FEN describes an impossible position', () => {
       expect(game.loadFen('8/8/8/8/8/8/8/8 w - - 0 1')).toBe(false);
     });

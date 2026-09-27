@@ -61,6 +61,12 @@ export class GameService {
   readonly moves = computed(() => this.state().moves);
   readonly ply = computed(() => this.state().ply);
 
+  /** Plies played before the start position: 0 for the initial position, 1 if black starts. */
+  readonly startPly = computed(() => {
+    const start = parsePosition(this.startFen()) ?? Chess.default();
+    return (start.fullmoves - 1) * 2 + (start.turn === 'white' ? 0 : 1);
+  });
+
   /** FEN of the position currently displayed. */
   readonly fen = computed(() => {
     const { startFen, moves, ply } = this.state();
