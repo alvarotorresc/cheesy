@@ -1,0 +1,80 @@
+<h1 class="visually-hidden">{{ i18n.t().analysis.title }}</h1>
+
+<div class="layout">
+  <div class="board-column">
+    <app-board
+      [fen]="game.fen()"
+      [orientation]="orientation()"
+      [turnColor]="game.turn()"
+      [dests]="game.dests()"
+      [lastMove]="game.lastMove()"
+      [check]="game.isCheck()"
+      [labels]="i18n.t().board"
+      (move)="onMove($event)"
+    />
+  </div>
+
+  <div class="panel">
+    <p class="status" role="status">{{ status() }}</p>
+
+    <div class="controls" role="group" [attr.aria-label]="i18n.t().analysis.controls">
+      <div class="nav-buttons">
+        <button
+          type="button"
+          [disabled]="!game.canGoBack()"
+          [attr.aria-label]="i18n.t().analysis.first"
+          [title]="i18n.t().analysis.first"
+          (click)="game.goToStart()"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+        <button
+          type="button"
+          [disabled]="!game.canGoBack()"
+          [attr.aria-label]="i18n.t().analysis.previous"
+          [title]="i18n.t().analysis.previous"
+          (click)="game.goBack()"
+        >
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+        <button
+          type="button"
+          [disabled]="!game.canGoForward()"
+          [attr.aria-label]="i18n.t().analysis.next"
+          [title]="i18n.t().analysis.next"
+          (click)="game.goForward()"
+        >
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button
+          type="button"
+          [disabled]="!game.canGoForward()"
+          [attr.aria-label]="i18n.t().analysis.last"
+          [title]="i18n.t().analysis.last"
+          (click)="game.goToEnd()"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" [disabled]="!game.canGoBack()" (click)="game.undo()">
+          {{ i18n.t().analysis.undo }}
+        </button>
+        <button type="button" (click)="flip()">{{ i18n.t().analysis.flip }}</button>
+        <button type="button" (click)="game.reset()">{{ i18n.t().analysis.reset }}</button>
+      </div>
+    </div>
+
+    <h2 class="moves-title">{{ i18n.t().analysis.moves }}</h2>
+    <app-move-list
+      class="moves"
+      [moves]="sans()"
+      [currentPly]="game.ply()"
+      [startPly]="game.startPly()"
+      [label]="i18n.t().analysis.moves"
+      [emptyLabel]="i18n.t().analysis.noMoves"
+      (selectPly)="game.goTo($event)"
+    />
+  </div>
+</div>
