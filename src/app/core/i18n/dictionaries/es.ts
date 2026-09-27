@@ -96,7 +96,7 @@ export const es: Messages = {
     rivalLeft: 'El rival se ha salido de nuestras líneas con',
     bookHad: 'Nuestras líneas seguían con',
     deviationTitle: 'Esta jugada no está en nuestras líneas',
-    deviationChoice: 'Deshaz la jugada o sigue jugando.',
+    deviationChoice: 'Fuera de nuestras líneas: deshaz la jugada o sigue jugando.',
     deviationText: 'Es legal, así que se queda en el tablero. Aquí nuestras líneas siguen con',
     alsoCovered: 'También cubrimos',
     deviationNote:

@@ -162,7 +162,7 @@ describe('OpeningPlay', () => {
       session.play({ from: 'f1', to: 'c4' });
       await settle();
 
-      expect(text('.status')).toBe('Take the move back or keep playing.');
+      expect(text('.status')).toBe('Not in our lines: take it back or keep playing.');
       expect(text('.alert')).toContain('Here our lines go on with 2.Nf3. We also cover 2.d4.');
       button('Take it back').click();
       await settle();

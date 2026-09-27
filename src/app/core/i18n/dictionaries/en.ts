@@ -94,7 +94,7 @@ export const en = {
     rivalLeft: 'Your rival left our lines with',
     bookHad: 'Our lines went on with',
     deviationTitle: 'This move is not in our lines',
-    deviationChoice: 'Take the move back or keep playing.',
+    deviationChoice: 'Not in our lines: take it back or keep playing.',
     deviationText: 'It is legal, so it stays on the board. Here our lines go on with',
     alsoCovered: 'We also cover',
     deviationNote: 'Our lines are a selection of each opening, not every good move.',
