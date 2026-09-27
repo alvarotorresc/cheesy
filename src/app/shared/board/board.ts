@@ -92,8 +92,8 @@ export class BoardComponent {
 
   constructor() {
     afterNextRender(() => {
-      const element = this.boardElement().nativeElement;
-      const api = Chessground(element, {
+      // Chessground watches the board size itself (ResizeObserver), so it follows the layout.
+      const api = Chessground(this.boardElement().nativeElement, {
         ...this.config(),
         animation: { enabled: true, duration: 200 },
         premovable: { enabled: false },
@@ -105,12 +105,9 @@ export class BoardComponent {
           events: { after: (from, to) => this.onUserMove(from, to) },
         },
       });
-      const resizeObserver = new ResizeObserver(() => api.redrawAll());
-      resizeObserver.observe(element);
       this.api = api;
 
       this.destroyRef.onDestroy(() => {
-        resizeObserver.disconnect();
         api.destroy();
         this.api = undefined;
       });

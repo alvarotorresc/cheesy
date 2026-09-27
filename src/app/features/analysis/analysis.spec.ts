@@ -3,15 +3,6 @@ import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
 import { Analysis } from './analysis';
 
-class ResizeObserverStub {
-  observe(): void {
-    return;
-  }
-  disconnect(): void {
-    return;
-  }
-}
-
 describe('Analysis', () => {
   let fixture: ComponentFixture<Analysis>;
   let element: HTMLElement;
@@ -29,7 +20,6 @@ describe('Analysis', () => {
   const status = (): string => element.querySelector('[role="status"]')?.textContent?.trim() ?? '';
 
   beforeEach(async () => {
-    vi.stubGlobal('ResizeObserver', ResizeObserverStub);
     fixture = TestBed.createComponent(Analysis);
     TestBed.inject(I18nService).setLang('en');
     element = fixture.nativeElement as HTMLElement;
@@ -38,7 +28,6 @@ describe('Analysis', () => {
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
     localStorage.clear();
   });
 
