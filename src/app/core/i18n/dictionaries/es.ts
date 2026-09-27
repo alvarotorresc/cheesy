@@ -54,4 +54,14 @@ export const es: Messages = {
     knight: 'Caballo',
     cancel: 'Cancelar',
   },
+  engine: {
+    evaluation: 'Evaluación',
+    noEvaluation: 'Todavía sin evaluación',
+    lines: 'Líneas del motor',
+    noLines: 'Todavía no hay líneas.',
+    depth: 'Profundidad',
+    loading: 'Cargando el motor…',
+    thinking: 'El motor está pensando…',
+    error: 'No se ha podido arrancar el motor.',
+  },
 };

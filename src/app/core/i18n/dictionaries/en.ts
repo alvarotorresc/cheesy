@@ -52,6 +52,16 @@ export const en = {
     knight: 'Knight',
     cancel: 'Cancel',
   },
+  engine: {
+    evaluation: 'Evaluation',
+    noEvaluation: 'No evaluation yet',
+    lines: 'Engine lines',
+    noLines: 'No lines yet.',
+    depth: 'Depth',
+    loading: 'Loading engine…',
+    thinking: 'Engine thinking…',
+    error: 'The engine could not start.',
+  },
 };
 
 export type Messages = typeof en;
