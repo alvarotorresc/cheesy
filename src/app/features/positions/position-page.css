@@ -114,11 +114,13 @@ button {
   cursor: pointer;
 }
 
-button:hover:not(:disabled) {
+button:hover:not(:disabled, [aria-disabled='true']) {
   background: var(--color-surface-hover);
 }
 
-button:disabled {
+/* Replay buttons stay focusable at the ends of the line, so the keyboard focus is never lost. */
+button:disabled,
+button[aria-disabled='true'] {
   opacity: 0.45;
   cursor: default;
 }

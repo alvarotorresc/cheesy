@@ -2,6 +2,7 @@ import {
   afterRenderEffect,
   Component,
   computed,
+  DOCUMENT,
   effect,
   ElementRef,
   inject,
@@ -132,7 +133,10 @@ export class PositionPage {
   protected readonly sideToPlayLabel = sideToPlayLabel;
 
   private readonly heading = viewChild<ElementRef<HTMLElement>>('heading');
+  private readonly statusMessage = viewChild<ElementRef<HTMLElement>>('statusMessage');
+  private readonly document = inject(DOCUMENT);
   private focusedId: string | undefined;
+  private wasReplay: boolean | undefined;
 
   constructor() {
     effect(() => {
@@ -150,6 +154,16 @@ export class PositionPage {
       if (!heading || !id || id === this.focusedId) return;
       if (this.focusedId !== undefined) heading.nativeElement.focus();
       this.focusedId = id;
+    });
+
+    // Showing or leaving the solution removes the button that was pressed: keep the focus in the
+    // exercise, on its message, instead of letting it fall back to the page.
+    afterRenderEffect(() => {
+      const replay = this.trainer.isReplay();
+      const status = this.statusMessage()?.nativeElement;
+      const lost = this.document.activeElement === this.document.body;
+      if (this.wasReplay !== undefined && replay !== this.wasReplay && lost) status?.focus();
+      this.wasReplay = replay;
     });
   }
 

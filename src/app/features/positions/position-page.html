@@ -58,8 +58,10 @@
         </div>
 
         <p
+          #statusMessage
           class="status"
           role="status"
+          tabindex="-1"
           [class.wrong]="trainer.feedback()?.kind === 'wrong'"
           [class.right]="trainer.feedback()?.kind === 'correct'"
         >
@@ -71,7 +73,7 @@
             <p class="hint">{{ hint }}</p>
           }
           <div class="actions">
-            <button type="button" [disabled]="!!hintText()" (click)="trainer.showHint()">
+            <button type="button" [attr.aria-disabled]="!!hintText()" (click)="trainer.showHint()">
               {{ t.hint }}
             </button>
             <button type="button" (click)="trainer.revealSolution()">{{ t.showSolution }}</button>
@@ -87,7 +89,7 @@
           >
             <button
               type="button"
-              [disabled]="!game.canGoBack()"
+              [attr.aria-disabled]="!game.canGoBack()"
               [attr.aria-label]="t.first"
               [title]="t.first"
               (click)="trainer.goToStart()"
@@ -96,7 +98,7 @@
             </button>
             <button
               type="button"
-              [disabled]="!game.canGoBack()"
+              [attr.aria-disabled]="!game.canGoBack()"
               [attr.aria-label]="t.previous"
               [title]="t.previous"
               (click)="trainer.goBack()"
@@ -105,7 +107,7 @@
             </button>
             <button
               type="button"
-              [disabled]="!game.canGoForward()"
+              [attr.aria-disabled]="!game.canGoForward()"
               [attr.aria-label]="t.next"
               [title]="t.next"
               (click)="trainer.goForward()"
@@ -114,7 +116,7 @@
             </button>
             <button
               type="button"
-              [disabled]="!game.canGoForward()"
+              [attr.aria-disabled]="!game.canGoForward()"
               [attr.aria-label]="t.last"
               [title]="t.last"
               (click)="trainer.goToEnd()"

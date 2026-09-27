@@ -157,7 +157,7 @@ describe('PositionPage', () => {
       await harness.fixture.whenStable();
 
       expect(text('.hint')).toBe('Move the queen on d5.');
-      expect(button('Hint').disabled).toBe(true);
+      expect(button('Hint').getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should play the reply and list the moves when a right move is found', async () => {
@@ -192,7 +192,7 @@ describe('PositionPage', () => {
       expect(text('.status')).toBe('This is the solution. Step through the line to review it.');
       expect(text('.step')).toBe('Starting position.');
       expect(element().querySelectorAll('.steps button')).toHaveLength(3);
-      expect(button('Start of the solution').disabled).toBe(true);
+      expect(button('Start of the solution').getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should describe each step when moving through the solution with the buttons', async () => {
@@ -208,7 +208,7 @@ describe('PositionPage', () => {
       button('End of the solution').click();
       await harness.fixture.whenStable();
       expect(game().ply()).toBe(3);
-      expect(button('Next move').disabled).toBe(true);
+      expect(button('Next move').getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should move through the solution with the arrow keys', async () => {
@@ -238,6 +238,10 @@ describe('PositionPage', () => {
       await harness.fixture.whenStable();
 
       expect(game().ply()).toBe(2);
+    });
+
+    it('should keep the focus on the exercise message when the solution is shown', () => {
+      expect(document.activeElement).toBe(element().querySelector('.status'));
     });
 
     it('should start the exercise again when asked', async () => {
