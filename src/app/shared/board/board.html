@@ -1,0 +1,30 @@
+<div #board class="board"></div>
+
+@if (pendingPromotion(); as pending) {
+  <div
+    class="promotion"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="labels().promotion"
+    (keydown.escape)="cancelPromotion()"
+  >
+    <div class="choices">
+      @for (role of promotionRoles; track role) {
+        <button
+          #promotionButton
+          type="button"
+          class="choice"
+          [class.black]="pending.color === 'black'"
+          [attr.aria-label]="labels()[role]"
+          [title]="labels()[role]"
+          (click)="choosePromotion(role)"
+        >
+          <span aria-hidden="true">{{ glyphs[role] }}</span>
+        </button>
+      }
+    </div>
+    <button type="button" class="cancel" (click)="cancelPromotion()">
+      {{ labels().cancel }}
+    </button>
+  </div>
+}
