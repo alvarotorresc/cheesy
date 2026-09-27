@@ -395,14 +395,14 @@ input[type='radio'] {
   font-size: var(--text-sm);
 }
 
-/* A small square that stands for a side: white, or black with `black`. */
+/* A small disc, like a draughts piece, that stands for a side: white, or black with `black`. */
 .side-swatch {
   display: inline-block;
   flex: none;
   width: 0.875rem;
   height: 0.875rem;
   border: 1.5px solid var(--color-text);
-  border-radius: 2px;
+  border-radius: 50%;
   background: #ffffff;
   vertical-align: -0.1em;
 }
