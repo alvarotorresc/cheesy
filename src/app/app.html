@@ -1,4 +1,6 @@
-<a class="skip-link" href="#main">{{ i18n.t().app.skipToContent }}</a>
+<a class="skip-link" href="#main" (click)="skipToContent($event)">{{
+  i18n.t().app.skipToContent
+}}</a>
 
 <header class="header">
   <div class="header-inner">
@@ -33,6 +35,6 @@
   </div>
 </header>
 
-<main id="main" class="main" tabindex="-1">
+<main #main id="main" class="main" tabindex="-1">
   <router-outlet />
 </main>

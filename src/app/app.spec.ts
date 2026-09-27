@@ -40,4 +40,18 @@ describe('App', () => {
     expect(element.querySelector('nav')?.textContent).toContain('Aperturas');
     expect(spanish?.getAttribute('aria-pressed')).toBe('true');
   });
+
+  it('should focus the main content without navigating when the skip link is used', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const element = fixture.nativeElement as HTMLElement;
+    document.body.appendChild(element);
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+    element.querySelector('.skip-link')?.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(document.activeElement).toBe(element.querySelector('main'));
+    element.remove();
+  });
 });
