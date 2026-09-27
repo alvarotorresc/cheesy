@@ -1,0 +1,8 @@
+[build]
+  command = "pnpm build"
+  publish = "dist/chess-playground/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
