@@ -1,0 +1,16 @@
+<div
+  class="bar"
+  role="meter"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  [attr.aria-valuenow]="percent()"
+  [attr.aria-valuetext]="text() ?? emptyLabel()"
+  [attr.aria-label]="label()"
+  [class.flipped]="orientation() === 'black'"
+  [style.--white-share]="whiteShare()"
+>
+  <div class="white"></div>
+  @if (text(); as value) {
+    <span class="value" [class.on-white]="whiteAhead()" aria-hidden="true">{{ value }}</span>
+  }
+</div>
