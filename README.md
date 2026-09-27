@@ -26,7 +26,11 @@ The analysis board is available now. The other sections are in progress.
 
 ## Local development
 
-Requirements: Node.js 22.22.3 or newer (Angular 22 requires it) and pnpm 10.
+Requirements: pnpm 9.7 or newer, running on Node.js 22 or newer. Nothing else has to be installed:
+
+- pnpm switches itself to the version pinned in `packageManager` (12.6.0).
+- Node.js 26.10.0 is pinned in `devEngines.runtime`. `pnpm install` downloads it and every `pnpm`
+  script runs with it, whatever Node.js is installed on the machine.
 
 ```bash
 pnpm install
