@@ -1,0 +1,7 @@
+# Dependencies whose install scripts are not needed: they ship prebuilt binaries.
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+  - lefthook
+  - lmdb
+  - msgpackr-extract
