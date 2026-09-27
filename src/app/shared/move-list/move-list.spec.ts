@@ -39,6 +39,12 @@ describe('MoveList', () => {
     expect(element.querySelector('.row .placeholder')).not.toBeNull();
   });
 
+  it('should leave the black cell empty when white made the last move', async () => {
+    await render({ moves: ['e4', 'e5', 'Nf3'] });
+
+    expect(element.querySelector('.placeholder')).toBeNull();
+  });
+
   it('should highlight the move of the current ply when given', async () => {
     await render({ moves: ['e4', 'e5', 'Nf3'], currentPly: 2 });
 

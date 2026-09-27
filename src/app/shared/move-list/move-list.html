@@ -17,7 +17,7 @@
               >
                 {{ cell.san }}
               </button>
-            } @else {
+            } @else if ($first) {
               <span class="move placeholder" aria-hidden="true">…</span>
             }
           }
