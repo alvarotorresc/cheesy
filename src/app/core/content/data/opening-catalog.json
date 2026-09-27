@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ruy-lopez",
+    "name": {
+      "es": "Apertura Española (Ruy López)",
+      "en": "Ruy Lopez (Spanish Opening)"
+    },
+    "eco": "C60-C99",
+    "side": "white",
+    "description": {
+      "es": "Las blancas presionan el caballo de c6, defensor del peón de e5, y buscan una ventaja duradera en el centro.",
+      "en": "White pressures the c6 knight, the defender of the e5 pawn, aiming for a lasting central edge."
+    }
+  },
+  {
+    "id": "italian-game",
+    "name": {
+      "es": "Apertura Italiana",
+      "en": "Italian Game"
+    },
+    "eco": "C50-C59",
+    "side": "white",
+    "description": {
+      "es": "El alfil apunta a f7, el punto débil del enroque negro, y las blancas preparan c3 y d4 para dominar el centro.",
+      "en": "The bishop aims at f7, the weak point near the black king, while White prepares c3 and d4 to take the centre."
+    }
+  },
+  {
+    "id": "sicilian-najdorf",
+    "name": {
+      "es": "Defensa Siciliana, Variante Najdorf",
+      "en": "Sicilian Defence, Najdorf Variation"
+    },
+    "eco": "B90-B99",
+    "side": "black",
+    "description": {
+      "es": "Con 5...a6 las negras controlan b5 y mantienen opciones de ...e5 o ...e6; posiciones asimétricas y muy dinámicas.",
+      "en": "With 5...a6 Black controls b5 and keeps both ...e5 and ...e6 in reserve; sharp, unbalanced positions."
+    }
+  },
+  {
+    "id": "french-defence",
+    "name": {
+      "es": "Defensa Francesa",
+      "en": "French Defence"
+    },
+    "eco": "C00-C19",
+    "side": "black",
+    "description": {
+      "es": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con ...c5 y ...f6.",
+      "en": "Black accepts less space for a solid structure and central counterplay with ...c5 and ...f6."
+    }
+  },
+  {
+    "id": "caro-kann-defence",
+    "name": {
+      "es": "Defensa Caro-Kann",
+      "en": "Caro-Kann Defence"
+    },
+    "eco": "B10-B19",
+    "side": "black",
+    "description": {
+      "es": "Las negras preparan ...d5 con ...c6 para disputar el centro sin encerrar a su alfil de casillas claras.",
+      "en": "Black prepares ...d5 with ...c6 to contest the centre without locking in the light-squared bishop."
+    }
+  }
+]
