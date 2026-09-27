@@ -190,6 +190,9 @@ importers:
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
+      stockfish:
+        specifier: ^19.0.0
+        version: 19.0.0
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -2648,6 +2651,10 @@ packages:
     resolution: {integrity: sha512-eCPu1qRxPVkl5605OTWF8Wz40b4Mf45NY5LQmVPQ599knfs5QhASUm9GbJ5BDMDOXgrnh0wyEdvzmL//YMlw0A==}
     engines: {node: '>=18'}
 
+  stockfish@19.0.0:
+    resolution: {integrity: sha512-jDyYLbqNpboQcMs5HodTHI2CrKL74zkQWb1+sgoNXw5HI6avTblW4G0X7afFt3BBOc6VbTSkOV64EUxm/DWSpg==}
+    hasBin: true
+
   string-width@7.2.0:
     resolution: {integrity: sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==}
     engines: {node: '>=18'}
@@ -4940,6 +4947,8 @@ snapshots:
   std-env@4.2.0: {}
 
   stdin-discarder@0.3.2: {}
+
+  stockfish@19.0.0: {}
 
   string-width@7.2.0:
     dependencies:

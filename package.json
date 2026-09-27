@@ -34,6 +34,7 @@
     "@lichess-org/chessground": "^10.2.0",
     "chessops": "^0.15.1",
     "rxjs": "~7.8.0",
+    "stockfish": "^19.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
