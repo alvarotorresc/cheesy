@@ -81,3 +81,48 @@
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+
+/*
+ * Wide screen: title and feedback move to the top of the side column, so the board starts right
+ * under the navigation and fits the height of the window.
+ */
+@media (min-width: 60rem) {
+  :host {
+    grid-template-columns: auto minmax(18rem, 24rem);
+    /* Spare height goes to the last row, so title and feedback stay together at the top. */
+    grid-template-rows: auto auto auto 1fr;
+    justify-content: center;
+    align-items: start;
+    column-gap: var(--space-8);
+  }
+
+  .topbar,
+  .state {
+    grid-column: 1 / -1;
+  }
+
+  .play-layout {
+    display: contents;
+  }
+
+  h1 {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: var(--text-xl);
+  }
+
+  .feedback {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .play-board {
+    grid-column: 1;
+    grid-row: 2 / span 3;
+  }
+
+  .play-panel {
+    grid-column: 2;
+    grid-row: 4;
+  }
+}
