@@ -31,9 +31,9 @@ const spyLoaders = (overrides: Partial<ContentLoaders> = {}) => {
   };
 };
 
-const setup = (loaders: ContentLoaders | undefined = undefined): ContentService => {
+const setup = (loaders: ContentLoaders = bundledContentLoaders): ContentService => {
   TestBed.configureTestingModule({
-    providers: loaders ? [{ provide: CONTENT_LOADERS, useValue: loaders }] : [],
+    providers: [{ provide: CONTENT_LOADERS, useValue: loaders }],
   });
   return TestBed.inject(ContentService);
 };
@@ -138,6 +138,16 @@ describe('ContentService', () => {
       expect(loaders.positions).toHaveBeenCalledTimes(1);
     });
 
+    it('should download an opening once when both its tree and its book are requested', async () => {
+      const loaders = spyLoaders();
+      const content = setup(loaders);
+
+      await Promise.all([content.opening('ruy-lopez'), content.openingBook('ruy-lopez')]);
+      await content.openingBook('ruy-lopez');
+
+      expect(loaders.opening).toHaveBeenCalledTimes(1);
+    });
+
     it('should build each opening book once when it is requested again', async () => {
       const content = setup();
 
@@ -158,6 +168,31 @@ describe('ContentService', () => {
 
       expect(retried.length).toBeGreaterThan(0);
       expect(endgames).toHaveBeenCalledTimes(2);
+    });
+
+    it('should download the file again from the same origin when retried after a failed download', async () => {
+      // The default loaders: browsers remember a failed dynamic import and never request that
+      // file again, so the content is downloaded with fetch, which always tries anew.
+      const positions = await bundledContentLoaders.positions();
+      const fetchMock = vi
+        .fn<(url: URL | string) => Promise<Response>>()
+        .mockRejectedValueOnce(new TypeError('Failed to fetch'))
+        .mockImplementation(async () => new Response(JSON.stringify(positions)));
+      vi.stubGlobal('fetch', fetchMock);
+      const content = TestBed.inject(ContentService);
+
+      try {
+        await expect(content.positions()).rejects.toThrowError('Failed to fetch');
+        const retried = await content.positions();
+
+        expect(retried).toEqual(positions);
+        expect(fetchMock.mock.calls.map(([url]) => url.toString())).toEqual([
+          new URL('content/positions.json', document.baseURI).href,
+          new URL('content/positions.json', document.baseURI).href,
+        ]);
+      } finally {
+        vi.unstubAllGlobals();
+      }
     });
 
     it('should reject when the tree of an opening in the catalogue is not valid', async () => {

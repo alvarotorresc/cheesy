@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "26.10.0"
 
+# Content files keep their names between deploys: browsers must check them every time they are
+# requested, so a new version is never hidden behind a cached one.
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

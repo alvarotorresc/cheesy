@@ -27,14 +27,14 @@ export class ContentService {
 
   async opening(id: string): Promise<OpeningTree | undefined> {
     if (!(await this.hasOpening(id))) return undefined;
-    return this.cached(`opening:${id}`, () => this.loaders.opening(id));
+    return this.openingTree(id);
   }
 
   /** The opening with its positions computed, ready to answer where a game stands in theory. */
   async openingBook(id: string): Promise<OpeningBook | undefined> {
     if (!(await this.hasOpening(id))) return undefined;
     return this.cached(`opening-book:${id}`, async () =>
-      OpeningBook.from(await this.loaders.opening(id)),
+      OpeningBook.from(await this.openingTree(id)),
     );
   }
 
@@ -52,6 +52,11 @@ export class ContentService {
 
   async position(id: string): Promise<CuratedPosition | undefined> {
     return (await this.positions()).find((position) => position.id === id);
+  }
+
+  /** Shared by `opening` and `openingBook`, so the file is downloaded once. */
+  private openingTree(id: string): Promise<OpeningTree> {
+    return this.cached(`opening:${id}`, () => this.loaders.opening(id));
   }
 
   private async hasOpening(id: string): Promise<boolean> {
