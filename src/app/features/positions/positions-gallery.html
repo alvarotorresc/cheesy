@@ -1,0 +1,37 @@
+@let t = i18n.t().positions;
+
+<section class="intro">
+  <h1>{{ t.title }}</h1>
+  <p>{{ t.intro }}</p>
+</section>
+
+@if (list.status() === 'ready') {
+  <ul class="gallery" [attr.aria-label]="t.list">
+    @for (position of list.positions(); track position.id) {
+      <li>
+        <a class="card" [routerLink]="[position.id]">
+          <h2>{{ i18n.localize(position.title) }}</h2>
+          <p class="side">
+            <span class="side-dot" [class.black]="position.playerSide === 'black'"></span>
+            {{ sideToPlayLabel(position.playerSide, t) }}
+          </p>
+          @if (position.source) {
+            <p class="source">{{ position.source }}</p>
+          }
+          <ul class="tags" [attr.aria-label]="t.themes">
+            @for (tag of position.tags; track tag) {
+              <li>{{ tagLabel(tag, t) }}</li>
+            }
+          </ul>
+        </a>
+      </li>
+    }
+  </ul>
+} @else if (list.status() === 'error') {
+  <div class="state" role="alert">
+    <p>{{ t.loadError }}</p>
+    <button type="button" (click)="list.load()">{{ t.retry }}</button>
+  </div>
+} @else {
+  <p class="state" role="status">{{ t.loading }}</p>
+}

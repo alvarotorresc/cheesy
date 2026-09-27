@@ -1,0 +1,158 @@
+@let t = i18n.t().positions;
+
+<nav class="topbar" [attr.aria-label]="t.positionNavigation">
+  <a class="back" routerLink="..">&larr; {{ t.backToGallery }}</a>
+  @if (position()) {
+    <div class="neighbours">
+      @if (previousId(); as id) {
+        <a [routerLink]="['..', id]">&lsaquo; {{ t.previousPosition }}</a>
+      }
+      @if (nextId(); as id) {
+        <a [routerLink]="['..', id]">{{ t.nextPosition }} &rsaquo;</a>
+      }
+    </div>
+  }
+</nav>
+
+@if (list.status() === 'error') {
+  <div class="state" role="alert">
+    <p>{{ t.loadError }}</p>
+    <button type="button" (click)="list.load()">{{ t.retry }}</button>
+  </div>
+} @else if (list.status() === 'loading') {
+  <p class="state" role="status">{{ t.loading }}</p>
+} @else if (!position()) {
+  <p class="state" role="alert">{{ t.notFound }}</p>
+} @else if (position(); as position) {
+  <h1 #heading tabindex="-1">{{ i18n.localize(position.title) }}</h1>
+
+  @if (exercise() === 'unplayable') {
+    <p class="state" role="alert">{{ t.unplayable }}</p>
+  } @else if (exercise() === 'ready') {
+    <div class="layout">
+      <div class="board-column">
+        <app-board
+          [fen]="game.fen()"
+          [orientation]="position.playerSide"
+          [turnColor]="game.turn()"
+          [dests]="game.dests()"
+          [lastMove]="game.lastMove()"
+          [check]="game.isCheck()"
+          [viewOnly]="trainer.isReplay()"
+          [labels]="i18n.t().board"
+          (move)="trainer.play($event)"
+        />
+      </div>
+
+      <div class="panel">
+        <div class="meta">
+          <p class="side">{{ sideToPlayLabel(position.playerSide, t) }}</p>
+          @if (position.source) {
+            <p class="muted">{{ position.source }}</p>
+          }
+          <ul class="tags" [attr.aria-label]="t.themes">
+            @for (tag of position.tags; track tag) {
+              <li>{{ tagLabel(tag, t) }}</li>
+            }
+          </ul>
+        </div>
+
+        <p
+          class="status"
+          role="status"
+          [class.wrong]="trainer.feedback()?.kind === 'wrong'"
+          [class.right]="trainer.feedback()?.kind === 'correct'"
+        >
+          {{ status() }}
+        </p>
+
+        @if (!trainer.isReplay()) {
+          @if (hintText(); as hint) {
+            <p class="hint">{{ hint }}</p>
+          }
+          <div class="actions">
+            <button type="button" [disabled]="!!hintText()" (click)="trainer.showHint()">
+              {{ t.hint }}
+            </button>
+            <button type="button" (click)="trainer.revealSolution()">{{ t.showSolution }}</button>
+          </div>
+        } @else {
+          <p class="step" aria-live="polite">{{ stepText() }}</p>
+          <div
+            class="replay"
+            role="group"
+            [attr.aria-label]="t.replayControls"
+            (keydown.home)="onReplayKey($event, 'start')"
+            (keydown.end)="onReplayKey($event, 'end')"
+          >
+            <button
+              type="button"
+              [disabled]="!game.canGoBack()"
+              [attr.aria-label]="t.first"
+              [title]="t.first"
+              (click)="trainer.goToStart()"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+            <button
+              type="button"
+              [disabled]="!game.canGoBack()"
+              [attr.aria-label]="t.previous"
+              [title]="t.previous"
+              (click)="trainer.goBack()"
+            >
+              <span aria-hidden="true">&lsaquo;</span>
+            </button>
+            <button
+              type="button"
+              [disabled]="!game.canGoForward()"
+              [attr.aria-label]="t.next"
+              [title]="t.next"
+              (click)="trainer.goForward()"
+            >
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
+            <button
+              type="button"
+              [disabled]="!game.canGoForward()"
+              [attr.aria-label]="t.last"
+              [title]="t.last"
+              (click)="trainer.goToEnd()"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </div>
+        }
+
+        @if (steps().length) {
+          <h2>{{ t.solution }}</h2>
+          <ol class="steps">
+            @for (view of steps(); track view.ply) {
+              <li [class.opponent]="!view.step.byPlayer">
+                @if (trainer.isReplay()) {
+                  <button
+                    type="button"
+                    [attr.aria-current]="view.ply === game.ply() ? 'step' : null"
+                    (click)="trainer.goTo(view.ply)"
+                  >
+                    {{ view.number }} {{ view.step.san }}
+                  </button>
+                } @else {
+                  <span>{{ view.number }} {{ view.step.san }}</span>
+                }
+              </li>
+            }
+          </ol>
+        }
+
+        @if (trainer.isReplay()) {
+          <h2>{{ t.explanation }}</h2>
+          <p>{{ i18n.localize(position.explanation) }}</p>
+          <div class="actions">
+            <button type="button" (click)="trainer.retry()">{{ t.tryAgain }}</button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+}
