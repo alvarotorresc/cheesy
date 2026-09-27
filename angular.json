@@ -37,7 +37,6 @@
             ],
             "styles": [
               "node_modules/@lichess-org/chessground/assets/chessground.base.css",
-              "node_modules/@lichess-org/chessground/assets/chessground.brown.css",
               "node_modules/@lichess-org/chessground/assets/chessground.cburnett.css",
               "src/styles.css"
             ]

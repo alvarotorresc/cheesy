@@ -34,6 +34,10 @@ const PROMOTION_GLYPHS: Record<PromotionRole, string> = {
 
 const isLastRank = (key: Key): boolean => key.endsWith('8') || key.endsWith('1');
 
+/** Pieces jump instead of sliding when the user asks the system for less motion. */
+const prefersReducedMotion = (): boolean =>
+  typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Presentational chess board backed by chessground. It renders whatever its inputs describe and
  * reports user moves through `move`; the parent decides whether to accept them. After every user
@@ -99,7 +103,7 @@ export class BoardComponent {
       // Chessground watches the board size itself (ResizeObserver), so it follows the layout.
       const api = Chessground(this.boardElement().nativeElement, {
         ...this.config(),
-        animation: { enabled: true, duration: 200 },
+        animation: { enabled: !prefersReducedMotion(), duration: 200 },
         premovable: { enabled: false },
         draggable: { ...this.config().draggable, showGhost: true },
         movable: {

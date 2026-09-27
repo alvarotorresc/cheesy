@@ -547,11 +547,57 @@ input[type='radio'] {
   }
 }
 
+/* ---- Board theme (replaces chessground's brown theme) -------------------------------------- */
+
+/* A repeating 2×2 tile: light at the top left, as a8 and h1 always are. */
+cg-board {
+  background-color: var(--board-light);
+  background-image: repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%);
+  background-size: 25% 25%;
+}
+
+.cg-wrap {
+  box-shadow:
+    0 0 0 1px var(--board-edge),
+    var(--shadow-board);
+}
+
+cg-board square.last-move {
+  background-color: var(--board-last-move);
+}
+
+cg-board square.selected {
+  background-color: var(--board-selected);
+}
+
+cg-board square.move-dest {
+  background: radial-gradient(var(--board-dest) 21%, transparent 23%);
+}
+
+cg-board square.oc.move-dest {
+  background: radial-gradient(transparent 78%, var(--board-dest) 80%);
+}
+
+cg-board square.move-dest:hover,
+cg-board square.move-dest.hover {
+  background: var(--board-dest-hover);
+}
+
+cg-board square.check {
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--board-check) / 100%) 0%,
+    rgb(var(--board-check) / 85%) 30%,
+    rgb(var(--board-check) / 0%) 85%
+  );
+}
+
 /* Board coordinates drawn inside the edge squares, so they scale with the board. */
 .cg-wrap coords {
+  color: var(--board-coord);
   font-family: var(--font-sans);
-  font-size: clamp(0.5rem, 2.2vw, 0.75rem);
-  font-weight: 600;
+  font-size: clamp(0.5625rem, 2.2vw, 0.8125rem);
+  font-weight: 700;
   opacity: 1;
 }
 
@@ -560,10 +606,11 @@ input[type='radio'] {
   right: 0;
   left: auto;
   width: auto;
-  padding-right: 2px;
+  padding-right: 3px;
 }
 
 .cg-wrap coords.ranks coord {
+  padding-top: 2px;
   transform: none;
 }
 
@@ -573,8 +620,9 @@ input[type='radio'] {
   height: auto;
   align-items: flex-end;
   text-align: left;
+  text-transform: none;
 }
 
 .cg-wrap coords.files coord {
-  padding-left: 3px;
+  padding-left: 4px;
 }
