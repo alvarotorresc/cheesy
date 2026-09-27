@@ -1,7 +1,16 @@
 <h1 class="visually-hidden">{{ i18n.t().analysis.title }}</h1>
 
 <div class="layout">
-  <div class="board-column">
+  <div class="board-column" [class.with-bar]="engineOn()">
+    @if (engineOn()) {
+      <app-eval-bar
+        [score]="evaluation()"
+        [outcome]="outcome()"
+        [orientation]="orientation()"
+        [label]="i18n.t().engine.evaluation"
+        [emptyLabel]="i18n.t().engine.noEvaluation"
+      />
+    }
     <app-board
       [fen]="game.fen()"
       [orientation]="orientation()"
@@ -17,10 +26,54 @@
   <div class="panel">
     <p class="status" role="status">{{ status() }}</p>
 
+    @if (invalidLink()) {
+      <div class="notice" role="alert">
+        <p>{{ i18n.t().share.invalidLink }}</p>
+        <button type="button" class="button" (click)="invalidLink.set(false)">
+          {{ i18n.t().share.dismiss }}
+        </button>
+      </div>
+    }
+
+    <section class="engine" [attr.aria-label]="i18n.t().engine.toggle">
+      <label class="switch">
+        <input
+          #engineSwitch
+          type="checkbox"
+          role="switch"
+          [checked]="engineOn()"
+          (change)="engineOn.set(engineSwitch.checked)"
+        />
+        {{ i18n.t().engine.toggle }}
+      </label>
+
+      @if (engineOn()) {
+        <p class="engine-status" role="status">{{ engineMessage() }}</p>
+        @if (engine.status() === 'error') {
+          <button type="button" class="button retry" (click)="retry()">
+            {{ i18n.t().engine.retry }}
+          </button>
+        } @else if (!outcome()) {
+          <app-engine-lines
+            class="lines"
+            [lines]="lines()"
+            [startPly]="linesStartPly()"
+            [label]="i18n.t().engine.lines"
+            [emptyLabel]="i18n.t().engine.noLines"
+            [depthLabel]="i18n.t().engine.depth"
+            (selectMove)="playLine($event)"
+          />
+        }
+      } @else {
+        <p class="hint">{{ i18n.t().engine.downloadHint }}</p>
+      }
+    </section>
+
     <div class="controls" role="group" [attr.aria-label]="i18n.t().analysis.controls">
       <div class="nav-buttons">
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoBack()"
           [attr.aria-label]="i18n.t().analysis.first"
           [title]="i18n.t().analysis.first"
@@ -30,6 +83,7 @@
         </button>
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoBack()"
           [attr.aria-label]="i18n.t().analysis.previous"
           [title]="i18n.t().analysis.previous"
@@ -39,6 +93,7 @@
         </button>
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoForward()"
           [attr.aria-label]="i18n.t().analysis.next"
           [title]="i18n.t().analysis.next"
@@ -48,6 +103,7 @@
         </button>
         <button
           type="button"
+          class="button"
           [disabled]="!game.canGoForward()"
           [attr.aria-label]="i18n.t().analysis.last"
           [title]="i18n.t().analysis.last"
@@ -58,11 +114,15 @@
       </div>
 
       <div class="action-buttons">
-        <button type="button" [disabled]="!game.canGoBack()" (click)="game.undo()">
+        <button type="button" class="button" [disabled]="!game.canGoBack()" (click)="game.undo()">
           {{ i18n.t().analysis.undo }}
         </button>
-        <button type="button" (click)="flip()">{{ i18n.t().analysis.flip }}</button>
-        <button type="button" (click)="game.reset()">{{ i18n.t().analysis.reset }}</button>
+        <button type="button" class="button" (click)="flip()">
+          {{ i18n.t().analysis.flip }}
+        </button>
+        <button type="button" class="button" (click)="game.reset()">
+          {{ i18n.t().analysis.reset }}
+        </button>
       </div>
     </div>
 
@@ -76,5 +136,8 @@
       [emptyLabel]="i18n.t().analysis.noMoves"
       (selectPly)="game.goTo($event)"
     />
+
+    <app-share-panel />
+    <app-import-panel />
   </div>
 </div>
