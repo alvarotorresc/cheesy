@@ -9,7 +9,7 @@ import { TablebaseError, type TablebaseResult } from './tablebase.types';
 export const TABLEBASE_URL = 'https://tablebase.lichess.ovh/standard';
 /** The tablebase covers positions with this many pieces or fewer, kings included. */
 export const TABLEBASE_MAX_PIECES = 7;
-/** Lichess asks API clients to wait a full minute after an HTTP 429 before sending more requests. */
+/** After an HTTP 429 the Lichess API docs advise waiting a minute before retrying. */
 export const RATE_LIMIT_PAUSE_MS = 60_000;
 export const REQUEST_TIMEOUT_MS = 10_000;
 /** Answers kept in memory; the oldest one is dropped beyond this. */
