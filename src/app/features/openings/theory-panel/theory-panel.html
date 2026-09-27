@@ -1,0 +1,25 @@
+<section class="theory" aria-labelledby="theory-title">
+  <h2 id="theory-title">{{ i18n.t().openings.theory }}</h2>
+  <p class="variation">{{ title() }}</p>
+  @if (comment(); as comment) {
+    <p class="comment">{{ comment }}</p>
+  }
+  <p class="state" [class.away]="theory().status !== 'in-book'">
+    @switch (theory().status) {
+      @case ('in-book') {
+        {{ i18n.t().openings.inBook }}
+      }
+      @case ('end-of-book') {
+        {{ i18n.t().openings.endOfBook }}
+      }
+      @case ('out-of-book') {
+        @if (deviation(); as deviation) {
+          {{ deviation.byPlayer ? i18n.t().openings.youLeft : i18n.t().openings.rivalLeft }}
+          <strong>{{ deviation.played }}</strong
+          >. {{ i18n.t().openings.bookHad }} <strong>{{ deviation.expected }}</strong
+          >.
+        }
+      }
+    }
+  </p>
+</section>

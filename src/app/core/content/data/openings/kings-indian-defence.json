@@ -1,0 +1,508 @@
+{
+  "id": "kings-indian-defence",
+  "name": {
+    "es": "Defensa India de Rey",
+    "en": "King's Indian Defence"
+  },
+  "eco": "E60-E99",
+  "side": "black",
+  "description": {
+    "es": "Las negras ceden el centro al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un flanco distinto.",
+    "en": "Black concedes the centre early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different wing."
+  },
+  "root": [
+    {
+      "san": "d4",
+      "main": true,
+      "children": [
+        {
+          "san": "Nf6",
+          "main": true,
+          "children": [
+            {
+              "san": "c4",
+              "main": true,
+              "children": [
+                {
+                  "san": "g6",
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Bg7",
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "e4",
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "d6",
+                                  "name": {
+                                    "es": "Variante Normal",
+                                    "en": "Normal Variation"
+                                  },
+                                  "comment": {
+                                    "es": "Las negras permiten un gran centro blanco para atacarlo después con ...e5 o ...c5.",
+                                    "en": "Black allows a big white centre, planning to attack it later with ...e5 or ...c5."
+                                  },
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "Be2",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "e5",
+                                                  "name": {
+                                                    "es": "Variante Ortodoxa",
+                                                    "en": "Orthodox Variation"
+                                                  },
+                                                  "comment": {
+                                                    "es": "Golpe central clásico: las negras disputan d4 con un peón.",
+                                                    "en": "The classical central strike: Black contests d4 with a pawn."
+                                                  },
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "name": {
+                                                            "es": "Defensa Aronin-Taimanov",
+                                                            "en": "Aronin–Taimanov Defence"
+                                                          },
+                                                          "comment": {
+                                                            "es": "Presiona d4 y obliga a las blancas a cerrar el centro.",
+                                                            "en": "Pressures d4 and forces White to close the centre."
+                                                          },
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "d5",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Ne7",
+                                                                  "comment": {
+                                                                    "es": "Centro cerrado: las blancas atacarán en el flanco de dama y las negras en el de rey con ...f5.",
+                                                                    "en": "A closed centre: White attacks on the queenside and Black on the kingside with ...f5."
+                                                                  },
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Ne1",
+                                                                      "name": {
+                                                                        "es": "Sistema Clásico",
+                                                                        "en": "Classical System"
+                                                                      },
+                                                                      "comment": {
+                                                                        "es": "El caballo se dirige a d3 para apoyar c5 y vigilar f4.",
+                                                                        "en": "The knight heads for d3 to support c5 and watch f4."
+                                                                      },
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nd7",
+                                                                          "comment": {
+                                                                            "es": "El caballo deja paso al peón de f para la ruptura ...f5.",
+                                                                            "en": "The knight makes way for the ...f5 break."
+                                                                          },
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nd3",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "f5",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Bd2",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nf6",
+                                                                                          "main": true,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "f3",
+                                                                                              "main": true,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "f4",
+                                                                                                  "comment": {
+                                                                                                    "es": "Las negras cierran el flanco de rey y preparan ...g5-g4 para atacar.",
+                                                                                                    "en": "Black locks the kingside and prepares ...g5-g4 to attack."
+                                                                                                  },
+                                                                                                  "main": true,
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "san": "g4",
+                                                                                                      "comment": {
+                                                                                                        "es": "Las blancas frenan el avance de los peones negros en el flanco de rey.",
+                                                                                                        "en": "White puts a brake on Black's kingside pawn advance."
+                                                                                                      },
+                                                                                                      "main": true,
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "san": "g5",
+                                                                                                          "main": true,
+                                                                                                          "children": []
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            },
+                                                                            {
+                                                                              "san": "Be3",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "f5",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "f3",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "f4",
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Bf2",
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "g5",
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "san": "b4",
+                                                                      "name": {
+                                                                        "es": "Ataque de la Bayoneta",
+                                                                        "en": "Bayonet Attack"
+                                                                      },
+                                                                      "comment": {
+                                                                        "es": "Ataque rápido en el flanco de dama antes de que las negras se organicen.",
+                                                                        "en": "A fast queenside attack before Black gets organised."
+                                                                      },
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nh5",
+                                                                          "comment": {
+                                                                            "es": "El caballo deja paso a ...f5 y vigila f4.",
+                                                                            "en": "The knight makes way for ...f5 and watches f4."
+                                                                          },
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Re1",
+                                                                              "name": {
+                                                                                "es": "Línea Sokolov",
+                                                                                "en": "Sokolov's Line"
+                                                                              },
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "f5",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Ng5",
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nf6",
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "san": "d5",
+                                                      "name": {
+                                                        "es": "Variante Petrosian",
+                                                        "en": "Petrosian Variation"
+                                                      },
+                                                      "comment": {
+                                                        "es": "Cierra el centro de inmediato y prepara Ag5 para clavar el caballo.",
+                                                        "en": "Closes the centre at once and prepares Bg5 to pin the knight."
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "san": "a5",
+                                                          "name": {
+                                                            "es": "Defensa Stein",
+                                                            "en": "Stein Defence"
+                                                          },
+                                                          "comment": {
+                                                            "es": "Frena la expansión blanca con b4 en el flanco de dama.",
+                                                            "en": "Stops White's queenside expansion with b4."
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "san": "Bg5",
+                                                              "children": [
+                                                                {
+                                                                  "san": "h6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bh4",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Na6",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "san": "dxe5",
+                                                      "name": {
+                                                        "es": "Variante del Cambio",
+                                                        "en": "Exchange Variation"
+                                                      },
+                                                      "comment": {
+                                                        "es": "Cambio de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas.",
+                                                        "en": "An early queen trade: White hopes for a comfortable endgame, but Black equalises without much trouble."
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "san": "dxe5",
+                                                          "children": [
+                                                            {
+                                                              "san": "Qxd8",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Rxd8",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Bg5",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Re8",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "f3",
+                                      "name": {
+                                        "es": "Variante Sämisch",
+                                        "en": "Sämisch Variation"
+                                      },
+                                      "comment": {
+                                        "es": "Refuerza e4 y prepara Ae3, Dd2 y un posible ataque con g4 y h4.",
+                                        "en": "Reinforces e4 and prepares Be3, Qd2 and a possible attack with g4 and h4."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "children": [
+                                            {
+                                              "san": "Be3",
+                                              "children": [
+                                                {
+                                                  "san": "e5",
+                                                  "name": {
+                                                    "es": "Variante Sämisch, línea ortodoxa",
+                                                    "en": "Sämisch Variation, Orthodox Variation"
+                                                  },
+                                                  "comment": {
+                                                    "es": "La ruptura central clásica también contra la Sämisch.",
+                                                    "en": "The classical central break, this time against the Sämisch."
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "san": "Nge2",
+                                                      "children": [
+                                                        {
+                                                          "san": "c6",
+                                                          "children": [
+                                                            {
+                                                              "san": "d5",
+                                                              "children": [
+                                                                {
+                                                                  "san": "cxd5",
+                                                                  "name": {
+                                                                    "es": "Sämisch cerrada, línea principal",
+                                                                    "en": "Sämisch Variation, Closed Variation, Main Line"
+                                                                  },
+                                                                  "comment": {
+                                                                    "es": "Abre la columna c para el contrajuego negro en el flanco de dama.",
+                                                                    "en": "Opens the c-file for Black's queenside counterplay."
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "cxd5",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nbd7",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "f4",
+                                      "name": {
+                                        "es": "Ataque de los Cuatro Peones",
+                                        "en": "Four Pawns Attack"
+                                      },
+                                      "comment": {
+                                        "es": "Cuatro peones en el centro: mucho espacio, pero también objetivos para el contraataque negro.",
+                                        "en": "Four central pawns: lots of space, but also targets for Black's counterattack."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "children": [
+                                                {
+                                                  "san": "c5",
+                                                  "children": [
+                                                    {
+                                                      "san": "d5",
+                                                      "children": [
+                                                        {
+                                                          "san": "e6",
+                                                          "comment": {
+                                                            "es": "Las negras atacan la cadena de peones y abren la columna e.",
+                                                            "en": "Black attacks the pawn chain and opens the e-file."
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "san": "Be2",
+                                                              "children": [
+                                                                {
+                                                                  "san": "exd5",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "cxd5",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Re8",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

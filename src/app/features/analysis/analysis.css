@@ -1,0 +1,58 @@
+.board-column {
+  display: grid;
+}
+
+.board-column.with-bar {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+.notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 4px solid var(--color-danger);
+}
+
+.engine {
+  gap: var(--space-1);
+  padding-block: var(--space-2);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.engine-status {
+  min-height: 1.5em;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.engine-status:empty {
+  min-height: 0;
+}
+
+.retry {
+  justify-self: start;
+}
+
+/* Room for the depth and three lines, so the panel does not jump while they arrive. */
+.lines {
+  min-height: 10.5rem;
+}
+
+.controls {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.panel-title {
+  margin-bottom: calc(var(--space-5) * -1 + var(--space-2));
+}

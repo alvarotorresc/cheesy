@@ -1,0 +1,529 @@
+{
+  "id": "english-opening",
+  "name": {
+    "es": "Apertura Inglesa",
+    "en": "English Opening"
+  },
+  "eco": "A10-A39",
+  "side": "white",
+  "description": {
+    "es": "Las blancas controlan d5 desde el flanco con 1.c4, a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.",
+    "en": "White controls d5 from the flank with 1.c4, often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+  },
+  "root": [
+    {
+      "san": "c4",
+      "name": {
+        "es": "Apertura Inglesa",
+        "en": "English Opening"
+      },
+      "comment": {
+        "es": "Controla d5 desde el flanco; las blancas suelen combinarlo con un fianchetto en g2.",
+        "en": "Controls d5 from the flank; White often combines it with a fianchetto on g2."
+      },
+      "main": true,
+      "children": [
+        {
+          "san": "e5",
+          "name": {
+            "es": "Variante inglesa de rey (1...e5)",
+            "en": "King's English Variation"
+          },
+          "comment": {
+            "es": "Las negras ocupan el centro con el peón de rey.",
+            "en": "Black occupies the centre with the king's pawn."
+          },
+          "main": true,
+          "children": [
+            {
+              "san": "Nc3",
+              "name": {
+                "es": "Siciliana invertida",
+                "en": "Reversed Sicilian"
+              },
+              "comment": {
+                "es": "Una Siciliana con los colores cambiados y un tiempo más para las blancas.",
+                "en": "A Sicilian with colours reversed and an extra tempo for White."
+              },
+              "main": true,
+              "children": [
+                {
+                  "san": "Nf6",
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nf3",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "name": {
+                            "es": "Variante de los Cuatro Caballos",
+                            "en": "Four Knights Variation"
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "g3",
+                              "comment": {
+                                "es": "Fianchetto: el alfil de g2 presionará d5 y b7.",
+                                "en": "A fianchetto: the g2 bishop will press d5 and b7."
+                              },
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "cxd5",
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "Nxd5",
+                                          "comment": {
+                                            "es": "Estructura de Dragón invertido: las blancas juegan un Dragón con un tiempo más.",
+                                            "en": "A reversed Dragon structure: White plays a Dragon with an extra tempo."
+                                          },
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "Bg2",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "Nb6",
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Be7",
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "d3",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "O-O",
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "a3",
+                                                                      "comment": {
+                                                                        "es": "Prepara b4-b5 para expulsar al caballo de c6 y ganar espacio en el flanco de dama.",
+                                                                        "en": "Prepares b4-b5 to drive away the c6 knight and gain queenside space."
+                                                                      },
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Be6",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "b4",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "a5",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "b5",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Nd4",
+                                                                                          "main": true,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "Nc6",
+                  "children": [
+                    {
+                      "san": "g3",
+                      "children": [
+                        {
+                          "san": "g6",
+                          "children": [
+                            {
+                              "san": "Bg2",
+                              "children": [
+                                {
+                                  "san": "Bg7",
+                                  "children": [
+                                    {
+                                      "san": "d3",
+                                      "name": {
+                                        "es": "Sistema cerrado",
+                                        "en": "Closed System"
+                                      },
+                                      "comment": {
+                                        "es": "Juego lento: las blancas maniobran antes de romper con b4 o f4.",
+                                        "en": "Slow play: White manoeuvres before breaking with b4 or f4."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "d6",
+                                          "children": [
+                                            {
+                                              "san": "e4",
+                                              "name": {
+                                                "es": "Sistema Botvinnik",
+                                                "en": "Botvinnik System"
+                                              },
+                                              "comment": {
+                                                "es": "Los peones de c4 y e4 controlan d5; el plan es Cge2 y f4.",
+                                                "en": "The c4 and e4 pawns control d5; the plan is Nge2 and f4."
+                                              },
+                                              "children": [
+                                                {
+                                                  "san": "Nge7",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nge2",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "children": [
+                                                                {
+                                                                  "san": "f5",
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "c5",
+          "name": {
+            "es": "Variante Simétrica",
+            "en": "Symmetrical Variation"
+          },
+          "comment": {
+            "es": "Las negras copian la jugada y disputan d4.",
+            "en": "Black mirrors the move and contests d4."
+          },
+          "children": [
+            {
+              "san": "Nf3",
+              "children": [
+                {
+                  "san": "Nf6",
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "children": [
+                        {
+                          "san": "Nc6",
+                          "children": [
+                            {
+                              "san": "g3",
+                              "children": [
+                                {
+                                  "san": "g6",
+                                  "children": [
+                                    {
+                                      "san": "Bg2",
+                                      "children": [
+                                        {
+                                          "san": "Bg7",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "children": [
+                                                    {
+                                                      "san": "d4",
+                                                      "comment": {
+                                                        "es": "Las blancas rompen la simetría abriendo el centro.",
+                                                        "en": "White breaks the symmetry by opening the centre."
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "san": "cxd4",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nxd4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nxd4",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Qxd4",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "d6",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Qd3",
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "Nf6",
+          "name": {
+            "es": "Defensa Angloindia",
+            "en": "Anglo-Indian Defence"
+          },
+          "children": [
+            {
+              "san": "Nc3",
+              "children": [
+                {
+                  "san": "e6",
+                  "children": [
+                    {
+                      "san": "e4",
+                      "name": {
+                        "es": "Variante Mikenas-Carls",
+                        "en": "Mikenas–Carls Variation"
+                      },
+                      "comment": {
+                        "es": "Ocupa el centro de inmediato e invita a ...d5 y e5.",
+                        "en": "Occupies the centre at once, inviting ...d5 and e5."
+                      },
+                      "children": [
+                        {
+                          "san": "d5",
+                          "children": [
+                            {
+                              "san": "e5",
+                              "children": [
+                                {
+                                  "san": "d4",
+                                  "children": [
+                                    {
+                                      "san": "exf6",
+                                      "children": [
+                                        {
+                                          "san": "dxc3",
+                                          "children": [
+                                            {
+                                              "san": "bxc3",
+                                              "children": [
+                                                {
+                                                  "san": "Qxf6",
+                                                  "children": [
+                                                    {
+                                                      "san": "d4",
+                                                      "children": [
+                                                        {
+                                                          "san": "c5",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nf3",
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "san": "e6",
+          "name": {
+            "es": "Defensa Agincourt",
+            "en": "Agincourt Defence"
+          },
+          "comment": {
+            "es": "Las negras preparan ...d5 con una estructura de tipo Gambito de Dama.",
+            "en": "Black prepares ...d5 with a Queen's Gambit-style structure."
+          },
+          "children": [
+            {
+              "san": "Nf3",
+              "children": [
+                {
+                  "san": "d5",
+                  "children": [
+                    {
+                      "san": "g3",
+                      "children": [
+                        {
+                          "san": "Nf6",
+                          "children": [
+                            {
+                              "san": "Bg2",
+                              "children": [
+                                {
+                                  "san": "Be7",
+                                  "children": [
+                                    {
+                                      "san": "O-O",
+                                      "name": {
+                                        "es": "Neocatalana rehusada",
+                                        "en": "Neo-Catalan Declined"
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "O-O",
+                                          "children": [
+                                            {
+                                              "san": "b3",
+                                              "children": [
+                                                {
+                                                  "san": "c5",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bb2",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nc6",
+                                                          "children": [
+                                                            {
+                                                              "san": "e3",
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

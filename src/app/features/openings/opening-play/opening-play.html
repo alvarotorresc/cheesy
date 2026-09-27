@@ -1,0 +1,214 @@
+<nav class="topbar">
+  <a class="back back-link" routerLink="/openings">
+    <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+  </a>
+  @if (session.opening(); as opening) {
+    <a class="back back-link" [routerLink]="['/openings', opening.id, 'drill']">
+      {{ i18n.t().drill.fromPlay }}
+    </a>
+  }
+</nav>
+
+@switch (session.loadState()) {
+  @case ('loading') {
+    <p class="notice state-message" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+  }
+  @case ('not-found') {
+    <p class="notice state-message" role="alert">{{ i18n.t().openings.notFound }}</p>
+  }
+  @case ('error') {
+    <div class="notice state-message" role="alert">
+      <p>{{ i18n.t().openings.openingError }}</p>
+      <button type="button" class="button" (click)="session.retryLoad()">
+        {{ i18n.t().openings.retry }}
+      </button>
+    </div>
+  }
+}
+
+@if (session.opening(); as opening) {
+  <header class="head">
+    <h1>{{ i18n.localize(opening.name) }}</h1>
+    <p class="meta">
+      <span class="eco">{{ opening.eco }}</span>
+      <span>
+        {{ i18n.t().openings.youPlay }}
+        {{ session.playerColor() === 'white' ? i18n.t().openings.white : i18n.t().openings.black }}
+      </span>
+    </p>
+  </header>
+
+  <div class="play-layout">
+    <div class="play-board">
+      <app-board
+        [fen]="game.fen()"
+        [orientation]="session.playerColor()"
+        [turnColor]="game.turn()"
+        [dests]="game.dests()"
+        [lastMove]="game.lastMove()"
+        [check]="game.isCheck()"
+        [viewOnly]="!session.canMove()"
+        [labels]="i18n.t().board"
+        (move)="onMove($event)"
+      />
+    </div>
+
+    <div class="play-panel">
+      <div class="status-row">
+        <p class="status play-status" role="status">{{ status() }}</p>
+        @if (isReviewing()) {
+          <p class="reviewing">
+            {{ i18n.t().openings.reviewing }}
+            <button type="button" class="text-button" (click)="game.goToEnd()">
+              {{ i18n.t().openings.backToGame }}
+            </button>
+          </p>
+        }
+      </div>
+
+      @if (deviationMoves(); as moves) {
+        <div class="alert surface" role="group" aria-labelledby="deviation-title">
+          <h2 id="deviation-title" class="panel-title">{{ i18n.t().openings.deviationTitle }}</h2>
+          <p>
+            {{ i18n.t().openings.deviationText }} <strong>{{ moves.expected }}</strong
+            >.
+            @if (moves.alternatives) {
+              {{ i18n.t().openings.alsoCovered }} <strong>{{ moves.alternatives }}</strong
+              >.
+            }
+          </p>
+          <p class="note muted small">{{ i18n.t().openings.deviationNote }}</p>
+          <div class="button-row">
+            <button type="button" class="button" (click)="session.undo()">
+              {{ i18n.t().openings.takeBack }}
+            </button>
+            <button type="button" class="button primary" (click)="session.continueOutOfBook()">
+              {{ i18n.t().openings.keepPlaying }}
+            </button>
+          </div>
+        </div>
+      }
+
+      @if (session.phase() === 'engine-error') {
+        <div class="alert surface">
+          <button type="button" class="button" (click)="session.retryReply()">
+            {{ i18n.t().openings.retry }}
+          </button>
+        </div>
+      }
+
+      @if (session.theory(); as theory) {
+        <app-theory-panel
+          [theory]="theory"
+          [opening]="opening"
+          [playerColor]="session.playerColor()"
+        />
+      }
+
+      <div class="controls" role="group" [attr.aria-label]="i18n.t().openings.controls">
+        <div class="step-buttons">
+          <button
+            type="button"
+            class="button"
+            [disabled]="!game.canGoBack()"
+            [attr.aria-label]="i18n.t().analysis.first"
+            [title]="i18n.t().analysis.first"
+            (click)="game.goToStart()"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </button>
+          <button
+            type="button"
+            class="button"
+            [disabled]="!game.canGoBack()"
+            [attr.aria-label]="i18n.t().analysis.previous"
+            [title]="i18n.t().analysis.previous"
+            (click)="game.goBack()"
+          >
+            <span aria-hidden="true">&lsaquo;</span>
+          </button>
+          <button
+            type="button"
+            class="button"
+            [disabled]="!game.canGoForward()"
+            [attr.aria-label]="i18n.t().analysis.next"
+            [title]="i18n.t().analysis.next"
+            (click)="game.goForward()"
+          >
+            <span aria-hidden="true">&rsaquo;</span>
+          </button>
+          <button
+            type="button"
+            class="button"
+            [disabled]="!game.canGoForward()"
+            [attr.aria-label]="i18n.t().analysis.last"
+            [title]="i18n.t().analysis.last"
+            (click)="game.goToEnd()"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </button>
+        </div>
+
+        <div class="button-row">
+          <button
+            type="button"
+            class="button"
+            [disabled]="!session.canUndo()"
+            (click)="session.undo()"
+          >
+            {{ i18n.t().openings.undo }}
+          </button>
+          <button type="button" class="button" (click)="session.restart()">
+            {{ i18n.t().openings.restart }}
+          </button>
+          <button type="button" class="button" (click)="session.switchColor()">
+            {{ i18n.t().openings.switchColor }}
+          </button>
+        </div>
+      </div>
+
+      <h2 class="panel-title">{{ i18n.t().analysis.moves }}</h2>
+      <app-move-list
+        class="play-moves"
+        [moves]="sans()"
+        [currentPly]="game.ply()"
+        [startPly]="game.startPly()"
+        [label]="i18n.t().analysis.moves"
+        [emptyLabel]="i18n.t().analysis.noMoves"
+        (selectPly)="game.goTo($event)"
+      />
+
+      <section class="settings" aria-labelledby="settings-title">
+        <h2 id="settings-title" class="panel-title">{{ i18n.t().openings.settings }}</h2>
+        <fieldset>
+          <legend>{{ i18n.t().openings.opponent }}</legend>
+          @for (mode of opponentModes; track mode) {
+            <label class="option">
+              <input
+                type="radio"
+                name="opponent-mode"
+                [value]="mode"
+                [checked]="session.opponentMode() === mode"
+                (change)="session.setOpponentMode(mode)"
+              />
+              {{
+                mode === 'book' ? i18n.t().openings.opponentBook : i18n.t().openings.opponentEngine
+              }}
+            </label>
+          }
+          <p class="hint muted small">{{ i18n.t().openings.opponentNote }}</p>
+        </fieldset>
+        <label class="field">
+          <span>{{ i18n.t().openings.strength }}</span>
+          <select class="select" (change)="onStrengthChange($event)">
+            @for (level of strengthLevels; track level.key) {
+              <option [value]="level.skill" [selected]="session.skillLevel() === level.skill">
+                {{ i18n.t().openings.strengthLevels[level.key] }}
+              </option>
+            }
+          </select>
+        </label>
+      </section>
+    </div>
+  </div>
+}

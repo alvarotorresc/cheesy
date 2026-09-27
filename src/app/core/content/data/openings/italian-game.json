@@ -1,0 +1,407 @@
+{
+  "id": "italian-game",
+  "name": {
+    "es": "Apertura Italiana",
+    "en": "Italian Game"
+  },
+  "eco": "C50-C59",
+  "side": "white",
+  "description": {
+    "es": "El alfil apunta a f7, el punto débil del enroque negro, y las blancas preparan c3 y d4 para dominar el centro.",
+    "en": "The bishop aims at f7, the weak point near the black king, while White prepares c3 and d4 to take the centre."
+  },
+  "root": [
+    {
+      "san": "e4",
+      "main": true,
+      "children": [
+        {
+          "san": "e5",
+          "main": true,
+          "children": [
+            {
+              "san": "Nf3",
+              "main": true,
+              "children": [
+                {
+                  "san": "Nc6",
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Bc4",
+                      "name": {
+                        "es": "Apertura Italiana",
+                        "en": "Italian Game"
+                      },
+                      "comment": {
+                        "es": "El alfil se sitúa en la diagonal a2-g8, apuntando a f7.",
+                        "en": "The bishop takes the a2-g8 diagonal, eyeing f7."
+                      },
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Bc5",
+                          "name": {
+                            "es": "Giuoco Piano",
+                            "en": "Giuoco Piano"
+                          },
+                          "comment": {
+                            "es": "Respuesta simétrica: el alfil negro también apunta al punto f2.",
+                            "en": "The symmetrical reply: the black bishop also eyes f2."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "c3",
+                              "comment": {
+                                "es": "Prepara d4 para levantar un centro de peones.",
+                                "en": "Prepares d4 to build a pawn centre."
+                              },
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "d4",
+                                      "name": {
+                                        "es": "Ataque central",
+                                        "en": "Centre Attack"
+                                      },
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "exd4",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "cxd4",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "Bb4+",
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "Bd2",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Bxd2+",
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "Nbxd2",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "d5",
+                                                                  "comment": {
+                                                                    "es": "Golpe central clásico: las negras rompen antes de que e5 las encierre.",
+                                                                    "en": "The classic central strike: Black breaks before e5 can cramp them."
+                                                                  },
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "exd5",
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxd5",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Qb3",
+                                                                              "comment": {
+                                                                                "es": "Presiona d5 y b7; las blancas juegan con el peón aislado de d4 y piezas activas.",
+                                                                                "en": "Hits d5 and b7; White plays with the isolated d4 pawn and active pieces."
+                                                                              },
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Nce7",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "O-O",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "O-O",
+                                                                                          "main": true,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Rfe1",
+                                                                                              "main": true,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "c6",
+                                                                                                  "main": true,
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "san": "d3",
+                                      "name": {
+                                        "es": "Giuoco Pianissimo",
+                                        "en": "Giuoco Pianissimo"
+                                      },
+                                      "comment": {
+                                        "es": "Plan lento y flexible: se protege e4 y se maniobra antes de romper en el centro.",
+                                        "en": "A slow, flexible plan: e4 is protected and White manoeuvres before any central break."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "d6",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "children": [
+                                                    {
+                                                      "san": "Re1",
+                                                      "children": [
+                                                        {
+                                                          "san": "a6",
+                                                          "children": [
+                                                            {
+                                                              "san": "Bb3",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Ba7",
+                                                                  "comment": {
+                                                                    "es": "Ambos alfiles se ponen a salvo de ataques de peones antes de continuar la maniobra.",
+                                                                    "en": "Both bishops step out of reach of pawn attacks before the manoeuvring continues."
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "h3",
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "b4",
+                              "name": {
+                                "es": "Gambito Evans",
+                                "en": "Evans Gambit"
+                              },
+                              "comment": {
+                                "es": "Gambito: se entrega un peón para ganar tiempos con c3 y d4.",
+                                "en": "A gambit: White gives a pawn to gain time with c3 and d4."
+                              },
+                              "children": [
+                                {
+                                  "san": "Bxb4",
+                                  "children": [
+                                    {
+                                      "san": "c3",
+                                      "children": [
+                                        {
+                                          "san": "Ba5",
+                                          "children": [
+                                            {
+                                              "san": "d4",
+                                              "comment": {
+                                                "es": "Centro de peones y desarrollo rápido a cambio del material.",
+                                                "en": "A pawn centre and fast development in return for the material."
+                                              },
+                                              "children": [
+                                                {
+                                                  "san": "exd4",
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nge7",
+                                                          "children": [
+                                                            {
+                                                              "san": "cxd4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "d5",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "exd5",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxd5",
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Nf6",
+                          "name": {
+                            "es": "Defensa de los Dos Caballos",
+                            "en": "Two Knights Defence"
+                          },
+                          "comment": {
+                            "es": "Contraataque sobre e4 que invita a Cg5.",
+                            "en": "A counterattack on e4 that invites Ng5."
+                          },
+                          "children": [
+                            {
+                              "san": "Ng5",
+                              "comment": {
+                                "es": "Ataca f7 con dos piezas; las negras deben responder con precisión.",
+                                "en": "Hits f7 twice; Black must respond accurately."
+                              },
+                              "children": [
+                                {
+                                  "san": "d5",
+                                  "children": [
+                                    {
+                                      "san": "exd5",
+                                      "children": [
+                                        {
+                                          "san": "Na5",
+                                          "comment": {
+                                            "es": "Las negras entregan un peón y ganan tiempos atacando al alfil.",
+                                            "en": "Black gives a pawn and gains time by attacking the bishop."
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "Bb5+",
+                                              "children": [
+                                                {
+                                                  "san": "c6",
+                                                  "children": [
+                                                    {
+                                                      "san": "dxc6",
+                                                      "children": [
+                                                        {
+                                                          "san": "bxc6",
+                                                          "children": [
+                                                            {
+                                                              "san": "Be2",
+                                                              "children": [
+                                                                {
+                                                                  "san": "h6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nf3",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "e4",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Ne5",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Bd6",
+                                                                                  "children": []
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

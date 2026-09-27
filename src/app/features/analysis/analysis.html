@@ -1,0 +1,145 @@
+<h1 class="visually-hidden">{{ i18n.t().analysis.title }}</h1>
+
+<div class="play-layout">
+  <div class="play-board board-column" [class.with-bar]="engineOn()">
+    @if (engineOn()) {
+      <app-eval-bar
+        [score]="evaluation()"
+        [outcome]="outcome()"
+        [orientation]="orientation()"
+        [label]="i18n.t().engine.evaluation"
+        [emptyLabel]="i18n.t().engine.noEvaluation"
+      />
+    }
+    <app-board
+      [fen]="game.fen()"
+      [orientation]="orientation()"
+      [turnColor]="game.turn()"
+      [dests]="game.dests()"
+      [lastMove]="game.lastMove()"
+      [check]="game.isCheck()"
+      [labels]="i18n.t().board"
+      (move)="onMove($event)"
+    />
+  </div>
+
+  <div class="play-panel">
+    <p class="status play-status" role="status">{{ status() }}</p>
+
+    @if (invalidLink()) {
+      <div class="notice surface" role="alert">
+        <p>{{ i18n.t().share.invalidLink }}</p>
+        <button type="button" class="button" (click)="invalidLink.set(false)">
+          {{ i18n.t().share.dismiss }}
+        </button>
+      </div>
+    }
+
+    <section class="engine surface" [attr.aria-label]="i18n.t().engine.toggle">
+      <label class="switch">
+        <input
+          #engineSwitch
+          type="checkbox"
+          role="switch"
+          [checked]="engineOn()"
+          (change)="engineOn.set(engineSwitch.checked)"
+        />
+        {{ i18n.t().engine.toggle }}
+      </label>
+
+      <!-- Always in the page, so screen readers announce every change of its text. -->
+      <p class="engine-status" role="status">{{ engineMessage() }}</p>
+
+      @if (engineOn()) {
+        @if (engine.status() === 'error') {
+          <button type="button" class="button retry" (click)="retry()">
+            {{ i18n.t().engine.retry }}
+          </button>
+        } @else if (!hasNoLegalMoves()) {
+          <app-engine-lines
+            class="lines"
+            [lines]="lines()"
+            [startPly]="linesStartPly()"
+            [label]="i18n.t().engine.lines"
+            [emptyLabel]="i18n.t().engine.noLines"
+            [depthLabel]="i18n.t().engine.depth"
+            (selectMove)="playLine($event)"
+          />
+        }
+      } @else {
+        <p class="hint muted small">{{ i18n.t().engine.downloadHint }}</p>
+      }
+    </section>
+
+    <div class="controls" role="group" [attr.aria-label]="i18n.t().analysis.controls">
+      <div class="step-buttons">
+        <button
+          type="button"
+          class="button"
+          [disabled]="!game.canGoBack()"
+          [attr.aria-label]="i18n.t().analysis.first"
+          [title]="i18n.t().analysis.first"
+          (click)="game.goToStart()"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+        <button
+          type="button"
+          class="button"
+          [disabled]="!game.canGoBack()"
+          [attr.aria-label]="i18n.t().analysis.previous"
+          [title]="i18n.t().analysis.previous"
+          (click)="game.goBack()"
+        >
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+        <button
+          type="button"
+          class="button"
+          [disabled]="!game.canGoForward()"
+          [attr.aria-label]="i18n.t().analysis.next"
+          [title]="i18n.t().analysis.next"
+          (click)="game.goForward()"
+        >
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button
+          type="button"
+          class="button"
+          [disabled]="!game.canGoForward()"
+          [attr.aria-label]="i18n.t().analysis.last"
+          [title]="i18n.t().analysis.last"
+          (click)="game.goToEnd()"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </div>
+
+      <div class="button-row">
+        <button type="button" class="button" [disabled]="!game.canGoBack()" (click)="game.undo()">
+          {{ i18n.t().analysis.undo }}
+        </button>
+        <button type="button" class="button" (click)="flip()">
+          {{ i18n.t().analysis.flip }}
+        </button>
+        <button type="button" class="button" (click)="game.reset()">
+          {{ i18n.t().analysis.reset }}
+        </button>
+      </div>
+    </div>
+
+    <h2 class="panel-title">{{ i18n.t().analysis.moves }}</h2>
+    <app-move-list
+      class="play-moves"
+      [moves]="sans()"
+      [currentPly]="game.ply()"
+      [startPly]="game.startPly()"
+      [label]="i18n.t().analysis.moves"
+      [emptyLabel]="i18n.t().analysis.noMoves"
+      (selectPly)="game.goTo($event)"
+    />
+
+    <app-share-panel />
+    <app-import-panel />
+  </div>
+</div>

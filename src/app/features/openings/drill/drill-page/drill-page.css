@@ -1,0 +1,162 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.eco {
+  padding: 0.0625rem var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/*
+ * Main message of the drill. Right and wrong answers differ by colour and by the style of their
+ * bar, as in the positions. Empty while choosing a line, but kept in place for screen readers.
+ */
+.status {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: inset 4px 0 0 var(--color-control);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.status.idle {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.status.right {
+  box-shadow: inset 6px 0 0 var(--color-accent);
+}
+
+.status.wrong {
+  border: 2px dashed var(--color-danger);
+  box-shadow: none;
+}
+
+.reviewing,
+.saved {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.saved.failed {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+/* The move given away after too many mistakes: the panel raises its voice. */
+.help {
+  border-color: var(--color-accent);
+  border-left-width: 6px;
+}
+
+/* Numbers first, each on its own row: the labels are too long for columns on a phone. */
+dl {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+}
+
+dl > div {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+dt {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+dd {
+  min-width: 2ch;
+  margin: 0;
+  font-size: var(--text-xl);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: end;
+}
+
+/*
+ * Wide screen: title and message move to the top of the side column, so the board starts right
+ * under the navigation and fits the height of the window.
+ */
+@media (min-width: 60rem) {
+  :host {
+    grid-template-columns: auto minmax(18rem, 24rem);
+    /* Spare height goes to the last row, so title and message stay together at the top. */
+    grid-template-rows: auto auto auto 1fr;
+    justify-content: center;
+    align-items: start;
+    column-gap: var(--space-8);
+  }
+
+  .topbar,
+  .notice {
+    grid-column: 1 / -1;
+  }
+
+  .play-layout {
+    display: contents;
+  }
+
+  .head {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .head h1 {
+    font-size: var(--text-xl);
+  }
+
+  .status {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .play-board {
+    grid-column: 1;
+    grid-row: 2 / span 3;
+  }
+
+  .play-panel {
+    grid-column: 2;
+    grid-row: 4;
+  }
+}

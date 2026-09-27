@@ -1,0 +1,69 @@
+@let t = i18n.t().drill;
+
+<section class="page-intro">
+  <h1>{{ i18n.t().openings.title }}</h1>
+  <p>{{ i18n.t().openings.intro }}</p>
+</section>
+
+@switch (state().status) {
+  @case ('loading') {
+    <p class="notice state-message" role="status">{{ i18n.t().openings.loading }}</p>
+  }
+  @case ('error') {
+    <div class="notice state-message" role="alert">
+      <p>{{ i18n.t().openings.loadError }}</p>
+      <button type="button" class="button" (click)="load()">{{ i18n.t().openings.retry }}</button>
+    </div>
+  }
+}
+
+@if (state(); as current) {
+  @if (current.status === 'ready') {
+    @for (group of current.groups; track group.family) {
+      <section class="family" [attr.aria-labelledby]="'family-' + group.family">
+        <h2 [id]="'family-' + group.family">{{ i18n.t().openings.families[group.family] }}</h2>
+        <ul class="entry-grid">
+          @for (opening of group.openings; track opening.id) {
+            <li>
+              <a class="card entry" [routerLink]="['/openings', opening.id]">
+                <h3 class="entry-title">{{ i18n.localize(opening.name) }}</h3>
+                <p class="entry-meta">
+                  <span class="eco">{{ opening.eco }}</span>
+                  <span>
+                    <span
+                      class="side-swatch"
+                      [class.black]="opening.side === 'black'"
+                      aria-hidden="true"
+                    ></span>
+                    {{
+                      opening.side === 'white'
+                        ? i18n.t().openings.forWhite
+                        : i18n.t().openings.forBlack
+                    }}</span
+                  >
+                </p>
+                <p class="description">{{ i18n.localize(opening.description) }}</p>
+                @if (progress().get(opening.id); as done) {
+                  <p class="progress">
+                    {{ t.progressCount(done.practiced, done.mastered, done.total) }}
+                  </p>
+                }
+              </a>
+              <a
+                class="drill"
+                [routerLink]="['/openings', opening.id, 'drill']"
+                [attr.aria-label]="t.drillLinkLabel(i18n.localize(opening.name))"
+              >
+                {{ t.drillLink }}
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    } @empty {
+      <p class="notice state-message">{{ i18n.t().openings.empty }}</p>
+    }
+
+    <app-progress-note [hasProgress]="hasProgress()" [note]="t.listNote" />
+  }
+}

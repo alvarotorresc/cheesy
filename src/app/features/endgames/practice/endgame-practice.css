@@ -1,0 +1,78 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.heading h1 {
+  font-size: var(--text-xl);
+}
+
+.goal {
+  color: var(--color-text-muted);
+}
+
+.status[data-goal='achieved'] {
+  color: var(--color-accent-text);
+}
+
+.change:empty {
+  display: none;
+}
+
+.change p {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: inset 4px 0 0 var(--color-accent);
+  font-weight: 600;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) repeat(2, minmax(0, 2fr));
+  gap: var(--space-2);
+}
+
+/* ‹ and ›: from the system font, which draws them at a readable size. */
+.controls .button:nth-child(-n + 2) {
+  padding-inline: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.tablebase {
+  gap: var(--space-3);
+}
+
+.tablebase-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-block: calc(var(--space-2) * -1);
+}
+
+.toggle {
+  margin-inline-end: calc(var(--space-3) * -1);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.idea {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.idea p {
+  color: var(--color-text-muted);
+}

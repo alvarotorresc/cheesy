@@ -1,0 +1,54 @@
+:host {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.family {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.entry-grid li {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-2);
+}
+
+.eco {
+  padding: 0.0625rem var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.progress {
+  padding-left: var(--space-2);
+  border-left: 3px solid var(--color-accent);
+  font-size: var(--text-sm);
+}
+
+.drill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.drill:hover {
+  border-color: var(--color-accent);
+}

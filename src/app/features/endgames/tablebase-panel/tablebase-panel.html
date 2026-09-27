@@ -1,0 +1,41 @@
+@let t = i18n.t().tablebase;
+<div class="body" aria-live="polite" [attr.aria-busy]="state().status === 'loading'">
+  @switch (state().status) {
+    @case ('loading') {
+      <p class="note">{{ t.loading }}</p>
+    }
+    @case ('waiting') {
+      <p class="note">{{ t.waiting }}</p>
+    }
+    @case ('not-applicable') {
+      <p class="note">{{ t.notApplicable }}</p>
+    }
+    @case ('error') {
+      <p class="note">{{ errorText() }}</p>
+      <button type="button" class="button retry" (click)="retry.emit()">{{ t.retry }}</button>
+    }
+    @case ('ready') {
+      @if (view(); as result) {
+        <dl class="facts">
+          <div class="fact">
+            <dt>{{ t.result }}</dt>
+            <dd class="result" [attr.data-tone]="result.tone">{{ result.label }}</dd>
+            @if (result.mate) {
+              <dd class="detail">{{ result.mate }}</dd>
+            }
+            @if (result.zeroing) {
+              <dd class="detail">{{ result.zeroing }}</dd>
+            }
+          </div>
+          @if (result.bestMove) {
+            <div class="fact">
+              <dt>{{ result.bestMoveLabel }}</dt>
+              <dd class="move">{{ result.bestMove }}</dd>
+            </div>
+          }
+        </dl>
+      }
+    }
+  }
+</div>
+<p class="source muted">{{ t.source }}</p>

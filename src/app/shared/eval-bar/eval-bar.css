@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  width: 1.75rem;
+  min-height: 8rem;
+}
+
+.bar {
+  position: relative;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  border: 1px solid var(--board-edge);
+  border-radius: var(--radius-sm);
+  background: var(--color-piece-black);
+}
+
+.white {
+  position: absolute;
+  inset: 0;
+  background: var(--color-piece-white);
+  transform: scaleY(var(--white-share));
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.value {
+  position: absolute;
+  top: var(--space-1);
+  right: 0;
+  left: 0;
+  color: var(--color-piece-white);
+  font-size: 0.625rem;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.value.on-white {
+  top: auto;
+  bottom: var(--space-1);
+  color: var(--color-piece-black);
+}
+
+/* Black at the bottom: White's share grows from the top and each end swaps. */
+.flipped .white {
+  transform-origin: top;
+}
+
+.flipped .value {
+  top: auto;
+  bottom: var(--space-1);
+}
+
+.flipped .value.on-white {
+  top: var(--space-1);
+  bottom: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .white {
+    transition: none;
+  }
+}

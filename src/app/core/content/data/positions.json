@@ -1,0 +1,293 @@
+[
+  {
+    "id": "legal-mate",
+    "title": {
+      "es": "Mate de Légal",
+      "en": "Légal’s Mate"
+    },
+    "fen": "rn1qkbnr/ppp2p1p/3p2p1/4N3/2B1P3/2N5/PPPP1PPP/R1BbK2R w KQkq - 0 6",
+    "playerSide": "white",
+    "solution": [
+      "Bxf7+",
+      "Ke7",
+      "Nd5#"
+    ],
+    "explanation": {
+      "es": "Las negras se han llevado la dama, pero sus casillas alrededor del rey están indefensas. El alfil da jaque protegido por el caballo de e5, el rey solo puede ir a e7 y el otro caballo remata en d5.",
+      "en": "Black has won the queen, but the squares around the king are undefended. The bishop checks with the support of the e5 knight, the king can only go to e7 and the other knight finishes on d5."
+    },
+    "tags": [
+      "legal-mate",
+      "sacrifice",
+      "opening-trap"
+    ]
+  },
+  {
+    "id": "reti-tartakower-1910",
+    "title": {
+      "es": "Sacrificio de dama en d8",
+      "en": "Queen sacrifice on d8"
+    },
+    "source": "Réti – Tartakower, Vienna 1910",
+    "fen": "rnb1kb1r/pp3ppp/2p5/4q3/4n3/3Q4/PPPB1PPP/2KR1BNR w kq - 0 9",
+    "playerSide": "white",
+    "solution": [
+      "Qd8+",
+      "Kxd8",
+      "Bg5+",
+      "Kc7",
+      "Bd8#"
+    ],
+    "explanation": {
+      "es": "La dama se entrega para atraer al rey a d8, donde queda alineado con la torre de d1. Ag5 da jaque doble (alfil y torre) y el rey no tiene defensa: si ...Re8, Td8 es mate; si ...Rc7, Ad8 es mate.",
+      "en": "The queen is given up to drag the king to d8, in line with the d1 rook. Bg5 is a double check (bishop and rook) with no defence: after ...Ke8, Rd8 is mate; after ...Kc7, Bd8 is mate."
+    },
+    "tags": [
+      "attraction",
+      "double-check",
+      "queen-sacrifice"
+    ]
+  },
+  {
+    "id": "opera-game-1858",
+    "title": {
+      "es": "La partida de la Ópera",
+      "en": "The Opera Game"
+    },
+    "source": "Morphy – Duke Karl of Brunswick & Count Isouard, Paris 1858",
+    "fen": "4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16",
+    "playerSide": "white",
+    "solution": [
+      "Qb8+",
+      "Nxb8",
+      "Rd8#"
+    ],
+    "explanation": {
+      "es": "El caballo de d7 es el único defensor de d8. La dama se sacrifica en b8 para desviarlo y la torre da mate en la octava fila, apoyada por el alfil de g5.",
+      "en": "The d7 knight is the only defender of d8. The queen sacrifice on b8 deflects it and the rook mates on the back rank, supported by the g5 bishop."
+    },
+    "tags": [
+      "deflection",
+      "queen-sacrifice",
+      "back-rank"
+    ]
+  },
+  {
+    "id": "kieninger-trap",
+    "title": {
+      "es": "Trampa de Kieninger",
+      "en": "Kieninger Trap"
+    },
+    "fen": "r1b1k2r/ppppqppp/2n5/4n3/1PP2B2/5N2/1P1NPPPP/R2QKB1R b KQkq - 0 8",
+    "playerSide": "black",
+    "solution": [
+      "Nd3#"
+    ],
+    "explanation": {
+      "es": "Las blancas han ganado el alfil, pero el peón de e2 está clavado por la dama de e7. El caballo salta a d3 con jaque y nadie puede capturarlo: el rey no tiene casillas libres.",
+      "en": "White has won the bishop, but the e2 pawn is pinned by the queen on e7. The knight jumps to d3 with check and nothing can take it: the king has no free squares."
+    },
+    "tags": [
+      "pin",
+      "smothered-mate",
+      "opening-trap"
+    ]
+  },
+  {
+    "id": "smothered-mate",
+    "title": {
+      "es": "Mate de la coz",
+      "en": "Smothered mate"
+    },
+    "fen": "2q2r1k/6pp/7N/3Q4/8/8/5PPP/6K1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Qg8+",
+      "Rxg8",
+      "Nf7#"
+    ],
+    "explanation": {
+      "es": "La dama se ofrece en g8, protegida por el caballo, para que la torre tape la última casilla libre del rey. El caballo da mate en f7: el rey queda ahogado por sus propias piezas.",
+      "en": "The queen is offered on g8, protected by the knight, so that the rook blocks the king’s last free square. The knight mates on f7: the king is smothered by its own pieces."
+    },
+    "tags": [
+      "smothered-mate",
+      "queen-sacrifice",
+      "attraction"
+    ]
+  },
+  {
+    "id": "evergreen-game-1852",
+    "title": {
+      "es": "La Siempreviva",
+      "en": "The Evergreen Game"
+    },
+    "source": "Anderssen – Dufresne, Berlin 1852",
+    "fen": "1r2k1r1/pbppnp1p/1b3P2/8/Q7/B1PB1q2/P4PPP/3R2K1 w - - 0 21",
+    "playerSide": "white",
+    "solution": [
+      "Qxd7+",
+      "Kxd7",
+      "Bf5+",
+      "Ke8",
+      "Bd7+",
+      "Kf8",
+      "Bxe7#"
+    ],
+    "explanation": {
+      "es": "Tras el sacrificio de dama, Af5 descubre el jaque de la torre de d1: jaque doble. Los dos alfiles y el peón de f6 cierran la red de mate alrededor del rey negro.",
+      "en": "After the queen sacrifice, Bf5 uncovers the d1 rook: a double check. The two bishops and the f6 pawn close the mating net around the black king."
+    },
+    "tags": [
+      "queen-sacrifice",
+      "double-check",
+      "discovered-attack"
+    ]
+  },
+  {
+    "id": "boden-mate-1853",
+    "title": {
+      "es": "Mate de Boden",
+      "en": "Boden’s Mate"
+    },
+    "source": "Schulder – Boden, London 1853",
+    "fen": "2k1rb1r/ppp3pp/2n2q2/3B1b2/5P2/2P1BQ2/PP1N1P1P/2KR3R b - - 0 14",
+    "playerSide": "black",
+    "solution": [
+      "Qxc3+",
+      "bxc3",
+      "Ba3#"
+    ],
+    "explanation": {
+      "es": "La dama se sacrifica en c3 para abrir la diagonal a3-f8. Los dos alfiles, cruzados en diagonales, dan mate al rey enrocado largo, bloqueado por su propia torre y caballo.",
+      "en": "The queen sacrifice on c3 opens the a3-f8 diagonal. The two bishops on crossing diagonals mate the long-castled king, which is boxed in by its own rook and knight."
+    },
+    "tags": [
+      "boden-mate",
+      "queen-sacrifice"
+    ]
+  },
+  {
+    "id": "back-rank-battery",
+    "title": {
+      "es": "Mate del pasillo",
+      "en": "Back-rank mate"
+    },
+    "fen": "4r1k1/3q1ppp/8/8/8/8/4QPPP/4R1K1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Qxe8+",
+      "Qxe8",
+      "Rxe8#"
+    ],
+    "explanation": {
+      "es": "El rey negro no tiene casillas de escape porque sus peones siguen en la segunda fila. La batería en la columna e gana la lucha por e8: tras el cambio, la torre da mate en la octava.",
+      "en": "The black king has no escape square because its pawns are still on their starting rank. The battery on the e-file wins the fight for e8: after the exchange, the rook mates on the back rank."
+    },
+    "tags": [
+      "back-rank"
+    ]
+  },
+  {
+    "id": "anastasia-mate",
+    "title": {
+      "es": "Mate de Anastasia",
+      "en": "Anastasia’s mate"
+    },
+    "fen": "r4r1k/pp2Nppp/8/7Q/8/3R4/Pq3PPP/6K1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Qxh7+",
+      "Kxh7",
+      "Rh3#"
+    ],
+    "explanation": {
+      "es": "El caballo de e7 controla g8 y g6, y el peón de g7 tapa la otra salida del rey. La dama se sacrifica en h7 para abrir la columna h y la torre da mate desde h3.",
+      "en": "The e7 knight covers g8 and g6, and the g7 pawn blocks the king’s other exit. The queen sacrifice on h7 opens the h-file and the rook mates from h3."
+    },
+    "tags": [
+      "anastasia-mate",
+      "queen-sacrifice"
+    ]
+  },
+  {
+    "id": "arabian-mate",
+    "title": {
+      "es": "Mate árabe",
+      "en": "Arabian mate"
+    },
+    "fen": "2r4k/pp1R3p/5N2/8/8/8/1q3PPP/6K1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Rxh7#"
+    ],
+    "explanation": {
+      "es": "Las negras tienen ventaja material, pero juegan las blancas. La torre captura en h7 protegida por el caballo de f6, que además controla g8; la propia torre cubre g7.",
+      "en": "Black is ahead in material, but it is White’s move. The rook captures on h7 protected by the f6 knight, which also covers g8; the rook itself covers g7."
+    },
+    "tags": [
+      "arabian-mate",
+      "back-rank"
+    ]
+  },
+  {
+    "id": "royal-fork",
+    "title": {
+      "es": "Horquilla de caballo",
+      "en": "Knight fork"
+    },
+    "fen": "r4rk1/pp3ppp/2q5/3N4/8/8/PP1Q1PPP/5RK1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Ne7+",
+      "Kh8",
+      "Nxc6"
+    ],
+    "explanation": {
+      "es": "La dama negra ataca al caballo de d5, pero el caballo salta a e7 con jaque y ataca a la vez al rey y a la dama. Tras mover el rey, el caballo captura la dama.",
+      "en": "The black queen attacks the d5 knight, but the knight jumps to e7 with check, hitting king and queen at once. After the king moves, the knight takes the queen."
+    },
+    "tags": [
+      "fork",
+      "knight-fork"
+    ]
+  },
+  {
+    "id": "pin-wins-queen",
+    "title": {
+      "es": "Clavada de la dama",
+      "en": "Pinning the queen"
+    },
+    "fen": "4k2r/pppp1ppp/8/4q3/8/8/PP1Q1PPP/R5K1 w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Re1"
+    ],
+    "explanation": {
+      "es": "La torre ocupa la columna e y clava la dama negra contra su rey: la dama no puede apartarse. Las negras pierden la dama a cambio de la torre, porque e1 está protegida por la dama blanca.",
+      "en": "The rook takes the e-file and pins the black queen to its king: the queen cannot step aside. Black loses the queen for the rook, because e1 is protected by the white queen."
+    },
+    "tags": [
+      "pin"
+    ]
+  },
+  {
+    "id": "rook-skewer",
+    "title": {
+      "es": "Ensartada",
+      "en": "Skewer"
+    },
+    "fen": "3r4/pp6/1q3k2/8/8/8/PP3PP1/2R3KR w - - 0 1",
+    "playerSide": "white",
+    "solution": [
+      "Rh6+"
+    ],
+    "explanation": {
+      "es": "El rey negro y su dama están en la misma fila. La torre da jaque desde h6; el rey tiene que apartarse y, en la jugada siguiente, la torre captura la dama que quedaba detrás.",
+      "en": "The black king and queen stand on the same rank. The rook checks from h6; the king has to step aside and, next move, the rook takes the queen standing behind it."
+    },
+    "tags": [
+      "skewer"
+    ]
+  }
+]

@@ -1,0 +1,538 @@
+{
+  "id": "french-defence",
+  "name": {
+    "es": "Defensa Francesa",
+    "en": "French Defence"
+  },
+  "eco": "C00-C19",
+  "side": "black",
+  "description": {
+    "es": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con ...c5 y ...f6.",
+    "en": "Black accepts less space for a solid structure and central counterplay with ...c5 and ...f6."
+  },
+  "root": [
+    {
+      "san": "e4",
+      "main": true,
+      "children": [
+        {
+          "san": "e6",
+          "name": {
+            "es": "Defensa Francesa",
+            "en": "French Defence"
+          },
+          "comment": {
+            "es": "Prepara ...d5 apoyado por el peón de e6.",
+            "en": "Prepares ...d5 with the support of the e6 pawn."
+          },
+          "main": true,
+          "children": [
+            {
+              "san": "d4",
+              "main": true,
+              "children": [
+                {
+                  "san": "d5",
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nc3",
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "Bb4",
+                          "name": {
+                            "es": "Variante Winawer",
+                            "en": "Winawer Variation"
+                          },
+                          "comment": {
+                            "es": "Clava el caballo y presiona e4; las negras aceptan ceder el alfil a cambio de dañar la estructura blanca.",
+                            "en": "Pins the knight and hits e4; Black is ready to give up the bishop to damage White’s structure."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "e5",
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "c5",
+                                  "comment": {
+                                    "es": "Ataque inmediato a la base de la cadena de peones blanca.",
+                                    "en": "An immediate strike at the base of White’s pawn chain."
+                                  },
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "a3",
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "Bxc3+",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "bxc3",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "Ne7",
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "Qg4",
+                                                      "comment": {
+                                                        "es": "Ataca g7, debilitado tras la marcha del alfil negro de casillas oscuras.",
+                                                        "en": "Attacks g7, weakened after Black’s dark-squared bishop left."
+                                                      },
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Qc7",
+                                                          "name": {
+                                                            "es": "Variante del Peón Envenenado",
+                                                            "en": "Poisoned Pawn Variation"
+                                                          },
+                                                          "comment": {
+                                                            "es": "Las negras entregan el flanco de rey a cambio de un contrajuego fuerte contra c3 y el centro.",
+                                                            "en": "Black gives up the kingside for strong counterplay against c3 and the centre."
+                                                          },
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "Qxg7",
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Rg8",
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Qxh7",
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "cxd4",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Ne2",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "Nbc6",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "f4",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Bd7",
+                                                                                          "main": true,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "san": "Qd3",
+                                                                                              "main": true,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "san": "dxc3",
+                                                                                                  "main": true,
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Nf6",
+                          "name": {
+                            "es": "Variante Clásica",
+                            "en": "Classical Variation"
+                          },
+                          "comment": {
+                            "es": "Desarrollo natural que presiona e4.",
+                            "en": "Natural development that pressures e4."
+                          },
+                          "children": [
+                            {
+                              "san": "Bg5",
+                              "children": [
+                                {
+                                  "san": "Be7",
+                                  "children": [
+                                    {
+                                      "san": "e5",
+                                      "children": [
+                                        {
+                                          "san": "Nfd7",
+                                          "children": [
+                                            {
+                                              "san": "Bxe7",
+                                              "children": [
+                                                {
+                                                  "san": "Qxe7",
+                                                  "children": [
+                                                    {
+                                                      "san": "f4",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nf3",
+                                                              "children": [
+                                                                {
+                                                                  "san": "c5",
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "san": "e5",
+                              "name": {
+                                "es": "Variante Steinitz",
+                                "en": "Steinitz Variation"
+                              },
+                              "children": [
+                                {
+                                  "san": "Nfd7",
+                                  "children": [
+                                    {
+                                      "san": "f4",
+                                      "comment": {
+                                        "es": "Refuerza e5 con f4; las negras atacan la cadena con ...c5 y ...Cc6.",
+                                        "en": "Reinforces e5 with f4; Black hits the chain with ...c5 and ...Nc6."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "c5",
+                                          "children": [
+                                            {
+                                              "san": "Nf3",
+                                              "children": [
+                                                {
+                                                  "san": "Nc6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Be3",
+                                                      "children": [
+                                                        {
+                                                          "san": "cxd4",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nxd4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bc5",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Qd2",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "O-O",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "O-O-O",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "a6",
+                                                                                  "children": []
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "e5",
+                      "name": {
+                        "es": "Variante del Avance",
+                        "en": "Advance Variation"
+                      },
+                      "comment": {
+                        "es": "Las blancas ganan espacio; las negras atacan la cadena de peones desde su base con ...c5.",
+                        "en": "White gains space; Black attacks the pawn chain at its base with ...c5."
+                      },
+                      "children": [
+                        {
+                          "san": "c5",
+                          "children": [
+                            {
+                              "san": "c3",
+                              "children": [
+                                {
+                                  "san": "Nc6",
+                                  "children": [
+                                    {
+                                      "san": "Nf3",
+                                      "children": [
+                                        {
+                                          "san": "Qb6",
+                                          "comment": {
+                                            "es": "Suma presión sobre d4 y b2.",
+                                            "en": "Adds pressure on d4 and b2."
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "a3",
+                                              "children": [
+                                                {
+                                                  "san": "c4",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nbd2",
+                                                      "children": [
+                                                        {
+                                                          "san": "Na5",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "exd5",
+                      "name": {
+                        "es": "Variante del Cambio",
+                        "en": "Exchange Variation"
+                      },
+                      "comment": {
+                        "es": "Estructura simétrica: el alfil negro de c8 queda liberado.",
+                        "en": "A symmetrical structure that frees Black’s c8 bishop."
+                      },
+                      "children": [
+                        {
+                          "san": "exd5",
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "Bd3",
+                                      "children": [
+                                        {
+                                          "san": "Bd6",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "children": [
+                                                {
+                                                  "san": "O-O",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bg5",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bg4",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Nd2",
+                      "name": {
+                        "es": "Variante Tarrasch",
+                        "en": "Tarrasch Variation"
+                      },
+                      "comment": {
+                        "es": "Evita la clavada ...Ab4 y mantiene libre el peón de c.",
+                        "en": "Avoids the ...Bb4 pin and keeps the c-pawn free."
+                      },
+                      "children": [
+                        {
+                          "san": "c5",
+                          "children": [
+                            {
+                              "san": "exd5",
+                              "children": [
+                                {
+                                  "san": "Qxd5",
+                                  "comment": {
+                                    "es": "Las negras recuperan el peón con la dama y aceptan perder algo de tiempo a cambio de una estructura sin debilidades.",
+                                    "en": "Black recaptures with the queen, accepting some lost time for a structure without weaknesses."
+                                  },
+                                  "children": [
+                                    {
+                                      "san": "Ngf3",
+                                      "children": [
+                                        {
+                                          "san": "cxd4",
+                                          "children": [
+                                            {
+                                              "san": "Bc4",
+                                              "children": [
+                                                {
+                                                  "san": "Qd6",
+                                                  "children": [
+                                                    {
+                                                      "san": "O-O",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nf6",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nb3",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Nc6",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nbxd4",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Nxd4",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nxd4",
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "a6",
+                                                                                  "children": []
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

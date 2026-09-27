@@ -1,0 +1,579 @@
+{
+  "id": "kings-gambit",
+  "name": {
+    "es": "Gambito de Rey",
+    "en": "King's Gambit"
+  },
+  "eco": "C30-C39",
+  "side": "white",
+  "description": {
+    "es": "Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un centro con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.",
+    "en": "White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a centre with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+  },
+  "root": [
+    {
+      "san": "e4",
+      "main": true,
+      "children": [
+        {
+          "san": "e5",
+          "main": true,
+          "children": [
+            {
+              "san": "f4",
+              "name": {
+                "es": "Gambito de Rey",
+                "en": "King's Gambit"
+              },
+              "comment": {
+                "es": "Gambito: se ofrece el peón de f para desviar el peón de e5 y abrir la columna f.",
+                "en": "A gambit: White offers the f-pawn to deflect the e5 pawn and open the f-file."
+              },
+              "main": true,
+              "children": [
+                {
+                  "san": "exf4",
+                  "name": {
+                    "es": "Gambito de Rey Aceptado",
+                    "en": "King's Gambit Accepted"
+                  },
+                  "comment": {
+                    "es": "Las negras aceptan el peón y deben decidir si lo defienden o lo devuelven para desarrollarse.",
+                    "en": "Black takes the pawn and must decide whether to hold it or give it back for development."
+                  },
+                  "main": true,
+                  "children": [
+                    {
+                      "san": "Nf3",
+                      "name": {
+                        "es": "Gambito del Caballo de Rey",
+                        "en": "King's Knight's Gambit"
+                      },
+                      "comment": {
+                        "es": "Impide ...Dh4+ y prepara d4 y Axf4.",
+                        "en": "Prevents ...Qh4+ and prepares d4 and Bxf4."
+                      },
+                      "main": true,
+                      "children": [
+                        {
+                          "san": "d5",
+                          "name": {
+                            "es": "Defensa Moderna",
+                            "en": "Modern Defence"
+                          },
+                          "comment": {
+                            "es": "Las negras golpean en el centro para abrir líneas y desarrollarse deprisa.",
+                            "en": "Black strikes in the centre to open lines and develop quickly."
+                          },
+                          "main": true,
+                          "children": [
+                            {
+                              "san": "exd5",
+                              "main": true,
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "name": {
+                                    "es": "Defensa Abbazia",
+                                    "en": "Abbazia Defence"
+                                  },
+                                  "main": true,
+                                  "children": [
+                                    {
+                                      "san": "Bb5+",
+                                      "comment": {
+                                        "es": "Jaque intermedio que complica la recuperación del peón de d5.",
+                                        "en": "An in-between check that makes it harder for Black to regain the d5 pawn."
+                                      },
+                                      "main": true,
+                                      "children": [
+                                        {
+                                          "san": "c6",
+                                          "main": true,
+                                          "children": [
+                                            {
+                                              "san": "dxc6",
+                                              "main": true,
+                                              "children": [
+                                                {
+                                                  "san": "bxc6",
+                                                  "main": true,
+                                                  "children": [
+                                                    {
+                                                      "san": "Bc4",
+                                                      "main": true,
+                                                      "children": [
+                                                        {
+                                                          "san": "Nd5",
+                                                          "name": {
+                                                            "es": "Defensa Abbazia, línea principal",
+                                                            "en": "Abbazia Defence, Main Line"
+                                                          },
+                                                          "comment": {
+                                                            "es": "Las negras conservan el peón de f4 y centralizan el caballo; las blancas buscan actividad a cambio.",
+                                                            "en": "Black keeps the f4 pawn and centralises the knight; White seeks activity in return."
+                                                          },
+                                                          "main": true,
+                                                          "children": [
+                                                            {
+                                                              "san": "O-O",
+                                                              "comment": {
+                                                                "es": "Las blancas enrocan: la torre de f1 apuntará al peón de f4.",
+                                                                "en": "White castles: the f1 rook will target the f4 pawn."
+                                                              },
+                                                              "main": true,
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bd6",
+                                                                  "main": true,
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "Nc3",
+                                                                      "main": true,
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "Be6",
+                                                                          "main": true,
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Ne4",
+                                                                              "main": true,
+                                                                              "children": [
+                                                                                {
+                                                                                  "san": "O-O",
+                                                                                  "main": true,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "san": "Nxd6",
+                                                                                      "main": true,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "san": "Qxd6",
+                                                                                          "main": true,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "g5",
+                          "comment": {
+                            "es": "Defiende f4 con otro peón: el planteamiento clásico y más agudo.",
+                            "en": "Defends f4 with another pawn: the classical and sharpest approach."
+                          },
+                          "children": [
+                            {
+                              "san": "h4",
+                              "comment": {
+                                "es": "Ataca la cadena g5-f4 antes de que las negras la consoliden con ...h6 y ...Ag7.",
+                                "en": "Undermines the g5-f4 chain before Black can consolidate with ...h6 and ...Bg7."
+                              },
+                              "children": [
+                                {
+                                  "san": "g4",
+                                  "children": [
+                                    {
+                                      "san": "Ne5",
+                                      "name": {
+                                        "es": "Gambito Kieseritzky",
+                                        "en": "Kieseritzky Gambit"
+                                      },
+                                      "comment": {
+                                        "es": "El caballo salta al centro; las blancas atacarán g4 y f4 en cuanto puedan.",
+                                        "en": "The knight jumps to the centre; White will go after g4 and f4."
+                                      },
+                                      "children": [
+                                        {
+                                          "san": "Nf6",
+                                          "name": {
+                                            "es": "Defensa Berlinesa",
+                                            "en": "Berlin Defence"
+                                          },
+                                          "children": [
+                                            {
+                                              "san": "d4",
+                                              "children": [
+                                                {
+                                                  "san": "d6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nd3",
+                                                      "children": [
+                                                        {
+                                                          "san": "Nxe4",
+                                                          "children": [
+                                                            {
+                                                              "san": "Bxf4",
+                                                              "children": [
+                                                                {
+                                                                  "san": "Bg7",
+                                                                  "children": [
+                                                                    {
+                                                                      "san": "c3",
+                                                                      "children": [
+                                                                        {
+                                                                          "san": "O-O",
+                                                                          "children": [
+                                                                            {
+                                                                              "san": "Nd2",
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "d6",
+                          "name": {
+                            "es": "Defensa Fischer",
+                            "en": "Fischer Defence"
+                          },
+                          "comment": {
+                            "es": "Quita la casilla e5 al caballo antes de defender f4 con ...g5.",
+                            "en": "Takes e5 away from the knight before defending f4 with ...g5."
+                          },
+                          "children": [
+                            {
+                              "san": "d4",
+                              "children": [
+                                {
+                                  "san": "g5",
+                                  "children": [
+                                    {
+                                      "san": "h4",
+                                      "children": [
+                                        {
+                                          "san": "g4",
+                                          "children": [
+                                            {
+                                              "san": "Ng1",
+                                              "comment": {
+                                                "es": "Retirada paradójica: el caballo esquiva el ataque del peón y se reubicará por e2.",
+                                                "en": "A paradoxical retreat: the knight dodges the pawn and will be redeployed via e2."
+                                              },
+                                              "children": [
+                                                {
+                                                  "san": "Qf6",
+                                                  "children": [
+                                                    {
+                                                      "san": "Nc3",
+                                                      "children": [
+                                                        {
+                                                          "san": "Ne7",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "san": "Be7",
+                          "name": {
+                            "es": "Defensa Cunningham",
+                            "en": "Cunningham Defence"
+                          },
+                          "comment": {
+                            "es": "Amenaza ...Ah4+ para incomodar al rey blanco.",
+                            "en": "Threatens ...Bh4+ to harass the white king."
+                          },
+                          "children": [
+                            {
+                              "san": "Bc4",
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "e5",
+                                      "children": [
+                                        {
+                                          "san": "Ng4",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "children": [
+                                                {
+                                                  "san": "d6",
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "san": "Bc4",
+                      "name": {
+                        "es": "Gambito del Alfil",
+                        "en": "Bishop's Gambit"
+                      },
+                      "comment": {
+                        "es": "El alfil apunta a f7; las blancas aceptan un posible ...Dh4+ seguido de Rf1.",
+                        "en": "The bishop eyes f7; White accepts a possible ...Qh4+ followed by Kf1."
+                      },
+                      "children": [
+                        {
+                          "san": "Nf6",
+                          "children": [
+                            {
+                              "san": "Nc3",
+                              "children": [
+                                {
+                                  "san": "c6",
+                                  "children": [
+                                    {
+                                      "san": "Bb3",
+                                      "children": [
+                                        {
+                                          "san": "d5",
+                                          "children": [
+                                            {
+                                              "san": "exd5",
+                                              "children": [
+                                                {
+                                                  "san": "cxd5",
+                                                  "children": [
+                                                    {
+                                                      "san": "d4",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bd6",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "d5",
+                  "name": {
+                    "es": "Contragambito Falkbeer",
+                    "en": "Falkbeer Countergambit"
+                  },
+                  "comment": {
+                    "es": "Las negras rehúsan el peón y contraatacan en el centro.",
+                    "en": "Black declines the pawn and hits back in the centre."
+                  },
+                  "children": [
+                    {
+                      "san": "exd5",
+                      "children": [
+                        {
+                          "san": "exf4",
+                          "comment": {
+                            "es": "Ahora sí se toma en f4: la posición recuerda a la Defensa Moderna.",
+                            "en": "Now Black does take on f4, reaching a position similar to the Modern Defence."
+                          },
+                          "children": [
+                            {
+                              "san": "Nf3",
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "Bc4",
+                                      "children": [
+                                        {
+                                          "san": "Nxd5",
+                                          "children": [
+                                            {
+                                              "san": "O-O",
+                                              "children": [
+                                                {
+                                                  "san": "Be7",
+                                                  "children": [
+                                                    {
+                                                      "san": "d4",
+                                                      "children": [
+                                                        {
+                                                          "san": "O-O",
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "san": "Bc5",
+                  "name": {
+                    "es": "Gambito de Rey Rehusado, Variante Clásica",
+                    "en": "King's Gambit Declined, Classical Variation"
+                  },
+                  "comment": {
+                    "es": "El alfil controla g1 e impide el enroque corto blanco.",
+                    "en": "The bishop covers g1 and stops White from castling short."
+                  },
+                  "children": [
+                    {
+                      "san": "Nf3",
+                      "children": [
+                        {
+                          "san": "d6",
+                          "children": [
+                            {
+                              "san": "c3",
+                              "comment": {
+                                "es": "Prepara d4 para expulsar al alfil y levantar un centro fuerte.",
+                                "en": "Prepares d4 to kick the bishop and build a strong centre."
+                              },
+                              "children": [
+                                {
+                                  "san": "Nf6",
+                                  "children": [
+                                    {
+                                      "san": "d4",
+                                      "children": [
+                                        {
+                                          "san": "exd4",
+                                          "children": [
+                                            {
+                                              "san": "cxd4",
+                                              "children": [
+                                                {
+                                                  "san": "Bb4+",
+                                                  "children": [
+                                                    {
+                                                      "san": "Bd2",
+                                                      "children": [
+                                                        {
+                                                          "san": "Bxd2+",
+                                                          "children": [
+                                                            {
+                                                              "san": "Nbxd2",
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

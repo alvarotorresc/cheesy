@@ -1,0 +1,9 @@
+dist
+coverage
+.angular
+pnpm-lock.yaml
+LICENSE
+
+# Written by scripts with JSON.stringify: kept exactly as generated
+src/app/core/content/data
+content/tablebase-cache.json

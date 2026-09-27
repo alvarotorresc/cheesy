@@ -1,0 +1,16 @@
+<section class="intro">
+  <h1>{{ i18n.t().home.title }}</h1>
+  <p>{{ i18n.t().home.intro }}</p>
+</section>
+
+<!-- The four sections as a 2×2 corner of a board: light, dark / dark, light. -->
+<ul class="sections">
+  @for (section of sections; track section) {
+    <li class="square">
+      <a class="tile" [routerLink]="['/', section]">
+        <h2>{{ i18n.t().nav[section] }}</h2>
+        <p>{{ i18n.t().home[section] }}</p>
+      </a>
+    </li>
+  }
+</ul>

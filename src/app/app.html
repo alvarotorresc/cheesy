@@ -1,0 +1,43 @@
+<a class="skip-link" href="#main" (click)="skipToContent($event)">{{
+  i18n.t().app.skipToContent
+}}</a>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="brand" routerLink="/">
+      <app-logo class="logo" />
+      <span class="wordmark">{{ i18n.t().app.name }}</span>
+    </a>
+
+    <nav class="nav" [attr.aria-label]="i18n.t().app.mainNavigation">
+      @for (section of sections; track section) {
+        <a
+          class="nav-link"
+          [routerLink]="['/', section]"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          {{ i18n.t().nav[section] }}
+        </a>
+      }
+    </nav>
+
+    <div class="lang" role="group" [attr.aria-label]="i18n.t().app.language">
+      @for (lang of langs; track lang) {
+        <button
+          type="button"
+          class="lang-button"
+          [attr.lang]="lang"
+          [attr.aria-pressed]="i18n.lang() === lang"
+          (click)="i18n.setLang(lang)"
+        >
+          {{ lang.toUpperCase() }}
+        </button>
+      }
+    </div>
+  </div>
+</header>
+
+<main #main id="main" class="main" tabindex="-1">
+  <router-outlet />
+</main>

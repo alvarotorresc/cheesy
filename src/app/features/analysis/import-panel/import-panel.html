@@ -1,0 +1,22 @@
+<details class="import">
+  <summary>{{ i18n.t().importer.title }}</summary>
+
+  <form class="form" (submit)="load($event, source.value)">
+    <label class="label" for="import-source">{{ i18n.t().importer.label }}</label>
+    <textarea
+      #source
+      id="import-source"
+      class="source textarea"
+      rows="4"
+      spellcheck="false"
+      autocomplete="off"
+      autocapitalize="off"
+      aria-describedby="import-feedback"
+      [attr.aria-invalid]="hasError()"
+    ></textarea>
+    <button type="submit" class="button primary load">{{ i18n.t().importer.load }}</button>
+    <p id="import-feedback" class="feedback" role="status" [class.error]="hasError()">
+      {{ message() }}
+    </p>
+  </form>
+</details>

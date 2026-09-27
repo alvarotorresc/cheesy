@@ -1,0 +1,128 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.topbar,
+.neighbours {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+}
+
+.meta,
+.feedback {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.side {
+  font-weight: 700;
+}
+
+.hint,
+.opponent {
+  color: var(--color-text-muted);
+}
+
+/* Right and wrong answers differ by colour and by the style of their bar. */
+.status {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: inset 4px 0 0 var(--color-control);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.status.right {
+  box-shadow: inset 6px 0 0 var(--color-accent);
+}
+
+.status.wrong {
+  border: 2px dashed var(--color-danger);
+  box-shadow: none;
+}
+
+.tags,
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps .button {
+  padding-inline: var(--space-3);
+}
+
+.steps span {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  font-weight: 600;
+}
+
+.steps .button[aria-current='step'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.step {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/*
+ * Wide screen: title and feedback move to the top of the side column, so the board starts right
+ * under the navigation and fits the height of the window.
+ */
+@media (min-width: 60rem) {
+  :host {
+    grid-template-columns: auto minmax(18rem, 24rem);
+    /* Spare height goes to the last row, so title and feedback stay together at the top. */
+    grid-template-rows: auto auto auto 1fr;
+    justify-content: center;
+    align-items: start;
+    column-gap: var(--space-8);
+  }
+
+  .topbar,
+  .state {
+    grid-column: 1 / -1;
+  }
+
+  .play-layout {
+    display: contents;
+  }
+
+  h1 {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: var(--text-xl);
+  }
+
+  .feedback {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .play-board {
+    grid-column: 1;
+    grid-row: 2 / span 3;
+  }
+
+  .play-panel {
+    grid-column: 2;
+    grid-row: 4;
+  }
+}
