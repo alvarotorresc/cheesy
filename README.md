@@ -11,7 +11,10 @@ The interface is available in English and Spanish.
 - **Openings**: play an opening and drill its main lines.
 - **Endgames**: convert winning endgames and hold the drawn ones.
 - **Positions**: find the best move in tactical positions.
-- **Analysis**: a free board to explore any idea, with move history navigation.
+- **Analysis**: a free board to explore any idea, with move history navigation, an optional
+  engine (evaluation bar and three best lines), FEN and PGN import and export, and links that open
+  a position (`/analysis?fen=…`). The engine is off by default: it downloads about 2 MB the first
+  time it is turned on.
 
 The analysis board is available now. The other sections are in progress.
 
@@ -77,6 +80,7 @@ The content is fixed and validated before it reaches the app: see [content/READM
 
 - [chessground](https://github.com/lichess-org/chessground), the board used by Lichess, licensed under GPL-3.0-or-later.
 - [chessops](https://github.com/niklasf/chessops), chess rules and notation, licensed under GPL-3.0-or-later.
+- [Stockfish](https://stockfishchess.org), the chess engine, licensed under GPL-3.0, running in the browser from the [stockfish](https://www.npmjs.com/package/stockfish) package (lite, single-threaded build).
 - [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
 - [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), names and ECO codes of openings used to check the content, dedicated to the public domain under CC0.
 - The [Lichess tablebase](https://tablebase.lichess.ovh) and [Stockfish](https://stockfishchess.org), used to verify the endgames and the positions.
