@@ -42,6 +42,19 @@
     </p>
   </header>
 
+  <!-- Above the board, so the reaction to a move is visible on phones too. -->
+  <p
+    #statusMessage
+    class="status"
+    role="status"
+    tabindex="-1"
+    [class.wrong]="
+      session.feedback()?.kind === 'wrong' || session.feedback()?.kind === 'other-line'
+    "
+  >
+    {{ status() }}
+  </p>
+
   <div class="layout">
     <div class="board-column">
       <app-board
@@ -58,18 +71,6 @@
     </div>
 
     <div class="panel">
-      <p
-        #statusMessage
-        class="status"
-        role="status"
-        tabindex="-1"
-        [class.wrong]="
-          session.feedback()?.kind === 'wrong' || session.feedback()?.kind === 'other-line'
-        "
-      >
-        {{ status() }}
-      </p>
-
       @if (session.phase() === 'setup') {
         <app-drill-setup />
       } @else {
