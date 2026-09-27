@@ -9,7 +9,7 @@ import {
   OpeningSession,
   REPLY_DELAY_MS,
 } from './opening-session';
-import { fakeEngineFactory } from './testing/fake-engine';
+import { fakeEngineFactory } from '../../core/engine/testing';
 import { testLoaders, testTree } from './testing/test-opening';
 
 /** Tree with no moves: the rival has to use the engine from the first move. */
@@ -30,7 +30,7 @@ describe('OpeningSession', () => {
   /** Lets the engine start and search, then answers with `uci` and lets the pause run out. */
   const engineAnswers = async (uci: string): Promise<void> => {
     await vi.advanceTimersByTimeAsync(0);
-    engines.last().reply(uci);
+    engines.last().answer(uci);
     await waitForReply();
   };
 
@@ -228,7 +228,7 @@ describe('OpeningSession', () => {
 
       expect(session.lineTheory()?.status).toBe('end-of-book');
       expect(engines.last().sent).toContain(`go movetime ${ENGINE_MOVETIME_MS}`);
-      engines.last().reply('a7a6');
+      engines.last().answer('a7a6');
       await waitForReply();
       expect(sans().at(-1)).toBe('a6');
     });
@@ -241,7 +241,7 @@ describe('OpeningSession', () => {
       expect(engines.last().sent).toContain(
         `setoption name Skill Level value ${DEFAULT_SKILL_LEVEL}`,
       );
-      engines.last().reply('c7c5');
+      engines.last().answer('c7c5');
       await waitForReply();
       expect(sans()).toEqual(['e4', 'c5']);
     });
@@ -250,7 +250,7 @@ describe('OpeningSession', () => {
       session.setOpponentMode('engine');
       session.play({ from: 'e2', to: 'e4' });
       await vi.advanceTimersByTimeAsync(0);
-      engines.last().reply('c7c5');
+      engines.last().answer('c7c5');
       await waitForReply();
 
       expect(session.deviation()).toBeUndefined();
@@ -329,7 +329,7 @@ describe('OpeningSession', () => {
       await vi.advanceTimersByTimeAsync(0);
 
       expect(session.phase()).toBe('opponent');
-      engines.last().reply('g8f6');
+      engines.last().answer('g8f6');
       await waitForReply();
       expect(sans()).toEqual(['e4', 'e5', 'Bc4', 'Nf6']);
       expect(session.phase()).toBe('player');
@@ -338,7 +338,7 @@ describe('OpeningSession', () => {
     it('should not warn again for later moves out of the tree', async () => {
       session.continueOutOfBook();
       await vi.advanceTimersByTimeAsync(0);
-      engines.last().reply('g8f6');
+      engines.last().answer('g8f6');
       await waitForReply();
 
       session.play({ from: 'd2', to: 'd3' });
@@ -349,11 +349,11 @@ describe('OpeningSession', () => {
 
     it('should ignore continue when there is nothing to continue', () => {
       session.continueOutOfBook();
-      const searches = engines.last().searches;
+      const searches = engines.last().searches.length;
 
       session.continueOutOfBook();
 
-      expect(engines.last().searches).toBe(searches);
+      expect(engines.last().searches).toHaveLength(searches);
     });
   });
 
@@ -390,7 +390,8 @@ describe('OpeningSession', () => {
       const engine = engines.last();
 
       session.undo();
-      engine.reply('e7e5');
+      // The search had just ended on its own: its move arrives after the stop.
+      engine.emit('bestmove e7e5');
       await waitForReply();
 
       expect(engine.sent).toContain('stop');
@@ -401,7 +402,7 @@ describe('OpeningSession', () => {
       session.setOpponentMode('engine');
       session.play({ from: 'e2', to: 'e4' });
       await vi.advanceTimersByTimeAsync(0);
-      engines.last().reply('e7e5');
+      engines.last().answer('e7e5');
       await vi.advanceTimersByTimeAsync(REPLY_DELAY_MS / 2);
 
       session.undo();
@@ -531,13 +532,13 @@ describe('OpeningSession', () => {
       session.retryReply();
       await vi.advanceTimersByTimeAsync(0);
       expect(engines.engines).toHaveLength(2);
-      engines.last().reply('e2e4');
+      engines.last().answer('e2e4');
       await waitForReply();
       expect(sans()).toEqual(['e4']);
     });
 
     it('should report an error when the engine gives no move', async () => {
-      engines.last().reply('(none)');
+      engines.last().answer('(none)');
       await waitForReply();
 
       expect(session.phase()).toBe('engine-error');
@@ -582,13 +583,13 @@ describe('OpeningSession', () => {
     });
 
     it('should stop answering once the player mates', () => {
-      const searches = engines.last().searches;
+      const searches = engines.last().searches.length;
 
       session.play({ from: 'd8', to: 'h4' });
 
       expect(session.phase()).toBe('game-over');
       expect(session.result()).toEqual({ reason: 'checkmate', winner: 'black' });
-      expect(engines.last().searches).toBe(searches);
+      expect(engines.last().searches).toHaveLength(searches);
       expect(session.canMove()).toBe(false);
     });
 

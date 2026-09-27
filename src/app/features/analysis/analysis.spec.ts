@@ -3,40 +3,12 @@ import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { INITIAL_FEN } from 'chessops/fen';
-import {
-  ENGINE_TRANSPORT,
-  EngineService,
-  type EngineTransport,
-  type EngineTransportHandlers,
-} from '../../core/engine';
+import { ENGINE_TRANSPORT, EngineService, type EngineTransportHandlers } from '../../core/engine';
+import { FakeUciEngine } from '../../core/engine/testing';
 import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
 import { BoardComponent } from '../../shared/board';
 import { Analysis } from './analysis';
-
-/** Engine double: records the commands it receives and lets the test write its output. */
-class FakeEngine implements EngineTransport {
-  readonly sent: string[] = [];
-  terminated = false;
-
-  constructor(private readonly handlers: EngineTransportHandlers) {}
-
-  send(command: string): void {
-    this.sent.push(command);
-  }
-
-  terminate(): void {
-    this.terminated = true;
-  }
-
-  emit(...lines: string[]): void {
-    for (const line of lines) this.handlers.line(line);
-  }
-
-  crash(): void {
-    this.handlers.error();
-  }
-}
 
 const AFTER_E4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
 const FOOLS_MATE = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3';
@@ -47,9 +19,9 @@ describe('Analysis', () => {
   let harness: RouterTestingHarness;
   let element: HTMLElement;
   let game: GameService;
-  let engines: FakeEngine[];
+  let engines: FakeUciEngine[];
 
-  const engine = (): FakeEngine => {
+  const engine = (): FakeUciEngine => {
     const last = engines.at(-1);
     if (!last) throw new Error('The engine was not started');
     return last;
@@ -94,7 +66,7 @@ describe('Analysis', () => {
   };
 
   /** Turns the engine on and answers the UCI handshake. */
-  const startEngine = async (): Promise<FakeEngine> => {
+  const startEngine = async (): Promise<FakeUciEngine> => {
     await switchEngine(true);
     engine().emit('uciok', 'readyok');
     await render();
@@ -112,7 +84,8 @@ describe('Analysis', () => {
         {
           provide: ENGINE_TRANSPORT,
           useValue: (handlers: EngineTransportHandlers) => {
-            const fake = new FakeEngine(handlers);
+            // Silent: the test writes every line of the engine.
+            const fake = new FakeUciEngine(handlers, { autoBoot: false, autoStop: false });
             engines.push(fake);
             return fake;
           },

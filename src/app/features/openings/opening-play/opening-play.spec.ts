@@ -6,7 +6,7 @@ import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { OpeningSession, REPLY_DELAY_MS } from '../opening-session';
-import { fakeEngineFactory } from '../testing/fake-engine';
+import { fakeEngineFactory } from '../../../core/engine/testing';
 import { testLoaders, testTree } from '../testing/test-opening';
 import { By } from '@angular/platform-browser';
 import { en } from '../../../core/i18n/dictionaries/en';
@@ -190,7 +190,7 @@ describe('OpeningPlay', () => {
 
       button('Keep playing against Stockfish').click();
       await settle();
-      engines.last().reply('g8f6');
+      engines.last().answer('g8f6');
       await settle(REPLY_DELAY_MS);
 
       expect(sans()).toEqual(['e4', 'e5', 'Bc4', 'Nf6']);
@@ -295,18 +295,18 @@ describe('OpeningPlay', () => {
       expect(text('.status')).toBe('Stockfish could not answer.');
       button('Try again').click();
       await settle();
-      engines.last().reply('e2e4');
+      engines.last().answer('e2e4');
       await settle(REPLY_DELAY_MS);
 
       expect(sans()).toEqual(['e4']);
     });
 
     it('should announce the result when the game ends', async () => {
-      engines.last().reply('f2f3');
+      engines.last().answer('f2f3');
       await settle(REPLY_DELAY_MS);
       session.play({ from: 'e7', to: 'e5' });
       await settle();
-      engines.last().reply('g2g4');
+      engines.last().answer('g2g4');
       await settle(REPLY_DELAY_MS);
 
       session.play({ from: 'd8', to: 'h4' });
@@ -316,11 +316,11 @@ describe('OpeningPlay', () => {
     });
 
     it('should say check when the player is in check', async () => {
-      engines.last().reply('e2e4');
+      engines.last().answer('e2e4');
       await settle(REPLY_DELAY_MS);
       session.play({ from: 'f7', to: 'f6' });
       await settle();
-      engines.last().reply('d1h5');
+      engines.last().answer('d1h5');
       await settle(REPLY_DELAY_MS);
 
       expect(text('.status')).toBe('Check. Your move');

@@ -2,64 +2,27 @@ import { Component, inject, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { INITIAL_FEN } from 'chessops/fen';
 import { EngineError, EngineService } from './engine.service';
-import {
-  ENGINE_TRANSPORT,
-  type EngineTransport,
-  type EngineTransportHandlers,
-} from './engine-transport';
-
-/** Engine double: records the commands it receives and lets the test write its output. */
-class FakeEngine implements EngineTransport {
-  readonly sent: string[] = [];
-  terminated = false;
-
-  constructor(private readonly handlers: EngineTransportHandlers) {}
-
-  send(command: string): void {
-    this.sent.push(command);
-  }
-
-  terminate(): void {
-    this.terminated = true;
-  }
-
-  emit(...lines: string[]): void {
-    for (const line of lines) this.handlers.line(line);
-  }
-
-  crash(): void {
-    this.handlers.error();
-  }
-
-  /** Answers the UCI handshake. */
-  boot(): void {
-    this.emit('uciok', 'readyok');
-    this.clear();
-  }
-
-  clear(): void {
-    this.sent.length = 0;
-  }
-}
+import { ENGINE_TRANSPORT, type EngineTransportHandlers } from './engine-transport';
+import { FakeUciEngine } from './testing';
 
 const AFTER_E4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
 const SCHOLARS_MATE = 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4';
 const STALEMATE = '7k/5Q2/6K1/8/8/8/8/8 b - - 0 1';
 
 describe('EngineService', () => {
-  let engines: FakeEngine[];
+  let engines: FakeUciEngine[];
   let factory: ReturnType<typeof vi.fn>;
   let service: EngineService;
   let injector: Injector & { destroy(): void };
 
-  const engine = (): FakeEngine => {
+  const engine = (): FakeUciEngine => {
     const last = engines.at(-1);
     if (!last) throw new Error('The engine was not started');
     return last;
   };
 
   /** Starts an analysis of the initial position and boots the engine. */
-  const startAnalysis = (fen = INITIAL_FEN, options = {}): FakeEngine => {
+  const startAnalysis = (fen = INITIAL_FEN, options = {}): FakeUciEngine => {
     service.analyze(fen, options);
     engine().boot();
     return engine();
@@ -68,7 +31,8 @@ describe('EngineService', () => {
   beforeEach(() => {
     engines = [];
     factory = vi.fn((handlers: EngineTransportHandlers) => {
-      const fake = new FakeEngine(handlers);
+      // Silent: every line of the engine is written by the test.
+      const fake = new FakeUciEngine(handlers, { autoBoot: false, autoStop: false });
       engines.push(fake);
       return fake;
     });

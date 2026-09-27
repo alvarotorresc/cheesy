@@ -8,7 +8,8 @@ import {
   LUCENA_RESPONSE,
   SQUARE_RULE_RESPONSE,
 } from '../../../core/tablebase/testing';
-import { ENGINE_FIRST, fakeEngineFactory, LUCENA, SQUARE_RULE } from '../testing';
+import { fakeEngineFactory } from '../../../core/engine/testing';
+import { ENGINE_FIRST, LUCENA, SQUARE_RULE } from '../testing';
 import { ENGINE_MOVETIME_MS, EndgameSession } from './endgame-session';
 
 describe('EndgameSession', () => {
