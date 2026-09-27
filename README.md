@@ -2,6 +2,8 @@
 
 A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no tracking.
 
+When you practise endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer; no other request leaves the browser for any site but this one.
+
 The board is always playable. You can make any legal move and the app reacts to it; it never blocks you.
 
 The interface is available in English and Spanish.
