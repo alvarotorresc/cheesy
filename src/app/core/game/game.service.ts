@@ -24,8 +24,10 @@ import {
   type PgnNodeData,
 } from 'chessops/pgn';
 import { makeSanAndPlay, parseSan } from 'chessops/san';
-import type { GameResult, MoveInput, PlayedMove } from './game.types';
+import type { GameResult, MoveInput, PgnLoadError, PgnLoadResult, PlayedMove } from './game.types';
 import { parsePosition } from './position';
+
+const fail = (error: PgnLoadError): PgnLoadResult => ({ ok: false, error });
 
 interface GameState {
   startFen: string;
@@ -149,29 +151,40 @@ export class GameService {
   }
 
   /**
-   * Loads the main line of the first game in a PGN and shows its final position.
-   * Returns false, leaving the game untouched, if the PGN is empty, not standard chess or has an
-   * illegal move.
+   * Loads the main line of the first game in a PGN and shows its final position. If it cannot,
+   * the game is left untouched and the result says why. The PGN parser skips any text it does not
+   * understand, so a text without moves and without a `FEN` header is not taken as a game.
    */
-  loadPgn(pgn: string): boolean {
+  loadPgn(pgn: string): PgnLoadResult {
     const [game] = parsePgn(pgn);
-    if (!game) return false;
+    const mainline = game ? [...game.moves.mainline()] : [];
+    if (!game || (mainline.length === 0 && !game.headers.has('FEN'))) {
+      return fail({ reason: 'no-game' });
+    }
     const start = startingPosition(game.headers).unwrap(
       (pos) => pos,
       () => undefined,
     );
-    if (!start || start.rules !== 'chess') return false;
+    if (!start) return fail({ reason: 'invalid-start-position' });
+    if (start.rules !== 'chess') return fail({ reason: 'unsupported-variant' });
 
     const startFen = makeFen(start.toSetup());
     const pos = start.clone();
     const moves: PlayedMove[] = [];
-    for (const node of game.moves.mainline()) {
+    for (const node of mainline) {
       const move = parseSan(pos, node.san);
-      if (!move || !isNormal(move)) return false;
+      if (!move || !isNormal(move)) {
+        return fail({
+          reason: 'illegal-move',
+          moveNumber: pos.fullmoves,
+          turn: pos.turn,
+          san: node.san,
+        });
+      }
       moves.push(this.record(pos, move));
     }
     this.state.set({ startFen, moves, ply: moves.length });
-    return true;
+    return { ok: true };
   }
 
   /** Exports the whole game (not only up to the displayed move) as PGN. */

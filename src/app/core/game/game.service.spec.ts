@@ -332,7 +332,7 @@ describe('GameService', () => {
 
       const loaded = other.loadPgn(pgn);
 
-      expect(loaded).toBe(true);
+      expect(loaded).toEqual({ ok: true });
       expect(other.moves().map((move) => move.san)).toEqual(game.moves().map((move) => move.san));
       expect(other.fen()).toBe(game.fen());
       expect(other.ply()).toBe(10);
@@ -353,17 +353,66 @@ describe('GameService', () => {
       expect(other.moves().map((move) => move.san)).toEqual(['a8=Q+']);
     });
 
-    it('should return false and keep the game when the PGN has an illegal move', () => {
+    it('should report the illegal move and keep the game when the PGN has one', () => {
       playAll(game, ['e4']);
 
       const loaded = game.loadPgn('1. e4 e5 2. Ke3 *');
 
-      expect(loaded).toBe(false);
+      expect(loaded).toEqual({
+        ok: false,
+        error: { reason: 'illegal-move', moveNumber: 2, turn: 'white', san: 'Ke3' },
+      });
       expect(game.moves().map((move) => move.san)).toEqual(['e4']);
     });
 
-    it('should return false when the PGN is empty', () => {
-      expect(game.loadPgn('')).toBe(false);
+    it('should number an illegal Black move from its own move number', () => {
+      const loaded = game.loadPgn('1. e4 e5 2. d4 Ke5 *');
+
+      expect(loaded).toEqual({
+        ok: false,
+        error: { reason: 'illegal-move', moveNumber: 2, turn: 'black', san: 'Ke5' },
+      });
+    });
+
+    it.each(['', '   ', 'hello world', '!!!', '<script>alert(1)</script>', '{ open comment e4'])(
+      'should report no game and keep the current one when the text has no moves: %j',
+      (text) => {
+        playAll(game, ['e4']);
+
+        expect(game.loadPgn(text)).toEqual({ ok: false, error: { reason: 'no-game' } });
+        expect(game.moves()).toHaveLength(1);
+      },
+    );
+
+    it('should load a position without moves when the PGN has a FEN header', () => {
+      const fen = '4k3/8/8/8/8/8/8/4K2R w K - 0 1';
+
+      const loaded = game.loadPgn(`[SetUp "1"]\n[FEN "${fen}"]\n\n*`);
+
+      expect(loaded).toEqual({ ok: true });
+      expect(game.fen()).toBe(fen);
+      expect(game.moves()).toHaveLength(0);
+    });
+
+    it('should report an invalid start position when the FEN header is not legal', () => {
+      expect(game.loadPgn('[FEN "not a fen"]\n\n1. e4 *')).toEqual({
+        ok: false,
+        error: { reason: 'invalid-start-position' },
+      });
+    });
+
+    it('should reject games of other chess variants', () => {
+      expect(game.loadPgn('[Variant "Crazyhouse"]\n\n1. e4 *')).toEqual({
+        ok: false,
+        error: { reason: 'unsupported-variant' },
+      });
+    });
+
+    it('should load only the main line when the PGN has variations and comments', () => {
+      const loaded = game.loadPgn('1. e4 { best by test } (1. d4 d5) e5 2. Nf3 *');
+
+      expect(loaded).toEqual({ ok: true });
+      expect(game.moves().map((move) => move.san)).toEqual(['e4', 'e5', 'Nf3']);
     });
   });
 });

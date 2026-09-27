@@ -16,6 +16,19 @@ export interface PlayedMove {
   fenAfter: string;
 }
 
+/** Why a PGN could not be loaded. */
+export type PgnLoadError =
+  /** The text has no moves and no start position: nothing that looks like a game. */
+  | { reason: 'no-game' }
+  /** A game of another variant, such as Crazyhouse. */
+  | { reason: 'unsupported-variant' }
+  /** The `FEN` header is not a legal position. */
+  | { reason: 'invalid-start-position' }
+  /** The main line has a move that is not legal. `turn` is the side that should play it. */
+  | { reason: 'illegal-move'; moveNumber: number; turn: Color; san: string };
+
+export type PgnLoadResult = { ok: true } | { ok: false; error: PgnLoadError };
+
 export type GameEndReason = 'checkmate' | 'stalemate' | 'insufficient-material';
 
 export interface GameResult {
