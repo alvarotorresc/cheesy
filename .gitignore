@@ -1,0 +1,33 @@
+# Build output
+/dist
+/tmp
+/out-tsc
+
+# Dependencies
+/node_modules
+
+# Logs
+*.log
+
+# Angular
+/.angular/cache
+
+# Tests
+/coverage
+__screenshots__/
+
+# Environment
+.env
+.env.*
+
+# Netlify
+.netlify
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# System files
+.DS_Store
+Thumbs.db
