@@ -38,6 +38,7 @@
     "@angular/router": "^22.2.0",
     "@lichess-org/chessground": "^10.2.0",
     "chessops": "^0.15.1",
+    "dexie": "^4.4.6",
     "rxjs": "~7.8.0",
     "stockfish": "^19.0.0",
     "tslib": "^2.3.0"
@@ -51,6 +52,7 @@
     "@vitest/coverage-v8": "^5.0.2",
     "angular-eslint": "^22.5.0",
     "eslint": "^10.11.0",
+    "fake-indexeddb": "^6.2.5",
     "jsdom": "^30.0.0",
     "lefthook": "^2.1.14",
     "prettier": "^3.9.9",
