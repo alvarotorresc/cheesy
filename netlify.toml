@@ -2,6 +2,9 @@
   command = "pnpm build"
   publish = "dist/chess-playground/browser"
 
+[build.environment]
+  NODE_VERSION = "26.10.0"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
