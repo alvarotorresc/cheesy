@@ -53,6 +53,34 @@ describe('TablebasePanel', () => {
     expect(text()).toContain('Best move');
   });
 
+  it.each([
+    ['en', 1, '1 half-move to the next capture or pawn move'],
+    ['en', -2, '2 half-moves to the next capture or pawn move'],
+    ['es', 1, '1 media jugada hasta la próxima captura o jugada de peón'],
+    ['es', 2, '2 medias jugadas hasta la próxima captura o jugada de peón'],
+  ] as const)('should count %s half-moves in singular or plural (%i)', async (lang, dtz, label) => {
+    TestBed.inject(I18nService).setLang(lang);
+    const result = { ...LUCENA_RESULT, dtz };
+
+    await show({ status: 'ready', fen: LUCENA_FEN, result }, 'white', 'white');
+
+    expect(text()).toContain(label);
+  });
+
+  it.each([
+    ['en', 'You mate in 1', 'You are mated in 1'],
+    ['es', 'Das mate en 1', 'Recibes mate en 1'],
+  ] as const)('should announce a mate in one in %s', async (lang, forYou, againstYou) => {
+    TestBed.inject(I18nService).setLang(lang);
+    const result = { ...LUCENA_RESULT, dtm: 1 };
+
+    await show({ status: 'ready', fen: LUCENA_FEN, result }, 'white', 'white');
+    expect(text()).toContain(forYou);
+
+    await show({ status: 'ready', fen: LUCENA_FEN, result }, 'black', 'white');
+    expect(text()).toContain(againstYou);
+  });
+
   it('should call the first move of a lost position the most stubborn defence', async () => {
     const result = { ...LUCENA_RESULT, category: 'loss' as const, dtm: -20 };
 

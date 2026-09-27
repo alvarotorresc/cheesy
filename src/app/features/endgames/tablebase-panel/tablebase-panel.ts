@@ -68,6 +68,7 @@ export class TablebasePanel {
     const category = playerToMove ? result.category : oppositeCategory(result.category);
     const outcome = categoryOutcome(category);
     const mateMoves = result.dtm === undefined ? undefined : Math.ceil(Math.abs(result.dtm) / 2);
+    const zeroingMoves = result.dtz === undefined ? undefined : Math.abs(result.dtz);
     const playerMates = outcome === 'win' || category === 'cursed-win' || category === 'maybe-win';
     return {
       category,
@@ -78,7 +79,9 @@ export class TablebasePanel {
           ? fill(playerMates ? t.mateForYou : t.mateAgainstYou, { n: mateMoves })
           : undefined,
       zeroing:
-        result.dtz && category !== 'draw' ? fill(t.dtz, { n: Math.abs(result.dtz) }) : undefined,
+        zeroingMoves && category !== 'draw'
+          ? fill(zeroingMoves === 1 ? t.dtzOne : t.dtz, { n: zeroingMoves })
+          : undefined,
       bestMove: playerToMove && category !== 'unknown' ? result.moves[0]?.san : undefined,
       // In a draw many moves are equally good, and in a loss the move only delays the end.
       bestMoveLabel:

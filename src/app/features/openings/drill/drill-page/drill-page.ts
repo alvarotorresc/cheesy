@@ -115,14 +115,16 @@ export class DrillPage {
       .paramMap.pipe(takeUntilDestroyed())
       .subscribe((params) => void this.session.load(params.get('id') ?? ''));
 
-    // Starting, finishing or leaving a line removes the button that was pressed: keep the focus
-    // in the drill, on its message, instead of letting it fall back to the page.
+    // Starting or finishing a line removes the button that was pressed: keep the focus in the
+    // drill, on its message, instead of letting it fall back to the page. Loading the opening
+    // removes no button, and an empty message has nothing to read.
     afterRenderEffect(() => {
       const phase = this.session.phase();
       const status = this.statusMessage()?.nativeElement;
       const active = this.document.activeElement;
       const lost = !active || active === this.document.body;
-      if (this.lastPhase !== undefined && phase !== this.lastPhase && lost) status?.focus();
+      const wasLoaded = this.lastPhase !== undefined && this.lastPhase !== 'idle';
+      if (wasLoaded && phase !== this.lastPhase && lost && this.status()) status?.focus();
       this.lastPhase = phase;
     });
   }

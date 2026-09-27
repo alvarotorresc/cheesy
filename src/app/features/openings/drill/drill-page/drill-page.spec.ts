@@ -134,6 +134,29 @@ describe('DrillPage', () => {
       expect(text('[role=alert]')).toBe('We do not have this opening.');
     });
 
+    it('should leave the focus alone when the opening loads', async () => {
+      params = new BehaviorSubject(convertToParamMap({ id: 'test-opening' }));
+      TestBed.configureTestingModule({
+        providers: [
+          provideRouter([]),
+          { provide: ActivatedRoute, useValue: { paramMap: params } },
+          { provide: CONTENT_LOADERS, useValue: loaders },
+          { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
+        ],
+      });
+      TestBed.inject(I18nService).setLang('en');
+      fixture = TestBed.createComponent(DrillPage);
+      element = fixture.nativeElement as HTMLElement;
+      // First render while the opening is still loading, as in the browser.
+      fixture.detectChanges();
+      expect(text('[role=status]')).toBe('Loading the opening…');
+      await settle();
+
+      expect(element.querySelector('app-drill-setup')).not.toBeNull();
+      expect(element.querySelector('.status')?.textContent?.trim()).toBe('');
+      expect(document.activeElement).toBe(document.body);
+    });
+
     it('should never start the engine', async () => {
       await create();
       await chooseLineAndStart(MAIN);
@@ -355,6 +378,24 @@ describe('DrillPage', () => {
       await settle();
 
       expect(document.activeElement).toBe(element.querySelector('.status'));
+    });
+
+    it('should not move the focus to the message when it is empty', async () => {
+      await create();
+      await chooseLineAndStart(CENTRE);
+      await move('e2', 'e4');
+      await settle(DRILL_REPLY_DELAY_MS);
+      await move('d2', 'd4');
+      await settle();
+
+      const change = button('Choose another line');
+      change.focus();
+      change.click();
+      await settle();
+
+      expect(element.querySelector('app-drill-setup')).not.toBeNull();
+      expect(text('.status')).toBe('');
+      expect(document.activeElement).not.toBe(element.querySelector('.status'));
     });
   });
 });

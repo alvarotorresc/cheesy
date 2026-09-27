@@ -175,7 +175,7 @@ describe('OpeningPlay', () => {
       expect(text('.status')).toBe('Your rival is thinking…');
       await settle(REPLY_DELAY_MS);
 
-      expect(text('.status')).toBe('Your move');
+      expect(text('.status')).toBe('Your move.');
       expect(element.querySelectorAll('app-move-list button')).toHaveLength(2);
     });
 
@@ -285,7 +285,7 @@ describe('OpeningPlay', () => {
       await settle();
 
       expect(text('.meta')).toBe('C20 Juegas con Blancas');
-      expect(text('.status')).toBe('Te toca');
+      expect(text('.status')).toBe('Te toca mover.');
     });
   });
 
@@ -358,7 +358,7 @@ describe('OpeningPlay', () => {
       engines.last().answer('d1h5');
       await settle(REPLY_DELAY_MS);
 
-      expect(text('.status')).toBe('Check. Your move');
+      expect(text('.status')).toBe('Check. Your move.');
     });
   });
 });
