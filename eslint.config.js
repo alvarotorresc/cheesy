@@ -29,6 +29,13 @@ module.exports = defineConfig([
     },
   },
   {
+    // Content tooling runs in Node.js and reports to the terminal.
+    files: ['content/**/*.ts'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
   },

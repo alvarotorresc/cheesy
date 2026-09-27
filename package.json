@@ -24,6 +24,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "content:build": "node content/authoring/build.ts",
+    "content:typecheck": "tsc -p content/tsconfig.json",
     "prepare": "lefthook install"
   },
   "dependencies": {
