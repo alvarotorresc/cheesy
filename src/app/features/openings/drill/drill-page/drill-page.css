@@ -1,0 +1,178 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.back {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--color-text);
+}
+
+.notice {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.eco {
+  font-weight: 600;
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.board-column {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.panel {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.status {
+  padding-left: var(--space-3);
+  border-left: 4px solid var(--color-accent);
+  font-weight: 600;
+}
+
+.status:empty {
+  padding: 0;
+  border: 0;
+}
+
+.status.wrong {
+  border-left-color: var(--color-text-muted);
+}
+
+.reviewing,
+.saved {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.help,
+.summary {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.help {
+  border-left: 4px solid var(--color-accent);
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+dt {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.actions button {
+  flex: 1 1 auto;
+}
+
+button {
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--color-surface-hover);
+}
+
+button.primary {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+button.primary:hover {
+  background: var(--color-accent);
+  filter: brightness(1.08);
+}
+
+button.link {
+  padding: 0 var(--space-1);
+  border: 0;
+  background: none;
+  text-decoration: underline;
+}
+
+.moves {
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 60rem) {
+  .layout {
+    grid-template-columns: minmax(0, 40rem) minmax(18rem, 1fr);
+    align-items: start;
+  }
+
+  .board-column {
+    margin: 0;
+  }
+}

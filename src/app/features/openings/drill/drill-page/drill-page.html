@@ -1,0 +1,140 @@
+@let t = i18n.t().drill;
+
+<nav class="topbar">
+  <a class="back" routerLink="/openings">
+    <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+  </a>
+  @if (session.opening(); as opening) {
+    <a class="back" [routerLink]="['/openings', opening.id]">{{ t.backToOpening }}</a>
+  }
+</nav>
+
+@switch (session.loadState()) {
+  @case ('loading') {
+    <p class="notice" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+  }
+  @case ('not-found') {
+    <p class="notice" role="alert">{{ i18n.t().openings.notFound }}</p>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ i18n.t().openings.openingError }}</p>
+      <button type="button" (click)="session.retryLoad()">{{ i18n.t().openings.retry }}</button>
+    </div>
+  }
+}
+
+@if (session.opening(); as opening) {
+  <header class="head">
+    <h1>{{ i18n.localize(opening.name) }}: {{ t.title }}</h1>
+    <p class="meta">
+      <span class="eco">{{ opening.eco }}</span>
+      <span>
+        {{ t.color }}
+        {{ session.playerColor() === 'white' ? i18n.t().openings.white : i18n.t().openings.black }}
+      </span>
+      @if (session.phase() !== 'setup' && session.currentLine(); as line) {
+        <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
+        @if (line.nodes.at(-1)?.variation; as variation) {
+          <span>{{ i18n.localize(variation) }}</span>
+        }
+      }
+    </p>
+  </header>
+
+  <div class="layout">
+    <div class="board-column">
+      <app-board
+        [fen]="game.fen()"
+        [orientation]="session.playerColor()"
+        [turnColor]="game.turn()"
+        [dests]="game.dests()"
+        [lastMove]="game.lastMove()"
+        [check]="game.isCheck()"
+        [viewOnly]="!session.canMove()"
+        [labels]="i18n.t().board"
+        (move)="onMove($event)"
+      />
+    </div>
+
+    <div class="panel">
+      <p
+        #statusMessage
+        class="status"
+        role="status"
+        tabindex="-1"
+        [class.wrong]="
+          session.feedback()?.kind === 'wrong' || session.feedback()?.kind === 'other-line'
+        "
+      >
+        {{ status() }}
+      </p>
+
+      @if (session.phase() === 'setup') {
+        <app-drill-setup />
+      } @else {
+        @if (isReviewing()) {
+          <p class="reviewing">
+            {{ t.reviewing }}
+            <button type="button" class="link" (click)="game.goToEnd()">
+              {{ t.backToDrill }}
+            </button>
+          </p>
+        }
+
+        @if (help(); as help) {
+          <div class="help">
+            <h2>{{ t.helpTitle }}</h2>
+            <p>{{ help }}</p>
+          </div>
+        }
+
+        @if (session.summary(); as summary) {
+          <section class="summary" aria-labelledby="summary-title">
+            <h2 id="summary-title">{{ t.summaryTitle }}</h2>
+            <dl>
+              <div>
+                <dt>{{ t.summaryMoves }}</dt>
+                <dd>{{ summary.moves }}</dd>
+              </div>
+              <div>
+                <dt>{{ t.summaryMistakes }}</dt>
+                <dd>{{ summary.mistakes }}</dd>
+              </div>
+              <div>
+                <dt>{{ t.summaryHelp }}</dt>
+                <dd>{{ summary.helpedMoves }}</dd>
+              </div>
+            </dl>
+            <p class="saved" role="status">{{ saveMessage() }}</p>
+            <div class="actions">
+              @if (session.hasNextLine()) {
+                <button type="button" class="primary" (click)="session.nextLine()">
+                  {{ t.nextLine }}
+                </button>
+              }
+              <button type="button" (click)="session.restartLine()">{{ t.again }}</button>
+              <button type="button" (click)="session.backToSetup()">{{ t.changeLine }}</button>
+            </div>
+          </section>
+        } @else {
+          <div class="actions" role="group" [attr.aria-label]="t.title">
+            <button type="button" (click)="session.restartLine()">{{ t.restartLine }}</button>
+            <button type="button" (click)="session.backToSetup()">{{ t.changeLine }}</button>
+          </div>
+        }
+
+        <h2 class="moves-title">{{ i18n.t().analysis.moves }}</h2>
+        <app-move-list
+          class="moves"
+          [moves]="sans()"
+          [currentPly]="game.ply()"
+          [startPly]="game.startPly()"
+          [label]="i18n.t().analysis.moves"
+          [emptyLabel]="i18n.t().analysis.noMoves"
+          (selectPly)="game.goTo($event)"
+        />
+      }
+    </div>
+  </div>
+}

@@ -137,6 +137,9 @@ export class DrillSession {
     return { practiced: rows.length, mastered: rows.filter(isMastered).length };
   });
 
+  /** Whether this opening has any saved progress, with either colour. */
+  readonly hasProgress = computed(() => this.progressRows().length > 0);
+
   readonly phase = computed<DrillPhase>(() => {
     const run = this.drillRun();
     if (!this.book()) return 'idle';
