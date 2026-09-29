@@ -41,8 +41,13 @@
             ],
             "styles": [
               "node_modules/@lichess-org/chessground/assets/chessground.base.css",
-              "node_modules/@lichess-org/chessground/assets/chessground.cburnett.css",
-              "src/styles.css"
+              "src/styles/pieces.css",
+              "src/styles/tokens.css",
+              "src/styles/base.css",
+              "src/styles/controls.css",
+              "src/styles/catalog.css",
+              "src/styles/layout.css",
+              "src/styles/board.css"
             ]
           },
           "configurations": {
@@ -55,8 +60,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
               "optimization": {
