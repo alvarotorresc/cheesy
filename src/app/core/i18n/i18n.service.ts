@@ -1,6 +1,7 @@
 import { computed, DOCUMENT, effect, inject, Injectable, signal } from '@angular/core';
 import { en, type Messages } from './dictionaries/en';
 import { es } from './dictionaries/es';
+import { localizeSan } from './san';
 import { isLang, resolveLocalized, type Lang, type Localized } from './i18n.types';
 
 export const LANG_STORAGE_KEY = 'cheesy.lang';
@@ -52,6 +53,11 @@ export class I18nService {
     } catch {
       // Storage can be unavailable (private mode, blocked site data); the choice lasts this visit.
     }
+  }
+
+  /** A move in SAN as the active language shows it (Spanish letters for the pieces). Display only. */
+  san(san: string): string {
+    return localizeSan(san, this.current());
   }
 
   /** Resolves content written in both languages to the active one. Reactive when read in templates. */

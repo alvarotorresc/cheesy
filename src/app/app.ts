@@ -2,10 +2,11 @@ import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { I18nService, LANGS } from './core/i18n';
 import { Logo } from './shared/logo';
+import { Toast } from './shared/toast';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, Logo],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, Logo, Toast],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

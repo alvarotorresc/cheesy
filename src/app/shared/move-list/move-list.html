@@ -15,7 +15,7 @@
                 [attr.aria-current]="cell.ply === currentPly() ? 'step' : null"
                 (click)="selectPly.emit(cell.ply)"
               >
-                {{ cell.san }}
+                {{ i18n.san(cell.san) }}
               </button>
             } @else if ($first) {
               <span class="move placeholder" aria-hidden="true">…</span>
