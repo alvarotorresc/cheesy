@@ -1,0 +1,28 @@
+@let f = t().footer;
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <app-logo class="logo" />
+      <p>
+        <strong>{{ t().app.name }}</strong> {{ f.tagline }}
+      </p>
+    </div>
+    <nav [attr.aria-label]="f.navigation">
+      <ul class="footer-links">
+        <li>
+          <a href="https://github.com/alvarotorresc/cheesy" rel="noopener">{{ f.source }}</a>
+        </li>
+        <li>
+          <a routerLink="/acerca" fragment="privacidad">{{ f.privacy }}</a>
+        </li>
+        <li>
+          <a routerLink="/acerca" fragment="creditos">{{ f.credits }}</a>
+        </li>
+        <li>
+          <a href="https://alvarotc.com" rel="noopener">alvarotc.com</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>

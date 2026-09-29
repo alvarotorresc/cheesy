@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import { Location } from '@angular/common';
+import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
@@ -87,7 +88,7 @@ describe('PositionPage', () => {
 
   describe('loading', () => {
     it('should announce the loading state while the content arrives', async () => {
-      await open('/positions/smothered', () => new Promise(() => undefined));
+      await open('/positions/3', () => new Promise(() => undefined));
 
       expect(text('[role="status"]')).toBe('Loading positions…');
     });
@@ -97,7 +98,7 @@ describe('PositionPage', () => {
         .fn<ContentLoaders['positions']>()
         .mockRejectedValueOnce(new Error('offline'))
         .mockResolvedValue(POSITIONS);
-      await open('/positions/smothered', positions);
+      await open('/positions/3', positions);
       await vi.waitFor(() => expect(text('[role="alert"]')).toContain('could not be loaded'));
 
       button('Try again').click();
@@ -105,7 +106,7 @@ describe('PositionPage', () => {
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
     });
 
-    it.each(['unknown', '__proto__', 'constructor', '%3Cscript%3E'])(
+    it.each(['unknown', '__proto__', 'constructor', '%3Cscript%3E', '0', '01', '4', '9999'])(
       'should say the position does not exist when the id is %s',
       async (id) => {
         await open(`/positions/${id}`);
@@ -118,8 +119,33 @@ describe('PositionPage', () => {
       },
     );
 
+    it('should number the positions from the fewest moves to the most, keeping the content order', async () => {
+      await open('/positions/1');
+      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+
+      await harness.navigateByUrl('/positions/3');
+      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+    });
+
+    it('should send an old link by content id to the number of the position', async () => {
+      await open('/positions/smothered');
+
+      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      expect(TestBed.inject(Router).url).toBe('/positions/3');
+    });
+
+    it('should not keep the old address in the history', async () => {
+      await open('/positions/kieninger');
+      await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/positions/1'));
+
+      TestBed.inject(Location).back();
+      await harness.fixture.whenStable();
+
+      expect(TestBed.inject(Router).url).not.toBe('/positions/kieninger');
+    });
+
     it('should refuse a position of the content that cannot be played', async () => {
-      await open('/positions/broken');
+      await open('/positions/2');
 
       await vi.waitFor(() =>
         expect(text('[role="alert"]')).toBe('This position cannot be played.'),
@@ -130,7 +156,7 @@ describe('PositionPage', () => {
 
   describe('guessing', () => {
     beforeEach(async () => {
-      await open('/positions/smothered');
+      await open('/positions/3');
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
     });
 
@@ -186,7 +212,7 @@ describe('PositionPage', () => {
 
   describe('replay', () => {
     beforeEach(async () => {
-      await open('/positions/smothered');
+      await open('/positions/3');
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
       button('Show solution').click();
       await harness.fixture.whenStable();
@@ -271,32 +297,37 @@ describe('PositionPage', () => {
 
   describe('navigation between positions', () => {
     it('should link to the next position only when on the first one', async () => {
-      await open('/positions/smothered');
+      await open('/positions/1');
+      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+
+      const links = [...element().querySelectorAll('.neighbours a')];
+      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
+    });
+
+    it('should link to the previous position only when on the last one', async () => {
+      await open('/positions/3');
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
 
       const links = [...element().querySelectorAll('.neighbours a')];
-      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/kieninger']);
+      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
     });
 
     it('should show a black position from the black side', async () => {
-      await open('/positions/kieninger');
+      await open('/positions/1');
       await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
 
       expect(board().orientation()).toBe('black');
       expect(text('.status')).toBe('Find the winning move.');
       const links = [...element().querySelectorAll('.neighbours a')];
-      expect(links.map((link) => link.textContent?.trim())).toEqual([
-        '‹ Previous position',
-        'Next position ›',
-      ]);
+      expect(links.map((link) => link.textContent?.trim())).toEqual(['Next position ›']);
     });
 
     it('should start a fresh exercise and focus the title when moving to another position', async () => {
-      await open('/positions/smothered');
+      await open('/positions/3');
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
-      await harness.navigateByUrl('/positions/kieninger');
+      await harness.navigateByUrl('/positions/1');
       await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
 
       expect(text('.status')).toBe('Find the winning move.');
@@ -304,7 +335,7 @@ describe('PositionPage', () => {
     });
 
     it('should keep the focus where it is on the first position shown', async () => {
-      await open('/positions/smothered');
+      await open('/positions/3');
       await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
 
       expect(document.activeElement).not.toBe(element().querySelector('h1'));

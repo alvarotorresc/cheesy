@@ -11,7 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
@@ -20,6 +20,7 @@ import { PageTitle } from '../../core/page-title';
 import { BoardComponent } from '../../shared/board';
 import { isFormField } from '../../shared/keyboard';
 import { sideToPlayLabel, tagLabel } from './position-labels';
+import { numberOfContentId, POSITION_NUMBER } from './position-order';
 import { PositionList } from './position-list';
 import { PositionTrainer } from './position-trainer';
 import type { SolutionStep } from './solution-line';
@@ -35,8 +36,9 @@ interface StepView {
 /**
  * "Guess the move" page of one curated position, reached through `/positions/:id`.
  *
- * The id comes from the URL and is untrusted: it is only compared with the ids of the content, so
- * an unknown or malformed id shows a "not found" message.
+ * The segment comes from the URL and is untrusted: it is only read as the number of a position in
+ * the gallery (see `orderPositions`), so anything else, or a number past the last position, shows
+ * a "not found" message.
  */
 @Component({
   selector: 'app-position-page',
@@ -60,9 +62,21 @@ export class PositionPage {
     { initialValue: '' },
   );
 
-  private readonly index = computed(() =>
-    this.list.positions().findIndex((position) => position.id === this.id()),
+  /** Place of the position in the gallery: its number in the URL, minus one. */
+  private readonly index = computed(() => {
+    const id = this.id();
+    const index = POSITION_NUMBER.test(id) ? Number(id) - 1 : -1;
+    return index < this.list.positions().length ? index : -1;
+  });
+
+  /** Number that replaces the id of an old link, while the page is on its way there. */
+  private readonly redirect = computed(() =>
+    this.list.status() === 'ready' && this.index() < 0
+      ? numberOfContentId(this.list.positions(), this.id())
+      : undefined,
   );
+
+  protected readonly redirecting = computed(() => this.redirect() !== undefined);
 
   protected readonly position = computed<CuratedPosition | undefined>(
     () => this.list.positions()[this.index()],
@@ -141,9 +155,14 @@ export class PositionPage {
   private wasReplay: boolean | undefined;
 
   constructor() {
+    const router = inject(Router);
     inject(PageTitle).showDetail(() => {
       const position = this.position();
       return position && this.i18n.localize(position.title);
+    });
+    effect(() => {
+      const number = this.redirect();
+      if (number) untracked(() => router.navigate(['/positions', number], { replaceUrl: true }));
     });
     effect(() => {
       const position = this.position();
@@ -185,8 +204,12 @@ export class PositionPage {
     else this.trainer.goToEnd();
   }
 
+  /** Number in the URL of the position next to this one, if there is one. */
   private neighbourId(offset: number): string | undefined {
-    if (this.index() < 0) return undefined;
-    return this.list.positions()[this.index() + offset]?.id;
+    const neighbour = this.index() + offset;
+    if (this.index() < 0 || neighbour < 0 || neighbour >= this.list.positions().length) {
+      return undefined;
+    }
+    return String(neighbour + 1);
   }
 }

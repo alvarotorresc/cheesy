@@ -9,7 +9,7 @@
   <ul class="gallery entry-grid" [attr.aria-label]="t.list">
     @for (position of list.positions(); track position.id) {
       <li>
-        <a class="card entry" [routerLink]="[position.id]">
+        <a class="card entry" [routerLink]="[$index + 1]">
           <h2 class="entry-title">{{ i18n.localize(position.title) }}</h2>
           <p class="side entry-meta">
             <span

@@ -66,7 +66,7 @@ describe('PositionsGallery', () => {
     const element = await setup(async () => POSITIONS);
     const cards = element.querySelectorAll<HTMLAnchorElement>('a.card');
 
-    expect(cards[1].getAttribute('href')).toBe('/positions/black-to-play');
+    expect(cards[1].getAttribute('href')).toBe('/positions/2');
   });
 
   it('should show the texts in Spanish when Spanish is selected', async () => {

@@ -4,7 +4,7 @@ import { I18nService } from '../../core/i18n';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { PositionList } from './position-list';
 
-/** Gallery of the curated tactical positions, in the order of the content file. */
+/** Gallery of the curated tactical positions, from fewest to most moves of the player. */
 @Component({
   selector: 'app-positions-gallery',
   imports: [RouterLink],

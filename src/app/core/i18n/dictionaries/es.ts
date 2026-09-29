@@ -6,6 +6,7 @@ export const es: Messages = {
     skipToContent: 'Saltar al contenido',
     mainNavigation: 'Navegación principal',
     language: 'Idioma',
+    homeLabel: 'Cheesy, inicio',
   },
   nav: {
     home: 'Inicio',
@@ -13,6 +14,20 @@ export const es: Messages = {
     endgames: 'Finales',
     positions: 'Posiciones',
     analysis: 'Análisis',
+    about: 'Acerca de',
+  },
+  footer: {
+    tagline: 'es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
+    navigation: 'Pie de página',
+    source: 'Código fuente (GPL-3)',
+    privacy: 'Privacidad',
+    credits: 'Créditos',
+  },
+  about: {
+    title: 'Acerca de Cheesy',
+    privacy: 'Privacidad',
+    credits: 'Créditos',
+    code: 'Código fuente',
   },
   home: {
     title: 'Practica ajedrez contra el ordenador',

@@ -11,6 +11,7 @@ const SECTIONS = {
   endgames: (t) => t.nav.endgames,
   positions: (t) => t.nav.positions,
   analysis: (t) => t.nav.analysis,
+  about: (t) => t.nav.about,
 } satisfies Record<string, (t: Messages) => string>;
 
 export type PageSection = keyof typeof SECTIONS;

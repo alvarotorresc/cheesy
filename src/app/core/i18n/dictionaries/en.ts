@@ -4,6 +4,7 @@ export const en = {
     skipToContent: 'Skip to content',
     mainNavigation: 'Main navigation',
     language: 'Language',
+    homeLabel: 'Cheesy, home',
   },
   nav: {
     home: 'Home',
@@ -11,6 +12,20 @@ export const en = {
     endgames: 'Endgames',
     positions: 'Positions',
     analysis: 'Analysis',
+    about: 'About',
+  },
+  footer: {
+    tagline: 'is open source. No accounts, no cookies: your progress stays in your browser.',
+    navigation: 'Footer',
+    source: 'Source code (GPL-3)',
+    privacy: 'Privacy',
+    credits: 'Credits',
+  },
+  about: {
+    title: 'About Cheesy',
+    privacy: 'Privacy',
+    credits: 'Credits',
+    code: 'Source code',
   },
   home: {
     title: 'Practice chess against the computer',

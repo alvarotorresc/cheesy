@@ -1,10 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { ContentService, type CuratedPosition } from '../../core/content';
+import { orderPositions } from './position-order';
 
 export type PositionListStatus = 'loading' | 'ready' | 'error';
 
 /**
- * The curated positions of the content, loaded when a page of the feature is created.
+ * The curated positions of the content, in the order of the gallery (see `orderPositions`), loaded when a page of the feature is created.
  *
  * Provided by each page of the feature.
  */
@@ -28,7 +29,7 @@ export class PositionList {
     this.status.set('loading');
     this.content.positions().then(
       (positions) => {
-        this.positions.set(positions);
+        this.positions.set(orderPositions(positions));
         this.status.set('ready');
       },
       () => this.status.set('error'),

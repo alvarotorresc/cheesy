@@ -21,6 +21,8 @@
   </div>
 } @else if (list.status() === 'loading') {
   <p class="state state-message" role="status">{{ t.loading }}</p>
+} @else if (redirecting()) {
+  <p class="state state-message" role="status">{{ t.loading }}</p>
 } @else if (!position()) {
   <p class="state state-message" role="alert">{{ t.notFound }}</p>
 } @else if (position(); as position) {

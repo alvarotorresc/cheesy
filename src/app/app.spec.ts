@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { appConfig } from './app.config';
@@ -32,12 +32,76 @@ describe('App', () => {
     expect(document.title).toBe('Inicio · Cheesy');
   });
 
+  it('should title the About page in both languages', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/acerca');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('About · Cheesy');
+
+    TestBed.inject(I18nService).setLang('es');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('Acerca de · Cheesy');
+  });
+
+  it('should give the padding of each kind of page to the main content', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    const main = (fixture.nativeElement as HTMLElement).querySelector('main');
+    const classes = async (url: string): Promise<string> => {
+      await router.navigateByUrl(url);
+      await fixture.whenStable();
+      return main?.className ?? '';
+    };
+
+    expect(await classes('/')).toBe('main main--home');
+    expect(await classes('/openings')).toBe('main');
+    expect(await classes('/openings/ruy-lopez')).toBe('main main--play');
+    expect(await classes('/openings/ruy-lopez/drill')).toBe('main main--play');
+    expect(await classes('/analysis')).toBe('main main--play');
+    expect(await classes('/endgames')).toBe('main');
+    expect(await classes('/positions/1')).toBe('main');
+    expect(await classes('/acerca')).toBe('main main--about');
+  });
+
+  it('should show the footer with its four links on every page', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+
+    for (const url of ['/', '/openings', '/analysis', '/acerca']) {
+      await router.navigateByUrl(url);
+      await fixture.whenStable();
+      const links = (fixture.nativeElement as HTMLElement).querySelectorAll('footer a');
+      expect(Array.from(links, (link) => link.getAttribute('href'))).toEqual([
+        'https://github.com/alvarotorresc/cheesy',
+        '/acerca#privacidad',
+        '/acerca#creditos',
+        'https://alvarotc.com',
+      ]);
+    }
+  });
+
+  it('should name the brand link for screen readers', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+
+    expect(
+      (fixture.nativeElement as HTMLElement).querySelector('.brand')?.getAttribute('aria-label'),
+    ).toBe('Cheesy, home');
+  });
+
   it('should link to the four sections when rendered', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
 
-    const links = Array.from(element.querySelectorAll('nav a'), (link) =>
+    const links = Array.from(element.querySelectorAll('.nav a'), (link) =>
       link.getAttribute('href'),
     );
 

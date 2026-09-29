@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 import type { PageSection } from '../../core/page-title';
+import type { MainKind } from '../../layout/main-kind';
 
 /**
  * Routes under `/openings`: the catalogue, the play page of each opening and its drill. The drill
@@ -16,11 +17,13 @@ export const OPENINGS_ROUTES: Routes = [
   {
     path: ':id/drill',
     title: 'drill' satisfies PageSection,
+    data: { main: 'play' } satisfies { main: MainKind },
     loadComponent: () => import('./drill/drill-page/drill-page').then((m) => m.DrillPage),
   },
   {
     path: ':id',
     title: 'openings' satisfies PageSection,
+    data: { main: 'play' } satisfies { main: MainKind },
     loadComponent: () => import('./opening-play/opening-play').then((m) => m.OpeningPlay),
   },
 ];
