@@ -1,69 +1,222 @@
-@let t = i18n.t().practice;
+@let t = i18n.t().openings;
 
-<section class="page-intro">
-  <h1>{{ i18n.t().openings.title }}</h1>
-  <p>{{ i18n.t().openings.intro }}</p>
+<section class="intro" aria-labelledby="openings-title">
+  <h1 id="openings-title">{{ t.title }}</h1>
+  <p class="intro-lead">{{ t.listLead }}</p>
+  <dl class="modes">
+    <div class="mode mode-play">
+      <dt>
+        <span>{{ t.modePlay }}</span>
+      </dt>
+      <dd>{{ t.modePlayText }}</dd>
+    </div>
+    <div class="mode mode-practice">
+      <dt>
+        <span>{{ t.modePractice }}</span>
+      </dt>
+      <dd>
+        {{ t.modePracticeBefore }}<strong>{{ t.modePracticeBold }}</strong
+        >{{ t.modePracticeAfter }}
+      </dd>
+    </div>
+  </dl>
 </section>
 
 @switch (state().status) {
   @case ('loading') {
-    <p class="notice state-message" role="status">{{ i18n.t().openings.loading }}</p>
+    <p class="notice loading" role="status">{{ t.loading }}</p>
   }
   @case ('error') {
-    <div class="notice state-message" role="alert">
-      <p>{{ i18n.t().openings.loadError }}</p>
-      <button type="button" class="button" (click)="load()">{{ i18n.t().openings.retry }}</button>
+    <div class="notice loading" role="alert">
+      <p>{{ t.loadError }}</p>
+      <button type="button" class="button" (click)="load()">{{ t.retry }}</button>
     </div>
   }
-}
-
-@if (state(); as current) {
-  @if (current.status === 'ready') {
-    @for (group of current.groups; track group.family) {
-      <section class="family" [attr.aria-labelledby]="'family-' + group.family">
-        <h2 [id]="'family-' + group.family">{{ i18n.t().openings.families[group.family] }}</h2>
-        <ul class="entry-grid">
-          @for (opening of group.openings; track opening.id) {
-            <li>
-              <a class="card entry" [routerLink]="['/openings', opening.id]">
-                <h3 class="entry-title">{{ i18n.localize(opening.name) }}</h3>
-                <p class="entry-meta">
-                  <span class="eco">{{ opening.eco }}</span>
-                  <span>
-                    <span
-                      class="side-swatch"
-                      [class.black]="opening.side === 'black'"
-                      aria-hidden="true"
-                    ></span>
-                    {{
-                      opening.side === 'white'
-                        ? i18n.t().openings.forWhite
-                        : i18n.t().openings.forBlack
-                    }}</span
-                  >
-                </p>
-                <p class="description">{{ i18n.localize(opening.description) }}</p>
-                @if (progress().get(opening.id); as done) {
-                  <p class="progress">
-                    {{ t.progressCount(done.practiced, done.mastered, done.total) }}
-                  </p>
-                }
-              </a>
-              <a
-                class="practice"
-                [routerLink]="['/openings', opening.id, 'practice']"
-                [attr.aria-label]="t.practiceLinkLabel(i18n.localize(opening.name))"
+  @case ('ready') {
+    @if (catalog().length === 0) {
+      <p class="notice loading">{{ t.empty }}</p>
+    } @else {
+      <button
+        type="button"
+        class="button filters-toggle"
+        aria-controls="opening-filters"
+        [attr.aria-expanded]="filtersOpen()"
+        (click)="filtersOpen.set(!filtersOpen())"
+      >
+        {{ t.filters }}
+        @if (activeCount() > 0) {
+          <span class="count-badge" [attr.aria-label]="t.filtersActive(activeCount())">{{
+            activeCount()
+          }}</span>
+        }
+        <app-icon name="mini-chevron" />
+      </button>
+      <section
+        id="opening-filters"
+        class="filters"
+        [attr.aria-label]="t.filters"
+        [hidden]="!filtersOpen()"
+      >
+        <div class="filter-group">
+          <p class="filter-label" id="family-label">{{ t.familyLabel }}</p>
+          <div class="family-tabs" role="group" aria-labelledby="family-label">
+            <div class="tab-cluster">
+              <button
+                type="button"
+                class="tab"
+                [attr.aria-pressed]="filters().scope === 'all'"
+                (click)="setScope('all')"
               >
-                {{ t.practiceLink }}
-              </a>
-            </li>
+                {{ t.allFamilies }}
+              </button>
+            </div>
+            @for (cluster of clusters(); track cluster.move) {
+              <div class="tab-cluster">
+                <button
+                  type="button"
+                  class="tab move"
+                  [attr.aria-label]="t.firstMoveLabel[cluster.move]"
+                  [attr.aria-pressed]="filters().scope === cluster.move"
+                  (click)="setScope(cluster.move)"
+                >
+                  {{ t.firstMove[cluster.move] }}
+                </button>
+                @for (family of cluster.families; track family) {
+                  <button
+                    type="button"
+                    class="tab"
+                    [attr.aria-pressed]="filters().scope === family"
+                    (click)="setScope(family)"
+                  >
+                    {{ t.familyTabs[family] }}
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="filter-row">
+          <fieldset class="filter-group">
+            <legend class="filter-label">{{ t.sideLabel }}</legend>
+            <div class="segmented">
+              <label
+                ><input
+                  type="radio"
+                  name="side"
+                  value="all"
+                  [checked]="filters().side === 'all'"
+                  (change)="setSide('all')"
+                /><span>{{ t.sideAll }}</span></label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="side"
+                  value="white"
+                  [checked]="filters().side === 'white'"
+                  (change)="setSide('white')"
+                /><span><i class="king pc pc-wK" aria-hidden="true"></i>{{ t.white }}</span></label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="side"
+                  value="black"
+                  [checked]="filters().side === 'black'"
+                  (change)="setSide('black')"
+                /><span><i class="king pc pc-bK" aria-hidden="true"></i>{{ t.black }}</span></label
+              >
+            </div>
+          </fieldset>
+          <fieldset class="filter-group">
+            <legend class="filter-label">{{ t.progressLabel }}</legend>
+            <div class="segmented">
+              @for (
+                option of [
+                  ['all', t.statusAll],
+                  ['none', t.statusNone],
+                  ['progress', t.statusProgress],
+                  ['mastered', t.statusMastered],
+                ];
+                track option[0]
+              ) {
+                <label
+                  ><input
+                    type="radio"
+                    name="status"
+                    [value]="option[0]"
+                    [checked]="filters().status === option[0]"
+                    (change)="setStatus(option[0])"
+                  /><span>{{ option[1] }}</span></label
+                >
+              }
+            </div>
+          </fieldset>
+        </div>
+        <div class="filter-foot">
+          <p class="result-count" aria-live="polite">
+            {{ t.count(visible().length, catalog().length) }}
+          </p>
+          @if (activeCount() > 0) {
+            <button type="button" class="text-button" (click)="clearFilters()">
+              {{ t.clearFilters }}
+            </button>
           }
-        </ul>
+        </div>
       </section>
-    } @empty {
-      <p class="notice state-message">{{ i18n.t().openings.empty }}</p>
+
+      <div class="families">
+        @for (group of groups(); track group.family) {
+          <section class="family" [attr.aria-labelledby]="'family-' + group.family">
+            <div class="family-head">
+              <h2 [id]="'family-' + group.family">{{ t.families[group.family] }}</h2>
+              <span class="count">{{ t.groupCount(group.openings.length) }}</span>
+            </div>
+            <ul class="shelf" [class.single]="groups().length === 1">
+              @for (opening of group.openings; track opening.id) {
+                <li>
+                  <app-opening-card [opening]="opening" [progress]="progress().get(opening.id)" />
+                </li>
+              }
+            </ul>
+          </section>
+        } @empty {
+          <div class="notice">
+            <p>{{ t.noMatch }}</p>
+            <p>{{ t.noMatchHint }}</p>
+            <button type="button" class="button" (click)="clearFilters()">
+              {{ t.clearFilters }}
+            </button>
+          </div>
+        }
+      </div>
     }
 
-    <app-progress-note [hasProgress]="hasProgress()" [note]="t.listNote" />
+    <section class="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title" class="visually-hidden">{{ t.progressTitle }}</h2>
+      <p>{{ i18n.t().practice.privacy }}</p>
+      @if (progressService.status() === 'unavailable') {
+        <p>{{ i18n.t().practice.unavailable }}</p>
+      }
+      <div class="actions-inline">
+        <button type="button" class="text-button" (click)="askToClear()">
+          {{ i18n.t().practice.clear }}
+        </button>
+      </div>
+      <p class="status-msg" role="status">{{ message() }}</p>
+    </section>
   }
 }
+
+<dialog #dialog aria-labelledby="clear-title">
+  <h2 id="clear-title">{{ t.clearTitle }}</h2>
+  <p>{{ t.clearText }}</p>
+  <div class="dialog-actions">
+    <button type="button" class="button" (click)="cancelClear()">
+      {{ i18n.t().practice.cancel }}
+    </button>
+    <button type="button" class="button danger" [disabled]="clearing()" (click)="confirmClear()">
+      {{ i18n.t().practice.confirmClearAction }}
+    </button>
+  </div>
+</dialog>
