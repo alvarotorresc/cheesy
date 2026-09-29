@@ -1,6 +1,6 @@
 # Cheesy
 
-A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies. Visits may be counted with a self-hosted Umami, without cookies or personal data.
+A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies. Visits are counted with a self-hosted Umami, without cookies or personal data.
 
 When you practise endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer; apart from the optional visit counter above, no other request leaves the browser for any site but this one.
 

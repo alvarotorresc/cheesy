@@ -6,9 +6,9 @@ describe('Umami', () => {
   const scripts = (): HTMLScriptElement[] =>
     Array.from(document.head.querySelectorAll<HTMLScriptElement>('script[data-website-id]'));
 
-  const start = (websiteId?: string): void => {
+  const start = (websiteId?: string, countLocal = true): void => {
     TestBed.configureTestingModule({
-      providers: [websiteId === undefined ? provideUmami() : provideUmami(websiteId)],
+      providers: [websiteId === undefined ? provideUmami() : provideUmami(websiteId, countLocal)],
     });
     // Creating the environment runs the initializers.
     TestBed.inject(DOCUMENT);
@@ -18,16 +18,22 @@ describe('Umami', () => {
     for (const script of scripts()) script.remove();
   });
 
-  it('should not have a website id until the site is registered', () => {
-    expect(UMAMI_WEBSITE_ID).toBe('');
-    expect(umamiEnabled()).toBe(false);
+  it('should have the website id of the registered site', () => {
+    expect(UMAMI_WEBSITE_ID).toBe('fcf066c2-d02f-4894-acb0-b511f160cffd');
+    expect(umamiEnabled()).toBe(true);
   });
 
-  it('should add no script when the website id is empty', () => {
+  it('should not count local development with the default settings', () => {
     start();
 
     expect(scripts()).toEqual([]);
     expect(document.head.querySelector(`script[src^="${UMAMI_ORIGIN}"]`)).toBeNull();
+  });
+
+  it('should not count local development even with a website id', () => {
+    start('7f4c1a2e-0000-4000-8000-000000000000', false);
+
+    expect(scripts()).toEqual([]);
   });
 
   it('should add no script for an explicit empty id', () => {
