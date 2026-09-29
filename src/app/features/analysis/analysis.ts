@@ -1,18 +1,21 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import type { Color } from 'chessops';
+import { Component, computed, DOCUMENT, effect, inject, signal, untracked } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import type { Key } from '@lichess-org/chessground/types';
+import { parseAnalysisParams } from '../../core/analysis-link';
+import { ContentService } from '../../core/content';
 import { EngineService, type EngineMove } from '../../core/engine';
-import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
-import { BoardComponent, type BoardMove } from '../../shared/board';
+import { buildMoveRows } from './move-tree/move-rows';
+import { BoardComponent, type BoardArrow } from '../../shared/board';
 import { EngineLines } from '../../shared/engine-lines';
-import { EvalBar, type EvalOutcome } from '../../shared/eval-bar';
+import { EvalBar, type EvalBarMode, type EvalOutcome } from '../../shared/eval-bar';
 import { gameEndMessage } from '../../shared/game-end';
 import { isFormField } from '../../shared/keyboard';
-import { MoveList } from '../../shared/move-list';
-import { ImportPanel } from './import-panel/import-panel';
-import { SharePanel } from './share-panel/share-panel';
-import { FEN_PARAM, loadSharedFen } from './shared-position';
+import { resolveOrigin } from './analysis-origin';
+import { AnalysisSession } from './analysis-session';
+import { bookNames } from './book-names';
+import { IoPanel } from './io-panel/io-panel';
+import { MoveTreeView } from './move-tree/move-tree-view';
 
 /** Best lines shown by the engine. */
 const LINE_COUNT = 3;
@@ -22,48 +25,60 @@ const LINE_COUNT = 3;
  */
 const ANALYSIS_DEPTH = 20;
 
+const KEYS: Record<string, (session: AnalysisSession) => void> = {
+  ArrowLeft: (session) => session.previous(),
+  ArrowRight: (session) => session.next(),
+  ArrowUp: (session) => session.sibling(-1),
+  ArrowDown: (session) => session.sibling(1),
+};
+
 /**
- * Free board: both sides can move, with history navigation, an optional engine that follows the
- * displayed position, import of FEN and PGN, and sharing. The board never waits for the engine.
+ * Free board with variations: both sides can move, and a move from an earlier position starts a
+ * variation instead of erasing the line. An optional engine follows the position on the board and
+ * draws its best move. Links carry every move, and a link from another section says where it
+ * comes from. The board never waits for the engine.
  */
 @Component({
   selector: 'app-analysis',
-  imports: [BoardComponent, EngineLines, EvalBar, ImportPanel, MoveList, SharePanel],
-  providers: [GameService, EngineService],
+  imports: [BoardComponent, EngineLines, EvalBar, IoPanel, MoveTreeView, RouterLink],
+  providers: [AnalysisSession, EngineService],
   templateUrl: './analysis.html',
   styleUrl: './analysis.css',
-  host: {
-    '(document:keydown.arrowleft)': 'onArrowKey($event, -1)',
-    '(document:keydown.arrowright)': 'onArrowKey($event, 1)',
-  },
+  host: { '(document:keydown)': 'onKey($event)' },
 })
 export class Analysis {
-  protected readonly game = inject(GameService);
+  protected readonly session = inject(AnalysisSession);
   protected readonly engine = inject(EngineService);
   protected readonly i18n = inject(I18nService);
-
-  protected readonly orientation = signal<Color>('white');
-  protected readonly sans = computed(() => this.game.moves().map((move) => move.san));
+  private readonly content = inject(ContentService);
+  private readonly document = inject(DOCUMENT);
 
   /**
    * Off until the user turns it on: the engine downloads about 2 MB and keeps a CPU core busy,
    * which a phone on mobile data should not pay for just by opening the page.
    */
   protected readonly engineOn = signal(false);
-  /** Set when the page was opened with a `?fen=` that is not a legal position. */
-  protected readonly invalidLink = signal(false);
 
-  protected readonly status = computed(() => {
-    const result = this.game.result();
-    if (result) return gameEndMessage(result, this.i18n.t().gameEnd);
-    const t = this.i18n.t().analysis;
-    const turn = this.game.turn() === 'white' ? t.whiteToMove : t.blackToMove;
-    return this.game.isCheck() ? `${t.check}. ${turn}` : turn;
+  protected readonly moveItems = computed(() =>
+    buildMoveRows(this.session.tree(), this.session.collapsed()),
+  );
+
+  /** Names of the opening variations in the list, only when the user came from an opening. */
+  protected readonly names = computed<ReadonlyMap<string, string>>(() => {
+    const origin = this.session.origin();
+    if (origin?.kind !== 'opening' && origin?.kind !== 'practice') return new Map();
+    const names = bookNames(this.session.tree(), origin.book);
+    return new Map([...names].map(([id, name]) => [id, this.i18n.localize(name)]));
+  });
+
+  protected readonly gameOver = computed(() => {
+    const result = this.session.result();
+    return result && gameEndMessage(result, this.i18n.t().gameEnd);
   });
 
   /** Result of a finished game, shown on the bar instead of the engine's score. */
   protected readonly outcome = computed<EvalOutcome | undefined>(() => {
-    const result = this.game.result();
+    const result = this.session.result();
     return result && (result.winner ?? 'draw');
   });
 
@@ -72,45 +87,91 @@ export class Analysis {
    * insufficient material) end the game by rule but leave legal moves, and this free board lets
    * the user keep playing them: the engine goes on analysing those moves.
    */
-  protected readonly hasNoLegalMoves = computed(() => this.game.dests().size === 0);
+  protected readonly hasNoLegalMoves = computed(() => this.session.dests().size === 0);
 
-  /** Whether the engine's lines belong to the displayed position. */
+  /** Whether the engine's lines belong to the position on the board. */
   private readonly isAnalysisCurrent = computed(
-    () => this.engine.analyzedFen() === this.game.fen(),
+    () => this.engine.analyzedFen() === this.session.current().fen,
   );
 
   protected readonly lines = computed(() => (this.isAnalysisCurrent() ? this.engine.lines() : []));
   protected readonly evaluation = computed(() =>
     this.isAnalysisCurrent() ? this.engine.evaluation() : undefined,
   );
-  /** Plies before the displayed position, to number the moves of the lines. */
-  protected readonly linesStartPly = computed(() => this.game.startPly() + this.game.ply());
 
-  protected readonly engineMessage = computed(() => {
-    const t = this.i18n.t().engine;
-    if (!this.engineOn()) return '';
-    if (this.hasNoLegalMoves()) return t.noLegalMoves;
-    switch (this.engine.status()) {
-      case 'loading':
-        return t.loading;
-      case 'thinking':
-        return t.thinking;
-      case 'error':
-        return t.error;
+  protected readonly barMode = computed<EvalBarMode>(() => {
+    if (!this.engineOn()) return 'off';
+    return this.engine.status() === 'loading' ? 'loading' : 'on';
+  });
+
+  /** The first move of the best line, drawn on the board. */
+  protected readonly arrows = computed<readonly BoardArrow[]>(() => {
+    const best = this.engineOn() ? this.lines()[0]?.pv[0] : undefined;
+    return best ? [{ from: best.slice(0, 2) as Key, to: best.slice(2, 4) as Key }] : [];
+  });
+
+  /** First move of the variation the current move is in, as the screen writes it. */
+  protected readonly variationStart = computed(() => {
+    const tree = this.session.tree();
+    const start = tree.variationStart(this.session.currentId());
+    return start === undefined ? undefined : this.session.label(tree.node(start));
+  });
+
+  protected readonly nestedVariation = computed(
+    () => this.session.tree().variationDepth(this.session.currentId()) > 1,
+  );
+
+  protected readonly originSub = computed(() => {
+    const origin = this.session.origin();
+    const t = this.i18n.t().analysis;
+    switch (origin?.kind) {
+      case 'opening':
+      case 'practice': {
+        if (!this.session.tree().has(origin.arrivalId)) return '';
+        const node = this.session.tree().node(origin.arrivalId);
+        if (node.parentId === undefined) return t.originOpeningStart;
+        const variation = origin.variation ? this.i18n.localize(origin.variation) : '';
+        const move = this.session.label(node);
+        return variation ? t.originOpening(variation, move) : `${move}.`;
+      }
+      case 'endgame':
+        return t.originGoal(origin.goal, origin.side);
+      case 'position':
+        return t.originPosition(origin.number, origin.total);
       default:
         return '';
     }
   });
 
-  constructor() {
-    const param = inject(ActivatedRoute).snapshot.queryParamMap.get(FEN_PARAM);
-    this.invalidLink.set(loadSharedFen(this.game, param) === 'invalid');
+  protected readonly originBack = computed(() => {
+    const t = this.i18n.t().analysis;
+    switch (this.session.origin()?.kind) {
+      case 'practice':
+        return t.backToPractice;
+      case 'endgame':
+        return t.backToEndgame;
+      case 'position':
+        return t.backToPosition;
+      default:
+        return t.backToOpening;
+    }
+  });
 
-    // Follows the displayed position. Only the switch and the position are tracked; the engine's
-    // own state is read untracked so its updates never restart the analysis.
+  constructor() {
+    const link = parseAnalysisParams(inject(ActivatedRoute).snapshot.queryParamMap);
+    this.session.open(link, link.status === 'ok' && link.origin !== undefined);
+    if (link.status === 'ok' && link.origin) {
+      void resolveOrigin(this.content, link.origin, link.tree, link.currentId).then((info) => {
+        // Only if nothing replaced the tree of the link in the meantime.
+        if (info && this.session.tree() === link.tree) this.session.origin.set(info);
+      });
+    }
+
+    // Follows the position on the board. Only the switch and the position are tracked; the
+    // engine's own state is read untracked so its updates never restart the analysis.
     effect(() => {
       const isOn = this.engineOn();
-      const fen = this.game.fen();
+      const fen = this.session.current().fen;
       untracked(() => {
         if (!isOn) {
           this.engine.destroy();
@@ -122,30 +183,33 @@ export class Analysis {
     });
   }
 
-  protected onMove(move: BoardMove): void {
-    this.game.play(move);
-  }
-
-  protected flip(): void {
-    this.orientation.update((color) => (color === 'white' ? 'black' : 'white'));
-  }
-
   protected retry(): void {
-    this.analyze(this.game.fen());
+    this.analyze(this.session.current().fen);
   }
 
-  /** Plays the first move of an engine line, if the line still belongs to the displayed position. */
+  /** Plays the first move of an engine line, if the line still belongs to the board. */
   protected playLine(move: EngineMove): void {
-    if (this.isAnalysisCurrent()) this.game.playSan(move.san);
+    if (this.isAnalysisCurrent()) this.session.playUci(move.uci);
   }
 
-  protected onArrowKey(event: Event, step: -1 | 1): void {
-    if (isFormField(event.target)) return;
-    if (step < 0) {
-      this.game.goBack();
-    } else {
-      this.game.goForward();
-    }
+  protected reset(): void {
+    this.session.reset();
+  }
+
+  /** Closes the notice and leaves the focus at the start of the content, where it was. */
+  protected dismissInvalidLink(): void {
+    this.session.invalidLink.set(false);
+    this.document.getElementById('main')?.focus();
+  }
+
+  protected onKey(event: KeyboardEvent): void {
+    const action = KEYS[event.key];
+    if (!action || isFormField(event.target)) return;
+    if (event.ctrlKey || event.altKey || event.metaKey) return;
+    const before = this.session.currentId();
+    action(this.session);
+    // The keys only stop scrolling the page when they moved through the moves.
+    if (this.session.currentId() !== before) event.preventDefault();
   }
 
   private analyze(fen: string): void {

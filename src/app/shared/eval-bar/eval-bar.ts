@@ -5,6 +5,9 @@ import { formatScore, whiteWinningChance, type EngineScore } from '../../core/en
 /** Result of a finished game: the winner, or a draw. */
 export type EvalOutcome = Color | 'draw';
 
+/** `off`: the engine is off (striped bar). `loading`: it is starting (breathing). `on`: scores. */
+export type EvalBarMode = 'off' | 'loading' | 'on';
+
 const OUTCOMES: Record<EvalOutcome, { text: string; whiteShare: number }> = {
   white: { text: '1-0', whiteShare: 1 },
   black: { text: '0-1', whiteShare: 0 },
@@ -13,7 +16,7 @@ const OUTCOMES: Record<EvalOutcome, { text: string; whiteShare: number }> = {
 
 /**
  * Presentational evaluation bar: White's share grows from White's side of the board. The score is
- * also written as text (`+0.4`, `#3`), so the bar never depends on colour alone.
+ * also written as text (`+0.4`, `#3`) inside the bar, so the bar never depends on colour alone.
  */
 @Component({
   selector: 'app-eval-bar',
@@ -34,8 +37,11 @@ export class EvalBar {
   readonly label = input.required<string>();
   /** Value announced while there is no evaluation, already translated. */
   readonly emptyLabel = input.required<string>();
+  /** State of the engine behind the bar. Off and loading show no score. */
+  readonly mode = input<EvalBarMode>('on');
 
   protected readonly text = computed(() => {
+    if (this.mode() !== 'on') return undefined;
     const outcome = this.outcome();
     if (outcome) return OUTCOMES[outcome].text;
     const score = this.score();
@@ -43,6 +49,7 @@ export class EvalBar {
   });
 
   protected readonly whiteShare = computed(() => {
+    if (this.mode() !== 'on') return 0.5;
     const outcome = this.outcome();
     if (outcome) return OUTCOMES[outcome].whiteShare;
     const score = this.score();
@@ -51,6 +58,6 @@ export class EvalBar {
 
   protected readonly percent = computed(() => Math.round(this.whiteShare() * 100));
 
-  /** Whether White is ahead or level: the score is written on White's end of the bar. */
+  /** Whether White is ahead or level: the score is then written on White's end of the bar. */
   protected readonly whiteAhead = computed(() => this.whiteShare() >= 0.5);
 }

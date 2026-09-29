@@ -1,22 +1,42 @@
-<section class="engine-lines" [attr.aria-label]="label()">
-  @if (rows().length === 0) {
-    <p class="empty">{{ emptyLabel() }}</p>
-  } @else {
-    <p class="depth">{{ depthLabel() }} {{ depth() }}</p>
-    <ol class="lines">
-      @for (row of rows(); track row.multipv) {
-        <li>
-          <button
-            type="button"
-            class="line"
-            [attr.aria-label]="row.score + ' ' + row.moves"
-            (click)="selectMove.emit(row.move)"
+@if (rows().length === 0) {
+  <p class="empty">{{ emptyLabel() }}</p>
+} @else {
+  <div class="engine-meta">
+    <span class="depth"
+      >{{ depthLabel() }} <b>{{ depth() }}</b></span
+    >
+    @if (bestLabel()) {
+      <span class="best-note">
+        <svg viewBox="0 0 28 14" aria-hidden="true" focusable="false">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            d="M2 7h17"
+          />
+          <path fill="currentColor" d="M26 7 17 1.5v11z" />
+        </svg>
+        {{ bestLabel() }}
+      </span>
+    }
+  </div>
+  <ol class="lines" [attr.aria-label]="label()">
+    @for (row of rows(); track row.multipv; let first = $first) {
+      <li>
+        <button
+          type="button"
+          class="line"
+          [class.best]="first"
+          [attr.aria-label]="row.label"
+          (click)="selectMove.emit(row.move)"
+        >
+          <span class="score" [class.black]="row.black">{{ row.score }}</span>
+          <span class="pv"
+            ><b>{{ row.first }}</b> {{ row.rest }}</span
           >
-            <span class="score">{{ row.score }}</span>
-            <span class="moves">{{ row.moves }}</span>
-          </button>
-        </li>
-      }
-    </ol>
-  }
-</section>
+        </button>
+      </li>
+    }
+  </ol>
+}

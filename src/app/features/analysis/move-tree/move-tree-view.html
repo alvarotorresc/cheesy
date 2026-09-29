@@ -1,0 +1,53 @@
+<ng-template #cell let-cell>
+  @if (cell === 'dots') {
+    <span class="ml-dots" aria-hidden="true">…</span>
+  } @else if (isMove(cell)) {
+    <span class="ml-cell">
+      <button
+        type="button"
+        class="mv"
+        [class.fresh]="cell.id === freshId()"
+        [attr.aria-label]="label(cell)"
+        [attr.aria-current]="cell.id === currentId() ? 'true' : null"
+        (click)="pick.emit(cell.id)"
+      >
+        {{ i18n.san(cell.san) }}
+      </button>
+      @if (names().get(cell.id); as name) {
+        <span class="mv-name">{{ name }}</span>
+      }
+    </span>
+  } @else {
+    <span></span>
+  }
+</ng-template>
+
+<div #scroller class="moves-scroll">
+  @for (item of items(); track item.key) {
+    @if (item.kind === 'row') {
+      <div class="ml-row">
+        <span class="ml-num">{{ item.number }}</span>
+        <ng-container *ngTemplateOutlet="cell; context: { $implicit: item.white }" />
+        <ng-container *ngTemplateOutlet="cell; context: { $implicit: item.black }" />
+      </div>
+    } @else {
+      <app-variation
+        [view]="item.view"
+        [currentId]="currentId()"
+        [freshId]="freshId()"
+        [names]="names()"
+        (pick)="pick.emit($event)"
+        (fold)="fold.emit($event)"
+      />
+    }
+  } @empty {
+    <p class="ml-empty">{{ i18n.t().analysis.emptyTree }}</p>
+  }
+</div>
+@if (hasVariations()) {
+  <div class="var-legend">
+    <span><i></i>{{ i18n.t().analysis.legendVariation }}</span>
+    <span><i class="d2"></i>{{ i18n.t().analysis.legendNested }}</span>
+    <span>{{ i18n.t().analysis.legendNote }}</span>
+  </div>
+}

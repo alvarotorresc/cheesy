@@ -1,0 +1,112 @@
+:host {
+  display: block;
+  --var-rail-1: #7a8d99;
+  --var-rail-2: #865a00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --var-rail-1: #7d95a3;
+    --var-rail-2: #f4c542;
+  }
+}
+
+.moves-scroll {
+  max-height: min(28rem, 60svh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid var(--color-border);
+  scroll-padding: var(--space-8);
+}
+
+@media (max-width: 59.99rem) {
+  .moves-scroll {
+    max-height: none;
+  }
+}
+
+.ml-empty {
+  padding: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.ml-row {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.ml-row + .ml-row,
+app-variation + .ml-row {
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+
+.ml-num {
+  display: grid;
+  place-items: center;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ml-row .mv {
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  justify-content: start;
+  font-size: var(--text-md);
+}
+
+.ml-dots {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.ml-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  column-gap: 0;
+  min-width: 0;
+  padding-block: 2px;
+}
+
+.ml-cell .mv-name {
+  width: auto;
+  padding: 0 var(--space-3) var(--space-1);
+  line-height: 1.25;
+}
+
+.ml-cell .mv + .mv-name {
+  padding-left: 0;
+}
+
+.var-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-3);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.var-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.var-legend i {
+  width: 0;
+  height: 1rem;
+  border-left: 3px solid var(--var-rail-1);
+}
+
+.var-legend i.d2 {
+  border-left-style: dotted;
+  border-left-color: var(--var-rail-2);
+}

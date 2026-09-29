@@ -1,0 +1,53 @@
+/* Shared by the move list and its variations (each component gets its own scoped copy). */
+.mv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--duration-fast) ease;
+}
+
+.mv:hover {
+  background: var(--color-surface-hover);
+}
+
+.mv[aria-current='true'] {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.mv .n {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.mv[aria-current='true'] .n {
+  color: inherit;
+}
+
+.mv.fresh {
+  animation: fresh 700ms var(--ease-out);
+}
+
+@keyframes fresh {
+  from {
+    box-shadow: 0 0 0 3px var(--color-accent);
+  }
+}
+
+.mv-name {
+  display: block;
+  width: 100%;
+  color: var(--color-accent-text);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  padding: var(--space-1) var(--space-3) 0;
+}

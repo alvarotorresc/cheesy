@@ -78,6 +78,17 @@ const resultOf = (pos: Chess, fens: readonly string[]): GameResult | undefined =
   return undefined;
 };
 
+/**
+ * How a line of positions has ended at its last one, if it has: `fens` are every position from the
+ * start, oldest first. The same rules as a game of `GameService`, for screens that keep their own
+ * moves (the analysis tree).
+ */
+export const resultOfLine = (fens: readonly string[]): GameResult | undefined => {
+  const last = fens.at(-1);
+  const pos = last === undefined ? undefined : parsePosition(last);
+  return pos && resultOf(pos, fens);
+};
+
 /** FEN of every position from the start up to the move being viewed. */
 const fensUpTo = ({ startFen, moves, ply }: GameState): string[] => [
   startFen,

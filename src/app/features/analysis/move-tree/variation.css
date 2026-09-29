@@ -1,0 +1,91 @@
+:host {
+  display: block;
+  /* Rails and background of the variations; the move list sets the same ones for its legend. */
+  --var-rail-1: #7a8d99;
+  --var-rail-2: #865a00;
+  --var-bg: #f3f5f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --var-rail-1: #7d95a3;
+    --var-rail-2: #f4c542;
+    --var-bg: #112029;
+  }
+}
+
+.var {
+  position: relative;
+  margin: 0;
+  padding: var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) + 2rem);
+  background: var(--var-bg);
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  border-left: 3px solid var(--var-rail-1);
+}
+
+.var .var {
+  margin: var(--space-1) 0 var(--space-1) 0;
+  border-left: 3px dotted var(--var-rail-2);
+  background: color-mix(in srgb, var(--var-bg) 50%, var(--color-surface));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.var .mv {
+  padding: 0.1rem 0.35rem;
+  margin-right: 0.1rem;
+  min-height: 2rem;
+  font-weight: 600;
+}
+
+.var .mv-name {
+  display: inline;
+  padding: 0 0.35rem 0 0;
+  width: auto;
+}
+
+.var-toggle {
+  position: absolute;
+  left: var(--space-1);
+  top: var(--space-2);
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.var-toggle:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.var-toggle app-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.var-toggle[aria-expanded='false'] app-icon {
+  transform: rotate(-90deg);
+}
+
+.var-more {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.var.enter {
+  animation: var-in 360ms var(--ease-out) both;
+}
+
+@keyframes var-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
