@@ -1,10 +1,7 @@
+import { FEN_PARAM, MAX_SHARED_FEN_LENGTH } from '../../core/analysis-link';
 import type { GameService } from '../../core/game';
 
-/** Query parameter that carries a shared position: `/analysis?fen=…`. */
-export const FEN_PARAM = 'fen';
-
-/** A FEN is under 100 characters; anything much longer is not one and is not parsed. */
-export const MAX_SHARED_FEN_LENGTH = 128;
+export { FEN_PARAM, MAX_SHARED_FEN_LENGTH };
 
 export type SharedFenOutcome = 'none' | 'loaded' | 'invalid';
 
