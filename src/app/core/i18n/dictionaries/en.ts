@@ -28,13 +28,65 @@ export const en = {
     code: 'Source code',
   },
   home: {
-    title: 'Practice chess against the computer',
+    title: 'Openings, endgames and tactics, in your browser.',
     intro:
-      'Play openings, endgames and tactical positions right in your browser. The board is always playable: make any legal move and see what happens.',
-    openings: 'Play an opening and practise its main lines.',
-    endgames: 'Convert winning endgames and hold the drawn ones.',
-    positions: 'Find the best move in tactical positions.',
-    analysis: 'Set up a free board and explore any idea.',
+      'Play openings and endgames against the computer, find the move in tactical positions and analyse with an engine.',
+    loading: 'Loading the home page…',
+    loadError: 'The content could not be loaded.',
+    retry: 'Try again',
+    heroBoardLabel: (name: string, side: 'white' | 'black') =>
+      `Board with the main line of ${name}, seen from ${side === 'white' ? "White's" : "Black's"} side.`,
+    forWhite: 'For White',
+    forBlack: 'For Black',
+    heroShort: {
+      'ruy-lopez': 'Ruy Lopez',
+      'sicilian-najdorf': 'Najdorf',
+      'queens-gambit-declined': "Queen's Gambit",
+      'english-opening': 'English',
+    },
+    boardControls: 'Board controls',
+    previousMove: 'Previous move',
+    nextMove: 'Next move',
+    playMoves: 'Play the moves',
+    pauseMoves: 'Pause the moves',
+    heroPicker: 'Openings on the board',
+    playOpening: 'Play this opening',
+    playOpeningLabel: (name: string) => `Play ${name}`,
+    sections: 'Sections',
+    stopAnimation: 'Stop the animation',
+    openingsDesc:
+      'Play the line against the computer or drill it in strict mode until you know it.',
+    openingsCount: (count: number) => `${count} openings`,
+    dragonName: 'Dragon Variation',
+    seenFromBlack: 'seen from Black',
+    openingsAlt: (name: string, moves: string) =>
+      `Board with the ${name} after ${moves}, seen from Black's side.`,
+    openingsButton: (name: string) => `Play the moves of the ${name}`,
+    endgamesDesc: 'Win the won endgames and hold the drawn ones against a perfect opponent.',
+    endgamesCount: (count: number) => `${count} endgames`,
+    endgamesAlt: (
+      name: string,
+      turn: 'white' | 'black',
+      goal: 'win' | 'draw',
+      side: 'white' | 'black',
+    ) =>
+      `${name}. ${turn === 'white' ? 'White' : 'Black'} to move. Goal: ${goal === 'win' ? 'win' : 'draw'} with ${side === 'white' ? 'White' : 'Black'}.`,
+    endgamesGoal: (goal: 'win' | 'draw', side: 'white' | 'black') =>
+      `Goal: ${goal === 'win' ? 'win' : 'draw'} with ${side === 'white' ? 'White' : 'Black'}`,
+    endgamesButton: (name: string) => `Highlight the pieces of the ${name}`,
+    positionsDesc: 'Find the winning move in tactical positions and famous games.',
+    positionsCount: (count: number) => `${count} positions`,
+    positionsQuestion: (turn: 'white' | 'black') =>
+      `What does ${turn === 'white' ? 'White' : 'Black'} play?`,
+    positionsAlt: (title: string, turn: 'white' | 'black') =>
+      `${title}, starting position. What does ${turn === 'white' ? 'White' : 'Black'} play?`,
+    positionsButton: 'Go through several exercise positions',
+    analysisDesc: 'Load a position or a game and explore it with the engine.',
+    analysisCount: 'Free board',
+    analysisAlt: (name: string, moves: string) =>
+      `${name} after ${moves}, with an illustrative evaluation bar.`,
+    analysisButton: (name: string) => `Play the ${name} with the evaluation bar`,
+    illustrativeBar: 'illustrative bar',
   },
   placeholder: {
     comingSoon: 'This section is on its way.',

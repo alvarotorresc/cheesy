@@ -1,0 +1,132 @@
+<section class="sections" aria-labelledby="home-sections-title">
+  <h2 id="home-sections-title" class="visually-hidden">{{ i18n.t().home.sections }}</h2>
+  <ul class="section-grid">
+    <li>
+      <app-section-card
+        [title]="i18n.t().nav.openings"
+        route="/openings"
+        [count]="i18n.t().home.openingsCount(data().counts.openings)"
+        [description]="i18n.t().home.openingsDesc"
+        [buttonLabel]="i18n.t().home.openingsButton(i18n.t().home.dragonName)"
+        [replay]="opening"
+      >
+        <div figure class="scene" [class.on]="opening.playing()">
+          <app-mini-board
+            [frames]="data().dragon.frames"
+            [ply]="opening.ply()"
+            [orientation]="data().dragon.side"
+            [fading]="opening.fading()"
+            [label]="
+              i18n.t().home.openingsAlt(i18n.t().home.dragonName, lineLabel(data().dragon.sans))
+            "
+          />
+        </div>
+        <span note>{{ i18n.t().home.dragonName }}</span>
+        <span
+          note
+          [class.mv]="opening.playing() && opening.ply() > 0"
+          [class.soft]="!(opening.playing() && opening.ply() > 0)"
+          >{{
+            opening.playing() && opening.ply() > 0
+              ? plyLabel(data().dragon.sans, opening.ply())
+              : i18n.t().home.seenFromBlack
+          }}</span
+        >
+      </app-section-card>
+    </li>
+
+    <li>
+      <app-section-card
+        [title]="i18n.t().nav.endgames"
+        route="/endgames"
+        [count]="i18n.t().home.endgamesCount(data().counts.endgames)"
+        [description]="i18n.t().home.endgamesDesc"
+        [buttonLabel]="i18n.t().home.endgamesButton(i18n.localize(data().endgame.name))"
+        [replay]="endgame"
+      >
+        <div figure class="scene" [class.on]="endgame.playing()">
+          <app-mini-board
+            [frames]="data().endgame.frames"
+            [orientation]="data().endgame.side"
+            [rings]="data().endgame.squares"
+            [ringsOn]="endgame.playing()"
+            [label]="
+              i18n
+                .t()
+                .home.endgamesAlt(
+                  i18n.localize(data().endgame.name),
+                  data().endgame.turn,
+                  data().endgame.goal,
+                  data().endgame.side
+                )
+            "
+          />
+        </div>
+        <span note>{{ i18n.localize(data().endgame.name) }}.</span>
+        <span note class="soft">{{
+          i18n.t().home.endgamesGoal(data().endgame.goal, data().endgame.side)
+        }}</span>
+      </app-section-card>
+    </li>
+
+    <li>
+      <app-section-card
+        [title]="i18n.t().nav.positions"
+        route="/positions"
+        [count]="i18n.t().home.positionsCount(data().counts.positions)"
+        [description]="i18n.t().home.positionsDesc"
+        [buttonLabel]="i18n.t().home.positionsButton"
+        [replay]="puzzle"
+      >
+        <div figure class="scene" [class.on]="puzzle.playing()">
+          <app-mini-board
+            [frames]="puzzleShown().frames"
+            [orientation]="puzzleShown().side"
+            [fading]="puzzle.fading()"
+            [label]="
+              i18n.t().home.positionsAlt(i18n.localize(puzzleShown().name), puzzleShown().turn)
+            "
+          />
+        </div>
+        <span note>{{ i18n.localize(puzzleShown().name) }}.</span>
+        <span note class="soft">{{ i18n.t().home.positionsQuestion(puzzleShown().turn) }}</span>
+      </app-section-card>
+    </li>
+
+    <li>
+      <app-section-card
+        [title]="i18n.t().nav.analysis"
+        route="/analysis"
+        [count]="i18n.t().home.analysisCount"
+        [description]="i18n.t().home.analysisDesc"
+        [buttonLabel]="i18n.t().home.analysisButton(i18n.localize(data().italian.name))"
+        [replay]="analysis"
+      >
+        <div figure class="scene with-bar" [class.on]="analysis.playing()">
+          <div class="evalbar" aria-hidden="true">
+            <div class="evalbar-white" [style.--eval]="evalLevel() + '%'"></div>
+          </div>
+          <app-mini-board
+            [frames]="data().italian.frames"
+            [ply]="analysis.ply()"
+            [orientation]="data().italian.side"
+            [fading]="analysis.fading()"
+            [label]="
+              i18n
+                .t()
+                .home.analysisAlt(
+                  i18n.localize(data().italian.name),
+                  lineLabel(data().italian.sans)
+                )
+            "
+          />
+        </div>
+        <span note>{{ i18n.localize(data().italian.name) }}</span>
+        <span note class="mv" [hidden]="!(analysis.playing() && analysis.ply() > 0)">{{
+          plyLabel(data().italian.sans, analysis.ply())
+        }}</span>
+        <span note class="soft">{{ i18n.t().home.illustrativeBar }}</span>
+      </app-section-card>
+    </li>
+  </ul>
+</section>
