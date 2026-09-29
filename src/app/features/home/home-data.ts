@@ -12,7 +12,6 @@ export const HERO_OPENING_IDS = [
   'queens-gambit-declined',
   'english-opening',
 ] as const;
-export type HeroOpeningId = (typeof HERO_OPENING_IDS)[number];
 
 const HERO_PLIES = 12;
 const DRAGON_ID = 'sicilian-dragon';
