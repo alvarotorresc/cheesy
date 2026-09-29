@@ -6,6 +6,7 @@ import { bundledContentLoaders } from '../../../core/content/testing';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { PROGRESS_STORE_LOADER } from '../../../core/progress';
 import { LOOKUP_DELAY_MS, TABLEBASE_HTTP } from '../../../core/tablebase';
 import {
   FakeTablebaseHttp,
@@ -13,8 +14,9 @@ import {
   SQUARE_RULE_RESPONSE,
 } from '../../../core/tablebase/testing';
 import { fakeEngineFactory } from '../../../core/engine/testing';
+import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { ENGINE_FIRST, LUCENA, SQUARE_RULE } from '../testing';
-import { EndgamePractice, TABLEBASE_VISIBLE_STORAGE_KEY } from './endgame-practice';
+import { EndgamePractice, TABLEBASE_PANEL_STORAGE_KEY } from './endgame-practice';
 
 describe('EndgamePractice', () => {
   let engines: ReturnType<typeof fakeEngineFactory>;
@@ -22,11 +24,12 @@ describe('EndgamePractice', () => {
   let tablebaseDown: boolean;
   let harness: RouterTestingHarness;
   let loadEndgames: ReturnType<typeof vi.fn>;
+  let memory: ReturnType<typeof memoryProgressStore>;
 
   const element = () => harness.routeNativeElement as HTMLElement;
   const game = () => harness.routeDebugElement?.injector.get(GameService) as GameService;
   const text = () => element().textContent?.replace(/\s+/g, ' ').trim() ?? '';
-  const status = () => element().querySelector('.status[role="status"]')?.textContent?.trim() ?? '';
+  const status = () => element().querySelector('.status-line')?.textContent?.trim() ?? '';
 
   const button = (label: string): HTMLButtonElement => {
     const found = [...element().querySelectorAll('button')].find(
@@ -62,11 +65,13 @@ describe('EndgamePractice', () => {
     engines = fakeEngineFactory();
     tablebase = new FakeTablebaseHttp();
     tablebaseDown = false;
+    memory = memoryProgressStore();
     loadEndgames = vi.fn(async () => [LUCENA, SQUARE_RULE, ENGINE_FIRST]);
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'endgames/:id', component: EndgamePractice }]),
         { provide: ENGINE_TRANSPORT, useValue: engines.factory },
+        { provide: PROGRESS_STORE_LOADER, useValue: () => memory.loader() },
         {
           provide: TABLEBASE_HTTP,
           useValue: (url: string, signal: AbortSignal) =>
@@ -93,7 +98,7 @@ describe('EndgamePractice', () => {
 
     expect(element().querySelector('h1')?.textContent).toBe('Lucena position');
     expect(document.title).toBe('Lucena position · Cheesy');
-    expect(text()).toContain('Goal: win with White.');
+    expect(text()).toContain('Goal: win with White');
     expect(text()).toContain('Build the bridge.');
     expect(status()).toBe('Your move.');
     expect(game().fen()).toBe(LUCENA.fen);
@@ -126,7 +131,8 @@ describe('EndgamePractice', () => {
 
     move('d1', 'd4');
     await settle();
-    expect(status()).toMatch(/engine/i);
+    expect(status()).toBe('The rival is thinking…');
+    expect(element().querySelector('.seat .src')?.textContent).toContain('Playing Stockfish');
 
     engines.last().answer('c2c1');
     await settle();
@@ -187,15 +193,57 @@ describe('EndgamePractice', () => {
     expect(game().moves()).toHaveLength(0);
   });
 
-  it('should announce the end of the game and whether the goal was met', async () => {
+  it('should announce the achieved goal with the reason and save the endgame once', async () => {
     await open('lucena-position');
 
     game().loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 0 1');
     game().play({ from: 'a1', to: 'a8' });
     await settle();
 
-    expect(status()).toBe('Checkmate. You win. Goal achieved.');
-    expect(element().querySelector('app-tablebase-panel')).toBeNull();
+    const card = element().querySelector('.result');
+    expect(card?.querySelector('h2')?.textContent?.trim()).toBe('Goal achieved');
+    expect(card?.textContent).toContain('You gave mate with 1.Ra8#.');
+    expect(card?.querySelector('a.button')?.getAttribute('href')).toBe(
+      '/endgames/kp-square-rule-defence',
+    );
+    expect(memory.endgameRows.get('lucena-position')?.completions).toBe(1);
+    expect(card?.textContent).toContain('Endgame passed, saved in this browser');
+
+    // Browsing the moves and coming back does not count it again.
+    game().goTo(0);
+    await settle();
+    expect(element().querySelector('.result')).toBeNull();
+    game().goTo(1);
+    await settle();
+    expect(memory.endgameRows.get('lucena-position')?.completions).toBe(1);
+  });
+
+  it('should count the endgame again after restarting and passing it once more', async () => {
+    await open('lucena-position');
+    game().loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 0 1');
+    game().play({ from: 'a1', to: 'a8' });
+    await settle();
+
+    button('Restart').click();
+    await settle();
+    game().loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 0 1');
+    game().play({ from: 'a1', to: 'a8' });
+    await settle();
+
+    expect(memory.endgameRows.get('lucena-position')?.completions).toBe(2);
+  });
+
+  it('should say when the goal was passed but could not be saved', async () => {
+    memory = memoryProgressStore({ failWrites: true });
+    await open('lucena-position');
+
+    game().loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 0 1');
+    game().play({ from: 'a1', to: 'a8' });
+    await settle();
+
+    expect(element().querySelector('.result')?.textContent).toContain(
+      'Endgame passed. It could not be saved in this browser.',
+    );
   });
 
   it('should report a failed goal when a draw is reached in a won endgame', async () => {
@@ -205,7 +253,23 @@ describe('EndgamePractice', () => {
     game().play({ from: 'f5', to: 'f7' });
     await settle();
 
-    expect(status()).toBe('Stalemate. Draw. Goal not achieved. Undo or restart to try again.');
+    const card = element().querySelector('.result.failed');
+    expect(card?.querySelector('h2')?.textContent?.trim()).toBe('Goal not achieved');
+    expect(card?.textContent).toContain('Stalemate. Draw. Undo the move or restart');
+    expect(memory.endgameRows.size).toBe(0);
+  });
+
+  it('should link to Analysis with the position, the moves and where it comes from', async () => {
+    tablebaseDown = true;
+    await open('lucena-position');
+    move('d1', 'd4');
+    await settle();
+
+    const href = element().querySelector('a.analyze')?.getAttribute('href') ?? '';
+
+    expect(href).toContain('/analysis?');
+    expect(href).toContain('from=endgame:lucena-position');
+    expect(decodeURIComponent(href)).toContain('1. Rd4');
   });
 
   it('should show the engine error and retry it', async () => {
@@ -214,7 +278,10 @@ describe('EndgamePractice', () => {
 
     engines.last().crash();
     await settle();
-    expect(status()).toBe('The engine could not start.');
+    expect(element().querySelector('.alert')?.textContent).toContain(
+      'The rival cannot answer: neither the Lichess tablebase nor Stockfish is responding.',
+    );
+    expect(element().querySelector('.seat .src')?.textContent).toContain('No answer');
 
     button('Try the engine again').click();
     await settle();
@@ -223,47 +290,52 @@ describe('EndgamePractice', () => {
   });
 
   describe('tablebase', () => {
-    it('should be shown by default and show the theoretical result of the position', async () => {
+    const panelBody = () => element().querySelector<HTMLElement>('#tablebase-body');
+
+    it('should start closed and still look the position up', async () => {
       await open('lucena-position');
       await settle(LOOKUP_DELAY_MS);
 
       expect(tablebase.requests).toHaveLength(1);
+      expect(panelBody()?.hidden).toBe(true);
+      expect(button('Show').getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should open the panel, show the result and give the hint only when asked', async () => {
+      await open('lucena-position');
+      await settle(LOOKUP_DELAY_MS);
       tablebase.last().respond(200, LUCENA_RESPONSE);
       await settle();
 
-      expect(element().querySelector('.result')?.textContent?.trim()).toBe('You win');
-      expect(element().querySelector('.move')?.textContent?.trim()).toBe('Rd5');
-      expect(button('Hide tablebase').getAttribute('aria-expanded')).toBe('true');
+      button('Show').click();
+      await settle();
+
+      expect(panelBody()?.hidden).toBe(false);
+      expect(element().querySelector('.res')?.textContent?.trim()).toBe('You win');
+      expect(element().querySelector('.fact .move')).toBeNull();
+      expect(localStorage.getItem(TABLEBASE_PANEL_STORAGE_KEY)).toBe('open');
+
+      button('Show hint').click();
+      await settle();
+
+      expect(element().querySelector('.fact .move')?.textContent?.trim()).toBe('Rd5');
     });
 
-    it('should hide the panel and remember the choice, and go on asking for the moves', async () => {
-      await open('lucena-position');
-
-      button('Hide tablebase').click();
-      await settle(LOOKUP_DELAY_MS);
-
-      // The lookups do not depend on the panel: the moves are checked and the rival plays from it.
-      expect(tablebase.requests).toHaveLength(1);
-      expect(element().querySelector('app-tablebase-panel')).toBeNull();
-      expect(localStorage.getItem(TABLEBASE_VISIBLE_STORAGE_KEY)).toBe('hidden');
-      expect(button('Show tablebase').getAttribute('aria-expanded')).toBe('false');
-    });
-
-    it('should start hidden when the player hid it before', async () => {
-      localStorage.setItem(TABLEBASE_VISIBLE_STORAGE_KEY, 'hidden');
+    it('should remember that the panel was opened, and drop the old key', async () => {
+      localStorage.setItem(TABLEBASE_PANEL_STORAGE_KEY, 'open');
+      localStorage.setItem('cheesy.endgames.tablebase', 'hidden');
 
       await open('lucena-position');
-      await settle(LOOKUP_DELAY_MS);
 
-      expect(tablebase.requests).toHaveLength(1);
-      expect(element().querySelector('app-tablebase-panel')).toBeNull();
-      button('Show tablebase').click();
-      await settle(LOOKUP_DELAY_MS);
-      expect(tablebase.requests).toHaveLength(1);
-      expect(element().querySelector('app-tablebase-panel')).not.toBeNull();
+      expect(panelBody()?.hidden).toBe(false);
+      expect(localStorage.getItem('cheesy.endgames.tablebase')).toBeNull();
+      button('Hide').click();
+      await settle();
+      expect(localStorage.getItem(TABLEBASE_PANEL_STORAGE_KEY)).toBe('closed');
     });
 
     it('should wait for the rival instead of showing its position', async () => {
+      localStorage.setItem(TABLEBASE_PANEL_STORAGE_KEY, 'open');
       await open('lucena-position');
       await settle(LOOKUP_DELAY_MS);
       tablebase.last().respond(200, LUCENA_RESPONSE);
@@ -275,10 +347,10 @@ describe('EndgamePractice', () => {
       // The only new request is the one of the rival, for the position after the move.
       expect(tablebase.requests).toHaveLength(2);
       expect(tablebase.last().fen).toBe(game().fen().replace(/ \d+$/, ' 1'));
-      expect(text()).toContain('Waiting for the engine');
+      expect(text()).toContain('Waiting for the rival');
     });
 
-    it('should warn when a player move changes the theoretical result', async () => {
+    it('should warn, with the move number, when a move changes the theoretical result', async () => {
       await open('kp-square-rule-defence');
       await settle(LOOKUP_DELAY_MS);
       tablebase.last().respond(200, SQUARE_RULE_RESPONSE);
@@ -287,12 +359,16 @@ describe('EndgamePractice', () => {
       move('g5', 'g4');
       await settle();
 
-      expect(element().querySelector('.change')?.textContent).toContain(
-        'Your move Kg4 changed the theoretical result from a draw to a loss.',
+      expect(element().querySelector('.alert.fresh')?.textContent).toContain(
+        'Your move 1...Kg4 changed the theoretical result from a draw to a loss.',
       );
+      const marked = element().querySelector('.move-list button.bad');
+      expect(marked?.textContent?.trim()).toBe('Kg4');
+      expect(marked?.getAttribute('aria-label')).toBe('1...Kg4, your move');
     });
 
     it('should keep the game going with a discreet notice when the tablebase fails', async () => {
+      localStorage.setItem(TABLEBASE_PANEL_STORAGE_KEY, 'open');
       await open('lucena-position');
       await settle(LOOKUP_DELAY_MS);
 
