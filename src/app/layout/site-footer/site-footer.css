@@ -12,7 +12,7 @@
 .footer-inner {
   display: grid;
   gap: var(--space-5);
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-8) var(--space-4);
 }

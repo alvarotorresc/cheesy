@@ -38,7 +38,7 @@
     'nav nav';
   align-items: center;
   gap: var(--space-2) var(--space-4);
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-3) var(--space-4) 0;
 }
@@ -135,10 +135,11 @@
   color: var(--color-on-accent);
 }
 
+/* A route without a kind is a list, as wide as the header; the home and Acerca keep 78rem. */
 .main {
   flex: 1;
   width: 100%;
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) var(--space-12);
 }
@@ -158,10 +159,12 @@
 }
 
 .main--home {
+  max-width: var(--content-width);
   padding-top: var(--space-6);
 }
 
 .main--about {
+  max-width: var(--content-width);
   padding-top: var(--space-6);
   padding-bottom: var(--space-16);
 }

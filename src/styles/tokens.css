@@ -53,6 +53,12 @@
 
   --tap: 2.75rem;
   --content-width: 78rem;
+  /*
+   * Header, footer and the three lists. The same 78rem up to a 1440px window; wider, it takes
+   * three quarters of every extra pixel, up to 100rem: a row of five opening cards, the largest
+   * family. Any wider and the rows of cards would stop short of the right edge.
+   */
+  --page-width: clamp(var(--content-width), var(--content-width) + (100vw - 90rem) * 0.75, 100rem);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --duration-fast: 120ms;
