@@ -44,7 +44,6 @@ export class EndgamePractice {
   protected readonly session = inject(EndgameSession);
   protected readonly i18n = inject(I18nService);
   private readonly engine = inject(EngineService);
-  private readonly lookup = inject(TablebaseLookup);
   private readonly content = inject(ContentService);
   private readonly window = inject(DOCUMENT).defaultView;
 
@@ -78,10 +77,12 @@ export class EndgamePractice {
   protected readonly status = computed(() => {
     const t = this.i18n.t().endgames;
     const result = this.game.result();
+    const goal = this.session.goal();
     if (result) {
       const reason = gameEndMessage(result, this.i18n.t().gameEnd, this.session.playerSide());
-      return `${reason} ${this.session.goal() === 'achieved' ? t.goalAchieved : t.goalFailed}`;
+      return `${reason} ${goal === 'achieved' ? t.goalAchieved : t.goalFailed}`;
     }
+    if (goal) return goal === 'achieved' ? t.goalAchieved : t.goalFailed;
     if (this.session.engineFailed()) return t.engineError;
     if (this.session.engineThinking()) {
       return this.engine.status() === 'loading' ? t.engineLoading : t.engineThinking;
@@ -105,15 +106,8 @@ export class EndgamePractice {
     });
   });
 
-  /** The position the panel looks up: none while the engine is choosing or after the game. */
-  private readonly lookupFen = computed(() => {
-    if (!this.tablebaseVisible() || !this.session.endgame()) return undefined;
-    if (this.session.engineThinking() || this.game.isGameOver()) return undefined;
-    return this.game.fen();
-  });
-
   protected readonly panelState = computed<TablebasePanelState>(() =>
-    this.session.engineThinking() ? { status: 'waiting' } : this.lookup.state(),
+    this.session.engineThinking() ? { status: 'waiting' } : this.session.probeState(),
   );
 
   constructor() {
@@ -124,14 +118,6 @@ export class EndgamePractice {
     effect(() => {
       const endgame = this.endgame.hasValue() ? this.endgame.value() : undefined;
       if (endgame) untracked(() => this.session.start(endgame));
-    });
-    effect(() => {
-      const visible = this.tablebaseVisible();
-      untracked(() => this.session.setMoveChecks(visible));
-    });
-    effect(() => {
-      const fen = this.lookupFen();
-      untracked(() => this.lookup.track(fen));
     });
   }
 
@@ -145,7 +131,7 @@ export class EndgamePractice {
   }
 
   protected retryTablebase(): void {
-    this.lookup.retry();
+    this.session.retryProbe();
   }
 
   protected toggleTablebase(): void {

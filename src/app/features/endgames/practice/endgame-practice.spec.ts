@@ -19,6 +19,7 @@ import { EndgamePractice, TABLEBASE_VISIBLE_STORAGE_KEY } from './endgame-practi
 describe('EndgamePractice', () => {
   let engines: ReturnType<typeof fakeEngineFactory>;
   let tablebase: FakeTablebaseHttp;
+  let tablebaseDown: boolean;
   let harness: RouterTestingHarness;
   let loadEndgames: ReturnType<typeof vi.fn>;
 
@@ -60,12 +61,19 @@ describe('EndgamePractice', () => {
   beforeEach(async () => {
     engines = fakeEngineFactory();
     tablebase = new FakeTablebaseHttp();
+    tablebaseDown = false;
     loadEndgames = vi.fn(async () => [LUCENA, SQUARE_RULE, ENGINE_FIRST]);
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'endgames/:id', component: EndgamePractice }]),
         { provide: ENGINE_TRANSPORT, useValue: engines.factory },
-        { provide: TABLEBASE_HTTP, useValue: tablebase.http },
+        {
+          provide: TABLEBASE_HTTP,
+          useValue: (url: string, signal: AbortSignal) =>
+            tablebaseDown
+              ? Promise.reject(new TypeError('Failed to fetch'))
+              : tablebase.http(url, signal),
+        },
         {
           provide: CONTENT_LOADERS,
           useValue: { ...bundledContentLoaders, endgames: loadEndgames },
@@ -112,6 +120,8 @@ describe('EndgamePractice', () => {
   );
 
   it('should play the engine answer after a player move', async () => {
+    // The rival falls back to the engine when the tablebase does not answer.
+    tablebaseDown = true;
     await open('lucena-position');
 
     move('d1', 'd4');
@@ -130,6 +140,8 @@ describe('EndgamePractice', () => {
   });
 
   it('should browse the moves with the arrow keys, but not from a form field', async () => {
+    // The rival falls back to the engine when the tablebase does not answer.
+    tablebaseDown = true;
     await open('lucena-position');
     move('d1', 'd4');
     await settle();
@@ -149,6 +161,8 @@ describe('EndgamePractice', () => {
   });
 
   it('should undo the engine answer together with the player move', async () => {
+    // The rival falls back to the engine when the tablebase does not answer.
+    tablebaseDown = true;
     await open('lucena-position');
     move('d1', 'd4');
     await settle();
@@ -195,6 +209,7 @@ describe('EndgamePractice', () => {
   });
 
   it('should show the engine error and retry it', async () => {
+    tablebaseDown = true;
     await open('engine-first');
 
     engines.last().crash();
@@ -221,13 +236,14 @@ describe('EndgamePractice', () => {
       expect(button('Hide tablebase').getAttribute('aria-expanded')).toBe('true');
     });
 
-    it('should stop asking and remember the choice when hidden', async () => {
+    it('should hide the panel and remember the choice, and go on asking for the moves', async () => {
       await open('lucena-position');
 
       button('Hide tablebase').click();
       await settle(LOOKUP_DELAY_MS);
 
-      expect(tablebase.requests).toHaveLength(0);
+      // The lookups do not depend on the panel: the moves are checked and the rival plays from it.
+      expect(tablebase.requests).toHaveLength(1);
       expect(element().querySelector('app-tablebase-panel')).toBeNull();
       expect(localStorage.getItem(TABLEBASE_VISIBLE_STORAGE_KEY)).toBe('hidden');
       expect(button('Show tablebase').getAttribute('aria-expanded')).toBe('false');
@@ -239,13 +255,15 @@ describe('EndgamePractice', () => {
       await open('lucena-position');
       await settle(LOOKUP_DELAY_MS);
 
-      expect(tablebase.requests).toHaveLength(0);
+      expect(tablebase.requests).toHaveLength(1);
+      expect(element().querySelector('app-tablebase-panel')).toBeNull();
       button('Show tablebase').click();
       await settle(LOOKUP_DELAY_MS);
       expect(tablebase.requests).toHaveLength(1);
+      expect(element().querySelector('app-tablebase-panel')).not.toBeNull();
     });
 
-    it('should wait for the engine instead of asking about its position', async () => {
+    it('should wait for the rival instead of showing its position', async () => {
       await open('lucena-position');
       await settle(LOOKUP_DELAY_MS);
       tablebase.last().respond(200, LUCENA_RESPONSE);
@@ -254,7 +272,9 @@ describe('EndgamePractice', () => {
       move('d1', 'd4');
       await settle(LOOKUP_DELAY_MS);
 
-      expect(tablebase.requests).toHaveLength(1);
+      // The only new request is the one of the rival, for the position after the move.
+      expect(tablebase.requests).toHaveLength(2);
+      expect(tablebase.last().fen).toBe(game().fen().replace(/ \d+$/, ' 1'));
       expect(text()).toContain('Waiting for the engine');
     });
 
