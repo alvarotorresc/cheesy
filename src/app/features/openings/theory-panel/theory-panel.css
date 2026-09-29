@@ -1,40 +1,145 @@
+:host {
+  display: block;
+}
+
 .theory {
   display: grid;
-  gap: var(--space-2);
-  padding: var(--space-4);
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) var(--space-5);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
 }
 
-h2 {
-  color: var(--color-text-muted);
+.theory-label {
   font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0;
+  font-weight: 700;
+  color: var(--color-text-muted);
 }
 
 .variation {
-  font-size: var(--text-lg);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .variation {
+    animation: rise 420ms var(--ease-out);
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
 }
 
 .comment {
-  color: var(--color-text-muted);
+  max-width: 40rem;
+  line-height: 1.5;
 }
 
-/* In our lines: cheddar bar. Away from them: a neutral one. */
-.state {
+/* In our lines: cheddar bar. Away from them: red. End of our lines: neutral. */
+.book-state {
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-hover);
-  box-shadow: inset 4px 0 0 var(--color-accent);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-accent-soft);
   font-size: var(--text-sm);
   font-weight: 600;
 }
 
-.state.away {
-  box-shadow: inset 4px 0 0 var(--color-control);
+.book-state.away {
+  border-left-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.book-state.end {
+  border-left-color: var(--color-control);
+  background: var(--color-surface-hover);
+}
+
+.rival-choice {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.rival-choice strong {
+  color: var(--color-text);
+}
+
+.route-block {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.route-title {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.route {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.route li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1rem 4.5rem 1fr;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 0.2rem 0;
+  font-size: var(--text-sm);
+}
+
+.route li::before {
+  content: '';
+  grid-column: 1;
+  width: 0.6rem;
+  height: 0.6rem;
+  justify-self: center;
+  align-self: center;
+  border: 2px solid var(--color-control);
+  border-radius: 2px;
+  background: var(--color-surface);
+}
+
+.route li + li::after {
+  content: '';
+  position: absolute;
+  left: calc(0.5rem - 1px);
+  top: -0.55rem;
+  height: 0.9rem;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.route .rm {
+  grid-column: 2;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+
+.route .rn {
+  grid-column: 3;
+}
+
+.route li.now::before {
+  background: var(--color-accent);
+  border-color: var(--color-accent-text);
+}
+
+.route li.now .rn {
+  font-weight: 800;
 }

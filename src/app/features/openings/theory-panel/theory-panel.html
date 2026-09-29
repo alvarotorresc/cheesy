@@ -1,25 +1,48 @@
 <section class="theory" aria-labelledby="theory-title">
-  <h2 id="theory-title">{{ i18n.t().openings.theory }}</h2>
-  <p class="variation">{{ title() }}</p>
+  <h2 class="theory-label" id="theory-title">{{ i18n.t().openings.theory }}</h2>
+  <!-- A new element per variation, so its entrance plays each time the variation changes. -->
+  @for (name of [title()]; track name) {
+    <p class="variation">{{ name }}</p>
+  }
   @if (comment(); as comment) {
     <p class="comment">{{ comment }}</p>
   }
-  <p class="state" [class.away]="theory().status !== 'in-book'">
-    @switch (theory().status) {
-      @case ('in-book') {
-        {{ i18n.t().openings.inBook }}
-      }
-      @case ('end-of-book') {
-        {{ i18n.t().openings.endOfBook }}
-      }
-      @case ('out-of-book') {
-        @if (deviation(); as deviation) {
+  @switch (theory().status) {
+    @case ('in-book') {
+      <p class="book-state">{{ i18n.t().openings.inBook }}</p>
+    }
+    @case ('end-of-book') {
+      <p class="book-state end">{{ i18n.t().openings.endOfBook }}</p>
+    }
+    @case ('out-of-book') {
+      @if (deviation(); as deviation) {
+        <p class="book-state away">
           {{ deviation.byPlayer ? i18n.t().openings.youLeft : i18n.t().openings.rivalLeft }}
           <strong>{{ deviation.played }}</strong
           >. {{ i18n.t().openings.bookHad }} <strong>{{ deviation.expected }}</strong
           >.
-        }
+        </p>
       }
     }
-  </p>
+  }
+  @if (rivalChoice(); as choice) {
+    <p class="rival-choice">
+      {{ i18n.t().openings.play.rivalChose }} <strong>{{ choice.played }}</strong
+      >{{ i18n.t().openings.play.rivalChoseMid }} <strong>{{ choice.main }}</strong
+      >.
+    </p>
+  }
+  @if (route().length > 0) {
+    <div class="route-block">
+      <p class="route-title" id="route-title">{{ i18n.t().openings.play.route }}</p>
+      <ol class="route" aria-labelledby="route-title">
+        @for (step of route(); track $index) {
+          <li [class.now]="step.now">
+            <span class="rm">{{ step.move }}</span
+            ><span class="rn">{{ step.name }}</span>
+          </li>
+        }
+      </ol>
+    </div>
+  }
 </section>

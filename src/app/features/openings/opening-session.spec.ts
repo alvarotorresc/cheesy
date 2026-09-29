@@ -10,6 +10,7 @@ import {
   REPLY_DELAY_MS,
 } from './opening-session';
 import { fakeEngineFactory } from '../../core/engine/testing';
+import { OPENING_RANDOM } from './book-pick';
 import { testLoaders, testTree } from './testing/test-opening';
 
 /** Tree with no moves: the rival has to use the engine from the first move. */
@@ -21,6 +22,8 @@ describe('OpeningSession', () => {
   let injector: (Injector & { destroy(): void }) | undefined;
   let session: OpeningSession;
   let game: GameService;
+  /** What the rival's dice roll: 0 picks the main continuation, close to 1 the last one. */
+  let random = 0;
 
   const sans = (): string[] => game.moves().map((move) => move.san);
 
@@ -49,6 +52,7 @@ describe('OpeningSession', () => {
       providers: [
         { provide: ENGINE_TRANSPORT, useValue: engines.factory },
         { provide: CONTENT_LOADERS, useValue: loaders },
+        { provide: OPENING_RANDOM, useValue: () => random },
       ],
     });
     const scope = Injector.create({
@@ -66,6 +70,7 @@ describe('OpeningSession', () => {
   };
 
   beforeEach(() => {
+    random = 0;
     vi.useFakeTimers();
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
@@ -652,6 +657,51 @@ describe('OpeningSession', () => {
       await pending;
 
       expect(session.loadState()).toBe('loading');
+    });
+  });
+
+  describe('rival variety', () => {
+    beforeEach(() => setup());
+
+    const playToKnight = async (): Promise<void> => {
+      await start();
+      session.play({ from: 'e2', to: 'e4' });
+      await waitForReply();
+      session.play({ from: 'g1', to: 'f3' });
+      await waitForReply();
+    };
+
+    it('should play the main continuation when the roll is low', async () => {
+      await playToKnight();
+
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nc6']);
+    });
+
+    it('should play an alternative when the roll is high', async () => {
+      random = 0.99;
+      await playToKnight();
+
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nf6']);
+      expect(session.theory()?.status).toBe('end-of-book');
+    });
+
+    it('should ignore the roll when only the main line is wanted', async () => {
+      random = 0.99;
+      session.setMainOnly(true);
+      await playToKnight();
+
+      expect(session.mainOnly()).toBe(true);
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nc6']);
+    });
+
+    it('should not read the dice against Stockfish', async () => {
+      random = 0.99;
+      session.setOpponentMode('engine');
+      await start();
+      session.play({ from: 'e2', to: 'e4' });
+      await engineAnswers('c7c5');
+
+      expect(sans()).toEqual(['e4', 'c5']);
     });
   });
 });

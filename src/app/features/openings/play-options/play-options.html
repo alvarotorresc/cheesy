@@ -1,0 +1,50 @@
+<details class="options">
+  <summary>
+    <span class="opt-title">{{ i18n.t().openings.settings }}</span>
+    <span class="opt-chev" aria-hidden="true"></span>
+    <span class="opt-now">{{ summary() }}</span>
+  </summary>
+  <div class="options-body">
+    <fieldset>
+      <legend>{{ i18n.t().openings.play.rivalPlays }}</legend>
+      <div class="segmented">
+        @for (mode of opponentModes; track mode) {
+          <label>
+            <input
+              type="radio"
+              name="opponent-mode"
+              [value]="mode"
+              [checked]="opponentMode() === mode"
+              (change)="opponentModeChange.emit(mode)"
+            />
+            <span>{{
+              mode === 'book'
+                ? i18n.t().openings.play.rivalBook
+                : i18n.t().openings.play.rivalEngine
+            }}</span>
+          </label>
+        }
+      </div>
+      <label class="check" [class.disabled]="opponentMode() === 'engine'">
+        <input
+          type="checkbox"
+          [checked]="mainOnly()"
+          [disabled]="opponentMode() === 'engine'"
+          (change)="onMainOnly($event)"
+        />
+        {{ i18n.t().openings.play.mainOnly }}
+      </label>
+      <p class="hint">{{ hint() }}</p>
+    </fieldset>
+    <label class="field">
+      <span>{{ i18n.t().openings.strength }}</span>
+      <select class="select" (change)="onStrength($event)">
+        @for (level of strengthLevels; track level.key) {
+          <option [value]="level.skill" [selected]="skillLevel() === level.skill">
+            {{ i18n.t().openings.strengthLevels[level.key] }}
+          </option>
+        }
+      </select>
+    </label>
+  </div>
+</details>
