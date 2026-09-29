@@ -2,6 +2,7 @@
   display: block;
   --shelf-col: min(76%, 17rem);
   --shelf-min: 15rem;
+  --shelf-max: 17.5rem;
 }
 
 /* ---- Intro ---- */
@@ -50,6 +51,20 @@
 
 :host .shelf.single {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+
+/* Wider than 1440px the groups wrap side by side and the cards stop growing (see catalog.css). */
+@media (min-width: 90.0625rem) {
+  .groups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--space-8) var(--space-12);
+  }
+
+  :host .shelf.single {
+    grid-template-columns: repeat(auto-fill, minmax(var(--shelf-min), var(--shelf-max)));
+  }
 }
 
 /* ---- Card: the whole card is the link to the exercise ---- */

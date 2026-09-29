@@ -1,8 +1,9 @@
 :host {
   display: block;
-  /* Finales sizes its cards apart from the other lists (catalog.css reads these two). */
+  /* Finales sizes its cards apart from the other lists (catalog.css reads these three). */
   --shelf-col: min(80%, 17rem);
   --shelf-min: 13.25rem;
+  --shelf-max: 14rem;
 }
 
 /* ---- Intro ---------------------------------------------------------------------------------- */
@@ -99,6 +100,16 @@
   display: grid;
   gap: var(--space-8);
   margin-top: var(--space-8);
+}
+
+/* Wider than 1440px the groups wrap side by side (catalog.css sizes each one to its cards). */
+@media (min-width: 90.0625rem) {
+  .groups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--space-8) var(--space-12);
+  }
 }
 
 /* A single shelf on a phone lays its cards out in a grid instead of scrolling sideways. */

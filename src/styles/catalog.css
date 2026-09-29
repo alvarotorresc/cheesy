@@ -165,6 +165,26 @@
   }
 }
 
+/*
+ * Wider than 1440px: the cards keep about the size they have at 1440 (--shelf-max, per page) and
+ * the window gains columns. A group is as wide as its cards (--n, set by the template), so short
+ * groups sit side by side; each page lays its groups out in a wrapping row.
+ */
+@media (min-width: 90.0625rem) {
+  .catalog .shelf,
+  .catalog .shelf.single {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--shelf-min, 17.5rem), var(--shelf-max, 18rem))
+    );
+  }
+
+  .catalog .family,
+  .catalog .group {
+    flex: 0 1 calc(var(--n, 99) * var(--shelf-max, 18rem) + (var(--n, 99) - 1) * var(--space-5));
+  }
+}
+
 /* ---- Card ---------------------------------------------------------------------------------- */
 
 .catalog .card {

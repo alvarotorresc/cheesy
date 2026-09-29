@@ -167,7 +167,11 @@
 
       <div class="families">
         @for (group of groups(); track group.family) {
-          <section class="family" [attr.aria-labelledby]="'family-' + group.family">
+          <section
+            class="family"
+            [attr.aria-labelledby]="'family-' + group.family"
+            [style.--n]="group.openings.length"
+          >
             <div class="family-head">
               <h2 [id]="'family-' + group.family">{{ t.families[group.family] }}</h2>
               <span class="count">{{ t.groupCount(group.openings.length) }}</span>

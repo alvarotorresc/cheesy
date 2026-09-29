@@ -78,3 +78,13 @@
   gap: var(--space-8);
   margin-top: var(--space-8);
 }
+
+/* Wider than 1440px the families wrap side by side (catalog.css sizes each one to its cards). */
+@media (min-width: 90.0625rem) {
+  .families {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--space-8) var(--space-12);
+  }
+}

@@ -193,7 +193,11 @@
     </div>
   } @else {
     @for (group of groups(); track group.id) {
-      <section class="group" [attr.aria-labelledby]="'group-' + group.id">
+      <section
+        class="group"
+        [attr.aria-labelledby]="'group-' + group.id"
+        [style.--n]="group.cards.length"
+      >
         <div class="group-head">
           <h2 [id]="'group-' + group.id">{{ groupTitle(group.id) }}</h2>
           <span class="count">{{ t.groupCount(group.cards.length) }}</span>

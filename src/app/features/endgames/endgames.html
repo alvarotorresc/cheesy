@@ -138,7 +138,7 @@
 
   <div class="groups" [class.reveal]="reveal()" aria-live="polite">
     @for (group of groups(); track group.key; let g = $index) {
-      <section class="group" [attr.aria-labelledby]="'group-' + g">
+      <section class="group" [attr.aria-labelledby]="'group-' + g" [style.--n]="group.cards.length">
         <div class="group-head">
           <h2 [id]="'group-' + g">{{ i18n.localize(group.name) }}</h2>
           <span class="count">{{ groupCount(group) }}</span>
