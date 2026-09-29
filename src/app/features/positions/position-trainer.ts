@@ -6,7 +6,7 @@ import { ProgressService } from '../../core/progress';
 import { buildSolutionLine, isSameMove, type SolutionStep } from './solution-line';
 
 /**
- * - `guessing`: the user looks for the next move of the solution. The board is always playable.
+ * - `guessing`: the user looks for the next move of the solution.
  * - `solved`: every move of the solution was found; the line can be replayed.
  * - `revealed`: the user asked for the solution; the line can be replayed.
  */
