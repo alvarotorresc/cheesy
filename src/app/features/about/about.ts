@@ -9,7 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { parseFen } from 'chessops/fen';
-import { UMAMI_ORIGIN, umamiEnabled } from '../../core/analytics';
+import { umamiEnabled } from '../../core/analytics';
 import { ContentService } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { AboutCredits } from './credits/about-credits';
@@ -68,7 +68,6 @@ export class About {
 
   protected readonly briefPieces = BRIEF_PIECES;
   protected readonly umami = inject(ABOUT_UMAMI);
-  protected readonly umamiOrigin = UMAMI_ORIGIN;
 
   protected readonly sent = signal<SentPosition | undefined>(undefined);
   /** The rank lit on the board and in the FEN (1 to 8), if any. */

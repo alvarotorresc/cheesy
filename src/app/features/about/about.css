@@ -397,12 +397,6 @@ h3 {
   color: var(--color-text);
 }
 
-.umami .host {
-  color: var(--color-text);
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
 @media (min-width: 48rem) {
   .umami {
     grid-template-columns: 14rem minmax(0, 1fr);

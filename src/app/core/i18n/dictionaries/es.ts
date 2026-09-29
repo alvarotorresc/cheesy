@@ -21,7 +21,7 @@ export const es: Messages = {
     navigation: 'Pie de página',
     source: 'Código fuente (GPL-3)',
     privacy: 'Privacidad',
-    credits: 'Créditos',
+    about: 'Acerca de',
   },
   about: {
     title: 'Acerca de Cheesy',
@@ -80,7 +80,7 @@ export const es: Messages = {
     engineNote:
       'En Aperturas, Posiciones y Análisis tus jugadas no salen de aquí: el motor funciona dentro de tu navegador.',
     umamiTitle: 'Contamos visitas con Umami',
-    umamiText: 'Una analítica sencilla, alojada en un servidor propio: ',
+    umamiText: 'Una analítica sencilla, alojada en un servidor propio y con la conexión cifrada.',
     umamiFacts: [
       { label: 'Mide', value: 'Visitas y páginas vistas' },
       { label: 'Sin', value: 'Cookies' },

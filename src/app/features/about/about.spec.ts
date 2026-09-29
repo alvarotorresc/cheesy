@@ -149,7 +149,8 @@ describe('About', () => {
     const element = await open({ umami: true });
 
     expect(element.querySelector('.umami h3')?.textContent).toBe('Contamos visitas con Umami');
-    expect(text(element.querySelector('.umami .host'))).toBe('https://analytics.alvarotc.com');
+    expect(element.querySelector('.umami .host')).toBeNull();
+    expect(text(element.querySelector('.umami'))).not.toContain('https://');
     expect(element.querySelectorAll('.umami .facts li')).toHaveLength(3);
   });
 

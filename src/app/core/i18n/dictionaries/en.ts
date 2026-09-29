@@ -19,7 +19,7 @@ export const en = {
     navigation: 'Footer',
     source: 'Source code (GPL-3)',
     privacy: 'Privacy',
-    credits: 'Credits',
+    about: 'About',
   },
   about: {
     title: 'About Cheesy',
@@ -81,7 +81,7 @@ export const en = {
     engineNote:
       'In Openings, Positions and Analysis your moves do not leave here: the engine runs inside your browser.',
     umamiTitle: 'We count visits with Umami',
-    umamiText: 'A simple analytics tool, hosted on our own server: ',
+    umamiText: 'A simple analytics tool, hosted on our own server over an encrypted connection.',
     umamiFacts: [
       { label: 'Measures', value: 'Visits and page views' },
       { label: 'Without', value: 'Cookies' },
