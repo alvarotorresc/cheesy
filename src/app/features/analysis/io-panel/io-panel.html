@@ -1,0 +1,75 @@
+<details class="block io">
+  <summary>
+    <span class="io-title">{{ i18n.t().analysis.ioTitle }}</span>
+    <span class="io-sub">{{ i18n.t().analysis.ioSub }}</span>
+    <app-icon class="io-chevron" name="mini-chevron" />
+  </summary>
+  <div class="io-body">
+    <section class="io-part" aria-labelledby="share-title">
+      <h3 id="share-title">{{ i18n.t().share.title }}</h3>
+      <div class="copy-row">
+        <button type="button" class="button" (click)="copyFen()">
+          {{ i18n.t().share.copyFen }}
+        </button>
+        <button type="button" class="button" (click)="copyPgn()">
+          {{ i18n.t().share.copyPgn }}
+        </button>
+        <button type="button" class="button" (click)="copyLink()">
+          {{ i18n.t().share.copyLink }}
+        </button>
+      </div>
+      <p
+        class="feedback"
+        role="status"
+        [class.ok]="shareMessage() && !shareError()"
+        [class.error]="shareError()"
+      >
+        {{ shareMessage() }}
+      </p>
+      <div class="link-preview">
+        <span [class.warn]="tooLong()">{{ linkNote() }}</span>
+        <output [attr.aria-label]="i18n.t().analysis.linkLabel">{{ link() }}</output>
+      </div>
+      @if (attempt(); as current) {
+        @if (!current.ok) {
+          <div class="fallback">
+            <label class="label" for="share-fallback">{{ i18n.t().share.textToCopy }}</label>
+            <textarea
+              #fallback
+              id="share-fallback"
+              class="textarea"
+              rows="3"
+              readonly
+              [value]="current.text"
+            ></textarea>
+          </div>
+        }
+      }
+    </section>
+    <div class="divider" role="presentation"></div>
+    <section class="io-part" aria-labelledby="import-title">
+      <h3 id="import-title">{{ i18n.t().importer.title }}</h3>
+      <form class="io-part" novalidate (submit)="load($event, source.value)">
+        <label class="label" for="import-source">{{ i18n.t().importer.label }}</label>
+        <textarea
+          #source
+          id="import-source"
+          class="textarea"
+          rows="4"
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+          aria-describedby="import-help import-feedback"
+          [attr.aria-invalid]="hasImportError() ? 'true' : null"
+        ></textarea>
+        <p class="helper" id="import-help">{{ i18n.t().analysis.importHelp }}</p>
+        <div class="load-row">
+          <button type="submit" class="button primary">{{ i18n.t().importer.load }}</button>
+          <p id="import-feedback" class="feedback" role="status" [class.error]="hasImportError()">
+            {{ importMessage() }}
+          </p>
+        </div>
+      </form>
+    </section>
+  </div>
+</details>

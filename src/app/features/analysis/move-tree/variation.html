@@ -1,0 +1,59 @@
+@let line = view();
+<div class="var" [class.enter]="line.start.id === freshId()" [attr.data-depth]="line.depth">
+  <button
+    type="button"
+    class="var-toggle"
+    [attr.aria-expanded]="!line.folded"
+    [attr.aria-label]="toggleLabel()"
+    (click)="fold.emit(line.start.id)"
+  >
+    <app-icon name="mini-chevron" />
+  </button>
+  @if (names().get(line.start.id); as name) {
+    <span class="mv-name">{{ name }}</span>
+  }
+  <button
+    type="button"
+    class="mv"
+    [class.fresh]="line.start.id === freshId()"
+    [attr.aria-label]="label(line.start)"
+    [attr.aria-current]="line.start.id === currentId() ? 'true' : null"
+    (click)="pick.emit(line.start.id)"
+  >
+    <span class="n">{{ moveNumber(line.start) }}</span
+    >{{ i18n.san(line.start.san) }}
+  </button>
+  @if (line.folded) {
+    <span class="var-more">{{ i18n.t().analysis.moreMoves(line.hidden) }}</span>
+  } @else {
+    @for (item of line.items; track track(item)) {
+      @if (item.kind === 'move') {
+        @if (names().get(item.node.id); as name) {
+          <span class="mv-name">{{ name }}</span>
+        }
+        <button
+          type="button"
+          class="mv"
+          [class.fresh]="item.node.id === freshId()"
+          [attr.aria-label]="label(item.node)"
+          [attr.aria-current]="item.node.id === currentId() ? 'true' : null"
+          (click)="pick.emit(item.node.id)"
+        >
+          @if (item.number) {
+            <span class="n">{{ item.number }}</span>
+          }
+          {{ i18n.san(item.node.san) }}
+        </button>
+      } @else {
+        <app-variation
+          [view]="item.view"
+          [currentId]="currentId()"
+          [freshId]="freshId()"
+          [names]="names()"
+          (pick)="pick.emit($event)"
+          (fold)="fold.emit($event)"
+        />
+      }
+    }
+  }
+</div>

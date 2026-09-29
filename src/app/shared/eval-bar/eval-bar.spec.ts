@@ -75,7 +75,7 @@ describe('EvalBar', () => {
   it('should pass White’s share to the styles', async () => {
     await render({ score: { type: 'mate', value: 2 } });
 
-    expect(meter().style.getPropertyValue('--white-share')).toBe('1');
+    expect(meter().style.getPropertyValue('--share')).toBe('1');
   });
 
   it('should fill the bar and write 1-0 when White has won, whatever the score', async () => {
@@ -105,5 +105,21 @@ describe('EvalBar', () => {
     await render({ orientation: 'black' });
 
     expect(meter().classList).toContain('flipped');
+  });
+
+  it('should stripe the bar and show no score while the engine is off', async () => {
+    await render({ mode: 'off', score: { type: 'cp', value: 150 }, emptyLabel: 'Engine off' });
+
+    expect(meter().classList).toContain('off');
+    expect(value()).toBeUndefined();
+    expect(meter().hasAttribute('aria-valuenow')).toBe(false);
+    expect(meter().getAttribute('aria-valuetext')).toBe('Engine off');
+  });
+
+  it('should breathe without a score while the engine loads', async () => {
+    await render({ mode: 'loading', outcome: 'white' });
+
+    expect(meter().classList).toContain('loading');
+    expect(value()).toBeUndefined();
   });
 });

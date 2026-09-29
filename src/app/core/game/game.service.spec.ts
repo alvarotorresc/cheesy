@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { INITIAL_FEN } from 'chessops/fen';
-import { GameService } from './game.service';
+import { GameService, resultOfLine } from './game.service';
 
 const playAll = (game: GameService, sans: readonly string[]): void => {
   for (const san of sans) {
@@ -567,6 +567,35 @@ describe('GameService', () => {
 
       expect(loaded).toEqual({ ok: true });
       expect(game.moves().map((move) => move.san)).toEqual(['e4', 'e5', 'Nf3']);
+    });
+  });
+});
+
+describe('resultOfLine', () => {
+  const fensOf = (sans: readonly string[]): string[] => {
+    const game = new GameService();
+    const fens = [game.fen()];
+    for (const san of sans) {
+      game.playSan(san);
+      fens.push(game.fen());
+    }
+    return fens;
+  };
+
+  it('should say nothing while the line goes on', () => {
+    expect(resultOfLine(fensOf(['e4', 'e5']))).toBeUndefined();
+    expect(resultOfLine([])).toBeUndefined();
+  });
+
+  it('should find a checkmate at the end of the line', () => {
+    expect(resultOfLine(fensOf(SCHOLARS_MATE))).toEqual({ reason: 'checkmate', winner: 'white' });
+  });
+
+  it('should find a threefold repetition along the line', () => {
+    const shuffle = ['Nf3', 'Nf6', 'Ng1', 'Ng8', 'Nf3', 'Nf6', 'Ng1', 'Ng8'];
+    expect(resultOfLine(fensOf(shuffle))).toEqual({
+      reason: 'threefold-repetition',
+      winner: undefined,
     });
   });
 });
