@@ -125,12 +125,6 @@
   font-weight: 600;
 }
 
-.catalog .family-first {
-  font-weight: 800;
-  color: var(--color-accent-text);
-  font-variant-numeric: tabular-nums;
-}
-
 /* Each page sets --shelf-col (phone) and --shelf-min (wide) to size its cards. */
 .catalog .shelf {
   display: grid;
@@ -278,18 +272,6 @@
 .catalog .replay svg {
   width: 1.1rem;
   height: 1.1rem;
-}
-
-.catalog .replay .i-pause {
-  display: none;
-}
-
-.catalog .replay[aria-pressed='true'] .i-play {
-  display: none;
-}
-
-.catalog .replay[aria-pressed='true'] .i-pause {
-  display: block;
 }
 
 /* With a mouse the button appears when the card is hovered or focused; touch always shows it. */
