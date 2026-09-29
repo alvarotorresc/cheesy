@@ -10,13 +10,15 @@ The interface is available in English and Spanish.
 
 - **Openings**: play an opening and practise its main lines.
 - **Endgames**: convert winning endgames and hold the drawn ones.
-- **Positions**: find the best move in tactical positions.
+- **Positions**: find the best move in tactical positions. Each one has a number in its address
+  (`/positions/1`), from fewest to most moves.
 - **Analysis**: a free board to explore any idea, with move history navigation, an optional
   engine (evaluation bar and three best lines), FEN and PGN import and export, and links that open
   a position (`/analysis?fen=…&pgn=…`). The engine is off by default: it downloads about 2 MB the first
   time it is turned on.
 
-The analysis board is available now. The other sections are in progress.
+The screens are being redesigned: the shared layout (header, footer, `/acerca`) and the base
+services are in place, and each section moves to its new design one at a time.
 
 ## Tech stack
 
@@ -64,8 +66,10 @@ A pre-commit hook, installed with `pnpm install`, lints and formats the staged f
 
 ```
 src/app/
-  core/       game state (chessops), translations and content loading
-  shared/     presentational components: board and move list
+  core/       game state (chessops), move tree and analysis links, progress (IndexedDB),
+              translations and content loading
+  layout/     the parts around every page: footer and the padding of each kind of route
+  shared/     presentational components: board, mini board, move list, icons, toast
   features/   one folder per section, loaded lazily
 content/      sources and checks of the openings, endgames and positions
 ```
