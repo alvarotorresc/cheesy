@@ -1,24 +1,44 @@
 # Cheesy
 
-A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies. Visits are counted with a self-hosted Umami, without cookies or personal data.
+A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies, and your progress stays in your browser (IndexedDB).
 
-When you practise endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer; apart from the optional visit counter above, no other request leaves the browser for any site but this one.
+Two things reach outside the browser. In Endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer. In production, visits are counted with a self-hosted [Umami](https://umami.is), without cookies or personal data and respecting Do Not Track; it is not loaded on `localhost`. The About page says all this in the app.
 
 The interface is available in English and Spanish.
 
 ## Sections
 
-- **Openings**: play an opening and practise its main lines.
-- **Endgames**: convert winning endgames and hold the drawn ones.
-- **Positions**: find the best move in tactical positions. Each one has a number in its address
-  (`/positions/1`), from fewest to most moves.
-- **Analysis**: a free board to explore any idea, with move history navigation, an optional
-  engine (evaluation bar and three best lines), FEN and PGN import and export, and links that open
-  a position (`/analysis?fen=…&pgn=…`). The engine is off by default: it downloads about 2 MB the first
-  time it is turned on.
+| Route                    | What it is                                                              |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `/`                      | Home: the sections with small animated previews of each                 |
+| `/openings`              | The catalogue of openings, with filters and your progress in each       |
+| `/openings/:id`          | Play an opening against the engine, with its theory alongside           |
+| `/openings/:id/practice` | Practise the lines of that opening and build a streak on each           |
+| `/endgames`              | The endgames to win or hold, with the ones you have passed marked       |
+| `/endgames/:id`          | Play one endgame against a perfect opponent                             |
+| `/positions`             | The gallery of tactical positions, with filters and the ones you solved |
+| `/positions/:id`         | Find the best move in one position                                      |
+| `/analysis`              | A free board to explore any idea                                        |
+| `/acerca`                | About: what is saved, what leaves your browser, credits and source code |
 
-The screens are being redesigned: the shared layout (header, footer, `/acerca`) and the base
-services are in place, and each section moves to its new design one at a time.
+- **Openings**: play an opening against Stockfish at five strength levels, or in book mode where
+  the rival follows the main line. Practice asks for the moves of a line from memory: a line is
+  mastered after three clean runs in a row. The old `/openings/:id/drill` address redirects to the
+  practice.
+- **Endgames**: convert winning endgames and hold the drawn ones (fifteen moves without losing the
+  draw). The rival plays perfectly from the Lichess tablebase, with Stockfish as a reserve when the
+  tablebase does not answer, and a panel shows the tablebase verdict of the position. The ones you
+  pass are remembered.
+- **Positions**: find the best move in tactical positions. Each one has a number in its address
+  (`/positions/1`), from fewest to most moves. The ones you solve, and at the first try, are
+  remembered.
+- **Analysis**: a free board with the move history as a tree, so you can add variations and fold
+  them, an optional engine (evaluation bar and three best lines), FEN and PGN import and export,
+  and links that carry a position (`/analysis?fen=…`), its moves or the whole tree with its
+  variations (`&pgn=…`). The other sections open here with a link back to where you came from. The
+  engine is off by default: it downloads about 2 MB the first time it is turned on.
+- **About**: `/acerca` (the route is in Spanish in both languages) lists what is saved in your
+  browser and how to clear it, the only thing that is sent out, and the credits.
 
 ## Tech stack
 
