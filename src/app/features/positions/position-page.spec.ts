@@ -5,6 +5,8 @@ import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
+import { PROGRESS_STORE_LOADER } from '../../core/progress';
+import { memoryProgressStore } from '../openings/testing/memory-progress-store';
 import { I18nService } from '../../core/i18n';
 import { BoardComponent, type BoardMove } from '../../shared/board';
 import { PositionPage } from './position-page';
@@ -74,6 +76,7 @@ describe('PositionPage', () => {
       providers: [
         provideRouter([{ path: 'positions', children: POSITIONS_ROUTES }]),
         { provide: CONTENT_LOADERS, useValue: { positions } as Partial<ContentLoaders> },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -103,7 +106,7 @@ describe('PositionPage', () => {
 
       button('Try again').click();
 
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
     });
 
     it.each(['unknown', '__proto__', 'constructor', '%3Cscript%3E', '0', '01', '4', '9999'])(
@@ -121,16 +124,16 @@ describe('PositionPage', () => {
 
     it('should number the positions from the fewest moves to the most, keeping the content order', async () => {
       await open('/positions/1');
-      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       await harness.navigateByUrl('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
     });
 
     it('should send an old link by content id to the number of the position', async () => {
       await open('/positions/smothered');
 
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       expect(TestBed.inject(Router).url).toBe('/positions/3');
     });
 
@@ -157,27 +160,38 @@ describe('PositionPage', () => {
   describe('guessing', () => {
     beforeEach(async () => {
       await open('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
     });
 
-    it('should name the browser tab after the position', () => {
-      expect(document.title).toBe('Smothered mate · Cheesy');
+    it('should keep the browser tab neutral, without the name of the position', () => {
+      expect(document.title).toBe('Position 3 of 3 · Cheesy');
+    });
+
+    it('should not tell the title, themes, game, explanation or analysis link before the end', () => {
+      const shown = element().textContent ?? '';
+      for (const spoiler of ['Smothered mate', 'Lucena, 1497', 'The queen is sacrificed.']) {
+        expect(shown).not.toContain(spoiler);
+      }
+      expect(element().querySelector('.theme-tag')).toBeNull();
+      expect(element().querySelector('a[href^="/analysis"]')).toBeNull();
+      expect(element().querySelector('.board-col')?.getAttribute('aria-label')).toBe(
+        'Board: White to play.',
+      );
     });
 
     it('should show the position from the side to play with its details', () => {
       expect(board().orientation()).toBe('white');
       expect(board().viewOnly()).toBe(false);
-      expect(element().textContent).toContain('White to play');
-      expect(element().textContent).toContain('Lucena, 1497');
-      expect(text('.tags li')).toBe('Smothered mate');
-      expect(text('.status')).toBe('Find the winning line: 2 moves of yours.');
-      expect(element().textContent).not.toContain('The queen is sacrificed.');
+      expect(text('h1')).toBe('White to play2 moves of yours');
+      expect(text('.message')).toContain('Find the winning line: 2 moves of yours.');
     });
 
     it('should say a wrong move was wrong, take it back and keep the board playable', async () => {
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
-      expect(text('.status')).toBe('Qd6 is not the move. It has been taken back: try another one.');
+      expect(text('.message')).toContain(
+        'Qd6 is not the move. It has been taken back: try another one.',
+      );
       expect(game().moves()).toEqual([]);
       expect(board().viewOnly()).toBe(false);
     });
@@ -186,14 +200,14 @@ describe('PositionPage', () => {
       button('Hint').click();
       await harness.fixture.whenStable();
 
-      expect(text('.hint')).toBe('Move the queen on d5.');
+      expect(text('.hint-line')).toBe('Hint: move the queen on d5.');
       expect(button('Hint').getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should play the reply and list the moves when a right move is found', async () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
 
-      expect(text('.status')).toBe('Qg8+ is right. Your opponent answers Rxg8. Keep going.');
+      expect(text('.message')).toContain('Qg8+ is right. Your opponent answers Rxg8. Keep going.');
       expect(
         [...element().querySelectorAll('.steps li')].map((item) => item.textContent?.trim()),
       ).toEqual(['1. Qg8+', '1… Rxg8']);
@@ -203,24 +217,31 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
       await moveOnBoard({ from: 'h6', to: 'f7' });
 
-      expect(text('.status')).toBe('Nf7# is right. Solved. Step through the line to review it.');
+      expect(text('.message')).toContain('Nf7# is right. Solved.');
       expect(element().textContent).toContain('The queen is sacrificed.');
+      expect(text('h1')).toBe('Smothered mate');
+      expect(document.title).toBe('Smothered mate · Cheesy');
+      expect(text('.theme-tag')).toBe('Smothered mate');
+      expect(text('.source dd')).toBe('Lucena, 1497');
+      expect(element().querySelector('a[href^="/analysis"]')?.getAttribute('href')).toMatch(
+        /from=position(%3A|:)smothered/,
+      );
       expect(board().viewOnly()).toBe(true);
-      expect(text('.step')).toBe('Your move: 2. Nf7# (checkmate).');
+      expect(text('.step-text')).toBe('Your move: 2. Nf7# (checkmate).');
     });
   });
 
   describe('replay', () => {
     beforeEach(async () => {
       await open('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       button('Show solution').click();
       await harness.fixture.whenStable();
     });
 
     it('should show the whole solution from the starting position', () => {
-      expect(text('.status')).toBe('This is the solution. Step through the line to review it.');
-      expect(text('.step')).toBe('Starting position.');
+      expect(text('.message')).toContain('This is the solution.');
+      expect(text('.step-text')).toBe('Starting position.');
       expect(element().querySelectorAll('.steps button')).toHaveLength(3);
       expect(button('Start of the solution').getAttribute('aria-disabled')).toBe('true');
     });
@@ -228,11 +249,11 @@ describe('PositionPage', () => {
     it('should describe each step when moving through the solution with the buttons', async () => {
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step')).toBe('Your move: 1. Qg8+ (check).');
+      expect(text('.step-text')).toBe('Your move: 1. Qg8+ (check).');
 
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step')).toBe('Reply: 1… Rxg8 (capture).');
+      expect(text('.step-text')).toBe('Reply: 1… Rxg8 (capture).');
 
       button('Previous move').click();
       button('End of the solution').click();
@@ -265,7 +286,7 @@ describe('PositionPage', () => {
     });
 
     it('should jump to the end and the start with End and Home inside the controls', async () => {
-      const controls = element().querySelector('[role="group"]') as HTMLElement;
+      const controls = element().querySelector('.replay-controls') as HTMLElement;
 
       controls.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
       expect(game().ply()).toBe(3);
@@ -282,14 +303,14 @@ describe('PositionPage', () => {
     });
 
     it('should keep the focus on the exercise message when the solution is shown', () => {
-      expect(document.activeElement).toBe(element().querySelector('.status'));
+      expect(document.activeElement).toBe(element().querySelector('.message'));
     });
 
     it('should start the exercise again when asked', async () => {
       button('Start again').click();
       await harness.fixture.whenStable();
 
-      expect(text('.status')).toBe('Find the winning line: 2 moves of yours.');
+      expect(text('.message')).toContain('Find the winning line: 2 moves of yours.');
       expect(board().viewOnly()).toBe(false);
       expect(element().querySelector('.steps')).toBeNull();
     });
@@ -298,45 +319,49 @@ describe('PositionPage', () => {
   describe('navigation between positions', () => {
     it('should link to the next position only when on the first one', async () => {
       await open('/positions/1');
-      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
-      const links = [...element().querySelectorAll('.neighbours a')];
+      const links = [...element().querySelectorAll('.neighbours a[href]')];
       expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
     });
 
     it('should link to the previous position only when on the last one', async () => {
       await open('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
-      const links = [...element().querySelectorAll('.neighbours a')];
+      const links = [...element().querySelectorAll('.neighbours a[href]')];
       expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
     });
 
     it('should show a black position from the black side', async () => {
       await open('/positions/1');
-      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       expect(board().orientation()).toBe('black');
-      expect(text('.status')).toBe('Find the winning move.');
-      const links = [...element().querySelectorAll('.neighbours a')];
-      expect(links.map((link) => link.textContent?.trim())).toEqual(['Next position ›']);
+      expect(text('.message')).toContain('Find the winning move.');
+      expect(text('.where')).toBe('Position 1 of 3');
+      const links = [...element().querySelectorAll('.neighbours a[href]')];
+      expect(links.map((link) => link.textContent?.trim())).toEqual(['Next ›']);
+      expect(element().querySelector('.neighbours a[aria-disabled="true"]')?.textContent).toContain(
+        'Previous',
+      );
     });
 
     it('should start a fresh exercise and focus the title when moving to another position', async () => {
       await open('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
       await harness.navigateByUrl('/positions/1');
-      await vi.waitFor(() => expect(text('h1')).toBe('Kieninger Trap'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
-      expect(text('.status')).toBe('Find the winning move.');
+      expect(text('.message')).toContain('Find the winning move.');
       expect(document.activeElement).toBe(element().querySelector('h1'));
     });
 
     it('should keep the focus where it is on the first position shown', async () => {
       await open('/positions/3');
-      await vi.waitFor(() => expect(text('h1')).toBe('Smothered mate'));
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       expect(document.activeElement).not.toBe(element().querySelector('h1'));
     });

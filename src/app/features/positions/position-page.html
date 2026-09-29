@@ -1,55 +1,115 @@
 @let t = i18n.t().positions;
 
 <nav class="topbar" [attr.aria-label]="t.positionNavigation">
-  <a class="back back-link" routerLink="..">&larr; {{ t.backToGallery }}</a>
+  <a class="topbar-link" routerLink="/positions">
+    <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
+  </a>
   @if (position()) {
     <div class="neighbours">
       @if (previousId(); as id) {
-        <a class="back-link" [routerLink]="['..', id]">&lsaquo; {{ t.previousPosition }}</a>
+        <a class="topbar-link" [routerLink]="['/positions', id]">
+          <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
+        </a>
+      } @else {
+        <a class="topbar-link" role="link" aria-disabled="true">
+          <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
+        </a>
       }
+      <span class="where">{{ where() }}</span>
       @if (nextId(); as id) {
-        <a class="back-link" [routerLink]="['..', id]">{{ t.nextPosition }} &rsaquo;</a>
+        <a class="topbar-link" [routerLink]="['/positions', id]">
+          {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      } @else {
+        <a class="topbar-link" role="link" aria-disabled="true">
+          {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
+        </a>
       }
     </div>
   }
 </nav>
 
 @if (list.status() === 'error') {
-  <div class="state state-message" role="alert">
+  <div class="notice" role="alert">
     <p>{{ t.loadError }}</p>
+    <p>{{ t.loadErrorHint }}</p>
     <button type="button" class="button" (click)="list.retry()">{{ t.retry }}</button>
   </div>
-} @else if (list.status() === 'loading') {
-  <p class="state state-message" role="status">{{ t.loading }}</p>
-} @else if (redirecting()) {
-  <p class="state state-message" role="status">{{ t.loading }}</p>
+} @else if (list.status() === 'loading' || redirecting()) {
+  <p class="notice" role="status">{{ t.loading }}</p>
 } @else if (!position()) {
-  <p class="state state-message" role="alert">{{ t.notFound }}</p>
+  <p class="notice" role="alert">{{ t.notFound }}</p>
 } @else if (position(); as position) {
-  <h1 #heading tabindex="-1">{{ i18n.localize(position.title) }}</h1>
-
   @if (exercise() === 'unplayable') {
-    <p class="state state-message" role="alert">{{ t.unplayable }}</p>
+    <p class="notice" role="alert">{{ t.unplayable }}</p>
   } @else if (exercise() === 'ready') {
-    <div class="feedback">
-      <p
-        #statusMessage
-        class="status"
-        role="status"
-        tabindex="-1"
-        [class.wrong]="trainer.feedback()?.kind === 'wrong'"
-        [class.right]="trainer.feedback()?.kind === 'correct'"
-      >
-        {{ status() }}
-      </p>
-      @if (hintText(); as hint) {
-        <p class="hint">{{ hint }}</p>
-      }
-    </div>
+    <div class="exercise">
+      <div class="head" [class.revealing]="revealed()">
+        @if (revealed()) {
+          <p class="riddle-line">
+            <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
+            {{ sideToPlayLabel(position.playerSide, t) }},
+            {{ t.ownMoves(trainer.playerMoveCount()) }}
+          </p>
+        }
+        <h1 #heading tabindex="-1">
+          @if (revealed()) {
+            <span class="title-text">{{ i18n.localize(position.title) }}</span>
+          } @else {
+            <span class="riddle">
+              <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
+              <span>{{ sideToPlayLabel(position.playerSide, t) }}</span>
+              <span class="own-pill">{{ t.ownMoves(trainer.playerMoveCount()) }}</span>
+            </span>
+          }
+        </h1>
+        @if (revealed()) {
+          <div class="found">
+            <ul class="tags" [attr.aria-label]="t.themes">
+              @for (tag of position.tags; track tag; let i = $index) {
+                <li class="theme-tag" [style.--i]="i">{{ tagLabel(tag, t) }}</li>
+              }
+            </ul>
+            @if (position.source) {
+              <dl class="source">
+                <dt>{{ t.game }}</dt>
+                <dd>{{ position.source }}</dd>
+              </dl>
+            }
+          </div>
+        }
+      </div>
 
-    <div class="play-layout">
-      <div class="play-board">
+      <div class="feedback">
+        <p
+          #statusMessage
+          class="message"
+          role="status"
+          tabindex="-1"
+          [class.wrong]="message().kind === 'wrong'"
+          [class.right]="message().kind === 'right'"
+        >
+          <span class="msg-icon"><app-icon [name]="message().icon" /></span>
+          <span>
+            {{ message().main }}
+            @if (message().sub; as sub) {
+              <span class="sub">{{ sub }}</span>
+            }
+          </span>
+        </p>
+        @if (hintText(); as hint) {
+          <p class="hint-line">
+            <app-icon name="mini-bulb" />
+            <span
+              ><strong>{{ t.hintTitle }}</strong> {{ hint }}</span
+            >
+          </p>
+        }
+      </div>
+
+      <div class="board-col" role="group" [attr.aria-label]="t.boardLabel(position.playerSide)">
         <app-board
+          [class.glow]="trainer.phase() === 'solved'"
           [fen]="game.fen()"
           [orientation]="position.playerSide"
           [turnColor]="game.turn()"
@@ -57,117 +117,161 @@
           [lastMove]="game.lastMove()"
           [check]="game.isCheck()"
           [viewOnly]="trainer.isReplay()"
+          [marks]="marks()"
+          [ring]="ring()"
           [labels]="i18n.t().board"
           (move)="trainer.play($event)"
         />
       </div>
 
-      <div class="panel play-panel">
-        <div class="meta">
-          <p class="side">{{ sideToPlayLabel(position.playerSide, t) }}</p>
-          @if (position.source) {
-            <p class="muted">{{ position.source }}</p>
-          }
-          <ul class="tags" [attr.aria-label]="t.themes">
-            @for (tag of position.tags; track tag) {
-              <li class="tag">{{ tagLabel(tag, t) }}</li>
-            }
-          </ul>
-        </div>
-
+      <div class="panel">
         @if (!trainer.isReplay()) {
-          <div class="actions button-row">
+          <div class="progress-line">
+            <span>{{
+              trainer.playerMoveCount() === 1
+                ? t.oneMove
+                : t.moveOf(found() + 1, trainer.playerMoveCount())
+            }}</span>
+            <span class="pips" aria-hidden="true">
+              @for (pip of pips(); track $index) {
+                <span class="pip" [class]="pip"></span>
+              }
+            </span>
+          </div>
+          <div class="button-row">
             <button
               type="button"
               class="button"
               [attr.aria-disabled]="!!hintText()"
               (click)="trainer.showHint()"
             >
-              {{ t.hint }}
+              <app-icon name="mini-bulb" />{{ t.hint }}
             </button>
             <button type="button" class="button" (click)="trainer.revealSolution()">
-              {{ t.showSolution }}
+              <app-icon name="mini-eye" />{{ t.showSolution }}
             </button>
           </div>
+          @if (steps().length) {
+            <div class="block">
+              <h2 class="box-title">{{ t.yourMoves }}</h2>
+              <ol class="steps">
+                @for (view of steps(); track view.ply) {
+                  <li [class.opponent]="!view.step.byPlayer">
+                    <span class="plain">{{ view.number }} {{ i18n.san(view.step.san) }}</span>
+                  </li>
+                }
+              </ol>
+            </div>
+          }
         } @else {
-          <p class="step" aria-live="polite">{{ stepText() }}</p>
-          <div
-            class="replay step-buttons"
-            role="group"
-            [attr.aria-label]="t.replayControls"
-            (keydown.home)="onReplayKey($event, 'start')"
-            (keydown.end)="onReplayKey($event, 'end')"
-          >
-            <button
-              type="button"
-              class="button"
-              [attr.aria-disabled]="!game.canGoBack()"
-              [attr.aria-label]="t.first"
-              [title]="t.first"
-              (click)="trainer.goToStart()"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </button>
-            <button
-              type="button"
-              class="button"
-              [attr.aria-disabled]="!game.canGoBack()"
-              [attr.aria-label]="t.previous"
-              [title]="t.previous"
-              (click)="trainer.goBack()"
-            >
-              <span aria-hidden="true">&lsaquo;</span>
-            </button>
-            <button
-              type="button"
-              class="button"
-              [attr.aria-disabled]="!game.canGoForward()"
-              [attr.aria-label]="t.next"
-              [title]="t.next"
-              (click)="trainer.goForward()"
-            >
-              <span aria-hidden="true">&rsaquo;</span>
-            </button>
-            <button
-              type="button"
-              class="button"
-              [attr.aria-disabled]="!game.canGoForward()"
-              [attr.aria-label]="t.last"
-              [title]="t.last"
-              (click)="trainer.goToEnd()"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </button>
-          </div>
-        }
-
-        @if (steps().length) {
-          <h2 class="panel-title">{{ t.solution }}</h2>
-          <ol class="steps">
-            @for (view of steps(); track view.ply) {
-              <li [class.opponent]="!view.step.byPlayer">
-                @if (trainer.isReplay()) {
+          @if (trainer.phase() === 'revealed') {
+            <div class="result revealing-late">
+              <span
+                >{{ t.resultRevealed }}<span class="note">{{ t.resultRevealedNote }}</span></span
+              >
+            </div>
+          } @else if (trainer.result(); as result) {
+            <div class="result revealing-late">
+              @if (result === 'first') {
+                <span class="seal"><app-icon name="mini-star" /></span>
+              }
+              <span>
+                {{ result === 'first' ? t.resultFirst : t.resultSolved
+                }}<span class="note">{{
+                  result === 'unsaved' ? t.resultNotSaved : t.resultSaved
+                }}</span>
+              </span>
+            </div>
+          }
+          <div class="block revealing-late">
+            <h2 class="box-title">{{ t.solution }}</h2>
+            <ol class="steps">
+              @for (view of steps(); track view.ply) {
+                <li [class.opponent]="!view.step.byPlayer">
                   <button
                     type="button"
                     class="button"
                     [attr.aria-current]="view.ply === game.ply() ? 'step' : null"
+                    [attr.aria-label]="
+                      (view.step.byPlayer ? t.yourMove : t.opponentMove) +
+                      ' ' +
+                      view.number +
+                      ' ' +
+                      i18n.san(view.step.san)
+                    "
                     (click)="trainer.goTo(view.ply)"
                   >
-                    {{ view.number }} {{ view.step.san }}
+                    {{ view.number }} {{ i18n.san(view.step.san) }}
                   </button>
-                } @else {
-                  <span>{{ view.number }} {{ view.step.san }}</span>
-                }
-              </li>
+                </li>
+              }
+            </ol>
+            <div
+              class="replay-controls"
+              role="group"
+              [attr.aria-label]="t.replayControls"
+              (keydown.home)="onReplayKey($event, 'start')"
+              (keydown.end)="onReplayKey($event, 'end')"
+            >
+              <button
+                type="button"
+                class="button"
+                [attr.aria-disabled]="!game.canGoBack()"
+                [attr.aria-label]="t.first"
+                [title]="t.first"
+                (click)="trainer.goToStart()"
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+              <button
+                type="button"
+                class="button"
+                [attr.aria-disabled]="!game.canGoBack()"
+                [attr.aria-label]="t.previous"
+                [title]="t.previous"
+                (click)="trainer.goBack()"
+              >
+                <span aria-hidden="true">&lsaquo;</span>
+              </button>
+              <button
+                type="button"
+                class="button"
+                [attr.aria-disabled]="!game.canGoForward()"
+                [attr.aria-label]="t.next"
+                [title]="t.next"
+                (click)="trainer.goForward()"
+              >
+                <span aria-hidden="true">&rsaquo;</span>
+              </button>
+              <button
+                type="button"
+                class="button"
+                [attr.aria-disabled]="!game.canGoForward()"
+                [attr.aria-label]="t.last"
+                [title]="t.last"
+                (click)="trainer.goToEnd()"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </div>
+            <p class="step-text" aria-live="polite">{{ stepText() }}</p>
+          </div>
+          <div class="block revealing-late">
+            <h2 class="box-title">{{ t.explanation }}</h2>
+            <p class="explanation">{{ i18n.localize(position.explanation) }}</p>
+          </div>
+          <div class="after-actions revealing-late">
+            @if (nextId(); as id) {
+              <a class="button primary" [routerLink]="['/positions', id]">{{ t.nextExercise }}</a>
             }
-          </ol>
-        }
-
-        @if (trainer.isReplay()) {
-          <h2 class="panel-title">{{ t.explanation }}</h2>
-          <p>{{ i18n.localize(position.explanation) }}</p>
-          <div class="actions button-row">
-            <button type="button" class="button" (click)="trainer.retry()">{{ t.tryAgain }}</button>
+            <button type="button" class="button" (click)="trainer.retry()">
+              {{ t.tryAgain }}
+            </button>
+            @if (analysis(); as link) {
+              <a class="button" [routerLink]="link.commands" [queryParams]="link.queryParams">
+                <app-icon name="mini-search" />{{ t.analyse }}
+              </a>
+            }
           </div>
         }
       </div>
