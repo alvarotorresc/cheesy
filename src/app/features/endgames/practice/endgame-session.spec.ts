@@ -950,6 +950,44 @@ describe('EndgameSession', () => {
       expect(session.milestone()).toMatchObject({ promotedOrMated: false });
     });
 
+    it('should not let the rival move when its answer comes before the check of the promotion', async () => {
+      session.play(input('a7a8q'));
+      await settle();
+
+      await answer(game.fen(), {
+        category: 'loss',
+        dtz: -2,
+        dtm: -3,
+        checkmate: false,
+        stalemate: false,
+        moves: [{ uci: 'h8g7', category: 'win', dtz: 1, dtm: 2 }],
+      });
+      expect(sans()).toEqual(['a8=Q+']);
+
+      await answer(PROMO.fen, PROMO_RESPONSE('loss'));
+
+      expect(session.goalState()).toBe('achieved');
+      expect(sans()).toEqual(['a8=Q+']);
+      expect(session.engineThinking()).toBe(false);
+    });
+
+    it('should play the rival answer once the check leaves the goal open', async () => {
+      session.play(input('a7a8q'));
+      await settle();
+      await answer(game.fen(), {
+        category: 'loss',
+        dtz: -2,
+        dtm: -3,
+        checkmate: false,
+        stalemate: false,
+        moves: [{ uci: 'h8g7', category: 'win', dtz: 1, dtm: 2 }],
+      });
+
+      await answer(PROMO.fen, PROMO_RESPONSE('blessed-loss'));
+
+      expect(sans()).toEqual(['a8=Q+', 'Kg7']);
+    });
+
     it('should say the win escaped, without closing the game', async () => {
       session.play(input('a7a8q'));
       await settle();
