@@ -187,7 +187,7 @@ describe('PracticePage', () => {
     });
 
     it('should say that progress stays in the browser', () => {
-      expect(text('app-progress-note')).toContain('Your progress stays in this browser');
+      expect(text('app-progress-note')).toContain('Your progress is saved in this browser only');
     });
 
     it('should choose the colour of the player', async () => {

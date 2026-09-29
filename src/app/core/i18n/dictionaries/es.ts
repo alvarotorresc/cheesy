@@ -173,7 +173,7 @@ export const es: Messages = {
     saved: 'Progreso guardado en este navegador.',
     saveFailed: 'No se ha podido guardar este resultado en este navegador.',
     privacy:
-      'Tu progreso se queda en este navegador: sin cuentas, sin analítica, no se envía nada a ningún sitio.',
+      'Tu progreso se guarda solo en este navegador. No hay cuentas ni cookies y tu progreso no sale de este dispositivo; si borras los datos del navegador, se pierde.',
     unavailable:
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
     listNote: 'Una línea cuenta como practicada con cualquiera de los dos colores.',

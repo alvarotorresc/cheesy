@@ -169,7 +169,7 @@ export const en = {
     saved: 'Progress saved in this browser.',
     saveFailed: 'This result could not be saved in this browser.',
     privacy:
-      'Your progress stays in this browser: no accounts, no analytics, nothing is sent anywhere.',
+      'Your progress is saved in this browser only. There are no accounts or cookies and your progress never leaves this device; if you clear the browser data, it is lost.',
     unavailable:
       'This browser is not letting us save progress (private browsing or blocked storage). Everything else works.',
     listNote: 'A line counts as practised with either colour.',

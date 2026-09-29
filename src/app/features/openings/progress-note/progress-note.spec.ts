@@ -56,7 +56,7 @@ describe('ProgressNote', () => {
     await create(undefined, { note: 'A line counts as practised with either colour.' });
 
     expect(text('.note')).toContain(
-      'Your progress stays in this browser: no accounts, no analytics, nothing is sent anywhere.',
+      'Your progress is saved in this browser only. There are no accounts or cookies and your progress never leaves this device; if you clear the browser data, it is lost.',
     );
     expect(text('.note')).toContain('A line counts as practised with either colour.');
   });

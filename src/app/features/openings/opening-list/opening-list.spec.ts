@@ -190,7 +190,7 @@ describe('OpeningList', () => {
       await settle();
 
       expect(element.querySelector('app-progress-note')?.textContent).toContain(
-        'Your progress stays in this browser',
+        'Your progress is saved in this browser only',
       );
       expect(element.querySelector('app-progress-note')?.textContent).toContain(
         'A line counts as practised with either colour.',

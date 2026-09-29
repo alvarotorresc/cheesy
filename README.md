@@ -1,21 +1,19 @@
 # Cheesy
 
-A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no tracking.
+A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies. Visits may be counted with a self-hosted Umami, without cookies or personal data.
 
-When you practise endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer; no other request leaves the browser for any site but this one.
-
-The board is always playable. You can make any legal move and the app reacts to it; it never blocks you.
+When you practise endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer; apart from the optional visit counter above, no other request leaves the browser for any site but this one.
 
 The interface is available in English and Spanish.
 
 ## Sections
 
-- **Openings**: play an opening and drill its main lines.
+- **Openings**: play an opening and practise its main lines.
 - **Endgames**: convert winning endgames and hold the drawn ones.
 - **Positions**: find the best move in tactical positions.
 - **Analysis**: a free board to explore any idea, with move history navigation, an optional
   engine (evaluation bar and three best lines), FEN and PGN import and export, and links that open
-  a position (`/analysis?fen=…`). The engine is off by default: it downloads about 2 MB the first
+  a position (`/analysis?fen=…&pgn=…`). The engine is off by default: it downloads about 2 MB the first
   time it is turned on.
 
 The analysis board is available now. The other sections are in progress.
