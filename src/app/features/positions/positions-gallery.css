@@ -1,23 +1,195 @@
 :host {
+  display: block;
+  --shelf-col: min(76%, 17rem);
+  --shelf-min: 15rem;
+}
+
+/* ---- Intro ---- */
+.intro {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 46rem;
+}
+
+.intro-lead {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  max-width: 40rem;
+}
+
+/* ---- Filters: folded behind a button on a phone, always open from 48rem ---- */
+:host .filters {
+  display: none;
+  margin-top: var(--space-3);
+}
+
+:host .filters.open {
+  display: grid;
+}
+
+@media (min-width: 48rem) {
+  :host .filters {
+    display: grid;
+    margin-top: var(--space-8);
+  }
+
+  :host .filter-row {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    column-gap: var(--space-8);
+  }
+}
+
+/* ---- Groups by number of moves ---- */
+.groups {
   display: grid;
   gap: var(--space-8);
+  margin-top: var(--space-8);
 }
 
-.side {
-  color: var(--color-text);
-  font-weight: 600;
+:host .shelf.single {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
 }
 
-.source {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
+/* ---- Card: the whole card is the link to the exercise ---- */
+.card {
+  color: inherit;
+  text-decoration: none;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
+.card:focus-visible {
+  outline-offset: 3px;
+}
+
+.card app-mini-board {
+  transition: transform 260ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover app-mini-board {
+    transform: translateY(-3px);
+    --mb-shadow: 0 0 0 1px var(--board-edge), 0 0 0 4px var(--color-accent), var(--shadow-board);
+  }
+}
+
+.card:focus-visible app-mini-board {
+  --mb-shadow: 0 0 0 1px var(--board-edge), 0 0 0 4px var(--color-accent), var(--shadow-board);
+}
+
+:host .card-body {
   gap: var(--space-1);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+}
+
+:host .card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+:host .card-foot {
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--space-1) 0;
+  border-top: 1px solid var(--color-border);
+  min-height: calc(var(--tap) - 4px);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.status app-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.status.solved {
+  color: var(--color-text);
+}
+
+.status.first {
+  color: var(--color-accent-text);
+}
+
+.status.first .seal {
+  display: inline-grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.status.first .seal app-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.go {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---- Loading ---- */
+.skeleton-board {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+}
+
+.skeleton .bar {
+  height: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+}
+
+.skeleton .bar.short {
+  width: 55%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton {
+    animation: breathe 1.4s ease-in-out infinite alternate;
+  }
+
+  @keyframes breathe {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0.55;
+    }
+  }
+}
+
+/* ---- Entrance when the filters change: a short fade ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .groups.enter .card {
+    animation: rise 320ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 30ms);
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
