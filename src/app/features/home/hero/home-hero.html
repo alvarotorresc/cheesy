@@ -1,0 +1,108 @@
+<section class="hero" aria-labelledby="home-title">
+  <div class="hero-text">
+    <h1 id="home-title">{{ i18n.t().home.title }}</h1>
+    <p class="lead">{{ i18n.t().home.intro }}</p>
+  </div>
+
+  <div #stage class="hero-board" [class.playing]="player.moving()">
+    <app-mini-board
+      [frames]="line().frames"
+      [ply]="player.ply()"
+      [orientation]="line().side"
+      [label]="i18n.t().home.heroBoardLabel(name(), line().side)"
+      [fading]="player.fading()"
+    />
+  </div>
+
+  <div class="panel" aria-labelledby="home-now-name">
+    <div class="now">
+      <h2 class="now-name" id="home-now-name">{{ name() }}</h2>
+      <p class="now-meta">
+        <span>
+          <i
+            class="king pc"
+            [class.pc-wK]="line().side === 'white'"
+            [class.pc-bK]="line().side === 'black'"
+            aria-hidden="true"
+          ></i>
+          {{ line().side === 'white' ? i18n.t().home.forWhite : i18n.t().home.forBlack }}
+        </span>
+        @if (variant(); as variantName) {
+          <span class="now-var">{{ variantName }}</span>
+        }
+      </p>
+    </div>
+
+    <p class="moves" aria-hidden="true">
+      @for (pair of pairs(); track pair.number) {
+        <span class="pair">
+          <span class="num">{{ pair.number }}.</span>
+          @for (move of pair.moves; track move.index) {
+            <span
+              class="mv"
+              [class.now]="move.index === player.ply() - 1"
+              [class.future]="move.index >= player.ply()"
+              >{{ move.text }}</span
+            >
+          }
+        </span>
+      }
+    </p>
+
+    <div class="controls">
+      <div class="transport" role="group" [attr.aria-label]="i18n.t().home.boardControls">
+        <button
+          type="button"
+          class="icon-button"
+          [attr.aria-label]="i18n.t().home.previousMove"
+          [disabled]="player.ply() === 0"
+          (click)="previous()"
+        >
+          <app-icon name="mini-prev" />
+        </button>
+        <button
+          type="button"
+          class="icon-button play"
+          [attr.aria-pressed]="player.moving()"
+          [attr.aria-label]="player.moving() ? i18n.t().home.pauseMoves : i18n.t().home.playMoves"
+          (click)="player.toggle()"
+        >
+          <app-icon [name]="player.moving() ? 'mini-pause' : 'mini-play'" />
+        </button>
+        <button
+          type="button"
+          class="icon-button"
+          [attr.aria-label]="i18n.t().home.nextMove"
+          [disabled]="player.ply() === player.lastPly()"
+          (click)="next()"
+        >
+          <app-icon name="mini-next" />
+        </button>
+      </div>
+
+      <ul class="picker" [attr.aria-label]="i18n.t().home.heroPicker">
+        @for (option of lines(); track option.id; let i = $index) {
+          <li>
+            <button
+              type="button"
+              class="chip"
+              [attr.aria-pressed]="i === player.index()"
+              [attr.aria-label]="i18n.localize(option.name)"
+              [style.--p]="i === player.index() ? progress() : null"
+              (click)="choose(i)"
+            >
+              {{ shortName(option.id) }}
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <a
+      class="button primary cta"
+      [routerLink]="['/openings', line().id]"
+      [attr.aria-label]="i18n.t().home.playOpeningLabel(name())"
+      >{{ i18n.t().home.playOpening }}</a
+    >
+  </div>
+</section>

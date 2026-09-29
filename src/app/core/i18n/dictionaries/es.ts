@@ -15,13 +15,65 @@ export const es: Messages = {
     analysis: 'Análisis',
   },
   home: {
-    title: 'Practica ajedrez contra el ordenador',
+    title: 'Aperturas, finales y táctica, en tu navegador.',
     intro:
-      'Juega aperturas, finales y posiciones tácticas en tu navegador. El tablero siempre se puede jugar: haz cualquier jugada legal y mira qué pasa.',
-    openings: 'Juega una apertura y repasa sus líneas principales.',
-    endgames: 'Gana los finales ganados y defiende los de tablas.',
-    positions: 'Encuentra la mejor jugada en posiciones tácticas.',
-    analysis: 'Monta un tablero libre y explora cualquier idea.',
+      'Juega aperturas y finales contra el ordenador, encuentra la jugada en posiciones tácticas y analiza con motor.',
+    loading: 'Cargando el inicio…',
+    loadError: 'No se ha podido cargar el contenido.',
+    retry: 'Reintentar',
+    heroBoardLabel: (name: string, side: 'white' | 'black') =>
+      `Tablero con la línea principal de ${name}, visto desde las ${side === 'white' ? 'blancas' : 'negras'}.`,
+    forWhite: 'Para blancas',
+    forBlack: 'Para negras',
+    heroShort: {
+      'ruy-lopez': 'Española',
+      'sicilian-najdorf': 'Najdorf',
+      'queens-gambit-declined': 'Gambito de Dama',
+      'english-opening': 'Inglesa',
+    },
+    boardControls: 'Controles del tablero',
+    previousMove: 'Jugada anterior',
+    nextMove: 'Jugada siguiente',
+    playMoves: 'Reproducir las jugadas',
+    pauseMoves: 'Pausar las jugadas',
+    heroPicker: 'Aperturas del tablero',
+    playOpening: 'Jugar esta apertura',
+    playOpeningLabel: (name: string) => `Jugar ${name}`,
+    sections: 'Secciones',
+    stopAnimation: 'Parar la animación',
+    openingsDesc:
+      'Juega la línea contra el ordenador o practícala en modo estricto hasta dominarla.',
+    openingsCount: (count: number) => `${count} aperturas`,
+    dragonName: 'Variante del Dragón',
+    seenFromBlack: 'vista desde las negras',
+    openingsAlt: (name: string, moves: string) =>
+      `Tablero con la ${name} tras ${moves}, vista desde las negras.`,
+    openingsButton: (name: string) => `Reproducir las jugadas de la ${name}`,
+    endgamesDesc: 'Gana los finales ganados y defiende los de tablas contra un rival perfecto.',
+    endgamesCount: (count: number) => `${count} finales`,
+    endgamesAlt: (
+      name: string,
+      turn: 'white' | 'black',
+      goal: 'win' | 'draw',
+      side: 'white' | 'black',
+    ) =>
+      `${name}. Juegan ${turn === 'white' ? 'blancas' : 'negras'}. Objetivo: ${goal === 'win' ? 'ganar' : 'hacer tablas'} con ${side === 'white' ? 'blancas' : 'negras'}.`,
+    endgamesGoal: (goal: 'win' | 'draw', side: 'white' | 'black') =>
+      `Objetivo: ${goal === 'win' ? 'ganar' : 'hacer tablas'} con ${side === 'white' ? 'blancas' : 'negras'}`,
+    endgamesButton: (name: string) => `Resaltar las piezas de la ${name}`,
+    positionsDesc: 'Encuentra la jugada ganadora en posiciones tácticas y partidas famosas.',
+    positionsCount: (count: number) => `${count} posiciones`,
+    positionsQuestion: (turn: 'white' | 'black') =>
+      `¿Qué juegan las ${turn === 'white' ? 'blancas' : 'negras'}?`,
+    positionsAlt: (title: string, turn: 'white' | 'black') =>
+      `${title}, posición de salida. ¿Qué juegan las ${turn === 'white' ? 'blancas' : 'negras'}?`,
+    positionsButton: 'Pasar por varias posiciones de ejercicio',
+    analysisDesc: 'Carga una posición o una partida y explórala con el motor.',
+    analysisCount: 'Tablero libre',
+    analysisAlt: (name: string, moves: string) =>
+      `${name} tras ${moves}, con una barra de evaluación ilustrativa.`,
+    analysisButton: (name: string) => `Reproducir la ${name} con la barra de evaluación`,
+    illustrativeBar: 'barra ilustrativa',
   },
   placeholder: {
     comingSoon: 'Esta sección está en camino.',

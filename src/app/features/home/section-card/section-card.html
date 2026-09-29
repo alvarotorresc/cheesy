@@ -1,0 +1,26 @@
+<article class="sec" [class.playing]="replay().playing()" [appReplayTrigger]="replay()">
+  <figure class="sec-figure">
+    <ng-content select="[figure]" />
+  </figure>
+  <div class="sec-body">
+    <div class="sec-head">
+      <h3 class="sec-title">
+        <a class="sec-link" [routerLink]="route()">{{ title() }}</a>
+      </h3>
+      <button
+        type="button"
+        class="replay"
+        [attr.aria-pressed]="replay().playing()"
+        [attr.aria-label]="replay().playing() ? i18n.t().home.stopAnimation : buttonLabel()"
+        (click)="replay().toggleFromButton()"
+      >
+        <app-icon [name]="replay().playing() ? 'mini-pause' : 'mini-play'" />
+      </button>
+    </div>
+    <p class="sec-count">{{ count() }}</p>
+    <p class="sec-desc">{{ description() }}</p>
+    <p class="sec-note" aria-hidden="true">
+      <ng-content select="[note]" />
+    </p>
+  </div>
+</article>
