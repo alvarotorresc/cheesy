@@ -19,3 +19,15 @@ export interface PendingPromotion {
 
 /** Texts shown by the board. The parent passes them already translated. */
 export type BoardLabels = Record<PromotionRole | 'promotion' | 'cancel', string>;
+
+/** An arrow drawn by the app (not by the user), for example the best move. */
+export interface BoardArrow {
+  readonly from: Key;
+  readonly to: Key;
+}
+
+/** Colour of a marked square: a retracted move, a hint and a help square. */
+export type BoardMark = 'wrong' | 'hint' | 'help';
+
+/** Ring around the whole board. */
+export type BoardRing = 'none' | 'accent' | 'danger';

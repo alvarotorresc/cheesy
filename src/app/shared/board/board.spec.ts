@@ -71,6 +71,79 @@ describe('BoardComponent', () => {
     expect(element.querySelectorAll('square.last-move')).toHaveLength(2);
   });
 
+  it('should draw the arrows it is given with the best-move brush', async () => {
+    fixture.componentRef.setInput('arrows', [{ from: 'e2', to: 'e4' }]);
+    await fixture.whenStable();
+    await nextFrame();
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+
+    expect(api.state.drawable.autoShapes).toEqual([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
+    expect(api.state.drawable.brushes['best']).toMatchObject({ color: '#15781b', opacity: 0.82 });
+    expect(element.querySelector('svg.cg-shapes line[stroke="#15781b"]')).not.toBeNull();
+  });
+
+  it('should remove the arrows when the input is emptied', async () => {
+    fixture.componentRef.setInput('arrows', [{ from: 'e2', to: 'e4' }]);
+    await fixture.whenStable();
+    fixture.componentRef.setInput('arrows', []);
+    await fixture.whenStable();
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+
+    expect(api.state.drawable.autoShapes).toEqual([]);
+  });
+
+  it('should paint the marked squares with a class per mark', async () => {
+    fixture.componentRef.setInput(
+      'marks',
+      new Map([
+        ['e2', 'wrong'],
+        ['e4', 'hint'],
+        ['g1', 'help'],
+      ]),
+    );
+    await fixture.whenStable();
+    await nextFrame();
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+
+    expect(api.state.highlight.custom).toEqual(
+      new Map([
+        ['e2', 'mark-wrong'],
+        ['e4', 'mark-hint'],
+        ['g1', 'mark-help'],
+      ]),
+    );
+    expect(
+      element.querySelectorAll('square.mark-wrong, square.mark-hint, square.mark-help'),
+    ).toHaveLength(3);
+  });
+
+  it('should set the ring class on the host', async () => {
+    expect(element.classList).not.toContain('ring-accent');
+
+    fixture.componentRef.setInput('ring', 'accent');
+    await fixture.whenStable();
+    expect(element.classList).toContain('ring-accent');
+    expect(element.classList).not.toContain('ring-danger');
+
+    fixture.componentRef.setInput('ring', 'danger');
+    await fixture.whenStable();
+    expect(element.classList).toContain('ring-danger');
+    expect(element.classList).not.toContain('ring-accent');
+  });
+
+  it('should put the rank numbers on the left and hide the coordinates when asked to', async () => {
+    expect(element.querySelector('coords.ranks.left')).not.toBeNull();
+    expect(element.querySelector('coords.files')).not.toBeNull();
+
+    const bare = TestBed.createComponent(BoardComponent);
+    bare.componentRef.setInput('fen', INITIAL_FEN);
+    bare.componentRef.setInput('labels', LABELS);
+    bare.componentRef.setInput('coordinates', false);
+    await bare.whenStable();
+
+    expect(bare.nativeElement.querySelector('coords')).toBeNull();
+  });
+
   it('should keep the board interactive when it starts in view-only mode', async () => {
     const viewOnlyFixture = TestBed.createComponent(BoardComponent);
     viewOnlyFixture.componentRef.setInput('fen', INITIAL_FEN);
