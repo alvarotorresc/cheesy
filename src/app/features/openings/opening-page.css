@@ -188,6 +188,13 @@
   }
 }
 
+/* The play page is one window tall there: the placeholder board leaves room for the rest. */
+@media (min-width: 60rem) and (orientation: landscape) {
+  .sk-board {
+    max-width: min(36rem, 100dvh - 22rem);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .sk {
     animation: pulse 1.4s ease-in-out infinite;
