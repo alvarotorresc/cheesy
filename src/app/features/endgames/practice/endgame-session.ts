@@ -13,6 +13,7 @@ import {
   type TablebaseResult,
 } from '../../../core/tablebase';
 import {
+  DRAW_TARGET,
   evaluateEndgame,
   probeKey,
   type EndgameGoalState,
@@ -180,6 +181,8 @@ export class EndgameSession {
   private rivalOnEngine = false;
   private checkController: AbortController | undefined;
   private draining = false;
+  /** The lookups of the moves of the player in progress, for the rival to wait for. */
+  private checkRun: Promise<void> | undefined;
   private destroyed = false;
 
   constructor() {
@@ -287,9 +290,13 @@ export class EndgameSession {
     const controller = new AbortController();
     this.rivalController = controller;
     this.tablebase.probe(target, controller.signal).then(
-      (result) => {
+      async (result) => {
         if (this.rivalRequest !== request) return;
         this.rivalController = undefined;
+        // The last move of the player may close the goal once its own lookup comes back: the
+        // rival waits for it and only answers if the game is still on and unchanged.
+        if (this.lastMoveAwaitsCheck()) await this.checkRun;
+        if (this.rivalRequest !== request || this.goal()) return;
         let move: TablebaseMove;
         try {
           move = chooseRivalMove({ fen: target, result, seenPositions: this.seenPositions() });
@@ -356,8 +363,14 @@ export class EndgameSession {
    * Looks up, one at a time and in order, the positions the player moved from that have no
    * answer yet. Stops at the first failure; it starts again the next time something works.
    */
-  private async checkPending(): Promise<void> {
-    if (this.draining || this.destroyed) return;
+  private checkPending(): Promise<void> {
+    if (this.draining || this.destroyed) return this.checkRun ?? Promise.resolve();
+    const run = this.drainChecks();
+    this.checkRun = run;
+    return run;
+  }
+
+  private async drainChecks(): Promise<void> {
     this.draining = true;
     const controller = new AbortController();
     this.checkController = controller;
@@ -380,6 +393,21 @@ export class EndgameSession {
         this.draining = false;
       }
     }
+  }
+
+  /**
+   * The last move of the player is the only one waiting for its lookup, and its answer can close
+   * the goal (any win goal, or a draw one a move short of the target). A gap before it (an older
+   * lookup that has not come back) keeps its result out of the goal, so nobody waits.
+   */
+  private lastMoveAwaitsCheck(): boolean {
+    const milestone = this.milestone();
+    if (milestone?.kind === 'draw' && milestone.held + 1 < DRAW_TARGET) return false;
+    const unchecked = this.playerMoves().filter(
+      ({ fenBefore }) =>
+        !this.probes().has(probeKey(fenBefore)) && this.tablebase.isApplicable(fenBefore),
+    );
+    return unchecked.length === 1 && unchecked[0].index === this.game.moves().length - 1;
   }
 
   private abortChecks(): void {
