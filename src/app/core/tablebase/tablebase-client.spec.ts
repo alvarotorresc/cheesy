@@ -5,6 +5,7 @@ import {
   REQUEST_TIMEOUT_MS,
   TABLEBASE_URL,
   TablebaseClient,
+  tablebaseRequestUrl,
 } from './tablebase-client';
 import { createFetchTablebaseHttp, TABLEBASE_HTTP } from './tablebase-http';
 import { TablebaseError } from './tablebase.types';
@@ -310,6 +311,19 @@ describe('TablebaseClient', () => {
       expect(client.peek(fens[1])).toBeDefined();
       expect(client.peek(fens[500])).toBeDefined();
     });
+  });
+});
+
+describe('tablebaseRequestUrl', () => {
+  it('should build the address the client asks for, with the move number reset', () => {
+    expect(tablebaseRequestUrl('4k3/7R/r7/3KP3/8/8/8/8 b - - 3 40')).toBe(
+      `${TABLEBASE_URL}?fen=4k3%2F7R%2Fr7%2F3KP3%2F8%2F8%2F8%2F8%20b%20-%20-%203%201`,
+    );
+  });
+
+  it('should give nothing for a position the tablebase cannot answer', () => {
+    expect(tablebaseRequestUrl(INITIAL_FEN)).toBeUndefined();
+    expect(tablebaseRequestUrl('not a fen')).toBeUndefined();
   });
 });
 

@@ -4,6 +4,7 @@ export {
   TABLEBASE_MAX_PIECES,
   TABLEBASE_URL,
   TablebaseClient,
+  tablebaseRequestUrl,
 } from './tablebase-client';
 export {
   TABLEBASE_HTTP,
