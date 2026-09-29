@@ -8,6 +8,7 @@ import {
 } from '../../core/content';
 import { EngineService } from '../../core/engine';
 import { GameService, type GameResult, type MoveInput } from '../../core/game';
+import { OPENING_RANDOM, pickBookMove } from './book-pick';
 import { describeTheory, type Theory, type TheoryDeviation } from './opening-theory';
 
 /** How the rival answers while the game is still in the tree. Out of it, the engine always plays. */
@@ -48,6 +49,7 @@ export class OpeningSession {
   private readonly game = inject(GameService);
   private readonly engine = inject(EngineService);
   private readonly content = inject(ContentService);
+  private readonly random = inject(OPENING_RANDOM);
 
   private readonly loadStatus = signal<LoadState>('idle');
   private readonly current = signal<{ book: OpeningBook; summary: OpeningSummary } | undefined>(
@@ -55,6 +57,7 @@ export class OpeningSession {
   );
   private readonly color = signal<Color>('white');
   private readonly mode = signal<OpponentMode>('book');
+  private readonly onlyMain = signal(false);
   private readonly skill = signal(DEFAULT_SKILL_LEVEL);
   private readonly waiting = signal(false);
   private readonly replyFailed = signal(false);
@@ -73,6 +76,8 @@ export class OpeningSession {
   readonly opening = computed(() => this.current()?.summary);
   readonly playerColor = this.color.asReadonly();
   readonly opponentMode = this.mode.asReadonly();
+  /** In book mode, the rival always plays our main line instead of varying. */
+  readonly mainOnly = this.onlyMain.asReadonly();
   readonly skillLevel = this.skill.asReadonly();
   readonly result = this.finalResult.asReadonly();
   /** Deviation waiting for the player to undo it or go on against the engine. */
@@ -177,6 +182,11 @@ export class OpeningSession {
     this.mode.set(mode);
   }
 
+  /** Applies to the next answers of the rival in book mode. */
+  setMainOnly(mainOnly: boolean): void {
+    this.onlyMain.set(mainOnly);
+  }
+
   /** Engine strength for the next answers, from 0 to 20. */
   setSkillLevel(level: number): void {
     if (Number.isNaN(level)) return;
@@ -256,7 +266,10 @@ export class OpeningSession {
     const generation = ++this.replyGeneration;
     const moves = this.game.moves().length;
     const theory = this.lineTheory();
-    const bookMove = this.mode() === 'book' ? theory?.next : undefined;
+    const bookMove =
+      this.mode() === 'book' && theory?.next
+        ? pickBookMove([theory.next, ...theory.alternatives], this.random, this.onlyMain())
+        : undefined;
     const startedAt = Date.now();
     this.waiting.set(true);
     const answer = bookMove

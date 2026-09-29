@@ -21,6 +21,13 @@ export interface TheoryDeviation {
   readonly alternatives: readonly BookNode[];
 }
 
+/** The rival's last move when it is one of our lines but not the main one. */
+export interface RivalChoice {
+  readonly chosen: BookNode;
+  /** What the main line plays instead. */
+  readonly main: BookNode;
+}
+
 export interface Theory {
   readonly status: TheoryStatus;
   /** Last move of the line found in the tree. Undefined before the first book move. */
@@ -35,6 +42,10 @@ export interface Theory {
   readonly alternatives: readonly BookNode[];
   /** Only when `out-of-book`. */
   readonly deviation: TheoryDeviation | undefined;
+  /** Named variations passed through to reach `node`, in order: "where you are going". */
+  readonly route: readonly BookNode[];
+  /** Set when the last move of the line, still in the tree, is an alternative to the main move. */
+  readonly rivalChoice: RivalChoice | undefined;
 }
 
 const sideOfPly = (ply: number): Color => (ply % 2 === 1 ? 'white' : 'black');
@@ -45,13 +56,34 @@ export const numberedMove = (ply: number, san: string): string => {
   return ply % 2 === 1 ? `${number}.${san}` : `${number}...${san}`;
 };
 
+const routeTo = (node: BookNode | undefined): BookNode[] => {
+  const route: BookNode[] = [];
+  for (let step = node; step; step = step.parent) if (step.name) route.unshift(step);
+  return route;
+};
+
+/** The last move of the line when the tree offered a main move there and it was not the one played. */
+const rivalChoiceOf = (book: OpeningBook, sans: readonly string[]): RivalChoice | undefined => {
+  if (sans.length === 0) return undefined;
+  const chosen = book.lookup(sans);
+  if (!chosen.inBook || !chosen.node) return undefined;
+  const offered = chosen.node.parent?.children ?? book.root;
+  const main = offered[0];
+  return main && main !== chosen.node ? { chosen: chosen.node, main } : undefined;
+};
+
 /**
  * Where a line of SAN moves, played from the initial position, stands in the opening tree. Pure, so
  * the play mode and a stricter practice mode can share it.
  */
 export const describeTheory = (book: OpeningBook, sans: readonly string[]): Theory => {
   const lookup = book.lookup(sans);
-  const base = { node: lookup.node, variation: lookup.variation };
+  const base = {
+    node: lookup.node,
+    variation: lookup.variation,
+    route: routeTo(lookup.node),
+    rivalChoice: rivalChoiceOf(book, sans),
+  };
   if (lookup.inBook && lookup.bookMove) {
     return {
       ...base,

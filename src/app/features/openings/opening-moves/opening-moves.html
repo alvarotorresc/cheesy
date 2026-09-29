@@ -1,0 +1,29 @@
+@if (rows().length === 0) {
+  <p class="moves-empty">{{ emptyLabel() }}</p>
+} @else {
+  <ol #list class="moves-list" [attr.aria-label]="label()">
+    @for (row of rows(); track row.number) {
+      <li>
+        <span class="n">{{ row.number }}.</span>
+        @for (cell of [row.white, row.black]; track $index) {
+          @if (cell) {
+            <button
+              type="button"
+              [class.off]="cell.off"
+              [attr.aria-current]="cell.ply === currentPly() ? 'step' : null"
+              [attr.aria-label]="
+                cell.off ? cell.spoken + ', ' + outOfLines().toLowerCase() : cell.spoken
+              "
+              [attr.title]="cell.off ? outOfLines() : null"
+              (click)="selectPly.emit(cell.ply)"
+            >
+              {{ cell.text }}
+            </button>
+          } @else {
+            <span class="empty-cell"></span>
+          }
+        }
+      </li>
+    }
+  </ol>
+}

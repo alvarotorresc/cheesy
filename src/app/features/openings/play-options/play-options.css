@@ -1,0 +1,128 @@
+:host {
+  display: block;
+}
+
+.options {
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.options summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0 var(--space-3);
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  list-style: none;
+}
+
+.options summary::-webkit-details-marker {
+  display: none;
+}
+
+.options summary:hover {
+  background: var(--color-surface-hover);
+}
+
+.opt-title {
+  font-weight: 800;
+}
+
+.opt-now {
+  grid-column: 1;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.opt-chev {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-right: var(--space-1);
+  border-right: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.options[open] .opt-chev {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+
+.options-body {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 48rem) {
+  .options-body {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: var(--space-8);
+  }
+}
+
+fieldset {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend,
+.field > span {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  font-weight: 600;
+  cursor: pointer;
+  justify-self: start;
+}
+
+.check input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--color-accent-text);
+}
+
+.check.disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.hint {
+  max-width: 38rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.field {
+  display: grid;
+  min-width: 0;
+}
+
+.field .select {
+  padding: 0 var(--space-3);
+  font-weight: 600;
+  max-width: 100%;
+}
