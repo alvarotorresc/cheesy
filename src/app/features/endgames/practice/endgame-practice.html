@@ -1,18 +1,58 @@
 @let t = i18n.t().endgames;
+@let tb = i18n.t().tablebase;
 <p class="back">
-  <a class="back-link" routerLink="/endgames">&larr; {{ t.backToCatalog }}</a>
+  <a routerLink="/endgames"><app-icon name="arrow-left" />{{ t.backToCatalog }}</a>
 </p>
 
-@if (endgame.isLoading()) {
-  <p class="note state-message" role="status">{{ t.loading }}</p>
-} @else if (endgame.error()) {
-  <div class="note state-message" role="alert">
+@if (endgames.isLoading()) {
+  <p class="notice" role="status">{{ t.loading }}</p>
+} @else if (endgames.error()) {
+  <div class="notice" role="alert">
     <p>{{ t.loadError }}</p>
-    <button type="button" class="button" (click)="endgame.reload()">{{ t.retry }}</button>
+    <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
   </div>
 } @else if (session.endgame(); as current) {
-  <div class="play-layout">
-    <div class="play-board">
+  <div class="practice">
+    <header class="head">
+      <p class="cat">{{ i18n.localize(current.category) }}</p>
+      <h1>{{ i18n.localize(current.name) }}</h1>
+      <p class="goal-line">
+        <app-icon [name]="current.goal === 'win' ? 'trophy' : 'scales'" />{{ goalLine() }}
+        <i
+          class="king"
+          [class.pc-wK]="session.playerSide() === 'white'"
+          [class.pc-bK]="session.playerSide() === 'black'"
+          aria-hidden="true"
+        ></i>
+      </p>
+    </header>
+
+    <div class="play" [class.past]="!atEnd()">
+      <p class="seat">
+        <i
+          class="king"
+          [class.pc-wK]="rivalSide() === 'white'"
+          [class.pc-bK]="rivalSide() === 'black'"
+          aria-hidden="true"
+        ></i>
+        <span class="who">{{ t.rival }}</span>
+        <span class="src" [class.warn]="session.rivalSource() !== 'tablebase'">
+          @switch (session.rivalSource()) {
+            @case ('tablebase') {
+              <app-icon name="check-circle" />{{ t.sourceTablebase }}
+            }
+            @case ('stockfish') {
+              <app-icon name="wifi-slash" />{{ t.sourceStockfish }}
+            }
+            @default {
+              <app-icon name="warning-circle" />{{ t.sourceNone }}
+            }
+          }
+        </span>
+        @if (rivalThinking()) {
+          <span class="turn muted">{{ t.thinking }}</span>
+        }
+      </p>
       <app-board
         [fen]="game.fen()"
         [orientation]="session.playerSide()"
@@ -20,106 +60,245 @@
         [dests]="session.dests()"
         [lastMove]="game.lastMove()"
         [check]="game.isCheck()"
+        [ring]="ring()"
         [labels]="i18n.t().board"
         (move)="onMove($event)"
       />
+      <p class="seat">
+        <i
+          class="king"
+          [class.pc-wK]="session.playerSide() === 'white'"
+          [class.pc-bK]="session.playerSide() === 'black'"
+          aria-hidden="true"
+        ></i>
+        <span class="who">{{ t.you }}</span>
+        <span>{{ fill(t.withColor, { color: colorName() }) }}</span>
+        @if (yourTurn()) {
+          <span class="turn">{{ t.yourTurn }}</span>
+        }
+      </p>
     </div>
 
-    <div class="side play-panel">
-      <header class="heading">
-        <h1>{{ i18n.localize(current.name) }}</h1>
-        <p class="goal">{{ goalText() }}</p>
-      </header>
-
-      <p class="status play-status" role="status" [attr.data-goal]="session.goal()">
-        {{ status() }}
-      </p>
-
-      @if (session.engineFailed()) {
-        <button type="button" class="button" (click)="session.retryEngine()">
-          {{ t.engineRetry }}
-        </button>
+    <div class="panel">
+      @if (goalAchieved()) {
+        <section #resultCard class="result" aria-labelledby="result-title" tabindex="-1">
+          <h2 id="result-title"><app-icon name="flag-checkered" />{{ t.resultAchieved }}</h2>
+          <p>{{ resultWhy() }}</p>
+          <div class="row">
+            @if (nextId(); as next) {
+              <a class="button primary" [routerLink]="['/endgames', next]">{{ t.nextEndgame }}</a>
+            }
+            @if (saveState() === 'saved') {
+              <span class="saved"><app-icon name="check-bold" />{{ t.saved }}</span>
+            } @else if (saveState() === 'failed') {
+              <span class="saved">{{ t.saveFailed }}</span>
+            }
+          </div>
+        </section>
+      } @else if (goalFailed()) {
+        <section #resultCard class="result failed" aria-labelledby="result-title" tabindex="-1">
+          <h2 id="result-title"><app-icon name="warning-circle" />{{ t.resultFailed }}</h2>
+          <p>{{ failedWhy() }}</p>
+        </section>
       }
 
-      <div class="change" role="status">
-        @if (resultChangeText(); as text) {
-          <p>{{ text }}</p>
-        }
-      </div>
+      @if (status()) {
+        <p class="status-line" role="status" [class.visually-hidden]="atEnd()">
+          {{ status() }}
+          @if (!atEnd()) {
+            <button type="button" class="text-button" (click)="backToCurrent()">
+              {{ t.backToCurrent }}
+            </button>
+          }
+        </p>
+      }
+
+      @if (resultChangeText(); as changed) {
+        <div class="alert fresh" role="alert">
+          <app-icon name="warning-circle" />
+          <p>{{ changed }}</p>
+          @if (showWinEscaped()) {
+            <p class="sub">{{ t.winEscaped }}</p>
+          }
+        </div>
+      }
+      @if (session.rivalSource() === 'none') {
+        <div class="alert" role="alert">
+          <app-icon name="wifi-slash" />
+          <p>{{ t.noAnswer }}</p>
+          <p class="sub">{{ t.noAnswerHint }}</p>
+          <button type="button" class="button" (click)="session.retryEngine()">
+            {{ t.engineRetry }}
+          </button>
+        </div>
+      }
+
+      @if (milestoneView(); as milestone) {
+        <section class="milestone" aria-labelledby="milestone-title">
+          @if (milestone.kind === 'draw') {
+            <h2 id="milestone-title">{{ t.drawTitle }}</h2>
+            <div class="fuse-head">
+              @if (milestone.byRules) {
+                <span class="big">{{ t.drawBigRules }}</span>
+                <span class="of">{{ fill(t.drawOfRules, { n: milestone.held }) }}</span>
+              } @else {
+                <span class="big">{{ milestone.held }}</span>
+                <span class="of">{{ t.drawOf }}</span>
+              }
+            </div>
+            <div class="fuse" role="img" [attr.aria-label]="fuseLabel()">
+              @for (cell of milestone.cells; track $index) {
+                <span [class]="cell" [class.new]="$index === filledCell()"></span>
+              }
+            </div>
+            <p class="fine">{{ drawNote() }}</p>
+          } @else {
+            <h2 id="milestone-title">
+              {{ milestone.needsPawn ? t.winTitlePawn : t.winTitleMate }}
+            </h2>
+            <ol class="steps">
+              <li [class]="milestone.winKept ? 'ok' : 'bad'">
+                <span class="mark"
+                  ><app-icon [name]="milestone.winKept ? 'check-bold' : 'warning-circle'"
+                /></span>
+                <span
+                  ><strong>{{ milestone.winKept ? t.winKept : t.winLost }}</strong
+                  ><span class="sub">{{ t.winCheck }}</span></span
+                >
+              </li>
+              <li [class.ok]="milestone.promotedOrMated">
+                <span class="mark"
+                  ><app-icon
+                    [name]="
+                      milestone.promotedOrMated
+                        ? 'check-bold'
+                        : milestone.needsPawn
+                          ? 'crown'
+                          : 'flag-checkered'
+                    "
+                /></span>
+                <span
+                  ><strong>{{ milestone.needsPawn ? t.winStepPawn : t.winStepMate }}</strong
+                  ><span class="sub">{{
+                    milestone.promotedOrMated ? t.stepDone : t.stepPending
+                  }}</span></span
+                >
+              </li>
+            </ol>
+          }
+        </section>
+      }
 
       <div class="controls" role="group" [attr.aria-label]="t.controls">
         <button
           type="button"
-          class="button"
+          class="button icon-only"
           [disabled]="!game.canGoBack()"
           [attr.aria-label]="t.previous"
           [title]="t.previous"
           (click)="game.goBack()"
         >
-          <span aria-hidden="true">&lsaquo;</span>
+          <app-icon name="caret-left" />
         </button>
         <button
           type="button"
-          class="button"
+          class="button icon-only"
           [disabled]="!game.canGoForward()"
           [attr.aria-label]="t.next"
           [title]="t.next"
           (click)="game.goForward()"
         >
-          <span aria-hidden="true">&rsaquo;</span>
+          <app-icon name="caret-right" />
         </button>
         <button
           type="button"
           class="button"
-          [disabled]="!session.canUndo()"
+          [disabled]="!session.canUndo() || !atEnd()"
           (click)="session.undo()"
         >
           {{ t.undo }}
         </button>
-        <button type="button" class="button" (click)="session.restart()">{{ t.restart }}</button>
+        <button
+          type="button"
+          class="button"
+          [disabled]="game.moves().length === 0"
+          (click)="restart()"
+        >
+          {{ t.restart }}
+        </button>
       </div>
+      @if (analysis(); as link) {
+        <a class="button analyze" [routerLink]="link.commands" [queryParams]="link.queryParams"
+          ><app-icon name="magnifying-glass" />{{ t.analyze }}</a
+        >
+      }
 
-      <section class="tablebase surface" aria-labelledby="tablebase-title">
-        <div class="tablebase-header">
-          <h2 id="tablebase-title" class="panel-title">{{ i18n.t().tablebase.title }}</h2>
+      <section class="fold" aria-labelledby="tablebase-title">
+        <div class="fold-head">
+          <h2 id="tablebase-title">{{ tb.title }}</h2>
           <button
             type="button"
-            class="toggle button quiet"
+            class="button"
             aria-controls="tablebase-body"
-            [attr.aria-expanded]="tablebaseVisible()"
-            (click)="toggleTablebase()"
+            [attr.aria-expanded]="panelOpen()"
+            (click)="togglePanel()"
           >
-            {{ tablebaseVisible() ? i18n.t().tablebase.hide : i18n.t().tablebase.show }}
+            {{ panelOpen() ? tb.hide : tb.show }} <app-icon name="caret-down" />
           </button>
         </div>
-        @if (tablebaseVisible() && !game.isGameOver()) {
+        <div class="fold-body" id="tablebase-body" [hidden]="!panelOpen()">
           <app-tablebase-panel
-            id="tablebase-body"
             [state]="panelState()"
             [perspective]="session.playerSide()"
             [turn]="game.turn()"
+            [rival]="session.rivalSource()"
+            [atEnd]="atEnd()"
+            [over]="game.isGameOver() || closed()"
+            [hint]="session.hintMove()"
             (retry)="retryTablebase()"
+            (showHint)="session.revealHint()"
           />
+        </div>
+      </section>
+
+      <details class="fold idea">
+        <summary>
+          <span>{{ t.keyIdea }}</span>
+          <span class="hint">{{ t.keyIdeaHint }}</span>
+          <app-icon name="caret-down" />
+        </summary>
+        <p>{{ i18n.localize(current.explanation) }}</p>
+      </details>
+
+      <section class="moves" aria-labelledby="moves-title">
+        <h2 id="moves-title">{{ t.moves }}</h2>
+        @if (moveViews().length === 0) {
+          <p class="empty-moves">{{ t.noMoves }}</p>
+        } @else {
+          <ol class="move-list">
+            @for (move of moveViews(); track move.ply) {
+              <li>
+                @if (move.number) {
+                  <span class="num">{{ move.number }}</span>
+                }
+                <button
+                  type="button"
+                  [class.mine]="move.mine"
+                  [class.bad]="move.bad"
+                  [class.future]="move.future"
+                  [attr.aria-current]="move.current ? 'step' : null"
+                  [attr.aria-label]="move.label"
+                  (click)="game.goTo(move.ply)"
+                >
+                  {{ move.san }}
+                </button>
+              </li>
+            }
+          </ol>
         }
       </section>
-
-      <section class="idea" aria-labelledby="idea-title">
-        <h2 id="idea-title" class="panel-title">{{ t.keyIdea }}</h2>
-        <p>{{ i18n.localize(current.explanation) }}</p>
-      </section>
-
-      <h2 class="panel-title">{{ t.moves }}</h2>
-      <app-move-list
-        class="play-moves"
-        [moves]="sans()"
-        [currentPly]="game.ply()"
-        [startPly]="game.startPly()"
-        [label]="t.moves"
-        [emptyLabel]="t.noMoves"
-        (selectPly)="game.goTo($event)"
-      />
     </div>
   </div>
-} @else if (endgame.status() === 'resolved' && !endgame.value()) {
-  <p class="note state-message" role="alert">{{ t.notFound }}</p>
+} @else if (endgames.hasValue() || endgames.status() === 'idle') {
+  <p class="notice" role="alert">{{ t.notFound }}</p>
 }

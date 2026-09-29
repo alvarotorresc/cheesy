@@ -1,41 +1,58 @@
 @let t = i18n.t().tablebase;
 <div class="body" aria-live="polite" [attr.aria-busy]="state().status === 'loading'">
-  @switch (state().status) {
-    @case ('loading') {
-      <p class="note">{{ t.loading }}</p>
-    }
-    @case ('waiting') {
-      <p class="note">{{ t.waiting }}</p>
-    }
-    @case ('not-applicable') {
-      <p class="note">{{ t.notApplicable }}</p>
-    }
-    @case ('error') {
-      <p class="note">{{ errorText() }}</p>
-      <button type="button" class="button retry" (click)="retry.emit()">{{ t.retry }}</button>
-    }
-    @case ('ready') {
-      @if (view(); as result) {
-        <dl class="facts">
-          <div class="fact">
-            <dt>{{ t.result }}</dt>
-            <dd class="result" [attr.data-tone]="result.tone">{{ result.label }}</dd>
-            @if (result.mate) {
-              <dd class="detail">{{ result.mate }}</dd>
-            }
-            @if (result.zeroing) {
-              <dd class="detail">{{ result.zeroing }}</dd>
+  @if (state().status === 'error') {
+    <div class="alert neutral">
+      <app-icon name="wifi-slash" />
+      <p>{{ errorText() }}</p>
+      @if (errorHint(); as hint) {
+        <p class="sub">{{ hint }}</p>
+      }
+      <button type="button" class="button" (click)="retry.emit()">{{ t.retry }}</button>
+    </div>
+  } @else if (!atEnd()) {
+    <p class="fine">{{ t.earlier }}</p>
+  } @else {
+    @switch (state().status) {
+      @case ('loading') {
+        <p class="fine">{{ t.loading }}</p>
+      }
+      @case ('waiting') {
+        <p class="fine">{{ t.waiting }}</p>
+      }
+      @case ('not-applicable') {
+        <p class="fine">{{ t.notApplicable }}</p>
+      }
+      @case ('ready') {
+        @if (view(); as result) {
+          <dl class="facts">
+            <div class="fact">
+              <dt>{{ t.result }}</dt>
+              <dd class="res" [attr.data-tone]="result.tone">{{ result.label }}</dd>
+              @if (result.mate) {
+                <dd class="detail">{{ result.mate }}</dd>
+              }
+            </div>
+          </dl>
+          <div class="hint-box">
+            @if (!playerToMove() || over()) {
+              <p class="fine">{{ t.hintLater }}</p>
+            } @else if (hint(); as move) {
+              <dl class="facts">
+                <div class="fact">
+                  <dt>{{ result.bestMoveLabel }}</dt>
+                  <dd class="move">{{ i18n.san(move.san) }}</dd>
+                </div>
+              </dl>
+            } @else {
+              <button type="button" class="button" (click)="showHint.emit()">
+                <app-icon name="eye" />{{ t.hint }}
+              </button>
+              <p class="fine">{{ t.hintHelp }}</p>
             }
           </div>
-          @if (result.bestMove) {
-            <div class="fact">
-              <dt>{{ result.bestMoveLabel }}</dt>
-              <dd class="move">{{ result.bestMove }}</dd>
-            </div>
-          }
-        </dl>
+        }
       }
     }
   }
 </div>
-<p class="source muted">{{ t.source }}</p>
+<p class="source">{{ t.source }}</p>

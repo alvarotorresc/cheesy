@@ -358,6 +358,8 @@ input[type='radio'] {
   display: inline-block;
   flex: none;
   vertical-align: -0.3em;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* ---- Notice, dialog, toast ----------------------------------------------------------------- */

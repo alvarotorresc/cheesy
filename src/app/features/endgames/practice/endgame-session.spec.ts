@@ -662,7 +662,7 @@ describe('EndgameSession', () => {
 
       await answer(SQUARE_RULE.fen, SQUARE_RULE_RESPONSE);
 
-      expect(session.resultChange()).toEqual({ san: 'Kg4', before: 'draw', after: 'loss' });
+      expect(session.resultChange()).toEqual({ san: 'Kg4', ply: 1, before: 'draw', after: 'loss' });
     });
 
     it('should report nothing for a move that keeps the result', async () => {
@@ -756,7 +756,7 @@ describe('EndgameSession', () => {
       expect(tablebase.requests.filter((request) => request.fen === SQUARE_RULE.fen)).toHaveLength(
         1,
       );
-      expect(session.resultChange()).toEqual({ san: 'Kh4', before: 'draw', after: 'loss' });
+      expect(session.resultChange()).toEqual({ san: 'Kh4', ply: 1, before: 'draw', after: 'loss' });
     });
 
     it('should not check positions the tablebase does not cover', async () => {
@@ -959,7 +959,12 @@ describe('EndgameSession', () => {
       expect(session.goalState()).toBe('playing');
       expect(session.milestone()).toMatchObject({ winKept: false, promotedOrMated: false });
       expect(session.escapedAt()).toBe(0);
-      expect(session.resultChange()).toEqual({ san: 'a8=Q+', before: 'win', after: 'draw' });
+      expect(session.resultChange()).toEqual({
+        san: 'a8=Q+',
+        ply: 1,
+        before: 'win',
+        after: 'draw',
+      });
     });
   });
 

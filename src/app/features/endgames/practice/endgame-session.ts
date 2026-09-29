@@ -29,6 +29,8 @@ export type RivalSource = 'tablebase' | 'stockfish' | 'none';
 /** A move of the player that changed the theoretical result of the position. */
 export interface PlayerMoveResultChange extends MoveResultChange {
   san: string;
+  /** Half-moves of the game up to and including this move (its index in the game plus one). */
+  ply: number;
 }
 
 type Dests = ReturnType<GameService['dests']>;
@@ -90,11 +92,11 @@ export class EndgameSession {
     const player = this.playerSide();
     const startFen = this.game.startFen();
     const moves = this.game.moves();
-    const own: { move: PlayedMove; fenBefore: string }[] = [];
+    const own: { move: PlayedMove; fenBefore: string; index: number }[] = [];
     moves.forEach((move, index) => {
       const mover = index % 2 === 0 ? startTurn : opposite(startTurn);
       if (mover === player) {
-        own.push({ move, fenBefore: index === 0 ? startFen : moves[index - 1].fenAfter });
+        own.push({ move, fenBefore: index === 0 ? startFen : moves[index - 1].fenAfter, index });
       }
     });
     return own;
@@ -103,10 +105,10 @@ export class EndgameSession {
   /** Set after a player move that changed the theoretical result, until the next change. */
   readonly resultChange = computed<PlayerMoveResultChange | undefined>(() => {
     const probes = this.probes();
-    for (const { move, fenBefore } of [...this.playerMoves()].reverse()) {
+    for (const { move, fenBefore, index } of [...this.playerMoves()].reverse()) {
       const result = probes.get(probeKey(fenBefore));
       const change = result && moveResultChange(result, move.uci);
-      if (change) return { san: move.san, ...change };
+      if (change) return { san: move.san, ply: index + 1, ...change };
     }
     return undefined;
   });
