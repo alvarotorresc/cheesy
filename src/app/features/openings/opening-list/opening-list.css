@@ -1,54 +1,80 @@
-:host {
+/* Intro (OC 'Intro'). */
+.intro {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-4);
+  max-width: 46rem;
 }
 
-.family {
+.intro-lead {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  max-width: 40rem;
+}
+
+.modes {
   display: grid;
   gap: var(--space-3);
+  margin: 0;
 }
 
-.entry-grid li {
+.mode {
   display: grid;
-  grid-template-rows: 1fr auto;
-  gap: var(--space-2);
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
 }
 
-.eco {
-  padding: 0.0625rem var(--space-2);
+.mode dt {
+  font-weight: 800;
+}
+
+.mode dt span {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-hover);
-  color: var(--color-text);
-  font-size: var(--text-xs);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
-.description {
+.mode-play dt span {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.mode-practice dt span {
+  border: 1px solid var(--color-control);
+}
+
+.mode dd {
+  margin: 0;
   color: var(--color-text-muted);
-  font-size: var(--text-sm);
+  max-width: 36rem;
 }
 
-.progress {
-  padding-left: var(--space-2);
-  border-left: 3px solid var(--color-accent);
-  font-size: var(--text-sm);
-}
-
-.practice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--tap);
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
+.mode dd strong {
   color: var(--color-text);
-  font-weight: 600;
-  text-decoration: none;
+  font-weight: 700;
 }
 
-.practice:hover {
-  border-color: var(--color-accent);
+.loading {
+  margin-top: var(--space-8);
+}
+
+/* The filters fold behind the toggle on a phone, as in the Positions mock-up. */
+.filters-toggle + .filters {
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 48rem) {
+  /* Always visible from 48rem, even while the toggle says they are folded. */
+  .filters-toggle + .filters,
+  .filters[hidden] {
+    display: grid !important;
+    margin-top: var(--space-8);
+  }
+}
+
+.families {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
 }

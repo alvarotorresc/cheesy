@@ -1,37 +1,90 @@
-import { Component, effect, inject, signal, untracked } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ContentService } from '../../../core/content';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  signal,
+  untracked,
+  viewChild,
+} from '@angular/core';
+import { ContentService, type OpeningSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
-import { ProgressService, type LineProgress } from '../../../core/progress';
-import { groupByFamily, type OpeningGroup } from '../opening-families';
-import { summarizeProgress, type OpeningProgress } from '../opening-progress';
-import { ProgressNote } from '../progress-note/progress-note';
+import { ProgressService, type LineProgress, type ProgressColor } from '../../../core/progress';
+import { Icon } from '../../../shared/icon';
+import { OpeningCard } from '../opening-card/opening-card';
+import {
+  activeFilterCount,
+  familiesOf,
+  FIRST_MOVES,
+  matchesFilters,
+  NO_FILTERS,
+  type OpeningFilters,
+} from '../opening-filters';
+import { familyOf, groupByFamily } from '../opening-families';
+import { summarizeByColor, type ColorProgress, type OpeningStatus } from '../opening-progress';
 
 type ListState =
   | { status: 'loading' }
   | { status: 'error' }
-  | { status: 'ready'; groups: readonly OpeningGroup[] };
+  | { status: 'ready'; catalog: readonly OpeningSummary[] };
+
+type Summary = Record<ProgressColor, ColorProgress>;
 
 /**
- * Catalogue of openings grouped by family. Each one links to its play page and to its practice, and
- * shows how many of its lines have been practised in this browser.
+ * Catalogue of openings: filters by first move and family, side and progress, and a shelf of live
+ * cards for each family. Each card leads to Play and to Practise. Only the openings with saved
+ * progress have their tree downloaded, to count their lines as they are now.
  */
 @Component({
   selector: 'app-opening-list',
-  imports: [ProgressNote, RouterLink],
+  imports: [Icon, OpeningCard],
   templateUrl: './opening-list.html',
   styleUrl: './opening-list.css',
+  host: { class: 'catalog' },
 })
 export class OpeningList {
   protected readonly i18n = inject(I18nService);
+  protected readonly progressService = inject(ProgressService);
   private readonly content = inject(ContentService);
-  private readonly progressService = inject(ProgressService);
 
   protected readonly state = signal<ListState>({ status: 'loading' });
-  /** Progress of each opening with any, by opening id. */
-  protected readonly progress = signal<ReadonlyMap<string, OpeningProgress>>(new Map());
+  protected readonly filters = signal<OpeningFilters>(NO_FILTERS);
+  /** The filters fold behind a button on a phone. */
+  protected readonly filtersOpen = signal(false);
+  /** Progress of each opening that has any, by opening id. */
+  protected readonly progress = signal<ReadonlyMap<string, Summary>>(new Map());
   protected readonly hasProgress = signal(false);
+  protected readonly clearing = signal(false);
+  protected readonly message = signal('');
 
+  protected readonly activeCount = computed(() => activeFilterCount(this.filters()));
+
+  protected readonly catalog = computed(() => {
+    const state = this.state();
+    return state.status === 'ready' ? state.catalog : [];
+  });
+
+  protected readonly visible = computed(() => {
+    const filters = this.filters();
+    const progress = this.progress();
+    return this.catalog().filter((opening) =>
+      matchesFilters(opening, filters, progress.get(opening.id)),
+    );
+  });
+
+  protected readonly groups = computed(() => groupByFamily(this.visible()));
+
+  /** First moves with their families, only those the catalogue has. */
+  protected readonly clusters = computed(() => {
+    const present = new Set(this.catalog().map((opening) => familyOf(opening.eco)));
+    return FIRST_MOVES.map((move) => ({
+      move,
+      families: familiesOf(move).filter((family) => present.has(family)),
+    })).filter((cluster) => cluster.families.length > 0);
+  });
+
+  private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
   private progressGeneration = 0;
 
   constructor() {
@@ -46,16 +99,55 @@ export class OpeningList {
   protected async load(): Promise<void> {
     this.state.set({ status: 'loading' });
     try {
-      const catalog = await this.content.openingCatalog();
-      this.state.set({ status: 'ready', groups: groupByFamily(catalog) });
+      this.state.set({ status: 'ready', catalog: await this.content.openingCatalog() });
     } catch (error) {
       console.error(error);
       this.state.set({ status: 'error' });
     }
   }
 
+  protected setScope(scope: OpeningFilters['scope']): void {
+    this.filters.update((filters) => ({ ...filters, scope }));
+  }
+
+  protected setSide(value: string): void {
+    const side = value === 'white' || value === 'black' ? value : 'all';
+    this.filters.update((filters) => ({ ...filters, side }));
+  }
+
+  protected setStatus(value: string): void {
+    const status: OpeningStatus | 'all' =
+      value === 'none' || value === 'progress' || value === 'mastered' ? value : 'all';
+    this.filters.update((filters) => ({ ...filters, status }));
+  }
+
+  protected clearFilters(): void {
+    this.filters.set(NO_FILTERS);
+  }
+
+  protected askToClear(): void {
+    this.message.set('');
+    if (!this.hasProgress()) {
+      this.message.set(this.i18n.t().openings.noProgress);
+      return;
+    }
+    this.dialog()?.nativeElement.showModal();
+  }
+
+  protected cancelClear(): void {
+    this.dialog()?.nativeElement.close();
+  }
+
+  protected async confirmClear(): Promise<void> {
+    this.clearing.set(true);
+    const cleared = await this.progressService.clear('openings');
+    this.clearing.set(false);
+    this.dialog()?.nativeElement.close();
+    const t = this.i18n.t().practice;
+    this.message.set(cleared ? t.cleared : t.clearFailed);
+  }
+
   /**
-   * Only the openings with saved progress are downloaded, to count their lines as they are now.
    * Progress is a bonus: an opening that cannot be downloaded is shown without it, and the saved
    * progress can still be deleted.
    */
@@ -70,11 +162,11 @@ export class OpeningList {
     const results = await Promise.allSettled(
       [...byOpening].map(async ([id, openingRows]) => {
         const book = await this.content.openingBook(id);
-        return book ? ([id, summarizeProgress(book, openingRows)] as const) : undefined;
+        return book ? ([id, summarizeByColor(book, openingRows)] as const) : undefined;
       }),
     );
     if (generation !== this.progressGeneration) return;
-    const entries: (readonly [string, OpeningProgress])[] = [];
+    const entries: (readonly [string, Summary])[] = [];
     for (const result of results) {
       if (result.status === 'rejected') console.error(result.reason);
       else if (result.value) entries.push(result.value);
