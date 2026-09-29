@@ -26,6 +26,119 @@ export const en = {
     privacy: 'Privacy',
     credits: 'Credits',
     code: 'Source code',
+    lead: 'What is saved, what leaves your browser and what this site is made with.',
+    toc: 'On this page',
+    briefTitle: 'In short',
+    brief: [
+      'Your progress stays in your browser.',
+      'Only the positions of the endgames leave, towards Lichess.',
+      'No accounts, no cookies.',
+      'Open source, under the GPL-3 licence.',
+    ],
+    privacyClaim: 'No accounts, no cookies.',
+    privacyIntro: 'This is what is saved in your browser and the only thing that leaves it.',
+    staysTitle: 'Stays in your browser',
+    stays: [
+      {
+        title: 'Your progress in Openings',
+        text: 'Which lines you have practised and which you master.',
+      },
+      {
+        title: 'Endgames passed and positions solved',
+        text: 'And which ones you solved at the first try.',
+      },
+      { title: 'The language', text: 'Whether you choose Spanish or English.' },
+      { title: 'The tablebase panel', text: 'Whether you want it open or folded in Endgames.' },
+    ],
+    staysNote:
+      'None of this leaves your device. If you switch browser or computer, you start from scratch.',
+    eraseTitle: 'How to delete it',
+    eraseButton: 'Clear progress',
+    eraseButtonText: ', in Openings, Endgames and Positions, clears the progress of that section.',
+    eraseAll:
+      'To delete everything at once, clear the data of this site from your browser settings.',
+    sendsTitle: 'Goes to Lichess',
+    sendsIntro: {
+      before: 'In Endgames, the opponent plays what the ',
+      bold1: 'Lichess tablebase',
+      middle: ' says, and the panel shows you the theoretical result. For that, ',
+      bold2: 'every position of the endgame is sent to Lichess',
+      after:
+        ' while you play, also each time the opponent moves and with the panel open or folded.',
+    },
+    sendsOnlyPosition:
+      'Only the position travels: no account, no cookies and not the address of the page. As in any connection, Lichess sees your IP address. If Lichess does not answer, Stockfish plays on your device.',
+    fenBoardLabel: (name: string, side: 'white' | 'black') =>
+      `${name}, starting position of the exercise, seen from ${side}.`,
+    fenCaption: (name: string, turn: 'white' | 'black') =>
+      `${name}, at the start. ${turn === 'white' ? 'White' : 'Black'} to move.`,
+    fenAria: 'Position in FEN notation',
+    fenRowLabel: (rank: number, row: string) => `Rank ${rank}: ${row}`,
+    fenRest: 'Turn, castling, en passant and counters',
+    fenHelp:
+      'This is all that is sent. Each part is a rank of the board, from 8 to 1; hover or focus one to see it.',
+    requestTitle: 'The full request',
+    engineNote:
+      'In Openings, Positions and Analysis your moves do not leave here: the engine runs inside your browser.',
+    umamiTitle: 'We count visits with Umami',
+    umamiText: 'A simple analytics tool, hosted on our own server: ',
+    umamiFacts: [
+      { label: 'Measures', value: 'Visits and page views' },
+      { label: 'Without', value: 'Cookies' },
+      { label: 'Never', value: 'Personal data' },
+    ],
+    creditsIntro: 'Cheesy builds on the open work of other people. Thank you.',
+    credit: {
+      groups: {
+        engine: 'Engine and data',
+        board: 'Board',
+        look: 'Font and icons',
+      },
+      stockfish: {
+        license: 'GPL-3',
+        before: 'The engine that analyses and plays against you, in the browser version of ',
+        after: '.',
+      },
+      tablebase: {
+        name: 'Lichess tablebase',
+        license: 'Free service',
+        text: 'Exact results for endgames of up to seven pieces. The Endgames opponent plays with it.',
+      },
+      openings: {
+        name: 'Lichess openings',
+        license: 'CC0',
+        text: 'The names and ECO codes of the openings are checked against this data set.',
+      },
+      chessground: {
+        license: 'GPL-3 or later',
+        text: 'The board: dragging pieces, animating moves and highlighting squares.',
+      },
+      chessops: {
+        license: 'GPL-3 or later',
+        text: 'The rules of chess: legal moves, positions and notation.',
+      },
+      pieces: {
+        name: 'cburnett pieces',
+        license: 'GPL-2 or later',
+        text: 'The pieces of every board, by Colin M.L. Burnett. They come bundled with chessground.',
+      },
+      bricolage: {
+        license: 'OFL 1.1',
+        text: 'The typeface of the whole site.',
+      },
+      phosphor: {
+        name: 'Phosphor Icons',
+        license: 'MIT',
+        text: 'The icons of Endgames.',
+      },
+    },
+    codeIntro: {
+      before: 'Cheesy is free software under the ',
+      bold: 'GPL-3 licence',
+      after: ': you can read the code, change it and share it under the same licence.',
+    },
+    codeButton: 'View the code on GitHub',
+    madeBy: 'Made by Álvaro Torres, ',
   },
   home: {
     title: 'Openings, endgames and tactics, in your browser.',

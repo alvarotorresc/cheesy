@@ -1,15 +1,141 @@
 @let a = t().about;
 
-<h1>{{ a.title }}</h1>
-
-<section id="privacidad" aria-labelledby="about-privacy">
-  <h2 id="about-privacy">{{ a.privacy }}</h2>
+<section class="intro" aria-labelledby="about-title">
+  <div class="intro-text">
+    <h1 id="about-title">{{ a.title }}</h1>
+    <p class="lead">{{ a.lead }}</p>
+    <nav [attr.aria-label]="a.toc">
+      <ul class="toc">
+        <li>
+          <a href="#privacidad">{{ a.privacy }}</a>
+        </li>
+        <li>
+          <a href="#creditos">{{ a.credits }}</a>
+        </li>
+        <li>
+          <a href="#codigo">{{ a.code }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="brief">
+    <h2 class="brief-title">{{ a.briefTitle }}</h2>
+    <ul class="file">
+      @for (line of a.brief; track $index) {
+        <li>
+          <span class="cell"
+            ><i class="pc piece" [class]="'pc-' + briefPieces[$index]" aria-hidden="true"></i
+          ></span>
+          <p>{{ line }}</p>
+        </li>
+      }
+    </ul>
+  </div>
 </section>
 
-<section id="creditos" aria-labelledby="about-credits">
-  <h2 id="about-credits">{{ a.credits }}</h2>
+<section class="block" id="privacidad" aria-labelledby="about-privacy">
+  <div class="block-head">
+    <h2 id="about-privacy">{{ a.privacy }}</h2>
+    <p class="claim">{{ a.privacyClaim }}</p>
+    <p>{{ a.privacyIntro }}</p>
+  </div>
+
+  <div class="privacy">
+    <article class="pane" aria-labelledby="about-stays">
+      <h3 id="about-stays">{{ a.staysTitle }}</h3>
+      <ul class="stays">
+        @for (item of a.stays; track $index) {
+          <li>
+            <div>
+              <b>{{ item.title }}</b
+              ><span>{{ item.text }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+      <p class="prose">{{ a.staysNote }}</p>
+      <div class="erase">
+        <h4>{{ a.eraseTitle }}</h4>
+        <p>
+          <strong>{{ a.eraseButton }}</strong
+          >{{ a.eraseButtonText }}
+        </p>
+        <p>{{ a.eraseAll }}</p>
+      </div>
+    </article>
+
+    <article class="pane sends" aria-labelledby="about-sends">
+      <h3 id="about-sends">{{ a.sendsTitle }}</h3>
+      <div class="prose">
+        <p>
+          {{ a.sendsIntro.before }}<strong>{{ a.sendsIntro.bold1 }}</strong
+          >{{ a.sendsIntro.middle }}<strong>{{ a.sendsIntro.bold2 }}</strong
+          >{{ a.sendsIntro.after }}
+        </p>
+        <p>{{ a.sendsOnlyPosition }}</p>
+      </div>
+      @if (sent(); as position) {
+        <figure #figure class="fen-figure">
+          <app-mini-board
+            class="fen-board"
+            [frames]="position.frames"
+            [orientation]="position.side"
+            [highlightRank]="rank()"
+            [label]="a.fenBoardLabel(position.name, position.side)"
+          />
+          <figcaption class="fen-read">
+            <span class="fen-label">{{ a.fenCaption(position.name, position.turn) }}</span>
+            <div class="fen" [attr.aria-label]="a.fenAria">
+              @for (row of position.rows; track $index) {
+                <button
+                  type="button"
+                  class="fen-seg"
+                  [class.on]="rank() === 8 - $index"
+                  [attr.aria-label]="a.fenRowLabel(8 - $index, row)"
+                  (pointerenter)="show(8 - $index)"
+                  (pointerleave)="show(undefined)"
+                  (focus)="show(8 - $index)"
+                  (blur)="show(undefined)"
+                >
+                  {{ row }}
+                </button>
+                @if ($index < 7) {
+                  <span class="fen-sep" aria-hidden="true">/</span>
+                }
+              }
+              <span class="fen-rest" [title]="a.fenRest">{{ position.rest }}</span>
+            </div>
+            <p class="fen-help">{{ a.fenHelp }}</p>
+            <p class="request">
+              <span>{{ a.requestTitle }}</span
+              ><code>GET {{ position.request }}</code>
+            </p>
+          </figcaption>
+        </figure>
+      }
+      <p class="prose">{{ a.engineNote }}</p>
+    </article>
+  </div>
+
+  @if (umami) {
+    <div class="umami" aria-labelledby="about-umami">
+      <h3 id="about-umami">{{ a.umamiTitle }}</h3>
+      <div class="prose">
+        <p>
+          {{ a.umamiText }}<span class="host">{{ umamiOrigin }}</span
+          >.
+        </p>
+        <ul class="facts">
+          @for (fact of a.umamiFacts; track $index) {
+            <li>
+              <span class="k">{{ fact.label }}</span
+              ><span class="v">{{ fact.value }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
 </section>
 
-<section id="codigo" aria-labelledby="about-code">
-  <h2 id="about-code">{{ a.code }}</h2>
-</section>
+<app-about-credits />

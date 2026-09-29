@@ -10,6 +10,7 @@ export {
   CARD_TIMING,
   CARD_TIMING_REDUCED,
   createReplay,
+  prefersReducedMotion,
   ReplayCoordinator,
   type Replay,
   type ReplayOptions,

@@ -28,6 +28,116 @@ export const es: Messages = {
     privacy: 'Privacidad',
     credits: 'Créditos',
     code: 'Código fuente',
+    lead: 'Qué se guarda, qué sale de tu navegador y con qué está hecha esta web.',
+    toc: 'En esta página',
+    briefTitle: 'En corto',
+    brief: [
+      'Tu progreso se queda en tu navegador.',
+      'Solo las posiciones de los finales salen, hacia Lichess.',
+      'Sin cuentas ni cookies.',
+      'Código abierto, con licencia GPL-3.',
+    ],
+    privacyClaim: 'Sin cuentas ni cookies.',
+    privacyIntro: 'Esto es lo que se guarda en tu navegador y lo único que sale de él.',
+    staysTitle: 'Se queda en tu navegador',
+    stays: [
+      { title: 'Tu progreso en Aperturas', text: 'Qué líneas has practicado y cuáles dominas.' },
+      {
+        title: 'Finales superados y posiciones resueltas',
+        text: 'Y cuáles resolviste a la primera.',
+      },
+      { title: 'El idioma', text: 'Si eliges español o inglés.' },
+      { title: 'El panel de la tablebase', text: 'Si lo quieres abierto o plegado en Finales.' },
+    ],
+    staysNote:
+      'Nada de esto sale de tu dispositivo. Si cambias de navegador o de ordenador, empiezas de cero.',
+    eraseTitle: 'Cómo borrarlo',
+    eraseButton: 'Borrar el progreso',
+    eraseButtonText: ', en Aperturas, Finales y Posiciones, borra el de esa sección.',
+    eraseAll:
+      'Para borrarlo todo de una vez, borra los datos de este sitio desde la configuración de tu navegador.',
+    sendsTitle: 'Sale hacia Lichess',
+    sendsIntro: {
+      before: 'En Finales, el rival juega lo que dice la ',
+      bold1: 'tablebase de Lichess',
+      middle: ', y el panel te enseña el resultado teórico. Para eso, ',
+      bold2: 'cada posición del final se envía a Lichess',
+      after:
+        ' mientras juegas, también cada vez que mueve el rival y con el panel abierto o plegado.',
+    },
+    sendsOnlyPosition:
+      'Solo viaja la posición: sin cuenta, sin cookies y sin la dirección de la página. Como en cualquier conexión, Lichess ve tu dirección IP. Si Lichess no responde, juega Stockfish en tu dispositivo.',
+    fenBoardLabel: (name: string, side: 'white' | 'black') =>
+      `${name}, posición inicial del ejercicio, vista desde las ${side === 'white' ? 'blancas' : 'negras'}.`,
+    fenCaption: (name: string, turn: 'white' | 'black') =>
+      `${name}, al empezar. Juegan ${turn === 'white' ? 'blancas' : 'negras'}.`,
+    fenAria: 'Posición en notación FEN',
+    fenRowLabel: (rank: number, row: string) => `Fila ${rank}: ${row}`,
+    fenRest: 'Turno, enroques, al paso y contadores',
+    fenHelp:
+      'Esto es todo lo que se envía. Cada tramo es una fila del tablero, de la 8 a la 1; pasa el ratón o el foco por uno para verla.',
+    requestTitle: 'La petición completa',
+    engineNote:
+      'En Aperturas, Posiciones y Análisis tus jugadas no salen de aquí: el motor funciona dentro de tu navegador.',
+    umamiTitle: 'Contamos visitas con Umami',
+    umamiText: 'Una analítica sencilla, alojada en un servidor propio: ',
+    umamiFacts: [
+      { label: 'Mide', value: 'Visitas y páginas vistas' },
+      { label: 'Sin', value: 'Cookies' },
+      { label: 'Nunca', value: 'Datos personales' },
+    ],
+    creditsIntro: 'Cheesy se apoya en trabajo abierto de otras personas. Gracias.',
+    credit: {
+      groups: {
+        engine: 'Motor y datos',
+        board: 'Tablero',
+        look: 'Letra e iconos',
+      },
+      stockfish: {
+        license: 'GPL-3',
+        before: 'El motor que analiza y juega contra ti, en la versión para navegador de ',
+        after: '.',
+      },
+      tablebase: {
+        name: 'Tablebase de Lichess',
+        license: 'Servicio gratuito',
+        text: 'Resultados exactos de finales de hasta siete piezas. Con ella juega el rival de Finales.',
+      },
+      openings: {
+        name: 'Aperturas de Lichess',
+        license: 'CC0',
+        text: 'Los nombres y códigos ECO de las aperturas se comprueban con este conjunto de datos.',
+      },
+      chessground: {
+        license: 'GPL-3 o posterior',
+        text: 'El tablero: arrastrar piezas, animar jugadas y resaltar casillas.',
+      },
+      chessops: {
+        license: 'GPL-3 o posterior',
+        text: 'Las reglas del ajedrez: jugadas legales, posiciones y notación.',
+      },
+      pieces: {
+        name: 'Piezas cburnett',
+        license: 'GPL-2 o posterior',
+        text: 'Las piezas de todos los tableros, de Colin M.L. Burnett. Vienen incluidas en chessground.',
+      },
+      bricolage: {
+        license: 'OFL 1.1',
+        text: 'La tipografía de toda la web.',
+      },
+      phosphor: {
+        name: 'Phosphor Icons',
+        license: 'MIT',
+        text: 'Los iconos de Finales.',
+      },
+    },
+    codeIntro: {
+      before: 'Cheesy es software libre con ',
+      bold: 'licencia GPL-3',
+      after: ': puedes leer el código, cambiarlo y compartirlo con la misma licencia.',
+    },
+    codeButton: 'Ver el código en GitHub',
+    madeBy: 'Lo hace Álvaro Torres, ',
   },
   home: {
     title: 'Aperturas, finales y táctica, en tu navegador.',
