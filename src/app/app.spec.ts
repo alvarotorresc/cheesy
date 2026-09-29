@@ -116,7 +116,7 @@ describe('App', () => {
       expect(Array.from(links, (link) => link.getAttribute('href'))).toEqual([
         'https://github.com/alvarotorresc/cheesy',
         '/acerca#privacidad',
-        '/acerca#creditos',
+        '/acerca',
         'https://alvarotc.com',
       ]);
     }
