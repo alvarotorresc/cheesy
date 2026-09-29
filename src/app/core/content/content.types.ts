@@ -32,8 +32,28 @@ export interface OpeningNode {
   children: OpeningNode[];
 }
 
+/**
+ * The start of an opening's main line, enough to draw and replay a small board without downloading
+ * the move tree.
+ */
+export interface OpeningPreview {
+  /** Main line from the initial position, at most 12 plies, in canonical SAN. */
+  sans: string[];
+  /** Name of the variation that starts at each ply; same length as `sans`. */
+  names: (Localized | null)[];
+  /**
+   * First ply (1-based) of the main line that has a name, between the 4th and the 10th: the position
+   * that gives the opening its name. With none, the 6th ply or the end of the line if it is shorter.
+   */
+  namedPly: number;
+}
+
 /** The fields of an opening that a catalogue needs, without its move tree. */
-export type OpeningSummary = Omit<OpeningTree, 'root'>;
+export type OpeningSummary = Omit<OpeningTree, 'root'> & {
+  /** Lines of the opening: the leaves of its tree. */
+  lineCount: number;
+  preview: OpeningPreview;
+};
 
 export interface EndgamePosition {
   id: string;

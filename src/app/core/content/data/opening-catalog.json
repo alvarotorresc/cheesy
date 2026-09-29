@@ -10,6 +10,47 @@
     "description": {
       "es": "Las blancas presionan el caballo de c6, defensor del peón de e5, y buscan una ventaja duradera en el centro.",
       "en": "White pressures the c6 knight, the defender of the e5 pawn, aiming for a lasting central edge."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bb5",
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Be7",
+        "Re1",
+        "b5"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Apertura Española",
+          "en": "Ruy Lopez"
+        },
+        {
+          "es": "Defensa Morphy",
+          "en": "Morphy Defence"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Cerrada",
+          "en": "Closed Variation"
+        },
+        null,
+        null
+      ],
+      "namedPly": 5
     }
   },
   {
@@ -23,6 +64,47 @@
     "description": {
       "es": "El alfil apunta a f7, el punto débil del enroque negro, y las blancas preparan c3 y d4 para dominar el centro.",
       "en": "The bishop aims at f7, the weak point near the black king, while White prepares c3 and d4 to take the centre."
+    },
+    "lineCount": 4,
+    "preview": {
+      "sans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "c3",
+        "Nf6",
+        "d4",
+        "exd4",
+        "cxd4",
+        "Bb4+"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Apertura Italiana",
+          "en": "Italian Game"
+        },
+        {
+          "es": "Giuoco Piano",
+          "en": "Giuoco Piano"
+        },
+        null,
+        null,
+        {
+          "es": "Ataque central",
+          "en": "Centre Attack"
+        },
+        null,
+        null,
+        null
+      ],
+      "namedPly": 5
     }
   },
   {
@@ -36,6 +118,47 @@
     "description": {
       "es": "Con 5...a6 las negras controlan b5 y mantienen opciones de ...e5 o ...e6; posiciones asimétricas y muy dinámicas.",
       "en": "With 5...a6 Black controls b5 and keeps both ...e5 and ...e6 in reserve; sharp, unbalanced positions."
+    },
+    "lineCount": 4,
+    "preview": {
+      "sans": [
+        "e4",
+        "c5",
+        "Nf3",
+        "d6",
+        "d4",
+        "cxd4",
+        "Nxd4",
+        "Nf6",
+        "Nc3",
+        "a6",
+        "Bg5",
+        "e6"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Siciliana",
+          "en": "Sicilian Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Najdorf",
+          "en": "Najdorf Variation"
+        },
+        {
+          "es": "Línea principal 6.Ag5",
+          "en": "Main Line 6.Bg5"
+        },
+        null
+      ],
+      "namedPly": 10
     }
   },
   {
@@ -49,6 +172,44 @@
     "description": {
       "es": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con ...c5 y ...f6.",
       "en": "Black accepts less space for a solid structure and central counterplay with ...c5 and ...f6."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "e4",
+        "e6",
+        "d4",
+        "d5",
+        "Nc3",
+        "Bb4",
+        "e5",
+        "c5",
+        "a3",
+        "Bxc3+",
+        "bxc3",
+        "Ne7"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Francesa",
+          "en": "French Defence"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Winawer",
+          "en": "Winawer Variation"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -62,6 +223,44 @@
     "description": {
       "es": "Las negras preparan ...d5 con ...c6 para disputar el centro sin encerrar a su alfil de casillas claras.",
       "en": "Black prepares ...d5 with ...c6 to contest the centre without locking in the light-squared bishop."
+    },
+    "lineCount": 4,
+    "preview": {
+      "sans": [
+        "e4",
+        "c6",
+        "d4",
+        "d5",
+        "Nc3",
+        "dxe4",
+        "Nxe4",
+        "Bf5",
+        "Ng3",
+        "Bg6",
+        "h4",
+        "h6"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Caro-Kann",
+          "en": "Caro-Kann Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Clásica",
+          "en": "Classical Variation"
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 8
     }
   },
   {
@@ -75,6 +274,47 @@
     "description": {
       "es": "Las blancas abren el centro con 3.d4 y cambian su peón de d por el de e5: juego de piezas libre y algo más de espacio.",
       "en": "White opens the centre with 3.d4 and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "d4",
+        "exd4",
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "bxc6",
+        "e5",
+        "Qe7"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Apertura Escocesa",
+          "en": "Scotch Game"
+        },
+        null,
+        null,
+        {
+          "es": "Variante Schmidt",
+          "en": "Schmidt Variation"
+        },
+        null,
+        null,
+        {
+          "es": "Variante Mieses",
+          "en": "Mieses Variation"
+        },
+        null
+      ],
+      "namedPly": 5
     }
   },
   {
@@ -88,6 +328,47 @@
     "description": {
       "es": "Las negras contraatacan e4 en lugar de defender e5: una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel.",
       "en": "Black counterattacks e4 instead of defending e5: a symmetrical, very solid defence valued for its reliability at top level."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nf6",
+        "Nxe5",
+        "d6",
+        "Nf3",
+        "Nxe4",
+        "d4",
+        "d5",
+        "Bd3",
+        "Nc6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Petrov",
+          "en": "Petrov's Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Ataque Clásico",
+          "en": "Classical Attack"
+        },
+        null,
+        null,
+        {
+          "es": "Variante Mason-Showalter",
+          "en": "Mason–Showalter Variation"
+        }
+      ],
+      "namedPly": 4
     }
   },
   {
@@ -101,6 +382,53 @@
     "description": {
       "es": "Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un centro con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.",
       "en": "White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a centre with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+    },
+    "lineCount": 7,
+    "preview": {
+      "sans": [
+        "e4",
+        "e5",
+        "f4",
+        "exf4",
+        "Nf3",
+        "d5",
+        "exd5",
+        "Nf6",
+        "Bb5+",
+        "c6",
+        "dxc6",
+        "bxc6"
+      ],
+      "names": [
+        null,
+        null,
+        {
+          "es": "Gambito de Rey",
+          "en": "King's Gambit"
+        },
+        {
+          "es": "Gambito de Rey Aceptado",
+          "en": "King's Gambit Accepted"
+        },
+        {
+          "es": "Gambito del Caballo de Rey",
+          "en": "King's Knight's Gambit"
+        },
+        {
+          "es": "Defensa Moderna",
+          "en": "Modern Defence"
+        },
+        null,
+        {
+          "es": "Defensa Abbazia",
+          "en": "Abbazia Defence"
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 4
     }
   },
   {
@@ -114,6 +442,44 @@
     "description": {
       "es": "Las negras colocan el alfil en fianchetto en g7 para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos.",
       "en": "Black fianchettoes the bishop on g7 to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "e4",
+        "c5",
+        "Nf3",
+        "d6",
+        "d4",
+        "cxd4",
+        "Nxd4",
+        "Nf6",
+        "Nc3",
+        "g6",
+        "Be3",
+        "Bg7"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Siciliana",
+          "en": "Sicilian Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante del Dragón",
+          "en": "Dragon Variation"
+        },
+        null,
+        null
+      ],
+      "namedPly": 10
     }
   },
   {
@@ -127,6 +493,44 @@
     "description": {
       "es": "Las negras aceptan un agujero permanente en d5 y un peón retrasado en d6 a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel.",
       "en": "Black accepts a permanent hole on d5 and a backward d6 pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "e4",
+        "c5",
+        "Nf3",
+        "Nc6",
+        "d4",
+        "cxd4",
+        "Nxd4",
+        "Nf6",
+        "Nc3",
+        "e5",
+        "Ndb5",
+        "d6"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Siciliana",
+          "en": "Sicilian Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Lasker-Pelikan",
+          "en": "Lasker–Pelikan Variation"
+        },
+        null,
+        null
+      ],
+      "namedPly": 10
     }
   },
   {
@@ -140,6 +544,50 @@
     "description": {
       "es": "Con 2.c3 las blancas preparan d4 para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas.",
       "en": "With 2.c3 White prepares d4 to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "e4",
+        "c5",
+        "c3",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "Bg4",
+        "Be2",
+        "e6"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Siciliana",
+          "en": "Sicilian Defence"
+        },
+        {
+          "es": "Variante Alapin",
+          "en": "Alapin Variation"
+        },
+        null,
+        null,
+        {
+          "es": "Defensa Barmen",
+          "en": "Barmen Defence"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Barmen, línea moderna",
+          "en": "Barmen Defence, Modern Line"
+        },
+        null,
+        null
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -153,6 +601,44 @@
     "description": {
       "es": "Las negras atacan e4 en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender.",
       "en": "Black hits e4 on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "e4",
+        "d5",
+        "exd5",
+        "Qxd5",
+        "Nc3",
+        "Qa5",
+        "d4",
+        "Nf6",
+        "Nf3",
+        "c6",
+        "Bc4",
+        "Bf5"
+      ],
+      "names": [
+        null,
+        {
+          "es": "Defensa Escandinava",
+          "en": "Scandinavian Defence"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Escandinava, línea principal",
+          "en": "Scandinavian Defence, Main Line"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -166,6 +652,47 @@
     "description": {
       "es": "Las negras permiten un centro blanco amplio para socavarlo después con ...c5 o ...e5 y la presión del alfil de g7.",
       "en": "Black allows a broad white centre and undermines it later with ...c5 or ...e5 and pressure from the g7 bishop."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "e4",
+        "d6",
+        "d4",
+        "Nf6",
+        "Nc3",
+        "g6",
+        "f4",
+        "Bg7",
+        "Nf3",
+        "O-O",
+        "Bd3",
+        "Na6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Pirc",
+          "en": "Pirc Defence"
+        },
+        {
+          "es": "Ataque Austriaco",
+          "en": "Austrian Attack"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Weiss",
+          "en": "Weiss Variation"
+        },
+        null
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -179,6 +706,44 @@
     "description": {
       "es": "Las negras mantienen el peón de d5 con ...e6: planteamiento sólido y clásico. El reto es liberar el alfil de c8 y romper con ...c5 o ...e5.",
       "en": "Black keeps the d5 pawn with ...e6: a solid, classical approach. The challenge is freeing the c8 bishop and breaking with ...c5 or ...e5."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "d4",
+        "d5",
+        "c4",
+        "e6",
+        "Nc3",
+        "Nf6",
+        "Bg5",
+        "Be7",
+        "e3",
+        "O-O",
+        "Nf3",
+        "h6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        {
+          "es": "Gambito de Dama Rehusado",
+          "en": "Queen's Gambit Declined"
+        },
+        null,
+        null,
+        {
+          "es": "Variante Moderna (4.Ag5)",
+          "en": "Modern Variation (4.Bg5)"
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 4
     }
   },
   {
@@ -192,6 +757,50 @@
     "description": {
       "es": "Las negras toman el peón de c4 para ganar tiempo y atacar el centro con ...c5 o ...e5, sin intentar conservarlo.",
       "en": "Black takes the c4 pawn to gain time and hit the centre with ...c5 or ...e5, without trying to keep it."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "d4",
+        "d5",
+        "c4",
+        "dxc4",
+        "Nf3",
+        "Nf6",
+        "e3",
+        "e6",
+        "Bxc4",
+        "c5",
+        "O-O",
+        "a6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        {
+          "es": "Gambito de Dama Aceptado",
+          "en": "Queen's Gambit Accepted"
+        },
+        {
+          "es": "Variante Normal",
+          "en": "Normal Variation"
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Clásica",
+          "en": "Classical Defence"
+        },
+        null,
+        {
+          "es": "Defensa Clásica, línea principal",
+          "en": "Classical Defence, Main Line"
+        }
+      ],
+      "namedPly": 4
     }
   },
   {
@@ -205,6 +814,47 @@
     "description": {
       "es": "Las negras defienden d5 con ...c6, lo que deja libre al alfil de c8 para salir a f5 o g4 antes de jugar ...e6.",
       "en": "Black defends d5 with ...c6, leaving the c8 bishop free to reach f5 or g4 before ...e6."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "d4",
+        "d5",
+        "c4",
+        "c6",
+        "Nf3",
+        "Nf6",
+        "Nc3",
+        "dxc4",
+        "a4",
+        "Bf5",
+        "e3",
+        "e6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Eslava",
+          "en": "Slav Defence"
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Alapin",
+          "en": "Alapin Variation"
+        },
+        {
+          "es": "Variante Checa",
+          "en": "Czech Variation"
+        },
+        null,
+        null
+      ],
+      "namedPly": 4
     }
   },
   {
@@ -218,6 +868,41 @@
     "description": {
       "es": "Sistema de las blancas basado en Af4, e3, c3 y Cbd2: una estructura sólida que se juega casi contra cualquier defensa, con menos teoría que el Gambito de Dama.",
       "en": "A White system built on Bf4, e3, c3 and Nbd2: a solid structure that works against almost any defence, with less theory than the Queen's Gambit."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "d4",
+        "d5",
+        "Nf3",
+        "Nf6",
+        "Bf4",
+        "c5",
+        "e3",
+        "Nc6",
+        "Nbd2",
+        "e6",
+        "c3",
+        "Bd6"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Sistema Londres",
+          "en": "London System"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 5
     }
   },
   {
@@ -231,6 +916,44 @@
     "description": {
       "es": "Las negras ceden el centro al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un flanco distinto.",
       "en": "Black concedes the centre early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different wing."
+    },
+    "lineCount": 7,
+    "preview": {
+      "sans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "Nc3",
+        "Bg7",
+        "e4",
+        "d6",
+        "Nf3",
+        "O-O",
+        "Be2",
+        "e5"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Normal",
+          "en": "Normal Variation"
+        },
+        null,
+        null,
+        null,
+        {
+          "es": "Variante Ortodoxa",
+          "en": "Orthodox Variation"
+        }
+      ],
+      "namedPly": 8
     }
   },
   {
@@ -244,6 +967,47 @@
     "description": {
       "es": "Con 3...Ab4 las negras clavan el caballo de c3 para impedir e4, y a menudo cambian el alfil por el caballo para dañar la estructura blanca.",
       "en": "With 3...Bb4 Black pins the c3 knight to stop e4, often trading bishop for knight to damage White's pawn structure."
+    },
+    "lineCount": 6,
+    "preview": {
+      "sans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "e6",
+        "Nc3",
+        "Bb4",
+        "e3",
+        "O-O",
+        "Bd3",
+        "d5",
+        "Nf3",
+        "c5"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Nimzoindia",
+          "en": "Nimzo-Indian Defence"
+        },
+        {
+          "es": "Sistema Rubinstein",
+          "en": "Rubinstein System"
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Sistema Gligoric",
+          "en": "Gligoric System"
+        }
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -257,6 +1021,44 @@
     "description": {
       "es": "Las negras permiten que las blancas levanten un gran centro con e4 para atacarlo después con el alfil de g7 y ...c5. Apertura muy dinámica.",
       "en": "Black lets White build a big centre with e4 and then attacks it with the g7 bishop and ...c5. A highly dynamic opening."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "d4",
+        "Nf6",
+        "c4",
+        "g6",
+        "Nc3",
+        "d5",
+        "cxd5",
+        "Nxd5",
+        "e4",
+        "Nxc3",
+        "bxc3",
+        "Bg7"
+      ],
+      "names": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "es": "Defensa Grünfeld",
+          "en": "Grünfeld Defence"
+        },
+        null,
+        {
+          "es": "Variante del Cambio",
+          "en": "Exchange Variation"
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 6
     }
   },
   {
@@ -270,6 +1072,50 @@
     "description": {
       "es": "Las blancas controlan d5 desde el flanco con 1.c4, a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.",
       "en": "White controls d5 from the flank with 1.c4, often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+    },
+    "lineCount": 5,
+    "preview": {
+      "sans": [
+        "c4",
+        "e5",
+        "Nc3",
+        "Nf6",
+        "Nf3",
+        "Nc6",
+        "g3",
+        "d5",
+        "cxd5",
+        "Nxd5",
+        "Bg2",
+        "Nb6"
+      ],
+      "names": [
+        {
+          "es": "Apertura Inglesa",
+          "en": "English Opening"
+        },
+        {
+          "es": "Variante inglesa de rey (1...e5)",
+          "en": "King's English Variation"
+        },
+        {
+          "es": "Siciliana invertida",
+          "en": "Reversed Sicilian"
+        },
+        null,
+        null,
+        {
+          "es": "Variante de los Cuatro Caballos",
+          "en": "Four Knights Variation"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "namedPly": 6
     }
   }
 ]

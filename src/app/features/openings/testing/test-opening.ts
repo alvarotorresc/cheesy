@@ -58,13 +58,39 @@ export const testTree = (overrides: Partial<OpeningTree> = {}): OpeningTree => (
   ...overrides,
 });
 
-export const summaryOf = ({ id, name, eco, side, description }: OpeningTree): OpeningSummary => ({
+const leaves = (nodes: readonly OpeningNode[]): number =>
+  nodes.reduce((total, node) => total + (node.children.length ? leaves(node.children) : 1), 0);
+
+/** Catalogue entry of a tree, computed the way `pnpm content:build` does. */
+export const summaryOf = ({
   id,
   name,
   eco,
   side,
   description,
-});
+  root,
+}: OpeningTree): OpeningSummary => {
+  const line: OpeningNode[] = [];
+  for (let level = root; level.length;) {
+    const step = level.find((node) => node.main) ?? level[0];
+    line.push(step);
+    level = step.children;
+  }
+  const named = line.slice(0, 10).findIndex((node, index) => node.name && index + 1 >= 4);
+  return {
+    id,
+    name,
+    eco,
+    side,
+    description,
+    lineCount: leaves(root),
+    preview: {
+      sans: line.slice(0, 12).map((node) => node.san),
+      names: line.slice(0, 12).map((node) => node.name ?? null),
+      namedPly: named >= 0 ? named + 1 : Math.min(6, line.length),
+    },
+  };
+};
 
 /** Content loaders serving the given trees, with a catalogue built from them. */
 export const testLoaders = (trees: readonly OpeningTree[] = [testTree()]): ContentLoaders => ({
