@@ -1,4 +1,5 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nService } from '../../core/i18n';
 import { MoveList } from './move-list';
 
 const texts = (element: HTMLElement, selector: string): string[] =>
@@ -14,6 +15,8 @@ describe('MoveList', () => {
   };
 
   beforeEach(() => {
+    // Other specs may leave a stored language behind: these expectations are in English.
+    TestBed.inject(I18nService).setLang('en');
     fixture = TestBed.createComponent(MoveList);
     fixture.componentRef.setInput('label', 'Moves');
     fixture.componentRef.setInput('emptyLabel', 'No moves yet.');
@@ -64,5 +67,27 @@ describe('MoveList', () => {
     element.querySelectorAll<HTMLButtonElement>('button.move')[2].click();
 
     expect(selected).toEqual([3]);
+  });
+
+  it('should show the piece letters of the active language', async () => {
+    const i18n = TestBed.inject(I18nService);
+    i18n.setLang('es');
+    try {
+      await render({ moves: ['e4', 'e5', 'Nf3', 'Nc6', 'Bb5', 'a6', 'O-O', 'axb5', 'exd8=Q'] });
+
+      expect(texts(element, 'button.move')).toEqual([
+        'e4',
+        'e5',
+        'Cf3',
+        'Cc6',
+        'Ab5',
+        'a6',
+        'O-O',
+        'axb5',
+        'exd8=D',
+      ]);
+    } finally {
+      i18n.setLang('en');
+    }
   });
 });

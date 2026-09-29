@@ -7,6 +7,8 @@ const summary = (id: string, eco: string): OpeningSummary => ({
   eco,
   side: 'white',
   description: { es: '', en: '' },
+  lineCount: 1,
+  preview: { sans: [], names: [], namedPly: 4 },
 });
 
 describe('opening families', () => {

@@ -1,6 +1,9 @@
 /** Side the line was practised with. */
 export type ProgressColor = 'white' | 'black';
 
+/** Runs in a row without mistakes after which a line counts as mastered. */
+export const MASTERY_STREAK = 3;
+
 /**
  * What is kept about one line of an opening practised with one colour. Only completed runs count:
  * a run left halfway has no result.
@@ -15,6 +18,8 @@ export interface LineProgress {
   readonly practiced: number;
   /** Completed runs without a single mistake. */
   readonly clean: number;
+  /** Runs in a row without mistakes, up to the last one. A run with mistakes sets it to 0. */
+  readonly streak: number;
   /** When the line was last completed, in milliseconds since the epoch. */
   readonly lastPracticed: number;
   /** Fewest mistakes in a completed run. */
@@ -27,4 +32,28 @@ export interface LineResult {
   readonly color: ProgressColor;
   readonly lineId: string;
   readonly mistakes: number;
+}
+
+/** What is kept about one endgame: it is done once there is a row. */
+export interface EndgameProgress {
+  readonly endgameId: string;
+  /** Times the goal was reached (at least 1). */
+  readonly completions: number;
+  readonly firstCompletedAt: number;
+  readonly lastCompletedAt: number;
+}
+
+/**
+ * What is kept about one position. The id is the stable internal id of the content, never the
+ * number shown in the URL, which changes when positions are added.
+ */
+export interface PositionProgress {
+  readonly positionId: string;
+  /** Times solved; 0 when it was only spoiled. */
+  readonly solves: number;
+  /** Solved the first time with no mistake, hint or solution seen. Fixed at the first solve. */
+  readonly firstTry: boolean;
+  /** A mistake, hint or the solution came before the first solve. */
+  readonly spoiled: boolean;
+  readonly lastSolvedAt?: number;
 }

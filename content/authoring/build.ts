@@ -4,6 +4,7 @@ import path from 'node:path';
 import { Chess } from 'chessops/chess';
 import { buildTree } from './tree-builder.ts';
 import { allOpenings } from './openings.ts';
+import { countLeaves, openingPreview } from '../lib/opening-walk.ts';
 import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
@@ -29,7 +30,15 @@ for (const spec of allOpenings) {
   const tree = buildTree(spec);
   out(path.join(OPENINGS_DIR, `${tree.id}.json`), tree);
   const { id, name, eco, side, description } = tree;
-  catalog.push({ id, name, eco, side, description });
+  catalog.push({
+    id,
+    name,
+    eco,
+    side,
+    description,
+    lineCount: countLeaves(tree.root),
+    preview: openingPreview(tree.root),
+  });
 }
 out(OPENING_CATALOG_FILE, catalog);
 

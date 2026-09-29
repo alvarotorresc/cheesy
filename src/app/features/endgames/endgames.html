@@ -1,42 +1,240 @@
 @let t = i18n.t().endgames;
-<section class="page-intro">
-  <h1>{{ t.title }}</h1>
-  <p>{{ t.intro }}</p>
+<section class="intro" aria-labelledby="endgames-title">
+  <h1 id="endgames-title">{{ t.title }}</h1>
+  <p class="intro-lead">{{ t.intro }}</p>
+  <dl class="goals">
+    <div class="goal-def win">
+      <dt>
+        <span><app-icon name="trophy" />{{ t.goalWin }}</span>
+      </dt>
+      <dd>
+        {{ t.winDefBefore }}<strong>{{ t.winDefStrong }}</strong
+        >{{ t.winDefAfter }}
+      </dd>
+    </div>
+    <div class="goal-def draw">
+      <dt>
+        <span><app-icon name="scales" />{{ t.goalDraw }}</span>
+      </dt>
+      <dd>
+        {{ t.drawDefBefore }}<strong>{{ t.drawDefStrong }}</strong
+        >{{ t.drawDefAfter }}
+      </dd>
+    </div>
+  </dl>
 </section>
 
 @if (endgames.isLoading()) {
-  <p class="note state-message" role="status">{{ t.loading }}</p>
-} @else if (endgames.error()) {
-  <div class="note state-message" role="alert">
-    <p>{{ t.loadError }}</p>
-    <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
-  </div>
-} @else {
-  @for (category of categories(); track category.key) {
-    <section class="category" [attr.aria-labelledby]="'category-' + $index">
-      <h2 [id]="'category-' + $index">{{ i18n.localize(category.name) }}</h2>
-      <ul class="entry-grid">
-        @for (endgame of category.endgames; track endgame.id) {
+  <div class="groups">
+    <p class="visually-hidden" role="status">{{ t.loading }}</p>
+    <section class="group">
+      <div class="group-head">
+        <h2>{{ t.skeletonGroup }}</h2>
+      </div>
+      <ul class="shelf">
+        @for (n of [1, 2, 3, 4]; track n) {
           <li>
-            <a class="card entry" [routerLink]="[endgame.id]">
-              <span class="name entry-title">{{ i18n.localize(endgame.name) }}</span>
-              <span class="entry-meta">
-                <span class="goal" [attr.data-goal]="endgame.goal">{{
-                  endgame.goal === 'win' ? t.goalWin : t.goalDraw
-                }}</span>
-                <span
-                  ><span
-                    class="side-swatch"
-                    [class.black]="endgame.playerSide === 'black'"
-                    aria-hidden="true"
-                  ></span>
-                  {{ endgame.playerSide === 'white' ? t.playWhite : t.playBlack }}</span
-                >
-              </span>
-            </a>
+            <div class="card skeleton" aria-hidden="true">
+              <div class="board"></div>
+              <div class="card-body">
+                <div class="line w70"></div>
+                <div class="line w50"></div>
+              </div>
+              <div class="card-foot">
+                <div class="line btn"></div>
+              </div>
+            </div>
           </li>
         }
       </ul>
     </section>
-  }
+  </div>
+} @else if (endgames.error()) {
+  <div class="groups">
+    <div class="notice" role="alert">
+      <p>{{ t.loadError }}</p>
+      <p>{{ t.loadErrorHint }}</p>
+      <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
+    </div>
+  </div>
+} @else {
+  <section class="filters" [attr.aria-label]="t.filters">
+    <div class="filter-group">
+      <p class="filter-label" id="category-label">{{ t.categoryLabel }}</p>
+      <div class="tabs" role="group" aria-labelledby="category-label">
+        <button
+          type="button"
+          class="tab"
+          [attr.aria-pressed]="filters().category === 'all'"
+          (click)="setCategory('all')"
+        >
+          {{ t.all }} <span class="n">{{ total() }}</span>
+        </button>
+        @for (category of categories(); track category.key) {
+          <button
+            type="button"
+            class="tab"
+            [attr.aria-pressed]="filters().category === category.key"
+            (click)="setCategory(category.key)"
+          >
+            {{ i18n.localize(category.name) }} <span class="n">{{ countOf(category.key) }}</span>
+          </button>
+        }
+      </div>
+    </div>
+    <fieldset class="filter-group">
+      <legend class="filter-label">{{ t.goalLabel }}</legend>
+      <div class="segmented">
+        <label>
+          <input
+            type="radio"
+            name="goal"
+            value="all"
+            [checked]="filters().goal === 'all'"
+            (change)="setGoal('all')"
+          />
+          <span>{{ t.all }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="goal"
+            value="win"
+            [checked]="filters().goal === 'win'"
+            (change)="setGoal('win')"
+          />
+          <span><app-icon name="trophy" />{{ t.goalWin }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="goal"
+            value="draw"
+            [checked]="filters().goal === 'draw'"
+            (change)="setGoal('draw')"
+          />
+          <span><app-icon name="scales" />{{ t.goalDraw }}</span>
+        </label>
+      </div>
+    </fieldset>
+    <div class="filter-foot">
+      <p class="result-count" aria-live="polite">{{ resultCount() }}</p>
+      <p class="done-summary">
+        @if (doneCount() > 0) {
+          <span
+            ><strong>{{ doneNumbers() }}</strong> {{ t.doneSummaryLabel }}</span
+          >
+        } @else {
+          {{ t.noneDone }}
+        }
+      </p>
+      @if (filtered()) {
+        <button type="button" class="text-button" (click)="clearFilters()">
+          {{ t.clearFilters }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <div class="groups" [class.reveal]="reveal()" aria-live="polite">
+    @for (group of groups(); track group.key; let g = $index) {
+      <section class="group" [attr.aria-labelledby]="'group-' + g" [style.--n]="group.cards.length">
+        <div class="group-head">
+          <h2 [id]="'group-' + g">{{ i18n.localize(group.name) }}</h2>
+          <span class="count">{{ groupCount(group) }}</span>
+        </div>
+        <ul class="shelf" [class.single]="groups().length === 1">
+          @for (card of group.cards; track card.endgame.id) {
+            <li>
+              <article
+                class="card"
+                [class.done]="card.done"
+                [style.--i]="card.index"
+                [attr.aria-labelledby]="'endgame-' + card.endgame.id"
+              >
+                <app-mini-board
+                  [frames]="card.frames"
+                  [orientation]="card.endgame.playerSide"
+                  [label]="cardLabel(card)"
+                  [ring]="card.done"
+                />
+                <div class="card-body">
+                  <h3 class="card-title" [id]="'endgame-' + card.endgame.id">
+                    {{ i18n.localize(card.endgame.name) }}
+                  </h3>
+                  <p class="card-meta">
+                    <span [class.goal-win]="card.endgame.goal === 'win'">
+                      <app-icon [name]="card.endgame.goal === 'win' ? 'trophy' : 'scales'" />{{
+                        card.endgame.goal === 'win' ? t.goalWin : t.goalDraw
+                      }}
+                    </span>
+                    <span>
+                      <i
+                        class="king"
+                        [class.pc-wK]="card.endgame.playerSide === 'white'"
+                        [class.pc-bK]="card.endgame.playerSide === 'black'"
+                        aria-hidden="true"
+                      ></i
+                      >{{ card.endgame.playerSide === 'white' ? t.playWhite : t.playBlack }}
+                    </span>
+                  </p>
+                </div>
+                <div class="card-foot">
+                  <p class="status">
+                    @if (card.done) {
+                      <span class="seal"
+                        ><span class="dot"><app-icon name="check-bold" /></span>{{ t.done }}</span
+                      >
+                    } @else {
+                      <span class="todo">{{ t.notDone }}</span>
+                    }
+                  </p>
+                  <a
+                    class="button"
+                    [class.primary]="!card.done"
+                    [routerLink]="['/endgames', card.endgame.id]"
+                    [attr.aria-label]="
+                      (card.done ? t.repeat : t.practice) + ' ' + i18n.localize(card.endgame.name)
+                    "
+                    >{{ card.done ? t.repeat : t.practice }}</a
+                  >
+                </div>
+              </article>
+            </li>
+          }
+        </ul>
+      </section>
+    } @empty {
+      <div class="notice">
+        <p>{{ t.noResults }}</p>
+        <p>{{ t.noResultsHint }}</p>
+        <button type="button" class="button" (click)="clearFilters()">{{ t.clearFilters }}</button>
+      </div>
+    }
+  </div>
+
+  <section class="privacy" aria-labelledby="progress-title">
+    <h2 id="progress-title" class="visually-hidden">{{ t.progressTitle }}</h2>
+    <p>{{ t.privacy }}</p>
+    @if (progress.status() === 'unavailable') {
+      <p>{{ t.progressUnavailable }}</p>
+    }
+    <div class="actions-inline">
+      <button type="button" class="text-button" (click)="askToClear()">
+        {{ t.clearProgress }}
+      </button>
+    </div>
+    <p class="status-msg" role="status">{{ message() }}</p>
+  </section>
 }
+
+<dialog #dialog aria-labelledby="confirm-title">
+  <h2 id="confirm-title">{{ t.confirmTitle }}</h2>
+  <p>{{ t.confirmBody }}</p>
+  <div class="dialog-actions">
+    <button type="button" class="button" (click)="cancelClear()">{{ t.cancel }}</button>
+    <button type="button" class="button danger" (click)="confirmClear()">
+      {{ t.confirmClear }}
+    </button>
+  </div>
+</dialog>

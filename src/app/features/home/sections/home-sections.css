@@ -1,0 +1,106 @@
+:host {
+  display: block;
+
+  /* Illustrative evaluation bar of the Analysis card. */
+  --eval-white: #f3f5f6;
+  --eval-black: #13222d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --eval-white: #e8eef1;
+    --eval-black: #0a151c;
+  }
+}
+
+.sections {
+  margin-top: var(--space-12);
+}
+
+.section-grid {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Small boards: only the edge, a quicker highlight and a lighter dimming between two runs. */
+.scene app-mini-board {
+  --mb-shadow: 0 0 0 1px var(--board-edge);
+  --mb-hl-ms: 300ms;
+  --mb-fade: 0.3;
+}
+
+.scene.on app-mini-board {
+  --mb-shadow: 0 0 0 1px var(--board-edge), 0 0 0 4px var(--color-accent);
+}
+
+/* What the board shows, in the bottom row of the card. */
+.soft {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.mv {
+  box-shadow: inset 0 -3px 0 var(--color-accent);
+}
+
+/* Bar of the Analysis card: no figures, with a line for the balance. */
+.with-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px;
+}
+
+.evalbar {
+  position: relative;
+  width: 0.7rem;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--eval-black);
+  box-shadow: 0 0 0 1px var(--color-control);
+}
+
+.evalbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.9;
+}
+
+.evalbar-white {
+  position: absolute;
+  inset: 0;
+  background: var(--eval-white);
+  transform: translateY(calc(100% - var(--eval, 50%)));
+  transition: transform 1100ms var(--ease-out);
+}
+
+@media (min-width: 40rem) {
+  .section-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  /* Subgrid: the titles line up even if one board is narrower because of its bar. */
+  .section-grid > li {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+  }
+
+  .evalbar {
+    width: 1.1rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .section-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

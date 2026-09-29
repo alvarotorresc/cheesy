@@ -25,6 +25,30 @@ describe('opening theory', () => {
       expect(theory.deviation).toBeUndefined();
     });
 
+    it('should list the named variations passed through, up to the last book move', () => {
+      expect(describeTheory(book, []).route).toEqual([]);
+      expect(describeTheory(book, ['e4', 'e5', 'Nf3']).route.map((node) => node.name?.en)).toEqual([
+        'Open Game',
+        'King Knight Opening',
+      ]);
+      expect(describeTheory(book, ['e4', 'e5', 'Bc4']).route.map((node) => node.name?.en)).toEqual([
+        'Open Game',
+      ]);
+    });
+
+    it('should tell when the last move is an alternative to the main one', () => {
+      const choice = describeTheory(book, ['e4', 'e5', 'Nf3', 'Nf6']).rivalChoice;
+
+      expect(choice?.chosen.san).toBe('Nf6');
+      expect(choice?.main.san).toBe('Nc6');
+    });
+
+    it('should not tell it for the main move, the start, or a move out of the book', () => {
+      expect(describeTheory(book, []).rivalChoice).toBeUndefined();
+      expect(describeTheory(book, ['e4', 'e5', 'Nf3', 'Nc6']).rivalChoice).toBeUndefined();
+      expect(describeTheory(book, ['e4', 'e5', 'Bc4']).rivalChoice).toBeUndefined();
+    });
+
     it('should report where and by whom the line left the book, and what was expected', () => {
       const theory = describeTheory(book, ['e4', 'e5', 'Bc4', 'Nf6']);
 

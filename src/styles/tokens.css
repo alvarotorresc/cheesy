@@ -1,0 +1,154 @@
+/*
+ * Cheesy design tokens and shared building blocks.
+ *
+ * Ink navy and paper for the interface, cheddar yellow as the single accent (current move, primary
+ * action, what the eye should find first). The board itself uses its own pair of squares, tuned so
+ * the pieces and the coordinates stay readable.
+ */
+
+/* Bricolage Grotesque (SIL Open Font License 1.1, see /fonts/OFL.txt), latin subset, variable. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+
+  --font-sans:
+    'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-code: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Type scale (1.25 ratio from 1rem). */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: clamp(1.9rem, 1.4rem + 2.4vw, 3rem);
+  --text-display: clamp(2.4rem, 1.6rem + 4vw, 4.25rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radii grow with the size of the thing: controls, panels, big tiles. */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --tap: 2.75rem;
+  --content-width: 78rem;
+  /*
+   * Header, footer and the three lists. The same 78rem up to a 1440px window; wider, it takes
+   * three quarters of every extra pixel, up to 100rem: a row of five opening cards, the largest
+   * family. Any wider and the rows of cards would stop short of the right edge.
+   */
+  --page-width: clamp(var(--content-width), var(--content-width) + (100vw - 90rem) * 0.75, 100rem);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --duration-fast: 120ms;
+  --duration: 200ms;
+
+  --color-bg: #f3f5f6;
+  --color-surface: #ffffff;
+  --color-surface-hover: #e7ecef;
+  --color-border: #cad4da;
+  --color-control: #7a8d99;
+  --color-text: #13222d;
+  --color-text-muted: #4a5c68;
+  --color-accent: #f4c542;
+  --color-accent-hover: #e8b42a;
+  --color-on-accent: #13222d;
+  --color-accent-text: #865a00;
+  --color-accent-soft: rgb(244 197 66 / 22%);
+  --color-danger: #b3261e;
+  --color-danger-soft: rgb(179 38 30 / 10%);
+  --color-focus: #1f5bc4;
+  --color-overlay: rgb(19 34 45 / 62%);
+
+  /* Header band and the two "squares" of the home page. */
+  --color-ink: #13222d;
+  --color-on-ink: #ffffff;
+  --color-on-ink-muted: #b5c4ce;
+  --color-square-light: #ffffff;
+  --color-on-square-light: #13222d;
+  --color-on-square-light-muted: #4a5c68;
+  --color-square-dark: #13222d;
+  --color-on-square-dark: #ffffff;
+  --color-on-square-dark-muted: #b5c4ce;
+
+  --shadow-board: 0 1px 0 rgb(19 34 45 / 8%), 0 18px 40px -24px rgb(19 34 45 / 45%);
+
+  /* Board. */
+  --board-light: #e3e9ed;
+  --board-dark: #8aa1b1;
+  --board-coord: #13222d;
+  --board-edge: #13222d;
+  --board-last-move: rgb(244 197 66 / 72%);
+  --board-selected: rgb(244 197 66 / 90%);
+  --board-dest: rgb(19 34 45 / 38%);
+  --board-dest-hover: rgb(244 197 66 / 55%);
+  --board-check: 214 40 40;
+  --board-wrong: rgb(179 38 30 / 55%);
+  --board-arrow: #15781b;
+  --pip-progress: rgb(244 197 66 / 45%);
+
+  --color-promotion-bg: #e3e9ed;
+  --color-promotion-bg-hover: #f4c542;
+  --color-piece-white: #ffffff;
+  --color-piece-black: #111111;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-bg: #0e1b23;
+    --color-surface: #162832;
+    --color-surface-hover: #1e3542;
+    --color-border: #2e4856;
+    --color-control: #7d95a3;
+    --color-text: #e8eef1;
+    --color-text-muted: #a7b8c2;
+    --color-accent-hover: #ffd566;
+    --color-accent-text: #f4c542;
+    --color-accent-soft: rgb(244 197 66 / 14%);
+    --color-danger: #ff8b7e;
+    --color-danger-soft: rgb(255 139 126 / 12%);
+    --color-focus: #f4c542;
+    --color-overlay: rgb(5 12 16 / 72%);
+
+    --color-ink: #0a151c;
+    --color-on-ink-muted: #a7b8c2;
+    --color-square-light: #e8eef1;
+    --color-on-square-light-muted: #44545f;
+    --color-square-dark: #0a151c;
+    --color-on-square-dark-muted: #a7b8c2;
+
+    --shadow-board: 0 18px 44px -22px rgb(0 0 0 / 70%);
+
+    /* Slightly dimmer squares, so the board does not glare on a dark page. */
+    --board-light: #cfd8de;
+    --board-dark: #7f97a7;
+    --board-edge: #2e4856;
+    --board-wrong: rgb(255 110 95 / 60%);
+    --board-arrow: #1d9a25;
+    --pip-progress: rgb(244 197 66 / 40%);
+    --color-promotion-bg: #cfd8de;
+  }
+}

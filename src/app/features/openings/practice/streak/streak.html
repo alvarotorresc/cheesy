@@ -1,0 +1,9 @@
+@for (mark of marks(); track $index) {
+  <span
+    class="mark"
+    [class.on]="mark.on"
+    [class.new]="mark.gained"
+    [class.lost]="mark.lost"
+    [style.--i]="mark.step"
+  ></span>
+}

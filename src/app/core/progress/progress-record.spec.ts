@@ -4,7 +4,9 @@ import {
   isMastered,
   isValidResult,
   lineIdOf,
+  parseEndgameProgress,
   parseLineProgress,
+  parsePositionProgress,
   progressKey,
 } from './progress-record';
 import type { LineProgress, LineResult } from './progress.types';
@@ -17,6 +19,7 @@ const progress = (overrides: Partial<LineProgress> = {}): LineProgress => ({
   lineId: LINE,
   practiced: 3,
   clean: 1,
+  streak: 1,
   lastPracticed: 1_700_000_000_000,
   bestMistakes: 0,
   ...overrides,
@@ -124,7 +127,12 @@ describe('parseLineProgress', () => {
     ['an infinite date', { lastPracticed: Number.POSITIVE_INFINITY }],
     ['a date beyond the range of Date', { lastPracticed: 1e20 }],
     ['clean runs with mistakes as best', { bestMistakes: 2 }],
-    ['a perfect best without clean runs', { clean: 0 }],
+    ['a perfect best without clean runs', { clean: 0, streak: 0 }],
+    ['a missing streak', { streak: undefined }],
+    ['a negative streak', { streak: -1 }],
+    ['a streak longer than the clean runs', { streak: 2 }],
+    ['a streak longer than the runs', { practiced: 1, clean: 1, streak: 2 }],
+    ['a streak with mistakes as best', { streak: 1, bestMistakes: 1 }],
   ])('should reject a row with %s', (_name, overrides) => {
     expect(parseLineProgress(row(overrides))).toBeUndefined();
   });
@@ -154,19 +162,42 @@ describe('applyResult', () => {
       lineId: LINE,
       practiced: 1,
       clean: 0,
+      streak: 0,
       lastPracticed: 1000,
       bestMistakes: 2,
     });
   });
 
   it('should count a clean run', () => {
-    const next = applyResult(progress({ practiced: 2, clean: 0, bestMistakes: 3 }), result(), 5);
-    expect(next).toMatchObject({ practiced: 3, clean: 1, bestMistakes: 0, lastPracticed: 5 });
+    const next = applyResult(
+      progress({ practiced: 2, clean: 0, streak: 0, bestMistakes: 3 }),
+      result(),
+      5,
+    );
+    expect(next).toMatchObject({
+      practiced: 3,
+      clean: 1,
+      streak: 1,
+      bestMistakes: 0,
+      lastPracticed: 5,
+    });
   });
 
   it('should keep the best result when a worse run comes', () => {
     const next = applyResult(progress({ bestMistakes: 0 }), result({ mistakes: 5 }), 5);
     expect(next).toMatchObject({ practiced: 4, clean: 1, bestMistakes: 0 });
+  });
+
+  it('should grow the streak with each clean run and cut it at the first mistake', () => {
+    let current = applyResult(undefined, result(), 1);
+    current = applyResult(current, result(), 2);
+    expect(current.streak).toBe(2);
+    current = applyResult(current, result(), 3);
+    expect(current.streak).toBe(3);
+    current = applyResult(current, result({ mistakes: 1 }), 4);
+    expect(current).toMatchObject({ streak: 0, clean: 3, practiced: 4, bestMistakes: 0 });
+    current = applyResult(current, result(), 5);
+    expect(current.streak).toBe(1);
   });
 
   it('should produce rows that read back as valid', () => {
@@ -178,9 +209,74 @@ describe('applyResult', () => {
 });
 
 describe('isMastered', () => {
-  it('should need one clean run', () => {
+  it('should need a streak of three clean runs', () => {
     expect(isMastered(undefined)).toBe(false);
-    expect(isMastered(progress({ clean: 0, bestMistakes: 1 }))).toBe(false);
-    expect(isMastered(progress({ clean: 1 }))).toBe(true);
+    expect(isMastered(progress({ streak: 2 }))).toBe(false);
+    expect(isMastered(progress({ streak: 3 }))).toBe(true);
+    expect(isMastered(progress({ streak: 5 }))).toBe(true);
+  });
+
+  it('should be lost when a run has mistakes', () => {
+    const mastered = progress({ practiced: 3, clean: 3, streak: 3 });
+    expect(isMastered(mastered)).toBe(true);
+    expect(isMastered(applyResult(mastered, result({ mistakes: 1 }), 9))).toBe(false);
+  });
+});
+
+describe('parseEndgameProgress', () => {
+  const endgame = { endgameId: 'lucena', completions: 2, firstCompletedAt: 5, lastCompletedAt: 9 };
+
+  it('should read a valid row and copy only the known fields', () => {
+    expect(parseEndgameProgress({ ...endgame, extra: 1 })).toEqual(endgame);
+  });
+
+  it.each<[string, Record<string, unknown>]>([
+    ['a malformed id', { endgameId: '../x' }],
+    ['no completions', { completions: 0 }],
+    ['a fractional count', { completions: 1.5 }],
+    ['an invalid date', { firstCompletedAt: Number.NaN }],
+    ['a last date before the first', { lastCompletedAt: 1 }],
+  ])('should reject a row with %s', (_name, overrides) => {
+    expect(parseEndgameProgress({ ...endgame, ...overrides })).toBeUndefined();
+  });
+
+  it('should reject what is not an object', () => {
+    expect(parseEndgameProgress(null)).toBeUndefined();
+    expect(parseEndgameProgress('lucena')).toBeUndefined();
+  });
+});
+
+describe('parsePositionProgress', () => {
+  const solved = {
+    positionId: 'legal-mate',
+    solves: 2,
+    firstTry: true,
+    spoiled: false,
+    lastSolvedAt: 7,
+  };
+  const spoiledOnly = { positionId: 'legal-mate', solves: 0, firstTry: false, spoiled: true };
+
+  it('should read valid rows', () => {
+    expect(parsePositionProgress({ ...solved, extra: 1 })).toEqual(solved);
+    expect(parsePositionProgress(spoiledOnly)).toEqual(spoiledOnly);
+    const late = { ...solved, firstTry: false, spoiled: true };
+    expect(parsePositionProgress(late)).toEqual(late);
+  });
+
+  it.each<[string, Record<string, unknown>]>([
+    ['a malformed id', { positionId: '<x>' }],
+    ['a negative count', { solves: -1 }],
+    ['a flag that is not a boolean', { firstTry: 'yes' }],
+    ['first try and spoiled together', { spoiled: true }],
+    ['neither first try nor spoiled once solved', { firstTry: false }],
+    ['no date once solved', { lastSolvedAt: undefined }],
+    ['an invalid date', { lastSolvedAt: Number.POSITIVE_INFINITY }],
+    ['first try without solves', { solves: 0 }],
+  ])('should reject a row with %s', (_name, overrides) => {
+    expect(parsePositionProgress({ ...solved, ...overrides })).toBeUndefined();
+  });
+
+  it('should reject a date on a position that was never solved', () => {
+    expect(parsePositionProgress({ ...spoiledOnly, lastSolvedAt: 3 })).toBeUndefined();
   });
 });

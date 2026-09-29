@@ -5,6 +5,7 @@ import { CONTENT_LOADERS, type ContentLoaders } from '../../../core/content';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { OPENING_RANDOM } from '../book-pick';
 import { OpeningSession, REPLY_DELAY_MS } from '../opening-session';
 import { fakeEngineFactory } from '../../../core/engine/testing';
 import { testLoaders, testTree } from '../testing/test-opening';
@@ -35,6 +36,8 @@ describe('OpeningPlay', () => {
   let loaders: ContentLoaders;
   let session: OpeningSession;
   let game: GameService;
+  /** What the rival's dice roll: 0 always picks the main continuation. */
+  let random = 0;
 
   const create = async (id: string): Promise<void> => {
     params = new BehaviorSubject(convertToParamMap({ id }));
@@ -44,6 +47,7 @@ describe('OpeningPlay', () => {
         { provide: ActivatedRoute, useValue: { paramMap: params } },
         { provide: ENGINE_TRANSPORT, useValue: engines.factory },
         { provide: CONTENT_LOADERS, useValue: loaders },
+        { provide: OPENING_RANDOM, useValue: () => random },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -80,6 +84,7 @@ describe('OpeningPlay', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    random = 0;
     engines = fakeEngineFactory();
     loaders = testLoaders([testTree(), OTHER, EMPTY]);
   });
@@ -97,20 +102,20 @@ describe('OpeningPlay', () => {
 
       expect(text('h1')).toBe('Test Opening');
       expect(document.title).toBe('Test Opening · Cheesy');
-      expect(text('.meta')).toBe('C20 You play White');
+      expect(text('.meta')).toBe('You play WhiteECO C20');
       expect(text('app-theory-panel .comment')).toBe('A tree built for the tests.');
       expect(element.querySelector('app-board cg-board')).not.toBeNull();
     });
 
-    it('should link to the drill of the opening', async () => {
+    it('should link to the practice of the opening', async () => {
       await create('test-opening');
 
       const links = Array.from(element.querySelectorAll('a.back'));
       expect(links.map((link) => link.getAttribute('href'))).toEqual([
         '/openings',
-        '/openings/test-opening/drill',
+        '/openings/test-opening/practice',
       ]);
-      expect(links[1].textContent?.trim()).toBe('Drill these lines');
+      expect(links[1].textContent?.trim()).toBe('Practise these lines');
     });
 
     it('should announce the loading state while the opening arrives', async () => {
@@ -123,7 +128,7 @@ describe('OpeningPlay', () => {
     it('should say so, with a way back to the list, when the opening does not exist', async () => {
       await create('no-such-opening');
 
-      expect(text('[role="alert"]')).toBe('We do not have this opening.');
+      expect(text('[role="alert"] p')).toBe('We do not have this opening.');
       expect(element.querySelector('a.back')?.getAttribute('href')).toBe('/openings');
     });
 
@@ -176,7 +181,7 @@ describe('OpeningPlay', () => {
       await settle(REPLY_DELAY_MS);
 
       expect(text('.status')).toBe('Your move.');
-      expect(element.querySelectorAll('app-move-list button')).toHaveLength(2);
+      expect(element.querySelectorAll('app-opening-moves button')).toHaveLength(2);
     });
 
     it('should explain a move out of our lines and take it back when asked', async () => {
@@ -206,7 +211,7 @@ describe('OpeningPlay', () => {
       await settle(REPLY_DELAY_MS);
 
       expect(sans()).toEqual(['e4', 'e5', 'Bc4', 'Nf6']);
-      expect(text('app-theory-panel .state')).toContain('You left our lines with 2.Bc4.');
+      expect(text('app-theory-panel .book-state')).toContain('You left our lines with 2.Bc4.');
     });
 
     it('should undo the player move and the answer with the undo button', async () => {
@@ -284,8 +289,94 @@ describe('OpeningPlay', () => {
       TestBed.inject(I18nService).setLang('es');
       await settle();
 
-      expect(text('.meta')).toBe('C20 Juegas con Blancas');
+      expect(text('.meta')).toBe('Juegas con blancasECO C20');
       expect(text('.status')).toBe('Te toca mover.');
+    });
+  });
+
+  describe('rival variety, options and analysis', () => {
+    beforeEach(() => create('test-opening'));
+
+    const playToKnight = async (): Promise<void> => {
+      session.play({ from: 'e2', to: 'e4' });
+      await settle(REPLY_DELAY_MS);
+      session.play({ from: 'g1', to: 'f3' });
+      await settle(REPLY_DELAY_MS);
+    };
+
+    it('should answer with the main line when the dice say so, without any note', async () => {
+      await playToKnight();
+
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nc6']);
+      expect(element.querySelector('.rival-choice')).toBeNull();
+    });
+
+    it('should answer with an alternative and say which move the main line plays', async () => {
+      random = 0.99;
+      await playToKnight();
+
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nf6']);
+      expect(text('.variation')).toBe('Petrov Defence');
+      expect(text('.rival-choice')).toBe(
+        'The rival chose 2...Nf6, one of our lines. The main line goes on with 2...Nc6.',
+      );
+    });
+
+    it('should always play the main line when asked to, whatever the dice say', async () => {
+      random = 0.99;
+      element.querySelector<HTMLInputElement>('input[type="checkbox"]')?.click();
+      await settle();
+      await playToKnight();
+
+      expect(session.mainOnly()).toBe(true);
+      expect(sans()).toEqual(['e4', 'e5', 'Nf3', 'Nc6']);
+    });
+
+    it('should list the named variations passed through, the last one as current', async () => {
+      await playToKnight();
+
+      const steps = Array.from(element.querySelectorAll('.route li'));
+      expect(steps.map((step) => step.textContent?.trim())).toEqual([
+        '1...e5Open Game',
+        '2.Nf3King Knight Opening',
+      ]);
+      expect(steps.at(-1)?.classList.contains('now')).toBe(true);
+    });
+
+    it('should sum up the settings and disable the main-line choice against Stockfish', async () => {
+      expect(text('.opt-now')).toBe('Rival: our lines, varied. Stockfish: club player.');
+
+      element.querySelectorAll<HTMLInputElement>('input[type="radio"]')[1].click();
+      await settle();
+
+      expect(text('.opt-now')).toBe('Rival: Stockfish. Stockfish: club player.');
+      expect(element.querySelector<HTMLInputElement>('input[type="checkbox"]')?.disabled).toBe(
+        true,
+      );
+    });
+
+    it('should mark the moves outside our lines in italics', async () => {
+      session.play({ from: 'e2', to: 'e4' });
+      await settle(REPLY_DELAY_MS);
+      session.play({ from: 'f1', to: 'c4' });
+      await settle();
+
+      const moves = Array.from(element.querySelectorAll('app-opening-moves button'));
+      expect(moves.map((move) => move.classList.contains('off'))).toEqual([false, false, true]);
+      expect(text('.moves-legend')).toBe('In italics, the moves outside our lines.');
+    });
+
+    it('should link to Analysis with the game and the move on display', async () => {
+      await playToKnight();
+      game.goTo(3);
+      await settle();
+
+      const link = element.querySelector('.analyze a') as HTMLAnchorElement;
+      const url = new URL(link.href, 'http://localhost');
+      expect(url.pathname).toBe('/analysis');
+      expect(url.searchParams.get('pgn')).toBe('1. e4 e5 2. Nf3 Nc6');
+      expect(url.searchParams.get('ply')).toBe('3');
+      expect(url.searchParams.get('from')).toBe('opening:test-opening');
     });
   });
 

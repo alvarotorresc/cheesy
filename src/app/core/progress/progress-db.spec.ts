@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import { IDBFactory, IDBKeyRange } from 'fake-indexeddb';
 import { openProgressStore } from './progress-db';
-import { progressKey } from './progress-record';
+import { isMastered, parseLineProgress, progressKey } from './progress-record';
 import type { StoredLineProgress } from './progress-store';
 
 const row = (lineId: string, openingId = 'ruy-lopez'): StoredLineProgress => ({
@@ -11,6 +11,7 @@ const row = (lineId: string, openingId = 'ruy-lopez'): StoredLineProgress => ({
   lineId,
   practiced: 1,
   clean: 1,
+  streak: 1,
   lastPracticed: 10,
   bestMistakes: 0,
 });
@@ -26,45 +27,136 @@ describe('openProgressStore', () => {
 
   it('should keep rows by key and read them back', async () => {
     const store = await open();
-    await store.put(row('e2e4'));
-    await store.put(row('d2d4', 'london-system'));
+    await store.lines.put(row('e2e4'));
+    await store.lines.put(row('d2d4', 'london-system'));
 
-    expect(await store.get(row('e2e4').key)).toEqual(row('e2e4'));
-    expect(await store.get('missing')).toBeUndefined();
-    expect(await store.all()).toHaveLength(2);
+    expect(await store.lines.get(row('e2e4').key)).toEqual(row('e2e4'));
+    expect(await store.lines.get('missing')).toBeUndefined();
+    expect(await store.lines.all()).toHaveLength(2);
   });
 
   it('should replace the row of a line when it is saved again', async () => {
     const store = await open();
-    await store.put(row('e2e4'));
-    await store.put({ ...row('e2e4'), practiced: 2 });
+    await store.lines.put(row('e2e4'));
+    await store.lines.put({ ...row('e2e4'), practiced: 2 });
 
-    expect(await store.all()).toEqual([{ ...row('e2e4'), practiced: 2 }]);
+    expect(await store.lines.all()).toEqual([{ ...row('e2e4'), practiced: 2 }]);
   });
 
   it('should keep the rows between visits', async () => {
-    await (await open()).put(row('e2e4'));
+    await (await open()).lines.put(row('e2e4'));
 
-    expect(await (await open()).all()).toEqual([row('e2e4')]);
+    expect(await (await open()).lines.all()).toEqual([row('e2e4')]);
   });
 
   it('should remove every row when cleared', async () => {
     const store = await open();
-    await store.put(row('e2e4'));
-    await store.clear();
+    await store.lines.put(row('e2e4'));
+    await store.lines.clear();
 
-    expect(await store.all()).toEqual([]);
+    expect(await store.lines.all()).toEqual([]);
   });
 
-  it('should create version 1 of the schema with an index on the opening', async () => {
+  it('should keep endgames and positions in their own tables', async () => {
+    const store = await open();
+    await store.endgames.put({
+      endgameId: 'lucena',
+      completions: 1,
+      firstCompletedAt: 1,
+      lastCompletedAt: 1,
+    });
+    await store.positions.put({
+      positionId: 'legal-mate',
+      solves: 0,
+      firstTry: false,
+      spoiled: true,
+    });
+
+    expect(await store.endgames.get('lucena')).toMatchObject({ completions: 1 });
+    expect(await store.positions.all()).toHaveLength(1);
+    expect(await store.lines.all()).toEqual([]);
+
+    await store.positions.clear();
+    expect(await store.positions.all()).toEqual([]);
+    expect(await store.endgames.all()).toHaveLength(1);
+  });
+
+  it('should create version 2 of the schema', async () => {
     await open();
     const db = new Dexie('test-progress', { indexedDB, IDBKeyRange });
     await db.open();
 
-    expect(db.verno).toBe(1);
+    expect(db.verno).toBe(2);
     expect(db.table('lines').schema.primKey.name).toBe('key');
     expect(db.table('lines').schema.indexes.map((index) => index.name)).toEqual(['openingId']);
+    expect(db.table('endgames').schema.primKey.name).toBe('endgameId');
+    expect(db.table('positions').schema.primKey.name).toBe('positionId');
     db.close();
+  });
+
+  describe('upgrading from version 1', () => {
+    /** A version 1 database, as an earlier visit left it: no streak in the rows. */
+    const seedVersion1 = async (rows: Record<string, unknown>[]): Promise<void> => {
+      const old = new Dexie('test-progress', { indexedDB, IDBKeyRange });
+      old.version(1).stores({ lines: 'key, openingId' });
+      await old.open();
+      await old.table('lines').bulkPut(rows);
+      old.close();
+    };
+
+    const v1 = (lineId: string, practiced: unknown, clean: unknown): Record<string, unknown> => ({
+      key: progressKey('ruy-lopez', 'white', lineId),
+      openingId: 'ruy-lopez',
+      color: 'white',
+      lineId,
+      practiced,
+      clean,
+      lastPracticed: 10,
+      bestMistakes: clean === 0 ? 1 : 0,
+    });
+
+    it('should keep the streak only when every run was clean', async () => {
+      await seedVersion1([v1('e2e4', 3, 3), v1('d2d4', 4, 2), v1('c2c4', 1, 0), v1('g1f3', 1, 1)]);
+
+      const store = await open();
+      const streak = async (lineId: string) =>
+        ((await store.lines.get(progressKey('ruy-lopez', 'white', lineId))) as { streak: number })
+          .streak;
+
+      expect(await streak('e2e4')).toBe(3);
+      expect(await streak('d2d4')).toBe(0);
+      expect(await streak('c2c4')).toBe(0);
+      expect(await streak('g1f3')).toBe(1);
+    });
+
+    it('should read the upgraded rows as valid, mastering only the first', async () => {
+      await seedVersion1([v1('e2e4', 3, 3), v1('d2d4', 4, 2)]);
+
+      const rows = (await (await open()).lines.all()).flatMap(
+        (row) => parseLineProgress(row) ?? [],
+      );
+
+      expect(rows).toHaveLength(2);
+      expect(rows.filter(isMastered).map((row) => row.lineId)).toEqual(['e2e4']);
+    });
+
+    it('should give malformed rows a streak of 0 without dropping them', async () => {
+      await seedVersion1([v1('e2e4', 'many', 3)]);
+
+      const [row] = await (await open()).lines.all();
+
+      expect(row).toMatchObject({ streak: 0, practiced: 'many' });
+      expect(parseLineProgress(row)).toBeUndefined();
+    });
+
+    it('should leave the new tables empty', async () => {
+      await seedVersion1([v1('e2e4', 1, 1)]);
+
+      const store = await open();
+
+      expect(await store.endgames.all()).toEqual([]);
+      expect(await store.positions.all()).toEqual([]);
+    });
   });
 
   it('should reject when IndexedDB is missing', async () => {

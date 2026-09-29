@@ -43,6 +43,14 @@ const toProbe = (fen: string): Probe | undefined => {
   return { key: makeFen({ ...setup, fullmoves: 1 }), position };
 };
 
+const requestUrl = (key: string): string => `${TABLEBASE_URL}?fen=${encodeURIComponent(key)}`;
+
+/** The address the client asks for a position, or undefined when it would not ask at all. */
+export const tablebaseRequestUrl = (fen: string): string | undefined => {
+  const probe = toProbe(fen);
+  return probe && requestUrl(probe.key);
+};
+
 const abortError = (signal: AbortSignal | undefined): boolean => signal?.aborted ?? false;
 
 /**
@@ -156,7 +164,7 @@ export class TablebaseClient {
       controller.abort();
     }, REQUEST_TIMEOUT_MS);
     try {
-      const url = `${TABLEBASE_URL}?fen=${encodeURIComponent(key)}`;
+      const url = requestUrl(key);
       let response;
       try {
         response = await this.http(url, controller.signal);

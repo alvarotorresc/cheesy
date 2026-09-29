@@ -40,6 +40,13 @@ describe('OpeningList', () => {
   const text = (selector: string): string[] =>
     Array.from(element.querySelectorAll(selector)).map((node) => node.textContent?.trim() ?? '');
 
+  const click = async (target: Element | null | undefined): Promise<void> => {
+    (target as HTMLElement).click();
+    await fixture.whenStable();
+  };
+
+  const names = (): string[] => text('.card-title');
+
   beforeEach(() => {
     loaders = testLoaders(CATALOG);
     memory = memoryProgressStore();
@@ -54,24 +61,40 @@ describe('OpeningList', () => {
   it('should group the openings by family in family order', async () => {
     await create();
 
-    expect(text('h2')).toEqual(['1.e4 e5: open games', 'Other defences to 1.e4']);
+    expect(text('.family h2')).toEqual(['1.e4 e5: open games', 'Other defences to 1.e4']);
     expect(element.querySelectorAll('.family')[1].querySelectorAll('li')).toHaveLength(2);
   });
 
-  it('should show the translated name, ECO code and side of each opening', async () => {
+  it('should show the translated name, ECO code, side and line count of each opening', async () => {
     await create();
 
-    const card = element.querySelector('a.card');
+    const card = element.querySelector('.card');
     expect(card?.querySelector('h3')?.textContent).toContain('Test Opening');
-    expect(card?.textContent).toContain('C60-C99');
+    expect(card?.textContent).toContain('ECO C60-C99');
     expect(card?.textContent).toContain('For White');
+    expect(card?.textContent).toContain('3 lines, not started');
   });
 
-  it('should link each opening to its play page', async () => {
+  it('should link each opening to its play page and its practice', async () => {
     await create();
 
-    const links = Array.from(element.querySelectorAll('a.card')).map((a) => a.getAttribute('href'));
-    expect(links).toEqual(['/openings/ruy', '/openings/french', '/openings/caro']);
+    const links = Array.from(element.querySelectorAll('.card .actions a')).map((a) =>
+      a.getAttribute('href'),
+    );
+    expect(links.slice(0, 2)).toEqual(['/openings/ruy', '/openings/ruy/practice']);
+    expect(element.querySelector('.card .actions a')?.getAttribute('aria-label')).toBe(
+      'Play Test Opening',
+    );
+  });
+
+  it('should draw a board and a strip of moves for each opening', async () => {
+    await create();
+
+    expect(element.querySelectorAll('app-mini-board')).toHaveLength(3);
+    expect(element.querySelector('.replay')?.getAttribute('aria-label')).toBe(
+      'Watch the moves of Test Opening',
+    );
+    expect(element.querySelector('.moves')?.textContent).toContain('1.');
   });
 
   it('should follow the language of the interface', async () => {
@@ -106,7 +129,7 @@ describe('OpeningList', () => {
     element.querySelector<HTMLButtonElement>('[role="alert"] button')?.click();
     await fixture.whenStable();
 
-    expect(element.querySelectorAll('a.card')).toHaveLength(3);
+    expect(element.querySelectorAll('.card')).toHaveLength(3);
   });
 
   it('should say so when there are no openings', async () => {
@@ -116,22 +139,83 @@ describe('OpeningList', () => {
     expect(element.textContent).toContain('No openings yet.');
   });
 
+  describe('filters', () => {
+    const radio = (name: string, value: string): HTMLInputElement =>
+      element.querySelector(`input[name="${name}"][value="${value}"]`) as HTMLInputElement;
+
+    it('should fold behind a button that counts the active filters', async () => {
+      await create();
+
+      const toggle = element.querySelector<HTMLButtonElement>('.filters-toggle');
+      expect(toggle?.getAttribute('aria-expanded')).toBe('false');
+      expect(element.querySelector('.filters')?.hasAttribute('hidden')).toBe(true);
+      expect(element.querySelector('.count-badge')).toBeNull();
+
+      await click(toggle);
+      await click(radio('side', 'black'));
+
+      expect(toggle?.getAttribute('aria-expanded')).toBe('true');
+      expect(element.querySelector('.filters')?.hasAttribute('hidden')).toBe(false);
+      expect(element.querySelector('.count-badge')?.textContent?.trim()).toBe('1');
+    });
+
+    it('should filter by side and say how many are left', async () => {
+      await create();
+      expect(element.querySelector('.result-count')?.textContent?.trim()).toBe('3 openings');
+
+      await click(radio('side', 'black'));
+
+      expect(names()).toHaveLength(2);
+      expect(element.querySelector('.result-count')?.textContent?.trim()).toBe('2 openings of 3');
+    });
+
+    it('should filter by first move and by family', async () => {
+      await create();
+
+      await click(element.querySelector('[aria-label="All of 1.e4"]'));
+      expect(names()).toHaveLength(3);
+      const tab = Array.from(element.querySelectorAll('.tab')).find(
+        (button) => button.textContent?.trim() === 'Open games',
+      );
+      await click(tab);
+
+      expect(names()).toHaveLength(1);
+      expect(tab?.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('should show a message and clear the filters when nothing matches', async () => {
+      await create();
+
+      await click(radio('side', 'white'));
+      await click(radio('status', 'mastered'));
+
+      expect(element.querySelector('.families .notice')?.textContent).toContain(
+        'No opening matches these filters.',
+      );
+      await click(element.querySelector('.families .notice button'));
+
+      expect(names()).toHaveLength(3);
+      expect(element.querySelector('.count-badge')).toBeNull();
+    });
+  });
+
   describe('progress', () => {
     /** A stored row of a line of the test tree, practised once. */
     const saved = (
       openingId: string,
       lineId: string,
       color: 'white' | 'black' = 'white',
-      clean = 0,
+      streak = 0,
     ): StoredLineProgress => ({
       key: progressKey(openingId, color, lineId),
       openingId,
       color,
       lineId,
-      practiced: 1,
-      clean,
+      practiced: Math.max(streak, 1),
+      clean: streak,
+      streak,
       lastPracticed: 1,
-      bestMistakes: clean > 0 ? 0 : 2,
+      bestMistakes: streak > 0 ? 0 : 2,
     });
 
     const store = (...rows: StoredLineProgress[]): void => {
@@ -144,33 +228,29 @@ describe('OpeningList', () => {
       await fixture.whenStable();
     };
 
-    it('should link each opening to its drill', async () => {
-      await create();
+    const MAIN = 'e2e4 e7e5 g1f3 b8c6 f1b5';
+    const CENTRE = 'e2e4 e7e5 d2d4';
+    const PETROV = 'e2e4 e7e5 g1f3 g8f6';
 
-      const links = Array.from(element.querySelectorAll('a.drill'));
-      expect(links.map((a) => a.getAttribute('href'))).toEqual([
-        '/openings/ruy/drill',
-        '/openings/french/drill',
-        '/openings/caro/drill',
-      ]);
-      expect(links[0].textContent?.trim()).toBe('Drill');
-      expect(links[0].getAttribute('aria-label')).toBe('Drill Test Opening');
-    });
-
-    it('should count the lines practised and mastered with either colour', async () => {
-      store(
-        saved('ruy', 'e2e4 e7e5 g1f3 b8c6 f1b5', 'white', 1),
-        saved('ruy', 'e2e4 e7e5 g1f3 b8c6 f1b5', 'black'),
-        saved('ruy', 'e2e4 e7e5 d2d4', 'black'),
-      );
+    it('should show the progress of each colour with a pip for each line', async () => {
+      store(saved('ruy', MAIN, 'white', 3), saved('ruy', CENTRE, 'black'));
       await create();
       await settle();
 
-      const cards = Array.from(element.querySelectorAll('a.card'));
-      expect(cards[0].querySelector('.progress')?.textContent?.trim()).toBe(
-        '2 of 3 lines practised, 1 mastered',
+      const rows = Array.from(
+        element.querySelector('.card')?.querySelectorAll('.progress-row') ?? [],
       );
-      expect(cards[1].querySelector('.progress')).toBeNull();
+      expect(rows.map((row) => row.querySelector('.who')?.textContent?.trim())).toEqual([
+        'With White',
+        'With Black',
+      ]);
+      expect(rows[0].querySelector('.what')?.textContent?.trim()).toBe('1 of 3 mastered');
+      expect(rows[1].querySelector('.what')?.textContent?.trim()).toBe(
+        '0 of 3 mastered, 1 in progress',
+      );
+      expect(rows[0].querySelectorAll('.pip.m')).toHaveLength(1);
+      expect(rows[1].querySelectorAll('.pip.p')).toHaveLength(1);
+      expect(element.querySelectorAll('.card')[1].querySelector('.progress')).toBeNull();
     });
 
     it('should ignore progress of lines and openings that are not in the content', async () => {
@@ -178,75 +258,65 @@ describe('OpeningList', () => {
       await create();
       await settle();
 
-      expect(element.querySelector('a.card .progress')?.textContent?.trim()).toBe(
-        '0 of 3 lines practised, 0 mastered',
-      );
+      expect(element.querySelector('.card .progress')).toBeNull();
     });
 
-    it('should say where the progress is kept, and offer to delete it', async () => {
-      store(saved('ruy', 'e2e4 e7e5 d2d4'));
+    it('should call an opening mastered only with all its lines mastered with its own colour', async () => {
+      store(
+        saved('ruy', MAIN, 'white', 3),
+        saved('ruy', CENTRE, 'white', 3),
+        saved('ruy', PETROV, 'white', 3),
+        saved('french', MAIN, 'black', 3),
+      );
       await create();
       await settle();
 
-      expect(element.querySelector('app-progress-note')?.textContent).toContain(
-        'Your progress stays in this browser',
-      );
-      expect(element.querySelector('app-progress-note')?.textContent).toContain(
-        'A line counts as practised with either colour.',
-      );
-      expect(element.querySelector('app-progress-note button')?.textContent?.trim()).toBe(
-        'Delete progress',
-      );
+      await click(element.querySelector('input[name="status"][value="mastered"]'));
+
+      expect(names()).toHaveLength(1);
+      expect(element.querySelector('.progress-done')?.textContent?.trim()).toBe('All mastered');
     });
 
-    it('should forget the progress shown once it is deleted', async () => {
-      store(saved('ruy', 'e2e4 e7e5 d2d4'));
+    it('should say where the progress is kept and that there is none to delete', async () => {
       await create();
       await settle();
 
-      element.querySelector<HTMLButtonElement>('app-progress-note button')?.click();
+      expect(element.querySelector('.privacy')?.textContent).toContain(
+        'Your progress is saved in this browser only',
+      );
+      await click(element.querySelector('.privacy .text-button'));
+      expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe(
+        'There is no saved progress.',
+      );
+    });
+
+    it('should delete only the openings progress after a confirmation', async () => {
+      const showModal = vi.fn();
+      HTMLDialogElement.prototype.showModal = showModal;
+      HTMLDialogElement.prototype.close = vi.fn();
+      store(saved('ruy', CENTRE));
+      await create();
       await settle();
-      Array.from(element.querySelectorAll<HTMLButtonElement>('app-progress-note button'))
-        .find((button) => button.textContent?.trim() === 'Delete')
-        ?.click();
+
+      await click(element.querySelector('.privacy .text-button'));
+      expect(showModal).toHaveBeenCalled();
+      await click(element.querySelector('dialog .button.danger'));
       await settle();
       await settle();
 
       expect(memory.rows.size).toBe(0);
-      expect(element.querySelector('a.card .progress')).toBeNull();
+      expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe('Progress deleted.');
+      expect(element.querySelector('.card .progress')).toBeNull();
     });
 
     it('should show the list without progress when the trees cannot be read', async () => {
-      store(saved('ruy', 'e2e4 e7e5 d2d4'));
+      store(saved('ruy', CENTRE));
       loaders = { ...loaders, opening: () => Promise.reject(new Error('offline')) };
       await create();
       await settle();
 
-      expect(element.querySelectorAll('a.card')).toHaveLength(3);
-      expect(element.querySelector('a.card .progress')).toBeNull();
-      expect(element.querySelector('app-progress-note button')?.textContent?.trim()).toBe(
-        'Delete progress',
-      );
-    });
-
-    it('should show the progress of the openings that loaded when another one fails', async () => {
-      store(saved('ruy', 'e2e4 e7e5 d2d4'), saved('french', 'e2e4 e7e5 d2d4', 'black'));
-      const opening = loaders.opening;
-      loaders = {
-        ...loaders,
-        opening: (id) => (id === 'french' ? Promise.reject(new Error('offline')) : opening(id)),
-      };
-      await create();
-      await settle();
-
-      const cards = Array.from(element.querySelectorAll('a.card'));
-      expect(cards[0].querySelector('.progress')?.textContent?.trim()).toBe(
-        '1 of 3 lines practised, 0 mastered',
-      );
-      expect(cards[1].querySelector('.progress')).toBeNull();
-      expect(element.querySelector('app-progress-note button')?.textContent?.trim()).toBe(
-        'Delete progress',
-      );
+      expect(element.querySelectorAll('.card')).toHaveLength(3);
+      expect(element.querySelector('.card .progress')).toBeNull();
     });
   });
 });

@@ -1,51 +1,161 @@
-.board-column {
+/* ---- Notices on top: invalid link and "From" ---- */
+.top-notes {
   display: grid;
+  gap: var(--space-3);
 }
 
-.board-column.with-bar {
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--space-2);
-}
-
-.notice {
+.link-notice {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  border-left: 4px solid var(--color-danger);
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-danger);
+  border-left-width: 5px;
+  border-radius: var(--radius);
+  background: var(--color-danger-soft);
 }
 
-.engine {
-  gap: var(--space-1);
-  padding-block: var(--space-2);
+.link-notice p {
+  max-width: 44rem;
 }
 
-.switch {
-  display: flex;
+.link-notice strong {
+  display: block;
+}
+
+.origin {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: var(--space-3);
-  min-height: var(--tap);
-  font-weight: 700;
-  cursor: pointer;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  --color-focus: var(--color-accent);
+  animation: origin-in 520ms var(--ease-out) both;
 }
 
-.engine-status {
-  min-height: 1.5em;
+@keyframes origin-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.origin-mark {
+  grid-row: span 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  display: grid;
+  place-items: center;
+}
+
+.origin-mark i {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: block;
+}
+
+.origin-title {
+  font-weight: 800;
+  font-size: var(--text-lg);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.origin-title span {
+  color: var(--color-accent);
+}
+
+.origin-sub {
+  color: var(--color-on-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.origin-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-4);
+}
+
+.origin-actions a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-on-ink);
+}
+
+@media (min-width: 48rem) {
+  .origin {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .origin-actions {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}
+
+/* ---- Board with the evaluation bar on its left (stage in styles/layout.css) ---- */
+.play-stage {
+  --board-extra-h: 2rem;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 1.5rem var(--board);
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* ---- Turn and controls ---- */
+.turn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  min-height: 2rem;
+}
+
+.turn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+}
+
+.turn .king {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.check-tag {
+  padding: 0.05rem var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-danger);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.in-var {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-2);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
 
-.engine-status:empty {
-  min-height: 0;
-}
-
-.retry {
-  justify-self: start;
-}
-
-/* Room for the depth and three lines, so the panel does not jump while they arrive. */
-.lines {
-  min-height: 10.5rem;
+.in-var b {
+  color: var(--color-accent-text);
+  font-weight: 700;
 }
 
 .controls {
@@ -53,6 +163,132 @@
   gap: var(--space-2);
 }
 
-.panel-title {
-  margin-bottom: calc(var(--space-5) * -1 + var(--space-2));
+.nav-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.nav-buttons .button {
+  padding: 0;
+}
+
+.tool-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.tool-buttons .button {
+  padding-inline: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+/* One row on a wide phone or a tablet; two in the panel beside the board, which is narrower. */
+@media (min-width: 30rem) and (not ((min-width: 60rem) and (orientation: landscape))) {
+  .controls {
+    grid-template-columns: auto 1fr;
+  }
+
+  .nav-buttons .button {
+    width: 3.25rem;
+  }
+}
+
+@media (min-width: 30rem) {
+  .tool-buttons .button {
+    font-size: var(--text-md);
+  }
+}
+
+.kbd-hint {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+kbd {
+  font: inherit;
+  font-weight: 700;
+  padding: 0 0.3em;
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+}
+
+@media (hover: none) {
+  .kbd-hint {
+    display: none;
+  }
+}
+
+/* ---- Panel blocks ---- */
+.block {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  min-width: 0;
+}
+
+.block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+.engine-body {
+  padding: 0 var(--space-4) var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.engine-status {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  min-height: 1.3em;
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.retry-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.skeleton {
+  height: var(--tap);
+  border-radius: var(--radius);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-hover),
+    var(--color-bg),
+    var(--color-surface-hover)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.moves-block {
+  overflow: hidden;
+}
+
+.moves-head h2 {
+  font-size: var(--text-md);
+}
+
+.moves-head .count {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
 }

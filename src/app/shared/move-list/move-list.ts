@@ -1,4 +1,5 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
+import { I18nService } from '../../core/i18n';
 
 interface MoveCell {
   san: string;
@@ -19,6 +20,8 @@ interface MoveRow {
   styleUrl: './move-list.css',
 })
 export class MoveList {
+  protected readonly i18n = inject(I18nService);
+
   /** Moves in SAN, in the order they were played. */
   readonly moves = input.required<readonly string[]>();
   /** Number of moves applied to reach the displayed position (0 = start position). */

@@ -1,24 +1,251 @@
 :host {
-  display: grid;
-  gap: var(--space-8);
+  display: block;
+  /* Finales sizes its cards apart from the other lists (catalog.css reads these three). */
+  --shelf-col: min(80%, 17rem);
+  --shelf-min: 13.25rem;
+  --shelf-max: 14rem;
 }
 
-.category {
+/* ---- Intro ---------------------------------------------------------------------------------- */
+
+.intro {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 46rem;
+}
+
+.intro-lead {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  max-width: 40rem;
+}
+
+.goals {
   display: grid;
   gap: var(--space-3);
+  margin: 0;
 }
 
-/* Win or draw: the goal is the first thing to know about an endgame. */
-.goal {
-  padding: 0.0625rem var(--space-2);
+.goal-def {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.goal-def dt {
+  font-weight: 800;
+}
+
+.goal-def dt span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.1rem 0.6rem;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-hover);
-  color: var(--color-text);
-  font-size: var(--text-xs);
-  font-weight: 700;
 }
 
-.goal[data-goal='win'] {
+.goal-def.win dt span {
   background: var(--color-accent);
   color: var(--color-on-accent);
+}
+
+.goal-def.draw dt span {
+  border: 1px solid var(--color-control);
+}
+
+.goal-def dd {
+  margin: 0;
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.goal-def dd strong {
+  color: var(--color-text);
+}
+
+/* ---- Filters -------------------------------------------------------------------------------- */
+
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  padding: 2px 2px var(--space-2);
+}
+
+.tabs .tab {
+  flex: none;
+}
+
+.done-summary {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.done-summary strong {
+  color: var(--color-text);
+}
+
+/* ---- Shelves -------------------------------------------------------------------------------- */
+
+.groups {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+/* Wider than 1440px the groups wrap side by side (catalog.css sizes each one to its cards). */
+@media (min-width: 90.0625rem) {
+  .groups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--space-8) var(--space-12);
+  }
+}
+
+/* A single shelf on a phone lays its cards out in a grid instead of scrolling sideways. */
+@media (max-width: 44.99rem) {
+  :host .shelf.single {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  }
+}
+
+/* ---- Card ----------------------------------------------------------------------------------- */
+
+:host .card {
+  position: relative;
+  grid-template-rows: auto 1fr auto;
+}
+
+:host .card.done {
+  border-color: var(--color-accent-text);
+}
+
+:host .card-meta .goal-win {
+  color: var(--color-text);
+}
+
+:host .card-meta .king {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+:host .card-foot {
+  justify-content: stretch;
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 1.75rem;
+  padding: 0 var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.status .todo {
+  color: var(--color-text-muted);
+}
+
+.seal {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.15rem 0.55rem 0.15rem 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 800;
+}
+
+.seal .dot {
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-accent);
+}
+
+.seal .dot app-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.card .button {
+  width: 100%;
+}
+
+/* The seal grows in when the progress first paints: once, and it marks what is done. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal .seal {
+    animation: seal-in 420ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  @keyframes seal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+}
+
+/* ---- Loading -------------------------------------------------------------------------------- */
+
+.skeleton .board,
+.skeleton .line {
+  background: var(--color-surface-hover);
+  box-shadow: none;
+}
+
+.skeleton .board {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton .line {
+  height: 0.9rem;
+  border-radius: 4px;
+}
+
+.skeleton .line.w70 {
+  width: 70%;
+  height: 1.2rem;
+}
+
+.skeleton .line.w50 {
+  width: 50%;
+}
+
+.skeleton .line.btn {
+  height: var(--tap);
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton .board,
+  .skeleton .line {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
 }

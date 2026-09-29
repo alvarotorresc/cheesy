@@ -1,0 +1,99 @@
+@let o = opening();
+@let t = i18n.t().openings;
+
+<article class="card" [class.playing]="replay.playing()" [appReplayTrigger]="replay">
+  <div class="board-wrap">
+    <app-mini-board
+      [frames]="frames()"
+      [ply]="replay.ply()"
+      [orientation]="o.side"
+      [label]="boardLabel()"
+      [fading]="replay.fading()"
+      [ring]="replay.playing()"
+    />
+    <button
+      type="button"
+      class="replay"
+      [attr.aria-pressed]="replay.playing()"
+      [attr.aria-label]="replay.playing() ? t.stopMoves(name()) : t.watchMoves(name())"
+      (click)="replay.toggleFromButton()"
+    >
+      <app-icon [name]="replay.playing() ? 'mini-pause' : 'mini-play'" />
+    </button>
+  </div>
+  <p class="moves" aria-hidden="true">
+    @for (move of moves(); track $index) {
+      @if (move.number) {
+        <span class="num">{{ move.number }}</span>
+      }
+      <span
+        class="mv"
+        [class.now]="replay.playing() && $index === replay.ply() - 1"
+        [class.future]="replay.playing() && $index >= replay.ply()"
+        >{{ move.text }}</span
+      >
+    }
+  </p>
+  <div class="card-body">
+    <h3 class="card-title">{{ name() }}</h3>
+    <p class="card-meta">
+      <span>
+        <i
+          class="king"
+          [class]="o.side === 'white' ? 'pc pc-wK' : 'pc pc-bK'"
+          aria-hidden="true"
+        ></i>
+        {{ o.side === 'white' ? t.forWhite : t.forBlack }}
+      </span>
+      <span>{{ t.lineCount(o.lineCount) }}</span>
+    </p>
+    <p class="card-desc">{{ i18n.localize(o.description) }}</p>
+  </div>
+  @if (rows().length) {
+    <div class="progress">
+      @for (row of rows(); track row.color) {
+        <div class="progress-row">
+          <span class="who">
+            <i
+              class="king"
+              [class]="row.color === 'white' ? 'pc pc-wK' : 'pc pc-bK'"
+              aria-hidden="true"
+            ></i>
+            {{ row.color === 'white' ? t.withWhite : t.withBlack }}
+          </span>
+          <span class="what">
+            @if (row.done) {
+              <span class="progress-done">{{ row.text }}</span>
+            } @else {
+              {{ row.text }}
+            }
+          </span>
+          <span class="pips" aria-hidden="true">
+            @for (pip of row.pips; track $index) {
+              <span class="pip" [class.m]="pip === 'm'" [class.p]="pip === 'p'"></span>
+            }
+          </span>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="progress-none">{{ t.notStarted(o.lineCount) }}</p>
+  }
+  <div class="actions">
+    <a
+      class="button primary"
+      [routerLink]="['/openings', o.id]"
+      [attr.aria-label]="t.playLabel(name())"
+      >{{ t.modePlay }}</a
+    >
+    <a
+      class="button"
+      [routerLink]="['/openings', o.id, 'practice']"
+      [attr.aria-label]="i18n.t().practice.practiceLinkLabel(name())"
+      >{{ t.modePractice }}</a
+    >
+  </div>
+  <div class="card-foot">
+    <span class="eco">ECO {{ o.eco }}</span>
+  </div>
+</article>

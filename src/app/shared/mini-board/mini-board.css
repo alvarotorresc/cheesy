@@ -1,0 +1,116 @@
+:host {
+  display: block;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: var(--board-light);
+  background-image: repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%);
+  background-size: 25% 25%;
+  box-shadow: var(--mb-shadow, 0 0 0 1px var(--board-edge), var(--shadow-board));
+  transition:
+    opacity var(--mb-fade-ms, 160ms) ease,
+    box-shadow var(--duration) ease;
+}
+
+/* The pattern does not change with black at the bottom: a8 and h1 are light either way. */
+.board.ring {
+  box-shadow:
+    0 0 0 1px var(--board-edge),
+    0 0 0 4px var(--color-accent),
+    var(--shadow-board);
+}
+
+.board.fading {
+  opacity: var(--mb-fade, 0.35);
+}
+
+.sq,
+.pc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+.sq.hl {
+  background: var(--board-last-move);
+  transition: transform var(--mb-hl-ms, 360ms) var(--ease-out);
+}
+
+.pc {
+  transition:
+    transform var(--mb-move-ms, 420ms) var(--ease-out),
+    opacity 220ms ease;
+  will-change: transform;
+}
+
+.pc.gone {
+  opacity: 0;
+}
+
+.board.resetting .pc,
+.board.resetting .sq,
+.board.resetting .rank-hl {
+  transition: none;
+}
+
+/* Endgames: a ring on every piece, all at once; none stands out above the others. */
+.sq.ring {
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.sq.ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 3px var(--color-accent),
+    0 0 0 1px var(--board-edge);
+  transform: scale(0.86);
+}
+
+.board.rings .sq.ring {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .board.rings .sq.ring::after {
+    animation: ring-beat 1400ms var(--ease-out) infinite;
+  }
+}
+
+/* The beat is on ::after: the transform of .sq itself puts it on its square. */
+@keyframes ring-beat {
+  0% {
+    transform: scale(0.72);
+  }
+
+  45% {
+    transform: scale(0.98);
+  }
+
+  100% {
+    transform: scale(0.72);
+  }
+}
+
+/* A whole rank lit, for the About page. */
+.rank-hl {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 12.5%;
+  background: var(--board-last-move);
+  transition:
+    transform 260ms var(--ease-out),
+    opacity 160ms ease;
+}

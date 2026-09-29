@@ -1,41 +1,282 @@
 @let t = i18n.t().positions;
 
-<section class="page-intro">
-  <h1>{{ t.title }}</h1>
-  <p>{{ t.intro }}</p>
+<section class="intro" aria-labelledby="title">
+  <h1 id="title">{{ t.title }}</h1>
+  <p class="intro-lead">{{ t.intro }}</p>
 </section>
 
-@if (list.status() === 'ready') {
-  <ul class="gallery entry-grid" [attr.aria-label]="t.list">
-    @for (position of list.positions(); track position.id) {
-      <li>
-        <a class="card entry" [routerLink]="[position.id]">
-          <h2 class="entry-title">{{ i18n.localize(position.title) }}</h2>
-          <p class="side entry-meta">
-            <span
-              class="side-swatch"
-              [class.black]="position.playerSide === 'black'"
-              aria-hidden="true"
-            ></span>
-            {{ sideToPlayLabel(position.playerSide, t) }}
-          </p>
-          @if (position.source) {
-            <p class="source">{{ position.source }}</p>
-          }
-          <ul class="tags" [attr.aria-label]="t.themes">
-            @for (tag of position.tags; track tag) {
-              <li class="tag">{{ tagLabel(tag, t) }}</li>
-            }
-          </ul>
-        </a>
-      </li>
-    }
-  </ul>
-} @else if (list.status() === 'error') {
-  <div class="state state-message" role="alert">
-    <p>{{ t.loadError }}</p>
-    <button type="button" class="button" (click)="list.retry()">{{ t.retry }}</button>
+<button
+  type="button"
+  class="button filters-toggle"
+  [attr.aria-expanded]="foldOpen()"
+  aria-controls="filters"
+  (click)="toggleFold()"
+>
+  {{ t.filters }}
+  @if (activeCount(); as count) {
+    <span class="count-badge">{{ count }}</span>
+  }
+  <app-icon name="mini-chevron" />
+</button>
+
+<section id="filters" class="filters" [class.open]="foldOpen()" [attr.aria-label]="t.filters">
+  <div class="filter-row">
+    <fieldset class="filter-group">
+      <legend class="filter-label">{{ t.filterSide }}</legend>
+      <div class="segmented">
+        <label>
+          <input
+            type="radio"
+            name="side"
+            value="all"
+            [checked]="filters().side === 'all'"
+            (change)="setSide('all')"
+          />
+          <span>{{ t.sideBoth }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="side"
+            value="white"
+            [checked]="filters().side === 'white'"
+            (change)="setSide('white')"
+          />
+          <span><i class="king pc pc-wK" aria-hidden="true"></i>{{ t.sideWhite }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="side"
+            value="black"
+            [checked]="filters().side === 'black'"
+            (change)="setSide('black')"
+          />
+          <span><i class="king pc pc-bK" aria-hidden="true"></i>{{ t.sideBlack }}</span>
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="filter-group">
+      <legend class="filter-label">{{ t.filterOwn }}</legend>
+      <div class="segmented">
+        <label>
+          <input
+            type="radio"
+            name="own"
+            value="all"
+            [checked]="filters().own === 'all'"
+            (change)="setOwn('all')"
+          />
+          <span>{{ t.ownAll }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="own"
+            value="1"
+            [checked]="filters().own === '1'"
+            (change)="setOwn('1')"
+          />
+          <span>1</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="own"
+            value="2"
+            [checked]="filters().own === '2'"
+            (change)="setOwn('2')"
+          />
+          <span>2</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="own"
+            value="3"
+            [checked]="filters().own === '3'"
+            (change)="setOwn('3')"
+          />
+          <span>{{ t.ownThreeOrMore }}</span>
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="filter-group">
+      <legend class="filter-label">{{ t.filterStatus }}</legend>
+      <div class="segmented">
+        <label>
+          <input
+            type="radio"
+            name="status"
+            value="all"
+            [checked]="filters().status === 'all'"
+            (change)="setStatus('all')"
+          />
+          <span>{{ t.statusAll }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="status"
+            value="none"
+            [checked]="filters().status === 'none'"
+            (change)="setStatus('none')"
+          />
+          <span>{{ t.statusNone }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="status"
+            value="solved"
+            [checked]="filters().status === 'solved'"
+            (change)="setStatus('solved')"
+          />
+          <span>{{ t.statusSolved }}</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="status"
+            value="first"
+            [checked]="filters().status === 'first'"
+            (change)="setStatus('first')"
+          />
+          <span>{{ t.statusFirst }}</span>
+        </label>
+      </div>
+    </fieldset>
   </div>
-} @else {
-  <p class="state state-message" role="status">{{ t.loading }}</p>
-}
+  <div class="filter-foot">
+    <p class="result-count" aria-live="polite">
+      @if (ready()) {
+        {{ resultCount() }}
+      } @else if (!failed()) {
+        {{ t.loading }}
+      }
+    </p>
+    @if (activeCount()) {
+      <button type="button" class="text-button" (click)="clearFilters()">
+        {{ t.clearFilters }}
+      </button>
+    }
+  </div>
+</section>
+
+<div class="groups" [class.enter]="entering()">
+  @if (failed()) {
+    <div class="notice" role="alert">
+      <p>{{ t.loadError }}</p>
+      <p>{{ t.loadErrorHint }}</p>
+      <button type="button" class="button" (click)="list.retry()">{{ t.retry }}</button>
+    </div>
+  } @else if (!ready()) {
+    <section class="group" aria-busy="true">
+      <p class="visually-hidden" role="status">{{ t.loading }}</p>
+      <ul class="shelf">
+        @for (skeleton of skeletons; track skeleton) {
+          <li>
+            <div class="card skeleton" aria-hidden="true">
+              <div class="skeleton-board"></div>
+              <div class="bar"></div>
+              <div class="bar short"></div>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  } @else if (groups().length === 0) {
+    <div class="notice">
+      <p>{{ t.noMatches }}</p>
+      <p>{{ t.noMatchesHint }}</p>
+      <button type="button" class="button" (click)="clearFilters()">{{ t.clearFilters }}</button>
+    </div>
+  } @else {
+    @for (group of groups(); track group.id) {
+      <section
+        class="group"
+        [attr.aria-labelledby]="'group-' + group.id"
+        [style.--n]="group.cards.length"
+      >
+        <div class="group-head">
+          <h2 [id]="'group-' + group.id">{{ groupTitle(group.id) }}</h2>
+          <span class="count">{{ t.groupCount(group.cards.length) }}</span>
+        </div>
+        <ul
+          class="shelf"
+          [class.single]="groups().length === 1"
+          [attr.aria-labelledby]="'group-' + group.id"
+        >
+          @for (card of group.cards; track card.position.id + '-' + generation()) {
+            <li>
+              <a
+                class="card"
+                [routerLink]="['/positions', card.number]"
+                [style.--i]="card.order"
+                [attr.aria-label]="cardLabel(card)"
+              >
+                <app-mini-board
+                  aria-hidden="true"
+                  label=""
+                  [frames]="card.frames"
+                  [orientation]="card.position.playerSide"
+                />
+                <div class="card-body" aria-hidden="true">
+                  <p class="card-title">
+                    <i
+                      class="king pc"
+                      [class]="card.position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"
+                    ></i>
+                    {{ sideToPlayLabel(card.position.playerSide, t) }}
+                  </p>
+                  <p class="card-meta">
+                    {{ t.ownMoves(card.own) }}
+                  </p>
+                </div>
+                <div class="card-foot" aria-hidden="true">
+                  @if (card.status === 'first') {
+                    <span class="status first">
+                      <span class="seal"><app-icon name="mini-star" /></span>
+                      {{ t.firstTryStatus }}
+                    </span>
+                  } @else if (card.status === 'solved') {
+                    <span class="status solved">
+                      <app-icon name="mini-check" />
+                      {{ t.solvedStatus }}
+                    </span>
+                  } @else {
+                    <span class="status">{{ t.unsolved }}</span>
+                  }
+                  <span class="go">{{ card.status === 'none' ? t.solve : t.repeat }}</span>
+                </div>
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+</div>
+
+<section class="privacy" aria-labelledby="privacy-title">
+  <h2 id="privacy-title" class="visually-hidden">{{ t.filterStatus }}</h2>
+  <p>{{ t.progressNote }}</p>
+  @if (progress.status() === 'unavailable') {
+    <p>{{ t.storageUnavailable }}</p>
+  }
+  <div class="actions-inline">
+    <button type="button" class="text-button" (click)="askToClear()">{{ t.clearProgress }}</button>
+  </div>
+  <p class="status-msg" role="status">{{ message() }}</p>
+</section>
+
+<dialog #dialog aria-labelledby="confirm-title">
+  <h2 id="confirm-title">{{ t.confirmTitle }}</h2>
+  <p>{{ t.confirmBody }}</p>
+  <div class="dialog-actions">
+    <button type="button" class="button" (click)="closeDialog()">{{ t.cancel }}</button>
+    <button type="button" class="button danger" (click)="confirmClear()">
+      {{ t.confirmClear }}
+    </button>
+  </div>
+</dialog>

@@ -1,0 +1,27 @@
+<div
+  class="board"
+  role="img"
+  [attr.aria-label]="label()"
+  [class.resetting]="resetting()"
+  [class.fading]="fading()"
+  [class.ring]="ring()"
+  [class.rings]="ringsOn()"
+>
+  @for (hl of highlights(); track $index) {
+    <div class="sq hl" [hidden]="hl.hidden" [style.transform]="hl.transform"></div>
+  }
+  @if (rankTransform(); as transform) {
+    <div class="rank-hl on" [style.transform]="transform"></div>
+  }
+  @for (piece of pieces(); track piece.id) {
+    <div
+      class="pc"
+      [class]="'pc-' + piece.code"
+      [class.gone]="piece.gone"
+      [style.transform]="piece.transform"
+    ></div>
+  }
+  @for (transform of ringSquares(); track $index) {
+    <div class="sq ring" [style.transform]="transform"></div>
+  }
+</div>

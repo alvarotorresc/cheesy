@@ -1,55 +1,43 @@
-:host {
+/* Notice of a page that could not be shown (not found, network error). */
+.page-notice {
+  margin-top: var(--space-4);
+}
+
+.loading-text {
+  margin-top: var(--space-3);
+}
+
+/* ---- Notices above the board ---- */
+.alert {
   display: grid;
-  gap: var(--space-4);
-}
-
-.topbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   gap: var(--space-3);
+  padding: var(--space-4);
+  border-color: var(--color-accent-text);
+  border-width: 2px;
 }
 
-.back {
-  justify-self: start;
+.alert .button-row .button {
+  flex: 0 0 auto;
 }
 
-.head {
-  display: grid;
-  gap: var(--space-2);
+.alert.error {
+  border-color: var(--color-danger);
 }
 
-.meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--color-text-muted);
+.alert p strong {
+  font-weight: 800;
 }
 
-.eco {
-  padding: 0.0625rem var(--space-2);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-hover);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: 700;
-}
-
-.status-row {
+/* ---- Side column ---- */
+.analyze {
   display: grid;
   gap: var(--space-1);
+  justify-items: start;
 }
 
-.reviewing {
+.analyze .hint {
   color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-/* Out of our lines: the one moment the panel raises its voice. */
-.alert {
-  border-color: var(--color-accent);
-  border-left-width: 6px;
+  font-size: var(--text-xs);
 }
 
 .controls {
@@ -57,78 +45,16 @@
   gap: var(--space-2);
 }
 
-.settings {
+.moves-block {
   display: grid;
-  gap: var(--space-3);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border);
+  gap: var(--space-2);
 }
 
-fieldset {
-  display: grid;
-  gap: var(--space-1);
-  margin: 0;
-  padding: 0;
-  border: 0;
+.moves-legend {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
 }
 
-legend {
-  margin-bottom: var(--space-1);
-  padding: 0;
+.moves-legend em {
   font-weight: 600;
-}
-
-.option,
-.field {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: var(--tap);
-}
-
-.field span {
-  font-weight: 600;
-}
-
-/*
- * Wide screen: the title moves to the top of the side column, so the board starts right under the
- * back link and fits the height of the window.
- */
-@media (min-width: 60rem) {
-  :host {
-    grid-template-columns: auto minmax(18rem, 24rem);
-    grid-template-rows: auto auto 1fr;
-    justify-content: center;
-    align-items: start;
-    column-gap: var(--space-8);
-  }
-
-  .back,
-  .notice {
-    grid-column: 1 / -1;
-  }
-
-  .play-layout {
-    display: contents;
-  }
-
-  .head {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .head h1 {
-    font-size: var(--text-xl);
-  }
-
-  .play-board {
-    grid-column: 1;
-    grid-row: 2 / span 2;
-  }
-
-  .play-panel {
-    grid-column: 2;
-    grid-row: 3;
-  }
 }

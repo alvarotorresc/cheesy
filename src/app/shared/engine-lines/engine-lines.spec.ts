@@ -1,5 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { EngineLine, EngineMove } from '../../core/engine';
+import { I18nService } from '../../core/i18n';
 import { EngineLines } from './engine-lines';
 
 const texts = (element: HTMLElement, selector: string): string[] =>
@@ -37,6 +38,7 @@ describe('EngineLines', () => {
     fixture.componentRef.setInput('emptyLabel', 'No lines yet.');
     fixture.componentRef.setInput('depthLabel', 'Depth');
     element = fixture.nativeElement as HTMLElement;
+    TestBed.inject(I18nService).setLang('en');
   });
 
   it('should show the empty label when there are no lines', async () => {
@@ -46,10 +48,10 @@ describe('EngineLines', () => {
     expect(element.querySelectorAll('button')).toHaveLength(0);
   });
 
-  it('should name the panel with its translated label', async () => {
+  it('should name the list with its translated label', async () => {
     await render({ lines: LINES, label: 'Líneas del motor' });
 
-    expect(element.querySelector('section')?.getAttribute('aria-label')).toBe('Líneas del motor');
+    expect(element.querySelector('ol')?.getAttribute('aria-label')).toBe('Líneas del motor');
   });
 
   it('should show the depth, the scores and the numbered moves of each line', async () => {
@@ -57,26 +59,55 @@ describe('EngineLines', () => {
 
     expect(element.querySelector('.depth')?.textContent?.trim()).toBe('Profundidad 18');
     expect(texts(element, '.score')).toEqual(['+0.3', '#-3']);
-    expect(texts(element, '.moves')).toEqual(['1. e4 e5 2. Nf3', '1. f3 e5']);
+    expect(texts(element, '.pv')).toEqual(['1.e4 e5 2.Nf3', '1.f3 e5']);
+    expect(texts(element, '.pv b')).toEqual(['1.e4', '1.f3']);
+  });
+
+  it('should mark the best line and the scores that favour Black', async () => {
+    await render({ lines: LINES, bestLabel: 'La mejor' });
+
+    const [best, second] = Array.from(element.querySelectorAll('button.line'));
+    expect(best.classList).toContain('best');
+    expect(second.classList).not.toContain('best');
+    expect(second.querySelector('.score')?.classList).toContain('black');
+    expect(element.querySelector('.best-note')?.textContent?.trim()).toBe('La mejor');
+  });
+
+  it('should write the moves with Spanish letters in Spanish', async () => {
+    TestBed.inject(I18nService).setLang('es');
+    await render({ lines: LINES });
+
+    expect(texts(element, '.pv')[0]).toBe('1.e4 e5 2.Cf3');
+    localStorage.clear();
   });
 
   it('should give each line an accessible name with its score and moves', async () => {
     await render({ lines: LINES });
 
     const [first] = Array.from(element.querySelectorAll('button'));
-    expect(first.getAttribute('aria-label')).toBe('+0.3 1. e4 e5 2. Nf3');
+    expect(first.getAttribute('aria-label')).toBe('+0.3 1.e4 e5 2.Nf3');
+  });
+
+  it('should build the accessible name with the given text', async () => {
+    await render({
+      lines: LINES,
+      lineLabel: (move: string, score: string, line: string) => `Play ${move} (${score}): ${line}`,
+    });
+
+    const [first] = Array.from(element.querySelectorAll('button'));
+    expect(first.getAttribute('aria-label')).toBe('Play 1.e4 (+0.3): 1.e4 e5 2.Nf3');
   });
 
   it('should number from the given ply when Black is to move', async () => {
     await render({ lines: [{ ...LINES[0], sanPv: ['Nf6', 'c4', 'e6'] }], startPly: 19 });
 
-    expect(texts(element, '.moves')).toEqual(['10... Nf6 11. c4 e6']);
+    expect(texts(element, '.pv')).toEqual(['10...Nf6 11.c4 e6']);
   });
 
   it('should cut long lines to the most moves allowed', async () => {
     await render({ lines: LINES, maxMoves: 1 });
 
-    expect(texts(element, '.moves')).toEqual(['1. e4', '1. f3']);
+    expect(texts(element, '.pv')).toEqual(['1.e4', '1.f3']);
   });
 
   it('should leave out lines without moves', async () => {

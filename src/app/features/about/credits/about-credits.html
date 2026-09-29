@@ -1,0 +1,56 @@
+@let a = t().about;
+
+<section class="block" id="creditos" aria-labelledby="about-credits">
+  <div class="block-head">
+    <h2 id="about-credits">{{ a.credits }}</h2>
+    <p>{{ a.creditsIntro }}</p>
+  </div>
+
+  <div class="credits">
+    @for (group of creditGroups; track group.id) {
+      <div class="group">
+        <h3>{{ a.credit.groups[group.id] }}</h3>
+        <ul class="items">
+          @for (item of group.items; track item.id) {
+            @let c = credit(item);
+            <li class="item">
+              <div class="item-top">
+                <span class="item-name">
+                  @if (item.url) {
+                    <a [href]="item.url" rel="noopener">{{ c.name }}</a>
+                  } @else {
+                    {{ c.name }}
+                  }
+                </span>
+                <span class="lic" [class.quiet]="item.quiet">{{ c.license }}</span>
+              </div>
+              @if (item.id === 'stockfish') {
+                <p>
+                  {{ a.credit.stockfish.before
+                  }}<a href="https://github.com/nmrugg/stockfish.js" rel="noopener">Stockfish.js</a
+                  >{{ a.credit.stockfish.after }}
+                </p>
+              } @else {
+                <p>{{ c.text }}</p>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="source" id="codigo" aria-labelledby="about-code">
+  <div>
+    <h2 id="about-code">{{ a.code }}</h2>
+    <p>
+      {{ a.codeIntro.before }}<strong>{{ a.codeIntro.bold }}</strong
+      >{{ a.codeIntro.after }}
+    </p>
+  </div>
+  <div class="source-actions">
+    <a class="button primary" [href]="sourceUrl" rel="noopener">{{ a.codeButton }}</a>
+    <p class="by">{{ a.madeBy }}<a href="https://alvarotc.com" rel="noopener">alvarotc.com</a></p>
+  </div>
+</section>

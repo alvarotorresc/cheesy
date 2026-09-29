@@ -4,7 +4,7 @@
 
 <header class="header">
   <div class="header-inner">
-    <a class="brand" routerLink="/">
+    <a class="brand" routerLink="/" [attr.aria-label]="i18n.t().app.homeLabel">
       <app-logo class="logo" />
       <span class="wordmark">{{ i18n.t().app.name }}</span>
     </a>
@@ -38,6 +38,18 @@
   </div>
 </header>
 
-<main #main id="main" class="main" tabindex="-1">
+<main
+  #main
+  id="main"
+  class="main"
+  [class.main--play]="mainKind() === 'play'"
+  [class.main--home]="mainKind() === 'home'"
+  [class.main--about]="mainKind() === 'about'"
+  tabindex="-1"
+>
   <router-outlet />
 </main>
+
+<app-site-footer [class.compact]="mainKind() === 'play'" />
+
+<app-toast />

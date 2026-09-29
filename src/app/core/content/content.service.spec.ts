@@ -29,7 +29,7 @@ const OPENING_IDS = [
   'english-opening',
 ];
 
-const summaryOf = ({ id, name, eco, side, description }: OpeningTree): OpeningSummary => ({
+const describedBy = ({ id, name, eco, side, description }: OpeningTree | OpeningSummary) => ({
   id,
   name,
   eco,
@@ -73,7 +73,20 @@ describe('ContentService', () => {
       const catalog = await content.openingCatalog();
       const trees = await Promise.all(catalog.map((entry) => content.opening(entry.id)));
 
-      expect(trees.map((tree) => summaryOf(tree!))).toEqual(catalog);
+      expect(catalog.map(describedBy)).toEqual(trees.map((tree) => describedBy(tree!)));
+    });
+
+    it('should count in the catalogue the lines of each opening book and preview its main line', async () => {
+      const catalog = await content.openingCatalog();
+
+      for (const entry of catalog) {
+        const book = (await content.openingBook(entry.id))!;
+        const main = book.mainLine.map((node) => node.san);
+        expect(entry.lineCount, entry.id).toBe(book.lines.length);
+        expect(entry.preview.sans, entry.id).toEqual(main.slice(0, 12));
+        expect(entry.preview.names, entry.id).toHaveLength(entry.preview.sans.length);
+        expect(entry.preview.namedPly, entry.id).toBeLessThanOrEqual(entry.preview.sans.length);
+      }
     });
 
     it('should load the tree of an opening when the id is in the catalogue', async () => {

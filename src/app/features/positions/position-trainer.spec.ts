@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
+import { PROGRESS_STORE_LOADER } from '../../core/progress';
+import { memoryProgressStore } from '../openings/testing/memory-progress-store';
 import { PositionTrainer } from './position-trainer';
 
 const position = (overrides: Partial<CuratedPosition>): CuratedPosition => ({
@@ -20,8 +22,17 @@ describe('PositionTrainer', () => {
   let trainer: PositionTrainer;
   let game: GameService;
 
+  let memory: ReturnType<typeof memoryProgressStore>;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [GameService, PositionTrainer] });
+    memory = memoryProgressStore();
+    TestBed.configureTestingModule({
+      providers: [
+        GameService,
+        PositionTrainer,
+        { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
+      ],
+    });
     trainer = TestBed.inject(PositionTrainer);
     game = TestBed.inject(GameService);
   });
@@ -73,7 +84,7 @@ describe('PositionTrainer', () => {
     it('should take back a wrong move and say which move it was', () => {
       trainer.play({ from: 'd5', to: 'd6' });
 
-      expect(trainer.feedback()).toEqual({ kind: 'wrong', played: 'Qd6' });
+      expect(trainer.feedback()).toEqual({ kind: 'wrong', played: 'Qd6', from: 'd5', to: 'd6' });
       expect(game.fen()).toBe(SMOTHERED.fen);
       expect(game.moves()).toEqual([]);
       expect(trainer.phase()).toBe('guessing');
@@ -162,7 +173,7 @@ describe('PositionTrainer', () => {
 
       trainer.play({ from: 'e1', to: 'c1' });
 
-      expect(trainer.feedback()).toEqual({ kind: 'wrong', played: 'O-O-O' });
+      expect(trainer.feedback()).toMatchObject({ kind: 'wrong', played: 'O-O-O' });
     });
 
     it('should accept the promotion to the piece of the solution', () => {
@@ -178,7 +189,7 @@ describe('PositionTrainer', () => {
 
       trainer.play({ from: 'a7', to: 'a8', promotion: 'knight' });
 
-      expect(trainer.feedback()).toEqual({ kind: 'wrong', played: 'a8=N' });
+      expect(trainer.feedback()).toMatchObject({ kind: 'wrong', played: 'a8=N' });
       expect(game.moves()).toEqual([]);
     });
 
@@ -303,5 +314,65 @@ describe('PositionTrainer', () => {
     trainer.retry();
 
     expect(trainer.position()).toBeUndefined();
+  });
+  describe('progress', () => {
+    const settle = () => vi.waitFor(() => expect(memory.positionRows.size).toBeGreaterThan(0));
+
+    it('should record a clean solve as done on the first try, by content id', async () => {
+      trainer.start(SMOTHERED);
+      trainer.play({ from: 'd5', to: 'g8' });
+      trainer.play({ from: 'h6', to: 'f7' });
+
+      await vi.waitFor(() => expect(trainer.result()).toBe('first'));
+      expect(memory.positionRows.get('test')).toMatchObject({ solves: 1, firstTry: true });
+    });
+
+    it('should spoil the first try with a wrong move, and say only "solved"', async () => {
+      trainer.start(SMOTHERED);
+      trainer.play({ from: 'd5', to: 'd6' });
+      await settle();
+      expect(memory.positionRows.get('test')).toMatchObject({ solves: 0, spoiled: true });
+
+      trainer.play({ from: 'd5', to: 'g8' });
+      trainer.play({ from: 'h6', to: 'f7' });
+
+      await vi.waitFor(() => expect(trainer.result()).toBe('solved'));
+      expect(memory.positionRows.get('test')).toMatchObject({ solves: 1, firstTry: false });
+    });
+
+    it('should spoil the first try with a hint', async () => {
+      trainer.start(SMOTHERED);
+      trainer.showHint();
+
+      await settle();
+      expect(memory.positionRows.get('test')?.spoiled).toBe(true);
+    });
+
+    it('should spoil the first try with the solution, and not count it as solved', async () => {
+      trainer.start(SMOTHERED);
+      trainer.revealSolution();
+
+      await settle();
+      expect(memory.positionRows.get('test')).toMatchObject({ solves: 0, spoiled: true });
+      expect(trainer.result()).toBeUndefined();
+    });
+
+    it('should save nothing when the browser keeps no progress', async () => {
+      TestBed.resetTestingModule();
+      const failing = memoryProgressStore({ failWrites: true });
+      TestBed.configureTestingModule({
+        providers: [
+          GameService,
+          PositionTrainer,
+          { provide: PROGRESS_STORE_LOADER, useValue: failing.loader },
+        ],
+      });
+      const other = TestBed.inject(PositionTrainer);
+      other.start(SMOTHERED);
+      other.play({ from: 'd5', to: 'g8' });
+      other.play({ from: 'h6', to: 'f7' });
+
+      await vi.waitFor(() => expect(other.result()).toBe('unsaved'));
+    });
   });
 });

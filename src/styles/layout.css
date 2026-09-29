@@ -1,0 +1,202 @@
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.button-row .button {
+  flex: 1 1 auto;
+}
+
+/* ---- Page pieces -------------------------------------------------------------------------- */
+
+/* Loading, empty and error messages that stand in for a whole page or list. */
+.state-message {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  max-width: 36rem;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.state-message[role='alert'] {
+  border-left: 4px solid var(--color-danger);
+  color: var(--color-text);
+}
+
+/* Boxed group inside a side panel (theory, tablebase, notices). */
+.surface {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.small {
+  font-size: var(--text-sm);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+/* ---- Play pages: the board as large as the window allows ---------------------------------- */
+
+/*
+ * One stage for every page with a playable board (opening play and practice, endgame, position,
+ * analysis), after chess.com:
+ *
+ * - Side by side (a wide window held landscape): the page is exactly one window tall, the board is
+ *   the largest square that fits in the height left under the header and above the footer, and in
+ *   the width left by a panel of at least --play-panel-min. The panel on its right is as tall as the
+ *   board and scrolls on its own.
+ * - Stacked (a phone, a tablet held upright, a narrow window): the board takes the full width,
+ *   capped by the height of the window, and the panel follows below it. The panel melts into the
+ *   stage (display: contents) so the items marked .play-lead (title, status, notices) stay above
+ *   the board, as in the phone mockups.
+ *
+ * A page describes what sits next to the board in its column with two lengths, set on
+ * .play-stage: --board-extra-v (bands above or below the board, such as the players of an
+ * endgame) and --board-extra-h (bars beside it, such as the evaluation bar). Whatever is in the
+ * column must add up to those lengths exactly, or the stage overflows.
+ *
+ * --board is always a multiple of 8px, as chessground draws its squares on whole pixels: the board
+ * then fills its box to the pixel and the panel ends level with it.
+ */
+:root {
+  /* The header: two rows on a phone (brand and languages, then the sections), one from 48rem. */
+  --header-h: calc(2 * var(--tap) + var(--space-3) + var(--space-2) + 1px);
+  --play-panel-min: 21rem;
+  --play-panel-max: 32rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --header-h: calc(4rem + 1px);
+  }
+}
+
+/* The page host of a play route fills the <main> of the app shell, which sizes it. */
+.main--play > :not(router-outlet) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.play-stage {
+  --board-extra-v: 0px;
+  --board-extra-h: 0px;
+  --play-gap: var(--space-4);
+  --board: round(
+    down,
+    min(
+      100cqi - var(--board-extra-h),
+      100dvh - var(--header-h) - var(--space-8) - var(--board-extra-v)
+    ),
+    8px
+  );
+
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--play-gap);
+  min-width: 0;
+}
+
+.play-board {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  width: calc(var(--board) + var(--board-extra-h));
+  min-width: 0;
+  justify-self: center;
+}
+
+.play-panel {
+  display: contents;
+}
+
+.play-lead {
+  order: -1;
+}
+
+.play-panel > *,
+.play-board {
+  min-width: 0;
+}
+
+/* A phone: the board goes almost edge to edge, the rest keeps the margin of the page. */
+@media (max-width: 29.99rem) {
+  .play-stage {
+    margin-inline: calc(var(--space-2) - var(--space-4));
+  }
+
+  .play-panel > *,
+  .play-stage > :not(.play-board, .play-panel) {
+    margin-inline: calc(var(--space-4) - var(--space-2));
+  }
+}
+
+@media (min-width: 60rem) and (orientation: landscape) {
+  .main--play > :not(router-outlet) {
+    flex: 1 1 0;
+  }
+
+  .play-stage {
+    --play-gap: var(--space-6);
+    --board: round(
+      down,
+      min(
+        100cqh - var(--board-extra-v),
+        100cqw - var(--play-panel-min) - var(--play-gap) - var(--board-extra-h)
+      ),
+      8px
+    );
+
+    flex: 1 1 0;
+    container-type: size;
+    grid-template-columns: auto minmax(var(--play-panel-min), var(--play-panel-max));
+    justify-content: center;
+    align-content: start;
+    min-height: 0;
+  }
+
+  .play-board {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .play-panel {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    height: calc(var(--board) + var(--board-extra-v));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Room for focus rings and box shadows, which the scroll box would clip. */
+    padding: 3px var(--space-2) var(--space-4) 3px;
+    scrollbar-width: thin;
+  }
+
+  .play-lead {
+    order: 0;
+  }
+}

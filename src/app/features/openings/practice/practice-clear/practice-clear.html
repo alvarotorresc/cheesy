@@ -1,0 +1,18 @@
+@let t = i18n.t().practice;
+
+<div class="progress-note">
+  <p>{{ t.privacy }}</p>
+  <button #clearButton type="button" class="text-button" (click)="ask()">{{ t.clear }}</button>
+  <p role="status">{{ result() }}</p>
+</div>
+
+<dialog #dialog aria-labelledby="practice-clear-title">
+  <h2 id="practice-clear-title">{{ t.clearTitle }}</h2>
+  <p>{{ t.clearBody }}</p>
+  <div class="dialog-actions">
+    <button type="button" class="button" (click)="cancel()">{{ t.cancel }}</button>
+    <button type="button" class="button danger" (click)="confirm()">
+      {{ t.confirmClearAction }}
+    </button>
+  </div>
+</dialog>

@@ -38,7 +38,7 @@
     'nav nav';
   align-items: center;
   gap: var(--space-2) var(--space-4);
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-3) var(--space-4) 0;
 }
@@ -55,6 +55,8 @@
 }
 
 .logo {
+  display: block;
+  flex: none;
   width: 2.25rem;
 }
 
@@ -133,16 +135,38 @@
   color: var(--color-on-accent);
 }
 
+/* A route without a kind is a list, as wide as the header; the home and Acerca keep 78rem. */
 .main {
   flex: 1;
   width: 100%;
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) var(--space-12);
 }
 
 .main:focus {
   outline: none;
+}
+
+/* Boards and exercises start closer to the header: the board is what the page is about. */
+.main--play {
+  padding-top: var(--space-4);
+}
+
+/* The stage of a play page (styles/layout.css) is centred in the window, wider than a text page. */
+.main--play {
+  max-width: none;
+}
+
+.main--home {
+  max-width: var(--content-width);
+  padding-top: var(--space-6);
+}
+
+.main--about {
+  max-width: var(--content-width);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-16);
 }
 
 @media (min-width: 48rem) {
@@ -170,5 +194,36 @@
 
   .main {
     padding: var(--space-8) var(--space-6) var(--space-12);
+  }
+
+  .main--play {
+    padding-top: var(--space-6);
+  }
+
+  .main--home {
+    padding-top: var(--space-8);
+  }
+
+  .main--about {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+}
+
+/*
+ * Play pages side by side: the page is one window tall. <main> takes what the header and the
+ * footer leave, and the stage inside it sizes the board to that height (styles/layout.css).
+ */
+@media (min-width: 60rem) and (orientation: landscape) {
+  :host(.play-shell) {
+    height: 100dvh;
+  }
+
+  .main--play {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+    padding: var(--space-4) var(--space-6);
   }
 }

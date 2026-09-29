@@ -16,12 +16,16 @@ import {
 } from '@angular/core';
 import { Chessground } from '@lichess-org/chessground';
 import type { Api } from '@lichess-org/chessground/api';
+import type { DrawBrushes } from '@lichess-org/chessground/draw';
 import type { Config } from '@lichess-org/chessground/config';
 import type { Color, Dests, Key } from '@lichess-org/chessground/types';
 import {
   PROMOTION_ROLES,
+  type BoardArrow,
   type BoardLabels,
+  type BoardMark,
   type BoardMove,
+  type BoardRing,
   type PendingPromotion,
   type PromotionRole,
 } from './board.types';
@@ -39,6 +43,9 @@ const isLastRank = (key: Key): boolean => key.endsWith('8') || key.endsWith('1')
 const prefersReducedMotion = (): boolean =>
   typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/** Brush of the best move arrow. The colour is remapped to a theme token in board.css. */
+const BEST_BRUSH = { key: 'best', color: '#15781b', opacity: 0.82, lineWidth: 11 };
+
 /**
  * Presentational chess board backed by chessground. It renders whatever its inputs describe and
  * reports user moves through `move`; the parent decides whether to accept them. After every user
@@ -48,6 +55,10 @@ const prefersReducedMotion = (): boolean =>
   selector: 'app-board',
   templateUrl: './board.html',
   styleUrl: './board.css',
+  host: {
+    '[class.ring-accent]': "ring() === 'accent'",
+    '[class.ring-danger]': "ring() === 'danger'",
+  },
 })
 export class BoardComponent {
   readonly fen = input.required<string>();
@@ -62,6 +73,14 @@ export class BoardComponent {
   readonly viewOnly = input(false);
   /** Texts of the promotion picker, already translated. */
   readonly labels = input.required<BoardLabels>();
+  /** Arrows drawn by the app, not by the user. */
+  readonly arrows = input<readonly BoardArrow[]>([]);
+  /** Squares painted with one of the board's marks. */
+  readonly marks = input<ReadonlyMap<Key, BoardMark>>(new Map());
+  /** Ring around the whole board. */
+  readonly ring = input<BoardRing>('none');
+  /** Draws the file and rank letters inside the edge squares. Read when the board is created. */
+  readonly coordinates = input(true);
 
   readonly move = output<BoardMove>();
 
@@ -100,6 +119,20 @@ export class BoardComponent {
       },
       draggable: { enabled: !viewOnly },
       selectable: { enabled: !viewOnly },
+      highlight: {
+        lastMove: true,
+        check: true,
+        custom: new Map([...this.marks()].map(([key, mark]) => [key, `mark-${mark}`])),
+      },
+      drawable: {
+        enabled: false,
+        visible: true,
+        autoShapes: this.arrows().map((arrow) => ({
+          orig: arrow.from,
+          dest: arrow.to,
+          brush: BEST_BRUSH.key,
+        })),
+      },
     };
   });
 
@@ -111,9 +144,17 @@ export class BoardComponent {
       // Chessground watches the board size itself (ResizeObserver), so it follows the layout.
       const api = Chessground(this.boardElement().nativeElement, {
         ...this.config(),
+        // Both are read once, when chessground wraps the element.
+        coordinates: this.coordinates(),
+        ranksPosition: 'left',
         animation: { enabled: !prefersReducedMotion(), duration: 200 },
         premovable: { enabled: false },
         draggable: { ...this.config().draggable, showGhost: true },
+        drawable: {
+          ...this.config().drawable,
+          // Chessground merges this into its default brushes; the type wants them all.
+          brushes: { [BEST_BRUSH.key]: BEST_BRUSH } as unknown as DrawBrushes,
+        },
         movable: {
           ...this.config().movable,
           free: false,

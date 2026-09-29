@@ -1,7 +1,10 @@
 import type {
+  EndgameProgress,
+  PositionProgress,
   ProgressStore,
   ProgressStoreLoader,
   StoredLineProgress,
+  TableStore,
 } from '../../../core/progress';
 
 /**
@@ -10,16 +13,33 @@ import type {
  * full disk would.
  */
 export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
-  const rows = new Map<string, StoredLineProgress>();
+  const table = <Row>(keyOf: (row: Row) => string) => {
+    const rows = new Map<string, Row>();
+    const store: TableStore<Row> = {
+      all: async () => [...rows.values()],
+      get: async (key) => rows.get(key),
+      put: async (row) => {
+        if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
+        rows.set(keyOf(row), row);
+      },
+      clear: async () => rows.clear(),
+    };
+    return { rows, store };
+  };
+  const lines = table<StoredLineProgress>((row) => row.key);
+  const endgames = table<EndgameProgress>((row) => row.endgameId);
+  const positions = table<PositionProgress>((row) => row.positionId);
   const store: ProgressStore = {
-    all: async () => [...rows.values()],
-    get: async (key) => rows.get(key),
-    put: async (row) => {
-      if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
-      rows.set(row.key, row);
-    },
-    clear: async () => rows.clear(),
+    lines: lines.store,
+    endgames: endgames.store,
+    positions: positions.store,
   };
   const loader: ProgressStoreLoader = async () => store;
-  return { rows, store, loader };
+  return {
+    rows: lines.rows,
+    endgameRows: endgames.rows,
+    positionRows: positions.rows,
+    store,
+    loader,
+  };
 };

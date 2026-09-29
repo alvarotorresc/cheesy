@@ -1,10 +1,12 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import type { SquareName } from 'chessops';
 import type { CuratedPosition } from '../../core/content';
 import { GameService, type MoveInput } from '../../core/game';
+import { ProgressService } from '../../core/progress';
 import { buildSolutionLine, isSameMove, type SolutionStep } from './solution-line';
 
 /**
- * - `guessing`: the user looks for the next move of the solution. The board is always playable.
+ * - `guessing`: the user looks for the next move of the solution.
  * - `solved`: every move of the solution was found; the line can be replayed.
  * - `revealed`: the user asked for the solution; the line can be replayed.
  */
@@ -13,7 +15,13 @@ export type TrainerPhase = 'guessing' | 'solved' | 'revealed';
 /** Reaction to the last move played while guessing. */
 export type TrainerFeedback =
   | { kind: 'correct'; played: string; reply: string | undefined }
-  | { kind: 'wrong'; played: string };
+  | { kind: 'wrong'; played: string; from: SquareName; to: SquareName };
+
+/**
+ * How a solve was saved: `first` on the first try, `solved` otherwise, `unsaved` when the browser
+ * did not keep it. Undefined until the answer of the store arrives.
+ */
+export type TrainerResult = 'first' | 'solved' | 'unsaved';
 
 interface TrainerState {
   position: CuratedPosition | undefined;
@@ -21,6 +29,7 @@ interface TrainerState {
   phase: TrainerPhase;
   feedback: TrainerFeedback | undefined;
   hint: boolean;
+  result: TrainerResult | undefined;
 }
 
 const EMPTY_STATE: TrainerState = {
@@ -29,6 +38,7 @@ const EMPTY_STATE: TrainerState = {
   phase: 'guessing',
   feedback: undefined,
   hint: false,
+  result: undefined,
 };
 
 /**
@@ -38,17 +48,29 @@ const EMPTY_STATE: TrainerState = {
  * is the only winning one, and the opponent's replies are played automatically. Any legal move is
  * accepted and compared with the solution; a wrong move is taken back so the user can try again.
  *
+ * It also keeps the progress: a wrong move, a hint or the solution asked for before the first solve
+ * spoils "first try", and a solve is recorded by the content id of the position.
+ *
  * Provided by the page, together with its own GameService, which holds the board.
  */
 @Injectable()
 export class PositionTrainer {
   private readonly game = inject(GameService);
+  private readonly progress = inject(ProgressService);
   private readonly state = signal<TrainerState>(EMPTY_STATE);
+
+  /** Every write to the progress waits for the previous one, so a spoil never lands after a solve. */
+  private writes: Promise<unknown> = Promise.resolve();
+  /** False once this attempt had a wrong move, a hint or the solution. */
+  private clean = true;
+  /** Counts the exercises started, so the answer of an old one is ignored. */
+  private attempt = 0;
 
   readonly position = computed(() => this.state().position);
   readonly line = computed(() => this.state().line);
   readonly phase = computed(() => this.state().phase);
   readonly feedback = computed(() => this.state().feedback);
+  readonly result = computed(() => this.state().result);
   readonly isReplay = computed(() => this.phase() !== 'guessing');
 
   /** Number of solution moves the user has to find. */
@@ -75,6 +97,8 @@ export class PositionTrainer {
    * cannot be played (invalid FEN, illegal solution or wrong side to move).
    */
   start(position: CuratedPosition): boolean {
+    this.attempt++;
+    this.clean = true;
     const line = buildSolutionLine(position.fen, position.solution);
     if (!line || !this.game.loadFen(position.fen) || this.game.turn() !== position.playerSide) {
       this.state.set(EMPTY_STATE);
@@ -103,7 +127,10 @@ export class PositionTrainer {
 
     if (!isSameMove(played, expected)) {
       this.game.undo();
-      this.patch({ feedback: { kind: 'wrong', played: played.san } });
+      this.spoil();
+      this.patch({
+        feedback: { kind: 'wrong', played: played.san, from: played.from, to: played.to },
+      });
       return;
     }
 
@@ -115,16 +142,20 @@ export class PositionTrainer {
       hint: false,
       phase: solved ? 'solved' : 'guessing',
     });
+    if (solved) this.saveSolve();
   }
 
   showHint(): void {
-    if (this.expected()) this.patch({ hint: true });
+    if (!this.expected()) return;
+    this.spoil();
+    this.patch({ hint: true });
   }
 
   /** Shows the whole solution, keeping the board on the position where the user stopped. */
   revealSolution(): void {
     const position = this.position();
     if (!position || this.isReplay()) return;
+    this.spoil();
     const reached = this.game.moves().length;
     this.game.loadFen(position.fen);
     for (const step of this.line()) this.game.playSan(step.san);
@@ -154,5 +185,30 @@ export class PositionTrainer {
 
   private patch(changes: Partial<TrainerState>): void {
     this.state.update((state) => ({ ...state, ...changes }));
+  }
+
+  /** The first wrong move, hint or solution of an attempt is written down once. */
+  private spoil(): void {
+    const position = this.position();
+    if (!position || !this.clean) return;
+    this.clean = false;
+    void this.enqueue(() => this.progress.markPositionSpoiled(position.id));
+  }
+
+  private saveSolve(): void {
+    const position = this.position();
+    if (!position) return;
+    const attempt = this.attempt;
+    const clean = this.clean;
+    void this.enqueue(() => this.progress.recordPositionSolve(position.id)).then((row) => {
+      if (attempt !== this.attempt) return;
+      this.patch({ result: !row ? 'unsaved' : row.firstTry && clean ? 'first' : 'solved' });
+    });
+  }
+
+  private enqueue<T>(write: () => Promise<T>): Promise<T> {
+    const next = this.writes.then(write, write);
+    this.writes = next.catch(() => undefined);
+    return next;
   }
 }

@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.footer {
+  --color-focus: var(--color-accent);
+
+  background: var(--color-ink);
+  color: var(--color-on-ink-muted);
+}
+
+.footer-inner {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 30rem;
+}
+
+.logo {
+  width: 1.75rem;
+  margin-top: 0.15rem;
+}
+
+.footer-brand p {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.footer-brand strong {
+  color: var(--color-accent);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  border-radius: var(--radius-sm);
+  color: var(--color-on-ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--duration-fast) ease;
+}
+
+.footer-links a:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+@media (min-width: 48rem) {
+  .footer-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    padding: var(--space-6);
+  }
+
+  .footer-links {
+    justify-content: flex-end;
+  }
+}
+
+/*
+ * Play pages side by side: one short row, so the board keeps the height of the window. Same links
+ * and text, less padding.
+ */
+@media (min-width: 60rem) and (orientation: landscape) {
+  :host(.compact) .footer-inner {
+    gap: var(--space-2) var(--space-6);
+    max-width: none;
+    padding: var(--space-1) var(--space-6);
+  }
+
+  :host(.compact) .footer-brand {
+    align-items: center;
+    max-width: none;
+  }
+
+  :host(.compact) .logo {
+    width: 1.25rem;
+    margin-top: 0;
+  }
+
+  :host(.compact) .footer-brand p {
+    font-size: var(--text-xs);
+  }
+
+  :host(.compact) .footer-links a {
+    min-height: 2rem;
+    font-size: var(--text-xs);
+  }
+}

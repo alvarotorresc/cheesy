@@ -1,0 +1,181 @@
+@let t = i18n.t().practice;
+
+<ng-template #topbar>
+  <nav class="topbar play-lead" [attr.aria-label]="t.thisOpening">
+    <a class="back-link" routerLink="/openings">
+      <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+    </a>
+    @if (session.loadState() === 'loading' || session.loadState() === 'ready') {
+      @if (openingId()?.get('id'); as id) {
+        <a class="swap-link" [routerLink]="['/openings', id]">{{ t.backToOpening }}</a>
+      }
+    }
+  </nav>
+</ng-template>
+
+@if (!session.opening()) {
+  <ng-container [ngTemplateOutlet]="topbar" />
+}
+
+@switch (session.loadState()) {
+  @case ('loading') {
+    <p class="visually-hidden" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+    <div class="skeleton" aria-hidden="true">
+      <div class="sk sk-title"></div>
+      <div class="sk-layout">
+        <div class="sk sk-board"></div>
+        <div class="sk sk-panel"></div>
+      </div>
+    </div>
+    <p class="muted small loading-text">{{ i18n.t().openings.loadingOpening }}</p>
+  }
+  @case ('not-found') {
+    <div class="notice" role="alert">
+      <p>{{ i18n.t().openings.notFound }}</p>
+    </div>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ i18n.t().openings.openingError }}</p>
+      <p class="muted">{{ t.errorHint }}</p>
+      <button type="button" class="button" (click)="session.retryLoad()">
+        {{ i18n.t().openings.retry }}
+      </button>
+    </div>
+  }
+}
+
+@if (session.opening(); as opening) {
+  <div class="play-stage">
+    <div class="play-board">
+      <div class="o-board board-area">
+        <app-board
+          [fen]="game.fen()"
+          [orientation]="session.playerColor()"
+          [turnColor]="game.turn()"
+          [dests]="game.dests()"
+          [lastMove]="game.lastMove()"
+          [check]="game.isCheck()"
+          [viewOnly]="!session.canMove()"
+          [labels]="i18n.t().board"
+          [arrows]="arrows()"
+          [marks]="marks()"
+          [ring]="ring()"
+          (move)="onMove($event)"
+        />
+      </div>
+    </div>
+
+    <div class="play-panel">
+      <ng-container [ngTemplateOutlet]="topbar" />
+      <header class="head play-lead">
+        <p class="head-kicker">
+          <span class="mode-tag practice">{{ t.title }}</span>
+          <span class="muted small">{{ t.strictNote }}</span>
+        </p>
+        <h1>{{ i18n.localize(opening.name) }}</h1>
+        <p class="meta">
+          <span>
+            <i
+              class="king pc"
+              [class.pc-wK]="session.playerColor() === 'white'"
+              [class.pc-bK]="session.playerColor() === 'black'"
+            ></i>
+            {{ t.color }}&nbsp;<strong>{{ colorName() }}</strong>
+          </span>
+          @if (session.phase() !== 'setup' && session.currentLine()) {
+            @if (session.position().total > 1) {
+              <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
+              @if (lineVariation(); as variation) {
+                <span>{{ variation }}</span>
+              }
+            } @else {
+              <span>{{ lineLabel() }}</span>
+            }
+          }
+          <span class="eco">ECO {{ opening.eco }}</span>
+        </p>
+      </header>
+
+      @if (session.phase() === 'setup') {
+        <p class="board-caption">{{ t.boardCaption(colorName()) }}</p>
+        <app-practice-setup class="o-panel" />
+      } @else {
+        <!-- Above the board on phones, so the reaction to a move is visible without scrolling. -->
+        <div class="o-status play-lead">
+          @if (feedback(); as feedback) {
+            <p
+              #message
+              class="feedback"
+              role="status"
+              tabindex="-1"
+              [class.right]="feedback.tone === 'right'"
+              [class.wrong]="feedback.tone === 'wrong'"
+              [class.idle]="feedback.tone === 'idle'"
+            >
+              @if (feedback.tone === 'turn') {
+                <i
+                  class="king pc"
+                  [class.pc-wK]="session.playerColor() === 'white'"
+                  [class.pc-bK]="session.playerColor() === 'black'"
+                ></i>
+              }
+              <span>
+                {{ feedback.text }}
+                @if (feedback.sub) {
+                  <span class="sub">{{ feedback.sub }}</span>
+                }
+                @if (feedback.spoken) {
+                  <span class="visually-hidden"> {{ feedback.spoken }}</span>
+                }
+              </span>
+            </p>
+          }
+        </div>
+
+        @if (session.summary()) {
+          <app-practice-summary class="o-panel" />
+        } @else {
+          <app-practice-progress class="o-panel" />
+          @if (help(); as help) {
+            <div class="help box o-panel" role="group" aria-labelledby="help-title">
+              <h2 class="box-title" id="help-title">{{ t.helpTitle }}</h2>
+              <p>
+                {{ t.helpLead }} <strong>{{ help.move }}</strong
+                >{{ t.helpTail(help.from, help.to) }}
+              </p>
+            </div>
+          }
+          <div class="button-row controls o-panel" role="group" [attr.aria-label]="t.title">
+            <button type="button" class="button" (click)="session.restartLine()">
+              {{ t.restartLine }}
+            </button>
+            <button type="button" class="button" (click)="session.backToSetup()">
+              {{ t.changeLine }}
+            </button>
+          </div>
+        }
+
+        <section class="moves-block o-moves" aria-labelledby="moves-title">
+          @if (isReviewing()) {
+            <p class="reviewing">
+              {{ t.reviewing }}
+              <button type="button" class="text-button" (click)="game.goToEnd()">
+                {{ t.backToPractice }}
+              </button>
+            </p>
+          }
+          <h2 class="box-title" id="moves-title">{{ i18n.t().analysis.moves }}</h2>
+          <app-move-list
+            [moves]="sans()"
+            [currentPly]="game.ply()"
+            [startPly]="game.startPly()"
+            [label]="i18n.t().analysis.moves"
+            [emptyLabel]="i18n.t().analysis.noMoves"
+            (selectPly)="game.goTo($event)"
+          />
+        </section>
+      }
+    </div>
+  </div>
+}
