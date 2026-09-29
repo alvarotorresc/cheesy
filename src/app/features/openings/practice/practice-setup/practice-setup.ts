@@ -1,10 +1,11 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import type { Color } from 'chessops';
-import { I18nService, type Messages } from '../../../../core/i18n';
-import { isMastered, type LineProgress } from '../../../../core/progress';
+import { I18nService } from '../../../../core/i18n';
+import { isMastered, MASTERY_STREAK } from '../../../../core/progress';
 import { numberedMove } from '../../opening-theory';
-import { ProgressNote } from '../../progress-note/progress-note';
+import { PracticeClear } from '../practice-clear/practice-clear';
 import { ALL_LINES, PracticeSession, type PracticeLine } from '../practice-session';
+import { Streak } from '../streak/streak';
 
 const COLORS: readonly Color[] = ['white', 'black'];
 
@@ -13,29 +14,12 @@ interface LineOption {
   readonly title: string;
   readonly variation: string | undefined;
   readonly moves: string;
-  readonly progress: string;
+  /** Streak of the line, or undefined when it was never practised. */
+  readonly streak: number | undefined;
   readonly mastered: boolean;
+  /** "Practised 5 times, last on 24 Sep 2026". Empty when never practised. */
+  readonly when: string;
 }
-
-/** One line about the progress of a line: times, best result, last date and whether mastered. */
-export const describeProgress = (
-  progress: LineProgress | undefined,
-  t: Messages['practice'],
-  formatDate: (time: number) => string,
-): string => {
-  if (!progress) return t.notPracticed;
-  return [
-    t.practiced(progress.practiced),
-    isMastered(progress) ? t.mastered : t.bestResult(progress.bestMistakes),
-    t.lastPracticed(formatDate(progress.lastPracticed)),
-  ].join(' · ');
-};
-
-/** Moves of the line as in a score sheet: "1.e4 e5 2.Nf3". */
-const movesOf = (line: PracticeLine): string =>
-  line.nodes
-    .map((node) => (node.ply % 2 === 1 ? numberedMove(node.ply, node.san) : node.san))
-    .join(' ');
 
 /**
  * Choice of colour and line before a practice, with the progress of each line kept in this
@@ -43,9 +27,9 @@ const movesOf = (line: PracticeLine): string =>
  */
 @Component({
   selector: 'app-practice-setup',
-  imports: [ProgressNote],
+  imports: [PracticeClear, Streak],
   templateUrl: './practice-setup.html',
-  styleUrl: './practice-setup.css',
+  styleUrls: ['../practice-box.css', './practice-setup.css'],
 })
 export class PracticeSetup {
   protected readonly session = inject(PracticeSession);
@@ -53,6 +37,18 @@ export class PracticeSetup {
 
   protected readonly colors = COLORS;
   protected readonly allLines = ALL_LINES;
+  protected readonly needed = MASTERY_STREAK;
+
+  private readonly title = viewChild.required<ElementRef<HTMLElement>>('title');
+
+  /** Moves of the line as in a score sheet, in the language of the page: "1.e4 e5 2.Cf3". */
+  private readonly movesOf = (line: PracticeLine): string =>
+    line.nodes
+      .map((node) => {
+        const san = this.i18n.san(node.san);
+        return node.ply % 2 === 1 ? numberedMove(node.ply, san) : san;
+      })
+      .join(' ');
 
   protected readonly options = computed<LineOption[]>(() => {
     const t = this.i18n.t().practice;
@@ -60,22 +56,58 @@ export class PracticeSetup {
     const format = new Intl.DateTimeFormat(this.i18n.lang(), { dateStyle: 'medium' });
     return this.session.lines().map((line) => {
       const variation = line.nodes.at(-1)?.variation;
-      const lineProgress = progress.get(line.id);
+      const row = progress.get(line.id);
       return {
         id: line.id,
         title: line.index === 0 ? t.mainLine : t.lineNumber(line.index + 1),
         variation: variation && this.i18n.localize(variation),
-        moves: movesOf(line),
-        progress: describeProgress(lineProgress, t, (time) => format.format(time)),
-        mastered: isMastered(lineProgress),
+        moves: this.movesOf(line),
+        streak: row && Math.min(row.streak, MASTERY_STREAK),
+        mastered: isMastered(row),
+        when: row
+          ? `${t.practiced(row.practiced)}, ${t.lastPracticed(format.format(row.lastPracticed))}`
+          : '',
       };
     });
   });
 
+  /** Whether the browser keeps the progress: if it does not, no progress is shown at all. */
+  protected readonly canSave = computed(() => this.session.storageStatus() !== 'unavailable');
+
+  /** "Sin empezar" or "2 de 5 dominadas" for each colour. */
+  protected readonly summaries = computed(() => {
+    const t = this.i18n.t().practice;
+    const progress = this.session.colorProgress();
+    return Object.fromEntries(
+      COLORS.map((color) => {
+        const summary = progress?.[color];
+        return [
+          color,
+          !summary || summary.practiced === 0
+            ? t.notStarted
+            : t.colorMastered(summary.mastered, summary.total),
+        ];
+      }),
+    ) as Record<Color, string>;
+  });
+
   protected readonly count = computed(() => {
     const { practiced, mastered } = this.session.progressCount();
-    return this.i18n.t().practice.progressCount(practiced, mastered, this.session.lines().length);
+    const color = this.colorName(this.session.playerColor()).toLocaleLowerCase(this.i18n.lang());
+    return this.i18n
+      .t()
+      .practice.colorProgressCount(practiced, mastered, this.session.lines().length, color);
   });
+
+  protected colorName(color: Color): string {
+    const t = this.i18n.t().openings;
+    return color === 'white' ? t.white : t.black;
+  }
+
+  /** Puts the focus on the title of the setup, when the button that was pressed went away. */
+  focusTitle(): void {
+    this.title().nativeElement.focus();
+  }
 
   protected onColorChange(color: Color): void {
     this.session.setPlayerColor(color);

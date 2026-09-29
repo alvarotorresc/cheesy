@@ -10,6 +10,7 @@ import {
   needsHelp,
   nextMove,
   playerMoveCount,
+  playerMovesDone,
   startRun,
   summaryOf,
   type PracticeRun,
@@ -142,6 +143,26 @@ describe('practice run', () => {
 
     it('should honour a custom number of allowed mistakes', () => {
       expect(needsHelp(addMistake(startRun(mainLine, 'white', 1)))).toBe(true);
+    });
+  });
+
+  describe('moves of the player done', () => {
+    it('should count only the moves of the player already on the board', () => {
+      let run = startRun(mainLine, 'white');
+      const done = [run]
+        .concat(Array.from({ length: 5 }).map(() => (run = advance(run))))
+        .map(playerMovesDone);
+
+      expect(done).toEqual([0, 1, 1, 2, 2, 3]);
+    });
+
+    it('should count the moves of Black, who moves second', () => {
+      let run = startRun(mainLine, 'black');
+      const done = [run]
+        .concat(Array.from({ length: 5 }).map(() => (run = advance(run))))
+        .map(playerMovesDone);
+
+      expect(done).toEqual([0, 0, 1, 1, 2, 2]);
     });
   });
 

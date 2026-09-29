@@ -1,0 +1,66 @@
+@let t = i18n.t().practice;
+
+@if (session.summary(); as summary) {
+  <section class="summary box" aria-labelledby="summary-title">
+    <h2 class="box-title" id="summary-title">{{ t.summaryTitle }}</h2>
+    <dl class="stats">
+      <div>
+        <dt>{{ t.summaryMoves }}</dt>
+        <dd>{{ summary.moves }}</dd>
+      </div>
+      <div [class.bad]="summary.mistakes > 0">
+        <dt>{{ t.summaryMistakes }}</dt>
+        <dd>{{ summary.mistakes }}</dd>
+      </div>
+      <div>
+        <dt>{{ t.summaryHelp }}</dt>
+        <dd>{{ summary.helpedMoves }}</dd>
+      </div>
+    </dl>
+    @if (streak(); as streak) {
+      <div class="streak-block" [class.mastered]="streak.mastered">
+        @if (session.streakChange(); as change) {
+          <app-streak
+            [value]="change.after"
+            [before]="change.before"
+            [size]="needed"
+            [big]="true"
+          />
+        }
+        <p class="streak-text">
+          <strong>{{ streak.title }}</strong>
+          <span>{{ streak.note }}</span>
+        </p>
+      </div>
+    }
+    <p class="saved" role="status" [class.failed]="session.saveState() === 'failed'">
+      {{ saveMessage() }}
+    </p>
+    <div class="button-row">
+      @if (session.hasNextLine()) {
+        <button type="button" class="button primary" (click)="session.nextLine()">
+          {{ t.nextLine }}
+        </button>
+      }
+      <button
+        type="button"
+        class="button"
+        [class.primary]="!session.hasNextLine()"
+        (click)="session.restartLine()"
+      >
+        {{ t.again }}
+      </button>
+      <button type="button" class="button" (click)="session.backToSetup()">
+        {{ t.changeLine }}
+      </button>
+    </div>
+    @if (analysis(); as link) {
+      <p class="analyze-row">
+        <a class="text-button" [routerLink]="link.commands" [queryParams]="link.queryParams">{{
+          t.analyze
+        }}</a>
+        <span>{{ t.analyzeNote }}</span>
+      </p>
+    }
+  </section>
+}

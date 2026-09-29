@@ -1,24 +1,41 @@
 @let t = i18n.t().practice;
 
-<nav class="topbar">
-  <a class="back back-link" routerLink="/openings">
+<nav class="topbar" [attr.aria-label]="t.thisOpening">
+  <a class="back-link" routerLink="/openings">
     <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
   </a>
-  @if (session.opening(); as opening) {
-    <a class="back back-link" [routerLink]="['/openings', opening.id]">{{ t.backToOpening }}</a>
+  @if (session.loadState() === 'loading' || session.loadState() === 'ready') {
+    @if (openingId()?.get('id'); as id) {
+      <a class="swap-link" [routerLink]="['/openings', id]">{{ t.backToOpening }}</a>
+    }
   }
 </nav>
 
 @switch (session.loadState()) {
   @case ('loading') {
-    <p class="notice state-message" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+    <p class="visually-hidden" role="status">{{ i18n.t().openings.loadingOpening }}</p>
+    <div class="skeleton" aria-hidden="true">
+      <div class="sk sk-title"></div>
+      <div class="board-layout">
+        <div class="col">
+          <div class="sk sk-board"></div>
+        </div>
+        <div class="col">
+          <div class="sk sk-panel"></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted small loading-text">{{ i18n.t().openings.loadingOpening }}</p>
   }
   @case ('not-found') {
-    <p class="notice state-message" role="alert">{{ i18n.t().openings.notFound }}</p>
+    <div class="notice" role="alert">
+      <p>{{ i18n.t().openings.notFound }}</p>
+    </div>
   }
   @case ('error') {
-    <div class="notice state-message" role="alert">
+    <div class="notice" role="alert">
       <p>{{ i18n.t().openings.openingError }}</p>
+      <p class="muted">{{ t.errorHint }}</p>
       <button type="button" class="button" (click)="session.retryLoad()">
         {{ i18n.t().openings.retry }}
       </button>
@@ -28,108 +45,107 @@
 
 @if (session.opening(); as opening) {
   <header class="head">
-    <h1>{{ i18n.localize(opening.name) }}: {{ t.title }}</h1>
+    <p class="head-kicker">
+      <span class="mode-tag">{{ t.title }}</span>
+      <span class="muted small">{{ t.strictNote }}</span>
+    </p>
+    <h1>{{ i18n.localize(opening.name) }}</h1>
     <p class="meta">
-      <span class="eco">{{ opening.eco }}</span>
       <span>
-        {{ t.color }}
-        {{ session.playerColor() === 'white' ? i18n.t().openings.white : i18n.t().openings.black }}
+        <i
+          class="king pc"
+          [class.pc-wK]="session.playerColor() === 'white'"
+          [class.pc-bK]="session.playerColor() === 'black'"
+        ></i>
+        {{ t.color }}&nbsp;<strong>{{ colorName() }}</strong>
       </span>
-      @if (session.phase() !== 'setup' && session.currentLine(); as line) {
-        <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
-        @if (line.nodes.at(-1)?.variation; as variation) {
-          <span>{{ i18n.localize(variation) }}</span>
+      @if (session.phase() !== 'setup' && session.currentLine()) {
+        @if (session.position().total > 1) {
+          <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
+          @if (lineVariation(); as variation) {
+            <span>{{ variation }}</span>
+          }
+        } @else {
+          <span>{{ lineLabel() }}</span>
         }
       }
+      <span class="eco">ECO {{ opening.eco }}</span>
     </p>
   </header>
 
-  <!-- Above the board, so the reaction to a move is visible on phones too. -->
-  <p
-    #statusMessage
-    class="status"
-    role="status"
-    tabindex="-1"
-    [class.wrong]="
-      session.feedback()?.kind === 'wrong' || session.feedback()?.kind === 'other-line'
-    "
-    [class.right]="session.feedback()?.kind === 'correct'"
-    [class.idle]="!status()"
-  >
-    {{ status() }}
-  </p>
-
-  <div class="play-layout">
-    <div class="play-board">
-      <app-board
-        [fen]="game.fen()"
-        [orientation]="session.playerColor()"
-        [turnColor]="game.turn()"
-        [dests]="game.dests()"
-        [lastMove]="game.lastMove()"
-        [check]="game.isCheck()"
-        [viewOnly]="!session.canMove()"
-        [labels]="i18n.t().board"
-        (move)="onMove($event)"
-      />
+  <div class="board-layout">
+    <div class="col col-board">
+      <div class="o-board board-area">
+        <app-board
+          [fen]="game.fen()"
+          [orientation]="session.playerColor()"
+          [turnColor]="game.turn()"
+          [dests]="game.dests()"
+          [lastMove]="game.lastMove()"
+          [check]="game.isCheck()"
+          [viewOnly]="!session.canMove()"
+          [labels]="i18n.t().board"
+          [arrows]="arrows()"
+          [marks]="marks()"
+          [ring]="ring()"
+          (move)="onMove($event)"
+        />
+        @if (session.phase() === 'setup') {
+          <p class="board-caption">{{ t.boardCaption(colorName()) }}</p>
+        }
+      </div>
     </div>
 
-    <div class="play-panel">
+    <div class="col col-panel">
       @if (session.phase() === 'setup') {
-        <app-practice-setup />
+        <app-practice-setup class="o-panel" />
       } @else {
-        @if (isReviewing()) {
-          <p class="reviewing">
-            {{ t.reviewing }}
-            <button type="button" class="text-button" (click)="game.goToEnd()">
-              {{ t.backToPractice }}
-            </button>
-          </p>
-        }
-
-        @if (help(); as help) {
-          <div class="help surface">
-            <h2 class="panel-title">{{ t.helpTitle }}</h2>
-            <p>{{ help }}</p>
-          </div>
-        }
-
-        @if (session.summary(); as summary) {
-          <section class="summary surface" aria-labelledby="summary-title">
-            <h2 id="summary-title" class="panel-title">{{ t.summaryTitle }}</h2>
-            <dl>
-              <div>
-                <dt>{{ t.summaryMoves }}</dt>
-                <dd>{{ summary.moves }}</dd>
-              </div>
-              <div>
-                <dt>{{ t.summaryMistakes }}</dt>
-                <dd>{{ summary.mistakes }}</dd>
-              </div>
-              <div>
-                <dt>{{ t.summaryHelp }}</dt>
-                <dd>{{ summary.helpedMoves }}</dd>
-              </div>
-            </dl>
-            <p class="saved" role="status" [class.failed]="session.saveState() === 'failed'">
-              {{ saveMessage() }}
-            </p>
-            <div class="actions button-row">
-              @if (session.hasNextLine()) {
-                <button type="button" class="button primary" (click)="session.nextLine()">
-                  {{ t.nextLine }}
-                </button>
+        <!-- Above the board on phones, so the reaction to a move is visible without scrolling. -->
+        <div class="o-status">
+          @if (feedback(); as feedback) {
+            <p
+              #message
+              class="feedback"
+              role="status"
+              tabindex="-1"
+              [class.right]="feedback.tone === 'right'"
+              [class.wrong]="feedback.tone === 'wrong'"
+              [class.idle]="feedback.tone === 'idle'"
+            >
+              @if (feedback.tone === 'turn') {
+                <i
+                  class="king pc"
+                  [class.pc-wK]="session.playerColor() === 'white'"
+                  [class.pc-bK]="session.playerColor() === 'black'"
+                ></i>
               }
-              <button type="button" class="button" (click)="session.restartLine()">
-                {{ t.again }}
-              </button>
-              <button type="button" class="button" (click)="session.backToSetup()">
-                {{ t.changeLine }}
-              </button>
-            </div>
-          </section>
+              <span>
+                {{ feedback.text }}
+                @if (feedback.sub) {
+                  <span class="sub">{{ feedback.sub }}</span>
+                }
+                @if (feedback.spoken) {
+                  <span class="visually-hidden"> {{ feedback.spoken }}</span>
+                }
+              </span>
+            </p>
+          }
+        </div>
+
+        @if (session.summary()) {
+          <app-practice-summary class="o-panel" />
         } @else {
-          <div class="actions button-row" role="group" [attr.aria-label]="t.title">
+          <app-practice-progress class="o-panel" />
+          @if (help(); as help) {
+            <div class="help box o-panel" role="group" aria-labelledby="help-title">
+              <h2 class="box-title" id="help-title">{{ t.helpTitle }}</h2>
+              <p>
+                {{ t.helpLead }} <strong>{{ help.move }}</strong
+                >{{ t.helpTail(help.from, help.to) }}
+              </p>
+            </div>
+          }
+          <div class="button-row controls o-panel" role="group" [attr.aria-label]="t.title">
             <button type="button" class="button" (click)="session.restartLine()">
               {{ t.restartLine }}
             </button>
@@ -139,16 +155,25 @@
           </div>
         }
 
-        <h2 class="moves-title panel-title">{{ i18n.t().analysis.moves }}</h2>
-        <app-move-list
-          class="moves play-moves"
-          [moves]="sans()"
-          [currentPly]="game.ply()"
-          [startPly]="game.startPly()"
-          [label]="i18n.t().analysis.moves"
-          [emptyLabel]="i18n.t().analysis.noMoves"
-          (selectPly)="game.goTo($event)"
-        />
+        <section class="moves-block o-moves" aria-labelledby="moves-title">
+          @if (isReviewing()) {
+            <p class="reviewing">
+              {{ t.reviewing }}
+              <button type="button" class="text-button" (click)="game.goToEnd()">
+                {{ t.backToPractice }}
+              </button>
+            </p>
+          }
+          <h2 class="box-title" id="moves-title">{{ i18n.t().analysis.moves }}</h2>
+          <app-move-list
+            [moves]="sans()"
+            [currentPly]="game.ply()"
+            [startPly]="game.startPly()"
+            [label]="i18n.t().analysis.moves"
+            [emptyLabel]="i18n.t().analysis.noMoves"
+            (selectPly)="game.goTo($event)"
+          />
+        </section>
       }
     </div>
   </div>

@@ -180,8 +180,13 @@ export const es: Messages = {
     practiceLinkLabel: (opening: string) => `Practicar ${opening}`,
     fromPlay: 'Practicar estas líneas',
     backToOpening: 'Jugar esta apertura',
+    thisOpening: 'Esta apertura',
+    strictNote: 'Modo estricto: solo vale la jugada de la línea.',
     intro:
-      'Modo estricto: solo cuenta la jugada de la línea. Cualquier otra se retira y cuenta como fallo. Tras tres fallos en la misma jugada, te la mostramos.',
+      'Solo cuenta la jugada de la línea. Cualquier otra se retira y cuenta como fallo. Tras tres fallos en la misma jugada, te la mostramos.',
+    masteryBefore: 'Una línea queda',
+    masteryWord: 'dominada',
+    masteryAfter: 'tras 3 pasadas seguidas sin fallos.',
     setupTitle: 'Qué practicar',
     color: 'Juegas con',
     line: 'Línea',
@@ -189,16 +194,21 @@ export const es: Messages = {
     mainLine: 'Línea principal',
     lineNumber: (index: number) => `Línea ${index}`,
     start: 'Empezar',
+    notStarted: 'Sin empezar',
+    colorMastered: (mastered: number, total: number) => `${mastered} de ${total} dominadas`,
     notPracticed: 'Sin practicar',
     practiced: (times: number) =>
       times === 1 ? 'Practicada una vez' : `Practicada ${times} veces`,
-    mastered: 'dominada',
-    bestResult: (mistakes: number) =>
-      mistakes === 1 ? 'mejor: 1 fallo' : `mejor: ${mistakes} fallos`,
-    lastPracticed: (date: string) => `última el ${date}`,
+    mastered: 'Dominada',
+    streakOf: (streak: number, needed: number) =>
+      `${streak} de ${needed} pasadas seguidas sin fallos`,
+    lastPracticed: (date: string) => `la última el ${date}`,
     progressCount: (practiced: number, mastered: number, total: number) =>
       `${practiced} de ${total} líneas practicadas, ${mastered} dominadas`,
-    lineOf: (index: number, total: number) => `Línea ${index} de ${total}`,
+    colorProgressCount: (practiced: number, mastered: number, total: number, color: string) =>
+      `${practiced} de ${total} líneas practicadas con ${color}, ${mastered} dominadas`,
+    lineOf: (index: number, total: number) => `Línea ${index} de ${total}, todas seguidas`,
+    boardCaption: (color: string) => `Posición inicial, con las ${color} abajo.`,
     yourMove: 'Te toca: juega la jugada de la línea.',
     rivalMoving: 'El rival está moviendo…',
     correct: (move: string) => `${move} es correcta.`,
@@ -206,9 +216,14 @@ export const es: Messages = {
       `${move} no está en esta línea. Se ha retirado (fallo ${attempt} de ${max} en esta jugada).`,
     otherLine: (move: string, variation: string, attempt: number, max: number) =>
       `${move} está en nuestras líneas (${variation}), pero no en la que practicas. Se ha retirado (fallo ${attempt} de ${max} en esta jugada).`,
+    trackTitle: 'Tu avance en la línea',
+    moveOf: (index: number, total: number) => `Jugada ${index} de ${total}`,
+    failsOnMove: 'Fallos en esta jugada',
+    failsCount: (count: number, max: number) => `${count} de ${max}`,
     helpTitle: 'La jugada de la línea',
-    help: (move: string, from: string, to: string) =>
-      `Juega ${move}, de ${from} a ${to}, para seguir.`,
+    helpLead: 'Juega',
+    helpTail: (from: string, to: string) =>
+      `, de ${from} a ${to}, para seguir. Te la marcamos en el tablero.`,
     restartLine: 'Reiniciar la línea',
     changeLine: 'Elegir otra línea',
     reviewing: 'Estás viendo una jugada anterior.',
@@ -219,22 +234,42 @@ export const es: Messages = {
     summaryMoves: 'Tus jugadas',
     summaryMistakes: 'Fallos',
     summaryHelp: 'Jugadas que te hemos mostrado',
+    streakMasteredTitle: 'Línea dominada',
+    streakMasteredNote: (needed: number, color: string) =>
+      `${needed} pasadas seguidas sin fallos con ${color}.`,
+    streakMore: (left: number) =>
+      left === 1
+        ? 'Una más sin fallos y queda dominada.'
+        : `${left === 2 ? 'Dos' : left} más sin fallos y queda dominada.`,
+    streakLostTitle: 'La racha vuelve a cero',
+    streakLostNote: (needed: number) =>
+      `Con algún fallo, la cuenta empieza de nuevo: hacen falta ${needed} pasadas seguidas sin fallos.`,
+    streakNoneTitle: 'Aún sin racha',
+    streakNoneNote: (needed: number) =>
+      `Hacen falta ${needed} pasadas seguidas sin fallos para dominarla.`,
     nextLine: 'Siguiente línea',
     again: 'Repetir esta línea',
+    analyze: 'Analizar esta posición',
+    analyzeNote: 'Abre Análisis con las jugadas de la línea.',
     saving: 'Guardando tu progreso…',
     saved: 'Progreso guardado en este navegador.',
     saveFailed: 'No se ha podido guardar este resultado en este navegador.',
+    errorHint: 'Comprueba la conexión y vuelve a intentarlo.',
     privacy:
       'Tu progreso se guarda solo en este navegador. No hay cuentas ni cookies y tu progreso no sale de este dispositivo; si borras los datos del navegador, se pierde.',
     unavailable:
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
     listNote: 'Una línea cuenta como practicada con cualquiera de los dos colores.',
     clear: 'Borrar el progreso',
+    clearTitle: '¿Borrar el progreso?',
     confirmClear: '¿Borrar todo el progreso guardado? No se puede deshacer.',
+    clearBody:
+      'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. No se puede deshacer.',
     confirmClearAction: 'Borrar',
     cancel: 'Cancelar',
     cleared: 'Progreso borrado.',
     clearFailed: 'No se ha podido borrar el progreso.',
+    nothingToClear: 'No hay progreso guardado.',
   },
   gameEnd: {
     checkmateWhiteWins: 'Jaque mate. Ganan blancas.',
