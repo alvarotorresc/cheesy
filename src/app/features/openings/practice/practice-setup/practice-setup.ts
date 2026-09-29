@@ -4,7 +4,7 @@ import { I18nService, type Messages } from '../../../../core/i18n';
 import { isMastered, type LineProgress } from '../../../../core/progress';
 import { numberedMove } from '../../opening-theory';
 import { ProgressNote } from '../../progress-note/progress-note';
-import { ALL_LINES, DrillSession, type DrillLine } from '../drill-session';
+import { ALL_LINES, PracticeSession, type PracticeLine } from '../practice-session';
 
 const COLORS: readonly Color[] = ['white', 'black'];
 
@@ -20,7 +20,7 @@ interface LineOption {
 /** One line about the progress of a line: times, best result, last date and whether mastered. */
 export const describeProgress = (
   progress: LineProgress | undefined,
-  t: Messages['drill'],
+  t: Messages['practice'],
   formatDate: (time: number) => string,
 ): string => {
   if (!progress) return t.notPracticed;
@@ -32,30 +32,30 @@ export const describeProgress = (
 };
 
 /** Moves of the line as in a score sheet: "1.e4 e5 2.Nf3". */
-const movesOf = (line: DrillLine): string =>
+const movesOf = (line: PracticeLine): string =>
   line.nodes
     .map((node) => (node.ply % 2 === 1 ? numberedMove(node.ply, node.san) : node.san))
     .join(' ');
 
 /**
- * Choice of colour and line before a drill, with the progress of each line kept in this
- * browser. Part of the drill page, which provides the session.
+ * Choice of colour and line before a practice, with the progress of each line kept in this
+ * browser. Part of the practice page, which provides the session.
  */
 @Component({
-  selector: 'app-drill-setup',
+  selector: 'app-practice-setup',
   imports: [ProgressNote],
-  templateUrl: './drill-setup.html',
-  styleUrl: './drill-setup.css',
+  templateUrl: './practice-setup.html',
+  styleUrl: './practice-setup.css',
 })
-export class DrillSetup {
-  protected readonly session = inject(DrillSession);
+export class PracticeSetup {
+  protected readonly session = inject(PracticeSession);
   protected readonly i18n = inject(I18nService);
 
   protected readonly colors = COLORS;
   protected readonly allLines = ALL_LINES;
 
   protected readonly options = computed<LineOption[]>(() => {
-    const t = this.i18n.t().drill;
+    const t = this.i18n.t().practice;
     const progress = this.session.lineProgress();
     const format = new Intl.DateTimeFormat(this.i18n.lang(), { dateStyle: 'medium' });
     return this.session.lines().map((line) => {
@@ -74,7 +74,7 @@ export class DrillSetup {
 
   protected readonly count = computed(() => {
     const { practiced, mastered } = this.session.progressCount();
-    return this.i18n.t().drill.progressCount(practiced, mastered, this.session.lines().length);
+    return this.i18n.t().practice.progressCount(practiced, mastered, this.session.lines().length);
   });
 
   protected onColorChange(color: Color): void {

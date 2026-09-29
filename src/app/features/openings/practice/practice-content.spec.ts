@@ -13,7 +13,7 @@ import {
   playerMoveCount,
   startRun,
   summaryOf,
-} from './drill-run';
+} from './practice-run';
 
 const PROMOTIONS: Readonly<Record<string, Role>> = {
   q: 'queen',
@@ -32,10 +32,10 @@ const boardMove = (node: BookNode): MoveInput => ({
 });
 
 /**
- * Every line of every opening shipped with the app must be playable in the drill, with either
+ * Every line of every opening shipped with the app must be playable in the practice, with either
  * colour, and must have its own progress id.
  */
-describe('Drill with the real content', async () => {
+describe('Practice with the real content', async () => {
   // The same loaders the app uses, read while collecting the tests to get one suite per opening.
   const catalog = await bundledContentLoaders.openingCatalog();
   const books = await Promise.all(

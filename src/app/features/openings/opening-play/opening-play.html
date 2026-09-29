@@ -3,8 +3,8 @@
     <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
   </a>
   @if (session.opening(); as opening) {
-    <a class="back back-link" [routerLink]="['/openings', opening.id, 'drill']">
-      {{ i18n.t().drill.fromPlay }}
+    <a class="back back-link" [routerLink]="['/openings', opening.id, 'practice']">
+      {{ i18n.t().practice.fromPlay }}
     </a>
   }
 </nav>

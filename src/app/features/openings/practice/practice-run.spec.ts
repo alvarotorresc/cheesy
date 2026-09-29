@@ -12,17 +12,21 @@ import {
   playerMoveCount,
   startRun,
   summaryOf,
-  type DrillRun,
-} from './drill-run';
+  type PracticeRun,
+} from './practice-run';
 
 /** Lines of the test tree: 1.e4 e5 2.Nf3 Nc6 3.Bb5, 1.e4 e5 2.Nf3 Nf6 and 1.e4 e5 2.d4. */
 const book = OpeningBook.from(testTree());
 const [mainLine, petrov, centre] = book.lines;
 
-const repeat = (run: DrillRun, step: (run: DrillRun) => DrillRun, times: number): DrillRun =>
-  Array.from({ length: times }).reduce<DrillRun>((current) => step(current), run);
+const repeat = (
+  run: PracticeRun,
+  step: (run: PracticeRun) => PracticeRun,
+  times: number,
+): PracticeRun =>
+  Array.from({ length: times }).reduce<PracticeRun>((current) => step(current), run);
 
-describe('drill run', () => {
+describe('practice run', () => {
   it('should start at the beginning of the line with no mistakes', () => {
     const run = startRun(mainLine, 'white');
 

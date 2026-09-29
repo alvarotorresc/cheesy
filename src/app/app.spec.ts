@@ -61,11 +61,23 @@ describe('App', () => {
     expect(await classes('/')).toBe('main main--home');
     expect(await classes('/openings')).toBe('main');
     expect(await classes('/openings/ruy-lopez')).toBe('main main--play');
-    expect(await classes('/openings/ruy-lopez/drill')).toBe('main main--play');
+    expect(await classes('/openings/ruy-lopez/practice')).toBe('main main--play');
     expect(await classes('/analysis')).toBe('main main--play');
     expect(await classes('/endgames')).toBe('main');
     expect(await classes('/positions/1')).toBe('main');
     expect(await classes('/acerca')).toBe('main main--about');
+  });
+
+  it('should send the old drill address to the practice page', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/openings/ruy-lopez/drill');
+    await harness.fixture.whenStable();
+
+    expect(TestBed.inject(Router).url).toBe('/openings/ruy-lopez/practice');
+    expect(document.title).toBe('Practice · Cheesy');
   });
 
   it('should show the footer with its four links on every page', async () => {

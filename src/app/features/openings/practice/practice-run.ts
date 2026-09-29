@@ -3,15 +3,15 @@ import type { BookNode, OpeningBook } from '../../../core/content';
 import type { Localized } from '../../../core/i18n';
 import { describeTheory } from '../opening-theory';
 
-/** Mistakes allowed on one move before the drill shows it. */
+/** Mistakes allowed on one move before the practice shows it. */
 export const DEFAULT_MAX_MISTAKES = 3;
 
 /**
- * One run of the drill through one line of an opening. Immutable: every step returns a new state,
+ * One run of the practice through one line of an opening. Immutable: every step returns a new state,
  * so the page can keep it in a signal. Pure and free of timers, so it can walk every line of the
  * content in a test.
  */
-export interface DrillRun {
+export interface PracticeRun {
   readonly line: readonly BookNode[];
   readonly color: Color;
   readonly maxMistakes: number;
@@ -21,18 +21,18 @@ export interface DrillRun {
   readonly mistakesOnMove: number;
   /** Mistakes in the whole run. */
   readonly mistakes: number;
-  /** Moves the player only found after the drill showed them. */
+  /** Moves the player only found after the practice showed them. */
   readonly helpedMoves: number;
 }
 
 /** How a move of the player compares with the line being practised. */
-export type DrillVerdict =
+export type PracticeVerdict =
   | { readonly kind: 'correct' }
   /** A move of another of our lines: not a chess mistake, but not this line either. */
   | { readonly kind: 'other-line'; readonly variation: Localized | undefined }
   | { readonly kind: 'wrong' };
 
-export interface DrillSummary {
+export interface PracticeSummary {
   /** Moves of the player in the line. */
   readonly moves: number;
   readonly mistakes: number;
@@ -45,7 +45,7 @@ export const startRun = (
   line: readonly BookNode[],
   color: Color,
   maxMistakes = DEFAULT_MAX_MISTAKES,
-): DrillRun => ({
+): PracticeRun => ({
   line,
   color,
   maxMistakes: Math.max(1, Math.trunc(maxMistakes)),
@@ -56,16 +56,16 @@ export const startRun = (
 });
 
 /** Next move of the line, whoever plays it. Undefined once the line is complete. */
-export const nextMove = (run: DrillRun): BookNode | undefined => run.line[run.ply];
+export const nextMove = (run: PracticeRun): BookNode | undefined => run.line[run.ply];
 
-export const isComplete = (run: DrillRun): boolean => run.ply >= run.line.length;
+export const isComplete = (run: PracticeRun): boolean => run.ply >= run.line.length;
 
 /** Whether the next move of the line is the player's. */
-export const isPlayerTurn = (run: DrillRun): boolean =>
+export const isPlayerTurn = (run: PracticeRun): boolean =>
   !isComplete(run) && sideOfPly(run.ply) === run.color;
 
 /** Whether the player has failed the current move enough times to be shown it. */
-export const needsHelp = (run: DrillRun): boolean =>
+export const needsHelp = (run: PracticeRun): boolean =>
   isPlayerTurn(run) && run.mistakesOnMove >= run.maxMistakes;
 
 /** Moves of the player in the line: 0 when the whole line belongs to the other side. */
@@ -78,9 +78,9 @@ export const playerMoveCount = (line: readonly BookNode[], color: Color): number
  */
 export const judgeMove = (
   book: OpeningBook,
-  run: DrillRun,
+  run: PracticeRun,
   played: { readonly uci: string; readonly san: string },
-): DrillVerdict => {
+): PracticeVerdict => {
   const expected = nextMove(run);
   if (expected?.uci === played.uci) return { kind: 'correct' };
   const path = run.line.slice(0, run.ply).map((node) => node.san);
@@ -91,7 +91,7 @@ export const judgeMove = (
 };
 
 /** The next move of the line is on the board: the player found it, or the rival played it. */
-export const advance = (run: DrillRun): DrillRun => {
+export const advance = (run: PracticeRun): PracticeRun => {
   if (isComplete(run)) return run;
   return {
     ...run,
@@ -102,12 +102,12 @@ export const advance = (run: DrillRun): DrillRun => {
 };
 
 /** The player's move was not the one of the line. */
-export const addMistake = (run: DrillRun): DrillRun =>
+export const addMistake = (run: PracticeRun): PracticeRun =>
   isPlayerTurn(run)
     ? { ...run, mistakesOnMove: run.mistakesOnMove + 1, mistakes: run.mistakes + 1 }
     : run;
 
-export const summaryOf = (run: DrillRun): DrillSummary => ({
+export const summaryOf = (run: PracticeRun): PracticeSummary => ({
   moves: playerMoveCount(run.line, run.color),
   mistakes: run.mistakes,
   helpedMoves: run.helpedMoves,

@@ -10,19 +10,19 @@ import { PROGRESS_STORE_LOADER, progressKey } from '../../../../core/progress';
 import { BoardComponent } from '../../../../shared/board';
 import { memoryProgressStore } from '../../testing/memory-progress-store';
 import { testLoaders, testTree } from '../../testing/test-opening';
-import { DRILL_REPLY_DELAY_MS, DrillSession } from '../drill-session';
-import { DrillPage } from './drill-page';
+import { PRACTICE_REPLY_DELAY_MS, PracticeSession } from '../practice-session';
+import { PracticePage } from './practice-page';
 
 const MAIN = 'e2e4 e7e5 g1f3 b8c6 f1b5';
 const CENTRE = 'e2e4 e7e5 d2d4';
 
-describe('DrillPage', () => {
-  let fixture: ComponentFixture<DrillPage>;
+describe('PracticePage', () => {
+  let fixture: ComponentFixture<PracticePage>;
   let element: HTMLElement;
   let params: BehaviorSubject<ParamMap>;
   let loaders: ContentLoaders;
   let memory: ReturnType<typeof memoryProgressStore>;
-  let session: DrillSession;
+  let session: PracticeSession;
   let game: GameService;
   let engineFactory: ReturnType<typeof vi.fn>;
 
@@ -39,9 +39,9 @@ describe('DrillPage', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
-    fixture = TestBed.createComponent(DrillPage);
+    fixture = TestBed.createComponent(PracticePage);
     element = fixture.nativeElement as HTMLElement;
-    session = fixture.debugElement.injector.get(DrillSession);
+    session = fixture.debugElement.injector.get(PracticeSession);
     game = fixture.debugElement.injector.get(GameService);
     await settle();
   };
@@ -117,13 +117,13 @@ describe('DrillPage', () => {
       button('Try again').click();
       await settle();
 
-      expect(text('h1')).toBe('Test Opening: Drill');
+      expect(text('h1')).toBe('Test Opening: Practice');
     });
 
-    it('should name the browser tab after the drill of the opening', async () => {
+    it('should name the browser tab after the practice of the opening', async () => {
       await create();
 
-      expect(document.title).toBe('Drill Test Opening · Cheesy');
+      expect(document.title).toBe('Practise Test Opening · Cheesy');
     });
 
     it('should reload when the id in the URL changes', async () => {
@@ -145,14 +145,14 @@ describe('DrillPage', () => {
         ],
       });
       TestBed.inject(I18nService).setLang('en');
-      fixture = TestBed.createComponent(DrillPage);
+      fixture = TestBed.createComponent(PracticePage);
       element = fixture.nativeElement as HTMLElement;
       // First render while the opening is still loading, as in the browser.
       fixture.detectChanges();
       expect(text('[role=status]')).toBe('Loading the opening…');
       await settle();
 
-      expect(element.querySelector('app-drill-setup')).not.toBeNull();
+      expect(element.querySelector('app-practice-setup')).not.toBeNull();
       expect(element.querySelector('.status')?.textContent?.trim()).toBe('');
       expect(document.activeElement).toBe(document.body);
     });
@@ -161,7 +161,7 @@ describe('DrillPage', () => {
       await create();
       await chooseLineAndStart(MAIN);
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
 
       expect(engineFactory).not.toHaveBeenCalled();
     });
@@ -198,20 +198,20 @@ describe('DrillPage', () => {
       expect(text('.meta')).toContain('You play Black');
     });
 
-    it('should start the drill and move the focus to its message', async () => {
+    it('should start the practice and move the focus to its message', async () => {
       const start = button('Start');
       start.focus();
       start.click();
       await settle();
 
-      expect(element.querySelector('app-drill-setup')).toBeNull();
+      expect(element.querySelector('app-practice-setup')).toBeNull();
       expect(text('[role=status].status')).toBe('Your move: play the move of the line.');
       expect(document.activeElement).toBe(element.querySelector('.status'));
       expect(text('.meta')).toContain('Line 1 of 3');
     });
   });
 
-  describe('drilling', () => {
+  describe('practiceing', () => {
     beforeEach(async () => {
       await create();
       await chooseLineAndStart(MAIN);
@@ -222,7 +222,7 @@ describe('DrillPage', () => {
 
       expect(text('.status')).toBe('1.e4 is right. Your rival is moving…');
 
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
 
       expect(text('.status')).toBe('1.e4 is right. Your move: play the move of the line.');
       expect(game.moves().map((played) => played.san)).toEqual(['e4', 'e5']);
@@ -240,7 +240,7 @@ describe('DrillPage', () => {
 
     it('should name the other line when the move belongs to one', async () => {
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('d2', 'd4');
 
       expect(text('.status')).toBe(
@@ -263,7 +263,7 @@ describe('DrillPage', () => {
     it('should restart the line', async () => {
       await move('e2', 'e4');
       button('Restart line').click();
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
 
       expect(game.moves()).toEqual([]);
     });
@@ -272,19 +272,19 @@ describe('DrillPage', () => {
       button('Choose another line').click();
       await settle();
 
-      expect(element.querySelector('app-drill-setup')).not.toBeNull();
+      expect(element.querySelector('app-practice-setup')).not.toBeNull();
     });
 
-    it('should browse the moves and come back to the drill', async () => {
+    it('should browse the moves and come back to the practice', async () => {
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
       await settle();
 
       expect(game.ply()).toBe(1);
       expect(text('.reviewing')).toContain('You are looking at an earlier move.');
 
-      button('Back to the drill').click();
+      button('Back to the practice').click();
       await settle();
 
       expect(game.ply()).toBe(2);
@@ -294,9 +294,9 @@ describe('DrillPage', () => {
   describe('summary', () => {
     const playMain = async (): Promise<void> => {
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('g1', 'f3');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('f1', 'b5');
       await settle();
     };
@@ -362,13 +362,13 @@ describe('DrillPage', () => {
       expect(text('.meta')).toContain('Line 2 of 3');
 
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('g1', 'f3');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       button('Next line').click();
       await settle();
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('d2', 'd4');
       await settle();
 
@@ -376,11 +376,11 @@ describe('DrillPage', () => {
       expect(() => button('Next line')).toThrow();
     });
 
-    it('should keep the focus in the drill when the pressed button goes away', async () => {
+    it('should keep the focus in the practice when the pressed button goes away', async () => {
       await create();
       await chooseLineAndStart(CENTRE);
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('d2', 'd4');
       await settle();
 
@@ -396,7 +396,7 @@ describe('DrillPage', () => {
       await create();
       await chooseLineAndStart(CENTRE);
       await move('e2', 'e4');
-      await settle(DRILL_REPLY_DELAY_MS);
+      await settle(PRACTICE_REPLY_DELAY_MS);
       await move('d2', 'd4');
       await settle();
 
@@ -405,7 +405,7 @@ describe('DrillPage', () => {
       change.click();
       await settle();
 
-      expect(element.querySelector('app-drill-setup')).not.toBeNull();
+      expect(element.querySelector('app-practice-setup')).not.toBeNull();
       expect(text('.status')).toBe('');
       expect(document.activeElement).not.toBe(element.querySelector('.status'));
     });

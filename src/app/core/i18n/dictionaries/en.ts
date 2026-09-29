@@ -31,7 +31,7 @@ export const en = {
     title: 'Practice chess against the computer',
     intro:
       'Play openings, endgames and tactical positions right in your browser. The board is always playable: make any legal move and see what happens.',
-    openings: 'Play an opening and drill its main lines.',
+    openings: 'Play an opening and practise its main lines.',
     endgames: 'Convert winning endgames and hold the drawn ones.',
     positions: 'Find the best move in tactical positions.',
     analysis: 'Set up a free board and explore any idea.',
@@ -119,11 +119,11 @@ export const en = {
       other: 'Other openings',
     },
   },
-  drill: {
-    title: 'Drill',
-    drillLink: 'Drill',
-    drillLinkLabel: (opening: string) => `Drill ${opening}`,
-    fromPlay: 'Drill these lines',
+  practice: {
+    title: 'Practice',
+    practiceLink: 'Practise',
+    practiceLinkLabel: (opening: string) => `Practise ${opening}`,
+    fromPlay: 'Practise these lines',
     backToOpening: 'Play this opening',
     intro:
       'Strict mode: only the move of the line counts. Any other move is taken back and counted as a mistake. After three mistakes on the same move, we show it to you.',
@@ -156,7 +156,7 @@ export const en = {
     restartLine: 'Restart line',
     changeLine: 'Choose another line',
     reviewing: 'You are looking at an earlier move.',
-    backToDrill: 'Back to the drill',
+    backToPractice: 'Back to the practice',
     complete: 'Line complete.',
     allDone: 'Line complete. You have gone through every line.',
     summaryTitle: 'Summary',

@@ -1,4 +1,4 @@
-@let t = i18n.t().drill;
+@let t = i18n.t().practice;
 
 <section class="page-intro">
   <h1>{{ i18n.t().openings.title }}</h1>
@@ -50,11 +50,11 @@
                 }
               </a>
               <a
-                class="drill"
-                [routerLink]="['/openings', opening.id, 'drill']"
-                [attr.aria-label]="t.drillLinkLabel(i18n.localize(opening.name))"
+                class="practice"
+                [routerLink]="['/openings', opening.id, 'practice']"
+                [attr.aria-label]="t.practiceLinkLabel(i18n.localize(opening.name))"
               >
-                {{ t.drillLink }}
+                {{ t.practiceLink }}
               </a>
             </li>
           }

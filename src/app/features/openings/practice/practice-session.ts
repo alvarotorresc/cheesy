@@ -21,20 +21,20 @@ import {
   nextMove,
   startRun,
   summaryOf,
-  type DrillRun,
-  type DrillSummary,
-} from './drill-run';
+  type PracticeRun,
+  type PracticeSummary,
+} from './practice-run';
 
 /**
- * `idle`: no opening loaded. `setup`: choosing colour and line. `drilling`: a line is being
+ * `idle`: no opening loaded. `setup`: choosing colour and line. `practiceing`: a line is being
  * practised. `complete`: the line is done and its summary is shown.
  */
-export type DrillPhase = 'idle' | 'setup' | 'drilling' | 'complete';
+export type PracticePhase = 'idle' | 'setup' | 'practiceing' | 'complete';
 
-export type DrillLoadState = 'idle' | 'loading' | 'ready' | 'not-found' | 'error';
+export type PracticeLoadState = 'idle' | 'loading' | 'ready' | 'not-found' | 'error';
 
 /** A line of the opening, with its stable id and its place in the tree. */
-export interface DrillLine {
+export interface PracticeLine {
   readonly id: string;
   readonly nodes: readonly BookNode[];
   /** Position in the tree, main line first: only for display, never stored. */
@@ -45,7 +45,7 @@ export interface DrillLine {
 export const ALL_LINES = 'all';
 
 /** Reaction to the last move of the player. `attempt` counts the mistakes on that move. */
-export type DrillFeedback =
+export type PracticeFeedback =
   | { readonly kind: 'correct'; readonly ply: number; readonly san: string }
   | { readonly kind: 'wrong'; readonly ply: number; readonly san: string; readonly attempt: number }
   | {
@@ -60,36 +60,36 @@ export type DrillFeedback =
 export type SaveState = 'saving' | 'saved' | 'failed';
 
 /** Pause before the rival's move, so it does not land at the same instant as the player's. */
-export const DRILL_REPLY_DELAY_MS = 450;
+export const PRACTICE_REPLY_DELAY_MS = 450;
 
 /**
- * State and rules of the opening drill: the player practises one line, or all of them in turn,
+ * State and rules of the opening practice: the player practises one line, or all of them in turn,
  * with one colour. The rival's moves are played from the line; only the move of the line is
  * accepted, anything else is taken back and counted as a mistake, and after too many mistakes on
- * the same move the drill shows it. This is the only strict mode of the app, chosen on purpose.
+ * the same move the practice shows it. This is the only strict mode of the app, chosen on purpose.
  *
  * It never uses the engine. Each completed line is recorded once in the progress kept in the
  * browser. The rival's moves carry a generation number, so a move that arrives after a restart,
  * a new line or leaving the page is dropped.
  *
- * Provided by the drill page together with its own `GameService`.
+ * Provided by the practice page together with its own `GameService`.
  */
 @Injectable()
-export class DrillSession {
+export class PracticeSession {
   private readonly game = inject(GameService);
   private readonly content = inject(ContentService);
   private readonly progress = inject(ProgressService);
 
-  private readonly loadStatus = signal<DrillLoadState>('idle');
+  private readonly loadStatus = signal<PracticeLoadState>('idle');
   private readonly current = signal<{ book: OpeningBook; summary: OpeningSummary } | undefined>(
     undefined,
   );
   private readonly color = signal<Color>('white');
   private readonly choice = signal<string>(ALL_LINES);
-  private readonly queue = signal<readonly DrillLine[]>([]);
+  private readonly queue = signal<readonly PracticeLine[]>([]);
   private readonly queueIndex = signal(0);
-  private readonly drillRun = signal<DrillRun | undefined>(undefined);
-  private readonly lastFeedback = signal<DrillFeedback | undefined>(undefined);
+  private readonly practiceRun = signal<PracticeRun | undefined>(undefined);
+  private readonly lastFeedback = signal<PracticeFeedback | undefined>(undefined);
   private readonly waiting = signal(false);
   private readonly saveStatus = signal<SaveState | undefined>(undefined);
   private readonly progressRows = signal<readonly LineProgress[]>([]);
@@ -99,21 +99,21 @@ export class DrillSession {
   private replyTimer: ReturnType<typeof setTimeout> | undefined;
   private requestedId: string | undefined;
   /** Last run sent to the progress store, so a completed line is never recorded twice. */
-  private recordedRun: DrillRun | undefined;
+  private recordedRun: PracticeRun | undefined;
 
   readonly loadState = this.loadStatus.asReadonly();
   readonly book = computed(() => this.current()?.book);
   readonly opening = computed(() => this.current()?.summary);
   readonly playerColor = this.color.asReadonly();
   readonly selectedLine = this.choice.asReadonly();
-  readonly run = this.drillRun.asReadonly();
+  readonly run = this.practiceRun.asReadonly();
   readonly feedback = this.lastFeedback.asReadonly();
   readonly isThinking = this.waiting.asReadonly();
   readonly saveState = this.saveStatus.asReadonly();
   readonly maxMistakes = DEFAULT_MAX_MISTAKES;
 
   /** Every line of the opening, main line first. */
-  readonly lines = computed<readonly DrillLine[]>(
+  readonly lines = computed<readonly PracticeLine[]>(
     () => this.book()?.lines.map((nodes, index) => ({ id: lineIdOf(nodes), nodes, index })) ?? [],
   );
 
@@ -140,11 +140,11 @@ export class DrillSession {
   /** Whether this opening has any saved progress, with either colour. */
   readonly hasProgress = computed(() => this.progressRows().length > 0);
 
-  readonly phase = computed<DrillPhase>(() => {
-    const run = this.drillRun();
+  readonly phase = computed<PracticePhase>(() => {
+    const run = this.practiceRun();
     if (!this.book()) return 'idle';
     if (!run) return 'setup';
-    return isComplete(run) ? 'complete' : 'drilling';
+    return isComplete(run) ? 'complete' : 'practiceing';
   });
 
   /** Line being practised, and its place in the queue when practising all of them. */
@@ -157,7 +157,7 @@ export class DrillSession {
 
   /** Whether the board accepts a move: the player's turn, looking at the latest position. */
   readonly canMove = computed(() => {
-    const run = this.drillRun();
+    const run = this.practiceRun();
     return (
       !!run && isPlayerTurn(run) && !this.waiting() && this.game.ply() === this.game.moves().length
     );
@@ -165,12 +165,12 @@ export class DrillSession {
 
   /** The move the player has to play, once it has been failed too many times. */
   readonly help = computed<BookNode | undefined>(() => {
-    const run = this.drillRun();
+    const run = this.practiceRun();
     return run && needsHelp(run) ? nextMove(run) : undefined;
   });
 
-  readonly summary = computed<DrillSummary | undefined>(() => {
-    const run = this.drillRun();
+  readonly summary = computed<PracticeSummary | undefined>(() => {
+    const run = this.practiceRun();
     return run && isComplete(run) ? summaryOf(run) : undefined;
   });
 
@@ -226,12 +226,12 @@ export class DrillSession {
     return this.requestedId === undefined ? Promise.resolve() : this.load(this.requestedId);
   }
 
-  /** Colour for the next drill. Only while choosing. */
+  /** Colour for the next practice. Only while choosing. */
   setPlayerColor(color: Color): void {
     if (this.phase() === 'setup') this.color.set(color);
   }
 
-  /** Line for the next drill: `ALL_LINES` or the id of a line of this opening. */
+  /** Line for the next practice: `ALL_LINES` or the id of a line of this opening. */
   chooseLine(choice: string): void {
     if (this.phase() !== 'setup') return;
     if (choice === ALL_LINES || this.lines().some((line) => line.id === choice)) {
@@ -239,7 +239,7 @@ export class DrillSession {
     }
   }
 
-  /** Starts the drill with the chosen colour and line. */
+  /** Starts the practice with the chosen colour and line. */
   start(): void {
     if (this.phase() !== 'setup') return;
     const choice = this.choice();
@@ -260,21 +260,21 @@ export class DrillSession {
 
   /** Starts the current line again from its first move. */
   restartLine(): void {
-    if (this.drillRun()) this.startLine();
+    if (this.practiceRun()) this.startLine();
   }
 
-  /** Leaves the drill and goes back to the choice of colour and line. */
+  /** Leaves the practice and goes back to the choice of colour and line. */
   backToSetup(): void {
     this.stopRun();
   }
 
   /**
-   * Plays a move of the player. The move of the line is kept and the drill goes on; any other
+   * Plays a move of the player. The move of the line is kept and the practice goes on; any other
    * legal move is taken back and counted as a mistake. Returns false when the board should not
    * have accepted a move, or the move is illegal: neither counts as a mistake.
    */
   play(move: MoveInput): boolean {
-    const run = this.drillRun();
+    const run = this.practiceRun();
     const book = this.book();
     if (!run || !book || !this.canMove()) return false;
     const played = this.game.play(move);
@@ -283,13 +283,13 @@ export class DrillSession {
     const verdict = judgeMove(book, run, played);
     if (verdict.kind === 'correct') {
       this.lastFeedback.set({ kind: 'correct', ply, san: played.san });
-      this.drillRun.set(advance(run));
+      this.practiceRun.set(advance(run));
       this.afterAdvance();
       return true;
     }
     this.game.undo();
     const next = addMistake(run);
-    this.drillRun.set(next);
+    this.practiceRun.set(next);
     this.lastFeedback.set(
       verdict.kind === 'wrong'
         ? { kind: 'wrong', ply, san: played.san, attempt: next.mistakesOnMove }
@@ -311,14 +311,14 @@ export class DrillSession {
     this.game.reset();
     this.lastFeedback.set(undefined);
     this.saveStatus.set(undefined);
-    this.drillRun.set(startRun(line.nodes, this.color(), this.maxMistakes));
+    this.practiceRun.set(startRun(line.nodes, this.color(), this.maxMistakes));
     this.afterAdvance();
   }
 
   private stopRun(): void {
     this.cancelReply();
     this.game.reset();
-    this.drillRun.set(undefined);
+    this.practiceRun.set(undefined);
     this.lastFeedback.set(undefined);
     this.saveStatus.set(undefined);
     this.queue.set([]);
@@ -327,7 +327,7 @@ export class DrillSession {
 
   /** After a move of the line reached the board: the rival answers or the line is complete. */
   private afterAdvance(): void {
-    const run = this.drillRun();
+    const run = this.practiceRun();
     if (!run) return;
     if (isComplete(run)) {
       void this.recordRun(run);
@@ -340,20 +340,20 @@ export class DrillSession {
     const generation = ++this.replyGeneration;
     this.waiting.set(true);
     clearTimeout(this.replyTimer);
-    this.replyTimer = setTimeout(() => this.applyReply(generation), DRILL_REPLY_DELAY_MS);
+    this.replyTimer = setTimeout(() => this.applyReply(generation), PRACTICE_REPLY_DELAY_MS);
   }
 
   private applyReply(generation: number): void {
     this.replyTimer = undefined;
     if (generation !== this.replyGeneration) return;
     this.waiting.set(false);
-    const run = this.drillRun();
+    const run = this.practiceRun();
     const node = run && !isPlayerTurn(run) ? nextMove(run) : undefined;
     if (!run || !node) return;
     this.game.goToEnd();
     // The line comes from the book, where every move was checked to be legal.
     this.game.playSan(node.san);
-    this.drillRun.set(advance(run));
+    this.practiceRun.set(advance(run));
     this.afterAdvance();
   }
 
@@ -364,7 +364,7 @@ export class DrillSession {
     this.waiting.set(false);
   }
 
-  private async recordRun(run: DrillRun): Promise<void> {
+  private async recordRun(run: PracticeRun): Promise<void> {
     const book = this.book();
     if (!book || this.recordedRun === run) return;
     this.recordedRun = run;
@@ -375,7 +375,7 @@ export class DrillSession {
       lineId: lineIdOf(run.line),
       mistakes: run.mistakes,
     });
-    if (this.drillRun() === run) this.saveStatus.set(saved ? 'saved' : 'failed');
+    if (this.practiceRun() === run) this.saveStatus.set(saved ? 'saved' : 'failed');
   }
 
   private async refreshProgress(openingId: string): Promise<void> {

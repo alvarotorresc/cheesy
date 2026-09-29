@@ -5,15 +5,15 @@ import { GameService } from '../../../core/game';
 import { PROGRESS_STORE_LOADER, progressKey, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../testing/memory-progress-store';
 import { testLoaders, testTree } from '../testing/test-opening';
-import { ALL_LINES, DRILL_REPLY_DELAY_MS, DrillSession } from './drill-session';
+import { ALL_LINES, PRACTICE_REPLY_DELAY_MS, PracticeSession } from './practice-session';
 
 const MAIN = 'e2e4 e7e5 g1f3 b8c6 f1b5';
 const PETROV = 'e2e4 e7e5 g1f3 g8f6';
 const CENTRE = 'e2e4 e7e5 d2d4';
 
-describe('DrillSession', () => {
+describe('PracticeSession', () => {
   let injector: (Injector & { destroy(): void }) | undefined;
-  let session: DrillSession;
+  let session: PracticeSession;
   let game: GameService;
   let progress: ProgressService;
   let memory: ReturnType<typeof memoryProgressStore>;
@@ -22,7 +22,7 @@ describe('DrillSession', () => {
   const sans = (): string[] => game.moves().map((move) => move.san);
 
   /** Lets the rival's pause run out and the promises in between settle. */
-  const rivalMoves = () => vi.advanceTimersByTimeAsync(DRILL_REPLY_DELAY_MS);
+  const rivalMoves = () => vi.advanceTimersByTimeAsync(PRACTICE_REPLY_DELAY_MS);
 
   /** Lets pending promises and effects settle. */
   const settle = async (): Promise<void> => {
@@ -47,17 +47,17 @@ describe('DrillSession', () => {
       ],
     });
     const scope = Injector.create({
-      providers: [GameService, DrillSession],
+      providers: [GameService, PracticeSession],
       parent: TestBed.inject(Injector),
     }) as Injector & { destroy(): void };
     injector = scope;
-    session = scope.get(DrillSession);
+    session = scope.get(PracticeSession);
     game = scope.get(GameService);
     progress = TestBed.inject(ProgressService);
   };
 
-  /** Loads the test opening and starts a drill of `line` with `color`. */
-  const startDrill = async (line = MAIN, color: 'white' | 'black' = 'white'): Promise<void> => {
+  /** Loads the test opening and starts a practice of `line` with `color`. */
+  const startPractice = async (line = MAIN, color: 'white' | 'black' = 'white'): Promise<void> => {
     await session.load('test-opening');
     session.setPlayerColor(color);
     session.chooseLine(line);
@@ -165,7 +165,7 @@ describe('DrillSession', () => {
       expect(session.selectedLine()).toBe(ALL_LINES);
     });
 
-    it('should not change colour or line during a drill', () => {
+    it('should not change colour or line during a practice', () => {
       session.start();
       session.setPlayerColor('black');
       session.chooseLine(PETROV);
@@ -177,7 +177,7 @@ describe('DrillSession', () => {
     it('should practise every line in turn when all are chosen', () => {
       session.start();
 
-      expect(session.phase()).toBe('drilling');
+      expect(session.phase()).toBe('practiceing');
       expect(session.currentLine()?.id).toBe(MAIN);
       expect(session.position()).toEqual({ index: 1, total: 3 });
       expect(session.hasNextLine()).toBe(true);
@@ -203,7 +203,7 @@ describe('DrillSession', () => {
 
   describe('playing the line', () => {
     it('should keep the move of the line and play the rival move after a pause', async () => {
-      await startDrill();
+      await startPractice();
 
       expect(session.canMove()).toBe(true);
       expect(session.play({ from: 'e2', to: 'e4' })).toBe(true);
@@ -219,7 +219,7 @@ describe('DrillSession', () => {
     });
 
     it('should let the rival open when the player has Black', async () => {
-      await startDrill(MAIN, 'black');
+      await startPractice(MAIN, 'black');
 
       expect(session.canMove()).toBe(false);
       expect(session.play({ from: 'e7', to: 'e5' })).toBe(false);
@@ -231,7 +231,7 @@ describe('DrillSession', () => {
     });
 
     it('should take back a move outside our lines and count it', async () => {
-      await startDrill();
+      await startPractice();
 
       expect(session.play({ from: 'd2', to: 'd4' })).toBe(true);
 
@@ -242,7 +242,7 @@ describe('DrillSession', () => {
     });
 
     it('should say when the move belongs to another of our lines', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       await rivalMoves();
 
@@ -260,7 +260,7 @@ describe('DrillSession', () => {
     });
 
     it('should neither accept nor count an illegal move', async () => {
-      await startDrill();
+      await startPractice();
 
       expect(session.play({ from: 'e2', to: 'e5' })).toBe(false);
       expect(session.run()?.mistakes).toBe(0);
@@ -268,7 +268,7 @@ describe('DrillSession', () => {
     });
 
     it('should show the move after three mistakes on it, and go on once played', async () => {
-      await startDrill();
+      await startPractice();
 
       session.play({ from: 'd2', to: 'd4' });
       session.play({ from: 'c2', to: 'c4' });
@@ -288,7 +288,7 @@ describe('DrillSession', () => {
     });
 
     it('should not accept moves while the player looks at an earlier position', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       await rivalMoves();
       game.goTo(1);
@@ -301,7 +301,7 @@ describe('DrillSession', () => {
     });
 
     it('should play the rival move on the latest position even when browsing back', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       game.goTo(0);
 
@@ -323,7 +323,7 @@ describe('DrillSession', () => {
     };
 
     it('should show the summary and record the line once', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'd2', to: 'd4' });
       await playMain();
 
@@ -343,7 +343,7 @@ describe('DrillSession', () => {
     });
 
     it('should complete a line that ends with the rival move', async () => {
-      await startDrill(PETROV, 'white');
+      await startPractice(PETROV, 'white');
       session.play({ from: 'e2', to: 'e4' });
       await rivalMoves();
       session.play({ from: 'g1', to: 'f3' });
@@ -356,7 +356,7 @@ describe('DrillSession', () => {
     });
 
     it('should show the progress of the lines with the chosen colour', async () => {
-      await startDrill();
+      await startPractice();
       await playMain();
 
       expect(session.lineProgress().get(MAIN)).toMatchObject({
@@ -387,7 +387,7 @@ describe('DrillSession', () => {
     });
 
     it('should forget the progress shown once it is deleted', async () => {
-      await startDrill();
+      await startPractice();
       await playMain();
 
       await progress.clear('openings');
@@ -398,7 +398,7 @@ describe('DrillSession', () => {
 
     it('should still show the summary when the result cannot be saved', async () => {
       setup({}, memoryProgressStore({ failWrites: true }));
-      await startDrill();
+      await startPractice();
       await playMain();
 
       expect(session.phase()).toBe('complete');
@@ -408,12 +408,12 @@ describe('DrillSession', () => {
     });
 
     it('should go on with the next line when practising all of them', async () => {
-      await startDrill(ALL_LINES);
+      await startPractice(ALL_LINES);
       await playMain();
 
       session.nextLine();
 
-      expect(session.phase()).toBe('drilling');
+      expect(session.phase()).toBe('practiceing');
       expect(session.currentLine()?.id).toBe(PETROV);
       expect(session.position()).toEqual({ index: 2, total: 3 });
       expect(sans()).toEqual([]);
@@ -422,7 +422,7 @@ describe('DrillSession', () => {
     });
 
     it('should not go past the last line', async () => {
-      await startDrill(MAIN);
+      await startPractice(MAIN);
       await playMain();
 
       session.nextLine();
@@ -432,11 +432,11 @@ describe('DrillSession', () => {
     });
 
     it('should practise the same line again and record it again', async () => {
-      await startDrill();
+      await startPractice();
       await playMain();
 
       session.restartLine();
-      expect(session.phase()).toBe('drilling');
+      expect(session.phase()).toBe('practiceing');
       expect(sans()).toEqual([]);
 
       await playMain();
@@ -446,7 +446,7 @@ describe('DrillSession', () => {
 
   describe('stopping', () => {
     it('should drop the rival move when the line restarts', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       session.restartLine();
 
@@ -457,7 +457,7 @@ describe('DrillSession', () => {
     });
 
     it('should go back to the choice of line', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       session.backToSetup();
       await rivalMoves();
@@ -468,7 +468,7 @@ describe('DrillSession', () => {
     });
 
     it('should drop the rival move when the page is left', async () => {
-      await startDrill();
+      await startPractice();
       session.play({ from: 'e2', to: 'e4' });
       const pageGame = game;
       leave();

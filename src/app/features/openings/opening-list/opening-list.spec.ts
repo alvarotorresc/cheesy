@@ -145,17 +145,17 @@ describe('OpeningList', () => {
       await fixture.whenStable();
     };
 
-    it('should link each opening to its drill', async () => {
+    it('should link each opening to its practice', async () => {
       await create();
 
-      const links = Array.from(element.querySelectorAll('a.drill'));
+      const links = Array.from(element.querySelectorAll('a.practice'));
       expect(links.map((a) => a.getAttribute('href'))).toEqual([
-        '/openings/ruy/drill',
-        '/openings/french/drill',
-        '/openings/caro/drill',
+        '/openings/ruy/practice',
+        '/openings/french/practice',
+        '/openings/caro/practice',
       ]);
-      expect(links[0].textContent?.trim()).toBe('Drill');
-      expect(links[0].getAttribute('aria-label')).toBe('Drill Test Opening');
+      expect(links[0].textContent?.trim()).toBe('Practise');
+      expect(links[0].getAttribute('aria-label')).toBe('Practise Test Opening');
     });
 
     it('should count the lines practised and mastered with either colour', async () => {

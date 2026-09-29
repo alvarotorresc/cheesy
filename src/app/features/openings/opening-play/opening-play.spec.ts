@@ -102,15 +102,15 @@ describe('OpeningPlay', () => {
       expect(element.querySelector('app-board cg-board')).not.toBeNull();
     });
 
-    it('should link to the drill of the opening', async () => {
+    it('should link to the practice of the opening', async () => {
       await create('test-opening');
 
       const links = Array.from(element.querySelectorAll('a.back'));
       expect(links.map((link) => link.getAttribute('href'))).toEqual([
         '/openings',
-        '/openings/test-opening/drill',
+        '/openings/test-opening/practice',
       ]);
-      expect(links[1].textContent?.trim()).toBe('Drill these lines');
+      expect(links[1].textContent?.trim()).toBe('Practise these lines');
     });
 
     it('should announce the loading state while the opening arrives', async () => {

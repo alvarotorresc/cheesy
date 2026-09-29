@@ -47,7 +47,7 @@ export const numberedMove = (ply: number, san: string): string => {
 
 /**
  * Where a line of SAN moves, played from the initial position, stands in the opening tree. Pure, so
- * the play mode and a stricter drill mode can share it.
+ * the play mode and a stricter practice mode can share it.
  */
 export const describeTheory = (book: OpeningBook, sans: readonly string[]): Theory => {
   const lookup = book.lookup(sans);

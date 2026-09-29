@@ -16,28 +16,28 @@ import { BoardComponent, type BoardMove } from '../../../../shared/board';
 import { isFormField } from '../../../../shared/keyboard';
 import { MoveList } from '../../../../shared/move-list';
 import { numberedMove } from '../../opening-theory';
-import { DrillSession, type DrillPhase } from '../drill-session';
-import { DrillSetup } from '../drill-setup/drill-setup';
+import { PracticeSession, type PracticePhase } from '../practice-session';
+import { PracticeSetup } from '../practice-setup/practice-setup';
 
 /**
- * Drill page of an opening (`/openings/:id/drill`): choose colour and line, then play the line
+ * Practice page of an opening (`/openings/:id/practice`): choose colour and line, then play the line
  * with only its moves accepted. The id in the URL is untrusted: the session checks it before
- * asking for content. No engine is provided here: the drill never needs Stockfish.
+ * asking for content. No engine is provided here: the practice never needs Stockfish.
  */
 @Component({
-  selector: 'app-drill-page',
-  imports: [BoardComponent, DrillSetup, MoveList, RouterLink],
-  providers: [GameService, DrillSession],
-  templateUrl: './drill-page.html',
-  styleUrl: './drill-page.css',
+  selector: 'app-practice-page',
+  imports: [BoardComponent, PracticeSetup, MoveList, RouterLink],
+  providers: [GameService, PracticeSession],
+  templateUrl: './practice-page.html',
+  styleUrl: './practice-page.css',
   host: {
     '(document:keydown.arrowleft)': 'browse($event, -1)',
     '(document:keydown.arrowright)': 'browse($event, 1)',
   },
 })
-export class DrillPage {
+export class PracticePage {
   protected readonly game = inject(GameService);
-  protected readonly session = inject(DrillSession);
+  protected readonly session = inject(PracticeSession);
   protected readonly i18n = inject(I18nService);
 
   protected readonly sans = computed(() => this.game.moves().map((move) => move.san));
@@ -46,19 +46,21 @@ export class DrillPage {
   /** The move shown after too many mistakes, with its squares for those who cannot see arrows. */
   protected readonly help = computed(() => {
     const node = this.session.help();
-    return node && this.i18n.t().drill.help(numberedMove(node.ply, node.san), node.from, node.to);
+    return (
+      node && this.i18n.t().practice.help(numberedMove(node.ply, node.san), node.from, node.to)
+    );
   });
 
-  /** Main message of the drill, announced to screen readers when it changes. */
+  /** Main message of the practice, announced to screen readers when it changes. */
   protected readonly status = computed(() => {
-    const t = this.i18n.t().drill;
+    const t = this.i18n.t().practice;
     const phase = this.session.phase();
     if (phase === 'complete') {
       return this.session.position().total > 1 && !this.session.hasNextLine()
         ? t.allDone
         : t.complete;
     }
-    if (phase !== 'drilling') return '';
+    if (phase !== 'practiceing') return '';
     const feedback = this.session.feedback();
     const max = this.session.maxMistakes;
     const next = this.session.isThinking() ? t.rivalMoving : t.yourMove;
@@ -89,7 +91,7 @@ export class DrillPage {
   });
 
   protected readonly saveMessage = computed(() => {
-    const t = this.i18n.t().drill;
+    const t = this.i18n.t().practice;
     switch (this.session.saveState()) {
       case 'saving':
         return t.saving;
@@ -104,19 +106,19 @@ export class DrillPage {
 
   private readonly statusMessage = viewChild<ElementRef<HTMLElement>>('statusMessage');
   private readonly document = inject(DOCUMENT);
-  private lastPhase: DrillPhase | undefined;
+  private lastPhase: PracticePhase | undefined;
 
   constructor() {
     inject(PageTitle).showDetail(() => {
       const opening = this.session.opening();
-      return opening && this.i18n.t().drill.drillLinkLabel(this.i18n.localize(opening.name));
+      return opening && this.i18n.t().practice.practiceLinkLabel(this.i18n.localize(opening.name));
     });
     inject(ActivatedRoute)
       .paramMap.pipe(takeUntilDestroyed())
       .subscribe((params) => void this.session.load(params.get('id') ?? ''));
 
     // Starting or finishing a line removes the button that was pressed: keep the focus in the
-    // drill, on its message, instead of letting it fall back to the page. Loading the opening
+    // practice, on its message, instead of letting it fall back to the page. Loading the opening
     // removes no button, and an empty message has nothing to read.
     afterRenderEffect(() => {
       const phase = this.session.phase();

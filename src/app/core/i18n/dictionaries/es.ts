@@ -122,11 +122,11 @@ export const es: Messages = {
       other: 'Otras aperturas',
     },
   },
-  drill: {
-    title: 'Drill',
-    drillLink: 'Drill',
-    drillLinkLabel: (opening: string) => `Drill de ${opening}`,
-    fromPlay: 'Practicar estas líneas en drill',
+  practice: {
+    title: 'Practicar',
+    practiceLink: 'Practicar',
+    practiceLinkLabel: (opening: string) => `Practicar ${opening}`,
+    fromPlay: 'Practicar estas líneas',
     backToOpening: 'Jugar esta apertura',
     intro:
       'Modo estricto: solo cuenta la jugada de la línea. Cualquier otra se retira y cuenta como fallo. Tras tres fallos en la misma jugada, te la mostramos.',
@@ -160,7 +160,7 @@ export const es: Messages = {
     restartLine: 'Reiniciar la línea',
     changeLine: 'Elegir otra línea',
     reviewing: 'Estás viendo una jugada anterior.',
-    backToDrill: 'Volver al drill',
+    backToPractice: 'Volver a la práctica',
     complete: 'Línea completada.',
     allDone: 'Línea completada. Has recorrido todas las líneas.',
     summaryTitle: 'Resumen',

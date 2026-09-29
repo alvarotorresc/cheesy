@@ -7,7 +7,7 @@ import { I18nService, type Messages } from '../i18n';
 const SECTIONS = {
   home: (t) => t.nav.home,
   openings: (t) => t.nav.openings,
-  drill: (t) => t.drill.title,
+  practice: (t) => t.practice.title,
   endgames: (t) => t.nav.endgames,
   positions: (t) => t.nav.positions,
   analysis: (t) => t.nav.analysis,

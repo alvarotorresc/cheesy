@@ -13,7 +13,7 @@ type ListState =
   | { status: 'ready'; groups: readonly OpeningGroup[] };
 
 /**
- * Catalogue of openings grouped by family. Each one links to its play page and to its drill, and
+ * Catalogue of openings grouped by family. Each one links to its play page and to its practice, and
  * shows how many of its lines have been practised in this browser.
  */
 @Component({

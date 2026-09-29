@@ -1,4 +1,4 @@
-@let t = i18n.t().drill;
+@let t = i18n.t().practice;
 
 <nav class="topbar">
   <a class="back back-link" routerLink="/openings">
@@ -76,13 +76,13 @@
 
     <div class="play-panel">
       @if (session.phase() === 'setup') {
-        <app-drill-setup />
+        <app-practice-setup />
       } @else {
         @if (isReviewing()) {
           <p class="reviewing">
             {{ t.reviewing }}
             <button type="button" class="text-button" (click)="game.goToEnd()">
-              {{ t.backToDrill }}
+              {{ t.backToPractice }}
             </button>
           </p>
         }

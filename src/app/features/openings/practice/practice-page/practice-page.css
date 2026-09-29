@@ -33,7 +33,7 @@
 }
 
 /*
- * Main message of the drill. Right and wrong answers differ by colour and by the style of their
+ * Main message of the practice. Right and wrong answers differ by colour and by the style of their
  * bar, as in the positions. Empty while choosing a line, but kept in place for screen readers.
  */
 .status {
