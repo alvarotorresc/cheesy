@@ -10,7 +10,7 @@ import { PROGRESS_STORE_LOADER, progressKey } from '../../../../core/progress';
 import { BoardComponent } from '../../../../shared/board';
 import { memoryProgressStore } from '../../testing/memory-progress-store';
 import { testLoaders, testTree } from '../../testing/test-opening';
-import { PRACTICE_REPLY_DELAY_MS, PracticeSession } from '../practice-session';
+import { PRACTICE_REPLY_DELAY_MS, PRACTICE_RETRACT_MS, PracticeSession } from '../practice-session';
 import { PracticePage } from './practice-page';
 
 const MAIN = 'e2e4 e7e5 g1f3 b8c6 f1b5';
@@ -117,7 +117,7 @@ describe('PracticePage', () => {
       button('Try again').click();
       await settle();
 
-      expect(text('h1')).toBe('Test Opening: Practice');
+      expect(text('h1')).toBe('Test Opening');
     });
 
     it('should name the browser tab after the practice of the opening', async () => {
@@ -153,7 +153,6 @@ describe('PracticePage', () => {
       await settle();
 
       expect(element.querySelector('app-practice-setup')).not.toBeNull();
-      expect(element.querySelector('.status')?.textContent?.trim()).toBe('');
       expect(document.activeElement).toBe(document.body);
     });
 
@@ -172,22 +171,25 @@ describe('PracticePage', () => {
 
     it('should list every line with its moves and progress', async () => {
       const lines = Array.from(element.querySelectorAll('.lines li')).map((item) =>
-        Array.from(item.querySelectorAll('.line-text > span'))
+        Array.from(item.querySelectorAll('.line-title, .line-moves, .line-prog'))
           .map((part) => part.textContent?.replace(/\s+/g, ' ').trim())
           .join(' | '),
       );
 
       expect(lines).toEqual([
         'All lines, one after another (3)',
-        'Main line · King Knight Opening | 1.e4 e5 2.Nf3 Nc6 3.Bb5 | Not practised yet',
-        'Line 2 · Petrov Defence | 1.e4 e5 2.Nf3 Nf6 | Not practised yet',
-        'Line 3 · Centre Game | 1.e4 e5 2.d4 | Not practised yet',
+        'Main line King Knight Opening | 1.e4 e5 2.Nf3 Nc6 3.Bb5 | Not practised yet',
+        'Line 2 Petrov Defence | 1.e4 e5 2.Nf3 Nf6 | Not practised yet',
+        'Line 3 Centre Game | 1.e4 e5 2.d4 | Not practised yet',
       ]);
-      expect(text('.count')).toBe('0 of 3 lines practised, 0 mastered');
+      expect(text('.count-row')).toBe('0 of 3 lines practised as white, 0 mastered');
+      expect(
+        Array.from(element.querySelectorAll('.color-sum')).map((sum) => sum.textContent),
+      ).toEqual(['Not started', 'Not started']);
     });
 
     it('should say that progress stays in the browser', () => {
-      expect(text('app-progress-note')).toContain('Your progress is saved in this browser only');
+      expect(text('app-practice-clear')).toContain('Your progress is saved in this browser only');
     });
 
     it('should choose the colour of the player', async () => {
@@ -195,7 +197,7 @@ describe('PracticePage', () => {
       await settle();
 
       expect(session.playerColor()).toBe('black');
-      expect(text('.meta')).toContain('You play Black');
+      expect(text('.meta')).toContain('You play black');
     });
 
     it('should start the practice and move the focus to its message', async () => {
@@ -205,13 +207,13 @@ describe('PracticePage', () => {
       await settle();
 
       expect(element.querySelector('app-practice-setup')).toBeNull();
-      expect(text('[role=status].status')).toBe('Your move: play the move of the line.');
-      expect(document.activeElement).toBe(element.querySelector('.status'));
+      expect(text('.feedback')).toBe('Your move: play the move of the line.');
+      expect(document.activeElement).toBe(element.querySelector('.feedback'));
       expect(text('.meta')).toContain('Line 1 of 3');
     });
   });
 
-  describe('practiceing', () => {
+  describe('running', () => {
     beforeEach(async () => {
       await create();
       await chooseLineAndStart(MAIN);
@@ -220,21 +222,21 @@ describe('PracticePage', () => {
     it('should confirm a right move and play the rival move', async () => {
       await move('e2', 'e4');
 
-      expect(text('.status')).toBe('1.e4 is right. Your rival is moving…');
+      expect(text('.feedback')).toBe('1.e4 is right. Your rival is moving…');
 
       await settle(PRACTICE_REPLY_DELAY_MS);
 
-      expect(text('.status')).toBe('1.e4 is right. Your move: play the move of the line.');
+      expect(text('.feedback')).toBe('Your move: play the move of the line.');
       expect(game.moves().map((played) => played.san)).toEqual(['e4', 'e5']);
     });
 
     it('should take back a wrong move and say how many mistakes it has', async () => {
       await move('d2', 'd4');
 
-      expect(text('.status')).toBe(
+      expect(text('.feedback')).toBe(
         '1.d4 is not in this line. It has been taken back (mistake 1 of 3 on this move).',
       );
-      expect(element.querySelector('.status')?.classList).toContain('wrong');
+      expect(element.querySelector('.feedback')?.classList).toContain('wrong');
       expect(game.moves()).toEqual([]);
     });
 
@@ -243,7 +245,7 @@ describe('PracticePage', () => {
       await settle(PRACTICE_REPLY_DELAY_MS);
       await move('d2', 'd4');
 
-      expect(text('.status')).toBe(
+      expect(text('.feedback')).toBe(
         '2.d4 is in our lines (Centre Game), but not in the one you are practising. It has been taken back (mistake 1 of 3 on this move).',
       );
     });
@@ -256,8 +258,8 @@ describe('PracticePage', () => {
       await move('g1', 'f3');
 
       expect(text('.help h2')).toBe('The move of the line');
-      expect(text('.help p')).toBe('Play 1.e4, from e2 to e4, to go on.');
-      expect(text('.status')).toContain('Play 1.e4, from e2 to e4, to go on.');
+      expect(text('.help p')).toBe('Play e4, from e2 to e4, to go on. It is marked on the board.');
+      expect(text('.feedback')).toContain('Play e4, from e2 to e4, to go on.');
     });
 
     it('should restart the line', async () => {
@@ -307,7 +309,7 @@ describe('PracticePage', () => {
       await move('a2', 'a3');
       await playMain();
 
-      expect(text('.status')).toBe('Line complete.');
+      expect(text('.feedback')).toBe('Line complete.');
       expect(Array.from(element.querySelectorAll('dd')).map((dd) => dd.textContent)).toEqual([
         '3',
         '1',
@@ -323,7 +325,7 @@ describe('PracticePage', () => {
       await chooseLineAndStart(MAIN);
       await playMain();
 
-      expect(text('.status')).toBe('Line complete.');
+      expect(text('.feedback')).toBe('Line complete.');
       expect(text('.saved')).toBe('This result could not be saved in this browser.');
     });
 
@@ -346,10 +348,11 @@ describe('PracticePage', () => {
       button('Choose another line').click();
       await settle();
 
-      expect(text('.lines li:nth-child(2) .progress')).toMatch(
-        /^Practised 3 times · mastered · last on /,
+      expect(text('.lines li:nth-child(2) .line-prog')).toMatch(
+        /^Mastered Practised 3 times, last on /,
       );
-      expect(text('.count')).toBe('1 of 3 lines practised, 1 mastered');
+      expect(text('.count-row')).toBe('1 of 3 lines practised as white, 1 mastered');
+      expect(text('.color-sum')).toBe('1 of 3 mastered');
     });
 
     it('should go through every line and say when they are all done', async () => {
@@ -372,7 +375,7 @@ describe('PracticePage', () => {
       await move('d2', 'd4');
       await settle();
 
-      expect(text('.status')).toBe('Line complete. You have gone through every line.');
+      expect(text('.feedback')).toBe('Line complete. You have gone through every line.');
       expect(() => button('Next line')).toThrow();
     });
 
@@ -389,10 +392,10 @@ describe('PracticePage', () => {
       again.click();
       await settle();
 
-      expect(document.activeElement).toBe(element.querySelector('.status'));
+      expect(document.activeElement).toBe(element.querySelector('.feedback'));
     });
 
-    it('should not move the focus to the message when it is empty', async () => {
+    it('should move the focus to the title of the choice of line', async () => {
       await create();
       await chooseLineAndStart(CENTRE);
       await move('e2', 'e4');
@@ -406,8 +409,266 @@ describe('PracticePage', () => {
       await settle();
 
       expect(element.querySelector('app-practice-setup')).not.toBeNull();
-      expect(text('.status')).toBe('');
-      expect(document.activeElement).not.toBe(element.querySelector('.status'));
+      expect(element.querySelector('.feedback')).toBeNull();
+      expect(document.activeElement).toBe(element.querySelector('#setup-title'));
+    });
+  });
+
+  describe('board marks', () => {
+    const board = (): BoardComponent =>
+      fixture.debugElement.query(By.directive(BoardComponent)).componentInstance as BoardComponent;
+
+    beforeEach(async () => {
+      await create();
+      await chooseLineAndStart(MAIN);
+    });
+
+    it('should ring the board in cheddar while the rival answers a right move', async () => {
+      await move('e2', 'e4');
+
+      expect(board().ring()).toBe('accent');
+
+      await settle(PRACTICE_REPLY_DELAY_MS);
+
+      expect(board().ring()).toBe('none');
+    });
+
+    it('should mark the squares of a move taken back for a moment', async () => {
+      await move('d2', 'd4');
+
+      expect(board().ring()).toBe('danger');
+      expect(
+        board()
+          .marks()
+          .get('d2' as never),
+      ).toBe('wrong');
+      expect(
+        board()
+          .marks()
+          .get('d4' as never),
+      ).toBe('wrong');
+
+      await settle(PRACTICE_RETRACT_MS);
+
+      expect(board().ring()).toBe('none');
+      expect(board().marks().size).toBe(0);
+    });
+
+    it('should draw the move of the line after three mistakes', async () => {
+      await move('d2', 'd4');
+      await move('c2', 'c4');
+      await move('g1', 'f3');
+      await settle(PRACTICE_RETRACT_MS);
+
+      expect(board().arrows()).toEqual([{ from: 'e2', to: 'e4' }]);
+      expect(
+        board()
+          .marks()
+          .get('e2' as never),
+      ).toBe('help');
+      expect(
+        board()
+          .marks()
+          .get('e4' as never),
+      ).toBe('help');
+      expect(board().ring()).toBe('accent');
+    });
+
+    it('should fill the track and count the mistakes on the move', async () => {
+      await move('e2', 'e4');
+      await settle(PRACTICE_REPLY_DELAY_MS);
+      await move('a2', 'a3');
+
+      expect(text('.track-head .n')).toBe('Move 2 of 3');
+      expect(element.querySelectorAll('.track i.done')).toHaveLength(1);
+      expect(element.querySelectorAll('.track i.now')).toHaveLength(1);
+      expect(element.querySelectorAll('.fail-marks i.on')).toHaveLength(1);
+      expect(text('.fails')).toContain('1 of 3');
+    });
+  });
+
+  describe('streak in the summary', () => {
+    const finishMain = async (): Promise<void> => {
+      await move('e2', 'e4');
+      await settle(PRACTICE_REPLY_DELAY_MS);
+      await move('g1', 'f3');
+      await settle(PRACTICE_REPLY_DELAY_MS);
+      await move('f1', 'b5');
+      await settle();
+    };
+
+    const seedStreak = (streak: number): void => {
+      const key = progressKey('test-opening', 'white', MAIN);
+      memory.rows.set(key, {
+        key,
+        openingId: 'test-opening',
+        color: 'white',
+        lineId: MAIN,
+        practiced: streak,
+        clean: streak,
+        streak,
+        lastPracticed: 1,
+        bestMistakes: 0,
+      });
+    };
+
+    it('should say how many runs are left to master the line', async () => {
+      await create();
+      await chooseLineAndStart(MAIN);
+      await finishMain();
+
+      expect(text('.streak-text strong')).toBe('1 of 3 runs in a row without mistakes');
+      expect(text('.streak-text span')).toBe('Two more without mistakes and it is mastered.');
+      expect(element.querySelector('.streak-block')?.classList).not.toContain('mastered');
+    });
+
+    it('should celebrate the run that masters the line', async () => {
+      seedStreak(2);
+      await create();
+      await chooseLineAndStart(MAIN);
+      await finishMain();
+
+      expect(text('.streak-text strong')).toBe('Line mastered');
+      expect(text('.streak-text span')).toBe('3 runs in a row without mistakes as white.');
+      expect(element.querySelector('.streak-block')?.classList).toContain('mastered');
+      expect(element.querySelectorAll('app-streak .mark.on')).toHaveLength(3);
+      expect(element.querySelectorAll('app-streak .mark.new')).toHaveLength(1);
+    });
+
+    it('should send the streak back to zero after a mistake', async () => {
+      seedStreak(2);
+      await create();
+      await chooseLineAndStart(MAIN);
+      await move('a2', 'a3');
+      await finishMain();
+
+      expect(text('.streak-text strong')).toBe('The streak goes back to zero');
+      expect(element.querySelectorAll('app-streak .mark.lost')).toHaveLength(2);
+      expect(element.querySelectorAll('app-streak .mark.on')).toHaveLength(0);
+    });
+
+    it('should say there is no streak yet after a first run with mistakes', async () => {
+      await create();
+      await chooseLineAndStart(MAIN);
+      await move('a2', 'a3');
+      await finishMain();
+
+      expect(text('.streak-text strong')).toBe('No streak yet');
+    });
+
+    it('should still show the streak when the result could not be saved', async () => {
+      seedStreak(2);
+      memory.store.lines.put = () => Promise.reject(new DOMException('full', 'QuotaExceededError'));
+      await create();
+      await chooseLineAndStart(MAIN);
+      await finishMain();
+
+      expect(text('.saved')).toBe('This result could not be saved in this browser.');
+      expect(text('.streak-text strong')).toBe('Line mastered');
+    });
+
+    it('should link to Analysis with the moves of the line', async () => {
+      await create();
+      await chooseLineAndStart(MAIN);
+      await finishMain();
+
+      const link = element.querySelector<HTMLAnchorElement>('.analyze-row a');
+
+      expect(link?.textContent?.trim()).toBe('Analyse this position');
+      const url = new URL(link?.href ?? '', 'http://localhost');
+      expect(url.pathname).toBe('/analysis');
+      expect(url.searchParams.get('pgn')).toBe('1. e4 e5 2. Nf3 Nc6 3. Bb5');
+      expect(url.searchParams.get('from')).toBe('practice:test-opening');
+    });
+  });
+
+  describe('storage', () => {
+    it('should say plainly when the browser does not keep progress', async () => {
+      memory = memoryProgressStore();
+      memory.loader = () => Promise.reject(new Error('blocked'));
+      await create();
+
+      expect(text('.unavailable')).toContain('This browser is not letting us save progress');
+      expect(element.querySelector('.count-row')).toBeNull();
+      expect(element.querySelector('.color-sum')).toBeNull();
+      expect(element.querySelector('.line-prog')).toBeNull();
+      expect(element.querySelector('app-practice-clear')).toBeNull();
+    });
+
+    describe('deleting the progress', () => {
+      beforeAll(() => {
+        // jsdom has no <dialog> methods.
+        const proto = HTMLDialogElement.prototype;
+        proto.showModal ??= function (this: HTMLDialogElement) {
+          this.setAttribute('open', '');
+        };
+        proto.close ??= function (this: HTMLDialogElement) {
+          this.removeAttribute('open');
+        };
+      });
+
+      const dialog = (): HTMLDialogElement => element.querySelector('dialog') as HTMLDialogElement;
+
+      it('should say there is nothing to delete when there is no progress', async () => {
+        await create();
+        button('Delete progress').click();
+        await settle();
+
+        expect(dialog().hasAttribute('open')).toBe(false);
+        expect(text('app-practice-clear [role=status]')).toBe('There is no saved progress.');
+      });
+
+      it('should ask first and keep the progress when cancelled', async () => {
+        const key = progressKey('test-opening', 'white', MAIN);
+        memory.rows.set(key, {
+          key,
+          openingId: 'test-opening',
+          color: 'white',
+          lineId: MAIN,
+          practiced: 1,
+          clean: 1,
+          streak: 1,
+          lastPracticed: 1,
+          bestMistakes: 0,
+        });
+        await create();
+        button('Delete progress').click();
+        await settle();
+
+        expect(dialog().hasAttribute('open')).toBe(true);
+        expect(text('dialog h2')).toBe('Delete the progress?');
+
+        button('Cancel').click();
+        await settle();
+
+        expect(dialog().hasAttribute('open')).toBe(false);
+        expect(memory.rows.size).toBe(1);
+      });
+
+      it('should delete the progress once confirmed', async () => {
+        const key = progressKey('test-opening', 'white', MAIN);
+        memory.rows.set(key, {
+          key,
+          openingId: 'test-opening',
+          color: 'white',
+          lineId: MAIN,
+          practiced: 1,
+          clean: 1,
+          streak: 1,
+          lastPracticed: 1,
+          bestMistakes: 0,
+        });
+        await create();
+        button('Delete progress').click();
+        await settle();
+        dialog().querySelector<HTMLButtonElement>('.danger')?.click();
+        await settle();
+
+        expect(memory.rows.size).toBe(0);
+        expect(text('app-practice-clear [role=status]')).toBe('Progress deleted.');
+        expect(text('.color-sum')).toBe('Not started');
+        expect(document.activeElement?.textContent?.trim()).toBe('Delete progress');
+      });
     });
   });
 });

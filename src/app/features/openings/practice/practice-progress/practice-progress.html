@@ -1,0 +1,22 @@
+@let t = i18n.t().practice;
+
+<section class="track-block box" aria-labelledby="track-title">
+  <div class="track-head">
+    <h2 class="box-title" id="track-title">{{ t.trackTitle }}</h2>
+    <span class="n">{{ t.moveOf(current(), total()) }}</span>
+  </div>
+  <div class="track" aria-hidden="true">
+    @for (cell of cells(); track $index) {
+      <i [class.done]="cell === 'done'" [class.now]="cell === 'now'"></i>
+    }
+  </div>
+  <p class="fails">
+    <span>{{ t.failsOnMove }}</span>
+    <span class="fail-marks" aria-hidden="true">
+      @for (on of fails(); track $index) {
+        <i [class.on]="on"></i>
+      }
+    </span>
+    <span>{{ t.failsCount(mistakes(), session.maxMistakes) }}</span>
+  </p>
+</section>

@@ -429,8 +429,13 @@ export const en = {
     practiceLinkLabel: (opening: string) => `Practise ${opening}`,
     fromPlay: 'Practise these lines',
     backToOpening: 'Play this opening',
+    thisOpening: 'This opening',
+    strictNote: 'Strict mode: only the move of the line counts.',
     intro:
-      'Strict mode: only the move of the line counts. Any other move is taken back and counted as a mistake. After three mistakes on the same move, we show it to you.',
+      'Only the move of the line counts. Any other move is taken back and counted as a mistake. After three mistakes on the same move, we show it to you.',
+    masteryBefore: 'A line is',
+    masteryWord: 'mastered',
+    masteryAfter: 'after 3 runs in a row without mistakes.',
     setupTitle: 'What to practise',
     color: 'You play',
     line: 'Line',
@@ -438,15 +443,20 @@ export const en = {
     mainLine: 'Main line',
     lineNumber: (index: number) => `Line ${index}`,
     start: 'Start',
+    notStarted: 'Not started',
+    colorMastered: (mastered: number, total: number) => `${mastered} of ${total} mastered`,
     notPracticed: 'Not practised yet',
     practiced: (times: number) => (times === 1 ? 'Practised once' : `Practised ${times} times`),
-    mastered: 'mastered',
-    bestResult: (mistakes: number) =>
-      mistakes === 1 ? 'best: 1 mistake' : `best: ${mistakes} mistakes`,
+    mastered: 'Mastered',
+    streakOf: (streak: number, needed: number) =>
+      `${streak} of ${needed} runs in a row without mistakes`,
     lastPracticed: (date: string) => `last on ${date}`,
     progressCount: (practiced: number, mastered: number, total: number) =>
       `${practiced} of ${total} lines practised, ${mastered} mastered`,
-    lineOf: (index: number, total: number) => `Line ${index} of ${total}`,
+    colorProgressCount: (practiced: number, mastered: number, total: number, color: string) =>
+      `${practiced} of ${total} lines practised as ${color}, ${mastered} mastered`,
+    lineOf: (index: number, total: number) => `Line ${index} of ${total}, all in a row`,
+    boardCaption: (color: string) => `Starting position, with ${color} at the bottom.`,
     yourMove: 'Your move: play the move of the line.',
     rivalMoving: 'Your rival is moving…',
     correct: (move: string) => `${move} is right.`,
@@ -454,9 +464,14 @@ export const en = {
       `${move} is not in this line. It has been taken back (mistake ${attempt} of ${max} on this move).`,
     otherLine: (move: string, variation: string, attempt: number, max: number) =>
       `${move} is in our lines (${variation}), but not in the one you are practising. It has been taken back (mistake ${attempt} of ${max} on this move).`,
+    trackTitle: 'Your progress in the line',
+    moveOf: (index: number, total: number) => `Move ${index} of ${total}`,
+    failsOnMove: 'Mistakes on this move',
+    failsCount: (count: number, max: number) => `${count} of ${max}`,
     helpTitle: 'The move of the line',
-    help: (move: string, from: string, to: string) =>
-      `Play ${move}, from ${from} to ${to}, to go on.`,
+    helpLead: 'Play',
+    helpTail: (from: string, to: string) =>
+      `, from ${from} to ${to}, to go on. It is marked on the board.`,
     restartLine: 'Restart line',
     changeLine: 'Choose another line',
     reviewing: 'You are looking at an earlier move.',
@@ -467,22 +482,42 @@ export const en = {
     summaryMoves: 'Your moves',
     summaryMistakes: 'Mistakes',
     summaryHelp: 'Moves shown to you',
+    streakMasteredTitle: 'Line mastered',
+    streakMasteredNote: (needed: number, color: string) =>
+      `${needed} runs in a row without mistakes as ${color}.`,
+    streakMore: (left: number) =>
+      left === 1
+        ? 'One more without mistakes and it is mastered.'
+        : `${left === 2 ? 'Two' : left} more without mistakes and it is mastered.`,
+    streakLostTitle: 'The streak goes back to zero',
+    streakLostNote: (needed: number) =>
+      `With any mistake, the count starts again: you need ${needed} runs in a row without mistakes.`,
+    streakNoneTitle: 'No streak yet',
+    streakNoneNote: (needed: number) =>
+      `You need ${needed} runs in a row without mistakes to master it.`,
     nextLine: 'Next line',
     again: 'Practise this line again',
+    analyze: 'Analyse this position',
+    analyzeNote: 'Opens Analysis with the moves of the line.',
     saving: 'Saving your progress…',
     saved: 'Progress saved in this browser.',
     saveFailed: 'This result could not be saved in this browser.',
+    errorHint: 'Check your connection and try again.',
     privacy:
       'Your progress is saved in this browser only. There are no accounts or cookies and your progress never leaves this device; if you clear the browser data, it is lost.',
     unavailable:
       'This browser is not letting us save progress (private browsing or blocked storage). Everything else works.',
     listNote: 'A line counts as practised with either colour.',
     clear: 'Delete progress',
+    clearTitle: 'Delete the progress?',
     confirmClear: 'Delete all the saved progress? This cannot be undone.',
+    clearBody:
+      'This deletes all the openings progress saved in this browser, as white and as black. It cannot be undone.',
     confirmClearAction: 'Delete',
     cancel: 'Cancel',
     cleared: 'Progress deleted.',
     clearFailed: 'The progress could not be deleted.',
+    nothingToClear: 'There is no saved progress.',
   },
   gameEnd: {
     checkmateWhiteWins: 'Checkmate. White wins.',

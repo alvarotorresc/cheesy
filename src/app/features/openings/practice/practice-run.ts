@@ -72,6 +72,10 @@ export const needsHelp = (run: PracticeRun): boolean =>
 export const playerMoveCount = (line: readonly BookNode[], color: Color): number =>
   line.filter((_, ply) => sideOfPly(ply) === color).length;
 
+/** Moves of the player already on the board. */
+export const playerMovesDone = (run: PracticeRun): number =>
+  playerMoveCount(run.line.slice(0, run.ply), run.color);
+
 /**
  * Compares a move of the player with the one the line expects. Moves are compared by their UCI,
  * which both the board and the book write with castling as the king move.

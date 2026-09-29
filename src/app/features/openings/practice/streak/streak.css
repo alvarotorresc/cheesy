@@ -1,0 +1,68 @@
+:host {
+  display: inline-flex;
+  gap: 3px;
+  vertical-align: middle;
+}
+
+.mark {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1.5px solid var(--color-control);
+  border-radius: 2px;
+}
+
+.mark.on {
+  background: var(--color-accent);
+  border-color: var(--color-accent-text);
+}
+
+:host(.big) {
+  gap: 5px;
+}
+
+:host(.big) .mark {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :host(.big) .mark.new {
+    animation: fill 520ms var(--ease-out) both;
+    animation-delay: calc(var(--i) * 160ms + 250ms);
+  }
+
+  :host(.big) .mark.lost {
+    animation: lose 600ms ease both;
+    animation-delay: calc(var(--i) * 120ms + 250ms);
+  }
+
+  @keyframes fill {
+    from {
+      background: transparent;
+      border-color: var(--color-control);
+      transform: scale(0.7);
+    }
+
+    60% {
+      transform: scale(1.12);
+    }
+
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes lose {
+    from {
+      background: var(--color-accent);
+      border-color: var(--color-accent-text);
+    }
+
+    to {
+      background: transparent;
+      border-color: var(--color-control);
+    }
+  }
+}

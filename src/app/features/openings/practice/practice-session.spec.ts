@@ -5,7 +5,12 @@ import { GameService } from '../../../core/game';
 import { PROGRESS_STORE_LOADER, progressKey, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../testing/memory-progress-store';
 import { testLoaders, testTree } from '../testing/test-opening';
-import { ALL_LINES, PRACTICE_REPLY_DELAY_MS, PracticeSession } from './practice-session';
+import {
+  ALL_LINES,
+  PRACTICE_REPLY_DELAY_MS,
+  PRACTICE_RETRACT_MS,
+  PracticeSession,
+} from './practice-session';
 
 const MAIN = 'e2e4 e7e5 g1f3 b8c6 f1b5';
 const PETROV = 'e2e4 e7e5 g1f3 g8f6';
@@ -177,7 +182,7 @@ describe('PracticeSession', () => {
     it('should practise every line in turn when all are chosen', () => {
       session.start();
 
-      expect(session.phase()).toBe('practiceing');
+      expect(session.phase()).toBe('running');
       expect(session.currentLine()?.id).toBe(MAIN);
       expect(session.position()).toEqual({ index: 1, total: 3 });
       expect(session.hasNextLine()).toBe(true);
@@ -236,7 +241,14 @@ describe('PracticeSession', () => {
       expect(session.play({ from: 'd2', to: 'd4' })).toBe(true);
 
       expect(sans()).toEqual([]);
-      expect(session.feedback()).toEqual({ kind: 'wrong', ply: 1, san: 'd4', attempt: 1 });
+      expect(session.feedback()).toEqual({
+        kind: 'wrong',
+        from: 'd2',
+        to: 'd4',
+        ply: 1,
+        san: 'd4',
+        attempt: 1,
+      });
       expect(session.run()?.mistakes).toBe(1);
       expect(session.canMove()).toBe(true);
     });
@@ -251,12 +263,42 @@ describe('PracticeSession', () => {
       expect(sans()).toEqual(['e4', 'e5']);
       expect(session.feedback()).toEqual({
         kind: 'other-line',
+        from: 'd2',
+        to: 'd4',
         ply: 3,
         san: 'd4',
         attempt: 1,
         variation: expect.objectContaining({ en: 'Centre Game' }),
       });
       expect(session.run()?.mistakes).toBe(1);
+    });
+
+    it('should keep the squares of a move taken back marked for a moment', async () => {
+      await startPractice();
+      session.play({ from: 'd2', to: 'd4' });
+
+      expect(session.retracted()).toEqual({ from: 'd2', to: 'd4' });
+      expect(session.feedback()).toMatchObject({ kind: 'wrong', from: 'd2', to: 'd4' });
+
+      await vi.advanceTimersByTimeAsync(PRACTICE_RETRACT_MS);
+
+      expect(session.retracted()).toBeUndefined();
+    });
+
+    it('should stop marking the squares when a right move is played', async () => {
+      await startPractice();
+      session.play({ from: 'd2', to: 'd4' });
+      session.play({ from: 'e2', to: 'e4' });
+
+      expect(session.retracted()).toBeUndefined();
+    });
+
+    it('should stop marking the squares when the line restarts', async () => {
+      await startPractice();
+      session.play({ from: 'd2', to: 'd4' });
+      session.restartLine();
+
+      expect(session.retracted()).toBeUndefined();
     });
 
     it('should neither accept nor count an illegal move', async () => {
@@ -407,13 +449,120 @@ describe('PracticeSession', () => {
       expect(progress.status()).toBe('unavailable');
     });
 
+    it('should tell how the streak changed, from the streak before the run', async () => {
+      const key = progressKey('test-opening', 'white', MAIN);
+      memory.rows.set(key, {
+        key,
+        openingId: 'test-opening',
+        color: 'white',
+        lineId: MAIN,
+        practiced: 2,
+        clean: 2,
+        streak: 2,
+        lastPracticed: 1,
+        bestMistakes: 0,
+      });
+      await startPractice();
+      await settle();
+      await playMain();
+
+      expect(session.streakChange()).toEqual({ before: 2, after: 3 });
+      // The rows were read again after saving: the streak before is not read from them any more.
+      expect(session.lineProgress().get(MAIN)?.streak).toBe(3);
+      expect(session.streakChange()).toEqual({ before: 2, after: 3 });
+    });
+
+    it('should send the streak back to zero after a run with mistakes', async () => {
+      const key = progressKey('test-opening', 'white', MAIN);
+      memory.rows.set(key, {
+        key,
+        openingId: 'test-opening',
+        color: 'white',
+        lineId: MAIN,
+        practiced: 2,
+        clean: 2,
+        streak: 2,
+        lastPracticed: 1,
+        bestMistakes: 0,
+      });
+      await startPractice();
+      await settle();
+      session.play({ from: 'a2', to: 'a3' });
+      await playMain();
+
+      expect(session.streakChange()).toEqual({ before: 2, after: 0 });
+    });
+
+    it('should not go past the streak that masters a line', async () => {
+      const key = progressKey('test-opening', 'white', MAIN);
+      memory.rows.set(key, {
+        key,
+        openingId: 'test-opening',
+        color: 'white',
+        lineId: MAIN,
+        practiced: 5,
+        clean: 5,
+        streak: 5,
+        lastPracticed: 1,
+        bestMistakes: 0,
+      });
+      await startPractice();
+      await settle();
+      await playMain();
+
+      expect(session.streakChange()).toEqual({ before: 3, after: 3 });
+    });
+
+    it('should work out the streak even when the result cannot be saved', async () => {
+      setup({}, memoryProgressStore({ failWrites: true }));
+      await startPractice();
+      await playMain();
+
+      expect(session.saveState()).toBe('failed');
+      expect(session.streakChange()).toEqual({ before: 0, after: 1 });
+    });
+
+    it('should forget the streak when the line starts again', async () => {
+      await startPractice();
+      await playMain();
+      session.restartLine();
+
+      expect(session.streakChange()).toBeUndefined();
+    });
+
+    it('should count the lines practised and mastered with each colour', async () => {
+      const row = (color: 'white' | 'black', streak: number) => {
+        const key = progressKey('test-opening', color, MAIN);
+        memory.rows.set(key, {
+          key,
+          openingId: 'test-opening',
+          color,
+          lineId: MAIN,
+          practiced: 3,
+          clean: 3,
+          streak,
+          lastPracticed: 1,
+          bestMistakes: 0,
+        });
+      };
+      row('white', 3);
+      row('black', 1);
+      await session.load('test-opening');
+      await settle();
+
+      const summary = session.colorProgress();
+
+      expect(summary?.white).toMatchObject({ total: 3, practiced: 1, mastered: 1 });
+      expect(summary?.black).toMatchObject({ total: 3, practiced: 1, mastered: 0, inProgress: 1 });
+    });
+
     it('should go on with the next line when practising all of them', async () => {
       await startPractice(ALL_LINES);
       await playMain();
 
       session.nextLine();
 
-      expect(session.phase()).toBe('practiceing');
+      expect(session.phase()).toBe('running');
       expect(session.currentLine()?.id).toBe(PETROV);
       expect(session.position()).toEqual({ index: 2, total: 3 });
       expect(sans()).toEqual([]);
@@ -436,7 +585,7 @@ describe('PracticeSession', () => {
       await playMain();
 
       session.restartLine();
-      expect(session.phase()).toBe('practiceing');
+      expect(session.phase()).toBe('running');
       expect(sans()).toEqual([]);
 
       await playMain();

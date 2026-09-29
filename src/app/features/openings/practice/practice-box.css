@@ -1,0 +1,15 @@
+/*
+ * Boxes of the practice panel (setup, progress, help and summary). Listed in the styleUrls of each
+ * component that draws one, because component styles do not reach each other. Not the global
+ * `.surface`, which also brings a grid and padding of its own.
+ */
+.box {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.box-title {
+  font-size: var(--text-md);
+  font-weight: 800;
+}
