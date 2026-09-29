@@ -439,3 +439,25 @@
   font-weight: 600;
   color: var(--color-text);
 }
+
+/* ---- Intro on wide screens ----------------------------------------------------------------- */
+
+/*
+ * Wider than 1440px, where the page is wider than 78rem, the title and the lead stay on the left at
+ * their reading width and the legend (the definitions of Openings and Endgames) moves to the right
+ * edge of the page, aligned to the top. Positions has no legend, so it keeps a single column.
+ */
+@media (min-width: 90.0625rem) {
+  .catalog .intro:has(dl) {
+    max-width: none;
+    grid-template-columns: minmax(0, 40rem) minmax(0, 40rem);
+    justify-content: space-between;
+    align-content: start;
+  }
+
+  .catalog .intro:has(dl) > dl {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+  }
+}
