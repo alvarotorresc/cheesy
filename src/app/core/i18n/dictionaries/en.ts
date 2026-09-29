@@ -201,9 +201,6 @@ export const en = {
     analysisButton: (name: string) => `Play the ${name} with the evaluation bar`,
     illustrativeBar: 'illustrative bar',
   },
-  placeholder: {
-    comingSoon: 'This section is on its way.',
-  },
   analysis: {
     title: 'Analysis board',
     whiteToMove: 'White to move',
@@ -327,7 +324,6 @@ export const en = {
     masteredOf: (mastered: number, total: number, inProgress: number) =>
       `${mastered} of ${total} mastered${inProgress ? `, ${inProgress} in progress` : ''}`,
     notStarted: (lines: number) => `${lines} ${lines === 1 ? 'line' : 'lines'}, not started`,
-    ecoLabel: 'ECO',
     progressTitle: 'Your progress',
     clearTitle: 'Delete the progress?',
     clearText:
@@ -425,7 +421,6 @@ export const en = {
   },
   practice: {
     title: 'Practice',
-    practiceLink: 'Practise',
     practiceLinkLabel: (opening: string) => `Practise ${opening}`,
     fromPlay: 'Practise these lines',
     backToOpening: 'Play this opening',
@@ -507,10 +502,8 @@ export const en = {
       'Your progress is saved in this browser only. There are no accounts or cookies and your progress never leaves this device; if you clear the browser data, it is lost.',
     unavailable:
       'This browser is not letting us save progress (private browsing or blocked storage). Everything else works.',
-    listNote: 'A line counts as practised with either colour.',
     clear: 'Delete progress',
     clearTitle: 'Delete the progress?',
-    confirmClear: 'Delete all the saved progress? This cannot be undone.',
     clearBody:
       'This deletes all the openings progress saved in this browser, as white and as black. It cannot be undone.',
     confirmClearAction: 'Delete',
@@ -547,7 +540,6 @@ export const en = {
     thinking: 'Engine thinking…',
     error: 'The engine stopped working.',
     toggle: 'Engine analysis',
-    downloadHint: 'Downloads about 2 MB the first time.',
     retry: 'Try again',
     noLegalMoves: 'No legal moves: nothing to analyse.',
   },
@@ -562,7 +554,6 @@ export const en = {
     noGame: 'No moves or position found in this text.',
     unsupportedVariant: 'Only standard chess games can be loaded.',
     invalidStartPosition: 'The starting position of this PGN is not valid.',
-    illegalMove: 'Illegal move in the PGN:',
     positionLoaded: 'Position loaded.',
     gameLoaded: 'Game loaded.',
   },
@@ -785,8 +776,6 @@ export const en = {
     thinking: 'Thinking…',
     yourTurn: 'Your turn',
     board: 'Board',
-    boardLast: ', last move {move}',
-    boardStart: ', starting position',
     resultAchieved: 'Goal achieved',
     resultFailed: 'Goal not achieved',
     whyCrowned: 'You promoted with {move} and the tablebase still says it is a win.',
@@ -868,7 +857,6 @@ export const en = {
     maybeLoss: 'Losing, but the fifty-move rule may save you',
     unknown: 'Unknown',
     mateForYou: 'You mate in {n}',
-    mateAgainstYou: 'You are mated in {n}',
     bestMove: 'Best move',
     drawingMove: 'A move that holds the draw',
     bestDefence: 'Most stubborn defence',

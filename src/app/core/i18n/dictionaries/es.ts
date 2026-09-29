@@ -200,9 +200,6 @@ export const es: Messages = {
     analysisButton: (name: string) => `Reproducir la ${name} con la barra de evaluación`,
     illustrativeBar: 'barra ilustrativa',
   },
-  placeholder: {
-    comingSoon: 'Esta sección está en camino.',
-  },
   analysis: {
     title: 'Tablero de análisis',
     whiteToMove: 'Juegan blancas',
@@ -332,7 +329,6 @@ export const es: Messages = {
     masteredOf: (mastered: number, total: number, inProgress: number) =>
       `${mastered} de ${total} dominadas${inProgress ? `, ${inProgress} en curso` : ''}`,
     notStarted: (lines: number) => `${lines} ${lines === 1 ? 'línea' : 'líneas'}, sin empezar`,
-    ecoLabel: 'ECO',
     progressTitle: 'Tu progreso',
     clearTitle: '¿Borrar el progreso?',
     clearText:
@@ -433,7 +429,6 @@ export const es: Messages = {
   },
   practice: {
     title: 'Practicar',
-    practiceLink: 'Practicar',
     practiceLinkLabel: (opening: string) => `Practicar ${opening}`,
     fromPlay: 'Practicar estas líneas',
     backToOpening: 'Jugar esta apertura',
@@ -516,10 +511,8 @@ export const es: Messages = {
       'Tu progreso se guarda solo en este navegador. No hay cuentas ni cookies y tu progreso no sale de este dispositivo; si borras los datos del navegador, se pierde.',
     unavailable:
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
-    listNote: 'Una línea cuenta como practicada con cualquiera de los dos colores.',
     clear: 'Borrar el progreso',
     clearTitle: '¿Borrar el progreso?',
-    confirmClear: '¿Borrar todo el progreso guardado? No se puede deshacer.',
     clearBody:
       'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. No se puede deshacer.',
     confirmClearAction: 'Borrar',
@@ -556,7 +549,6 @@ export const es: Messages = {
     thinking: 'El motor está pensando…',
     error: 'El motor ha dejado de funcionar.',
     toggle: 'Análisis del motor',
-    downloadHint: 'Descarga unos 2 MB la primera vez.',
     retry: 'Reintentar',
     noLegalMoves: 'No hay jugadas legales: nada que analizar.',
   },
@@ -571,7 +563,6 @@ export const es: Messages = {
     noGame: 'No hay jugadas ni posición en este texto.',
     unsupportedVariant: 'Solo se pueden cargar partidas de ajedrez clásico.',
     invalidStartPosition: 'La posición inicial de este PGN no es válida.',
-    illegalMove: 'Jugada ilegal en el PGN:',
     positionLoaded: 'Posición cargada.',
     gameLoaded: 'Partida cargada.',
   },
@@ -801,8 +792,6 @@ export const es: Messages = {
     thinking: 'Pensando…',
     yourTurn: 'Te toca',
     board: 'Tablero',
-    boardLast: ', última jugada {move}',
-    boardStart: ', posición inicial',
     resultAchieved: 'Objetivo cumplido',
     resultFailed: 'Objetivo no cumplido',
     whyCrowned: 'Has coronado con {move} y la tablebase sigue dando victoria.',
@@ -887,7 +876,6 @@ export const es: Messages = {
     maybeLoss: 'Pierdes, pero la regla de las 50 jugadas puede salvarte',
     unknown: 'Desconocido',
     mateForYou: 'Das mate en {n}',
-    mateAgainstYou: 'Recibes mate en {n}',
     bestMove: 'Mejor jugada',
     drawingMove: 'Una jugada que mantiene las tablas',
     bestDefence: 'Defensa más tenaz',
