@@ -1,28 +1,30 @@
 @let t = i18n.t().practice;
 
-<nav class="topbar" [attr.aria-label]="t.thisOpening">
-  <a class="back-link" routerLink="/openings">
-    <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
-  </a>
-  @if (session.loadState() === 'loading' || session.loadState() === 'ready') {
-    @if (openingId()?.get('id'); as id) {
-      <a class="swap-link" [routerLink]="['/openings', id]">{{ t.backToOpening }}</a>
+<ng-template #topbar>
+  <nav class="topbar play-lead" [attr.aria-label]="t.thisOpening">
+    <a class="back-link" routerLink="/openings">
+      <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+    </a>
+    @if (session.loadState() === 'loading' || session.loadState() === 'ready') {
+      @if (openingId()?.get('id'); as id) {
+        <a class="swap-link" [routerLink]="['/openings', id]">{{ t.backToOpening }}</a>
+      }
     }
-  }
-</nav>
+  </nav>
+</ng-template>
+
+@if (!session.opening()) {
+  <ng-container [ngTemplateOutlet]="topbar" />
+}
 
 @switch (session.loadState()) {
   @case ('loading') {
     <p class="visually-hidden" role="status">{{ i18n.t().openings.loadingOpening }}</p>
     <div class="skeleton" aria-hidden="true">
       <div class="sk sk-title"></div>
-      <div class="board-layout">
-        <div class="col">
-          <div class="sk sk-board"></div>
-        </div>
-        <div class="col">
-          <div class="sk sk-panel"></div>
-        </div>
+      <div class="sk-layout">
+        <div class="sk sk-board"></div>
+        <div class="sk sk-panel"></div>
       </div>
     </div>
     <p class="muted small loading-text">{{ i18n.t().openings.loadingOpening }}</p>
@@ -44,37 +46,8 @@
 }
 
 @if (session.opening(); as opening) {
-  <header class="head">
-    <p class="head-kicker">
-      <span class="mode-tag">{{ t.title }}</span>
-      <span class="muted small">{{ t.strictNote }}</span>
-    </p>
-    <h1>{{ i18n.localize(opening.name) }}</h1>
-    <p class="meta">
-      <span>
-        <i
-          class="king pc"
-          [class.pc-wK]="session.playerColor() === 'white'"
-          [class.pc-bK]="session.playerColor() === 'black'"
-        ></i>
-        {{ t.color }}&nbsp;<strong>{{ colorName() }}</strong>
-      </span>
-      @if (session.phase() !== 'setup' && session.currentLine()) {
-        @if (session.position().total > 1) {
-          <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
-          @if (lineVariation(); as variation) {
-            <span>{{ variation }}</span>
-          }
-        } @else {
-          <span>{{ lineLabel() }}</span>
-        }
-      }
-      <span class="eco">ECO {{ opening.eco }}</span>
-    </p>
-  </header>
-
-  <div class="board-layout">
-    <div class="col col-board">
+  <div class="play-stage">
+    <div class="play-board">
       <div class="o-board board-area">
         <app-board
           [fen]="game.fen()"
@@ -90,18 +63,46 @@
           [ring]="ring()"
           (move)="onMove($event)"
         />
-        @if (session.phase() === 'setup') {
-          <p class="board-caption">{{ t.boardCaption(colorName()) }}</p>
-        }
       </div>
     </div>
 
-    <div class="col col-panel">
+    <div class="play-panel">
+      <ng-container [ngTemplateOutlet]="topbar" />
+      <header class="head play-lead">
+        <p class="head-kicker">
+          <span class="mode-tag practice">{{ t.title }}</span>
+          <span class="muted small">{{ t.strictNote }}</span>
+        </p>
+        <h1>{{ i18n.localize(opening.name) }}</h1>
+        <p class="meta">
+          <span>
+            <i
+              class="king pc"
+              [class.pc-wK]="session.playerColor() === 'white'"
+              [class.pc-bK]="session.playerColor() === 'black'"
+            ></i>
+            {{ t.color }}&nbsp;<strong>{{ colorName() }}</strong>
+          </span>
+          @if (session.phase() !== 'setup' && session.currentLine()) {
+            @if (session.position().total > 1) {
+              <span>{{ t.lineOf(session.position().index, session.position().total) }}</span>
+              @if (lineVariation(); as variation) {
+                <span>{{ variation }}</span>
+              }
+            } @else {
+              <span>{{ lineLabel() }}</span>
+            }
+          }
+          <span class="eco">ECO {{ opening.eco }}</span>
+        </p>
+      </header>
+
       @if (session.phase() === 'setup') {
+        <p class="board-caption">{{ t.boardCaption(colorName()) }}</p>
         <app-practice-setup class="o-panel" />
       } @else {
         <!-- Above the board on phones, so the reaction to a move is visible without scrolling. -->
-        <div class="o-status">
+        <div class="o-status play-lead">
           @if (feedback(); as feedback) {
             <p
               #message

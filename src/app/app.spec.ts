@@ -64,8 +64,31 @@ describe('App', () => {
     expect(await classes('/openings/ruy-lopez/practice')).toBe('main main--play');
     expect(await classes('/analysis')).toBe('main main--play');
     expect(await classes('/endgames')).toBe('main');
-    expect(await classes('/positions/1')).toBe('main');
+    expect(await classes('/endgames/kp-opposition-defence')).toBe('main main--play');
+    expect(await classes('/positions')).toBe('main');
+    expect(await classes('/positions/1')).toBe('main main--play');
     expect(await classes('/acerca')).toBe('main main--about');
+  });
+
+  it('should mark the shell and the footer of a play page, which is one window tall', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    const host = fixture.nativeElement as HTMLElement;
+    const marks = async (url: string) => {
+      await router.navigateByUrl(url);
+      await fixture.whenStable();
+      return [
+        host.classList.contains('play-shell'),
+        host.querySelector('app-site-footer')?.classList.contains('compact'),
+      ];
+    };
+
+    expect(await marks('/analysis')).toEqual([true, true]);
+    expect(await marks('/openings')).toEqual([false, false]);
+    expect(await marks('/positions/1')).toEqual([true, true]);
+    expect(await marks('/')).toEqual([false, false]);
   });
 
   it('should send the old drill address to the practice page', async () => {

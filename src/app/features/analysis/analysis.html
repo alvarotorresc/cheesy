@@ -1,36 +1,8 @@
 @let t = i18n.t().analysis;
 <h1 class="visually-hidden">{{ t.title }}</h1>
 
-@if (session.invalidLink() || session.origin()) {
-  <div class="top-notes">
-    @if (session.invalidLink()) {
-      <div class="link-notice" role="alert">
-        <p>
-          <strong>{{ t.invalidLinkTitle }}</strong
-          >{{ t.invalidLinkBody }}
-        </p>
-        <button type="button" class="button" (click)="dismissInvalidLink()">
-          {{ i18n.t().share.dismiss }}
-        </button>
-      </div>
-    }
-    @if (session.origin(); as origin) {
-      <section class="origin" [attr.aria-label]="t.originLabel">
-        <span class="origin-mark" aria-hidden="true"><i class="pc pc-bK"></i></span>
-        <p class="origin-title">
-          {{ t.originFrom }} <span>{{ i18n.localize(origin.title) }}</span>
-        </p>
-        <p class="origin-sub">{{ originSub() }} {{ t.originTry }}</p>
-        <div class="origin-actions">
-          <a class="text-button" [routerLink]="origin.back">{{ originBack() }}</a>
-        </div>
-      </section>
-    }
-  </div>
-}
-
-<div class="layout">
-  <div class="board-col">
+<div class="play-stage">
+  <div class="play-board">
     <div class="board-row">
       <app-eval-bar
         [mode]="barMode()"
@@ -52,6 +24,36 @@
         (move)="session.play($event)"
       />
     </div>
+  </div>
+
+  <div class="play-panel">
+    @if (session.invalidLink() || session.origin()) {
+      <div class="top-notes play-lead">
+        @if (session.invalidLink()) {
+          <div class="link-notice" role="alert">
+            <p>
+              <strong>{{ t.invalidLinkTitle }}</strong
+              >{{ t.invalidLinkBody }}
+            </p>
+            <button type="button" class="button" (click)="dismissInvalidLink()">
+              {{ i18n.t().share.dismiss }}
+            </button>
+          </div>
+        }
+        @if (session.origin(); as origin) {
+          <section class="origin" [attr.aria-label]="t.originLabel">
+            <span class="origin-mark" aria-hidden="true"><i class="pc pc-bK"></i></span>
+            <p class="origin-title">
+              {{ t.originFrom }} <span>{{ i18n.localize(origin.title) }}</span>
+            </p>
+            <p class="origin-sub">{{ originSub() }} {{ t.originTry }}</p>
+            <div class="origin-actions">
+              <a class="text-button" [routerLink]="origin.back">{{ originBack() }}</a>
+            </div>
+          </section>
+        }
+      </div>
+    }
 
     <div class="turn-row">
       <p class="turn" role="status">
@@ -164,9 +166,7 @@
         t.keyboardMoves
       }}&ngsp;<kbd>↑</kbd>&ngsp;<kbd>↓</kbd>&ngsp;{{ t.keyboardLines }}
     </p>
-  </div>
 
-  <div class="panel">
     <section class="block engine" [attr.aria-labelledby]="'engine-label'">
       <div class="block-head">
         <label class="switch" id="engine-label">

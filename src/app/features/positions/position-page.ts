@@ -11,6 +11,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import type { Key } from '@lichess-org/chessground/types';
@@ -65,7 +66,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, RouterLink],
+  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink],
   providers: [GameService, PositionTrainer, PositionList],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
@@ -125,6 +126,15 @@ export class PositionPage {
     if (!started || started.position !== this.position()) return 'pending';
     return started.ok ? 'ready' : 'unplayable';
   });
+
+  /** The exercise is on the board: the top bar then moves into the panel beside it. */
+  protected readonly ready = computed(
+    () =>
+      this.list.status() !== 'error' &&
+      this.list.status() !== 'loading' &&
+      !this.redirecting() &&
+      this.exercise() === 'ready',
+  );
 
   /** True once the position is solved or its solution is shown: what was hidden can be told. */
   protected readonly revealed = computed(() => this.trainer.isReplay());

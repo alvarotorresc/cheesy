@@ -1,33 +1,39 @@
 @let t = i18n.t().positions;
 
-<nav class="topbar" [attr.aria-label]="t.positionNavigation">
-  <a class="topbar-link" routerLink="/positions">
-    <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
-  </a>
-  @if (position()) {
-    <div class="neighbours">
-      @if (previousId(); as id) {
-        <a class="topbar-link" [routerLink]="['/positions', id]">
-          <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
-        </a>
-      } @else {
-        <a class="topbar-link" role="link" aria-disabled="true">
-          <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
-        </a>
-      }
-      <span class="where">{{ where() }}</span>
-      @if (nextId(); as id) {
-        <a class="topbar-link" [routerLink]="['/positions', id]">
-          {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
-        </a>
-      } @else {
-        <a class="topbar-link" role="link" aria-disabled="true">
-          {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
-        </a>
-      }
-    </div>
-  }
-</nav>
+<ng-template #topbar>
+  <nav class="topbar play-lead" [attr.aria-label]="t.positionNavigation">
+    <a class="topbar-link" routerLink="/positions">
+      <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
+    </a>
+    @if (position()) {
+      <div class="neighbours">
+        @if (previousId(); as id) {
+          <a class="topbar-link" [routerLink]="['/positions', id]">
+            <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
+          </a>
+        } @else {
+          <a class="topbar-link" role="link" aria-disabled="true">
+            <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
+          </a>
+        }
+        <span class="where">{{ where() }}</span>
+        @if (nextId(); as id) {
+          <a class="topbar-link" [routerLink]="['/positions', id]">
+            {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        } @else {
+          <a class="topbar-link" role="link" aria-disabled="true">
+            {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        }
+      </div>
+    }
+  </nav>
+</ng-template>
+
+@if (!ready()) {
+  <ng-container [ngTemplateOutlet]="topbar" />
+}
 
 @if (list.status() === 'error') {
   <div class="notice" role="alert">
@@ -43,71 +49,12 @@
   @if (exercise() === 'unplayable') {
     <p class="notice" role="alert">{{ t.unplayable }}</p>
   } @else if (exercise() === 'ready') {
-    <div class="exercise">
-      <div class="head" [class.revealing]="revealed()">
-        @if (revealed()) {
-          <p class="riddle-line">
-            <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
-            {{ sideToPlayLabel(position.playerSide, t) }},
-            {{ t.ownMoves(trainer.playerMoveCount()) }}
-          </p>
-        }
-        <h1 #heading tabindex="-1">
-          @if (revealed()) {
-            <span class="title-text">{{ i18n.localize(position.title) }}</span>
-          } @else {
-            <span class="riddle">
-              <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
-              <span>{{ sideToPlayLabel(position.playerSide, t) }}</span>
-              <span class="own-pill">{{ t.ownMoves(trainer.playerMoveCount()) }}</span>
-            </span>
-          }
-        </h1>
-        @if (revealed()) {
-          <div class="found">
-            <ul class="tags" [attr.aria-label]="t.themes">
-              @for (tag of position.tags; track tag; let i = $index) {
-                <li class="theme-tag" [style.--i]="i">{{ tagLabel(tag, t) }}</li>
-              }
-            </ul>
-            @if (position.source) {
-              <dl class="source">
-                <dt>{{ t.game }}</dt>
-                <dd>{{ position.source }}</dd>
-              </dl>
-            }
-          </div>
-        }
-      </div>
-
-      <div class="feedback">
-        <p
-          #statusMessage
-          class="message"
-          role="status"
-          tabindex="-1"
-          [class.wrong]="message().kind === 'wrong'"
-          [class.right]="message().kind === 'right'"
-        >
-          <span class="msg-icon"><app-icon [name]="message().icon" /></span>
-          <span>
-            {{ message().main }}
-            @if (message().sub; as sub) {
-              <span class="sub">{{ sub }}</span>
-            }
-          </span>
-        </p>
-        @if (hintText(); as hint) {
-          <p class="hint-line">
-            <app-icon name="mini-bulb" />
-            <span
-              ><strong>{{ t.hintTitle }}</strong> {{ hint }}</span
-            >
-          </p>
-        }
-      </div>
-
-      <div class="board-col" role="group" [attr.aria-label]="t.boardLabel(position.playerSide)">
+    <div class="exercise play-stage">
+      <div
+        class="board-col play-board"
+        role="group"
+        [attr.aria-label]="t.boardLabel(position.playerSide)"
+      >
         <app-board
           [class.glow]="trainer.phase() === 'solved'"
           [fen]="game.fen()"
@@ -124,7 +71,74 @@
         />
       </div>
 
-      <div class="panel">
+      <div class="panel play-panel">
+        <ng-container [ngTemplateOutlet]="topbar" />
+        <div class="head play-lead" [class.revealing]="revealed()">
+          @if (revealed()) {
+            <p class="riddle-line">
+              <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
+              {{ sideToPlayLabel(position.playerSide, t) }},
+              {{ t.ownMoves(trainer.playerMoveCount()) }}
+            </p>
+          }
+          <h1 #heading tabindex="-1">
+            @if (revealed()) {
+              <span class="title-text">{{ i18n.localize(position.title) }}</span>
+            } @else {
+              <span class="riddle">
+                <i
+                  class="king pc"
+                  [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"
+                ></i>
+                <span>{{ sideToPlayLabel(position.playerSide, t) }}</span>
+                <span class="own-pill">{{ t.ownMoves(trainer.playerMoveCount()) }}</span>
+              </span>
+            }
+          </h1>
+          @if (revealed()) {
+            <div class="found">
+              <ul class="tags" [attr.aria-label]="t.themes">
+                @for (tag of position.tags; track tag; let i = $index) {
+                  <li class="theme-tag" [style.--i]="i">{{ tagLabel(tag, t) }}</li>
+                }
+              </ul>
+              @if (position.source) {
+                <dl class="source">
+                  <dt>{{ t.game }}</dt>
+                  <dd>{{ position.source }}</dd>
+                </dl>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="feedback play-lead">
+          <p
+            #statusMessage
+            class="message"
+            role="status"
+            tabindex="-1"
+            [class.wrong]="message().kind === 'wrong'"
+            [class.right]="message().kind === 'right'"
+          >
+            <span class="msg-icon"><app-icon [name]="message().icon" /></span>
+            <span>
+              {{ message().main }}
+              @if (message().sub; as sub) {
+                <span class="sub">{{ sub }}</span>
+              }
+            </span>
+          </p>
+          @if (hintText(); as hint) {
+            <p class="hint-line">
+              <app-icon name="mini-bulb" />
+              <span
+                ><strong>{{ t.hintTitle }}</strong> {{ hint }}</span
+              >
+            </p>
+          }
+        </div>
+
         @if (!trainer.isReplay()) {
           <div class="progress-line">
             <span>{{

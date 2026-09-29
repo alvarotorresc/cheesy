@@ -1,6 +1,6 @@
 /*
  * Pieces shared by the play and practice pages of an opening (the mockup's comun.css): top bar,
- * header, board and side column layout, status line and boxes. Loaded next to the component's own
+ * header, panel spacing, status line, boxes and loading skeleton. Loaded next to the component's own
  * styles with `styleUrls`. Global classes (.button, .king, .muted...) are used, never redefined.
  */
 
@@ -86,78 +86,12 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ---- Board and side column ---- */
+/* ---- Board and side panel (stage in styles/layout.css) ---- */
 
-/*
- * Two columns: board on the left, panel on the right (from 60rem). On a phone the columns melt
- * (display: contents) and the visual order puts the status and the notices above the board, so
- * the reaction to a move is seen without scrolling.
- */
-.board-layout {
-  display: grid;
-  gap: var(--space-4);
-  min-width: 0;
-}
-
-.col {
-  display: contents;
-}
-
-.board-layout > .col > * {
-  min-width: 0;
-}
-
-.board-area {
-  position: relative;
-  width: 100%;
-  max-width: 36rem;
-  margin-inline: auto;
-}
-
-@media (max-width: 59.99rem) {
-  .o-status {
-    order: 1;
-  }
-
-  .o-alert {
-    order: 2;
-  }
-
-  .o-board {
-    order: 3;
-  }
-
-  .o-controls {
-    order: 4;
-  }
-
-  .o-panel {
-    order: 5;
-  }
-
-  .o-moves {
-    order: 6;
-  }
-}
-
-@media (min-width: 60rem) {
-  .board-layout {
-    grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
-    gap: var(--space-8);
-    align-items: start;
-  }
-
-  .col {
-    display: grid;
-    gap: var(--space-4);
-    align-content: start;
-    min-width: 0;
-  }
-
-  .col-board {
-    position: sticky;
-    top: var(--space-4);
-  }
+/* The top bar, the header and the options sit in the panel, spaced by its gap. */
+.play-panel .topbar,
+.play-panel .head {
+  margin-bottom: 0;
 }
 
 /* ---- Status line, boxes and step buttons ---- */
@@ -215,6 +149,13 @@
   gap: var(--space-4);
 }
 
+.sk-layout,
+.sk-col {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
 .sk {
   border-radius: var(--radius);
   background: var(--color-surface-hover);
@@ -233,10 +174,18 @@
   aspect-ratio: 1;
   width: 100%;
   max-width: 36rem;
+  margin-inline: auto;
 }
 
 .sk-panel {
   height: 12rem;
+}
+
+@media (min-width: 60rem) {
+  .sk-layout {
+    grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
+    gap: var(--space-8);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,4 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Color } from 'chessops';
@@ -37,7 +38,7 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
  */
 @Component({
   selector: 'app-opening-play',
-  imports: [BoardComponent, OpeningMoves, PlayOptions, RouterLink, TheoryPanel],
+  imports: [BoardComponent, NgTemplateOutlet, OpeningMoves, PlayOptions, RouterLink, TheoryPanel],
   providers: [GameService, EngineService, OpeningSession],
   templateUrl: './opening-play.html',
   styleUrls: ['../opening-page.css', './opening-play.css'],

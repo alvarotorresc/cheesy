@@ -6,6 +6,10 @@
   margin-bottom: var(--space-4);
 }
 
+.panel .back {
+  margin-bottom: 0;
+}
+
 .back a {
   display: inline-flex;
   align-items: center;
@@ -17,17 +21,54 @@
   text-underline-offset: 3px;
 }
 
-/* ---- Layout --------------------------------------------------------------------------------- */
+/* ---- Layout (stage in styles/layout.css) ------------------------------------------------------ */
 
+/*
+ * Stacked, the two player bands sit above and below the board, and count in its height. Side by
+ * side they move to the panel column, level with the top and the bottom edges of the board, so the
+ * board keeps the full height: the rival band, the scrolling panel, then your band.
+ */
 .practice {
-  display: grid;
-  gap: var(--space-5);
-  grid-template-areas: 'head' 'board' 'panel';
-  min-width: 0;
+  --seat-h: 2.25rem;
+  --seats-h: calc(2 * var(--seat-h) + 2 * var(--space-2));
+  --board-extra-v: var(--seats-h);
+}
+
+@media (min-width: 60rem) and (orientation: landscape) {
+  .practice {
+    --board-extra-v: 0px;
+
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    row-gap: var(--space-2);
+  }
+
+  .play {
+    display: contents;
+  }
+
+  .play app-board {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: var(--board);
+  }
+
+  .seat {
+    grid-column: 2;
+    grid-row: 1;
+    padding-inline: 3px var(--space-2);
+  }
+
+  .seat:last-child {
+    grid-row: 3;
+  }
+
+  .panel {
+    grid-row: 2;
+    height: calc(var(--board) - var(--seats-h));
+  }
 }
 
 .head {
-  grid-area: head;
   display: grid;
   gap: var(--space-2);
 }
@@ -38,49 +79,13 @@
   font-weight: 700;
 }
 
-.play {
-  grid-area: board;
-  display: grid;
-  gap: var(--space-2);
-  align-content: start;
-  min-width: 0;
-  width: 100%;
-  max-width: 40rem;
-  justify-self: center;
-}
-
-.panel {
-  grid-area: panel;
-  display: grid;
-  gap: var(--space-4);
-  align-content: start;
-  min-width: 0;
-}
-
-@media (min-width: 60rem) {
-  .practice {
-    grid-template-columns: minmax(0, 38rem) minmax(0, 24rem);
-    justify-content: center;
-    grid-template-areas: 'board head' 'board panel';
-    grid-template-rows: auto 1fr;
-    column-gap: var(--space-8);
-    row-gap: var(--space-5);
-  }
-
-  .play {
-    position: sticky;
-    top: var(--space-4);
-    max-width: none;
-  }
-}
-
 /* ---- Player bands above and below the board ------------------------------------------------- */
 
 .seat {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 2.25rem;
+  height: var(--seat-h);
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-muted);

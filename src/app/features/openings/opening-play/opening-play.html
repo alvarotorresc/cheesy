@@ -1,13 +1,19 @@
-<nav class="topbar" [attr.aria-label]="i18n.t().openings.play.thisOpening">
-  <a class="back back-link" routerLink="/openings">
-    <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
-  </a>
-  @if (session.opening(); as opening) {
-    <a class="back swap-link" [routerLink]="['/openings', opening.id, 'practice']">
-      {{ i18n.t().practice.fromPlay }}
+<ng-template #topbar>
+  <nav class="topbar play-lead" [attr.aria-label]="i18n.t().openings.play.thisOpening">
+    <a class="back back-link" routerLink="/openings">
+      <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
     </a>
-  }
-</nav>
+    @if (session.opening(); as opening) {
+      <a class="back swap-link" [routerLink]="['/openings', opening.id, 'practice']">
+        {{ i18n.t().practice.fromPlay }}
+      </a>
+    }
+  </nav>
+</ng-template>
+
+@if (!session.opening()) {
+  <ng-container [ngTemplateOutlet]="topbar" />
+}
 
 @switch (session.loadState()) {
   @case ('loading') {
@@ -15,9 +21,9 @@
     <div class="skeleton" aria-hidden="true">
       <div class="sk sk-title"></div>
       <div class="sk sk-bar"></div>
-      <div class="board-layout">
-        <div class="col"><div class="sk sk-board"></div></div>
-        <div class="col">
+      <div class="sk-layout">
+        <div class="sk sk-board"></div>
+        <div class="sk-col">
           <div class="sk sk-bar"></div>
           <div class="sk sk-panel"></div>
         </div>
@@ -46,41 +52,8 @@
 }
 
 @if (session.opening(); as opening) {
-  <header class="head">
-    <p class="head-kicker">
-      <span class="mode-tag play">{{ i18n.t().openings.play.modeTag }}</span>
-      <span class="muted small">{{ i18n.t().openings.play.modeNote }}</span>
-    </p>
-    <h1>{{ i18n.localize(opening.name) }}</h1>
-    <p class="meta">
-      <span>
-        <i
-          class="king pc"
-          [class.pc-wK]="session.playerColor() === 'white'"
-          [class.pc-bK]="session.playerColor() === 'black'"
-          aria-hidden="true"
-        ></i>
-        {{ i18n.t().openings.youPlay }}&nbsp;<strong>{{
-          session.playerColor() === 'white'
-            ? i18n.t().openings.play.colorWhite
-            : i18n.t().openings.play.colorBlack
-        }}</strong>
-      </span>
-      <span class="eco">{{ i18n.t().openings.play.eco }} {{ opening.eco }}</span>
-    </p>
-  </header>
-
-  <app-play-options
-    [opponentMode]="session.opponentMode()"
-    [mainOnly]="session.mainOnly()"
-    [skillLevel]="session.skillLevel()"
-    (opponentModeChange)="session.setOpponentMode($event)"
-    (mainOnlyChange)="session.setMainOnly($event)"
-    (skillLevelChange)="session.setSkillLevel($event)"
-  />
-
-  <div class="board-layout">
-    <div class="col col-board">
+  <div class="play-stage">
+    <div class="play-board">
       <div class="o-board board-area">
         <app-board
           [fen]="game.fen()"
@@ -94,6 +67,110 @@
           (move)="onMove($event)"
         />
       </div>
+    </div>
+
+    <div class="play-panel">
+      <ng-container [ngTemplateOutlet]="topbar" />
+      <header class="head play-lead">
+        <p class="head-kicker">
+          <span class="mode-tag play">{{ i18n.t().openings.play.modeTag }}</span>
+          <span class="muted small">{{ i18n.t().openings.play.modeNote }}</span>
+        </p>
+        <h1>{{ i18n.localize(opening.name) }}</h1>
+        <p class="meta">
+          <span>
+            <i
+              class="king pc"
+              [class.pc-wK]="session.playerColor() === 'white'"
+              [class.pc-bK]="session.playerColor() === 'black'"
+              aria-hidden="true"
+            ></i>
+            {{ i18n.t().openings.youPlay }}&nbsp;<strong>{{
+              session.playerColor() === 'white'
+                ? i18n.t().openings.play.colorWhite
+                : i18n.t().openings.play.colorBlack
+            }}</strong>
+          </span>
+          <span class="eco">{{ i18n.t().openings.play.eco }} {{ opening.eco }}</span>
+        </p>
+      </header>
+
+      <app-play-options
+        class="play-lead"
+        [opponentMode]="session.opponentMode()"
+        [mainOnly]="session.mainOnly()"
+        [skillLevel]="session.skillLevel()"
+        (opponentModeChange)="session.setOpponentMode($event)"
+        (mainOnlyChange)="session.setMainOnly($event)"
+        (skillLevelChange)="session.setSkillLevel($event)"
+      />
+
+      <div class="o-status play-lead">
+        <p
+          class="status"
+          [class.idle]="status().idle"
+          [class.visually-hidden]="status().hidden"
+          role="status"
+        >
+          @if (status().king; as king) {
+            <i
+              class="king pc"
+              [class.pc-wK]="king === 'white'"
+              [class.pc-bK]="king === 'black'"
+              aria-hidden="true"
+            ></i>
+          }
+          {{ status().text }}
+        </p>
+        @if (isReviewing()) {
+          <p class="reviewing">
+            {{ i18n.t().openings.reviewing }}
+            <button type="button" class="text-button" (click)="game.goToEnd()">
+              {{ i18n.t().openings.backToGame }}
+            </button>
+          </p>
+        }
+      </div>
+
+      @if (deviationMoves(); as moves) {
+        <div class="o-alert play-lead">
+          <div class="alert box" role="group" aria-labelledby="deviation-title">
+            <h2 id="deviation-title" class="box-title">
+              {{ i18n.t().openings.deviationTitle }}
+            </h2>
+            <p>
+              {{ i18n.t().openings.deviationText }} <strong>{{ moves.expected }}</strong
+              >.
+              @if (moves.alternatives) {
+                {{ i18n.t().openings.alsoCovered }} <strong>{{ moves.alternatives }}</strong
+                >.
+              }
+            </p>
+            <p class="muted small">{{ i18n.t().openings.deviationNote }}</p>
+            <div class="button-row">
+              <button type="button" class="button" (click)="session.undo()">
+                {{ i18n.t().openings.takeBack }}
+              </button>
+              <button type="button" class="button primary" (click)="session.continueOutOfBook()">
+                {{ i18n.t().openings.keepPlaying }}
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (session.phase() === 'engine-error') {
+        <div class="o-alert play-lead">
+          <div class="alert error box" role="alert">
+            <p>{{ i18n.t().openings.play.engineErrorText }}</p>
+            <div class="button-row">
+              <button type="button" class="button" (click)="session.retryReply()">
+                {{ i18n.t().openings.retry }}
+              </button>
+            </div>
+          </div>
+        </div>
+      }
 
       <div class="o-controls controls" role="group" [attr.aria-label]="i18n.t().openings.controls">
         <div class="nav-steps">
@@ -156,75 +233,6 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <div class="col col-panel">
-      <div class="o-status">
-        <p
-          class="status"
-          [class.idle]="status().idle"
-          [class.visually-hidden]="status().hidden"
-          role="status"
-        >
-          @if (status().king; as king) {
-            <i
-              class="king pc"
-              [class.pc-wK]="king === 'white'"
-              [class.pc-bK]="king === 'black'"
-              aria-hidden="true"
-            ></i>
-          }
-          {{ status().text }}
-        </p>
-        @if (isReviewing()) {
-          <p class="reviewing">
-            {{ i18n.t().openings.reviewing }}
-            <button type="button" class="text-button" (click)="game.goToEnd()">
-              {{ i18n.t().openings.backToGame }}
-            </button>
-          </p>
-        }
-      </div>
-
-      @if (deviationMoves(); as moves) {
-        <div class="o-alert">
-          <div class="alert box" role="group" aria-labelledby="deviation-title">
-            <h2 id="deviation-title" class="box-title">
-              {{ i18n.t().openings.deviationTitle }}
-            </h2>
-            <p>
-              {{ i18n.t().openings.deviationText }} <strong>{{ moves.expected }}</strong
-              >.
-              @if (moves.alternatives) {
-                {{ i18n.t().openings.alsoCovered }} <strong>{{ moves.alternatives }}</strong
-                >.
-              }
-            </p>
-            <p class="muted small">{{ i18n.t().openings.deviationNote }}</p>
-            <div class="button-row">
-              <button type="button" class="button" (click)="session.undo()">
-                {{ i18n.t().openings.takeBack }}
-              </button>
-              <button type="button" class="button primary" (click)="session.continueOutOfBook()">
-                {{ i18n.t().openings.keepPlaying }}
-              </button>
-            </div>
-          </div>
-        </div>
-      }
-
-      @if (session.phase() === 'engine-error') {
-        <div class="o-alert">
-          <div class="alert error box" role="alert">
-            <p>{{ i18n.t().openings.play.engineErrorText }}</p>
-            <div class="button-row">
-              <button type="button" class="button" (click)="session.retryReply()">
-                {{ i18n.t().openings.retry }}
-              </button>
-            </div>
-          </div>
-        </div>
-      }
 
       @if (session.theory(); as theory) {
         <div class="o-panel">

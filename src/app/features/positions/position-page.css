@@ -48,55 +48,10 @@
   margin-top: var(--space-6);
 }
 
-/* ---- Grid of the exercise ---- */
-.exercise {
-  display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
-  grid-template-areas:
-    'head'
-    'feedback'
-    'board'
-    'panel';
-}
-
+/* ---- The exercise (stage in styles/layout.css) ---- */
 .head {
-  grid-area: head;
   display: grid;
   gap: var(--space-2);
-  min-width: 0;
-}
-
-.feedback {
-  grid-area: feedback;
-  min-width: 0;
-}
-
-.board-col {
-  grid-area: board;
-  min-width: 0;
-}
-
-.panel {
-  grid-area: panel;
-  display: grid;
-  gap: var(--space-5);
-  align-content: start;
-  min-width: 0;
-}
-
-@media (min-width: 60rem) {
-  .exercise {
-    grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
-    column-gap: var(--space-12);
-    row-gap: var(--space-5);
-    grid-template-areas:
-      'board head'
-      'board feedback'
-      'board panel';
-    grid-template-rows: auto auto 1fr;
-    margin-top: var(--space-6);
-  }
 }
 
 /* ---- Head: a riddle before, the title after ---- */

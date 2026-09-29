@@ -2,7 +2,6 @@
 .top-notes {
   display: grid;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
 }
 
 .link-notice {
@@ -103,65 +102,16 @@
   }
 }
 
-/* ---- Layout ---- */
-.layout {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.board-col {
-  display: grid;
-  gap: var(--space-3);
-  align-content: start;
-  min-width: 0;
-}
-
-.panel {
-  display: grid;
-  gap: var(--space-4);
-  align-content: start;
-  min-width: 0;
-}
-
-@media (min-width: 60rem) {
-  .layout {
-    grid-template-columns: minmax(0, min(46rem, calc(100svh - 15rem))) minmax(21rem, 1fr);
-    gap: var(--space-8);
-    align-items: start;
-  }
-
-  .panel {
-    max-width: 30rem;
-  }
-
-  .board-col {
-    position: sticky;
-    top: var(--space-4);
-  }
-}
-
-/* ---- Board with the evaluation bar on its left ---- */
-.board-row,
-.board-col .controls,
-.board-col .turn-row {
-  width: 100%;
-  max-width: min(100%, calc(100svh - 20rem) + 2rem);
+/* ---- Board with the evaluation bar on its left (stage in styles/layout.css) ---- */
+.play-stage {
+  --board-extra-h: 2rem;
 }
 
 .board-row {
   display: grid;
-  grid-template-columns: 1.5rem minmax(0, 1fr);
+  grid-template-columns: 1.5rem var(--board);
   gap: var(--space-2);
   min-width: 0;
-}
-
-@media (max-width: 59.99rem) {
-  .board-row,
-  .board-col .controls,
-  .board-col .turn-row {
-    max-width: 40rem;
-    margin-inline: auto;
-  }
 }
 
 /* ---- Turn and controls ---- */
@@ -234,7 +184,8 @@
   font-size: var(--text-sm);
 }
 
-@media (min-width: 30rem) {
+/* One row on a wide phone or a tablet; two in the panel beside the board, which is narrower. */
+@media (min-width: 30rem) and (not ((min-width: 60rem) and (orientation: landscape))) {
   .controls {
     grid-template-columns: auto 1fr;
   }
@@ -242,7 +193,9 @@
   .nav-buttons .button {
     width: 3.25rem;
   }
+}
 
+@media (min-width: 30rem) {
   .tool-buttons .button {
     font-size: var(--text-md);
   }

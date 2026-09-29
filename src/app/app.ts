@@ -13,6 +13,10 @@ import { Toast } from './shared/toast';
   imports: [RouterOutlet, RouterLink, RouterLinkActive, Logo, SiteFooter, Toast],
   templateUrl: './app.html',
   styleUrl: './app.css',
+  host: {
+    // A play page is one window tall when the board and its panel sit side by side.
+    '[class.play-shell]': "mainKind() === 'play'",
+  },
 })
 export class App {
   protected readonly i18n = inject(I18nService);

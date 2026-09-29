@@ -50,6 +50,6 @@
   <router-outlet />
 </main>
 
-<app-site-footer />
+<app-site-footer [class.compact]="mainKind() === 'play'" />
 
 <app-toast />

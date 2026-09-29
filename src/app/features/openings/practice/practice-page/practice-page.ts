@@ -7,6 +7,7 @@ import {
   inject,
   viewChild,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Color, SquareName } from 'chessops';
@@ -47,10 +48,18 @@ interface FeedbackView {
  */
 @Component({
   selector: 'app-practice-page',
-  imports: [BoardComponent, MoveList, PracticeProgress, PracticeSetup, PracticeSummary, RouterLink],
+  imports: [
+    BoardComponent,
+    MoveList,
+    NgTemplateOutlet,
+    PracticeProgress,
+    PracticeSetup,
+    PracticeSummary,
+    RouterLink,
+  ],
   providers: [GameService, PracticeSession],
   templateUrl: './practice-page.html',
-  styleUrls: ['../practice-box.css', './practice-page.css'],
+  styleUrls: ['../../opening-page.css', '../practice-box.css', './practice-page.css'],
   host: {
     '(document:keydown.arrowleft)': 'browse($event, -1)',
     '(document:keydown.arrowright)': 'browse($event, 1)',

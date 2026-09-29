@@ -10,6 +10,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
@@ -51,7 +52,7 @@ interface MoveView {
 /** One endgame: the player plays their side against a rival that answers from the tablebase. */
 @Component({
   selector: 'app-endgame-practice',
-  imports: [BoardComponent, Icon, RouterLink, TablebasePanel],
+  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink, TablebasePanel],
   providers: [GameService, EngineService, EndgameSession, TablebaseLookup],
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',

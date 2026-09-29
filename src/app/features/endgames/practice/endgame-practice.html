@@ -1,8 +1,14 @@
 @let t = i18n.t().endgames;
 @let tb = i18n.t().tablebase;
-<p class="back">
-  <a routerLink="/endgames"><app-icon name="arrow-left" />{{ t.backToCatalog }}</a>
-</p>
+<ng-template #back>
+  <p class="back play-lead">
+    <a routerLink="/endgames"><app-icon name="arrow-left" />{{ t.backToCatalog }}</a>
+  </p>
+</ng-template>
+
+@if (!session.endgame()) {
+  <ng-container [ngTemplateOutlet]="back" />
+}
 
 @if (endgames.isLoading()) {
   <p class="notice" role="status">{{ t.loading }}</p>
@@ -12,22 +18,8 @@
     <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
   </div>
 } @else if (session.endgame(); as current) {
-  <div class="practice">
-    <header class="head">
-      <p class="cat">{{ i18n.localize(current.category) }}</p>
-      <h1>{{ i18n.localize(current.name) }}</h1>
-      <p class="goal-line">
-        <app-icon [name]="current.goal === 'win' ? 'trophy' : 'scales'" />{{ goalLine() }}
-        <i
-          class="king"
-          [class.pc-wK]="session.playerSide() === 'white'"
-          [class.pc-bK]="session.playerSide() === 'black'"
-          aria-hidden="true"
-        ></i>
-      </p>
-    </header>
-
-    <div class="play" [class.past]="!atEnd()">
+  <div class="practice play-stage">
+    <div class="play play-board" [class.past]="!atEnd()">
       <p class="seat">
         <i
           class="king"
@@ -79,7 +71,22 @@
       </p>
     </div>
 
-    <div class="panel">
+    <div class="panel play-panel">
+      <ng-container [ngTemplateOutlet]="back" />
+      <header class="head play-lead">
+        <p class="cat">{{ i18n.localize(current.category) }}</p>
+        <h1>{{ i18n.localize(current.name) }}</h1>
+        <p class="goal-line">
+          <app-icon [name]="current.goal === 'win' ? 'trophy' : 'scales'" />{{ goalLine() }}
+          <i
+            class="king"
+            [class.pc-wK]="session.playerSide() === 'white'"
+            [class.pc-bK]="session.playerSide() === 'black'"
+            aria-hidden="true"
+          ></i>
+        </p>
+      </header>
+
       @if (goalAchieved()) {
         <section #resultCard class="result" aria-labelledby="result-title" tabindex="-1">
           <h2 id="result-title"><app-icon name="flag-checkered" />{{ t.resultAchieved }}</h2>
