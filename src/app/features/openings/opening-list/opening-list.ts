@@ -61,7 +61,7 @@ export class OpeningList {
    */
   private async loadProgress(): Promise<void> {
     const generation = ++this.progressGeneration;
-    const rows = await this.progressService.all();
+    const rows = await this.progressService.lines();
     if (generation !== this.progressGeneration) return;
     this.hasProgress.set(rows.length > 0);
     const byOpening = new Map<string, LineProgress[]>();

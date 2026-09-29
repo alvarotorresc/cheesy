@@ -328,6 +328,18 @@ describe('DrillPage', () => {
     });
 
     it('should show the progress of the line back in the choice of line', async () => {
+      // Two clean runs already: the one of this test makes the streak of three that masters it.
+      memory.rows.set(progressKey('test-opening', 'white', MAIN), {
+        key: progressKey('test-opening', 'white', MAIN),
+        openingId: 'test-opening',
+        color: 'white',
+        lineId: MAIN,
+        practiced: 2,
+        clean: 2,
+        streak: 2,
+        lastPracticed: 1,
+        bestMistakes: 0,
+      });
       await create();
       await chooseLineAndStart(MAIN);
       await playMain();
@@ -335,7 +347,7 @@ describe('DrillPage', () => {
       await settle();
 
       expect(text('.lines li:nth-child(2) .progress')).toMatch(
-        /^Practised once · mastered · last on /,
+        /^Practised 3 times · mastered · last on /,
       );
       expect(text('.count')).toBe('1 of 3 lines practised, 1 mastered');
     });

@@ -334,6 +334,7 @@ describe('DrillSession', () => {
       expect(memory.rows.get(progressKey('test-opening', 'white', MAIN))).toMatchObject({
         practiced: 1,
         clean: 0,
+        streak: 0,
         bestMistakes: 1,
       });
 
@@ -358,8 +359,12 @@ describe('DrillSession', () => {
       await startDrill();
       await playMain();
 
-      expect(session.lineProgress().get(MAIN)).toMatchObject({ practiced: 1, clean: 1 });
-      expect(session.progressCount()).toEqual({ practiced: 1, mastered: 1 });
+      expect(session.lineProgress().get(MAIN)).toMatchObject({
+        practiced: 1,
+        clean: 1,
+        streak: 1,
+      });
+      expect(session.progressCount()).toEqual({ practiced: 1, mastered: 0 });
 
       session.backToSetup();
       session.setPlayerColor('black');
@@ -369,7 +374,7 @@ describe('DrillSession', () => {
     });
 
     it('should leave out stored lines that are no longer in the content', async () => {
-      await progress.record({
+      await progress.recordLine({
         openingId: 'test-opening',
         color: 'white',
         lineId: 'e2e4 c7c5',
@@ -385,7 +390,7 @@ describe('DrillSession', () => {
       await startDrill();
       await playMain();
 
-      await progress.clear();
+      await progress.clear('openings');
       await settle();
 
       expect(session.lineProgress().size).toBe(0);

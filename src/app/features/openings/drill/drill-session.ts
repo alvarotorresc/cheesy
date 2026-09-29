@@ -369,7 +369,7 @@ export class DrillSession {
     if (!book || this.recordedRun === run) return;
     this.recordedRun = run;
     this.saveStatus.set('saving');
-    const saved = await this.progress.record({
+    const saved = await this.progress.recordLine({
       openingId: book.id,
       color: run.color,
       lineId: lineIdOf(run.line),
@@ -379,7 +379,7 @@ export class DrillSession {
   }
 
   private async refreshProgress(openingId: string): Promise<void> {
-    const rows = await this.progress.forOpening(openingId);
+    const rows = await this.progress.linesOf(openingId);
     if (this.book()?.id === openingId) this.progressRows.set(rows);
   }
 }

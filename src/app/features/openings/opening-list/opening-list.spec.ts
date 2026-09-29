@@ -122,16 +122,17 @@ describe('OpeningList', () => {
       openingId: string,
       lineId: string,
       color: 'white' | 'black' = 'white',
-      clean = 0,
+      streak = 0,
     ): StoredLineProgress => ({
       key: progressKey(openingId, color, lineId),
       openingId,
       color,
       lineId,
-      practiced: 1,
-      clean,
+      practiced: Math.max(streak, 1),
+      clean: streak,
+      streak,
       lastPracticed: 1,
-      bestMistakes: clean > 0 ? 0 : 2,
+      bestMistakes: streak > 0 ? 0 : 2,
     });
 
     const store = (...rows: StoredLineProgress[]): void => {
@@ -159,7 +160,7 @@ describe('OpeningList', () => {
 
     it('should count the lines practised and mastered with either colour', async () => {
       store(
-        saved('ruy', 'e2e4 e7e5 g1f3 b8c6 f1b5', 'white', 1),
+        saved('ruy', 'e2e4 e7e5 g1f3 b8c6 f1b5', 'white', 3),
         saved('ruy', 'e2e4 e7e5 g1f3 b8c6 f1b5', 'black'),
         saved('ruy', 'e2e4 e7e5 d2d4', 'black'),
       );

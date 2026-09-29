@@ -98,7 +98,7 @@ describe('ProgressNote', () => {
   it('should say when the progress could not be deleted', async () => {
     const memory = memoryProgressStore();
     await create(memory.loader);
-    vi.spyOn(memory.store, 'clear').mockRejectedValue(new Error('blocked'));
+    vi.spyOn(memory.store.lines, 'clear').mockRejectedValue(new Error('blocked'));
 
     await click('Delete progress');
     await click('Delete');
@@ -108,7 +108,7 @@ describe('ProgressNote', () => {
 
   it('should warn discreetly when progress cannot be saved in this browser', async () => {
     await create(() => Promise.reject(new Error('private mode')));
-    await progress.all();
+    await progress.lines();
     await fixture.whenStable();
 
     expect(text('.warning')).toBe(

@@ -49,7 +49,7 @@ export class ProgressNote {
 
   protected async confirmClear(): Promise<void> {
     this.clearState.set('clearing');
-    const cleared = await this.progress.clear();
+    const cleared = await this.progress.clear('openings');
     this.clearState.set(cleared ? 'cleared' : 'failed');
     this.focusAfterRender(() => this.result());
   }
