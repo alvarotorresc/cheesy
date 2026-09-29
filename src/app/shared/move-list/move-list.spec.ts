@@ -15,6 +15,8 @@ describe('MoveList', () => {
   };
 
   beforeEach(() => {
+    // Other specs may leave a stored language behind: these expectations are in English.
+    TestBed.inject(I18nService).setLang('en');
     fixture = TestBed.createComponent(MoveList);
     fixture.componentRef.setInput('label', 'Moves');
     fixture.componentRef.setInput('emptyLabel', 'No moves yet.');
