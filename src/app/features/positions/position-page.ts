@@ -15,16 +15,19 @@ import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import type { Key } from '@lichess-org/chessground/types';
+import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink } from '../../core/analysis-link';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
+import { colorOfPly, ReadingModeService } from '../../core/reading-mode';
 import { PageTitle } from '../../core/page-title';
 import { BoardComponent, type BoardMark, type BoardRing } from '../../shared/board';
 import { Icon } from '../../shared/icon';
 import type { IconName } from '../../shared/icon';
 import { isFormField } from '../../shared/keyboard';
+import { MoveText } from '../../shared/move';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { numberOfContentId, POSITION_NUMBER } from './position-order';
 import { PositionList } from './position-list';
@@ -37,6 +40,8 @@ interface StepView {
   ply: number;
   /** Move number with dots, "6." for white and "6…" for black. */
   number: string;
+  /** Side that plays the step, from the side to move in the starting position. */
+  color: Color;
 }
 
 /** Main message of the exercise: its kind picks the colour and the icon. */
@@ -66,7 +71,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink],
+  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink],
   providers: [GameService, PositionTrainer, PositionList],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
@@ -77,6 +82,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
 })
 export class PositionPage {
   protected readonly i18n = inject(I18nService);
+  protected readonly reading = inject(ReadingModeService);
   protected readonly game = inject(GameService);
   protected readonly trainer = inject(PositionTrainer);
   protected readonly list = inject(PositionList);
@@ -148,7 +154,12 @@ export class PositionPage {
       .map((step, index) => {
         const absolute = startPly + index;
         const number = Math.floor(absolute / 2) + 1;
-        return { step, ply: index + 1, number: absolute % 2 === 0 ? `${number}.` : `${number}…` };
+        return {
+          step,
+          ply: index + 1,
+          number: absolute % 2 === 0 ? `${number}.` : `${number}…`,
+          color: colorOfPly(absolute + 1),
+        };
       });
   });
 
@@ -170,20 +181,23 @@ export class PositionPage {
       return { kind: 'reveal', icon: 'mini-eye', main: t.revealed, sub: t.revealedSub };
     }
     if (feedback?.kind === 'wrong') {
-      const main = t.wrong(this.i18n.san(feedback.played));
+      const main = t.wrong(this.reading.full(feedback.played, { start: false }));
       return { kind: 'wrong', icon: 'mini-cross', main, sub: t.wrongSub };
     }
     if (phase === 'solved') {
       if (this.game.canGoForward()) {
         return { kind: 'right', icon: 'mini-check', main: t.reviewing, sub: t.reviewingSub };
       }
-      const main = `${t.correct(this.i18n.san(feedback?.played ?? ''))} ${t.solved}`;
+      const played = feedback?.played;
+      const main = played
+        ? `${t.correct(this.reading.full(played, { start: false }))} ${t.solved}`
+        : t.solved;
       return { kind: 'right', icon: 'mini-check', main, sub: t.solvedSub };
     }
     if (feedback?.kind === 'correct') {
-      const correct = t.correct(this.i18n.san(feedback.played));
+      const correct = t.correct(this.reading.full(feedback.played, { start: false }));
       const main = feedback.reply
-        ? `${correct} ${t.reply(this.i18n.san(feedback.reply))}`
+        ? `${correct} ${t.reply(this.reading.full(feedback.reply, { start: false }))}`
         : correct;
       return { kind: 'right', icon: 'mini-check', main };
     }
@@ -202,18 +216,23 @@ export class PositionPage {
     return hint ? t.hintText(t.pieces[hint.role], hint.from) : undefined;
   });
 
-  /** Description of the displayed step of the solution while replaying. */
+  /**
+   * Description of the displayed step of the solution while replaying. In words mode the sentence
+   * already tells captures, checks and mates; in notation they go in a note after the move.
+   */
   protected readonly stepText = computed(() => {
     const t = this.i18n.t().positions;
     const current = this.steps()[this.game.ply() - 1];
     if (!current) return t.startPosition;
     const { step, number } = current;
-    const notes = [
-      step.isCapture ? t.capture : undefined,
-      step.isMate ? t.mate : step.isCheck ? t.check : undefined,
-    ].filter((note) => note !== undefined);
+    const notes = this.reading.words()
+      ? []
+      : [
+          step.isCapture ? t.capture : undefined,
+          step.isMate ? t.mate : step.isCheck ? t.check : undefined,
+        ].filter((note) => note !== undefined);
     const who = step.byPlayer ? t.yourMove : t.opponentMove;
-    return `${who}: ${number} ${this.i18n.san(step.san)}${notes.length ? ` (${notes.join(', ')})` : ''}.`;
+    return `${who}: ${number} ${this.reading.full(step.san, { start: false })}${notes.length ? ` (${notes.join(', ')})` : ''}.`;
   });
 
   /** Analysis with this position and its solution: only after the solution is out. */

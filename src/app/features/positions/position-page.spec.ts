@@ -8,6 +8,7 @@ import { GameService } from '../../core/game';
 import { PROGRESS_STORE_LOADER } from '../../core/progress';
 import { memoryProgressStore } from '../openings/testing/memory-progress-store';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { BoardComponent, type BoardMove } from '../../shared/board';
 import { PositionPage } from './position-page';
 import { POSITIONS_ROUTES } from './positions.routes';
@@ -36,6 +37,13 @@ const KIENINGER: CuratedPosition = {
 const BROKEN: CuratedPosition = { ...SMOTHERED, id: 'broken', solution: ['Kxg8'] };
 
 const POSITIONS = [SMOTHERED, KIENINGER, BROKEN];
+
+/** Text of an element as a sighted reader sees it, without the sentences kept for screen readers. */
+const visibleText = (node: Element | null): string => {
+  const copy = node?.cloneNode(true) as Element | undefined;
+  copy?.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+  return (copy?.textContent ?? '').replace(/\s+/g, ' ').trim();
+};
 
 describe('PositionPage', () => {
   let harness: RouterTestingHarness;
@@ -80,6 +88,8 @@ describe('PositionPage', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
     harness = await RouterTestingHarness.create();
     await harness.navigateByUrl(url);
     await harness.fixture.whenStable();
@@ -190,7 +200,7 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
       expect(text('.message')).toContain(
-        'Qd6 is not the move. It has been taken back: try another one.',
+        'That was not the move: Qd6 has been taken back. Try another one.',
       );
       expect(game().moves()).toEqual([]);
       expect(board().viewOnly()).toBe(false);
@@ -207,17 +217,46 @@ describe('PositionPage', () => {
     it('should play the reply and list the moves when a right move is found', async () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
 
-      expect(text('.message')).toContain('Qg8+ is right. Your opponent answers Rxg8. Keep going.');
-      expect(
-        [...element().querySelectorAll('.steps li')].map((item) => item.textContent?.trim()),
-      ).toEqual(['1. Qg8+', '1… Rxg8']);
+      expect(text('.message')).toContain('Correct: Qg8+. Your opponent answers Rxg8. Keep going.');
+      expect([...element().querySelectorAll('.steps li')].map((item) => visibleText(item))).toEqual(
+        ['1. Qg8+', '1… Rxg8'],
+      );
+    });
+
+    it('should keep each number and its move in one run of text inside the flex box', async () => {
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+
+      // A flex box drops the space between a text and an element; one wrapper keeps "1. Qg8+".
+      for (const item of element().querySelectorAll('.steps span.plain')) {
+        expect(item.children).toHaveLength(1);
+        expect(item.firstElementChild?.querySelector('app-move')).not.toBeNull();
+      }
+    });
+
+    it('should tell the reply in words, in lower case inside the sentence', async () => {
+      TestBed.inject(I18nService).setLang('es');
+      TestBed.inject(ReadingModeService).setMode('words');
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+
+      expect(text('.message')).toContain(
+        'Correcto: dama a g8, jaque. El rival responde torre captura en g8. Sigue.',
+      );
+    });
+
+    it('should tell a wrong move in words', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      await moveOnBoard({ from: 'd5', to: 'd6' });
+
+      expect(text('.message')).toContain(
+        'That was not the move: queen to d6 has been taken back. Try another one.',
+      );
     });
 
     it('should finish, explain and allow replaying when the whole line is found', async () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
       await moveOnBoard({ from: 'h6', to: 'f7' });
 
-      expect(text('.message')).toContain('Nf7# is right. Solved.');
+      expect(text('.message')).toContain('Correct: Nf7#. Solved.');
       expect(element().textContent).toContain('The queen is sacrificed.');
       expect(text('h1')).toBe('Smothered mate');
       expect(document.title).toBe('Smothered mate · Cheesy');
@@ -243,6 +282,10 @@ describe('PositionPage', () => {
       expect(text('.message')).toContain('This is the solution.');
       expect(text('.step-text')).toBe('Starting position.');
       expect(element().querySelectorAll('.steps button')).toHaveLength(3);
+      for (const step of element().querySelectorAll('.steps button')) {
+        expect(step.children).toHaveLength(1);
+        expect(step.firstElementChild?.querySelector('app-move')).not.toBeNull();
+      }
       expect(button('Start of the solution').getAttribute('aria-disabled')).toBe('true');
     });
 
@@ -262,6 +305,24 @@ describe('PositionPage', () => {
       expect(button('Next move').getAttribute('aria-disabled')).toBe('true');
     });
 
+    it('should tell each step as a sentence in lower case in words mode, with no notes', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      button('Next move').click();
+      await harness.fixture.whenStable();
+      expect(text('.step-text')).toBe('Your move: 1. queen to g8, check.');
+      expect(
+        element().querySelector('.steps button[aria-current="step"]')?.getAttribute('aria-label'),
+      ).toBe('Your move 1. queen to g8, check');
+
+      button('Next move').click();
+      await harness.fixture.whenStable();
+      expect(text('.step-text')).toBe('Reply: 1… rook takes on g8.');
+
+      TestBed.inject(I18nService).setLang('es');
+      await harness.fixture.whenStable();
+      expect(text('.step-text')).toBe('Respuesta: 1… torre captura en g8.');
+    });
+
     it('should move through the solution with the arrow keys', async () => {
       document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
       document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
@@ -269,9 +330,9 @@ describe('PositionPage', () => {
       await harness.fixture.whenStable();
 
       expect(game().ply()).toBe(1);
-      expect(
-        element().querySelector('.steps button[aria-current="step"]')?.textContent?.trim(),
-      ).toBe('1. Qg8+');
+      expect(visibleText(element().querySelector('.steps button[aria-current="step"]'))).toBe(
+        '1. Qg8+',
+      );
     });
 
     it('should leave the arrow keys to a form field', () => {

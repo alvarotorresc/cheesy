@@ -1,10 +1,19 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { EngineLine, EngineMove } from '../../core/engine';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { EngineLines } from './engine-lines';
 
 const texts = (element: HTMLElement, selector: string): string[] =>
   Array.from(element.querySelectorAll(selector), (node) => node.textContent?.trim() ?? '');
+
+/** Visible text of each match: the sentences that only screen readers get are left out. */
+const shownTexts = (element: HTMLElement, selector: string): string[] =>
+  Array.from(element.querySelectorAll(selector), (node) => {
+    const copy = node.cloneNode(true) as HTMLElement;
+    copy.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+    return (copy.textContent ?? '').replace(/\s+/g, ' ').trim();
+  });
 
 const LINES: EngineLine[] = [
   {
@@ -39,6 +48,7 @@ describe('EngineLines', () => {
     fixture.componentRef.setInput('depthLabel', 'Depth');
     element = fixture.nativeElement as HTMLElement;
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
   });
 
   it('should show the empty label when there are no lines', async () => {
@@ -59,8 +69,8 @@ describe('EngineLines', () => {
 
     expect(element.querySelector('.depth')?.textContent?.trim()).toBe('Profundidad 18');
     expect(texts(element, '.score')).toEqual(['+0.3', '#-3']);
-    expect(texts(element, '.pv')).toEqual(['1.e4 e5 2.Nf3', '1.f3 e5']);
-    expect(texts(element, '.pv b')).toEqual(['1.e4', '1.f3']);
+    expect(shownTexts(element, '.pv')).toEqual(['1.e4 e5 2.Nf3', '1.f3 e5']);
+    expect(shownTexts(element, '.pv b')).toEqual(['1.e4', '1.f3']);
   });
 
   it('should mark the best line and the scores that favour Black', async () => {
@@ -77,7 +87,7 @@ describe('EngineLines', () => {
     TestBed.inject(I18nService).setLang('es');
     await render({ lines: LINES });
 
-    expect(texts(element, '.pv')[0]).toBe('1.e4 e5 2.Cf3');
+    expect(shownTexts(element, '.pv')[0]).toBe('1.e4 e5 2.Cf3');
     localStorage.clear();
   });
 
@@ -85,7 +95,9 @@ describe('EngineLines', () => {
     await render({ lines: LINES });
 
     const [first] = Array.from(element.querySelectorAll('button'));
-    expect(first.getAttribute('aria-label')).toBe('+0.3 1.e4 e5 2.Nf3');
+    expect(first.getAttribute('aria-label')).toBe(
+      '+0.3 1. Pawn to e4, pawn to e5, 2. knight to f3',
+    );
   });
 
   it('should build the accessible name with the given text', async () => {
@@ -95,19 +107,21 @@ describe('EngineLines', () => {
     });
 
     const [first] = Array.from(element.querySelectorAll('button'));
-    expect(first.getAttribute('aria-label')).toBe('Play 1.e4 (+0.3): 1.e4 e5 2.Nf3');
+    expect(first.getAttribute('aria-label')).toBe(
+      'Play 1. pawn to e4 (+0.3): 1. Pawn to e4, pawn to e5, 2. knight to f3',
+    );
   });
 
   it('should number from the given ply when Black is to move', async () => {
     await render({ lines: [{ ...LINES[0], sanPv: ['Nf6', 'c4', 'e6'] }], startPly: 19 });
 
-    expect(texts(element, '.pv')).toEqual(['10...Nf6 11.c4 e6']);
+    expect(shownTexts(element, '.pv')).toEqual(['10...Nf6 11.c4 e6']);
   });
 
   it('should cut long lines to the most moves allowed', async () => {
     await render({ lines: LINES, maxMoves: 1 });
 
-    expect(texts(element, '.pv')).toEqual(['1.e4', '1.f3']);
+    expect(shownTexts(element, '.pv')).toEqual(['1.e4', '1.f3']);
   });
 
   it('should leave out lines without moves', async () => {
@@ -125,5 +139,14 @@ describe('EngineLines', () => {
     element.querySelectorAll<HTMLButtonElement>('button.line')[1].click();
 
     expect(selected).toEqual([{ uci: 'f2f3', san: 'f3' }]);
+  });
+
+  it('should write the line with piece images and name it with sentences in words mode', async () => {
+    TestBed.inject(ReadingModeService).setMode('words');
+    await render({ lines: [{ ...LINES[0], sanPv: ['Nf3', 'd5'] }] });
+
+    const button = element.querySelector('button.line');
+    expect(button?.querySelector('.pc-wN')).not.toBeNull();
+    expect(button?.getAttribute('aria-label')).toContain('Knight to f3');
   });
 });

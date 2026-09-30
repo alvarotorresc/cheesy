@@ -1,8 +1,11 @@
-import { Component, computed, inject, input, output } from '@angular/core';
-import { I18nService } from '../../core/i18n';
+import { Component, computed, input, output } from '@angular/core';
+import type { Color } from 'chessops';
+import { MoveText } from '../move';
 
 interface MoveCell {
   san: string;
+  /** Side that plays the move. */
+  color: Color;
   /** Ply reached after this move, the value emitted when the move is selected. */
   ply: number;
 }
@@ -16,12 +19,11 @@ interface MoveRow {
 /** Presentational list of moves in SAN, grouped by move number. Clicking a move selects it. */
 @Component({
   selector: 'app-move-list',
+  imports: [MoveText],
   templateUrl: './move-list.html',
   styleUrl: './move-list.css',
 })
 export class MoveList {
-  protected readonly i18n = inject(I18nService);
-
   /** Moves in SAN, in the order they were played. */
   readonly moves = input.required<readonly string[]>();
   /** Number of moves applied to reach the displayed position (0 = start position). */
@@ -41,8 +43,8 @@ export class MoveList {
     const rows: MoveRow[] = [];
     this.moves().forEach((san, index) => {
       const absolutePly = startPly + index;
-      const cell: MoveCell = { san, ply: index + 1 };
       const isWhite = absolutePly % 2 === 0;
+      const cell: MoveCell = { san, color: isWhite ? 'white' : 'black', ply: index + 1 };
       const last = rows.at(-1);
       if (isWhite || !last || last.black) {
         rows.push({

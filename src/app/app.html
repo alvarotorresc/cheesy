@@ -22,6 +22,19 @@
       }
     </nav>
 
+    <div class="reading" role="group" [attr.aria-label]="i18n.t().app.readingMode">
+      @for (mode of readingModes; track mode) {
+        <button
+          type="button"
+          class="lang-button"
+          [attr.aria-pressed]="reading.mode() === mode"
+          (click)="reading.setMode(mode)"
+        >
+          {{ i18n.t().app[mode] }}
+        </button>
+      }
+    </div>
+
     <div class="lang" role="group" [attr.aria-label]="i18n.t().app.language">
       @for (lang of langs; track lang) {
         <button

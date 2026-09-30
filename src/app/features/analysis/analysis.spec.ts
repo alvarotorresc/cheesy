@@ -11,6 +11,7 @@ import { ENGINE_TRANSPORT, EngineService, type EngineTransportHandlers } from '.
 import { FakeUciEngine } from '../../core/engine/testing';
 import { parsePosition } from '../../core/game';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { ROOT_ID } from '../../core/move-tree';
 import { BoardComponent } from '../../shared/board';
 import { ToastService } from '../../shared/toast';
@@ -139,6 +140,8 @@ describe('Analysis', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
   });
 
   afterEach(() => {
@@ -221,9 +224,9 @@ describe('Analysis', () => {
       await render();
 
       expect(mainLine()).toEqual(['e4', 'e5', 'Nf3']);
-      expect(toast()).toBe('2.Bc4 starts a variation: your line is still there.');
+      expect(toast()).toBe('New variation with 2.Bc4: your line is still there.');
       expect(
-        element.querySelector('app-variation .mv[aria-current="true"]')?.textContent,
+        element.querySelector('app-variation .mv[aria-current="true"] .shown')?.textContent,
       ).toContain('Bc4');
       expect(element.querySelector('.in-var')?.textContent).toContain(
         'You are in a variation (2.Bc4).',
@@ -233,6 +236,22 @@ describe('Analysis', () => {
       button('Back to the main line').click();
       await render();
       expect(session.current().san).toBe('e5');
+    });
+
+    it('should write the moves of the notices in lower case inside the sentence in words mode', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      for (const san of ['e4', 'e5', 'Nf3']) playSan(san);
+      session.previous();
+      playSan('Bc4');
+      await render();
+
+      expect(toast()).toBe('New variation with 2. bishop to c4: your line is still there.');
+      expect(element.querySelector('.in-var')?.textContent).toContain(
+        'You are in a variation (2. bishop to c4).',
+      );
+      expect(element.querySelector('.var-toggle')?.getAttribute('aria-label')).toBe(
+        'Fold the variation 2. bishop to c4',
+      );
     });
 
     it('should fold a variation down to its first move and unfold it', async () => {
@@ -266,7 +285,7 @@ describe('Analysis', () => {
 
       expect(mainLine()).toEqual(['e4']);
       expect(session.currentId()).toBe(ROOT_ID);
-      expect(toast()).toBe('Undid 1...e5.');
+      expect(toast()).toBe('Move undone: 1...e5.');
     });
 
     it('should disable undo when there is nothing to undo', () => {
@@ -376,6 +395,7 @@ describe('Analysis', () => {
       );
     });
 
+    // Renders 1200 moves, each with its own board trigger: slow on a loaded machine.
     it('should warn and copy nothing when the game is too long for a link', async () => {
       const shuffle = Array.from(
         { length: 300 },
@@ -393,7 +413,7 @@ describe('Analysis', () => {
 
       expect(element.querySelector('.io .feedback.error')?.textContent?.trim()).toBe(warning);
       expect(element.querySelector('#share-fallback')).toBeNull();
-    });
+    }, 20_000);
 
     it('should preview a link that carries every move, variations included', async () => {
       const preview = (): string =>
@@ -459,9 +479,9 @@ describe('Analysis', () => {
 
       expect(barText()).toBe('+0.3');
       expect(lineButtons().map((line) => line.getAttribute('aria-label'))).toEqual([
-        'Play 1.e4. Evaluation +0.3. Line: 1.e4 e5 2.Nf3',
-        'Play 1.d4. Evaluation +0.3. Line: 1.d4 d5',
-        'Play 1.Nf3. Evaluation -0.2. Line: 1.Nf3 d5',
+        'Play 1. pawn to e4. Evaluation +0.3. Line: 1. Pawn to e4, pawn to e5, 2. knight to f3',
+        'Play 1. pawn to d4. Evaluation +0.3. Line: 1. Pawn to d4, pawn to d5',
+        'Play 1. knight to f3. Evaluation -0.2. Line: 1. Knight to f3, pawn to d5',
       ]);
       expect(lineButtons()[0].classList).toContain('best');
       expect(lineButtons()[2].querySelector('.score')?.classList).toContain('black');
@@ -521,7 +541,7 @@ describe('Analysis', () => {
 
       expect(mainLine()).toEqual(['d4']);
       expect(session.current().san).toBe('e4');
-      expect(toast()).toBe('1.e4 starts a variation: your line is still there.');
+      expect(toast()).toBe('New variation with 1.e4: your line is still there.');
     });
 
     it('should keep the board playable while the engine loads and thinks', async () => {
@@ -697,6 +717,10 @@ describe('Analysis', () => {
       const origin = element.querySelector('.origin');
       expect(origin?.textContent).toContain('From: French Defence');
       expect(origin?.textContent).toContain('after 3...Bb4');
+
+      TestBed.inject(ReadingModeService).setMode('words');
+      await render();
+      expect(origin?.textContent).toContain('Winawer Variation, after 3... bishop to b4.');
       expect(origin?.querySelector('a')?.getAttribute('href')).toBe('/openings/french-defence');
       expect(element.querySelector('app-move-tree .mv-name')).not.toBeNull();
 

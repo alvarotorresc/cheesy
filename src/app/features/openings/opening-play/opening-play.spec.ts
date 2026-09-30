@@ -5,6 +5,7 @@ import { CONTENT_LOADERS, type ContentLoaders } from '../../../core/content';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { OPENING_RANDOM } from '../book-pick';
 import { OpeningSession, REPLY_DELAY_MS } from '../opening-session';
 import { fakeEngineFactory } from '../../../core/engine/testing';
@@ -51,6 +52,7 @@ describe('OpeningPlay', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(OpeningPlay);
     element = fixture.nativeElement as HTMLElement;
     session = fixture.debugElement.injector.get(OpeningSession);
@@ -184,6 +186,18 @@ describe('OpeningPlay', () => {
       expect(element.querySelectorAll('app-opening-moves button')).toHaveLength(2);
     });
 
+    it('should write the moves of our lines in words when the player leaves them', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      session.play({ from: 'e2', to: 'e4' });
+      await settle(REPLY_DELAY_MS);
+      session.play({ from: 'f1', to: 'c4' });
+      await settle();
+
+      expect(text('.alert')).toContain(
+        'Here our lines go on with 2. knight to f3. We also cover 2. pawn to d4.',
+      );
+    });
+
     it('should explain a move out of our lines and take it back when asked', async () => {
       session.play({ from: 'e2', to: 'e4' });
       await settle(REPLY_DELAY_MS);
@@ -192,6 +206,10 @@ describe('OpeningPlay', () => {
 
       expect(text('.status')).toBe('Not in our lines: take it back or keep playing.');
       expect(text('.alert')).toContain('Here our lines go on with 2.Nf3. We also cover 2.d4.');
+      // The off-book move keeps the title of its button: the move inside adds none of its own.
+      const off = element.querySelector('app-opening-moves button.off');
+      expect(off?.getAttribute('title')).toBe('Outside our lines');
+      expect(off?.querySelector('app-move')?.hasAttribute('title')).toBe(false);
       button('Take it back').click();
       await settle();
 

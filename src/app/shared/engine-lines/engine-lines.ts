@@ -1,6 +1,8 @@
 import { Component, computed, inject, input, output } from '@angular/core';
+import type { Color } from 'chessops';
 import { formatScore, type EngineLine, type EngineMove } from '../../core/engine';
-import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
+import { MoveText } from '../move';
 
 interface LineRow {
   multipv: number;
@@ -8,38 +10,46 @@ interface LineRow {
   /** The score favours Black: the figure goes on a dark background. */
   black: boolean;
   /** First move with its number, written bold. */
-  first: string;
+  first: ShownMove;
   /** The rest of the line with the move numbers. */
-  rest: string;
+  rest: ShownMove[];
   /** Accessible name of the button. */
   label: string;
   /** First move of the line, emitted when the line is selected. */
   move: EngineMove;
 }
 
-/** Writes SAN moves with their numbers glued on (`12.Cf3 Cc6 13.d4` or `12...Cc6 13.d4`). */
-const numberMoves = (sans: readonly string[], startPly: number): string[] =>
+/** A move of a line with its number glued on in front (`12.`, `12...` or nothing). */
+interface ShownMove {
+  readonly prefix: string;
+  readonly san: string;
+  readonly color: Color;
+}
+
+/** Numbers SAN moves: `12.` before White's, `12...` only when the line starts with Black's. */
+const numberMoves = (sans: readonly string[], startPly: number): ShownMove[] =>
   sans.map((san, index) => {
     const ply = startPly + index;
     const number = Math.floor(ply / 2) + 1;
-    if (ply % 2 === 0) return `${number}.${san}`;
-    return index === 0 ? `${number}...${san}` : san;
+    const prefix = ply % 2 === 0 ? `${number}.` : index === 0 ? `${number}...` : '';
+    return { prefix, san, color: ply % 2 === 0 ? 'white' : 'black' };
   });
 
 /** Default accessible name of a line: its score and its moves. */
 const scoreAndLine = (_move: string, score: string, line: string): string => `${score} ${line}`;
 
 /**
- * Presentational list of the engine's best lines: score and variation, in the notation of the
- * active language. The first line is the best one. Selecting a line emits its first move.
+ * Presentational list of the engine's best lines: score and variation, written with the reading
+ * mode. The first line is the best one. Selecting a line emits its first move.
  */
 @Component({
   selector: 'app-engine-lines',
+  imports: [MoveText],
   templateUrl: './engine-lines.html',
   styleUrl: './engine-lines.css',
 })
 export class EngineLines {
-  private readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
 
   /** Lines ordered by rank, scores from White's point of view. */
   readonly lines = input.required<readonly EngineLine[]>();
@@ -68,18 +78,20 @@ export class EngineLines {
     return this.lines()
       .filter((line) => line.pv.length > 0 && line.sanPv.length > 0)
       .map((line) => {
-        // `san` reads the active language, so the moves follow it.
-        const sans = line.sanPv.slice(0, this.maxMoves()).map((san) => this.i18n.san(san));
-        const [first, ...rest] = numberMoves(sans, this.startPly());
+        const moves = numberMoves(line.sanPv.slice(0, this.maxMoves()), this.startPly());
         const score = formatScore(line.score);
-        const text = [first, ...rest].join(' ');
+        // Screen readers get sentences, whatever the reading mode shows. Only the first move of
+        // the list starts with a capital; the first move alone follows a word ("Play …").
+        const say = (move: (typeof moves)[number], start: boolean): string =>
+          `${move.prefix} ${this.reading.spoken(move.san, { start })}`.trim();
+        const said = moves.map((move, index) => say(move, index === 0));
         return {
           multipv: line.multipv,
           score,
           black: line.score.value < 0,
-          first,
-          rest: rest.join(' '),
-          label: describe(first, score, text),
+          first: moves[0],
+          rest: moves.slice(1),
+          label: describe(say(moves[0], false), score, said.join(', ')),
           move: { uci: line.pv[0], san: line.sanPv[0] },
         };
       });

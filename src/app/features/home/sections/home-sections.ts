@@ -1,5 +1,8 @@
 import { Component, computed, inject, input } from '@angular/core';
+import type { Color } from 'chessops';
 import { I18nService } from '../../../core/i18n';
+import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
+import { MoveText } from '../../../shared/move';
 import { createReplay, MiniBoard } from '../../../shared/mini-board';
 import { prefersReducedMotion } from '../../../shared/mini-board/replay';
 import { PUZZLE_COUNT, type HomeData } from '../home-data';
@@ -14,6 +17,13 @@ const SWING = [50, 56, 47, 54, 48, 53, 46, 52, 50] as const;
 const BALANCED = 50;
 const ANALYSIS_STEP_MS = 900;
 
+/** A move with its number in front, to be written with `<app-move>`. */
+interface ShownMove {
+  readonly prefix: string;
+  readonly san: string;
+  readonly color: Color;
+}
+
 /**
  * The four section cards of the home page, each with a small board that shows something real of
  * its section: an opening being played, an endgame with a ring on every piece, the starting
@@ -22,7 +32,7 @@ const ANALYSIS_STEP_MS = 900;
  */
 @Component({
   selector: 'app-home-sections',
-  imports: [MiniBoard, SectionCard],
+  imports: [MiniBoard, MoveText, SectionCard],
   templateUrl: './home-sections.html',
   styleUrl: './home-sections.css',
 })
@@ -30,6 +40,7 @@ export class HomeSections {
   readonly data = input.required<HomeData>();
 
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
 
   protected readonly opening = createReplay({
     frames: () => this.data().dragon.frames,
@@ -51,17 +62,20 @@ export class HomeSections {
     this.analysis.playing() ? SWING[this.analysis.ply() % SWING.length] : BALANCED,
   );
 
-  /** The move that has just been played: "1.e4", "1...c5", in the language of the page. */
-  protected plyLabel(sans: readonly string[], ply: number): string {
-    if (ply < 1 || ply > sans.length) return '';
+  /** The move that has just been played: "1.e4", "1...c5", written with `<app-move>`. */
+  protected shownMove(sans: readonly string[], ply: number): ShownMove | undefined {
+    if (ply < 1 || ply > sans.length) return undefined;
     const dots = ply % 2 === 0 ? '...' : '.';
-    return `${Math.ceil(ply / 2)}${dots}${this.i18n.san(sans[ply - 1])}`;
+    return { prefix: `${Math.ceil(ply / 2)}${dots}`, san: sans[ply - 1], color: colorOfPly(ply) };
   }
 
-  /** The whole line: "1.e4 c5 2.Nf3". */
+  /** The whole line as sentences for screen readers: "1. Pawn to e4, Pawn to c5, 2. Knight to f3". */
   protected lineLabel(sans: readonly string[]): string {
     return sans
-      .map((san, index) => (index % 2 === 0 ? `${index / 2 + 1}.` : '') + this.i18n.san(san))
-      .join(' ');
+      .map((san, index) => {
+        const number = index % 2 === 0 ? `${index / 2 + 1}. ` : '';
+        return number + this.reading.spoken(san);
+      })
+      .join(', ');
   }
 }

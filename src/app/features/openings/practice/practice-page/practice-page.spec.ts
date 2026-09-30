@@ -6,6 +6,7 @@ import { CONTENT_LOADERS, type ContentLoaders } from '../../../../core/content';
 import { ENGINE_TRANSPORT } from '../../../../core/engine';
 import { GameService } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
+import { ReadingModeService } from '../../../../core/reading-mode';
 import { PROGRESS_STORE_LOADER, progressKey } from '../../../../core/progress';
 import { BoardComponent } from '../../../../shared/board';
 import { memoryProgressStore } from '../../testing/memory-progress-store';
@@ -39,6 +40,7 @@ describe('PracticePage', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(PracticePage);
     element = fixture.nativeElement as HTMLElement;
     session = fixture.debugElement.injector.get(PracticeSession);
@@ -172,7 +174,12 @@ describe('PracticePage', () => {
     it('should list every line with its moves and progress', async () => {
       const lines = Array.from(element.querySelectorAll('.lines li')).map((item) =>
         Array.from(item.querySelectorAll('.line-title, .line-moves, .line-prog'))
-          .map((part) => part.textContent?.replace(/\s+/g, ' ').trim())
+          .map((part) => {
+            // The sentences that only screen readers get are left out.
+            const copy = part.cloneNode(true) as HTMLElement;
+            copy.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+            return copy.textContent?.replace(/\s+/g, ' ').trim();
+          })
           .join(' | '),
       );
 
@@ -222,7 +229,7 @@ describe('PracticePage', () => {
     it('should confirm a right move and play the rival move', async () => {
       await move('e2', 'e4');
 
-      expect(text('.feedback')).toBe('1.e4 is right. Your rival is moving…');
+      expect(text('.feedback')).toBe('Correct: 1.e4. Your rival is moving…');
 
       await settle(PRACTICE_REPLY_DELAY_MS);
 
@@ -258,8 +265,32 @@ describe('PracticePage', () => {
       await move('g1', 'f3');
 
       expect(text('.help h2')).toBe('The move of the line');
-      expect(text('.help p')).toBe('Play e4, from e2 to e4, to go on. It is marked on the board.');
-      expect(text('.feedback')).toContain('Play e4, from e2 to e4, to go on.');
+      expect(text('.help p')).toBe('Play e4. It goes from e2 to e4 and is marked on the board.');
+      expect(text('.feedback')).toContain('Play e4. It goes from e2 to e4');
+    });
+
+    it('should tell the messages and the help in words', async () => {
+      TestBed.inject(I18nService).setLang('es');
+      TestBed.inject(ReadingModeService).setMode('words');
+      await move('d2', 'd4');
+
+      expect(text('.feedback')).toBe(
+        '1. Peón a d4 no está en esta línea. Se ha retirado (fallo 1 de 3 en esta jugada).',
+      );
+
+      await move('c2', 'c4');
+      await move('g1', 'f3');
+
+      expect(text('.help p')).toBe(
+        'Juega peón a e4. Va de e2 a e4 y te la marcamos en el tablero.',
+      );
+    });
+
+    it('should confirm a right move in words', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      await move('e2', 'e4');
+
+      expect(text('.feedback')).toBe('Correct: 1. pawn to e4. Your rival is moving…');
     });
 
     it('should restart the line', async () => {

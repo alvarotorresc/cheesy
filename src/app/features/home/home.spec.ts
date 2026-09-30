@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { CONTENT_LOADERS, type ContentLoaders } from '../../core/content';
 import { bundledContentLoaders } from '../../core/content/testing';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { buildHomeData, HERO_OPENING_IDS } from './home-data';
 import { Home } from './home';
 
@@ -68,6 +69,7 @@ describe('Home', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('es');
+    TestBed.inject(ReadingModeService).setMode('notation');
   });
 
   afterEach(() => vi.unstubAllGlobals());

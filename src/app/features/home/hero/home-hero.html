@@ -42,8 +42,8 @@
               class="mv"
               [class.now]="move.index === player.ply() - 1"
               [class.future]="move.index >= player.ply()"
-              >{{ move.text }}</span
-            >
+              ><app-move [san]="move.san" [color]="move.color"
+            /></span>
           }
         </span>
       }

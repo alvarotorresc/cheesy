@@ -17,7 +17,7 @@
               [attr.title]="cell.off ? outOfLines() : null"
               (click)="selectPly.emit(cell.ply)"
             >
-              {{ cell.text }}
+              <app-move [san]="cell.san" [color]="cell.color" [tooltip]="!cell.off" />
             </button>
           } @else {
             <span class="empty-cell"></span>

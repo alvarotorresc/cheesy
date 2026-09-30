@@ -23,15 +23,15 @@
   </div>
   <p class="moves" aria-hidden="true">
     @for (move of moves(); track $index) {
-      @if (move.number) {
-        <span class="num">{{ move.number }}</span>
+      @if (move.prefix) {
+        <span class="num">{{ move.prefix }}</span>
       }
       <span
         class="mv"
         [class.now]="replay.playing() && $index === replay.ply() - 1"
         [class.future]="replay.playing() && $index >= replay.ply()"
-        >{{ move.text }}</span
-      >
+        ><app-move [san]="move.san" [color]="move.color"
+      /></span>
     }
   </p>
   <div class="card-body">

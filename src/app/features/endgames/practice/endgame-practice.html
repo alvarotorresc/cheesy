@@ -297,7 +297,7 @@
                   [attr.aria-label]="move.label"
                   (click)="game.goTo(move.ply)"
                 >
-                  {{ move.san }}
+                  <app-move [san]="move.san" [color]="move.color" />
                 </button>
               </li>
             }

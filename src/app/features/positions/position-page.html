@@ -171,7 +171,11 @@
               <ol class="steps">
                 @for (view of steps(); track view.ply) {
                   <li [class.opponent]="!view.step.byPlayer">
-                    <span class="plain">{{ view.number }} {{ i18n.san(view.step.san) }}</span>
+                    <span class="plain"
+                      ><span
+                        >{{ view.number }}
+                        <app-move [san]="view.step.san" [color]="view.color" /></span
+                    ></span>
                   </li>
                 }
               </ol>
@@ -211,11 +215,13 @@
                       ' ' +
                       view.number +
                       ' ' +
-                      i18n.san(view.step.san)
+                      reading.spoken(view.step.san, { start: false })
                     "
                     (click)="trainer.goTo(view.ply)"
                   >
-                    {{ view.number }} {{ i18n.san(view.step.san) }}
+                    <span
+                      >{{ view.number }} <app-move [san]="view.step.san" [color]="view.color"
+                    /></span>
                   </button>
                 </li>
               }

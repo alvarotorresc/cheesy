@@ -1,8 +1,10 @@
 import { Component, inject, input, output } from '@angular/core';
 import { I18nService } from '../../../core/i18n';
+import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
 import type { MoveNode } from '../../../core/move-tree';
 import { Icon } from '../../../shared/icon';
-import { moveLabel, moveNumber } from '../move-label';
+import { MoveText } from '../../../shared/move';
+import { moveNumber } from '../move-label';
 import type { VariationItem, VariationView } from './move-rows';
 
 /**
@@ -12,12 +14,13 @@ import type { VariationItem, VariationView } from './move-rows';
  */
 @Component({
   selector: 'app-variation',
-  imports: [Icon],
+  imports: [Icon, MoveText],
   templateUrl: './variation.html',
   styleUrls: ['./moves.css', './variation.css'],
 })
 export class Variation {
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
 
   readonly view = input.required<VariationView>();
   readonly currentId = input.required<string>();
@@ -31,9 +34,10 @@ export class Variation {
   readonly fold = output<string>();
 
   protected readonly moveNumber = moveNumber;
+  protected readonly colorOfPly = colorOfPly;
 
   protected label(node: MoveNode): string {
-    const text = moveLabel(node, (san) => this.i18n.san(san));
+    const text = `${moveNumber(node)} ${this.reading.spoken(node.san)}`;
     const name = this.names().get(node.id);
     return name ? `${text}, ${name}` : text;
   }
@@ -41,7 +45,7 @@ export class Variation {
   protected toggleLabel(): string {
     const { start, folded } = this.view();
     const t = this.i18n.t().analysis;
-    const text = moveLabel(start, (san) => this.i18n.san(san));
+    const text = `${moveNumber(start)} ${this.reading.spoken(start.san, { start: false })}`;
     return folded ? t.unfoldVariation(text) : t.foldVariation(text);
   }
 

@@ -14,6 +14,7 @@ import type { Color, SquareName } from 'chessops';
 import { GameService } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
 import { PageTitle } from '../../../../core/page-title';
+import { ReadingModeService } from '../../../../core/reading-mode';
 import {
   BoardComponent,
   type BoardArrow,
@@ -23,7 +24,6 @@ import {
 } from '../../../../shared/board';
 import { isFormField } from '../../../../shared/keyboard';
 import { MoveList } from '../../../../shared/move-list';
-import { numberedMove } from '../../opening-theory';
 import { PracticeProgress } from '../practice-progress/practice-progress';
 import { PracticeSession, type PracticePhase } from '../practice-session';
 import { PracticeSetup } from '../practice-setup/practice-setup';
@@ -69,6 +69,7 @@ export class PracticePage {
   protected readonly game = inject(GameService);
   protected readonly session = inject(PracticeSession);
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
 
   private readonly route = inject(ActivatedRoute);
   /** Id of the opening in the URL, for the link to play it while it loads. */
@@ -107,15 +108,13 @@ export class PracticePage {
     const node = this.session.help();
     return (
       node && {
-        move: this.i18n.san(node.san),
+        // After "Play": lower case in words mode.
+        move: this.reading.full(node.san, { start: false }),
         from: node.from,
         to: node.to,
       }
     );
   });
-
-  private readonly numbered = (ply: number, san: string): string =>
-    numberedMove(ply, this.i18n.san(san));
 
   /** Main message of the practice, announced to screen readers when it changes. */
   protected readonly feedback = computed<FeedbackView | undefined>(() => {
@@ -138,14 +137,14 @@ export class PracticePage {
         return thinking
           ? {
               tone: 'right',
-              text: t.correct(this.numbered(feedback.ply, feedback.san)),
+              text: t.correct(this.reading.numbered(feedback.ply, feedback.san, { start: false })),
               sub: next,
             }
           : { tone: 'turn', text: next };
       case 'wrong':
         return {
           tone: 'wrong',
-          text: t.wrong(this.numbered(feedback.ply, feedback.san), feedback.attempt, max),
+          text: t.wrong(this.reading.numbered(feedback.ply, feedback.san), feedback.attempt, max),
           spoken,
         };
       case 'other-line': {
@@ -155,7 +154,7 @@ export class PracticePage {
         return {
           tone: 'wrong',
           text: t.otherLine(
-            this.numbered(feedback.ply, feedback.san),
+            this.reading.numbered(feedback.ply, feedback.san),
             variation,
             feedback.attempt,
             max,

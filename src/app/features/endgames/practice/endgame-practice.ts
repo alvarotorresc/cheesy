@@ -13,6 +13,7 @@ import {
 import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink, type AnalysisLink } from '../../../core/analysis-link';
 import { ContentService, isContentId } from '../../../core/content';
@@ -21,11 +22,13 @@ import { GameService, type PlayedMove } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { Icon } from '../../../shared/icon';
 import { isFormField } from '../../../shared/keyboard';
+import { MoveText } from '../../../shared/move';
 import { DRAW_TARGET } from '../endgame-milestones';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
@@ -42,6 +45,7 @@ interface MoveView {
   readonly ply: number;
   readonly number: string;
   readonly san: string;
+  readonly color: Color;
   readonly label: string;
   readonly mine: boolean;
   readonly bad: boolean;
@@ -52,7 +56,7 @@ interface MoveView {
 /** One endgame: the player plays their side against a rival that answers from the tablebase. */
 @Component({
   selector: 'app-endgame-practice',
-  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink, TablebasePanel],
+  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink, TablebasePanel],
   providers: [GameService, EngineService, EndgameSession, TablebaseLookup],
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',
@@ -65,6 +69,7 @@ export class EndgamePractice {
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
   private readonly content = inject(ContentService);
   private readonly progress = inject(ProgressService);
   private readonly window = inject(DOCUMENT).defaultView;
@@ -138,13 +143,14 @@ export class EndgamePractice {
       const white = absolute % 2 === 0;
       const number = Math.floor(absolute / 2) + 1;
       const mine = (white ? 'white' : 'black') === player;
-      const san = this.i18n.san(move.san);
       const prefix = white ? `${number}.` : index === 0 ? `${number}...` : '';
       return {
         ply: index + 1,
         number: prefix,
-        san,
-        label: `${this.label(index, move)}, ${mine ? t.moveMine : t.moveRival}`,
+        san: move.san,
+        color: white ? 'white' : 'black',
+        // The name of the button replaces its content, so it tells the sentence in both modes.
+        label: `${number}${white ? '.' : '...'} ${this.reading.spoken(move.san)}, ${mine ? t.moveMine : t.moveRival}`,
         mine,
         bad: bad === index + 1,
         future: index + 1 > ply,
@@ -228,7 +234,9 @@ export class EndgamePractice {
     };
     const move = this.game.moves()[change.ply - 1];
     return fill(t.moveChanged, {
-      move: move ? this.label(change.ply - 1, move) : this.i18n.san(change.san),
+      move: move
+        ? this.label(change.ply - 1, move)
+        : this.reading.full(change.san, { start: false }),
       before: names[change.before],
       after: names[change.after],
     });
@@ -389,11 +397,13 @@ export class EndgamePractice {
     this.saveState.set(recorded ? 'saved' : 'failed');
   }
 
-  /** "12.Rd5" or "12...Ra1": the move of the game with its number, in the language of the page. */
+  /**
+   * "12. torre a d5" or "12.Td5": the move of the game with its number, in the reading mode. It
+   * always goes in the middle of a message, so the sentence starts in lower case.
+   */
   private label(index: number, move: PlayedMove): string {
-    const absolute = this.game.startPly() + index;
-    const number = Math.floor(absolute / 2) + 1;
-    return `${number}.${absolute % 2 === 0 ? '' : '..'}${this.i18n.san(move.san)}`;
+    // `startPly` counts the plies before the first move; `numbered` counts from 1.
+    return this.reading.numbered(this.game.startPly() + index + 1, move.san, { start: false });
   }
 
   private readPanelPreference(): boolean {

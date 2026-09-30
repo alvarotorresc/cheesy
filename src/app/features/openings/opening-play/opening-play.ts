@@ -8,12 +8,12 @@ import { EngineService } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { isFormField } from '../../../shared/keyboard';
 import { OpeningMoves } from '../opening-moves/opening-moves';
 import { OpeningSession } from '../opening-session';
-import { numberedMove } from '../opening-theory';
 import { PlayOptions } from '../play-options/play-options';
 import { TheoryPanel } from '../theory-panel/theory-panel';
 
@@ -52,6 +52,7 @@ export class OpeningPlay {
   protected readonly session = inject(OpeningSession);
   protected readonly i18n = inject(I18nService);
   private readonly engine = inject(EngineService);
+  private readonly reading = inject(ReadingModeService);
 
   protected readonly sans = computed(() => this.game.moves().map((move) => move.san));
   protected readonly isReviewing = computed(() => this.game.ply() < this.game.moves().length);
@@ -87,7 +88,8 @@ export class OpeningPlay {
   protected readonly deviationMoves = computed(() => {
     const deviation = this.session.deviation();
     if (!deviation) return undefined;
-    const written = (san: string): string => numberedMove(deviation.ply, this.i18n.san(san));
+    const written = (san: string): string =>
+      this.reading.numbered(deviation.ply, san, { start: false });
     return {
       expected: written(deviation.expected.san),
       alternatives: deviation.alternatives.map((node) => written(node.san)).join(', '),

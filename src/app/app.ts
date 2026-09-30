@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { I18nService, LANGS } from './core/i18n';
+import { type ReadingMode, ReadingModeService } from './core/reading-mode';
 import { mainKindOf } from './layout/main-kind';
 import { SiteFooter } from './layout/site-footer';
 import { Logo } from './shared/logo';
@@ -21,6 +22,8 @@ import { Toast } from './shared/toast';
 export class App {
   protected readonly i18n = inject(I18nService);
   protected readonly langs = LANGS;
+  protected readonly reading = inject(ReadingModeService);
+  protected readonly readingModes: readonly ReadingMode[] = ['words', 'notation'];
   protected readonly sections = ['openings', 'endgames', 'positions', 'analysis'] as const;
 
   private readonly router = inject(Router);

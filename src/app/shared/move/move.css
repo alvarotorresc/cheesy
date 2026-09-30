@@ -1,0 +1,20 @@
+/* Positioned so the hidden sentence (absolute) stays inside the move: otherwise it escapes the
+   clipping of a scrolling strip and widens the page. */
+:host {
+  display: inline;
+  position: relative;
+}
+
+/* A compact move never breaks between the piece image and its square. */
+.compact {
+  white-space: nowrap;
+}
+
+/* The piece image sits on the text line, as tall as a capital letter. */
+.icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.05em;
+  vertical-align: -0.2em;
+}

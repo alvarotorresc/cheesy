@@ -7,6 +7,10 @@ export const es: Messages = {
     mainNavigation: 'Navegación principal',
     language: 'Idioma',
     homeLabel: 'Cheesy, inicio',
+    readingMode: 'Modo de lectura',
+    words: 'Palabras',
+    notation: 'Notación',
+    castles: 'Enroque',
   },
   nav: {
     home: 'Inicio',
@@ -223,8 +227,9 @@ export const es: Messages = {
     keyboardHint: 'Con el teclado:',
     keyboardMoves: 'para moverte por las jugadas,',
     keyboardLines: 'para cambiar de línea.',
-    variationCreated: (move: string) => `${move} crea una variante: la línea que tenías sigue ahí.`,
-    undone: (move: string) => `Deshecha ${move}.`,
+    variationCreated: (move: string) =>
+      `Nueva variante con ${move}: la línea que tenías sigue ahí.`,
+    undone: (move: string) => `Jugada deshecha: ${move}.`,
     resetDone: 'Tablero reiniciado.',
     treeFull: 'No caben más jugadas en este tablero. Deshaz alguna o reinicia.',
     foldVariation: (move: string) => `Plegar la variante ${move}`,
@@ -463,7 +468,7 @@ export const es: Messages = {
     boardCaption: (color: string) => `Posición inicial, con las ${color} abajo.`,
     yourMove: 'Te toca: juega la jugada de la línea.',
     rivalMoving: 'El rival está moviendo…',
-    correct: (move: string) => `${move} es correcta.`,
+    correct: (move: string) => `Correcto: ${move}.`,
     wrong: (move: string, attempt: number, max: number) =>
       `${move} no está en esta línea. Se ha retirado (fallo ${attempt} de ${max} en esta jugada).`,
     otherLine: (move: string, variation: string, attempt: number, max: number) =>
@@ -475,7 +480,7 @@ export const es: Messages = {
     helpTitle: 'La jugada de la línea',
     helpLead: 'Juega',
     helpTail: (from: string, to: string) =>
-      `, de ${from} a ${to}, para seguir. Te la marcamos en el tablero.`,
+      `. Va de ${from} a ${to} y te la marcamos en el tablero.`,
     restartLine: 'Reiniciar la línea',
     changeLine: 'Elegir otra línea',
     reviewing: 'Estás viendo una jugada anterior.',
@@ -654,7 +659,7 @@ export const es: Messages = {
       'Haz cualquier jugada legal: si no es la buena, se retira y puedes volver a probar.',
     oneMove: 'Una jugada',
     moveOf: (current: number, total: number) => `Jugada ${current} de ${total}`,
-    correct: (move: string) => `${move} es correcta.`,
+    correct: (move: string) => `Correcto: ${move}.`,
     reply: (move: string) => `El rival responde ${move}. Sigue.`,
     solved: 'Resuelta.',
     solvedSub: 'Recorre la línea para repasarla.',
@@ -662,8 +667,7 @@ export const es: Messages = {
     reviewingSub: 'Recorre la línea con las flechas o pulsando cada jugada.',
     revealed: 'Esta es la solución.',
     revealedSub: 'Recorre la línea para repasarla.',
-    wrong: (move: string) =>
-      `${move} no es la jugada. Se ha retirado del tablero: prueba con otra.`,
+    wrong: (move: string) => `No era ${move}. Se ha retirado del tablero: prueba con otra.`,
     wrongSub: 'Intentos ilimitados.',
     hint: 'Pista',
     hintTitle: 'Pista:',
@@ -794,8 +798,8 @@ export const es: Messages = {
     board: 'Tablero',
     resultAchieved: 'Objetivo cumplido',
     resultFailed: 'Objetivo no cumplido',
-    whyCrowned: 'Has coronado con {move} y la tablebase sigue dando victoria.',
-    whyMated: 'Has dado mate con {move}.',
+    whyCrowned: 'La tablebase sigue dando victoria tras {move}.',
+    whyMated: 'Cierras la partida con {move}.',
     whyRulesStalemate: 'Tablas por ahogado: tu rey no tiene jugadas legales y no está en jaque.',
     whyRulesStalemateRival:
       'Tablas por ahogado: el rey del rival no tiene jugadas legales y no está en jaque.',
@@ -804,7 +808,7 @@ export const es: Messages = {
     whyRulesRepetition: 'Tablas por triple repetición de la posición.',
     whyRulesFifty: 'Tablas por la regla de las cincuenta jugadas.',
     failedAfter:
-      'Tras {move} la tablebase da la posición por perdida: con juego perfecto, el rival gana. Deshaz la jugada o reinicia para intentarlo de nuevo.',
+      'Tras {move}, la tablebase da la posición por perdida: con juego perfecto, el rival gana. Deshaz la jugada o reinicia para intentarlo de nuevo.',
     failedEnded: '{reason} Deshaz la jugada o reinicia para intentarlo de nuevo.',
     nextEndgame: 'Siguiente final',
     saved: 'Final superado, guardado en este navegador',
@@ -883,7 +887,7 @@ export const es: Messages = {
     hintHelp: 'Te enseña la mejor jugada de esta posición.',
     hintLater: 'La pista aparece cuando te toca mover.',
     earlier: 'La tablebase se consulta en la posición actual. Vuelve a ella para verla.',
-    moveChanged: 'Tu jugada {move} ha cambiado el resultado teórico: de {before} a {after}.',
+    moveChanged: 'Con tu jugada {move}, el resultado teórico ha pasado de {before} a {after}.',
     outcomeWin: 'victoria',
     outcomeDraw: 'tablas',
     outcomeLoss: 'derrota',

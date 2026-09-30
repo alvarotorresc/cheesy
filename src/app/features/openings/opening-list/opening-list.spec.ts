@@ -2,6 +2,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { CONTENT_LOADERS, type ContentLoaders } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import {
   PROGRESS_STORE_LOADER,
   progressKey,
@@ -32,6 +33,7 @@ describe('OpeningList', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(OpeningList);
     element = fixture.nativeElement as HTMLElement;
     await fixture.whenStable();

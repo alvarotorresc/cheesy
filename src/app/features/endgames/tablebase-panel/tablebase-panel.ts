@@ -8,6 +8,7 @@ import {
   type TablebaseLookupState,
   type TablebaseMove,
 } from '../../../core/tablebase';
+import { MoveText } from '../../../shared/move';
 import { Icon } from '../../../shared/icon';
 import { fill } from '../endgame-goal';
 import type { RivalSource } from '../practice/endgame-session';
@@ -45,7 +46,7 @@ interface ResultView {
  */
 @Component({
   selector: 'app-tablebase-panel',
-  imports: [Icon],
+  imports: [Icon, MoveText],
   templateUrl: './tablebase-panel.html',
   styleUrl: './tablebase-panel.css',
 })

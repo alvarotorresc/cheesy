@@ -26,12 +26,16 @@
           note
           [class.mv]="opening.playing() && opening.ply() > 0"
           [class.soft]="!(opening.playing() && opening.ply() > 0)"
-          >{{
-            opening.playing() && opening.ply() > 0
-              ? plyLabel(data().dragon.sans, opening.ply())
-              : i18n.t().home.seenFromBlack
-          }}</span
         >
+          @if (
+            opening.playing() && opening.ply() > 0 && shownMove(data().dragon.sans, opening.ply());
+            as move
+          ) {
+            {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+          } @else {
+            {{ i18n.t().home.seenFromBlack }}
+          }
+        </span>
       </app-section-card>
     </li>
 
@@ -122,9 +126,11 @@
           />
         </div>
         <span note>{{ i18n.localize(data().italian.name) }}</span>
-        <span note class="mv" [hidden]="!(analysis.playing() && analysis.ply() > 0)">{{
-          plyLabel(data().italian.sans, analysis.ply())
-        }}</span>
+        <span note class="mv" [hidden]="!(analysis.playing() && analysis.ply() > 0)">
+          @if (shownMove(data().italian.sans, analysis.ply()); as move) {
+            {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+          }
+        </span>
         <span note class="soft">{{ i18n.t().home.illustrativeBar }}</span>
       </app-section-card>
     </li>
