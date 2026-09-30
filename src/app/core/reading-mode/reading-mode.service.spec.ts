@@ -71,6 +71,27 @@ describe('ReadingModeService', () => {
     expect(mode.numbered(6, 'a6')).toBe('3...a6');
   });
 
+  it('should number a move in lower case inside a sentence, only in words mode', () => {
+    const mode = createService();
+
+    expect(mode.numbered(6, 'a6', { start: false })).toBe('3... peón a a6');
+    mode.setMode('notation');
+    expect(mode.numbered(6, 'a6', { start: false })).toBe('3...a6');
+  });
+
+  it('should write and number moves in English too', () => {
+    const mode = createService();
+    TestBed.inject(I18nService).setLang('en');
+
+    expect(mode.full('Nf3')).toBe('Knight to f3');
+    expect(mode.full('Nf3', { start: false })).toBe('knight to f3');
+    expect(mode.numbered(5, 'Bb5')).toBe('3. Bishop to b5');
+    expect(mode.numbered(5, 'Bb5', { start: false })).toBe('3. bishop to b5');
+    mode.setMode('notation');
+    expect(mode.full('Nf3', { start: false })).toBe('Nf3');
+    expect(mode.numbered(5, 'Bb5', { start: false })).toBe('3.Bb5');
+  });
+
   it('should always tell the sentence for screen readers', () => {
     const mode = createService();
     mode.setMode('notation');

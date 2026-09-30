@@ -96,7 +96,7 @@ describe('EngineLines', () => {
 
     const [first] = Array.from(element.querySelectorAll('button'));
     expect(first.getAttribute('aria-label')).toBe(
-      '+0.3 1. Pawn to e4, Pawn to e5, 2. Knight to f3',
+      '+0.3 1. Pawn to e4, pawn to e5, 2. knight to f3',
     );
   });
 
@@ -108,7 +108,7 @@ describe('EngineLines', () => {
 
     const [first] = Array.from(element.querySelectorAll('button'));
     expect(first.getAttribute('aria-label')).toBe(
-      'Play 1. Pawn to e4 (+0.3): 1. Pawn to e4, Pawn to e5, 2. Knight to f3',
+      'Play 1. pawn to e4 (+0.3): 1. Pawn to e4, pawn to e5, 2. knight to f3',
     );
   });
 

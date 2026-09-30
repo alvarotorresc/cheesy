@@ -51,10 +51,14 @@ export class ReadingModeService {
     return this.words() ? describeMove(san, lang, options) : localizeSan(san, lang);
   }
 
-  /** A move with its number: `3. Alfil a b5` / `3... Peón a a6`, or `3.Ab5` / `3...a6`. */
-  numbered(ply: number, san: string): string {
+  /**
+   * A move with its number: `3. Alfil a b5` / `3... Peón a a6`, or `3.Ab5` / `3...a6`. With
+   * `start: false` the sentence goes in lower case, for a move in the middle of a text.
+   */
+  numbered(ply: number, san: string, options: { start?: boolean } = {}): string {
     const number = `${Math.ceil(ply / 2)}${ply % 2 === 1 ? '.' : '...'}`;
-    return this.words() ? `${number} ${this.full(san)}` : `${number}${this.full(san)}`;
+    const move = this.full(san, options);
+    return this.words() ? `${number} ${move}` : `${number}${move}`;
   }
 
   /** The sentence of a move whatever the mode, for screen readers. */

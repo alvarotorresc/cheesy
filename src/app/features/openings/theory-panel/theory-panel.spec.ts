@@ -69,7 +69,16 @@ describe('TheoryPanel', () => {
     await render(['e4', 'e5', 'Bc4']);
 
     expect(text('.book-state')).toBe(
-      'Te has salido de nuestras líneas con 2. Alfil a c4. Nuestras líneas seguían con 2. Caballo a f3.',
+      'Te has salido de nuestras líneas con 2. alfil a c4. Nuestras líneas seguían con 2. caballo a f3.',
+    );
+  });
+
+  it("should write the rival's choice in words, in lower case inside the sentence", async () => {
+    TestBed.inject(ReadingModeService).setMode('words');
+    await render(['e4', 'e5', 'Nf3', 'Nf6'], 'white');
+
+    expect(text('.rival-choice')).toBe(
+      'The rival chose 2... knight to f6, one of our lines. The main line goes on with 2... knight to c6.',
     );
   });
 

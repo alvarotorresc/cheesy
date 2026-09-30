@@ -40,8 +40,8 @@ export class TheoryPanel {
     if (!deviation) return undefined;
     return {
       byPlayer: deviation.side === this.playerColor(),
-      played: this.reading.numbered(deviation.ply, deviation.san),
-      expected: this.reading.numbered(deviation.ply, deviation.expected.san),
+      played: this.reading.numbered(deviation.ply, deviation.san, { start: false }),
+      expected: this.reading.numbered(deviation.ply, deviation.expected.san, { start: false }),
     };
   });
 
@@ -52,8 +52,8 @@ export class TheoryPanel {
     const side: Color = choice.chosen.ply % 2 === 1 ? 'white' : 'black';
     if (side === this.playerColor()) return undefined;
     return {
-      played: this.reading.numbered(choice.chosen.ply, choice.chosen.san),
-      main: this.reading.numbered(choice.main.ply, choice.main.san),
+      played: this.reading.numbered(choice.chosen.ply, choice.chosen.san, { start: false }),
+      main: this.reading.numbered(choice.main.ply, choice.main.san, { start: false }),
     };
   });
 

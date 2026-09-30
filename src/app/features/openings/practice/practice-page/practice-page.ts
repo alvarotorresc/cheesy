@@ -137,7 +137,7 @@ export class PracticePage {
         return thinking
           ? {
               tone: 'right',
-              text: t.correct(this.reading.numbered(feedback.ply, feedback.san)),
+              text: t.correct(this.reading.numbered(feedback.ply, feedback.san, { start: false })),
               sub: next,
             }
           : { tone: 'turn', text: next };

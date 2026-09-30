@@ -45,7 +45,7 @@ export class Variation {
   protected toggleLabel(): string {
     const { start, folded } = this.view();
     const t = this.i18n.t().analysis;
-    const text = `${moveNumber(start)} ${this.reading.spoken(start.san)}`;
+    const text = `${moveNumber(start)} ${this.reading.spoken(start.san, { start: false })}`;
     return folded ? t.unfoldVariation(text) : t.foldVariation(text);
   }
 

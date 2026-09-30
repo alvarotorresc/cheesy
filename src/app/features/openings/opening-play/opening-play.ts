@@ -88,7 +88,8 @@ export class OpeningPlay {
   protected readonly deviationMoves = computed(() => {
     const deviation = this.session.deviation();
     if (!deviation) return undefined;
-    const written = (san: string): string => this.reading.numbered(deviation.ply, san);
+    const written = (san: string): string =>
+      this.reading.numbered(deviation.ply, san, { start: false });
     return {
       expected: written(deviation.expected.san),
       alternatives: deviation.alternatives.map((node) => written(node.san)).join(', '),

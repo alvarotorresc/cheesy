@@ -80,15 +80,18 @@ export class EngineLines {
       .map((line) => {
         const moves = numberMoves(line.sanPv.slice(0, this.maxMoves()), this.startPly());
         const score = formatScore(line.score);
-        // Screen readers get sentences, whatever the reading mode shows.
-        const said = moves.map((move) => `${move.prefix} ${this.reading.spoken(move.san)}`.trim());
+        // Screen readers get sentences, whatever the reading mode shows. Only the first move of
+        // the list starts with a capital; the first move alone follows a word ("Play …").
+        const say = (move: (typeof moves)[number], start: boolean): string =>
+          `${move.prefix} ${this.reading.spoken(move.san, { start })}`.trim();
+        const said = moves.map((move, index) => say(move, index === 0));
         return {
           multipv: line.multipv,
           score,
           black: line.score.value < 0,
           first: moves[0],
           rest: moves.slice(1),
-          label: describe(said[0], score, said.join(', ')),
+          label: describe(say(moves[0], false), score, said.join(', ')),
           move: { uci: line.pv[0], san: line.sanPv[0] },
         };
       });

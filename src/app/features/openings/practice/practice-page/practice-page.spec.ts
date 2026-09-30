@@ -290,7 +290,7 @@ describe('PracticePage', () => {
       TestBed.inject(ReadingModeService).setMode('words');
       await move('e2', 'e4');
 
-      expect(text('.feedback')).toBe('Correct: 1. Pawn to e4. Your rival is moving…');
+      expect(text('.feedback')).toBe('Correct: 1. pawn to e4. Your rival is moving…');
     });
 
     it('should restart the line', async () => {

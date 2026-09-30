@@ -397,10 +397,13 @@ export class EndgamePractice {
     this.saveState.set(recorded ? 'saved' : 'failed');
   }
 
-  /** "12. Torre a d5" or "12.Td5": the move of the game with its number, in the reading mode. */
+  /**
+   * "12. torre a d5" or "12.Td5": the move of the game with its number, in the reading mode. It
+   * always goes in the middle of a message, so the sentence starts in lower case.
+   */
   private label(index: number, move: PlayedMove): string {
     // `startPly` counts the plies before the first move; `numbered` counts from 1.
-    return this.reading.numbered(this.game.startPly() + index + 1, move.san);
+    return this.reading.numbered(this.game.startPly() + index + 1, move.san, { start: false });
   }
 
   private readPanelPreference(): boolean {

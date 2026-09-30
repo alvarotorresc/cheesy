@@ -114,7 +114,7 @@ export class Analysis {
   protected readonly variationStart = computed(() => {
     const tree = this.session.tree();
     const start = tree.variationStart(this.session.currentId());
-    return start === undefined ? undefined : this.session.label(tree.node(start));
+    return start === undefined ? undefined : this.session.label(tree.node(start), { start: false });
   });
 
   protected readonly nestedVariation = computed(
@@ -131,8 +131,8 @@ export class Analysis {
         const node = this.session.tree().node(origin.arrivalId);
         if (node.parentId === undefined) return t.originOpeningStart;
         const variation = origin.variation ? this.i18n.localize(origin.variation) : '';
-        const move = this.session.label(node);
-        return variation ? t.originOpening(variation, move) : `${move}.`;
+        if (!variation) return `${this.session.label(node)}.`;
+        return t.originOpening(variation, this.session.label(node, { start: false }));
       }
       case 'endgame':
         return t.originGoal(origin.goal, origin.side);

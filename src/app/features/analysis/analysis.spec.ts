@@ -238,6 +238,22 @@ describe('Analysis', () => {
       expect(session.current().san).toBe('e5');
     });
 
+    it('should write the moves of the notices in lower case inside the sentence in words mode', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      for (const san of ['e4', 'e5', 'Nf3']) playSan(san);
+      session.previous();
+      playSan('Bc4');
+      await render();
+
+      expect(toast()).toBe('New variation with 2. bishop to c4: your line is still there.');
+      expect(element.querySelector('.in-var')?.textContent).toContain(
+        'You are in a variation (2. bishop to c4).',
+      );
+      expect(element.querySelector('.var-toggle')?.getAttribute('aria-label')).toBe(
+        'Fold the variation 2. bishop to c4',
+      );
+    });
+
     it('should fold a variation down to its first move and unfold it', async () => {
       for (const san of ['e4', 'e5']) playSan(san);
       session.first();
@@ -462,9 +478,9 @@ describe('Analysis', () => {
 
       expect(barText()).toBe('+0.3');
       expect(lineButtons().map((line) => line.getAttribute('aria-label'))).toEqual([
-        'Play 1. Pawn to e4. Evaluation +0.3. Line: 1. Pawn to e4, Pawn to e5, 2. Knight to f3',
-        'Play 1. Pawn to d4. Evaluation +0.3. Line: 1. Pawn to d4, Pawn to d5',
-        'Play 1. Knight to f3. Evaluation -0.2. Line: 1. Knight to f3, Pawn to d5',
+        'Play 1. pawn to e4. Evaluation +0.3. Line: 1. Pawn to e4, pawn to e5, 2. knight to f3',
+        'Play 1. pawn to d4. Evaluation +0.3. Line: 1. Pawn to d4, pawn to d5',
+        'Play 1. knight to f3. Evaluation -0.2. Line: 1. Knight to f3, pawn to d5',
       ]);
       expect(lineButtons()[0].classList).toContain('best');
       expect(lineButtons()[2].querySelector('.score')?.classList).toContain('black');
@@ -700,6 +716,10 @@ describe('Analysis', () => {
       const origin = element.querySelector('.origin');
       expect(origin?.textContent).toContain('From: French Defence');
       expect(origin?.textContent).toContain('after 3...Bb4');
+
+      TestBed.inject(ReadingModeService).setMode('words');
+      await render();
+      expect(origin?.textContent).toContain('Winawer Variation, after 3... bishop to b4.');
       expect(origin?.querySelector('a')?.getAttribute('href')).toBe('/openings/french-defence');
       expect(element.querySelector('app-move-tree .mv-name')).not.toBeNull();
 

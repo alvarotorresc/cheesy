@@ -69,7 +69,7 @@ describe('AnalysisSession', () => {
     expect(sans()).toEqual(['e4', 'e5']);
     expect(session.current().san).toBe('c5');
     expect(session.hasVariations()).toBe(true);
-    expect(toasts).toEqual(['Nueva variante con 1... Peón a c5: la línea que tenías sigue ahí.']);
+    expect(toasts).toEqual(['Nueva variante con 1... peón a c5: la línea que tenías sigue ahí.']);
   });
 
   it('should reuse a move that is already there instead of repeating it', () => {
@@ -104,7 +104,7 @@ describe('AnalysisSession', () => {
     session.undo();
     expect(sans()).toEqual(['e4']);
     expect(session.currentId()).toBe(ROOT_ID);
-    expect(toasts).toEqual(['Jugada deshecha: 1... Peón a e5.']);
+    expect(toasts).toEqual(['Jugada deshecha: 1... peón a e5.']);
 
     session.last();
     session.undo();

@@ -194,7 +194,7 @@ describe('OpeningPlay', () => {
       await settle();
 
       expect(text('.alert')).toContain(
-        'Here our lines go on with 2. Knight to f3. We also cover 2. Pawn to d4.',
+        'Here our lines go on with 2. knight to f3. We also cover 2. pawn to d4.',
       );
     });
 

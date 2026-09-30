@@ -383,10 +383,13 @@ describe('EndgamePractice', () => {
       await settle();
 
       expect(element().querySelector('.alert.fresh')?.textContent).toContain(
-        'Con tu jugada 1... Rey a g4, el resultado teórico ha pasado de tablas a derrota.',
+        'Con tu jugada 1... rey a g4, el resultado teórico ha pasado de tablas a derrota.',
       );
       const marked = element().querySelector('.move-list button.bad');
       expect(marked?.getAttribute('aria-label')).toBe('1... Rey a g4, tu jugada');
+      expect(element().querySelector('.result.failed')?.textContent).toContain(
+        'Tras 1... rey a g4, la tablebase da la posición por perdida',
+      );
     });
 
     it('should keep the game going with a discreet notice when the tablebase fails', async () => {

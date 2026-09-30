@@ -71,9 +71,12 @@ export class AnalysisSession {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.replayTimer));
   }
 
-  /** A move with its number, in the reading mode: `7... Dama a c7` or `7...Dc7` in Spanish. */
-  label(node: MoveNode): string {
-    return this.reading.numbered(node.ply, node.san);
+  /**
+   * A move with its number, in the reading mode: `7... Dama a c7` or `7...Dc7` in Spanish. With
+   * `start: false`, in lower case for the middle of a sentence.
+   */
+  label(node: MoveNode, options: { start?: boolean } = {}): string {
+    return this.reading.numbered(node.ply, node.san, options);
   }
 
   /**
@@ -118,7 +121,9 @@ export class AnalysisSession {
     this.currentState.set(result.id);
     this.fresh.set(result.created ? result.id : undefined);
     if (result.created && result.variation) {
-      this.toast.show(this.i18n.t().analysis.variationCreated(this.label(tree.node(result.id))));
+      this.toast.show(
+        this.i18n.t().analysis.variationCreated(this.label(tree.node(result.id), { start: false })),
+      );
     }
   }
 
@@ -173,7 +178,7 @@ export class AnalysisSession {
     const tree = this.tree();
     const end = tree.lineEnd(this.currentId());
     if (end === ROOT_ID) return;
-    const text = this.label(tree.node(end));
+    const text = this.label(tree.node(end), { start: false });
     const removed = tree.removeLineEnd(this.currentId());
     if (!removed) return;
     this.stopReplay();
