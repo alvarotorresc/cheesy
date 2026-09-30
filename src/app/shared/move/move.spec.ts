@@ -92,6 +92,21 @@ describe('MoveText', () => {
     expect(visible()).toBe('Cxf7+');
   });
 
+  it('should keep the piece image and its square on one line only in compact words mode', async () => {
+    const whiteSpace = (): string =>
+      getComputedStyle(element.querySelector('.shown') as HTMLElement).whiteSpace;
+    await render();
+    expect(whiteSpace()).toBe('nowrap');
+
+    await render({ format: 'full' });
+    expect(whiteSpace()).not.toBe('nowrap');
+
+    await render({ format: 'compact' });
+    mode.setMode('notation');
+    await fixture.whenStable();
+    expect(whiteSpace()).not.toBe('nowrap');
+  });
+
   it('should hold its hidden sentence, so a scrolling strip clips it', async () => {
     await render();
     const host = element.querySelector('app-move') as HTMLElement;

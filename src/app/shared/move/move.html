@@ -1,4 +1,4 @@
-<span class="shown" aria-hidden="true">
+<span class="shown" [class.compact]="!!parts()" aria-hidden="true">
   @if (parts(); as parts) {
     @for (part of parts; track $index) {
       @if (part.kind === 'piece') {

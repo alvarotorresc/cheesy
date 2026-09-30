@@ -5,6 +5,11 @@
   position: relative;
 }
 
+/* A compact move never breaks between the piece image and its square. */
+.compact {
+  white-space: nowrap;
+}
+
 /* The piece image sits on the text line, as tall as a capital letter. */
 .icon {
   display: inline-block;
