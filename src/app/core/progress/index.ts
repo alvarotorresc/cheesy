@@ -10,6 +10,8 @@ export { isMastered, lineIdOf, progressKey } from './progress-record';
 export {
   MASTERY_STREAK,
   type EndgameProgress,
+  type LessonProgress,
+  type LessonResult,
   type LineProgress,
   type LineResult,
   type PositionProgress,

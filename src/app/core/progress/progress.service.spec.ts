@@ -47,6 +47,44 @@ describe('ProgressService', () => {
     vi.restoreAllMocks();
   });
 
+  describe('lessons', () => {
+    beforeEach(() => setupWithDatabase());
+
+    it('should record a lesson and replace it when it is done again', async () => {
+      const first = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 2 },
+        10,
+      );
+      const again = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 4 },
+        20,
+      );
+
+      expect(first).toEqual({
+        lessonId: 'knight-moves',
+        completedAt: 10,
+        exercises: 4,
+        firstTry: 2,
+      });
+      expect(again).toEqual({
+        lessonId: 'knight-moves',
+        completedAt: 20,
+        exercises: 4,
+        firstTry: 4,
+      });
+      expect(await service.lessons()).toEqual([again]);
+    });
+
+    it('should refuse a lesson result that makes no sense', async () => {
+      expect(
+        await service.recordLesson({ lessonId: 'Bad Id', exercises: 1, firstTry: 0 }),
+      ).toBeUndefined();
+      expect(
+        await service.recordLesson({ lessonId: 'ok', exercises: 1, firstTry: 2 }),
+      ).toBeUndefined();
+    });
+  });
+
   describe('with a working store', () => {
     beforeEach(() => setupWithDatabase());
 

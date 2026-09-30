@@ -57,3 +57,21 @@ export interface PositionProgress {
   readonly spoiled: boolean;
   readonly lastSolvedAt?: number;
 }
+
+/** What is kept about one lesson: it is done once there is a row. Doing it again replaces it. */
+export interface LessonProgress {
+  readonly lessonId: string;
+  /** When the summary of the lesson was last reached, in milliseconds since the epoch. */
+  readonly completedAt: number;
+  /** Exercises the lesson had then. */
+  readonly exercises: number;
+  /** Exercises solved on the first try, with no mistake, hint or solution. */
+  readonly firstTry: number;
+}
+
+/** Outcome of one lesson that reached its summary. */
+export interface LessonResult {
+  readonly lessonId: string;
+  readonly exercises: number;
+  readonly firstTry: number;
+}

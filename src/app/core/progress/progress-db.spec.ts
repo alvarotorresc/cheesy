@@ -81,17 +81,68 @@ describe('openProgressStore', () => {
     expect(await store.endgames.all()).toHaveLength(1);
   });
 
-  it('should create version 2 of the schema', async () => {
+  it('should create version 3 of the schema', async () => {
     await open();
     const db = new Dexie('test-progress', { indexedDB, IDBKeyRange });
     await db.open();
 
-    expect(db.verno).toBe(2);
+    expect(db.verno).toBe(3);
+    expect(db.table('lessons').schema.primKey.name).toBe('lessonId');
     expect(db.table('lines').schema.primKey.name).toBe('key');
     expect(db.table('lines').schema.indexes.map((index) => index.name)).toEqual(['openingId']);
     expect(db.table('endgames').schema.primKey.name).toBe('endgameId');
     expect(db.table('positions').schema.primKey.name).toBe('positionId');
     db.close();
+  });
+
+  it('should keep lessons in their own table', async () => {
+    const store = await open();
+    await store.lessons.put({
+      lessonId: 'knight-moves',
+      completedAt: 5,
+      exercises: 4,
+      firstTry: 3,
+    });
+
+    expect(await store.lessons.get('knight-moves')).toEqual({
+      lessonId: 'knight-moves',
+      completedAt: 5,
+      exercises: 4,
+      firstTry: 3,
+    });
+    expect(await store.lines.all()).toEqual([]);
+  });
+
+  describe('upgrading from version 2', () => {
+    it('should keep every row of lines, endgames and positions', async () => {
+      const old = new Dexie('test-progress', { indexedDB, IDBKeyRange });
+      old.version(1).stores({ lines: 'key, openingId' });
+      old
+        .version(2)
+        .stores({ lines: 'key, openingId', endgames: 'endgameId', positions: 'positionId' });
+      await old.open();
+      await old.table('lines').put(row('e2e4'));
+      await old
+        .table('endgames')
+        .put({ endgameId: 'lucena', completions: 2, firstCompletedAt: 1, lastCompletedAt: 3 });
+      await old
+        .table('positions')
+        .put({
+          positionId: 'legal-mate',
+          solves: 1,
+          firstTry: true,
+          spoiled: false,
+          lastSolvedAt: 4,
+        });
+      old.close();
+
+      const store = await open();
+
+      expect(await store.lines.all()).toEqual([row('e2e4')]);
+      expect(await store.endgames.get('lucena')).toMatchObject({ completions: 2 });
+      expect(await store.positions.get('legal-mate')).toMatchObject({ solves: 1 });
+      expect(await store.lessons.all()).toEqual([]);
+    });
   });
 
   describe('upgrading from version 1', () => {

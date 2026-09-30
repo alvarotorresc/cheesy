@@ -4,12 +4,20 @@ import {
   applyResult,
   isValidResult,
   parseEndgameProgress,
+  parseLessonProgress,
   parseLineProgress,
   parsePositionProgress,
   progressKey,
 } from './progress-record';
 import { PROGRESS_STORE_LOADER, type ProgressStore } from './progress-store';
-import type { EndgameProgress, LineProgress, LineResult, PositionProgress } from './progress.types';
+import type {
+  EndgameProgress,
+  LessonProgress,
+  LessonResult,
+  LineProgress,
+  LineResult,
+  PositionProgress,
+} from './progress.types';
 
 /**
  * `unknown`: the store has not been opened yet. `ready`: progress is read and saved.
@@ -127,6 +135,22 @@ export class ProgressService {
         lastSolvedAt: now,
       };
       await store.positions.put(next);
+      return next;
+    });
+  }
+
+  /** Every valid row of the lessons. */
+  async lessons(): Promise<LessonProgress[]> {
+    const rows = await this.run((store) => store.lessons.all());
+    return (rows ?? []).flatMap((row) => parseLessonProgress(row) ?? []);
+  }
+
+  /** Saves that a lesson reached its summary, replacing an earlier result. */
+  async recordLesson(result: LessonResult, now = Date.now()): Promise<LessonProgress | undefined> {
+    const next = parseLessonProgress({ ...result, completedAt: now });
+    if (!next) return undefined;
+    return this.save(async (store) => {
+      await store.lessons.put(next);
       return next;
     });
   }

@@ -1,5 +1,6 @@
 import type {
   EndgameProgress,
+  LessonProgress,
   PositionProgress,
   ProgressStore,
   ProgressStoreLoader,
@@ -29,16 +30,19 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
   const lines = table<StoredLineProgress>((row) => row.key);
   const endgames = table<EndgameProgress>((row) => row.endgameId);
   const positions = table<PositionProgress>((row) => row.positionId);
+  const lessons = table<LessonProgress>((row) => row.lessonId);
   const store: ProgressStore = {
     lines: lines.store,
     endgames: endgames.store,
     positions: positions.store,
+    lessons: lessons.store,
   };
   const loader: ProgressStoreLoader = async () => store;
   return {
     rows: lines.rows,
     endgameRows: endgames.rows,
     positionRows: positions.rows,
+    lessonRows: lessons.rows,
     store,
     loader,
   };
