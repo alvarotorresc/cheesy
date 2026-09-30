@@ -17,6 +17,7 @@ import {
 import { fakeEngineFactory } from '../../../core/engine/testing';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { ENGINE_FIRST, LUCENA, SQUARE_RULE } from '../testing';
+import { BoardSpotlight } from '../../../shared/board';
 import { EndgamePractice, TABLEBASE_PANEL_STORAGE_KEY } from './endgame-practice';
 
 describe('EndgamePractice', () => {
@@ -167,6 +168,27 @@ describe('EndgamePractice', () => {
     } finally {
       field.remove();
     }
+  });
+
+  it('should give each move of the list the position it is played from', async () => {
+    tablebaseDown = true;
+    await open('lucena-position');
+    move('d1', 'd4');
+    await settle();
+    engines.last().answer('c2c1');
+    await settle();
+
+    const requests: unknown[] = [];
+    const spotlight = harness.routeDebugElement?.injector.get(BoardSpotlight) as BoardSpotlight;
+    for (const spot of element().querySelectorAll('.move-list [data-spot]')) {
+      spot.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+      requests.push(spotlight.request());
+    }
+
+    expect(requests).toEqual([
+      { kind: 'move', san: 'Rd4', before: LUCENA.fen },
+      { kind: 'move', san: 'Rc1', before: game().moves()[0].fenAfter },
+    ]);
   });
 
   it('should undo the engine answer together with the player move', async () => {

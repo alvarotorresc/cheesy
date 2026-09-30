@@ -19,12 +19,12 @@
   vertical-align: -0.2em;
 }
 
-.spot[data-spot] {
+/* In a running text the move lights up as the board points at it; in a button the button does. */
+:host(.move) .spot[data-spot] {
   border-radius: 2px;
   cursor: default;
 }
 
-/* In a running text the move lights up as the board points at it; in a button the button does. */
 :host(.move) .spot[data-spot]:hover,
 :host(.move) .spot[data-spot]:focus-visible {
   background: var(--board-spot);

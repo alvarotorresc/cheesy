@@ -195,6 +195,11 @@ describe('PracticePage', () => {
       ).toEqual(['Not started', 'Not started']);
     });
 
+    it('should not give the moves of a line a tab stop inside its radio choice', () => {
+      expect(element.querySelectorAll('.line-moves app-move').length).toBeGreaterThan(0);
+      expect(element.querySelector('.line-moves [tabindex]')).toBeNull();
+    });
+
     it('should say that progress stays in the browser', () => {
       expect(text('app-practice-clear')).toContain('Your progress is saved in this browser only');
     });

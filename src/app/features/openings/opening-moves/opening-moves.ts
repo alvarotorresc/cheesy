@@ -11,6 +11,9 @@ import {
   Injector,
 } from '@angular/core';
 import type { Color } from 'chessops';
+import { Chess } from 'chessops/chess';
+import { makeFen } from 'chessops/fen';
+import { parseSan } from 'chessops/san';
 import { I18nService } from '../../../core/i18n';
 import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
 import { MoveText } from '../../../shared/move';
@@ -22,6 +25,8 @@ interface MoveCell {
   color: Color;
   /** The sentence with its number for screen readers: `3. Bishop to b5` or `3... Pawn to a6`. */
   spoken: string;
+  /** FEN of the position the move is played from; unknown after a move that is not legal. */
+  before: string | undefined;
   off: boolean;
 }
 
@@ -63,14 +68,20 @@ export class OpeningMoves {
 
   protected readonly rows = computed<MoveRow[]>(() => {
     const offFrom = this.offFrom();
+    let position: Chess | undefined = Chess.default();
     const cells = this.moves().map((san, index): MoveCell => {
       const ply = index + 1;
+      const before = position ? makeFen(position.toSetup()) : undefined;
+      const move = position ? parseSan(position, san) : undefined;
+      if (position && move) position.play(move);
+      else position = undefined;
       const dots = ply % 2 === 1 ? '.' : '...';
       return {
         ply,
         san,
         color: colorOfPly(ply),
         spoken: `${Math.ceil(ply / 2)}${dots} ${this.reading.spoken(san)}`,
+        before,
         off: ply >= offFrom,
       };
     });

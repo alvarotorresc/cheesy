@@ -75,7 +75,8 @@
               </span>
               <span class="line-moves">
                 @for (move of option.moves; track $index) {
-                  {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+                  {{ move.prefix
+                  }}<app-move [san]="move.san" [color]="move.color" [focusable]="false" />
                 }
               </span>
               @if (canSave()) {

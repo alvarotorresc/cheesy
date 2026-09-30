@@ -29,4 +29,21 @@ describe('MoveTreeView', () => {
       });
     }
   });
+
+  it('should take the position of the root moves from a start position that is not the usual', async () => {
+    const start = '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1';
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const tree = MoveTree.fromPgn('1. e4', start);
+    const fixture = TestBed.createComponent(MoveTreeView);
+    fixture.componentRef.setInput('items', buildMoveRows(tree, new Set()));
+    fixture.componentRef.setInput('currentId', 'r');
+    fixture.componentRef.setInput('tree', tree);
+    await fixture.whenStable();
+
+    const first = (fixture.nativeElement as HTMLElement).querySelector('[data-spot]')!;
+    first.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+
+    expect(tree.node('r').fen).toBe(start);
+    expect(TestBed.inject(BoardSpotlight).request()).toMatchObject({ before: start });
+  });
 });
