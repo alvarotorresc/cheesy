@@ -19,9 +19,10 @@
   vertical-align: -0.2em;
 }
 
-/* In a running text the move lights up as the board points at it; in a button the button does.
+/* A move with a tab stop of its own (in a text, the tablebase hint, the steps of a position) lights
+   up as the board points at it; inside a button (no tab stop) the button does, cursor included.
    A faint solid underline tells it apart at rest (the dotted one is for glossary terms). */
-:host(.move) .spot[data-spot] {
+.spot[data-spot][tabindex] {
   border-radius: 2px;
   cursor: default;
   text-decoration: underline;
@@ -29,13 +30,13 @@
   text-underline-offset: 0.2em;
 }
 
-:host(.move) .spot[data-spot]:hover,
-:host(.move) .spot[data-spot]:focus-visible {
+.spot[data-spot][tabindex]:hover,
+.spot[data-spot][tabindex]:focus-visible {
   background: var(--board-spot);
 }
 
 /* The tint alone is too faint to find the keyboard focus: the site's focus ring goes around it. */
-:host(.move) .spot[data-spot]:focus-visible {
+.spot[data-spot][tabindex]:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }

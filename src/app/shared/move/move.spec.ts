@@ -207,5 +207,19 @@ describe('MoveText', () => {
       expect((await create({ san: 'Nf3' })).getAttribute('tabindex')).toBe('0');
       expect((await create({ san: 'Nf3', focusable: false })).hasAttribute('tabindex')).toBe(false);
     });
+
+    it('should look pointable wherever it has a tab stop of its own, not only in a text', async () => {
+      // The tablebase hint and the steps of a position hold a bare <app-move>, without class="move".
+      // (The test DOM keeps the `text-decoration` shorthand as written: it is read as such.)
+      const own = getComputedStyle(await create({ san: 'Nf3' }));
+      expect(own.textDecoration).toBe('underline');
+      expect(own.cursor).toBe('default');
+    });
+
+    it('should leave the look to the button when the move sits inside one', async () => {
+      const inButton = getComputedStyle(await create({ san: 'Nf3', focusable: false }));
+      expect(inButton.textDecoration).not.toBe('underline');
+      expect(inButton.cursor).not.toBe('default');
+    });
   });
 });
