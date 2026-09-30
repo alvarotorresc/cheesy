@@ -1,11 +1,14 @@
 import {
+  afterNextRender,
   Component,
   computed,
   DestroyRef,
   DOCUMENT,
+  effect,
   ElementRef,
   forwardRef,
   inject,
+  Injector,
   input,
   signal,
   viewChild,
@@ -23,9 +26,22 @@ type State =
   | { kind: 'failed' }
   | { kind: 'ready'; term: GlossaryTerm | undefined };
 
+interface Place {
+  readonly left: number;
+  readonly width: number;
+  /** Distance from the top of the screen (below the word) or from the bottom (above it). */
+  readonly edge: number;
+  readonly above: boolean;
+}
+
 const HOVER_MS = 300;
+/** Grace time to cross from the word to the popup with the mouse without losing it. */
+const LEAVE_MS = 150;
 const GUTTER = 16;
+const GAP = 8;
 const WIDTH = 352; // 22rem
+/** Height assumed for the popup until it has been drawn and measured. */
+const ESTIMATED_HEIGHT = 380;
 
 let nextId = 0;
 
@@ -39,7 +55,7 @@ let nextId = 0;
   imports: [RouterLink, MiniBoard, forwardRef(() => RichTextView)],
   templateUrl: './term.html',
   styleUrl: './term.css',
-  host: { '(keydown)': 'onKeydown($event)' },
+  host: { '(focusout)': 'onFocusOut($event)' },
 })
 export class TermView {
   readonly id = input.required<string>();
@@ -48,12 +64,15 @@ export class TermView {
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   private readonly document = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
   private readonly button = viewChild.required<ElementRef<HTMLButtonElement>>('button');
+  private readonly popup = viewChild<ElementRef<HTMLElement>>('popup');
 
   protected readonly popupId = `term-popup-${nextId++}`;
+  protected readonly nameId = `${this.popupId}-name`;
   protected readonly state = signal<State>({ kind: 'closed' });
   protected readonly open = computed(() => this.state().kind !== 'closed');
-  protected readonly place = signal({ top: 0, left: 0, width: WIDTH });
+  protected readonly place = signal<Place>({ left: 0, width: WIDTH, edge: 0, above: false });
   protected readonly readyTerm = computed<GlossaryTerm | undefined>(() => {
     const state = this.state();
     return state.kind === 'ready' ? state.term : undefined;
@@ -64,45 +83,76 @@ export class TermView {
   });
 
   private hoverTimer: ReturnType<typeof setTimeout> | undefined;
+  private leaveTimer: ReturnType<typeof setTimeout> | undefined;
   private openedByHover = false;
 
   constructor() {
+    const host = () => this.button().nativeElement.parentElement;
     const onPress = (event: Event) => {
-      if (!this.open()) return;
-      const host = this.button().nativeElement.parentElement;
-      if (!host?.contains(event.target as Node)) this.close(false);
+      if (this.open() && !host()?.contains(event.target as Node)) this.close(false);
+    };
+    // Escape closes it wherever the focus is (a popup opened by the mouse never took it), and is
+    // kept from the rest of the page (the Analysis board uses the keyboard).
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || !this.open()) return;
+      event.preventDefault();
+      event.stopPropagation();
+      this.close(host()?.contains(event.target as Node) ?? false);
     };
     const onScroll = () => this.open() && this.close(false);
     this.document.addEventListener('pointerdown', onPress, { capture: true, passive: true });
+    this.document.addEventListener('keydown', onKey, { capture: true });
     this.document.defaultView?.addEventListener('scroll', onScroll, { passive: true });
     inject(DestroyRef).onDestroy(() => {
       clearTimeout(this.hoverTimer);
+      clearTimeout(this.leaveTimer);
       this.document.removeEventListener('pointerdown', onPress, { capture: true });
+      this.document.removeEventListener('keydown', onKey, { capture: true });
       this.document.defaultView?.removeEventListener('scroll', onScroll);
+    });
+
+    // The popup grows when its content arrives: place it again once it has been drawn.
+    effect(() => {
+      if (!this.state() || !this.open()) return;
+      afterNextRender(() => this.position(), { injector: this.injector });
     });
   }
 
   protected toggle(): void {
-    if (this.open() && !this.openedByHover) this.close(false);
+    if (this.open() && this.openedByHover) {
+      // A click on a popup the mouse opened pins it: it stays, and is not loaded again.
+      this.openedByHover = false;
+      return;
+    }
+    if (this.open()) this.close(false);
     else this.show(false);
   }
 
   protected onEnter(event: PointerEvent): void {
-    if (event.pointerType !== 'mouse' || this.open()) return;
-    this.hoverTimer = setTimeout(() => this.show(true), HOVER_MS);
+    if (event.pointerType !== 'mouse') return;
+    this.cancelLeave();
+    if (!this.open()) this.hoverTimer = setTimeout(() => this.show(true), HOVER_MS);
+  }
+
+  protected onPopupEnter(event: PointerEvent): void {
+    if (event.pointerType === 'mouse') this.cancelLeave();
   }
 
   protected onLeave(event: PointerEvent): void {
     if (event.pointerType !== 'mouse') return;
     clearTimeout(this.hoverTimer);
-    if (this.openedByHover) this.close(false);
+    if (!this.openedByHover) return;
+    this.leaveTimer = setTimeout(() => this.close(false), LEAVE_MS);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
-    if (event.key !== 'Escape' || !this.open()) return;
-    event.preventDefault();
-    event.stopPropagation();
-    this.close(true);
+  protected onFocusOut(event: FocusEvent): void {
+    const next = event.relatedTarget as Node | null;
+    // No next element (a click on the popup's text, the window losing focus) is not leaving.
+    if (next && !this.button().nativeElement.parentElement?.contains(next)) this.close(false);
+  }
+
+  private cancelLeave(): void {
+    clearTimeout(this.leaveTimer);
   }
 
   private show(byHover: boolean): void {
@@ -117,17 +167,34 @@ export class TermView {
 
   private close(focus: boolean): void {
     clearTimeout(this.hoverTimer);
+    this.cancelLeave();
     this.openedByHover = false;
     this.state.set({ kind: 'closed' });
     if (focus) this.button().nativeElement.focus();
   }
 
-  /** Below the word, never past the screen edges (fixed, so it ignores any scroll container). */
+  /**
+   * Under the word, or above it when it would not fit below; never past the screen edges (fixed, so
+   * it ignores any scroll container).
+   */
   private position(): void {
+    if (!this.open()) return;
+    const view = this.document.defaultView;
     const rect = this.button().nativeElement.getBoundingClientRect();
-    const viewport = this.document.defaultView?.innerWidth ?? WIDTH + 2 * GUTTER;
-    const width = Math.min(WIDTH, viewport - 2 * GUTTER);
-    const left = Math.min(Math.max(rect.left, GUTTER), viewport - GUTTER - width);
-    this.place.set({ top: rect.bottom + 8, left, width });
+    const viewportWidth = view?.innerWidth ?? WIDTH + 2 * GUTTER;
+    const viewportHeight = view?.innerHeight ?? ESTIMATED_HEIGHT + 2 * GUTTER;
+    const height = this.popup()?.nativeElement.offsetHeight || ESTIMATED_HEIGHT;
+    const width = Math.min(WIDTH, viewportWidth - 2 * GUTTER);
+    const left = Math.min(Math.max(rect.left, GUTTER), viewportWidth - GUTTER - width);
+    const fitsBelow = rect.bottom + GAP + height <= viewportHeight - GUTTER;
+    const roomAbove = rect.top - GAP;
+    const roomBelow = viewportHeight - rect.bottom - GAP;
+    const above = !fitsBelow && roomAbove > roomBelow;
+    this.place.set({
+      left,
+      width,
+      above,
+      edge: above ? viewportHeight - rect.top + GAP : rect.bottom + GAP,
+    });
   }
 }

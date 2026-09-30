@@ -36,15 +36,23 @@
   font-size: 0.95rem;
   line-height: 1.45;
   text-align: start;
+  /* Never taller than the screen: whatever does not fit scrolls inside. */
+  max-height: calc(100dvh - 2 * 16px);
+  overflow-y: auto;
 }
 
 .name {
-  margin: 0;
+  display: block;
   font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .definition {
-  margin: 0;
+  display: block;
+}
+
+.status {
+  display: block;
 }
 
 .board {

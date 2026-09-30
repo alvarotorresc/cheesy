@@ -67,7 +67,7 @@ describe('TermView', () => {
     await fixture.whenStable();
     expect(button().getAttribute('aria-expanded')).toBe('true');
     expect(button().getAttribute('aria-controls')).toBe(popup()?.id);
-    expect(popup()?.querySelector('h2')?.textContent?.trim()).toBe('Clavada');
+    expect(popup()?.querySelector('.name')?.textContent?.trim()).toBe('Clavada');
     expect(popup()?.textContent).toContain('Una pieza no puede moverse.');
     expect(popup()?.querySelector('app-mini-board')).not.toBeNull();
     expect(popup()?.querySelector('a')?.getAttribute('href')).toBe('/learn/glossary#pin');
@@ -110,13 +110,19 @@ describe('TermView', () => {
     vi.useRealTimers();
     await fixture.whenStable();
     expect(popup()).not.toBeNull();
+    vi.useFakeTimers();
     leave();
+    vi.advanceTimersByTime(150);
+    vi.useRealTimers();
     await fixture.whenStable();
     expect(popup()).toBeNull();
 
     button().click();
     await fixture.whenStable();
     leave();
+    vi.useFakeTimers();
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
     await fixture.whenStable();
     expect(popup()).not.toBeNull();
   });
@@ -147,7 +153,7 @@ describe('TermView', () => {
     button().click(); // close
     button().click(); // open again
     await fixture.whenStable();
-    expect(popup()?.querySelector('h2')?.textContent?.trim()).toBe('Clavada');
+    expect(popup()?.querySelector('.name')?.textContent?.trim()).toBe('Clavada');
   });
 
   it('should stay inside a narrow screen', async () => {
@@ -160,5 +166,146 @@ describe('TermView', () => {
     const width = parseFloat(style.width);
     expect(left).toBeGreaterThanOrEqual(16);
     expect(left + width).toBeLessThanOrEqual(360 - 16);
+  });
+
+  const openByMouse = async () => {
+    vi.useFakeTimers();
+    button().dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }));
+    vi.advanceTimersByTime(300);
+    vi.useRealTimers();
+    await fixture.whenStable();
+  };
+
+  it('should keep a mouse-opened popup when the mouse crosses from the word to it', async () => {
+    await openByMouse();
+    vi.useFakeTimers();
+    leave();
+    vi.advanceTimersByTime(100);
+    popup()!.dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }));
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
+    await fixture.whenStable();
+    expect(popup()).not.toBeNull();
+  });
+
+  it('should pin a mouse-opened popup on click without loading it again', async () => {
+    await openByMouse();
+    expect(load).toHaveBeenCalledTimes(1);
+    button().click();
+    await fixture.whenStable();
+    expect(popup()?.querySelector('.name')?.textContent?.trim()).toBe('Clavada');
+    expect(load).toHaveBeenCalledTimes(1);
+    leave();
+    vi.useFakeTimers();
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
+    await fixture.whenStable();
+    expect(popup()).not.toBeNull();
+  });
+
+  it('should close a mouse-opened popup with Escape even if the focus is elsewhere', async () => {
+    await openByMouse();
+    const escape = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+    document.body.dispatchEvent(escape);
+    await fixture.whenStable();
+    expect(popup()).toBeNull();
+    expect(escape.defaultPrevented).toBe(true);
+    expect(document.activeElement).not.toBe(button());
+  });
+
+  it('should close when the focus moves to something outside', async () => {
+    const outside = document.createElement('button');
+    document.body.appendChild(outside);
+    button().focus();
+    button().click();
+    await fixture.whenStable();
+    outside.focus();
+    await fixture.whenStable();
+    outside.remove();
+    expect(popup()).toBeNull();
+  });
+
+  it('should not close when the focus only moves to the popup link', async () => {
+    button().focus();
+    button().click();
+    await fixture.whenStable();
+    (popup()!.querySelector('a') as HTMLElement).focus();
+    await fixture.whenStable();
+    expect(popup()).not.toBeNull();
+  });
+
+  it('should close when the page scrolls', async () => {
+    button().click();
+    await fixture.whenStable();
+    window.dispatchEvent(new Event('scroll'));
+    await fixture.whenStable();
+    expect(popup()).toBeNull();
+  });
+
+  it('should name the dialog after the term, not the written word', async () => {
+    button().click();
+    await fixture.whenStable();
+    const name = document.getElementById(popup()!.getAttribute('aria-labelledby')!);
+    expect(name?.textContent?.trim()).toBe('Clavada');
+  });
+
+  it('should open above the word when it does not fit below', async () => {
+    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(700);
+    vi.spyOn(button(), 'getBoundingClientRect').mockReturnValue(new DOMRect(40, 600, 30, 20));
+    button().click();
+    await fixture.whenStable();
+    const style = (popup() as HTMLElement).style;
+    expect(popup()?.classList.contains('above')).toBe(true);
+    expect(style.top).toBe('');
+    expect(parseFloat(style.bottom)).toBe(700 - 600 + 8);
+  });
+
+  it('should open below the word when it fits', async () => {
+    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(1200);
+    vi.spyOn(button(), 'getBoundingClientRect').mockReturnValue(new DOMRect(40, 100, 30, 20));
+    button().click();
+    await fixture.whenStable();
+    expect(popup()?.classList.contains('above')).toBe(false);
+    expect(parseFloat((popup() as HTMLElement).style.top)).toBe(128);
+  });
+
+  it('should never be taller than the screen', async () => {
+    button().click();
+    await fixture.whenStable();
+    const tall = document.createElement('div');
+    tall.style.height = `${window.innerHeight * 2}px`;
+    popup()!.appendChild(tall);
+    const box = popup() as HTMLElement;
+    expect(getComputedStyle(box).overflowY).toBe('auto');
+    expect(box.offsetHeight).toBeLessThanOrEqual(window.innerHeight - 32);
+  });
+
+  it('should show a term inside the definition as a link, not as another popup', async () => {
+    load.mockResolvedValueOnce([
+      {
+        ...PIN,
+        definition: {
+          es: [{ kind: 'term', id: 'check', text: 'jaque' }],
+          en: [{ kind: 'term', id: 'check', text: 'check' }],
+        },
+      },
+    ]);
+    // A fresh service cache: the glossary of this test is the one above.
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), { provide: GLOSSARY_LOADER, useValue: load }],
+    });
+    TestBed.inject(I18nService).setLang('es');
+    element.remove();
+    fixture = TestBed.createComponent(TermView);
+    fixture.componentRef.setInput('id', 'pin');
+    fixture.componentRef.setInput('text', 'clava');
+    element = fixture.nativeElement as HTMLElement;
+    document.body.appendChild(element);
+    await fixture.whenStable();
+    button().click();
+    await fixture.whenStable();
+    expect(popup()?.querySelector('a.term')?.getAttribute('href')).toBe('/learn/glossary#check');
+    expect(popup()?.querySelector('app-term')).toBeNull();
   });
 });

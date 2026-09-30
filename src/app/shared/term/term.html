@@ -9,11 +9,16 @@
     (pointerenter)="onEnter($event)"
   >{{ text() }}</button
   >@if (open()) {<span
+      #popup
       class="popup"
       role="dialog"
+      [class.above]="place().above"
       [id]="popupId"
-      [attr.aria-label]="text()"
-      [style.top.px]="place().top"
+      [attr.aria-labelledby]="readyTerm() ? nameId : null"
+      [attr.aria-label]="readyTerm() ? null : text()"
+      (pointerenter)="onPopupEnter($event)"
+      [style.top.px]="place().above ? null : place().edge"
+      [style.bottom.px]="place().above ? place().edge : null"
       [style.left.px]="place().left"
       [style.width.px]="place().width"
     >
@@ -26,8 +31,8 @@
         }
         @case ('ready') {
           @if (readyTerm(); as term) {
-            <h2 class="name">{{ i18n.localize(term.name) }}</h2>
-            <p class="definition"><app-rich-text [text]="term.definition" [termLinks]="true" /></p>
+            <span class="name" [id]="nameId">{{ i18n.localize(term.name) }}</span>
+            <span class="definition"><app-rich-text [text]="term.definition" [termLinks]="true" /></span>
             <app-mini-board
               class="board"
               [frames]="frames()"
