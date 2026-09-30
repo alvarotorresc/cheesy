@@ -1,9 +1,6 @@
-import { plainText } from '../../core/content/testing';
 import { OpeningBook, type OpeningNode } from '../../core/content';
 import { describeTheory } from './opening-theory';
-import { testTree } from './testing/test-opening';
-
-const rich = (en: string) => plainText(`${en} (es)`, en);
+import { rich, testTree } from './testing/test-opening';
 
 describe('opening theory', () => {
   const book = OpeningBook.from(testTree());

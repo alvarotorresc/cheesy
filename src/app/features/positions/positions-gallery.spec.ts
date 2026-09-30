@@ -16,7 +16,7 @@ const POSITIONS: CuratedPosition[] = [
     fen: '4k3/8/8/8/8/8/8/4K2R w K - 0 1',
     playerSide: 'white',
     solution: ['Rh8#'],
-    explanation: plainText('Mate.', 'Mate.'),
+    explanation: plainText('Mate.'),
     tags: ['back-rank', 'windmill-attack'],
   },
   {
@@ -25,7 +25,7 @@ const POSITIONS: CuratedPosition[] = [
     fen: '4k2r/8/8/8/8/8/8/4K3 b k - 0 1',
     playerSide: 'black',
     solution: ['Rh1#'],
-    explanation: plainText('Mate.', 'Mate.'),
+    explanation: plainText('Mate.'),
     tags: ['pin'],
   },
   {

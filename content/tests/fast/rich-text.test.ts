@@ -142,8 +142,13 @@ describe('checkRichText', () => {
 
   it('rejects plain strings and unknown segments', () => {
     expect(errorsOf({ es: 'texto', en: 'text' })).not.toEqual([]);
-    expect(errorsOf({ es: [{ kind: 'bold', text: 'x' }], en: [] })).not.toEqual([]);
-    expect(errorsOf({ es: [{ kind: 'square', square: 'z9' }], en: [] })).not.toEqual([]);
+    const en = [{ kind: 'text', text: 'x' }];
+    expect(errorsOf({ es: [{ kind: 'bold', text: 'x' }], en })).toEqual([
+      expect.stringContaining('x.es[0].kind'),
+    ]);
+    expect(errorsOf({ es: [{ kind: 'square', square: 'z9' }], en })).toEqual([
+      expect.stringContaining('x.es[0].square'),
+    ]);
   });
 
   it('rejects an empty language', () => {

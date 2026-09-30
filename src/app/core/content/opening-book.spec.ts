@@ -1,9 +1,9 @@
-import { bundledContentLoaders, plainText } from './testing';
-import type { Localized, OpeningNode, OpeningTree, RichText } from './content.types';
+import { rich } from '../../features/openings/testing/test-opening';
+import { bundledContentLoaders } from './testing';
+import type { Localized, OpeningNode, OpeningTree } from './content.types';
 import { OpeningBook } from './opening-book';
 
 const named = (en: string): Localized => ({ es: `${en} (es)`, en });
-const rich = (en: string): RichText => plainText(`${en} (es)`, en);
 
 type NodeExtras = Partial<Pick<OpeningNode, 'name' | 'comment' | 'main'>>;
 

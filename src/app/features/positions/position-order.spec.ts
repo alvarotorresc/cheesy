@@ -1,6 +1,5 @@
-import { plainText } from '../../core/content/testing';
 import type { CuratedPosition } from '../../core/content';
-import { bundledContentLoaders } from '../../core/content/testing';
+import { bundledContentLoaders, plainText } from '../../core/content/testing';
 import {
   numberOfContentId,
   orderPositions,

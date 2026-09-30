@@ -11,7 +11,7 @@ const POSITION: CuratedPosition = {
   fen: '4k3/8/8/8/8/8/8/4K2R w K - 0 1',
   playerSide: 'white',
   solution: ['Rh8#'],
-  explanation: plainText('Mate.', 'Mate.'),
+  explanation: plainText('Mate.'),
   tags: ['back-rank'],
 };
 
