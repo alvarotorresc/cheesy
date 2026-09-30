@@ -13,6 +13,7 @@ import {
 import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink, type AnalysisLink } from '../../../core/analysis-link';
 import { ContentService, isContentId } from '../../../core/content';
@@ -26,6 +27,7 @@ import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { Icon } from '../../../shared/icon';
 import { isFormField } from '../../../shared/keyboard';
+import { MoveText } from '../../../shared/move';
 import { DRAW_TARGET } from '../endgame-milestones';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
@@ -42,6 +44,7 @@ interface MoveView {
   readonly ply: number;
   readonly number: string;
   readonly san: string;
+  readonly color: Color;
   readonly label: string;
   readonly mine: boolean;
   readonly bad: boolean;
@@ -52,7 +55,7 @@ interface MoveView {
 /** One endgame: the player plays their side against a rival that answers from the tablebase. */
 @Component({
   selector: 'app-endgame-practice',
-  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink, TablebasePanel],
+  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink, TablebasePanel],
   providers: [GameService, EngineService, EndgameSession, TablebaseLookup],
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',
@@ -138,12 +141,12 @@ export class EndgamePractice {
       const white = absolute % 2 === 0;
       const number = Math.floor(absolute / 2) + 1;
       const mine = (white ? 'white' : 'black') === player;
-      const san = this.i18n.san(move.san);
       const prefix = white ? `${number}.` : index === 0 ? `${number}...` : '';
       return {
         ply: index + 1,
         number: prefix,
-        san,
+        san: move.san,
+        color: white ? 'white' : 'black',
         label: `${this.label(index, move)}, ${mine ? t.moveMine : t.moveRival}`,
         mine,
         bad: bad === index + 1,

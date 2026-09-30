@@ -13,15 +13,22 @@ import {
   type OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import type { Color } from 'chessops';
 import { I18nService } from '../../../core/i18n';
+import { colorOfPly } from '../../../core/reading-mode';
 import { Icon } from '../../../shared/icon';
+import { MoveText } from '../../../shared/move';
 import { MiniBoard, ReplayCoordinator } from '../../../shared/mini-board';
 import { HERO_OPENING_IDS, type OpeningLine } from '../home-data';
 import { createHeroPlayer } from '../hero-player';
 
 interface MovePair {
   readonly number: number;
-  readonly moves: readonly { readonly index: number; readonly text: string }[];
+  readonly moves: readonly {
+    readonly index: number;
+    readonly san: string;
+    readonly color: Color;
+  }[];
 }
 
 /**
@@ -31,7 +38,7 @@ interface MovePair {
  */
 @Component({
   selector: 'app-home-hero',
-  imports: [Icon, MiniBoard, RouterLink],
+  imports: [Icon, MiniBoard, MoveText, RouterLink],
   templateUrl: './home-hero.html',
   styleUrl: './home-hero.css',
 })
@@ -58,9 +65,11 @@ export class HomeHero implements OnInit {
     for (let index = 0; index < sans.length; index += 2) {
       pairs.push({
         number: index / 2 + 1,
-        moves: sans
-          .slice(index, index + 2)
-          .map((san, offset) => ({ index: index + offset, text: this.i18n.san(san) })),
+        moves: sans.slice(index, index + 2).map((san, offset) => ({
+          index: index + offset,
+          san,
+          color: colorOfPly(index + offset + 1),
+        })),
       });
     }
     return pairs;

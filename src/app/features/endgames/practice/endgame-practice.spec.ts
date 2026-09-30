@@ -366,7 +366,7 @@ describe('EndgamePractice', () => {
         'Your move 1...Kg4 changed the theoretical result from a draw to a loss.',
       );
       const marked = element().querySelector('.move-list button.bad');
-      expect(marked?.textContent?.trim()).toBe('Kg4');
+      expect(marked?.querySelector('.shown')?.textContent?.trim()).toBe('Kg4');
       expect(marked?.getAttribute('aria-label')).toBe('1...Kg4, your move');
     });
 

@@ -462,9 +462,9 @@ describe('Analysis', () => {
 
       expect(barText()).toBe('+0.3');
       expect(lineButtons().map((line) => line.getAttribute('aria-label'))).toEqual([
-        'Play 1.e4. Evaluation +0.3. Line: 1.e4 e5 2.Nf3',
-        'Play 1.d4. Evaluation +0.3. Line: 1.d4 d5',
-        'Play 1.Nf3. Evaluation -0.2. Line: 1.Nf3 d5',
+        'Play 1. Pawn to e4. Evaluation +0.3. Line: 1. Pawn to e4, Pawn to e5, 2. Knight to f3',
+        'Play 1. Pawn to d4. Evaluation +0.3. Line: 1. Pawn to d4, Pawn to d5',
+        'Play 1. Knight to f3. Evaluation -0.2. Line: 1. Knight to f3, Pawn to d5',
       ]);
       expect(lineButtons()[0].classList).toContain('best');
       expect(lineButtons()[2].querySelector('.score')?.classList).toContain('black');

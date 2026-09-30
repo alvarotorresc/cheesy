@@ -73,7 +73,11 @@
                   <span class="variation">{{ option.variation }}</span>
                 }
               </span>
-              <span class="line-moves">{{ option.moves }}</span>
+              <span class="line-moves">
+                @for (move of option.moves; track $index) {
+                  {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+                }
+              </span>
               @if (canSave()) {
                 <span class="line-prog" [class.mastered]="option.mastered">
                   <app-streak [value]="option.streak ?? 0" [size]="needed" />

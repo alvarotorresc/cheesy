@@ -6,6 +6,7 @@ import { CONTENT_LOADERS, type ContentLoaders } from '../../../../core/content';
 import { ENGINE_TRANSPORT } from '../../../../core/engine';
 import { GameService } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
+import { ReadingModeService } from '../../../../core/reading-mode';
 import { PROGRESS_STORE_LOADER, progressKey } from '../../../../core/progress';
 import { BoardComponent } from '../../../../shared/board';
 import { memoryProgressStore } from '../../testing/memory-progress-store';
@@ -39,6 +40,7 @@ describe('PracticePage', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(PracticePage);
     element = fixture.nativeElement as HTMLElement;
     session = fixture.debugElement.injector.get(PracticeSession);
@@ -172,15 +174,20 @@ describe('PracticePage', () => {
     it('should list every line with its moves and progress', async () => {
       const lines = Array.from(element.querySelectorAll('.lines li')).map((item) =>
         Array.from(item.querySelectorAll('.line-title, .line-moves, .line-prog'))
-          .map((part) => part.textContent?.replace(/\s+/g, ' ').trim())
+          .map((part) => {
+            // The sentences that only screen readers get are left out.
+            const copy = part.cloneNode(true) as HTMLElement;
+            copy.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+            return copy.textContent?.replace(/\s+/g, ' ').trim();
+          })
           .join(' | '),
       );
 
       expect(lines).toEqual([
         'All lines, one after another (3)',
-        'Main line King Knight Opening | 1.e4 e5 2.Nf3 Nc6 3.Bb5 | Not practised yet',
-        'Line 2 Petrov Defence | 1.e4 e5 2.Nf3 Nf6 | Not practised yet',
-        'Line 3 Centre Game | 1.e4 e5 2.d4 | Not practised yet',
+        'Main line King Knight Opening | 1. e4 e5 2. Nf3 Nc6 3. Bb5 | Not practised yet',
+        'Line 2 Petrov Defence | 1. e4 e5 2. Nf3 Nf6 | Not practised yet',
+        'Line 3 Centre Game | 1. e4 e5 2. d4 | Not practised yet',
       ]);
       expect(text('.count-row')).toBe('0 of 3 lines practised as white, 0 mastered');
       expect(

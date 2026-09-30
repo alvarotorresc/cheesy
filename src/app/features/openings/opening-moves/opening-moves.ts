@@ -10,14 +10,17 @@ import {
   effect,
   Injector,
 } from '@angular/core';
+import type { Color } from 'chessops';
 import { I18nService } from '../../../core/i18n';
-import { numberedMove } from '../opening-theory';
+import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
+import { MoveText } from '../../../shared/move';
 
 interface MoveCell {
   /** Ply reached after the move: the value emitted when it is selected. */
   ply: number;
-  text: string;
-  /** Written with its number for screen readers: `3.Bb5` or `3...a6`. */
+  san: string;
+  color: Color;
+  /** The sentence with its number for screen readers: `3. Bishop to b5` or `3... Pawn to a6`. */
   spoken: string;
   off: boolean;
 }
@@ -34,11 +37,13 @@ interface MoveRow {
  */
 @Component({
   selector: 'app-opening-moves',
+  imports: [MoveText],
   templateUrl: './opening-moves.html',
   styleUrl: './opening-moves.css',
 })
 export class OpeningMoves {
   private readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
   private readonly injector = inject(Injector);
 
   /** Moves in English SAN, in the order they were played. */
@@ -60,8 +65,14 @@ export class OpeningMoves {
     const offFrom = this.offFrom();
     const cells = this.moves().map((san, index): MoveCell => {
       const ply = index + 1;
-      const shown = this.i18n.san(san);
-      return { ply, text: shown, spoken: numberedMove(ply, shown), off: ply >= offFrom };
+      const dots = ply % 2 === 1 ? '.' : '...';
+      return {
+        ply,
+        san,
+        color: colorOfPly(ply),
+        spoken: `${Math.ceil(ply / 2)}${dots} ${this.reading.spoken(san)}`,
+        off: ply >= offFrom,
+      };
     });
     const rows: MoveRow[] = [];
     for (let index = 0; index < cells.length; index += 2) {

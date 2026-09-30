@@ -2,10 +2,18 @@ import { Component, computed, ElementRef, inject, viewChild } from '@angular/cor
 import type { Color } from 'chessops';
 import { I18nService } from '../../../../core/i18n';
 import { isMastered, MASTERY_STREAK } from '../../../../core/progress';
-import { numberedMove } from '../../opening-theory';
+import { colorOfPly } from '../../../../core/reading-mode';
+import { MoveText } from '../../../../shared/move';
 import { PracticeClear } from '../practice-clear/practice-clear';
 import { ALL_LINES, PracticeSession, type PracticeLine } from '../practice-session';
 import { Streak } from '../streak/streak';
+
+/** A move of the line with its number in front (empty for Black's). */
+interface ShownMove {
+  readonly prefix: string;
+  readonly san: string;
+  readonly color: Color;
+}
 
 const COLORS: readonly Color[] = ['white', 'black'];
 
@@ -13,7 +21,7 @@ interface LineOption {
   readonly id: string;
   readonly title: string;
   readonly variation: string | undefined;
-  readonly moves: string;
+  readonly moves: readonly ShownMove[];
   /** Streak of the line, or undefined when it was never practised. */
   readonly streak: number | undefined;
   readonly mastered: boolean;
@@ -27,7 +35,7 @@ interface LineOption {
  */
 @Component({
   selector: 'app-practice-setup',
-  imports: [PracticeClear, Streak],
+  imports: [MoveText, PracticeClear, Streak],
   templateUrl: './practice-setup.html',
   styleUrls: ['../practice-box.css', './practice-setup.css'],
 })
@@ -41,14 +49,13 @@ export class PracticeSetup {
 
   private readonly title = viewChild.required<ElementRef<HTMLElement>>('title');
 
-  /** Moves of the line as in a score sheet, in the language of the page: "1.e4 e5 2.Cf3". */
-  private readonly movesOf = (line: PracticeLine): string =>
-    line.nodes
-      .map((node) => {
-        const san = this.i18n.san(node.san);
-        return node.ply % 2 === 1 ? numberedMove(node.ply, san) : san;
-      })
-      .join(' ');
+  /** Moves of the line as in a score sheet, each with its number when White plays it. */
+  private readonly movesOf = (line: PracticeLine): ShownMove[] =>
+    line.nodes.map((node) => ({
+      prefix: node.ply % 2 === 1 ? `${Math.ceil(node.ply / 2)}.` : '',
+      san: node.san,
+      color: colorOfPly(node.ply),
+    }));
 
   protected readonly options = computed<LineOption[]>(() => {
     const t = this.i18n.t().practice;

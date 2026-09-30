@@ -33,8 +33,13 @@
         >
           <span class="score" [class.black]="row.black">{{ row.score }}</span>
           <span class="pv"
-            ><b>{{ row.first }}</b> {{ row.rest }}</span
-          >
+            ><b
+              >{{ row.first.prefix }}<app-move [san]="row.first.san" [color]="row.first.color"
+            /></b>
+            @for (move of row.rest; track $index) {
+              {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+            }
+          </span>
         </button>
       </li>
     }

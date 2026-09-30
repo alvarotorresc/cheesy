@@ -5,6 +5,7 @@ import { CONTENT_LOADERS, type ContentLoaders } from '../../../core/content';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { OPENING_RANDOM } from '../book-pick';
 import { OpeningSession, REPLY_DELAY_MS } from '../opening-session';
 import { fakeEngineFactory } from '../../../core/engine/testing';
@@ -51,6 +52,7 @@ describe('OpeningPlay', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(OpeningPlay);
     element = fixture.nativeElement as HTMLElement;
     session = fixture.debugElement.injector.get(OpeningSession);
