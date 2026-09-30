@@ -8,6 +8,7 @@ export const en = {
     readingMode: 'Reading mode',
     words: 'Words',
     notation: 'Notation',
+    castles: 'Castles',
   },
   nav: {
     home: 'Home',

@@ -11,13 +11,15 @@ const text = (value: string): MovePart => ({ kind: 'text', text: value });
 /**
  * A SAN move for a tight list in words mode: the image of the piece instead of its letter and `×`
  * for a capture (`Nxf7+` → [knight] `×f7+`). Pawns have no image; a promotion shows the new piece.
- * Castling and text that is not a move stay as written.
+ * Castling is the given word (`Castles+`): short or long is told by the whole sentence. Text that
+ * is not a move stays as written.
  */
-export function compactMove(san: string, color: Color): readonly MovePart[] {
+export function compactMove(san: string, color: Color, castles: string): readonly MovePart[] {
   const move = parseSan(san);
-  if (!move || move.castle) return [text(san)];
-  const side = color === 'white' ? 'w' : 'b';
+  if (!move) return [text(san)];
   const tail = move.check + move.annotation;
+  if (move.castle) return [text(castles + tail)];
+  const side = color === 'white' ? 'w' : 'b';
   const square = `${move.from}${move.capture ? '×' : ''}${move.to}`;
   const parts: MovePart[] = [];
   if (move.piece) parts.push({ kind: 'piece', code: `${side}${move.piece}` });

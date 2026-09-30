@@ -33,7 +33,7 @@ export class MoveText {
   );
   protected readonly parts = computed<readonly MovePart[] | undefined>(() =>
     this.reading.words() && this.format() === 'compact'
-      ? compactMove(this.san(), this.color())
+      ? compactMove(this.san(), this.color(), this.i18n.t().app.castles)
       : undefined,
   );
   protected readonly text = computed(() =>

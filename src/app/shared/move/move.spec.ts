@@ -95,6 +95,24 @@ describe('MoveText', () => {
     expect(spoken()).toBe('Caballo captura en f7, jaque');
   });
 
+  it('should write castling as a word in compact words mode and say which in the title', async () => {
+    await render({ san: 'O-O' });
+    expect(visible()).toBe('Enroque');
+    expect(element.querySelector('app-move')?.getAttribute('title')).toBe('Enroque corto');
+
+    TestBed.inject(I18nService).setLang('en');
+    await render({ san: 'O-O-O#', color: 'black' });
+    expect(visible()).toBe('Castles#');
+    expect(spoken()).toBe('Queenside castling, checkmate');
+
+    await render({ format: 'full' });
+    expect(visible()).toBe('Queenside castling, checkmate');
+
+    mode.setMode('notation');
+    await render({ format: 'compact' });
+    expect(visible()).toBe('O-O-O#');
+  });
+
   it('should follow a mode change', async () => {
     await render();
     mode.setMode('notation');

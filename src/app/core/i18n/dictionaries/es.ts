@@ -10,6 +10,7 @@ export const es: Messages = {
     readingMode: 'Modo de lectura',
     words: 'Palabras',
     notation: 'Notación',
+    castles: 'Enroque',
   },
   nav: {
     home: 'Inicio',
