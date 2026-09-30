@@ -1,8 +1,26 @@
+import type { SquareName } from 'chessops';
 import type { Localized } from '../i18n/i18n.types';
 
 export type { Localized };
 
 export type Side = 'white' | 'black';
+
+/**
+ * A piece of a text of the content, cut by the content build. Moves are stored in English SAN
+ * whatever the language of the text; `number` is the move number as written ("1.", "1...", "...");
+ * `start` says whether the move opens a sentence; `written` is the move exactly as the author wrote it.
+ */
+export type Segment =
+  | { kind: 'text'; text: string }
+  | { kind: 'move'; san: string; number?: string; start: boolean; written: string }
+  | { kind: 'square'; square: SquareName }
+  | { kind: 'term'; id: string; text: string };
+
+/** A text of the content in every language, already cut into segments. */
+export interface RichText {
+  es: Segment[];
+  en: Segment[];
+}
 
 /** An opening as a tree of moves. Positions are not stored: they are computed with chessops. */
 export interface OpeningTree {

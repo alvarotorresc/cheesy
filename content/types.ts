@@ -6,4 +6,6 @@ export type {
   OpeningNode,
   OpeningSummary,
   OpeningTree,
+  RichText,
+  Segment,
 } from '../src/app/core/content/content.types.ts';
