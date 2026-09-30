@@ -217,16 +217,22 @@ export class PositionPage {
   });
 
   /**
-   * Description of the displayed step of the solution while replaying, always as a sentence: it is
-   * announced to screen readers, and the sentence already tells captures, checks and mates.
+   * Description of the displayed step of the solution while replaying. In words mode the sentence
+   * already tells captures, checks and mates; in notation they go in a note after the move.
    */
   protected readonly stepText = computed(() => {
     const t = this.i18n.t().positions;
     const current = this.steps()[this.game.ply() - 1];
     if (!current) return t.startPosition;
     const { step, number } = current;
+    const notes = this.reading.words()
+      ? []
+      : [
+          step.isCapture ? t.capture : undefined,
+          step.isMate ? t.mate : step.isCheck ? t.check : undefined,
+        ].filter((note) => note !== undefined);
     const who = step.byPlayer ? t.yourMove : t.opponentMove;
-    return `${who}: ${number} ${this.reading.spoken(step.san)}.`;
+    return `${who}: ${number} ${this.reading.full(step.san)}${notes.length ? ` (${notes.join(', ')})` : ''}.`;
   });
 
   /** Analysis with this position and its solution: only after the solution is out. */
