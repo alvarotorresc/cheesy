@@ -1,0 +1,12 @@
+:host {
+  display: inline;
+}
+
+/* The piece image sits on the text line, as tall as a capital letter. */
+.icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.05em;
+  vertical-align: -0.2em;
+}

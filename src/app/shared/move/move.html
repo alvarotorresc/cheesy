@@ -1,0 +1,14 @@
+<span class="shown" aria-hidden="true">
+  @if (parts(); as parts) {
+    @for (part of parts; track $index) {
+      @if (part.kind === 'piece') {
+        <span [class]="'pc icon pc-' + part.code"></span>
+      } @else {
+        {{ part.text }}
+      }
+    }
+  } @else {
+    {{ text() }}
+  }
+</span>
+<span class="visually-hidden">{{ sentence() }}</span>
