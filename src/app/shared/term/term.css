@@ -4,7 +4,8 @@
 
 /* A dotted underline marks a glossary term; moves and squares use a faint solid one. */
 .term {
-  padding: 0;
+  /* A host can widen the target (the theme tags on Positions make the whole pill the button). */
+  padding: var(--term-padding, 0);
   border: 0;
   background: none;
   color: inherit;
@@ -18,7 +19,7 @@
 .term:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: var(--term-radius, 2px);
 }
 
 /*

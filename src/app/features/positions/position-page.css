@@ -120,7 +120,9 @@
 }
 
 .theme-tag {
-  padding: 0.2rem var(--space-3);
+  /* The padding belongs to the term button (see --term-padding) so the whole pill is its target. */
+  --term-padding: 0.2rem var(--space-3);
+  --term-radius: var(--radius-pill);
   border: 1px solid var(--color-control);
   border-radius: var(--radius-pill);
   font-size: var(--text-sm);
