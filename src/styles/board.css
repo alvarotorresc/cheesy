@@ -159,9 +159,9 @@ cg-board square.mark-spot {
 }
 
 .cg-wrap svg.cg-shapes line[stroke='#2f6fb3'] {
-  stroke: var(--board-spot);
+  stroke: var(--board-spot-arrow);
 }
 
 .cg-wrap svg.cg-shapes marker path[fill='#2f6fb3'] {
-  fill: var(--board-spot);
+  fill: var(--board-spot-arrow);
 }

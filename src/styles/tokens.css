@@ -107,6 +107,7 @@
   --board-wrong: rgb(179 38 30 / 55%);
   --board-arrow: #15781b;
   --board-spot: rgb(47 111 179 / 35%);
+  --board-spot-arrow: rgb(47 111 179 / 85%);
   --pip-progress: rgb(244 197 66 / 45%);
 
   --color-promotion-bg: #e3e9ed;
@@ -150,6 +151,7 @@
     --board-wrong: rgb(255 110 95 / 60%);
     --board-arrow: #1d9a25;
     --board-spot: rgb(110 170 235 / 40%);
+    --board-spot-arrow: rgb(110 170 235 / 85%);
     --pip-progress: rgb(244 197 66 / 40%);
     --color-promotion-bg: #cfd8de;
   }

@@ -1,4 +1,4 @@
-import { DestroyRef, DOCUMENT, inject, Injectable, signal } from '@angular/core';
+import { computed, DestroyRef, DOCUMENT, inject, Injectable, signal } from '@angular/core';
 import { Chess, castlingSide } from 'chessops/chess';
 import { parseFen } from 'chessops/fen';
 import { parseSan } from 'chessops/san';
@@ -48,12 +48,12 @@ export function resolveSpot(request: SpotRequest | undefined, boardFen: string):
 /**
  * What a page with a main board is pointing at: a move or squares of a text or a list. Each page
  * with a board provides its own. A request is cleared only by whoever made it, so moving from one
- * move to the next never blinks. A sticky request (a tap) lasts until a press outside any trigger.
+ * move to the next never blinks. A request from a tap lasts until a press outside any trigger (SpotTrigger never clears it).
  */
 @Injectable()
 export class BoardSpotlight {
   private readonly current = signal<{ request: SpotRequest; owner: object } | undefined>(undefined);
-  readonly request = () => this.current()?.request;
+  readonly request = computed(() => this.current()?.request);
 
   constructor() {
     const document = inject(DOCUMENT);
@@ -66,8 +66,7 @@ export class BoardSpotlight {
     );
   }
 
-  point(request: SpotRequest, owner: object, sticky = false): void {
-    void sticky; // A sticky request is simply one that no pointerleave clears (see SpotTrigger).
+  point(request: SpotRequest, owner: object): void {
     this.current.set({ request, owner });
   }
 

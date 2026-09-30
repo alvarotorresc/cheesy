@@ -13,7 +13,7 @@ import { BoardSpotlight, type SpotRequest } from './spotlight';
     '(pointerenter)': 'onEnter($event)',
     '(pointerleave)': 'onLeave($event)',
     '(pointerup)': 'onTap($event)',
-    '(focus)': 'show(false)',
+    '(focus)': 'show()',
     '(blur)': 'hide()',
   },
 })
@@ -25,7 +25,7 @@ export class SpotTrigger {
   protected readonly spotlight = inject(BoardSpotlight, { optional: true });
 
   protected onEnter(event: PointerEvent): void {
-    if (event.pointerType === 'mouse') this.show(false);
+    if (event.pointerType === 'mouse') this.show();
   }
 
   protected onLeave(event: PointerEvent): void {
@@ -34,12 +34,12 @@ export class SpotTrigger {
   }
 
   protected onTap(event: PointerEvent): void {
-    if (event.pointerType !== 'mouse') this.show(true);
+    if (event.pointerType !== 'mouse') this.show();
   }
 
-  protected show(sticky: boolean): void {
+  protected show(): void {
     const request = this.appSpot();
-    if (request) this.spotlight?.point(request, this, sticky);
+    if (request) this.spotlight?.point(request, this);
   }
 
   protected hide(): void {

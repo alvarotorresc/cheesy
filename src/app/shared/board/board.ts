@@ -109,27 +109,15 @@ export class BoardComponent {
   private readonly spotlight = inject(BoardSpotlight, { optional: true });
   private readonly spot = computed(() => resolveSpot(this.spotlight?.request(), this.fen()));
 
-  private readonly config = computed<Config>(() => {
-    const viewOnly = this.viewOnly();
-    const lastMove = this.lastMove();
+  /**
+   * Squares and shapes drawn over the position. They are applied without `fen`: chessground resets
+   * its pieces from the fen it is given, which would snap back a pawn waiting for its promotion
+   * every time a text is pointed at.
+   */
+  private readonly overlay = computed<Config>(() => {
     const spot = this.spot();
     return {
-      fen: this.fen(),
-      orientation: this.orientation(),
-      turnColor: this.turnColor(),
-      check: this.check(),
-      lastMove: lastMove ? [...lastMove] : undefined,
-      // Chessground's own `viewOnly` only takes effect at creation (it skips binding the input
-      // events), so view-only mode is emulated with settings that can change later.
-      movable: {
-        color: viewOnly ? undefined : this.turnColor(),
-        dests: new Map(this.dests()),
-      },
-      draggable: { enabled: !viewOnly },
-      selectable: { enabled: !viewOnly },
       highlight: {
-        lastMove: true,
-        check: true,
         // The marks of the page go after the pointed squares, so they win on a shared square.
         custom: new Map<Key, string>([
           ...spot.squares.map((square) => [square as Key, 'mark-spot'] as const),
@@ -137,8 +125,6 @@ export class BoardComponent {
         ]),
       },
       drawable: {
-        enabled: false,
-        visible: true,
         autoShapes: [
           ...this.arrows().map((arrow) => ({
             orig: arrow.from,
@@ -153,6 +139,28 @@ export class BoardComponent {
     };
   });
 
+  private readonly config = computed<Config>(() => {
+    const viewOnly = this.viewOnly();
+    const lastMove = this.lastMove();
+    return {
+      fen: this.fen(),
+      orientation: this.orientation(),
+      turnColor: this.turnColor(),
+      check: this.check(),
+      lastMove: lastMove ? [...lastMove] : undefined,
+      // Chessground's own `viewOnly` only takes effect at creation (it skips binding the input
+      // events), so view-only mode is emulated with settings that can change later.
+      movable: {
+        color: viewOnly ? undefined : this.turnColor(),
+        dests: new Map(this.dests()),
+      },
+      draggable: { enabled: !viewOnly },
+      selectable: { enabled: !viewOnly },
+      highlight: { lastMove: true, check: true },
+      drawable: { enabled: false, visible: true },
+    };
+  });
+
   private readonly destroyRef = inject(DestroyRef);
   private api: Api | undefined;
 
@@ -161,6 +169,7 @@ export class BoardComponent {
       // Chessground watches the board size itself (ResizeObserver), so it follows the layout.
       const api = Chessground(this.boardElement().nativeElement, {
         ...this.config(),
+        highlight: { ...this.config().highlight, ...this.overlay().highlight },
         // Both are read once, when chessground wraps the element.
         coordinates: this.coordinates(),
         ranksPosition: 'left',
@@ -169,6 +178,7 @@ export class BoardComponent {
         draggable: { ...this.config().draggable, showGhost: true },
         drawable: {
           ...this.config().drawable,
+          ...this.overlay().drawable,
           // Chessground merges this into its default brushes; the type wants them all.
           brushes: {
             [BEST_BRUSH.key]: BEST_BRUSH,
@@ -205,6 +215,11 @@ export class BoardComponent {
       const config = this.config();
       this.syncRequest();
       this.api?.set(config);
+    });
+
+    effect(() => {
+      const overlay = this.overlay();
+      this.api?.set(overlay);
     });
 
     afterRenderEffect(() => {

@@ -236,4 +236,26 @@ describe('BoardComponent with a spotlight', () => {
       expect.objectContaining({ orig: 'g1', dest: 'f3', brush: 'spot' }),
     );
   });
+
+  it('should keep a pending promotion when a text points at the board', async () => {
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const fixture = TestBed.createComponent(BoardComponent);
+    fixture.componentRef.setInput('fen', '4k3/P7/8/8/8/8/8/4K3 w - - 0 1');
+    fixture.componentRef.setInput('labels', LABELS);
+    fixture.componentRef.setInput('dests', new Map([['a7', ['a8']]]));
+    await fixture.whenStable();
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+    api.move('a7', 'a8');
+    api.state.movable.events.after?.('a7', 'a8', { premove: false });
+    await fixture.whenStable();
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('[role="dialog"]')).not.toBeNull();
+
+    TestBed.inject(BoardSpotlight).point({ kind: 'squares', squares: ['e4'] }, {});
+    await fixture.whenStable();
+
+    expect(element.querySelector('[role="dialog"]')).not.toBeNull();
+    expect(api.state.pieces.get('a8')?.role).toBe('pawn');
+    expect(api.state.pieces.get('a7')).toBeUndefined();
+  });
 });

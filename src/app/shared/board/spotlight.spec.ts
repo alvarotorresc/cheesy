@@ -73,7 +73,7 @@ describe('BoardSpotlight', () => {
   });
 
   it('should clear a sticky request on a press outside any spot trigger', () => {
-    spotlight.point({ kind: 'squares', squares: ['e4'] }, a, true);
+    spotlight.point({ kind: 'squares', squares: ['e4'] }, a);
     document.body.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
     expect(spotlight.request()).toBeUndefined();
   });
@@ -82,9 +82,12 @@ describe('BoardSpotlight', () => {
     const trigger = document.createElement('span');
     trigger.setAttribute('data-spot', '');
     document.body.append(trigger);
-    spotlight.point({ kind: 'squares', squares: ['e4'] }, a, true);
-    trigger.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
-    expect(spotlight.request()).toBeDefined();
-    trigger.remove();
+    try {
+      spotlight.point({ kind: 'squares', squares: ['e4'] }, a);
+      trigger.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+      expect(spotlight.request()).toBeDefined();
+    } finally {
+      trigger.remove();
+    }
   });
 });
