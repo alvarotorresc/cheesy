@@ -26,8 +26,8 @@ export interface BoardArrow {
   readonly to: Key;
 }
 
-/** Colour of a marked square: a retracted move, a hint and a help square. */
-export type BoardMark = 'wrong' | 'hint' | 'help';
+/** Colour of a marked square: a retracted move, a hint, a help square and a square pointed at from a text. */
+export type BoardMark = 'wrong' | 'hint' | 'help' | 'spot';
 
 /** Ring around the whole board. */
 export type BoardRing = 'none' | 'accent' | 'danger';

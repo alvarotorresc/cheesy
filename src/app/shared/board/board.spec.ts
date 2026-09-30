@@ -2,6 +2,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { Api } from '@lichess-org/chessground/api';
 import { BoardComponent } from './board';
 import type { BoardLabels, BoardMove } from './board.types';
+import { BoardSpotlight } from './spotlight';
 
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const KINGS_ONLY_FEN = '4k3/8/8/8/8/8/8/4K3 w - - 0 1';
@@ -203,5 +204,36 @@ describe('BoardComponent', () => {
       expect(element.querySelector('[role="dialog"]')).toBeNull();
       expect(moves).toEqual([]);
     });
+  });
+});
+
+describe('BoardComponent with a spotlight', () => {
+  it('should mark the pointed squares without covering the marks of the page', async () => {
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const fixture = TestBed.createComponent(BoardComponent);
+    fixture.componentRef.setInput('fen', INITIAL_FEN);
+    fixture.componentRef.setInput('labels', LABELS);
+    fixture.componentRef.setInput('marks', new Map([['e4', 'hint']]));
+    await fixture.whenStable();
+    TestBed.inject(BoardSpotlight).point({ kind: 'squares', squares: ['e4', 'd5'] }, {});
+    await fixture.whenStable();
+    await nextFrame();
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelectorAll('cg-board square.mark-spot')).toHaveLength(1);
+    expect(element.querySelectorAll('cg-board square.mark-hint')).toHaveLength(1);
+  });
+
+  it('should draw the arrow of a pointed move', async () => {
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const fixture = TestBed.createComponent(BoardComponent);
+    fixture.componentRef.setInput('fen', INITIAL_FEN);
+    fixture.componentRef.setInput('labels', LABELS);
+    await fixture.whenStable();
+    TestBed.inject(BoardSpotlight).point({ kind: 'move', san: 'Nf3' }, {});
+    await fixture.whenStable();
+    const { api } = fixture.componentInstance as unknown as { api: Api };
+    expect(api.state.drawable.autoShapes).toContainEqual(
+      expect.objectContaining({ orig: 'g1', dest: 'f3', brush: 'spot' }),
+    );
   });
 });

@@ -29,6 +29,7 @@ import {
   type PendingPromotion,
   type PromotionRole,
 } from './board.types';
+import { BoardSpotlight, resolveSpot } from './spotlight';
 
 const PROMOTION_GLYPHS: Record<PromotionRole, string> = {
   queen: '♛',
@@ -45,6 +46,9 @@ const prefersReducedMotion = (): boolean =>
 
 /** Brush of the best move arrow. The colour is remapped to a theme token in board.css. */
 const BEST_BRUSH = { key: 'best', color: '#15781b', opacity: 0.82, lineWidth: 11 };
+
+/** Brush of the arrow of a pointed move. Remapped to a theme token in board.css. */
+const SPOT_BRUSH = { key: 'spot', color: '#2f6fb3', opacity: 0.7, lineWidth: 9 };
 
 /**
  * Presentational chess board backed by chessground. It renders whatever its inputs describe and
@@ -102,9 +106,13 @@ export class BoardComponent {
   /** Bumped after each user move to force a re-sync even when the inputs did not change. */
   private readonly syncRequest = signal(0);
 
+  private readonly spotlight = inject(BoardSpotlight, { optional: true });
+  private readonly spot = computed(() => resolveSpot(this.spotlight?.request(), this.fen()));
+
   private readonly config = computed<Config>(() => {
     const viewOnly = this.viewOnly();
     const lastMove = this.lastMove();
+    const spot = this.spot();
     return {
       fen: this.fen(),
       orientation: this.orientation(),
@@ -122,16 +130,25 @@ export class BoardComponent {
       highlight: {
         lastMove: true,
         check: true,
-        custom: new Map([...this.marks()].map(([key, mark]) => [key, `mark-${mark}`])),
+        // The marks of the page go after the pointed squares, so they win on a shared square.
+        custom: new Map<Key, string>([
+          ...spot.squares.map((square) => [square as Key, 'mark-spot'] as const),
+          ...[...this.marks()].map(([key, mark]) => [key, `mark-${mark}`] as const),
+        ]),
       },
       drawable: {
         enabled: false,
         visible: true,
-        autoShapes: this.arrows().map((arrow) => ({
-          orig: arrow.from,
-          dest: arrow.to,
-          brush: BEST_BRUSH.key,
-        })),
+        autoShapes: [
+          ...this.arrows().map((arrow) => ({
+            orig: arrow.from,
+            dest: arrow.to,
+            brush: BEST_BRUSH.key,
+          })),
+          ...(spot.arrow
+            ? [{ orig: spot.arrow.from, dest: spot.arrow.to, brush: SPOT_BRUSH.key }]
+            : []),
+        ],
       },
     };
   });
@@ -153,7 +170,10 @@ export class BoardComponent {
         drawable: {
           ...this.config().drawable,
           // Chessground merges this into its default brushes; the type wants them all.
-          brushes: { [BEST_BRUSH.key]: BEST_BRUSH } as unknown as DrawBrushes,
+          brushes: {
+            [BEST_BRUSH.key]: BEST_BRUSH,
+            [SPOT_BRUSH.key]: SPOT_BRUSH,
+          } as unknown as DrawBrushes,
         },
         movable: {
           ...this.config().movable,

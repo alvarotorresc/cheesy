@@ -1,4 +1,6 @@
 export { BoardComponent } from './board';
+export { SpotTrigger } from './spot-trigger';
+export { BoardSpotlight, resolveSpot, type SpotRequest, type SpotShapes } from './spotlight';
 export {
   PROMOTION_ROLES,
   type BoardArrow,
