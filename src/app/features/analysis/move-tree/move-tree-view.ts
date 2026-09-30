@@ -9,8 +9,10 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { I18nService } from '../../../core/i18n';
+import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
 import type { MoveNode } from '../../../core/move-tree';
-import { moveLabel } from '../move-label';
+import { MoveText } from '../../../shared/move';
+import { moveNumber } from '../move-label';
 import type { MainCell, MainItem } from './move-rows';
 import { Variation } from './variation';
 
@@ -21,12 +23,14 @@ import { Variation } from './variation';
  */
 @Component({
   selector: 'app-move-tree',
-  imports: [NgTemplateOutlet, Variation],
+  imports: [MoveText, NgTemplateOutlet, Variation],
   templateUrl: './move-tree-view.html',
   styleUrls: ['./moves.css', './move-tree-view.css'],
 })
 export class MoveTreeView {
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
+  protected readonly colorOfPly = colorOfPly;
 
   readonly items = input.required<readonly MainItem[]>();
   readonly currentId = input.required<string>();
@@ -61,7 +65,7 @@ export class MoveTreeView {
   }
 
   protected label(node: MoveNode): string {
-    const text = moveLabel(node, (san) => this.i18n.san(san));
+    const text = `${moveNumber(node)} ${this.reading.spoken(node.san)}`;
     const name = this.names().get(node.id);
     return name ? `${text}, ${name}` : text;
   }

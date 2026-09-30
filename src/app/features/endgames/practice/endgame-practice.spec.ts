@@ -6,6 +6,7 @@ import { bundledContentLoaders } from '../../../core/content/testing';
 import { ENGINE_TRANSPORT } from '../../../core/engine';
 import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { PROGRESS_STORE_LOADER } from '../../../core/progress';
 import { LOOKUP_DELAY_MS, TABLEBASE_HTTP } from '../../../core/tablebase';
 import {
@@ -86,6 +87,8 @@ describe('EndgamePractice', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
     harness = await RouterTestingHarness.create();
   });
 
@@ -318,7 +321,7 @@ describe('EndgamePractice', () => {
       button('Show hint').click();
       await settle();
 
-      expect(element().querySelector('.fact .move')?.textContent?.trim()).toBe('Rd5');
+      expect(element().querySelector('.fact .move .shown')?.textContent?.trim()).toBe('Rd5');
     });
 
     it('should remember that the panel was opened, and drop the old key', async () => {

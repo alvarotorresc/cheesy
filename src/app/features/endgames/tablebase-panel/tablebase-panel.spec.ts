@@ -2,6 +2,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { Color } from 'chessops';
 import { parsePosition } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { parseTablebaseResponse, type TablebaseResult } from '../../../core/tablebase';
 import {
   LUCENA_FEN,
@@ -36,6 +37,8 @@ describe('TablebasePanel', () => {
 
   beforeEach(() => {
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(TablebasePanel);
     element = fixture.nativeElement as HTMLElement;
   });
@@ -65,12 +68,12 @@ describe('TablebasePanel', () => {
 
     fixture.componentRef.setInput('hint', LUCENA_RESULT.moves[0]);
     await fixture.whenStable();
-    expect(element.querySelector('.fact .move')?.textContent?.trim()).toBe('Rd5');
+    expect(element.querySelector('.fact .move .shown')?.textContent?.trim()).toBe('Rd5');
     expect(text()).toContain('Best move');
 
     TestBed.inject(I18nService).setLang('es');
     await fixture.whenStable();
-    expect(element.querySelector('.fact .move')?.textContent?.trim()).toBe('Td5');
+    expect(element.querySelector('.fact .move .shown')?.textContent?.trim()).toBe('Td5');
   });
 
   it('should say the hint comes when it is the player turn, and never give it after the game', async () => {
@@ -120,7 +123,7 @@ describe('TablebasePanel', () => {
 
     expect(element.querySelector('.res')?.textContent?.trim()).toBe('Draw');
     expect(text()).not.toContain('mate');
-    expect(element.querySelector('.fact .move')?.textContent?.trim()).toBe('Kf4');
+    expect(element.querySelector('.fact .move .shown')?.textContent?.trim()).toBe('Kf4');
     expect(text()).toContain('A move that holds the draw');
   });
 

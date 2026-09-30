@@ -1,5 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { MoveList } from './move-list';
 
 const texts = (element: HTMLElement, selector: string): string[] =>
@@ -17,6 +18,8 @@ describe('MoveList', () => {
   beforeEach(() => {
     // Other specs may leave a stored language behind: these expectations are in English.
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(MoveList);
     fixture.componentRef.setInput('label', 'Moves');
     fixture.componentRef.setInput('emptyLabel', 'No moves yet.');
@@ -34,7 +37,7 @@ describe('MoveList', () => {
     await render({ moves: ['e4', 'e5', 'Nf3'] });
 
     expect(texts(element, '.number')).toEqual(['1.', '2.']);
-    expect(texts(element, 'button.move')).toEqual(['e4', 'e5', 'Nf3']);
+    expect(texts(element, 'button.move .shown')).toEqual(['e4', 'e5', 'Nf3']);
   });
 
   it('should start with a placeholder when black moves first', async () => {
@@ -54,7 +57,7 @@ describe('MoveList', () => {
     await render({ moves: ['e4', 'e5', 'Nf3'], currentPly: 2 });
 
     const current = element.querySelector('button.current');
-    expect(current?.textContent?.trim()).toBe('e5');
+    expect(current?.querySelector('.shown')?.textContent?.trim()).toBe('e5');
     expect(current?.getAttribute('aria-current')).toBe('step');
     expect(element.querySelectorAll('button.current')).toHaveLength(1);
   });
@@ -75,7 +78,7 @@ describe('MoveList', () => {
     try {
       await render({ moves: ['e4', 'e5', 'Nf3', 'Nc6', 'Bb5', 'a6', 'O-O', 'axb5', 'exd8=Q'] });
 
-      expect(texts(element, 'button.move')).toEqual([
+      expect(texts(element, 'button.move .shown')).toEqual([
         'e4',
         'e5',
         'Cf3',
@@ -89,5 +92,14 @@ describe('MoveList', () => {
     } finally {
       i18n.setLang('en');
     }
+  });
+
+  it('should draw the piece and name the button with the sentence in words mode', async () => {
+    TestBed.inject(ReadingModeService).setMode('words');
+    await render({ moves: ['e4', 'Nc6'] });
+
+    const [, black] = Array.from(element.querySelectorAll('button.move'));
+    expect(black.querySelector('.pc-bN')).not.toBeNull();
+    expect(black.querySelector('.visually-hidden')?.textContent?.trim()).toBe('Knight to c6');
   });
 });

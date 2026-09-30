@@ -11,6 +11,7 @@ import { ENGINE_TRANSPORT, EngineService, type EngineTransportHandlers } from '.
 import { FakeUciEngine } from '../../core/engine/testing';
 import { parsePosition } from '../../core/game';
 import { I18nService } from '../../core/i18n';
+import { ReadingModeService } from '../../core/reading-mode';
 import { ROOT_ID } from '../../core/move-tree';
 import { BoardComponent } from '../../shared/board';
 import { ToastService } from '../../shared/toast';
@@ -139,6 +140,8 @@ describe('Analysis', () => {
       ],
     });
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
   });
 
   afterEach(() => {
@@ -223,7 +226,7 @@ describe('Analysis', () => {
       expect(mainLine()).toEqual(['e4', 'e5', 'Nf3']);
       expect(toast()).toBe('2.Bc4 starts a variation: your line is still there.');
       expect(
-        element.querySelector('app-variation .mv[aria-current="true"]')?.textContent,
+        element.querySelector('app-variation .mv[aria-current="true"] .shown')?.textContent,
       ).toContain('Bc4');
       expect(element.querySelector('.in-var')?.textContent).toContain(
         'You are in a variation (2.Bc4).',

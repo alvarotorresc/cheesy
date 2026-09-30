@@ -11,7 +11,7 @@
         [attr.aria-current]="cell.id === currentId() ? 'true' : null"
         (click)="pick.emit(cell.id)"
       >
-        {{ i18n.san(cell.san) }}
+        <app-move [san]="cell.san" [color]="colorOfPly(cell.ply)" />
       </button>
       @if (names().get(cell.id); as name) {
         <span class="mv-name">{{ name }}</span>

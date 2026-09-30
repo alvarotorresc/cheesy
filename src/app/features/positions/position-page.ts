@@ -15,16 +15,19 @@ import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import type { Key } from '@lichess-org/chessground/types';
+import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink } from '../../core/analysis-link';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
+import { colorOfPly, ReadingModeService } from '../../core/reading-mode';
 import { PageTitle } from '../../core/page-title';
 import { BoardComponent, type BoardMark, type BoardRing } from '../../shared/board';
 import { Icon } from '../../shared/icon';
 import type { IconName } from '../../shared/icon';
 import { isFormField } from '../../shared/keyboard';
+import { MoveText } from '../../shared/move';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { numberOfContentId, POSITION_NUMBER } from './position-order';
 import { PositionList } from './position-list';
@@ -37,6 +40,8 @@ interface StepView {
   ply: number;
   /** Move number with dots, "6." for white and "6…" for black. */
   number: string;
+  /** Side that plays the step, from the side to move in the starting position. */
+  color: Color;
 }
 
 /** Main message of the exercise: its kind picks the colour and the icon. */
@@ -66,7 +71,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, NgTemplateOutlet, RouterLink],
+  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink],
   providers: [GameService, PositionTrainer, PositionList],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
@@ -77,6 +82,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
 })
 export class PositionPage {
   protected readonly i18n = inject(I18nService);
+  protected readonly reading = inject(ReadingModeService);
   protected readonly game = inject(GameService);
   protected readonly trainer = inject(PositionTrainer);
   protected readonly list = inject(PositionList);
@@ -148,7 +154,12 @@ export class PositionPage {
       .map((step, index) => {
         const absolute = startPly + index;
         const number = Math.floor(absolute / 2) + 1;
-        return { step, ply: index + 1, number: absolute % 2 === 0 ? `${number}.` : `${number}…` };
+        return {
+          step,
+          ply: index + 1,
+          number: absolute % 2 === 0 ? `${number}.` : `${number}…`,
+          color: colorOfPly(absolute + 1),
+        };
       });
   });
 
