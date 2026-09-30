@@ -11,6 +11,7 @@ const WIKI_PAWN_STRUCTURE = `${WIKI}Pawn_structure`;
 const WIKI_KP_ENDGAME = `${WIKI}King_and_pawn_versus_king_endgame`;
 const WIKI_ROOK_ENDGAME = `${WIKI}Rook_and_pawn_versus_rook_endgame`;
 const WIKI_LUCENA = `${WIKI}Lucena_position`;
+const WIKI_PHILIDOR = `${WIKI}Philidor_position`;
 const LICHESS_MATES_I = 'https://lichess.org/practice/checkmates/checkmate-patterns-i/fE4k21MW';
 const LICHESS_MATES_II = 'https://lichess.org/practice/checkmates/checkmate-patterns-ii/8yadFPpU';
 const LICHESS_MATES_IV = 'https://lichess.org/practice/checkmates/checkmate-patterns-iv/96Lij7wH';
@@ -121,7 +122,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'd5', to: 'd8', move: false }],
     },
     level: 'beginner',
-    sources: [WIKI_KP_ENDGAME, `${WIKI}Philidor_position`, `${WIKI}Chess_endgame`],
+    sources: [WIKI_KP_ENDGAME, WIKI_PHILIDOR, `${WIKI}Chess_endgame`],
   },
 
   // ─── Opening and strategy ────────────────────────────────────────────────────────────────────
@@ -226,7 +227,7 @@ export const glossary: GlossarySpec[] = [
     name: { es: 'Flanco', en: 'Flank' },
     definition: {
       es: 'Cada uno de los dos lados del tablero, fuera del [centro](centre). El flanco de dama son las columnas a, b y c; el flanco de rey, las columnas f, g y h.',
-      en: 'Either side of the board, away from the [centre](centre). The queenside is made up of the a, b and c columns; the kingside, of the f, g and h columns.',
+      en: 'Either side of the board, away from the [centre](centre): the queen’s flank is the a, b and c columns, and the king’s flank is the f, g and h columns.',
     },
     example: {
       fen: START,
@@ -280,7 +281,7 @@ export const glossary: GlossarySpec[] = [
       en: 'Active play by the defending side: threats of its own, often on the other [flank](flank), that stop the opponent from simply getting on with the attack.',
     },
     example: {
-      fen: '5rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1',
+      fen: 'r4rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1',
       orientation: 'black',
       highlights: ['a5', 'b4', 'c1'],
       arrows: [{ from: 'b4', to: 'b3', move: true }],
@@ -308,7 +309,7 @@ export const glossary: GlossarySpec[] = [
     id: 'pawn-chain',
     name: { es: 'Cadena de peones', en: 'Pawn chain' },
     definition: {
-      es: 'Varios peones del mismo color en diagonal, cada uno protegiendo al de delante. El último de la fila, la base, es su punto débil, porque no lo protege ningún peón.',
+      es: 'Varios peones del mismo color en diagonal, cada uno protegiendo al de delante. El de más atrás, la base, es su punto débil, porque no lo protege ningún peón.',
       en: 'Several pawns of the same colour in a diagonal line, each guarding the one in front of it. The one at the back, the base, is its weak point, because no pawn guards it.',
     },
     example: {
@@ -340,8 +341,8 @@ export const glossary: GlossarySpec[] = [
     id: 'isolated-pawn',
     name: { es: 'Peón aislado', en: 'Isolated pawn' },
     definition: {
-      es: 'Peón que no tiene peones de su color en las columnas de al lado. Ningún peón podrá protegerlo nunca, así que tienen que hacerlo las piezas.',
-      en: 'A pawn with no pawns of its own colour on the columns next to it. No pawn can ever guard it, so pieces have to do that job.',
+      es: 'Peón que no tiene peones de su color en las columnas de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas.',
+      en: 'A pawn with no pawns of its own colour on the columns next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job.',
     },
     example: {
       fen: '4k3/pp3ppp/4p3/8/3P4/8/PP3PPP/4K3 w - - 0 1',
@@ -372,8 +373,8 @@ export const glossary: GlossarySpec[] = [
     id: 'hanging-pawns',
     name: { es: 'Peones colgantes', en: 'Hanging pawns' },
     definition: {
-      es: 'Dos peones del mismo color en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el [centro](centre) mientras aguantan juntos, pero pueden convertirse en un blanco.',
-      en: 'Two pawns of the same colour on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the [centre](centre) while they hold together, but they can turn into a target.',
+      es: 'Dos peones del mismo color, uno al lado del otro en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el [centro](centre) mientras aguantan juntos, pero pueden convertirse en un blanco.',
+      en: 'Two pawns of the same colour standing side by side on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the [centre](centre) while they hold together, but they can turn into a target.',
     },
     example: {
       fen: '4k3/p4ppp/4p3/8/2PP4/8/P4PPP/4K3 w - - 0 1',
@@ -442,10 +443,13 @@ export const glossary: GlossarySpec[] = [
       en: 'Instead of making the move that seems forced, such as taking back a piece, you first play another one the opponent has to answer, often a [check](check), and only then make the expected move.',
     },
     example: {
-      fen: '5rk1/pp4pp/5p2/8/8/2b5/PP3PPP/3Q1RK1 w - - 0 1',
+      fen: 'r2q1rk1/pbp2ppp/8/8/8/1Pn2Q2/P2P1PPP/R1B1R1K1 w - - 0 1',
       orientation: 'white',
-      highlights: ['c3', 'g8'],
-      arrows: [{ from: 'd1', to: 'b3', move: true }],
+      highlights: ['c3', 'b7', 'f3'],
+      arrows: [
+        { from: 'f3', to: 'b7', move: true },
+        { from: 'd2', to: 'c3', move: false },
+      ],
     },
     level: 'intermediate',
     sources: [
@@ -495,8 +499,8 @@ export const glossary: GlossarySpec[] = [
     id: 'knight-fork',
     name: { es: 'Horquilla de caballo', en: 'Knight fork' },
     definition: {
-      es: '[Ataque doble](fork) hecho por un caballo. Es muy frecuente porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
-      en: 'A [fork](fork) made by a knight. It is very common because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight.',
+      es: '[Ataque doble](fork) hecho por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
+      en: 'A [fork](fork) made by a knight. It is especially dangerous because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight.',
     },
     example: {
       fen: 'r3k3/8/8/1N6/8/8/8/4K3 w - - 0 1',
@@ -753,7 +757,7 @@ export const glossary: GlossarySpec[] = [
     name: { es: 'Mate árabe', en: 'Arabian mate' },
     definition: {
       es: '[Jaque mate](checkmate) de torre y caballo contra un rey arrinconado en una esquina: la torre, pegada al rey, da el jaque, y el caballo la protege y vigila la casilla de escape que queda. Ya aparece en antiguos manuscritos árabes.',
-      en: '[Checkmate](checkmate) by a rook and a knight against a king stuck in a corner: the rook, right next to the king, gives check, and the knight protects it and covers the one escape square left. It already appears in old Arabic manuscripts.',
+      en: '[Checkmate](checkmate) by a rook and a knight against a king stuck in a corner: the rook, right next to the king, gives check, and the knight protects it and covers the one escape square left. It appears as far back as old Arabic chess manuscripts.',
     },
     example: {
       fen: '7k/R7/5N2/8/8/8/5PPP/6K1 w - - 0 1',
@@ -795,8 +799,8 @@ export const glossary: GlossarySpec[] = [
     id: 'key-squares',
     name: { es: 'Casillas clave', en: 'Key squares' },
     definition: {
-      es: 'En los finales con solo reyes y peones, casillas que, si el rey del bando más fuerte llega a una de ellas, le aseguran un objetivo, normalmente [coronar](promotion) su peón, haga lo que haga el rival.',
-      en: 'In endgames with only kings and pawns, squares that guarantee a goal, usually [promoting](promotion) the pawn, once the stronger side’s king reaches one of them, whatever the opponent does.',
+      es: 'En la última fase de la partida, cuando solo quedan reyes y peones, casillas en las que el rey del bando más fuerte, en cuanto llega, tiene asegurado su objetivo, normalmente [coronar](promotion) su peón, haga lo que haga el rival.',
+      en: 'Late in the game, when only kings and pawns are left, squares where the stronger side’s king, once it gets there, is sure to reach its goal, usually [promoting](promotion) the pawn, whatever the opponent does.',
     },
     example: {
       fen: '4k3/8/3K4/8/4P3/8/8/8 b - - 0 1',
@@ -861,7 +865,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'b6', to: 'h6', move: false }],
     },
     level: 'advanced',
-    sources: [WIKI_GLOSSARY, `${WIKI}Philidor_position`, WIKI_ROOK_ENDGAME, LICHESS_ROOK_ENDGAMES],
+    sources: [WIKI_GLOSSARY, WIKI_PHILIDOR, WIKI_ROOK_ENDGAME, LICHESS_ROOK_ENDGAMES],
   },
   {
     id: 'building-a-bridge',

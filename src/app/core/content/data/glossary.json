@@ -876,7 +876,7 @@
         },
         {
           "kind": "text",
-          "text": ". The queenside is made up of the a, b and c columns; the kingside, of the f, g and h columns."
+          "text": ": the queen’s flank is the a, b and c columns, and the king’s flank is the f, g and h columns."
         }
       ]
     },
@@ -1020,7 +1020,7 @@
       ]
     },
     "example": {
-      "fen": "5rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1",
+      "fen": "r4rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1",
       "orientation": "black",
       "highlights": [
         "a5",
@@ -1088,7 +1088,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Varios peones del mismo color en diagonal, cada uno protegiendo al de delante. El último de la fila, la base, es su punto débil, porque no lo protege ningún peón."
+          "text": "Varios peones del mismo color en diagonal, cada uno protegiendo al de delante. El de más atrás, la base, es su punto débil, porque no lo protege ningún peón."
         }
       ],
       "en": [
@@ -1182,13 +1182,13 @@
       "es": [
         {
           "kind": "text",
-          "text": "Peón que no tiene peones de su color en las columnas de al lado. Ningún peón podrá protegerlo nunca, así que tienen que hacerlo las piezas."
+          "text": "Peón que no tiene peones de su color en las columnas de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "A pawn with no pawns of its own colour on the columns next to it. No pawn can ever guard it, so pieces have to do that job."
+          "text": "A pawn with no pawns of its own colour on the columns next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job."
         }
       ]
     },
@@ -1251,7 +1251,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Dos peones del mismo color en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el "
+          "text": "Dos peones del mismo color, uno al lado del otro en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el "
         },
         {
           "kind": "term",
@@ -1266,7 +1266,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "Two pawns of the same colour on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the "
+          "text": "Two pawns of the same colour standing side by side on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the "
         },
         {
           "kind": "term",
@@ -1486,17 +1486,23 @@
       ]
     },
     "example": {
-      "fen": "5rk1/pp4pp/5p2/8/8/2b5/PP3PPP/3Q1RK1 w - - 0 1",
+      "fen": "r2q1rk1/pbp2ppp/8/8/8/1Pn2Q2/P2P1PPP/R1B1R1K1 w - - 0 1",
       "orientation": "white",
       "highlights": [
         "c3",
-        "g8"
+        "b7",
+        "f3"
       ],
       "arrows": [
         {
-          "from": "d1",
-          "to": "b3",
+          "from": "f3",
+          "to": "b7",
           "move": true
+        },
+        {
+          "from": "d2",
+          "to": "c3",
+          "move": false
         }
       ]
     },
@@ -1607,7 +1613,7 @@
         },
         {
           "kind": "text",
-          "text": " hecho por un caballo. Es muy frecuente porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo."
+          "text": " hecho por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo."
         }
       ],
       "en": [
@@ -1622,7 +1628,7 @@
         },
         {
           "kind": "text",
-          "text": " made by a knight. It is very common because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight."
+          "text": " made by a knight. It is especially dangerous because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight."
         }
       ]
     },
@@ -2465,7 +2471,7 @@
         },
         {
           "kind": "text",
-          "text": " by a rook and a knight against a king stuck in a corner: the rook, right next to the king, gives check, and the knight protects it and covers the one escape square left. It already appears in old Arabic manuscripts."
+          "text": " by a rook and a knight against a king stuck in a corner: the rook, right next to the king, gives check, and the knight protects it and covers the one escape square left. It appears as far back as old Arabic chess manuscripts."
         }
       ]
     },
@@ -2538,7 +2544,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "En los finales con solo reyes y peones, casillas que, si el rey del bando más fuerte llega a una de ellas, le aseguran un objetivo, normalmente "
+          "text": "En la última fase de la partida, cuando solo quedan reyes y peones, casillas en las que el rey del bando más fuerte, en cuanto llega, tiene asegurado su objetivo, normalmente "
         },
         {
           "kind": "term",
@@ -2553,7 +2559,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "In endgames with only kings and pawns, squares that guarantee a goal, usually "
+          "text": "Late in the game, when only kings and pawns are left, squares where the stronger side’s king, once it gets there, is sure to reach its goal, usually "
         },
         {
           "kind": "term",
@@ -2562,7 +2568,7 @@
         },
         {
           "kind": "text",
-          "text": " the pawn, once the stronger side’s king reaches one of them, whatever the opponent does."
+          "text": " the pawn, whatever the opponent does."
         }
       ]
     },
