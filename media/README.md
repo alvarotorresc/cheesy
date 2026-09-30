@@ -9,9 +9,9 @@ Playwright and its own headless Chromium. The scripts never touch the app code.
 From the repo root. The first time, install the browser: `pnpm exec playwright install chromium`.
 
 ```sh
-pnpm media                                        # shots -> labels -> promo, writes media/out/
-pnpm media:shots --only screen-02 --lang es --no-build   # repeat only part of the screenshots
-pnpm media:readme                                 # refresh .github/readme/ (1280x800, es and en)
+pnpm media                                              # shots -> labels -> promo, writes media/out/
+pnpm media:shots --only screen-02 --lang es --no-build  # repeat a single screenshot
+pnpm media:readme                                       # refresh .github/readme/ (1280x800, es and en)
 ```
 
 `media/out/` is not in git. `.github/readme/` is.

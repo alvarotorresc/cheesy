@@ -2,7 +2,7 @@
 //
 // Composes the cover screenshots (cover-*.png, cover-mobile-*.png) into a browser or phone frame
 // on the site's dark background at 1920x1080, renders the 1200x630 social card, and renders the
-// favicon at 1024x1024 for the store listing icon. The pages in media/promo/ are opened with
+// favicon at 1024x1024 as the icon of the project page. The pages in media/promo/ are opened with
 // file:// (they are not in dist/), with the fonts from the repo's own node_modules. Run it after
 // shots.mjs: it needs the cover PNGs in media/out/.
 

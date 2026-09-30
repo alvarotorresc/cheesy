@@ -156,9 +156,9 @@ The content is fixed and validated before it reaches the app: see
 ### Screenshots
 
 ```bash
-pnpm media                                          # screenshots, texts, promos and icon into media/out/
-pnpm media:shots --only cover --lang es --no-build  # repeat a single screenshot
-pnpm media:readme                                   # regenerate .github/readme/
+pnpm media                                              # screenshots, texts, promos and icon into media/out/
+pnpm media:shots --only screen-02 --lang es --no-build  # repeat a single screenshot
+pnpm media:readme                                       # regenerate .github/readme/
 ```
 
 The first time, run `pnpm exec playwright install chromium`. How the screenshots

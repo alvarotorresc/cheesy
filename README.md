@@ -155,9 +155,9 @@ El contenido es fijo y se valida antes de llegar a la app: mira
 ### Capturas
 
 ```bash
-pnpm media                                        # capturas, textos, promos e icono en media/out/
-pnpm media:shots --only cover --lang es --no-build  # repite una sola captura
-pnpm media:readme                                 # regenera .github/readme/
+pnpm media                                              # capturas, textos, promos e icono en media/out/
+pnpm media:shots --only screen-02 --lang es --no-build  # repite una sola captura
+pnpm media:readme                                       # regenera .github/readme/
 ```
 
 La primera vez hace falta `pnpm exec playwright install chromium`. Cómo se hacen
