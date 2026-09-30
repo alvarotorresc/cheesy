@@ -209,8 +209,8 @@ export const italian: OpeningSpec = {
     },
     [`${ITA} Nf6 Ng5 d5 exd5 Na5`]: {
       comment: {
-        es: 'Las negras entregan un peón y ganan [tiempos](tempo) atacando al alfil.',
-        en: 'Black gives a pawn and gains [time](tempo) by attacking the bishop.',
+        es: 'Las negras [entregan](sacrifice) un peón y ganan [tiempos](tempo) atacando al alfil.',
+        en: 'Black [gives](sacrifice) a pawn and gains [time](tempo) by attacking the bishop.',
       },
     },
   },

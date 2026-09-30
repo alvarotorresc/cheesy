@@ -109,8 +109,8 @@ export const scotch: OpeningSpec = {
     },
     [`${SC} Qh4 Nc3 Bb4 Be2 Qxe4 Nb5`]: {
       comment: {
-        es: 'Las blancas han entregado el peón de e4 a cambio de [desarrollo](development) y presión sobre c7.',
-        en: 'White has given the e4 pawn for [development](development) and pressure on c7.',
+        es: 'Las blancas [han entregado](sacrifice) el peón de e4 a cambio de [desarrollo](development) y presión sobre c7.',
+        en: 'White [has given](sacrifice) the e4 pawn for [development](development) and pressure on c7.',
       },
     },
     'e4 e5 Nf3 Nc6 d4 exd4 Bc4': {
@@ -247,8 +247,8 @@ export const kingsGambit: OpeningSpec = {
   eco: 'C30-C39',
   side: 'white',
   description: {
-    es: 'Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un [centro](centre) con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.',
-    en: 'White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a [centre](centre) with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory.',
+    es: 'Las blancas [entregan](sacrifice) el peón de f para desviar el de e5, abrir la columna f y levantar un [centro](centre) con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.',
+    en: 'White [gives up](sacrifice) the f-pawn to deflect the e5 pawn, open the f-file and build a [centre](centre) with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory.',
   },
   main: `${KGA} d5 exd5 Nf6 Bb5+ c6 dxc6 bxc6 Bc4 Nd5 O-O Bd6 Nc3 Be6 Ne4 O-O Nxd6 Qxd6`,
   lines: [

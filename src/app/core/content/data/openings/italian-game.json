@@ -935,7 +935,16 @@
                                             "es": [
                                               {
                                                 "kind": "text",
-                                                "text": "Las negras entregan un peón y ganan "
+                                                "text": "Las negras "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "sacrifice",
+                                                "text": "entregan"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " un peón y ganan "
                                               },
                                               {
                                                 "kind": "term",
@@ -950,7 +959,16 @@
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "Black gives a pawn and gains "
+                                                "text": "Black "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "sacrifice",
+                                                "text": "gives"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " a pawn and gains "
                                               },
                                               {
                                                 "kind": "term",

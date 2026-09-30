@@ -1124,7 +1124,16 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Las blancas han entregado el peón de "
+                                                            "text": "Las blancas "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "sacrifice",
+                                                            "text": "han entregado"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " el peón de "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -1155,7 +1164,16 @@
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "White has given the "
+                                                            "text": "White "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "sacrifice",
+                                                            "text": "has given"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " the "
                                                           },
                                                           {
                                                             "kind": "square",

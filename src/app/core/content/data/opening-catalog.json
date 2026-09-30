@@ -927,7 +927,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las blancas entregan el peón de f para desviar el de "
+          "text": "Las blancas "
+        },
+        {
+          "kind": "term",
+          "id": "sacrifice",
+          "text": "entregan"
+        },
+        {
+          "kind": "text",
+          "text": " el peón de f para desviar el de "
         },
         {
           "kind": "square",
@@ -958,7 +967,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "White gives up the f-pawn to deflect the "
+          "text": "White "
+        },
+        {
+          "kind": "term",
+          "id": "sacrifice",
+          "text": "gives up"
+        },
+        {
+          "kind": "text",
+          "text": " the f-pawn to deflect the "
         },
         {
           "kind": "square",
