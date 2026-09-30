@@ -443,12 +443,12 @@ export const glossary: GlossarySpec[] = [
       en: 'Instead of making the move that seems forced, such as taking back a piece, you first play another one the opponent has to answer, often a [check](check), and only then make the expected move.',
     },
     example: {
-      fen: 'r2q1rk1/pbp2ppp/8/8/8/1Pn2Q2/P2P1PPP/R1B1R1K1 w - - 0 1',
+      fen: '5rk1/pp2bppp/8/3N4/8/8/PP3PPP/3q1RK1 w - - 0 1',
       orientation: 'white',
-      highlights: ['c3', 'b7', 'f3'],
+      highlights: ['d1', 'e7'],
       arrows: [
-        { from: 'f3', to: 'b7', move: true },
-        { from: 'd2', to: 'c3', move: false },
+        { from: 'd5', to: 'e7', move: true },
+        { from: 'f1', to: 'd1', move: false },
       ],
     },
     level: 'intermediate',
@@ -839,8 +839,8 @@ export const glossary: GlossarySpec[] = [
     id: 'lucena-position',
     name: { es: 'Posición de Lucena', en: 'Lucena position' },
     definition: {
-      es: 'Final de torre y peón contra torre que gana el bando del peón: el peón está a un paso de [coronar](promotion), su rey está delante de él y su torre mantiene alejado al rey rival. Se gana [construyendo un puente](building-a-bridge) con la torre.',
-      en: 'A rook and pawn against rook endgame that the side with the pawn wins: the pawn is one step from [promoting](promotion), its king stands in front of it and its rook keeps the enemy king away. The win comes from [building a bridge](building-a-bridge) with the rook.',
+      es: 'Posición del final de la partida, con torre y peón contra torre, que gana el bando del peón: el peón está a un paso de [coronar](promotion), su rey está delante de él y su torre mantiene alejado al rey rival. Se gana [construyendo un puente](building-a-bridge) con la torre.',
+      en: 'A position late in the game, with a rook and a pawn against a rook, that the side with the pawn wins: the pawn is one step from [promoting](promotion), its king stands in front of it and its rook keeps the enemy king away. The win comes from [building a bridge](building-a-bridge) with the rook.',
     },
     example: {
       fen: '3K4/3P2k1/8/8/8/8/2r5/5R2 w - - 0 1',
@@ -855,8 +855,8 @@ export const glossary: GlossarySpec[] = [
     id: 'philidor-position',
     name: { es: 'Posición de Philidor', en: 'Philidor position' },
     definition: {
-      es: 'Final de torre y peón contra torre que el bando que defiende consigue empatar: su rey está en la [casilla de coronación](queening-square) y su torre, en la tercera fila desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da [jaques](check) por detrás.',
-      en: 'A rook and pawn against rook endgame that the defending side draws: its king sits on the [queening square](queening-square) and its rook, on the third row from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives [checks](check) from behind.',
+      es: 'Posición del final de la partida, con torre y peón contra torre, que el bando que defiende consigue empatar: su rey está en la [casilla de coronación](queening-square) y su torre, en la tercera fila desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da [jaques](check) por detrás.',
+      en: 'A position late in the game, with a rook and a pawn against a rook, that the defending side draws: its king sits on the [queening square](queening-square) and its rook, on the third row from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives [checks](check) from behind.',
     },
     example: {
       fen: '4k3/R7/1r6/3KP3/8/8/8/8 w - - 0 1',

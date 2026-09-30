@@ -1486,22 +1486,21 @@
       ]
     },
     "example": {
-      "fen": "r2q1rk1/pbp2ppp/8/8/8/1Pn2Q2/P2P1PPP/R1B1R1K1 w - - 0 1",
+      "fen": "5rk1/pp2bppp/8/3N4/8/8/PP3PPP/3q1RK1 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "c3",
-        "b7",
-        "f3"
+        "d1",
+        "e7"
       ],
       "arrows": [
         {
-          "from": "f3",
-          "to": "b7",
+          "from": "d5",
+          "to": "e7",
           "move": true
         },
         {
-          "from": "d2",
-          "to": "c3",
+          "from": "f1",
+          "to": "d1",
           "move": false
         }
       ]
@@ -2679,7 +2678,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Final de torre y peón contra torre que gana el bando del peón: el peón está a un paso de "
+          "text": "Posición del final de la partida, con torre y peón contra torre, que gana el bando del peón: el peón está a un paso de "
         },
         {
           "kind": "term",
@@ -2703,7 +2702,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "A rook and pawn against rook endgame that the side with the pawn wins: the pawn is one step from "
+          "text": "A position late in the game, with a rook and a pawn against a rook, that the side with the pawn wins: the pawn is one step from "
         },
         {
           "kind": "term",
@@ -2758,7 +2757,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Final de torre y peón contra torre que el bando que defiende consigue empatar: su rey está en la "
+          "text": "Posición del final de la partida, con torre y peón contra torre, que el bando que defiende consigue empatar: su rey está en la "
         },
         {
           "kind": "term",
@@ -2782,7 +2781,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "A rook and pawn against rook endgame that the defending side draws: its king sits on the "
+          "text": "A position late in the game, with a rook and a pawn against a rook, that the defending side draws: its king sits on the "
         },
         {
           "kind": "term",
