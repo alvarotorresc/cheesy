@@ -232,7 +232,7 @@ export class PositionPage {
           step.isMate ? t.mate : step.isCheck ? t.check : undefined,
         ].filter((note) => note !== undefined);
     const who = step.byPlayer ? t.yourMove : t.opponentMove;
-    return `${who}: ${number} ${this.reading.full(step.san)}${notes.length ? ` (${notes.join(', ')})` : ''}.`;
+    return `${who}: ${number} ${this.reading.full(step.san, { start: false })}${notes.length ? ` (${notes.join(', ')})` : ''}.`;
   });
 
   /** Analysis with this position and its solution: only after the solution is out. */

@@ -305,19 +305,22 @@ describe('PositionPage', () => {
       expect(button('Next move').getAttribute('aria-disabled')).toBe('true');
     });
 
-    it('should tell each step as a sentence in words mode, with no notes', async () => {
+    it('should tell each step as a sentence in lower case in words mode, with no notes', async () => {
       TestBed.inject(ReadingModeService).setMode('words');
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step-text')).toBe('Your move: 1. Queen to g8, check.');
+      expect(text('.step-text')).toBe('Your move: 1. queen to g8, check.');
+      expect(
+        element().querySelector('.steps button[aria-current="step"]')?.getAttribute('aria-label'),
+      ).toBe('Your move 1. queen to g8, check');
 
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step-text')).toBe('Reply: 1… Rook takes on g8.');
+      expect(text('.step-text')).toBe('Reply: 1… rook takes on g8.');
 
       TestBed.inject(I18nService).setLang('es');
       await harness.fixture.whenStable();
-      expect(text('.step-text')).toBe('Respuesta: 1… Torre captura en g8.');
+      expect(text('.step-text')).toBe('Respuesta: 1… torre captura en g8.');
     });
 
     it('should move through the solution with the arrow keys', async () => {
