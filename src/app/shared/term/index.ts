@@ -1,0 +1,1 @@
+export { TermView } from './term';

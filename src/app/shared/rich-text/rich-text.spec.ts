@@ -1,4 +1,5 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import type { RichText } from '../../core/content/content.types';
 import { I18nService } from '../../core/i18n';
 import { ReadingModeService } from '../../core/reading-mode';
@@ -35,6 +36,7 @@ describe('RichTextView', () => {
       .trim();
 
   beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
     TestBed.inject(I18nService).setLang('es');
     fixture = TestBed.createComponent(RichTextView);
     fixture.componentRef.setInput('text', TEXT);
@@ -61,15 +63,27 @@ describe('RichTextView', () => {
     expect(shown()).toBe('Only 1...Ke7 draws.');
   });
 
-  it('should mark squares and terms so they can be styled', async () => {
+  it('should mark squares so they can be styled', async () => {
     await fixture.whenStable();
     expect(element.querySelector('.square')?.textContent?.trim()).toBe('e6');
-    expect(element.querySelector('.term')?.textContent?.trim()).toBe('oposición');
+  });
+
+  it('should turn a term into a glossary button', async () => {
+    await fixture.whenStable();
+    expect(element.querySelector('app-term button.term')?.textContent?.trim()).toBe('oposición');
+  });
+
+  it('should turn a term into a link to the glossary page when asked to', async () => {
+    fixture.componentRef.setInput('termLinks', true);
+    await fixture.whenStable();
+    expect(element.querySelector('a.term')?.getAttribute('href')).toBe(
+      '/learn/glossary#opposition',
+    );
   });
 
   it('should point the board at a square of the text', async () => {
     TestBed.resetTestingModule();
-    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    TestBed.configureTestingModule({ providers: [BoardSpotlight, provideRouter([])] });
     const f = TestBed.createComponent(RichTextView);
     f.componentRef.setInput('text', TEXT);
     await f.whenStable();
