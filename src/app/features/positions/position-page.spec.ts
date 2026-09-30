@@ -200,7 +200,7 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
       expect(text('.message')).toContain(
-        'It was not Qd6. It has been taken back: try another one.',
+        'That was not the move: Qd6 has been taken back. Try another one.',
       );
       expect(game().moves()).toEqual([]);
       expect(board().viewOnly()).toBe(false);
@@ -248,7 +248,7 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
       expect(text('.message')).toContain(
-        'It was not queen to d6. It has been taken back: try another one.',
+        'That was not the move: queen to d6 has been taken back. Try another one.',
       );
     });
 

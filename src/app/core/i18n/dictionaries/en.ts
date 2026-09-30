@@ -651,7 +651,7 @@ export const en = {
     reviewingSub: 'Step through the line with the arrows or by pressing each move.',
     revealed: 'This is the solution.',
     revealedSub: 'Step through the line to review it.',
-    wrong: (move: string) => `It was not ${move}. It has been taken back: try another one.`,
+    wrong: (move: string) => `That was not the move: ${move} has been taken back. Try another one.`,
     wrongSub: 'Unlimited attempts.',
     hint: 'Hint',
     hintTitle: 'Hint:',
