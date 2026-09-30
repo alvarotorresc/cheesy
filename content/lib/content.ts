@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { CuratedPosition, EndgamePosition, OpeningTree } from '../types.ts';
+import type { CuratedPosition, EndgamePosition, GlossaryTerm, OpeningTree } from '../types.ts';
 
 /** The `content/` folder: authoring sources, validation and verification tooling. */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -29,6 +29,9 @@ export const loadEndgamesRaw = () => readJson(ENDGAMES_FILE);
 export const loadEndgames = () => loadEndgamesRaw() as EndgamePosition[];
 export const loadPositionsRaw = () => readJson(POSITIONS_FILE);
 export const loadPositions = () => loadPositionsRaw() as CuratedPosition[];
+
+export const loadGlossaryRaw = () => readJson(GLOSSARY_FILE);
+export const loadGlossary = () => loadGlossaryRaw() as GlossaryTerm[];
 
 /** Ids of the glossary terms; none while the glossary does not exist yet. */
 export const loadGlossaryIds = (): Set<string> =>

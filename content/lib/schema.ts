@@ -108,6 +108,40 @@ export function validateOpeningTree(t: unknown): Errors {
   return errs;
 }
 
+const LEVELS = ['beginner', 'intermediate', 'advanced'];
+
+export function validateGlossaryTerm(t: unknown, at: string): Errors {
+  const errs: Errors = [];
+  if (!isObj(t)) return [`${at}: must be an object`];
+  checkKeys(t, ['id', 'name', 'definition', 'example', 'level', 'sources'], ['lesson'], at, errs);
+  checkId(t.id, `${at}.id`, errs);
+  checkLocalized(t.name, `${at}.name`, errs);
+  checkRichText(t.definition, `${at}.definition`, errs);
+  if (!LEVELS.includes(t.level as string))
+    errs.push(`${at}.level: must be beginner|intermediate|advanced`);
+  if (!Array.isArray(t.sources) || t.sources.length === 0 || !t.sources.every(nonEmpty))
+    errs.push(`${at}.sources: must be a non-empty array of URLs`);
+  if (t.lesson !== undefined) checkId(t.lesson, `${at}.lesson`, errs);
+  const ex = t.example;
+  if (!isObj(ex)) errs.push(`${at}.example: must be an object`);
+  else {
+    checkKeys(ex, ['fen', 'orientation', 'highlights', 'arrows'], [], `${at}.example`, errs);
+    if (!nonEmpty(ex.fen)) errs.push(`${at}.example.fen: must be a non-empty string`);
+    if (!SIDES.includes(ex.orientation as string))
+      errs.push(`${at}.example.orientation: must be white|black`);
+    if (!Array.isArray(ex.highlights)) errs.push(`${at}.example.highlights: must be an array`);
+    if (!Array.isArray(ex.arrows)) errs.push(`${at}.example.arrows: must be an array`);
+    else
+      ex.arrows.forEach((a, i) => {
+        if (!isObj(a)) return void errs.push(`${at}.example.arrows[${i}]: must be an object`);
+        checkKeys(a, ['from', 'to', 'move'], [], `${at}.example.arrows[${i}]`, errs);
+        if (typeof a.move !== 'boolean')
+          errs.push(`${at}.example.arrows[${i}].move: must be a boolean`);
+      });
+  }
+  return errs;
+}
+
 export function validateEndgame(e: unknown, at: string): Errors {
   const errs: Errors = [];
   if (!isObj(e)) return [`${at}: must be an object`];
