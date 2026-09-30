@@ -73,6 +73,10 @@ describe('TermView', () => {
     expect(popup()?.querySelector('a')?.getAttribute('href')).toBe('/learn/glossary#pin');
   });
 
+  it('should announce that the word opens a dialog', () => {
+    expect(button().getAttribute('aria-haspopup')).toBe('dialog');
+  });
+
   it('should close with Escape, give the focus back and keep Escape to itself', async () => {
     button().click();
     await fixture.whenStable();

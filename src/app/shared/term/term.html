@@ -3,6 +3,7 @@
     #button
     type="button"
     class="term"
+    aria-haspopup="dialog"
     [attr.aria-expanded]="open()"
     [attr.aria-controls]="open() ? popupId : null"
     (click)="toggle()"
