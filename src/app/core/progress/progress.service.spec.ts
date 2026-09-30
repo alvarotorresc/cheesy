@@ -75,6 +75,18 @@ describe('ProgressService', () => {
       expect(await service.lessons()).toEqual([again]);
     });
 
+    it('should ignore lesson rows that were tampered with', async () => {
+      const good = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 2 },
+        10,
+      );
+      await store.lessons.put({ lessonId: 'Bad Id', completedAt: 5, exercises: 1, firstTry: 0 });
+      await store.lessons.put({ lessonId: 'the-board', completedAt: 5, exercises: 1, firstTry: 3 });
+      await store.lessons.put({ lessonId: 'pawns', completedAt: -1, exercises: 1, firstTry: 0 });
+
+      expect(await service.lessons()).toEqual([good]);
+    });
+
     it('should refuse a lesson result that makes no sense', async () => {
       expect(
         await service.recordLesson({ lessonId: 'Bad Id', exercises: 1, firstTry: 0 }),

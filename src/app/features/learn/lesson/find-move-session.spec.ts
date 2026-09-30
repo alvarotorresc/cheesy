@@ -41,6 +41,26 @@ describe('FindMoveSession', () => {
     expect(session.play({ from: 'e1', to: 'g1' })).toEqual({ kind: 'solved' });
   });
 
+  it('should read castling made by dropping the king on its rook', () => {
+    const session = new FindMoveSession(
+      step('4k3/8/8/8/8/8/8/4K2R w K - 0 1', { by: 'rule', rule: 'castle' }),
+    );
+    expect(session.sanOf({ from: 'e1', to: 'h1' })).toBe('O-O');
+    expect(session.play({ from: 'e1', to: 'h1' })).toEqual({ kind: 'solved' });
+  });
+
+  it('should lose the first try when the solution is revealed and played', () => {
+    const session = new FindMoveSession(
+      step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'engine', solution: ['Ra8#'] }),
+    );
+    session.reveal();
+    const san = session.solutionMove()!;
+    const from = session.hintSquare()!;
+    expect(session.play({ from, to: 'a8' })).toEqual({ kind: 'solved' });
+    expect(san).toBe('Ra8#');
+    expect(session.tracker.firstTry()).toBe(false);
+  });
+
   it('should follow an engine solution with the rival replies', () => {
     const session = new FindMoveSession(
       step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'engine', solution: ['Ra8#'] }),

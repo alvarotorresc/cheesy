@@ -125,15 +125,13 @@ describe('openProgressStore', () => {
       await old
         .table('endgames')
         .put({ endgameId: 'lucena', completions: 2, firstCompletedAt: 1, lastCompletedAt: 3 });
-      await old
-        .table('positions')
-        .put({
-          positionId: 'legal-mate',
-          solves: 1,
-          firstTry: true,
-          spoiled: false,
-          lastSolvedAt: 4,
-        });
+      await old.table('positions').put({
+        positionId: 'legal-mate',
+        solves: 1,
+        firstTry: true,
+        spoiled: false,
+        lastSolvedAt: 4,
+      });
       old.close();
 
       const store = await open();
