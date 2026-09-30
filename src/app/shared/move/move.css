@@ -28,5 +28,10 @@
 :host(.move) .spot[data-spot]:hover,
 :host(.move) .spot[data-spot]:focus-visible {
   background: var(--board-spot);
-  outline: none;
+}
+
+/* The tint alone is too faint to find the keyboard focus: the site's focus ring goes around it. */
+:host(.move) .spot[data-spot]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
