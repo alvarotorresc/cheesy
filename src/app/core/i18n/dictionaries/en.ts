@@ -17,6 +17,7 @@ export const en = {
     positions: 'Positions',
     analysis: 'Analysis',
     about: 'About',
+    glossary: 'Glossary',
   },
   footer: {
     tagline: 'is open source. No accounts, no cookies: your progress stays in your browser.',
@@ -24,6 +25,18 @@ export const en = {
     source: 'Source code (GPL-3)',
     privacy: 'Privacy',
     about: 'About',
+  },
+  glossary: {
+    title: 'Glossary',
+    intro: 'The chess words used around Cheesy, in plain words and with a board that shows them.',
+    search: 'Search a term',
+    searchLabel: 'Search the glossary',
+    empty: 'No term matches that search.',
+    seeInGlossary: 'See in the glossary',
+    close: 'Close',
+    loading: 'Loading…',
+    failed: 'The glossary could not be loaded. Try again in a moment.',
+    boardLabel: (name: string) => `Example board: ${name}`,
   },
   about: {
     title: 'About Cheesy',

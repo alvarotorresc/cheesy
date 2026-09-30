@@ -19,6 +19,7 @@ export const es: Messages = {
     positions: 'Posiciones',
     analysis: 'Análisis',
     about: 'Acerca de',
+    glossary: 'Glosario',
   },
   footer: {
     tagline: 'es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
@@ -26,6 +27,19 @@ export const es: Messages = {
     source: 'Código fuente (GPL-3)',
     privacy: 'Privacidad',
     about: 'Acerca de',
+  },
+  glossary: {
+    title: 'Glosario',
+    intro:
+      'Las palabras de ajedrez que usa Cheesy, explicadas en llano y con un tablero que las enseña.',
+    search: 'Busca un término',
+    searchLabel: 'Buscar en el glosario',
+    empty: 'Ningún término coincide con esa búsqueda.',
+    seeInGlossary: 'Ver en el glosario',
+    close: 'Cerrar',
+    loading: 'Cargando…',
+    failed: 'No se ha podido cargar el glosario. Prueba de nuevo en un momento.',
+    boardLabel: (name: string) => `Tablero de ejemplo: ${name}`,
   },
   about: {
     title: 'Acerca de Cheesy',

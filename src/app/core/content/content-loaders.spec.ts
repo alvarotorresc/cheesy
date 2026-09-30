@@ -1,5 +1,5 @@
-import { createFetchContentLoaders } from './content-loaders';
-import { bundledContentLoaders } from './testing';
+import { createFetchContentLoaders, createFetchGlossaryLoader } from './content-loaders';
+import { bundledContentLoaders, bundledGlossaryLoader } from './testing';
 
 const BASE = 'https://chess.example/app/';
 
@@ -112,5 +112,45 @@ describe('createFetchContentLoaders', () => {
     await expect(loaders.opening('a--b')).rejects.toThrow();
     await expect(loaders.opening('a'.repeat(65))).rejects.toThrow();
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('createFetchGlossaryLoader', () => {
+  let fetchMock: ReturnType<typeof vi.fn<(url: URL | string) => Promise<Response>>>;
+
+  beforeEach(() => {
+    fetchMock = vi.fn<(url: URL | string) => Promise<Response>>();
+    vi.stubGlobal('fetch', fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should request the glossary from the content folder and resolve with its terms', async () => {
+    const terms = await bundledGlossaryLoader();
+    fetchMock.mockResolvedValue(reply(terms));
+
+    expect(await createFetchGlossaryLoader(BASE)()).toEqual(terms);
+    expect(fetchMock.mock.calls.map(([url]) => url.toString())).toEqual([
+      'https://chess.example/app/content/glossary.json',
+    ]);
+  });
+
+  it('should reject when the server answers with an error status', async () => {
+    fetchMock.mockResolvedValue(reply('Not found', 404));
+
+    await expect(createFetchGlossaryLoader(BASE)()).rejects.toThrowError(/404/);
+  });
+
+  it('should reject when the file is not a list of terms with an id', async () => {
+    const load = createFetchGlossaryLoader(BASE);
+
+    fetchMock.mockResolvedValue(reply('<!doctype html><html></html>'));
+    await expect(load()).rejects.toThrow();
+    fetchMock.mockResolvedValue(reply({ id: 'pin' }));
+    await expect(load()).rejects.toThrowError(/content/);
+    fetchMock.mockResolvedValue(reply([{ name: 'Pin' }]));
+    await expect(load()).rejects.toThrowError(/content/);
   });
 });
