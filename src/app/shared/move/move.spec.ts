@@ -7,13 +7,14 @@ import { MoveText } from './move';
 @Component({
   imports: [MoveText],
   template: `<button type="button">
-    <app-move [san]="san()" [color]="color()" [format]="format()" />
+    <app-move [san]="san()" [color]="color()" [format]="format()" [tooltip]="tooltip()" />
   </button>`,
 })
 class Host {
   readonly san = input('Nxf7+');
   readonly color = input<'white' | 'black'>('white');
   readonly format = input<'compact' | 'full'>('compact');
+  readonly tooltip = input(true);
 }
 
 describe('MoveText', () => {
@@ -66,6 +67,16 @@ describe('MoveText', () => {
     expect(element.querySelector('app-move')?.getAttribute('title')).toBe(
       'Caballo captura en f7, jaque',
     );
+  });
+
+  it('should leave the title to the host when asked, in both modes', async () => {
+    await render({ tooltip: false });
+    expect(element.querySelector('app-move')?.hasAttribute('title')).toBe(false);
+    expect(spoken()).toBe('Caballo captura en f7, jaque');
+
+    mode.setMode('notation');
+    await fixture.whenStable();
+    expect(element.querySelector('app-move')?.hasAttribute('title')).toBe(false);
   });
 
   it('should write the sentence in full words mode, without a title', async () => {

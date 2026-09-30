@@ -206,6 +206,10 @@ describe('OpeningPlay', () => {
 
       expect(text('.status')).toBe('Not in our lines: take it back or keep playing.');
       expect(text('.alert')).toContain('Here our lines go on with 2.Nf3. We also cover 2.d4.');
+      // The off-book move keeps the title of its button: the move inside adds none of its own.
+      const off = element.querySelector('app-opening-moves button.off');
+      expect(off?.getAttribute('title')).toBe('Outside our lines');
+      expect(off?.querySelector('app-move')?.hasAttribute('title')).toBe(false);
       button('Take it back').click();
       await settle();
 
