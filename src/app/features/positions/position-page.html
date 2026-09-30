@@ -172,8 +172,10 @@
                 @for (view of steps(); track view.ply) {
                   <li [class.opponent]="!view.step.byPlayer">
                     <span class="plain"
-                      >{{ view.number }} <app-move [san]="view.step.san" [color]="view.color"
-                    /></span>
+                      ><span
+                        >{{ view.number }}
+                        <app-move [san]="view.step.san" [color]="view.color" /></span
+                    ></span>
                   </li>
                 }
               </ol>
@@ -217,7 +219,9 @@
                     "
                     (click)="trainer.goTo(view.ply)"
                   >
-                    {{ view.number }} <app-move [san]="view.step.san" [color]="view.color" />
+                    <span
+                      >{{ view.number }} <app-move [san]="view.step.san" [color]="view.color"
+                    /></span>
                   </button>
                 </li>
               }

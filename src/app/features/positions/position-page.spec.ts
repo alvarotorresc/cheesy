@@ -223,6 +223,16 @@ describe('PositionPage', () => {
       );
     });
 
+    it('should keep each number and its move in one run of text inside the flex box', async () => {
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+
+      // A flex box drops the space between a text and an element; one wrapper keeps "1. Qg8+".
+      for (const item of element().querySelectorAll('.steps span.plain')) {
+        expect(item.children).toHaveLength(1);
+        expect(item.firstElementChild?.querySelector('app-move')).not.toBeNull();
+      }
+    });
+
     it('should tell the reply in words, in lower case inside the sentence', async () => {
       TestBed.inject(I18nService).setLang('es');
       TestBed.inject(ReadingModeService).setMode('words');
@@ -272,6 +282,10 @@ describe('PositionPage', () => {
       expect(text('.message')).toContain('This is the solution.');
       expect(text('.step-text')).toBe('Starting position.');
       expect(element().querySelectorAll('.steps button')).toHaveLength(3);
+      for (const step of element().querySelectorAll('.steps button')) {
+        expect(step.children).toHaveLength(1);
+        expect(step.firstElementChild?.querySelector('app-move')).not.toBeNull();
+      }
       expect(button('Start of the solution').getAttribute('aria-disabled')).toBe('true');
     });
 
