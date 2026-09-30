@@ -158,11 +158,60 @@ function seededRandom() {
   };
 }
 
+// The progress database of the app (src/app/core/progress/progress-db.ts): Dexie schema version
+// 2, which IndexedDB sees as 20 because Dexie multiplies its versions by 10. The stores are
+// created here exactly as Dexie would, so the app opens the database without an upgrade.
+const PROGRESS_DB = { name: 'cheesy', version: 20 };
+// A file of the build that is not the app: it puts the page on the origin without starting it.
+const STATIC_FILE = '/3rdpartylicenses.txt';
+
+// Writes the saved progress before the app starts: the page goes to a static file of the same
+// origin, the database is created there with its rows, and the goto() of the caller finds it.
+// The rows go in as they are; the app checks them when it reads them and drops the bad ones
+// without a word, so each scene that seeds progress checks that it shows.
+async function seedProgress(page, { lines = [], endgames = [], positions = [] }) {
+  await page.goto(BASE_URL + STATIC_FILE);
+  const written = await page.evaluate(
+    ({ db: { name, version }, rows }) =>
+      new Promise((done, fail) => {
+        const request = indexedDB.open(name, version);
+        request.onerror = () => fail(request.error);
+        request.onblocked = () => fail(new Error('the progress database is blocked'));
+        request.onupgradeneeded = () => {
+          const db = request.result;
+          db.createObjectStore('lines', { keyPath: 'key' }).createIndex('openingId', 'openingId');
+          db.createObjectStore('endgames', { keyPath: 'endgameId' });
+          db.createObjectStore('positions', { keyPath: 'positionId' });
+        };
+        request.onsuccess = () => {
+          const db = request.result;
+          const tx = db.transaction(Object.keys(rows), 'readwrite');
+          let count = 0;
+          for (const [store, list] of Object.entries(rows)) {
+            for (const row of list) {
+              tx.objectStore(store).put(row).onsuccess = () => count++;
+            }
+          }
+          tx.oncomplete = () => {
+            db.close();
+            done(count);
+          };
+          tx.onerror = () => fail(tx.error);
+          tx.onabort = () => fail(tx.error ?? new Error('the progress transaction was aborted'));
+        };
+      }),
+    { db: PROGRESS_DB, rows: { lines, endgames, positions } },
+  );
+  const wanted = lines.length + endgames.length + positions.length;
+  if (written !== wanted) throw new Error(`progress: ${written} of ${wanted} rows written`);
+}
+
 // Creates the context and a blank page; the caller does the goto().
 //   lang      'es' | 'en', written to localStorage['cheesy.lang'] before the app starts.
 //   theme     'light' | 'dark'. The app has no toggle: it follows prefers-color-scheme.
 //   storage   extra localStorage entries, with their full keys ({ 'cheesy.foo': 'bar' }).
-//   progress  saved progress to seed in the IndexedDB database `cheesy`. Not used yet.
+//   progress  saved progress to seed in the IndexedDB database `cheesy`, before the app starts:
+//             { lines, endgames, positions }, rows as the app stores them (see progress.mjs).
 export async function openPage(
   browser,
   { lang = 'es', theme = 'light', mobile = false, storage = {}, progress = {} } = {},
@@ -217,6 +266,7 @@ export async function openPage(
 
   const page = await context.newPage();
   await page.clock.setFixedTime(FIXED_NOW);
+  if (Object.values(progress).some((rows) => rows.length > 0)) await seedProgress(page, progress);
   return page;
 }
 
