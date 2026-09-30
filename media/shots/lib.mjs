@@ -5,7 +5,7 @@
 //
 // Pieces, in the order a script uses them:
 //   buildSite()    -- `pnpm build` (skipped with --no-build).
-//   startServer()  -- static server on :4791 with the SPA fallback, started and stopped by us.
+//   startServer()  -- static server on :4791 (or MEDIA_PORT) with the SPA fallback, started and stopped by us.
 //   openPage()     -- context with viewport, language, colour scheme, fixed clock, no network
 //                     beyond localhost and no animations.
 //   ready()        -- waits until the route has rendered its content.
@@ -30,7 +30,8 @@ export const SITE = 'https://cheesy.alvarotc.com';
 export { chromium };
 
 const DIST = join(REPO_ROOT, 'dist', 'cheesy', 'browser');
-const PORT = 4791;
+// MEDIA_PORT lets two runs share the machine, each with its own server.
+const PORT = Number(process.env.MEDIA_PORT ?? 4791);
 const BASE_URL = `http://localhost:${PORT}`;
 
 // Fixed time for everything that reads the clock (progress dates, review schedules):

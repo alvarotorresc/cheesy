@@ -8,9 +8,14 @@
 //   mobile      true for the 360x780 viewport at 3x (PNG of 1080x2340)
 //   storage     extra localStorage entries, with their full keys
 //   progress    saved progress to seed before the app starts
+//   before      (page, lang) => runs before the page loads (a route that answers a request)
 //   prep        (page, lang) => leaves the page in the state to photograph, before settle()
 //   after       (page, lang) => last touches after settle() (a hover, a focus)
 //   keepScroll  true to keep the scroll position that prep left
+
+import { LIST_SCENES } from './scenes/lists.mjs';
+import { BOARD_SCENES } from './scenes/boards.mjs';
+import { ENGINE_SCENES } from './scenes/engine.mjs';
 
 // aria-labels of the transport buttons of the home board, from the i18n dictionaries
 // (home.previousMove, home.nextMove, home.playMoves).
@@ -72,4 +77,7 @@ function heroAt(ply) {
 export const SCENES = [
   { file: 'cover', path: '/', theme: 'light', prep: heroAt(HERO_PLY) },
   { file: 'cover-mobile', path: '/', theme: 'light', mobile: true, prep: heroAt(HERO_PLY) },
+  ...[...LIST_SCENES, ...BOARD_SCENES, ...ENGINE_SCENES].sort((a, b) =>
+    a.file.localeCompare(b.file),
+  ),
 ];

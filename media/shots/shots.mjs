@@ -70,6 +70,7 @@ async function main() {
             storage: scene.storage,
             progress: scene.progress,
           });
+          if (scene.before) await scene.before(page, language);
           await page.goto(server.url + scene.path);
           await ready(page);
           if (scene.prep) await scene.prep(page, language);
