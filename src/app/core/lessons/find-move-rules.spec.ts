@@ -21,7 +21,7 @@ describe('acceptedMoves', () => {
   it('should count a defender pinned to its king as no defence', () => {
     // The e7 knight would defend d5, but it is pinned by the rook on e1 against the king on e8.
     const pos = at('4k3/4n3/8/3b4/8/8/3Q4/4R1K1 w - - 0 1');
-    expect(acceptedMoves(pos, 'capture-undefended')).toContain('Qxd5');
+    expect(acceptedMoves(pos, 'capture-undefended')).toEqual(['Qxd5']);
   });
 
   it('should give castling once for each side', () => {
