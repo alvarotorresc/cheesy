@@ -205,7 +205,7 @@ describe('EndgamePractice', () => {
 
     const card = element().querySelector('.result');
     expect(card?.querySelector('h2')?.textContent?.trim()).toBe('Goal achieved');
-    expect(card?.textContent).toContain('You gave mate with 1.Ra8#.');
+    expect(card?.textContent).toContain('You end the game with 1.Ra8#.');
     expect(card?.querySelector('a.button')?.getAttribute('href')).toBe(
       '/endgames/kp-square-rule-defence',
     );
@@ -219,6 +219,72 @@ describe('EndgamePractice', () => {
     game().goTo(1);
     await settle();
     expect(memory.endgameRows.get('lucena-position')?.completions).toBe(1);
+  });
+
+  it('should tell the mate in words without saying mate twice', async () => {
+    await open('lucena-position');
+    TestBed.inject(ReadingModeService).setMode('words');
+    game().loadFen('6k1/8/6K1/8/8/8/8/R7 w - - 0 1');
+    game().play({ from: 'a1', to: 'a8' });
+    await settle();
+
+    expect(element().querySelector('.result')?.textContent).toContain(
+      'You end the game with 1. rook to a8, checkmate.',
+    );
+    TestBed.inject(I18nService).setLang('es');
+    await settle();
+    expect(element().querySelector('.result')?.textContent).toContain(
+      'Cierras la partida con 1. torre a a8, jaque mate.',
+    );
+  });
+
+  describe('promotion', () => {
+    const PROMOTION = {
+      ...LUCENA,
+      id: 'promotion',
+      fen: '7k/P7/8/8/8/8/8/K7 w - - 0 1',
+    };
+    const PROMOTION_RESPONSE = {
+      category: 'win',
+      dtz: 1,
+      dtm: 3,
+      checkmate: false,
+      stalemate: false,
+      moves: [{ uci: 'a7a8q', san: 'a8=Q+', category: 'loss', dtz: -2, dtm: -3 }],
+    };
+
+    const promote = async (): Promise<Element | null> => {
+      loadEndgames.mockResolvedValue([PROMOTION]);
+      await open('promotion');
+      await settle(LOOKUP_DELAY_MS);
+      tablebase.requests
+        .find((request) => request.fen.startsWith('7k/P7/8/8/8/8/8/K7 w'))
+        ?.respond(200, PROMOTION_RESPONSE);
+      await settle();
+      game().play({ from: 'a7', to: 'a8', promotion: 'queen' });
+      await settle(LOOKUP_DELAY_MS);
+      return element().querySelector('.result');
+    };
+
+    it('should tell the promotion that keeps the win', async () => {
+      const card = await promote();
+
+      expect(card?.textContent).toContain('The tablebase still says it is a win after 1.a8=Q+.');
+    });
+
+    it('should tell the promotion in words without saying promote twice', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      const card = await promote();
+
+      expect(card?.textContent).toContain(
+        'The tablebase still says it is a win after 1. pawn to a8, promotes to a queen, check.',
+      );
+      TestBed.inject(I18nService).setLang('es');
+      await settle();
+      expect(element().querySelector('.result')?.textContent).toContain(
+        'La tablebase sigue dando victoria tras 1. peón a a8 y corona dama, jaque.',
+      );
+    });
   });
 
   it('should count the endgame again after restarting and passing it once more', async () => {

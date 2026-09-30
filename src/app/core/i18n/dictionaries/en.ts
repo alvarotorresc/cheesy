@@ -781,8 +781,8 @@ export const en = {
     board: 'Board',
     resultAchieved: 'Goal achieved',
     resultFailed: 'Goal not achieved',
-    whyCrowned: 'You promoted with {move}. The tablebase still says it is a win.',
-    whyMated: 'You gave mate with {move}.',
+    whyCrowned: 'The tablebase still says it is a win after {move}.',
+    whyMated: 'You end the game with {move}.',
     whyRulesStalemate: 'Draw by stalemate: your king has no legal move and is not in check.',
     whyRulesStalemateRival:
       'Draw by stalemate: the rival king has no legal move and is not in check.',

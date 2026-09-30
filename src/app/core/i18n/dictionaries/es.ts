@@ -797,8 +797,8 @@ export const es: Messages = {
     board: 'Tablero',
     resultAchieved: 'Objetivo cumplido',
     resultFailed: 'Objetivo no cumplido',
-    whyCrowned: 'Has coronado con {move}. La tablebase sigue dando victoria.',
-    whyMated: 'Has dado mate con {move}.',
+    whyCrowned: 'La tablebase sigue dando victoria tras {move}.',
+    whyMated: 'Cierras la partida con {move}.',
     whyRulesStalemate: 'Tablas por ahogado: tu rey no tiene jugadas legales y no está en jaque.',
     whyRulesStalemateRival:
       'Tablas por ahogado: el rey del rival no tiene jugadas legales y no está en jaque.',
