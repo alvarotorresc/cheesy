@@ -1,110 +1,178 @@
+_**Español** · [English](README.en.md)_
+
 # Cheesy
 
-A web playground to practise chess against the computer: openings, endgames and tactical positions. Everything runs in the browser. There is no backend, no account and no cookies, and your progress stays in your browser (IndexedDB).
+**Aperturas, finales y táctica, en tu navegador.** Juega aperturas y finales
+contra el ordenador, encuentra la jugada en posiciones tácticas y analiza con
+motor. Es para quien quiere practicar ajedrez a su ritmo: no hay cuenta que
+crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 
-Two things reach outside the browser. In Endgames, the position is looked up in the [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or referrer. In production, visits are counted with a self-hosted [Umami](https://umami.is), without cookies or personal data and respecting Do Not Track; it is not loaded on `localhost`. The About page says all this in the app.
+[![Abrir Cheesy](https://img.shields.io/badge/Abrir%20Cheesy-cheesy.alvarotc.com-f4c542?style=for-the-badge&labelColor=13222d)](https://cheesy.alvarotc.com)
 
-The interface is available in English and Spanish.
+![21 aperturas · 14 finales · 13 posiciones](https://img.shields.io/badge/21%20aperturas%20%C2%B7%2014%20finales-13%20posiciones-f4c542?style=flat-square&labelColor=13222d)
+![Español / English](https://img.shields.io/badge/Espa%C3%B1ol-English-f4c542?style=flat-square&labelColor=13222d)
+![Sin cuentas · Sin anuncios](https://img.shields.io/badge/Sin%20cuentas-Sin%20anuncios-f4c542?style=flat-square&labelColor=13222d)
+![Licencia GPL-3.0](https://img.shields.io/badge/licencia-GPL--3.0-f4c542?style=flat-square&labelColor=13222d)
+[![CI](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml)
 
-## Sections
+![La página de inicio de Cheesy: el titular, un tablero grande con la Apertura Española tras 6.Te1, un panel con sus jugadas y el botón «Jugar esta apertura», y debajo el comienzo de las cuatro secciones](.github/readme/home-es.png)
 
-| Route                    | What it is                                                              |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `/`                      | Home: the sections with small animated previews of each                 |
-| `/openings`              | The catalogue of openings, with filters and your progress in each       |
-| `/openings/:id`          | Play an opening against the engine, with its theory alongside           |
-| `/openings/:id/practice` | Practise the lines of that opening and build a streak on each           |
-| `/endgames`              | The endgames to win or hold, with the ones you have passed marked       |
-| `/endgames/:id`          | Play one endgame against a perfect opponent                             |
-| `/positions`             | The gallery of tactical positions, with filters and the ones you solved |
-| `/positions/:id`         | Find the best move in one position                                      |
-| `/analysis`              | A free board to explore any idea                                        |
-| `/acerca`                | About: what is saved, what leaves your browser, credits and source code |
+## Qué puedes hacer
 
-- **Openings**: play an opening against Stockfish at five strength levels, or in book mode where
-  the rival follows the main line. Practice asks for the moves of a line from memory: a line is
-  mastered after three clean runs in a row. The old `/openings/:id/drill` address redirects to the
-  practice.
-- **Endgames**: convert winning endgames and hold the drawn ones (fifteen moves without losing the
-  draw). The rival plays perfectly from the Lichess tablebase, with Stockfish as a reserve when the
-  tablebase does not answer, and a panel shows the tablebase verdict of the position. The ones you
-  pass are remembered.
-- **Positions**: find the best move in tactical positions. Each one has a number in its address
-  (`/positions/1`), from fewest to most moves. The ones you solve, and at the first try, are
-  remembered.
-- **Analysis**: a free board with the move history as a tree, so you can add variations and fold
-  them, an optional engine (evaluation bar and three best lines), FEN and PGN import and export,
-  and links that carry a position (`/analysis?fen=…`), its moves or the whole tree with its
-  variations (`&pgn=…`). The other sections open here with a link back to where you came from. The
-  engine is off by default: it downloads about 2 MB the first time it is turned on.
-- **About**: `/acerca` (the route is in Spanish in both languages) lists what is saved in your
-  browser and how to clear it, the only thing that is sent out, and the credits.
+- **Aprender aperturas jugándolas y practicándolas.** En Jugar, el rival
+  responde con las líneas que cubrimos, más a menudo la principal, o es
+  Stockfish en cinco niveles de fuerza; la teoría va al lado y te avisa cuando
+  te sales de ella. En Practicar solo vale la jugada de la línea: queda dominada
+  tras tres pasadas seguidas sin fallos.
 
-## Tech stack
+  ![El catálogo de aperturas: los filtros por primera jugada, familia, bando y progreso, y la fila «1.e4 e5: juegos abiertos» con cuatro aperturas, cada una con su minitablero, su progreso y los botones «Jugar» y «Practicar»](.github/readme/openings-es.png)
 
-- [Angular](https://angular.dev) 22: standalone components, signals, zoneless change detection
-- [chessground](https://github.com/lichess-org/chessground) for the board
-- [chessops](https://github.com/niklasf/chessops) for chess rules, SAN, FEN and PGN
-- [Vitest](https://vitest.dev) for unit tests
-- ESLint, Prettier and Lefthook for code quality
-- Static hosting on Netlify
+  ![Una partida de la Apertura Española con blancas, en el tema oscuro: el tablero tras 5…Ae7, el aviso «Te toca mover», el panel de teoría con la Variante Cerrada y la nota «Estás dentro de nuestras líneas», y la lista de jugadas](.github/readme/play-es.png)
 
-## Local development
+- **Convertir y aguantar finales contra un rival perfecto.** El rival juega
+  con la tablebase de Lichess, y un panel te dice el veredicto de la posición.
+  En los finales de tablas hay que aguantar quince jugadas sin perderlas. Los que
+  superas se recuerdan.
 
-Requirements: pnpm 10 or newer, running on Node.js 22 or newer. Nothing else has to be installed:
+  ![La Posición de Lucena, a ganar con blancas: el tablero, la lista de objetivos con «La victoria sigue en juego» y el panel de la tablebase abierto, con el resultado teórico «Ganas», «Das mate en 17» y el botón «Ver pista»](.github/readme/endgame-es.png)
 
-- pnpm switches itself to the version pinned in `packageManager` (11.28.0).
-- Node.js 26.10.0 is pinned in `devEngines.runtime`. `pnpm install` downloads it and every `pnpm`
-  script runs with it, whatever Node.js is installed on the machine.
+- **Buscar la mejor jugada en posiciones tácticas.** Cada posición tiene su
+  número, de menos a más jugadas, y no te enseña la solución antes de resolverla.
+  Se recuerdan las que resuelves, y las que aciertas a la primera.
+- **Analizar cualquier idea en un tablero libre.** El historial es un árbol
+  donde puedes añadir variaciones y plegarlas; el motor es opcional (barra de
+  evaluación y tres mejores líneas); importas y exportas FEN y PGN; y los enlaces
+  llevan una posición, sus jugadas o el árbol entero con sus variaciones.
+
+  ![El tablero de análisis en el tema oscuro con una partida de la Apertura Española: el motor encendido a profundidad 20, la barra de evaluación, las tres mejores líneas, una flecha verde con la mejor jugada y la lista de jugadas con una variación plegada](.github/readme/analysis-es.png)
+
+## Privacidad
+
+No hay servidor propio, ni cuenta, ni cookies. Tu progreso se guarda en tu
+navegador (IndexedDB), y la página Acerca de lo explica dentro de la app, con
+cómo borrarlo.
+
+Solo salen dos cosas del navegador:
+
+- **En Finales**, la posición se consulta en la
+  [tablebase de Lichess](https://tablebase.lichess.ovh), sin cookies ni
+  referrer.
+- **En producción**, las visitas se cuentan con un [Umami](https://umami.is)
+  autoalojado, sin cookies ni datos personales y respetando Do Not Track. No se
+  carga en `localhost`.
+
+## Desarrollo
+
+Angular 22 con componentes standalone, señales y detección de cambios sin zone.js.
+Alojado como sitio estático en Netlify.
+
+- [Angular](https://angular.dev) 22
+- [chessground](https://github.com/lichess-org/chessground) para el tablero
+- [chessops](https://github.com/niklasf/chessops) para las reglas, SAN, FEN y PGN
+- [Vitest](https://vitest.dev) para los tests unitarios
+- ESLint, Prettier y Lefthook para la calidad del código
+
+### Requisitos
+
+pnpm 10 o superior, ejecutándose sobre Node.js 22 o superior. No hace falta
+instalar nada más:
+
+- pnpm cambia solo a la versión fijada en `packageManager` (11.28.0).
+- Node.js 26.10.0 está fijado en `devEngines.runtime`. `pnpm install` lo descarga
+  y todos los scripts de `pnpm` se ejecutan con él, sea cual sea el Node.js
+  instalado en la máquina.
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Then open `http://localhost:4200`.
+Después abre `http://localhost:4200`.
 
-## Scripts
+### Scripts
 
-| Script                   | What it does                                                                     |
-| ------------------------ | -------------------------------------------------------------------------------- |
-| `pnpm dev`               | Starts the development server (`pnpm start` is the same)                         |
-| `pnpm build`             | Builds the production bundle into `dist/cheesy/browser`                          |
-| `pnpm test`              | Runs the unit tests and the fast content checks once                             |
-| `pnpm test:coverage`     | Runs the unit tests with a coverage report in `coverage/`                        |
-| `pnpm lint`              | Lints TypeScript and templates                                                   |
-| `pnpm format`            | Formats the code with Prettier                                                   |
-| `pnpm format:check`      | Checks formatting without writing                                                |
-| `pnpm content:build`     | Regenerates the content JSON files from their sources                            |
-| `pnpm content:test`      | Runs the fast content checks: schema and legal moves                             |
-| `pnpm content:typecheck` | Type-checks the content tooling                                                  |
-| `pnpm content:verify`    | Checks the content against Stockfish and the Lichess tablebase (slow, not in CI) |
+| Script                   | Qué hace                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------- |
+| `pnpm dev`               | Arranca el servidor de desarrollo (`pnpm start` es lo mismo)                          |
+| `pnpm build`             | Genera el bundle de producción en `dist/cheesy/browser`                               |
+| `pnpm test`              | Ejecuta una vez los tests unitarios y las comprobaciones rápidas del contenido        |
+| `pnpm test:coverage`     | Ejecuta los tests unitarios con informe de cobertura en `coverage/`                   |
+| `pnpm lint`              | Pasa el linter por TypeScript y plantillas                                            |
+| `pnpm format`            | Formatea el código con Prettier                                                       |
+| `pnpm format:check`      | Comprueba el formato sin escribir                                                     |
+| `pnpm content:build`     | Regenera los JSON del contenido a partir de sus fuentes                               |
+| `pnpm content:test`      | Ejecuta las comprobaciones rápidas del contenido: esquema y jugadas legales           |
+| `pnpm content:typecheck` | Comprueba los tipos de las herramientas del contenido                                 |
+| `pnpm content:verify`    | Contrasta el contenido con Stockfish y la tablebase de Lichess (lento, no está en CI) |
 
-A pre-commit hook, installed with `pnpm install`, lints and formats the staged files.
+Un hook de pre-commit, que se instala con `pnpm install`, pasa el linter y el
+formateo por los archivos preparados.
 
-## Project structure
+### Rutas
+
+| Ruta                     | Qué es                                                                     |
+| ------------------------ | -------------------------------------------------------------------------- |
+| `/`                      | Portada: las secciones con una pequeña vista previa animada de cada una    |
+| `/openings`              | El catálogo de aperturas, con filtros y tu progreso en cada una            |
+| `/openings/:id`          | Juega una apertura contra el motor, con su teoría al lado                  |
+| `/openings/:id/practice` | Practica las líneas de esa apertura y encadena una racha en cada una       |
+| `/endgames`              | Los finales que ganar o aguantar, con los superados marcados               |
+| `/endgames/:id`          | Juega un final contra un rival perfecto                                    |
+| `/positions`             | La galería de posiciones tácticas, con filtros y las que has resuelto      |
+| `/positions/:id`         | Encuentra la mejor jugada en una posición                                  |
+| `/analysis`              | Un tablero libre para explorar cualquier idea                              |
+| `/acerca`                | Acerca de: qué se guarda, qué sale del navegador, créditos y código fuente |
+
+Detalles que no se ven en la tabla:
+
+- La dirección antigua `/openings/:id/drill` redirige a la práctica.
+- En Finales, el rival recurre a Stockfish cuando la tablebase no responde.
+- Cada posición lleva un número en su dirección (`/positions/1`), de menos a más
+  jugadas.
+- En Análisis, los enlaces llevan una posición (`/analysis?fen=…`), sus jugadas o
+  el árbol entero con sus variaciones (`&pgn=…`). Las otras secciones abren aquí
+  con un enlace para volver de donde vienes.
+- El motor de Análisis está apagado por defecto: descarga unos 2 MB la primera
+  vez que se enciende.
+- `/acerca` es la ruta en español en los dos idiomas.
+
+### Estructura
 
 ```
 src/app/
-  core/       game state (chessops), move tree and analysis links, progress (IndexedDB),
-              translations and content loading
-  layout/     the parts around every page: footer and the padding of each kind of route
-  shared/     presentational components: board, mini board, move list, icons, toast
-  features/   one folder per section, loaded lazily
-content/      sources and checks of the openings, endgames and positions
+  core/       estado de la partida (chessops), árbol de jugadas y enlaces de análisis,
+              progreso (IndexedDB), traducciones y carga del contenido
+  layout/     lo que rodea a cada página: el pie y el relleno de cada tipo de ruta
+  shared/     componentes de presentación: tablero, minitablero, lista de jugadas,
+              iconos, aviso
+  features/   una carpeta por sección, cargadas de forma diferida
+content/      fuentes y comprobaciones de las aperturas, los finales y las posiciones
 ```
 
-The content is fixed and validated before it reaches the app: see [content/README.md](content/README.md).
+El contenido es fijo y se valida antes de llegar a la app: mira
+[content/README.md](content/README.md).
 
-## License
+### Capturas
 
+```bash
+pnpm media                                        # capturas, textos, promos e icono en media/out/
+pnpm media:shots --only cover --lang es --no-build  # repite una sola captura
+pnpm media:readme                                 # regenera .github/readme/
+```
+
+La primera vez hace falta `pnpm exec playwright install chromium`. Cómo se hacen
+las capturas está en [media/README.md](media/README.md).
+
+## Autor
+
+Hecha por [Alvaro Torres](https://github.com/alvarotorresc). Licencia
 [GPL-3.0](LICENSE).
 
-## Credits
+## Créditos
 
-- [chessground](https://github.com/lichess-org/chessground), the board used by Lichess, licensed under GPL-3.0-or-later.
-- [chessops](https://github.com/niklasf/chessops), chess rules and notation, licensed under GPL-3.0-or-later.
-- [Stockfish](https://stockfishchess.org), the chess engine, licensed under GPL-3.0, running in the browser from the [stockfish](https://www.npmjs.com/package/stockfish) package (lite, single-threaded build).
-- [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
-- [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), names and ECO codes of openings used to check the content, dedicated to the public domain under CC0.
-- The [Lichess tablebase](https://tablebase.lichess.ovh) and [Stockfish](https://stockfishchess.org), used to verify the endgames and the positions.
+- [chessground](https://github.com/lichess-org/chessground), el tablero que usa Lichess, con licencia GPL-3.0-or-later.
+- [chessops](https://github.com/niklasf/chessops), reglas y notación del ajedrez, con licencia GPL-3.0-or-later.
+- [Stockfish](https://stockfishchess.org), el motor de ajedrez, con licencia GPL-3.0, que se ejecuta en el navegador desde el paquete [stockfish](https://www.npmjs.com/package/stockfish) (versión lite, de un solo hilo).
+- [Lichess](https://lichess.org), cuyo trabajo de código abierto hace posible este proyecto. El juego de piezas es el de cburnett, tal como viene con chessground.
+- [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), nombres y códigos ECO de las aperturas, usados para comprobar el contenido, dedicados al dominio público con CC0.
+- La [tablebase de Lichess](https://tablebase.lichess.ovh) y [Stockfish](https://stockfishchess.org), usados para verificar los finales y las posiciones.
