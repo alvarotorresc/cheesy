@@ -27,9 +27,15 @@ const BROWSER_LANG = { es: 'es-ES', en: 'en-US' };
 function parseArgs(argv) {
   const args = { only: null, lang: null, build: true };
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--only') args.only = argv[++i];
-    else if (argv[i] === '--lang') args.lang = argv[++i];
-    else if (argv[i] === '--no-build') args.build = false;
+    if (argv[i] === '--only' || argv[i] === '--lang') {
+      const value = argv[++i];
+      if (value === undefined || value.startsWith('--'))
+        throw new Error(`${argv[i - 1]} needs a value`);
+      if (argv[i - 1] === '--lang' && !(value in BROWSER_LANG)) {
+        throw new Error(`--lang must be es or en, got "${value}"`);
+      }
+      args[argv[i - 1].slice(2)] = value;
+    } else if (argv[i] === '--no-build') args.build = false;
   }
   return args;
 }
