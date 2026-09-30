@@ -29,8 +29,9 @@
     "content:typecheck": "tsc -p content/tsconfig.json",
     "content:verify": "vitest run --config content/vitest.verify.config.ts",
     "pieces:css": "node scripts/generate-pieces-css.mjs",
-    "media": "node media/shots/shots.mjs",
+    "media": "node media/shots/shots.mjs && node media/shots/promo.mjs",
     "media:shots": "node media/shots/shots.mjs",
+    "media:promo": "node media/shots/promo.mjs",
     "prepare": "lefthook install"
   },
   "dependencies": {

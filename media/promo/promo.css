@@ -1,0 +1,100 @@
+/*
+ * Shared look of the promo images: the ink navy of the app header, the word "Cheesy" in cheddar
+ * and a strip of the board along one edge, with a single cheddar square (the colour the app keeps
+ * for the current move). Each page sets its own canvas through --w, --h and --sq (the side of a
+ * board square, a divisor of the canvas so the squares land on whole pixels).
+ */
+
+/* Bricolage Grotesque (SIL Open Font License 1.1, see public/fonts/OFL.txt), latin, variable. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  src: url('../../public/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+}
+
+:root {
+  --ink: #13222d;
+  --ink-dark: #0e1b23;
+  --ink-surface: #162832;
+  --ink-line: #2b4352;
+  --paper: #f3f5f6;
+  --cheddar: #f4c542;
+  --board-light: #e3e9ed;
+  --board-dark: #8aa1b1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The logo tile takes exactly one board square, so it lines up with the board below it. */
+.logo {
+  display: block;
+  width: var(--sq);
+  height: var(--sq);
+  /* The tile has black squares of its own: a ring keeps its outline on the ink background. */
+  border-radius: calc(var(--sq) * 0.1875);
+  box-shadow: 0 0 0 3px var(--ink-line);
+}
+
+.name {
+  margin: 0;
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  color: var(--cheddar);
+}
+
+.line {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* A piece of the board: the checker is painted as a background, the children are single squares. */
+.board {
+  position: absolute;
+  background: repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%) 0 0 /
+    calc(var(--sq) * 2) calc(var(--sq) * 2);
+}
+
+.board .current {
+  position: absolute;
+  left: calc(var(--col) * var(--sq));
+  top: calc(var(--row) * var(--sq));
+  width: var(--sq);
+  height: var(--sq);
+  background: var(--cheddar);
+}
+
+/* The screenshot frames. No text in them: the screenshot does the talking. */
+.frame {
+  position: absolute;
+  background: var(--ink-dark);
+  border: 3px solid var(--ink-line);
+  box-shadow: 0 36px 80px rgb(5 12 17 / 0.6);
+  overflow: hidden;
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+}

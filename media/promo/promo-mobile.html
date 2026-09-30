@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cheesy promo, mobile</title>
+    <link rel="stylesheet" href="promo.css" />
+    <style>
+      /* Same 16x9 grid of 120px squares as the desktop promo. */
+      :root {
+        --w: 1920px;
+        --h: 1080px;
+        --sq: 120px;
+      }
+      .copy {
+        position: absolute;
+        top: 120px;
+        left: 120px;
+        width: 960px;
+      }
+      .name {
+        margin-top: 40px;
+        font-size: 236px;
+      }
+      .line {
+        margin-top: 48px;
+        max-width: 860px;
+        font-size: 76px;
+      }
+      .board {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 240px;
+      }
+      /* The phone stands on the board like a piece: centred on the line between two files, its
+         base on the line between the two ranks. */
+      .frame {
+        top: 40px;
+        left: 1218px;
+        width: 408px;
+        padding: 15px;
+        border-radius: 64px;
+      }
+      /* The real screenshot is 1080x2340; the ratio keeps the frame steady while it loads. */
+      .frame img {
+        aspect-ratio: 1080 / 2340;
+        border-radius: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board"><span class="current" style="--col: 1; --row: 0"></span></div>
+    <div class="copy">
+      <img class="logo" src="../../public/favicon.svg" alt="" />
+      <h1 class="name">Cheesy</h1>
+      <p class="line" data-t="line"></p>
+    </div>
+    <div class="frame"><img id="shot" alt="" /></div>
+    <script src="promo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cheesy social image</title>
+    <link rel="stylesheet" href="promo.css" />
+    <style>
+      /* 1200x630 holds six ranks of 105px squares; the board takes the four files on the right. */
+      :root {
+        --w: 1200px;
+        --h: 630px;
+        --sq: 105px;
+      }
+      .copy {
+        position: absolute;
+        top: 105px;
+        left: 84px;
+        width: 600px;
+      }
+      .name {
+        margin-top: 36px;
+        font-size: 176px;
+      }
+      .line {
+        margin-top: 30px;
+        max-width: 560px;
+        font-size: 50px;
+      }
+      .board {
+        top: 0;
+        right: 0;
+        width: 420px;
+        height: 630px;
+      }
+      /* A lone knight on the current square: decoration, not a position to solve. */
+      .knight {
+        position: absolute;
+        left: calc(var(--sq) * 1);
+        top: calc(var(--sq) * 3);
+        width: var(--sq);
+        height: var(--sq);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <span class="current" style="--col: 1; --row: 3"></span>
+      <svg class="knight" viewBox="0 0 64 64" aria-hidden="true">
+        <path
+          transform="translate(32 32) scale(0.8) translate(-31.5 -31)"
+          fill="#13222d"
+          fill-rule="evenodd"
+          d="M19 51C19 43 23 37.5 29 33.5C25 33.5 21.5 35.5 18.5 37.5C15 39.5 11 38.5 10 35.5C9 32.5 10 30 12 28L21.5 17.5C23 15.5 24 13.5 25 11L26.5 5.5L30.5 10C41.5 10.5 50 18.5 50 32C50 40 47.5 45 47.5 51ZM13 57C13 53 15 51 18 51H48C51 51 53 53 53 57ZM22.6 18.5a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0-3.8 0Z"
+        />
+      </svg>
+    </div>
+    <div class="copy">
+      <img class="logo" src="../../public/favicon.svg" alt="" />
+      <h1 class="name">Cheesy</h1>
+      <p class="line" data-t="line"></p>
+    </div>
+    <script src="promo.js"></script>
+  </body>
+</html>
