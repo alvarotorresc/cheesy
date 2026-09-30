@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cheesy promo, desktop</title>
+    <link rel="stylesheet" href="promo.css" />
+    <style>
+      /* 1920x1080 is a 16x9 grid of 120px squares; everything snaps to it. */
+      :root {
+        --w: 1920px;
+        --h: 1080px;
+        --sq: 120px;
+      }
+      .copy {
+        position: absolute;
+        top: 120px;
+        left: 120px;
+        width: 480px;
+      }
+      .name {
+        margin-top: 52px;
+        font-size: 148px;
+      }
+      .line {
+        margin-top: 40px;
+        font-size: 52px;
+      }
+      .board {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 240px;
+      }
+      /* The browser starts level with the logo, ends 120px from the right edge (1134px plus its
+         border) and stands on the board: its foot covers half of the first rank. */
+      .frame {
+        top: 120px;
+        left: 660px;
+        width: 1134px;
+        border-radius: 22px;
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: 56px;
+        padding: 0 24px;
+      }
+      .bar span {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--ink-line);
+      }
+      .bar .address {
+        width: 440px;
+        height: 28px;
+        margin-left: 28px;
+        border-radius: 999px;
+        background: var(--ink-surface);
+      }
+      .frame img {
+        aspect-ratio: 1600 / 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board"><span class="current" style="--col: 1; --row: 0"></span></div>
+    <div class="copy">
+      <img class="logo" src="../../public/favicon.svg" alt="" />
+      <h1 class="name">Cheesy</h1>
+      <p class="line" data-t="line"></p>
+    </div>
+    <div class="frame">
+      <div class="bar"><span></span><span></span><span></span><span class="address"></span></div>
+      <img id="shot" alt="" />
+    </div>
+    <script src="promo.js"></script>
+  </body>
+</html>
