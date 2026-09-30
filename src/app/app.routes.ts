@@ -1,4 +1,5 @@
-import type { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { Router, type Routes } from '@angular/router';
 import type { PageSection } from './core/page-title';
 import type { MainKind } from './layout/main-kind';
 
@@ -33,6 +34,16 @@ export const routes: Routes = [
     title: 'analysis' satisfies PageSection,
     data: { main: 'play' } satisfies RouteData,
     loadComponent: () => import('./features/analysis/analysis').then((m) => m.Analysis),
+  },
+  {
+    path: 'learn',
+    loadChildren: () => import('./features/learn/learn.routes').then((m) => m.LEARN_ROUTES),
+  },
+  {
+    // The glossary moved inside Learn; old links keep their anchor.
+    path: 'glossary',
+    redirectTo: ({ fragment }) =>
+      inject(Router).createUrlTree(['/learn/glossary'], fragment ? { fragment } : {}),
   },
   {
     // The route is in Spanish, as the anchors of its sections are, in both languages.

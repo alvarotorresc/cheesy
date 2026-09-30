@@ -24,6 +24,7 @@ describe('SiteFooter', () => {
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([
       'Código fuente (GPL-3)',
       'Privacidad',
+      'Glosario',
       'Acerca de',
       'alvarotc.com',
     ]);
@@ -39,6 +40,7 @@ describe('SiteFooter', () => {
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([
       'Source code (GPL-3)',
       'Privacy',
+      'Glossary',
       'About',
       'alvarotc.com',
     ]);
@@ -46,8 +48,9 @@ describe('SiteFooter', () => {
 
   it('should send Privacy to its anchor and About to the top of the About page', async () => {
     const element = await render('en');
-    const [, privacy, about] = Array.from(element.querySelectorAll('a'));
+    const [, privacy, glossary, about] = Array.from(element.querySelectorAll('a'));
 
+    expect(glossary.getAttribute('href')).toBe('/learn/glossary');
     expect(privacy.getAttribute('href')).toBe('/acerca#privacidad');
     expect(about.getAttribute('href')).toBe('/acerca');
   });

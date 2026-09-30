@@ -33,6 +33,25 @@ describe('App', () => {
     expect(document.title).toBe('Inicio · Cheesy');
   });
 
+  it('should send the old glossary address, with its anchor, to the glossary inside Learn', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/glossary#pin');
+    expect(TestBed.inject(Router).url).toBe('/learn/glossary#pin');
+    await harness.navigateByUrl('/learn');
+    expect(TestBed.inject(Router).url).toBe('/learn/glossary');
+  });
+
+  it('should name the glossary tab', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/learn/glossary');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('Glossary · Cheesy');
+  });
+
   it('should title the About page in both languages', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
@@ -117,6 +136,7 @@ describe('App', () => {
       expect(Array.from(links, (link) => link.getAttribute('href'))).toEqual([
         'https://github.com/alvarotorresc/cheesy',
         '/acerca#privacidad',
+        '/learn/glossary',
         '/acerca',
         'https://alvarotc.com',
       ]);
