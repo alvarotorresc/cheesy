@@ -10,7 +10,8 @@ import type {
 import { OpeningBook } from './opening-book';
 
 /**
- * Loads the fixed content of the app (openings, endgames and curated positions) on demand.
+ * Loads the fixed content of the app (openings, endgames, curated positions and the glossary) on
+ * demand.
  *
  * Every file is downloaded once and kept in memory; a failed download is forgotten, so the next
  * call tries again. Ids usually come from the URL, so an unknown id resolves to undefined instead

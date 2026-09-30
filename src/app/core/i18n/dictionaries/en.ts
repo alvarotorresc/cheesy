@@ -17,7 +17,6 @@ export const en = {
     positions: 'Positions',
     analysis: 'Analysis',
     about: 'About',
-    glossary: 'Glossary',
   },
   footer: {
     tagline: 'is open source. No accounts, no cookies: your progress stays in your browser.',
@@ -25,6 +24,7 @@ export const en = {
     source: 'Source code (GPL-3)',
     privacy: 'Privacy',
     about: 'About',
+    glossary: 'Glossary',
   },
   glossary: {
     title: 'Glossary',

@@ -19,7 +19,6 @@ export const es: Messages = {
     positions: 'Posiciones',
     analysis: 'Análisis',
     about: 'Acerca de',
-    glossary: 'Glosario',
   },
   footer: {
     tagline: 'es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
@@ -27,6 +26,7 @@ export const es: Messages = {
     source: 'Código fuente (GPL-3)',
     privacy: 'Privacidad',
     about: 'Acerca de',
+    glossary: 'Glosario',
   },
   glossary: {
     title: 'Glosario',
