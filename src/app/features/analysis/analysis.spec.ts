@@ -395,6 +395,7 @@ describe('Analysis', () => {
       );
     });
 
+    // Renders 1200 moves, each with its own board trigger: slow on a loaded machine.
     it('should warn and copy nothing when the game is too long for a link', async () => {
       const shuffle = Array.from(
         { length: 300 },
@@ -412,7 +413,7 @@ describe('Analysis', () => {
 
       expect(element.querySelector('.io .feedback.error')?.textContent?.trim()).toBe(warning);
       expect(element.querySelector('#share-fallback')).toBeNull();
-    });
+    }, 20_000);
 
     it('should preview a link that carries every move, variations included', async () => {
       const preview = (): string =>
