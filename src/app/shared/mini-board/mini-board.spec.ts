@@ -163,6 +163,27 @@ describe('MiniBoard', () => {
     expect(element.querySelectorAll('.sq.ring')).toHaveLength(2);
     expect(element.querySelector<HTMLElement>('.rank-hl')?.style.transform).toBe('translateY(0%)');
   });
+
+  it('should draw an arrow from the centre of one square to the centre of another', async () => {
+    fixture.componentRef.setInput('arrows', [{ from: 'a1', to: 'h8' }]);
+    await fixture.whenStable();
+    const line = element.querySelector('svg.arrows line')!;
+    expect([line.getAttribute('x1'), line.getAttribute('y1')]).toEqual(['0.5', '7.5']);
+    expect([line.getAttribute('x2'), line.getAttribute('y2')]).toEqual(['7.5', '0.5']);
+  });
+
+  it('should flip the arrows with the board', async () => {
+    fixture.componentRef.setInput('arrows', [{ from: 'a1', to: 'h8' }]);
+    fixture.componentRef.setInput('orientation', 'black');
+    await fixture.whenStable();
+    const line = element.querySelector('svg.arrows line')!;
+    expect([line.getAttribute('x1'), line.getAttribute('y1')]).toEqual(['7.5', '0.5']);
+  });
+
+  it('should draw no arrow layer without arrows', async () => {
+    await fixture.whenStable();
+    expect(element.querySelector('svg.arrows')).toBeNull();
+  });
 });
 
 describe('MiniBoard with the Dragon Variation', () => {

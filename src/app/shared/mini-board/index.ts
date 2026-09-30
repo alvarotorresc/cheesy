@@ -1,4 +1,4 @@
-export { MiniBoard } from './mini-board';
+export { MiniBoard, type MiniArrow } from './mini-board';
 export {
   frameFromFen,
   framesFromLine,
