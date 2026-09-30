@@ -23,12 +23,42 @@ for (const p of loadPositions()) texts.push({ at: `${p.id}.explanation`, text: p
 
 const glossary = loadGlossaryIds();
 
-/** Something that looks like a move and was not read as one: a typo or the other language's letters. */
+/**
+ * Something that looks like a move and was not read as one: the other language's letters, a square
+ * off the board (`Cf9`, `Ni3`) or a castling the reader missed (`O–O` with a dash, or any `O-O` left
+ * over). Wider than the reader on purpose, so a slip ends up here instead of in plain text.
+ */
 const SUSPICIOUS =
-  /(?<![\p{L}\p{N}])(?:[A-Z][a-h]?[1-8]?x?[a-h][1-8]|[a-h]x[a-h][1-8]|0-0)(?![\p{L}\p{N}])/u;
+  /(?<![\p{L}\p{N}])(?:[A-Z][a-z]?[0-9]?x?[a-z][0-9]|[a-z]x[a-z][0-9]|[O0][-–—][O0](?:[-–—][O0])?)(?![\p{L}\p{N}])/u;
 
 const textOf = (segments: Segment[]): string[] =>
   segments.flatMap((s) => (s.kind === 'text' ? [s.text] : []));
+
+/** What looks like a move in the text segments, as found. */
+const suspiciousIn = (segments: Segment[]): string[] =>
+  textOf(segments).flatMap((t) => t.match(SUSPICIOUS)?.[0] ?? []);
+
+describe('the check for moves left unread', () => {
+  const text = (value: string): Segment[] => [{ kind: 'text', text: value }];
+
+  it('flags square typos and castling written with the letter O', () => {
+    for (const [written, found] of [
+      ['juega Cf9 y gana', 'Cf9'],
+      ['then Ni3 wins', 'Ni3'],
+      ['exf9 takes', 'exf9'],
+      ['then O-O and', 'O-O'],
+      ['then O-O-O and', 'O-O-O'],
+      ['castles 0-0 early', '0-0'],
+      ['enroca O–O pronto', 'O–O'],
+    ])
+      expect(suspiciousIn(text(written)), written).toEqual([found]);
+  });
+
+  it('leaves plain words, lone squares and questions alone', () => {
+    for (const written of ['the d-file', '¿está en d5?', 'a 1-0 win', 'Opposition', 'KO-OK'])
+      expect(suspiciousIn(text(written)), written).toEqual([]);
+  });
+});
 
 describe('cut texts of the content', () => {
   it('has texts to check', () => {
