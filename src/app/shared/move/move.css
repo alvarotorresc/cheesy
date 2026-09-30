@@ -19,10 +19,14 @@
   vertical-align: -0.2em;
 }
 
-/* In a running text the move lights up as the board points at it; in a button the button does. */
+/* In a running text the move lights up as the board points at it; in a button the button does.
+   A faint solid underline tells it apart at rest (the dotted one is for glossary terms). */
 :host(.move) .spot[data-spot] {
   border-radius: 2px;
   cursor: default;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
 }
 
 :host(.move) .spot[data-spot]:hover,

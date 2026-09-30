@@ -6,9 +6,13 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* On a page with a board the square can point at it: a faint solid underline says so at rest. */
 .square[data-spot] {
   border-radius: 2px;
   cursor: default;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
 }
 
 .square[data-spot]:hover,
