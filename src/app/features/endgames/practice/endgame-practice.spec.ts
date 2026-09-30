@@ -363,11 +363,30 @@ describe('EndgamePractice', () => {
       await settle();
 
       expect(element().querySelector('.alert.fresh')?.textContent).toContain(
-        'Your move 1...Kg4 changed the theoretical result from a draw to a loss.',
+        'With your move 1...Kg4, the theoretical result went from a draw to a loss.',
       );
       const marked = element().querySelector('.move-list button.bad');
       expect(marked?.querySelector('.shown')?.textContent?.trim()).toBe('Kg4');
-      expect(marked?.getAttribute('aria-label')).toBe('1...Kg4, your move');
+      // The name of the button is a sentence even in notation.
+      expect(marked?.getAttribute('aria-label')).toBe('1... King to g4, your move');
+    });
+
+    it('should tell the move that changed the result in words', async () => {
+      await open('kp-square-rule-defence');
+      TestBed.inject(I18nService).setLang('es');
+      TestBed.inject(ReadingModeService).setMode('words');
+      await settle(LOOKUP_DELAY_MS);
+      tablebase.last().respond(200, SQUARE_RULE_RESPONSE);
+      await settle();
+
+      move('g5', 'g4');
+      await settle();
+
+      expect(element().querySelector('.alert.fresh')?.textContent).toContain(
+        'Con tu jugada 1... Rey a g4, el resultado teórico ha pasado de tablas a derrota.',
+      );
+      const marked = element().querySelector('.move-list button.bad');
+      expect(marked?.getAttribute('aria-label')).toBe('1... Rey a g4, tu jugada');
     });
 
     it('should keep the game going with a discreet notice when the tablebase fails', async () => {

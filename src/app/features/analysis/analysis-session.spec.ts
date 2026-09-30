@@ -4,6 +4,7 @@ import { parseAnalysisParams } from '../../core/analysis-link';
 import { OpeningBook } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { MAX_TREE_NODES, MoveTree, ROOT_ID } from '../../core/move-tree';
+import { ReadingModeService } from '../../core/reading-mode';
 import { ToastService } from '../../shared/toast';
 import { AnalysisSession, REPLAY_START_MS, REPLAY_STEP_MS } from './analysis-session';
 
@@ -22,6 +23,8 @@ describe('AnalysisSession', () => {
     toasts = [];
     TestBed.configureTestingModule({ providers: [AnalysisSession] });
     TestBed.inject(I18nService).setLang('es');
+    // The messages are checked in words, the mode for those who do not read notation.
+    TestBed.inject(ReadingModeService).setMode('words');
     vi.spyOn(TestBed.inject(ToastService), 'show').mockImplementation((text) => {
       toasts.push(text);
     });
@@ -66,7 +69,7 @@ describe('AnalysisSession', () => {
     expect(sans()).toEqual(['e4', 'e5']);
     expect(session.current().san).toBe('c5');
     expect(session.hasVariations()).toBe(true);
-    expect(toasts).toEqual(['1...c5 crea una variante: la línea que tenías sigue ahí.']);
+    expect(toasts).toEqual(['Nueva variante con 1... Peón a c5: la línea que tenías sigue ahí.']);
   });
 
   it('should reuse a move that is already there instead of repeating it', () => {
@@ -101,7 +104,7 @@ describe('AnalysisSession', () => {
     session.undo();
     expect(sans()).toEqual(['e4']);
     expect(session.currentId()).toBe(ROOT_ID);
-    expect(toasts).toEqual(['Deshecha 1...e5.']);
+    expect(toasts).toEqual(['Jugada deshecha: 1... Peón a e5.']);
 
     session.last();
     session.undo();

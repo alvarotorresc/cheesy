@@ -50,12 +50,6 @@ export interface Theory {
 
 const sideOfPly = (ply: number): Color => (ply % 2 === 1 ? 'white' : 'black');
 
-/** Move written with its number, as in a score sheet: `3.Bb5` or `3...a6`. */
-export const numberedMove = (ply: number, san: string): string => {
-  const number = Math.ceil(ply / 2);
-  return ply % 2 === 1 ? `${number}.${san}` : `${number}...${san}`;
-};
-
 const routeTo = (node: BookNode | undefined): BookNode[] => {
   const route: BookNode[] = [];
   for (let step = node; step; step = step.parent) if (step.name) route.unshift(step);

@@ -1,5 +1,5 @@
 import { OpeningBook, type OpeningNode } from '../../core/content';
-import { describeTheory, numberedMove } from './opening-theory';
+import { describeTheory } from './opening-theory';
 import { testTree } from './testing/test-opening';
 
 describe('opening theory', () => {
@@ -87,17 +87,6 @@ describe('opening theory', () => {
       const empty = OpeningBook.from({ ...testTree(), root: [] as OpeningNode[] });
 
       expect(describeTheory(empty, []).status).toBe('end-of-book');
-    });
-  });
-
-  describe('numberedMove', () => {
-    it.each([
-      [1, 'e4', '1.e4'],
-      [2, 'e5', '1...e5'],
-      [5, 'Bb5', '3.Bb5'],
-      [6, 'a6', '3...a6'],
-    ])('should write ply %i %s as %s', (ply, san, expected) => {
-      expect(numberedMove(ply, san)).toBe(expected);
     });
   });
 });

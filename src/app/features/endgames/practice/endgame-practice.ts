@@ -22,6 +22,7 @@ import { GameService, type PlayedMove } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
 import { BoardComponent, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
@@ -68,6 +69,7 @@ export class EndgamePractice {
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
   private readonly content = inject(ContentService);
   private readonly progress = inject(ProgressService);
   private readonly window = inject(DOCUMENT).defaultView;
@@ -147,7 +149,8 @@ export class EndgamePractice {
         number: prefix,
         san: move.san,
         color: white ? 'white' : 'black',
-        label: `${this.label(index, move)}, ${mine ? t.moveMine : t.moveRival}`,
+        // The name of the button replaces its content, so it tells the sentence in both modes.
+        label: `${number}${white ? '.' : '...'} ${this.reading.spoken(move.san)}, ${mine ? t.moveMine : t.moveRival}`,
         mine,
         bad: bad === index + 1,
         future: index + 1 > ply,
@@ -231,7 +234,9 @@ export class EndgamePractice {
     };
     const move = this.game.moves()[change.ply - 1];
     return fill(t.moveChanged, {
-      move: move ? this.label(change.ply - 1, move) : this.i18n.san(change.san),
+      move: move
+        ? this.label(change.ply - 1, move)
+        : this.reading.full(change.san, { start: false }),
       before: names[change.before],
       after: names[change.after],
     });
@@ -392,11 +397,10 @@ export class EndgamePractice {
     this.saveState.set(recorded ? 'saved' : 'failed');
   }
 
-  /** "12.Rd5" or "12...Ra1": the move of the game with its number, in the language of the page. */
+  /** "12. Torre a d5" or "12.Td5": the move of the game with its number, in the reading mode. */
   private label(index: number, move: PlayedMove): string {
-    const absolute = this.game.startPly() + index;
-    const number = Math.floor(absolute / 2) + 1;
-    return `${number}.${absolute % 2 === 0 ? '' : '..'}${this.i18n.san(move.san)}`;
+    // `startPly` counts the plies before the first move; `numbered` counts from 1.
+    return this.reading.numbered(this.game.startPly() + index + 1, move.san);
   }
 
   private readPanelPreference(): boolean {

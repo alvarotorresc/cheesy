@@ -224,7 +224,7 @@ describe('Analysis', () => {
       await render();
 
       expect(mainLine()).toEqual(['e4', 'e5', 'Nf3']);
-      expect(toast()).toBe('2.Bc4 starts a variation: your line is still there.');
+      expect(toast()).toBe('New variation with 2.Bc4: your line is still there.');
       expect(
         element.querySelector('app-variation .mv[aria-current="true"] .shown')?.textContent,
       ).toContain('Bc4');
@@ -269,7 +269,7 @@ describe('Analysis', () => {
 
       expect(mainLine()).toEqual(['e4']);
       expect(session.currentId()).toBe(ROOT_ID);
-      expect(toast()).toBe('Undid 1...e5.');
+      expect(toast()).toBe('Move undone: 1...e5.');
     });
 
     it('should disable undo when there is nothing to undo', () => {
@@ -524,7 +524,7 @@ describe('Analysis', () => {
 
       expect(mainLine()).toEqual(['d4']);
       expect(session.current().san).toBe('e4');
-      expect(toast()).toBe('1.e4 starts a variation: your line is still there.');
+      expect(toast()).toBe('New variation with 1.e4: your line is still there.');
     });
 
     it('should keep the board playable while the engine loads and thinks', async () => {

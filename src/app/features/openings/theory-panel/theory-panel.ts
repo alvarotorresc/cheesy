@@ -2,7 +2,8 @@ import { Component, computed, inject, input } from '@angular/core';
 import type { Color } from 'chessops';
 import type { OpeningSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
-import { numberedMove, type Theory } from '../opening-theory';
+import { ReadingModeService } from '../../../core/reading-mode';
+import type { Theory } from '../opening-theory';
 
 /**
  * Where the displayed position stands in our lines: variation, idea behind the last move, whether
@@ -20,6 +21,7 @@ export class TheoryPanel {
   readonly playerColor = input.required<Color>();
 
   protected readonly i18n = inject(I18nService);
+  private readonly reading = inject(ReadingModeService);
 
   /** The variation reached, or the opening itself before any named variation. */
   protected readonly title = computed(() =>
@@ -38,8 +40,8 @@ export class TheoryPanel {
     if (!deviation) return undefined;
     return {
       byPlayer: deviation.side === this.playerColor(),
-      played: numberedMove(deviation.ply, this.i18n.san(deviation.san)),
-      expected: numberedMove(deviation.ply, this.i18n.san(deviation.expected.san)),
+      played: this.reading.numbered(deviation.ply, deviation.san),
+      expected: this.reading.numbered(deviation.ply, deviation.expected.san),
     };
   });
 
@@ -50,15 +52,15 @@ export class TheoryPanel {
     const side: Color = choice.chosen.ply % 2 === 1 ? 'white' : 'black';
     if (side === this.playerColor()) return undefined;
     return {
-      played: numberedMove(choice.chosen.ply, this.i18n.san(choice.chosen.san)),
-      main: numberedMove(choice.main.ply, this.i18n.san(choice.main.san)),
+      played: this.reading.numbered(choice.chosen.ply, choice.chosen.san),
+      main: this.reading.numbered(choice.main.ply, choice.main.san),
     };
   });
 
   /** Named variations passed through, the last one marked as the current. */
   protected readonly route = computed(() =>
     this.theory().route.map((node, index, all) => ({
-      move: numberedMove(node.ply, this.i18n.san(node.san)),
+      move: this.reading.numbered(node.ply, node.san),
       name: node.name ? this.i18n.localize(node.name) : '',
       now: index === all.length - 1,
     })),

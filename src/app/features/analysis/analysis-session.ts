@@ -5,11 +5,11 @@ import type { ParsedAnalysisLink } from '../../core/analysis-link';
 import { parsePosition, resultOfLine } from '../../core/game';
 import { I18nService } from '../../core/i18n';
 import { MAX_TREE_NODES, MoveTree, ROOT_ID, type MoveNode } from '../../core/move-tree';
+import { ReadingModeService } from '../../core/reading-mode';
 import type { BoardMove } from '../../shared/board';
 import { ToastService } from '../../shared/toast';
 import type { AnalysisOriginInfo } from './analysis-origin';
 import { loadImport, type ImportOutcome } from './io-panel/load-import';
-import { moveLabel } from './move-label';
 
 /** Arrival from another section: the line plays itself up to the position, this fast. */
 export const REPLAY_STEP_MS = 170;
@@ -28,6 +28,7 @@ const prefersReducedMotion = (): boolean =>
 @Injectable()
 export class AnalysisSession {
   private readonly toast = inject(ToastService);
+  private readonly reading = inject(ReadingModeService);
   private readonly i18n = inject(I18nService);
 
   private readonly treeState = signal(MoveTree.fromFen(), { equal: () => false });
@@ -70,9 +71,9 @@ export class AnalysisSession {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.replayTimer));
   }
 
-  /** A move written for the screen: `3.e5`, `7...Dc7` in Spanish. */
+  /** A move with its number, in the reading mode: `7... Dama a c7` or `7...Dc7` in Spanish. */
   label(node: MoveNode): string {
-    return moveLabel(node, (san) => this.i18n.san(san));
+    return this.reading.numbered(node.ply, node.san);
   }
 
   /**

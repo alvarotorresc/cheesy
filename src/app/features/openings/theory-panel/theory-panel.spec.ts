@@ -2,6 +2,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { Color } from 'chessops';
 import { OpeningBook } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
+import { ReadingModeService } from '../../../core/reading-mode';
 import { describeTheory } from '../opening-theory';
 import { summaryOf, testTree } from '../testing/test-opening';
 import { TheoryPanel } from './theory-panel';
@@ -22,6 +23,8 @@ describe('TheoryPanel', () => {
 
   beforeEach(() => {
     TestBed.inject(I18nService).setLang('en');
+    // Other specs may leave a stored mode behind: these expectations are written in notation.
+    TestBed.inject(ReadingModeService).setMode('notation');
     fixture = TestBed.createComponent(TheoryPanel);
     fixture.componentRef.setInput('opening', summaryOf(testTree()));
     element = fixture.nativeElement as HTMLElement;
@@ -57,6 +60,16 @@ describe('TheoryPanel', () => {
 
     expect(text('.book-state')).toBe(
       'You left our lines with 2.Bc4. Our lines went on with 2.Nf3.',
+    );
+  });
+
+  it('should write the moves in words, with their numbers', async () => {
+    TestBed.inject(I18nService).setLang('es');
+    TestBed.inject(ReadingModeService).setMode('words');
+    await render(['e4', 'e5', 'Bc4']);
+
+    expect(text('.book-state')).toBe(
+      'Te has salido de nuestras líneas con 2. Alfil a c4. Nuestras líneas seguían con 2. Caballo a f3.',
     );
   });
 

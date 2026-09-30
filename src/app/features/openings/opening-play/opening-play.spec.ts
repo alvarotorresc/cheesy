@@ -186,6 +186,18 @@ describe('OpeningPlay', () => {
       expect(element.querySelectorAll('app-opening-moves button')).toHaveLength(2);
     });
 
+    it('should write the moves of our lines in words when the player leaves them', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      session.play({ from: 'e2', to: 'e4' });
+      await settle(REPLY_DELAY_MS);
+      session.play({ from: 'f1', to: 'c4' });
+      await settle();
+
+      expect(text('.alert')).toContain(
+        'Here our lines go on with 2. Knight to f3. We also cover 2. Pawn to d4.',
+      );
+    });
+
     it('should explain a move out of our lines and take it back when asked', async () => {
       session.play({ from: 'e2', to: 'e4' });
       await settle(REPLY_DELAY_MS);

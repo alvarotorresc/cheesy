@@ -200,7 +200,7 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
       expect(text('.message')).toContain(
-        'Qd6 is not the move. It has been taken back: try another one.',
+        'It was not Qd6. It has been taken back: try another one.',
       );
       expect(game().moves()).toEqual([]);
       expect(board().viewOnly()).toBe(false);
@@ -217,9 +217,28 @@ describe('PositionPage', () => {
     it('should play the reply and list the moves when a right move is found', async () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
 
-      expect(text('.message')).toContain('Qg8+ is right. Your opponent answers Rxg8. Keep going.');
+      expect(text('.message')).toContain('Correct: Qg8+. Your opponent answers Rxg8. Keep going.');
       expect([...element().querySelectorAll('.steps li')].map((item) => visibleText(item))).toEqual(
         ['1. Qg8+', '1… Rxg8'],
+      );
+    });
+
+    it('should tell the reply in words, in lower case inside the sentence', async () => {
+      TestBed.inject(I18nService).setLang('es');
+      TestBed.inject(ReadingModeService).setMode('words');
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+
+      expect(text('.message')).toContain(
+        'Correcto: dama a g8, jaque. El rival responde torre captura en g8. Sigue.',
+      );
+    });
+
+    it('should tell a wrong move in words', async () => {
+      TestBed.inject(ReadingModeService).setMode('words');
+      await moveOnBoard({ from: 'd5', to: 'd6' });
+
+      expect(text('.message')).toContain(
+        'It was not queen to d6. It has been taken back: try another one.',
       );
     });
 
@@ -227,7 +246,7 @@ describe('PositionPage', () => {
       await moveOnBoard({ from: 'd5', to: 'g8' });
       await moveOnBoard({ from: 'h6', to: 'f7' });
 
-      expect(text('.message')).toContain('Nf7# is right. Solved.');
+      expect(text('.message')).toContain('Correct: Nf7#. Solved.');
       expect(element().textContent).toContain('The queen is sacrificed.');
       expect(text('h1')).toBe('Smothered mate');
       expect(document.title).toBe('Smothered mate · Cheesy');
@@ -237,7 +256,7 @@ describe('PositionPage', () => {
         /from=position(%3A|:)smothered/,
       );
       expect(board().viewOnly()).toBe(true);
-      expect(text('.step-text')).toBe('Your move: 2. Nf7# (checkmate).');
+      expect(text('.step-text')).toBe('Your move: 2. Knight to f7, checkmate.');
     });
   });
 
@@ -259,11 +278,11 @@ describe('PositionPage', () => {
     it('should describe each step when moving through the solution with the buttons', async () => {
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step-text')).toBe('Your move: 1. Qg8+ (check).');
+      expect(text('.step-text')).toBe('Your move: 1. Queen to g8, check.');
 
       button('Next move').click();
       await harness.fixture.whenStable();
-      expect(text('.step-text')).toBe('Reply: 1… Rxg8 (capture).');
+      expect(text('.step-text')).toBe('Reply: 1… Rook takes on g8.');
 
       button('Previous move').click();
       button('End of the solution').click();
