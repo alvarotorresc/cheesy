@@ -152,6 +152,12 @@ export class TermView {
     if (event.pointerType === 'mouse') this.cancelLeave();
   }
 
+  /** A press inside a popup the mouse opened pins it, like a click on the word. */
+  protected onPopupPress(): void {
+    this.openedByHover = false;
+    this.cancelLeave();
+  }
+
   protected onLeave(event: PointerEvent): void {
     if (event.pointerType !== 'mouse') return;
     clearTimeout(this.hoverTimer);

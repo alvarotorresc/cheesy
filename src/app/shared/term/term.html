@@ -18,6 +18,7 @@
       [attr.aria-labelledby]="readyTerm() ? nameId : null"
       [attr.aria-label]="readyTerm() ? null : text()"
       (pointerenter)="onPopupEnter($event)"
+      (pointerdown)="onPopupPress()"
       [style.top.px]="place().above ? null : place().edge"
       [style.bottom.px]="place().above ? place().edge : null"
       [style.max-height.px]="place().maxHeight"

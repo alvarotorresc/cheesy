@@ -212,8 +212,19 @@ describe('TermView', () => {
     await fixture.whenStable();
     expect(popup()?.querySelector('.name')?.textContent?.trim()).toBe('Clavada');
     expect(load).toHaveBeenCalledTimes(1);
-    leave();
     vi.useFakeTimers();
+    leave();
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
+    await fixture.whenStable();
+    expect(popup()).not.toBeNull();
+  });
+
+  it('should pin a mouse-opened popup when it is pressed inside', async () => {
+    await openByMouse();
+    popup()!.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    vi.useFakeTimers();
+    leave();
     vi.advanceTimersByTime(1000);
     vi.useRealTimers();
     await fixture.whenStable();
