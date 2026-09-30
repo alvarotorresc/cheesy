@@ -36,7 +36,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 
 // Fixed time for everything that reads the clock (progress dates, review schedules):
 // Monday 28 September 2026, 10:30 in Madrid. Only `Date` is pinned; timers keep running.
-export const FIXED_NOW = new Date('2026-09-28T08:30:00Z');
+const FIXED_NOW = new Date('2026-09-28T08:30:00Z');
 
 export function buildSite() {
   const res = spawnSync('pnpm', ['build'], { cwd: REPO_ROOT, stdio: 'inherit' });
@@ -72,8 +72,9 @@ async function answers(url) {
   }
 }
 
-// File for a request path, or index.html when there is none (the app is an SPA and the router
-// owns every path without a file). Nothing outside the build directory is ever served.
+// File for a request path. A path without an extension that has no file gets index.html (the
+// app is an SPA and the router owns those paths); a missing file with an extension (an asset)
+// gives null, which is answered with a 404. Nothing outside the build directory is ever served.
 function fileFor(pathname) {
   const index = join(DIST, 'index.html');
   let decoded;
@@ -84,7 +85,8 @@ function fileFor(pathname) {
   }
   const file = resolve(DIST, `.${sep}${decoded}`);
   if (file !== DIST && !file.startsWith(DIST + sep)) return index;
-  return existsSync(file) && statSync(file).isFile() ? file : index;
+  if (existsSync(file) && statSync(file).isFile()) return file;
+  return extname(pathname) === '' ? index : null;
 }
 
 // It always starts its own server. If the port already answers it fails: that could be the
@@ -99,12 +101,18 @@ export async function startServer() {
   const server = createServer((req, res) => {
     const { pathname } = new URL(req.url ?? '/', BASE_URL);
     const file = fileFor(pathname);
+    if (file === null) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('Not found');
+    }
     res.writeHead(200, {
       'Content-Type': MIME[extname(file).toLowerCase()] ?? 'application/octet-stream',
       'Cache-Control': 'no-store',
     });
     if (req.method === 'HEAD') return res.end();
-    createReadStream(file).pipe(res);
+    const stream = createReadStream(file);
+    stream.on('error', () => res.destroy());
+    stream.pipe(res);
   });
   await new Promise((done, fail) => {
     server.once('error', fail);
@@ -227,6 +235,8 @@ export async function openPage(
     reducedMotion: 'reduce',
     locale: lang === 'es' ? 'es-ES' : 'en-US',
     timezoneId: 'Europe/Madrid',
+    // A service worker would answer from its cache instead of the server we are photographing.
+    serviceWorkers: 'block',
   });
 
   // No request leaves localhost: the visit counter (analytics.alvarotc.com), the endgame
@@ -266,7 +276,14 @@ export async function openPage(
 
   const page = await context.newPage();
   await page.clock.setFixedTime(FIXED_NOW);
-  if (Object.values(progress).some((rows) => rows.length > 0)) await seedProgress(page, progress);
+  if (Object.values(progress).some((rows) => rows.length > 0)) {
+    try {
+      await seedProgress(page, progress);
+    } catch (error) {
+      await context.close();
+      throw error;
+    }
+  }
   return page;
 }
 
