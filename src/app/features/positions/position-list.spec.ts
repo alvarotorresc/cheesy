@@ -1,7 +1,8 @@
-import { plainText } from '../../core/content/testing';
+import { bundledGlossaryLoader, plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { en } from '../../core/i18n/dictionaries/en';
+import { es } from '../../core/i18n/dictionaries/es';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { PositionList } from './position-list';
 
@@ -83,6 +84,19 @@ describe('position labels', () => {
   it('should not read inherited properties when the tag names one', () => {
     expect(tagLabel('constructor', t)).toBe('constructor');
     expect(tagLabel('__proto__', t)).toBe('__proto__');
+  });
+
+  it('should label every theme tag with the name of its glossary term, in both languages', async () => {
+    const glossary = await bundledGlossaryLoader();
+    const tags = Object.keys(en.positions.tags);
+    expect(tags).toHaveLength(17);
+    expect(Object.keys(es.positions.tags).sort()).toEqual([...tags].sort());
+    for (const tag of tags) {
+      const term = glossary.find((candidate) => candidate.id === tag);
+      expect(term, `glossary term for the tag ${tag}`).toBeDefined();
+      expect(es.positions.tags[tag], `es label of ${tag}`).toBe(term?.name.es);
+      expect(en.positions.tags[tag], `en label of ${tag}`).toBe(term?.name.en);
+    }
   });
 
   it('should name the side to play', () => {
