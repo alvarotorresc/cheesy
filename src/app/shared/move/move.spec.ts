@@ -47,6 +47,18 @@ describe('MoveText', () => {
     expect(visible()).toBe('×f7+');
   });
 
+  it('should write the visible text with no space around it', async () => {
+    await render();
+    const shown = (): string | null | undefined => element.querySelector('.shown')?.textContent;
+
+    expect(shown()).toBe('×f7+');
+
+    mode.setMode('notation');
+    await fixture.whenStable();
+
+    expect(shown()).toBe('Cxf7+');
+  });
+
   it('should give the button the sentence as its accessible name', async () => {
     await render();
 

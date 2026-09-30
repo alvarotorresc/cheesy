@@ -4,11 +4,11 @@
       @if (part.kind === 'piece') {
         <span [class]="'pc icon pc-' + part.code"></span>
       } @else {
-        {{ part.text }}
+        <ng-container>{{ part.text }}</ng-container>
       }
     }
   } @else {
-    {{ text() }}
+    <ng-container>{{ text() }}</ng-container>
   }
 </span>
 <span class="visually-hidden">{{ sentence() }}</span>

@@ -185,9 +185,9 @@ describe('PracticePage', () => {
 
       expect(lines).toEqual([
         'All lines, one after another (3)',
-        'Main line King Knight Opening | 1. e4 e5 2. Nf3 Nc6 3. Bb5 | Not practised yet',
-        'Line 2 Petrov Defence | 1. e4 e5 2. Nf3 Nf6 | Not practised yet',
-        'Line 3 Centre Game | 1. e4 e5 2. d4 | Not practised yet',
+        'Main line King Knight Opening | 1.e4 e5 2.Nf3 Nc6 3.Bb5 | Not practised yet',
+        'Line 2 Petrov Defence | 1.e4 e5 2.Nf3 Nf6 | Not practised yet',
+        'Line 3 Centre Game | 1.e4 e5 2.d4 | Not practised yet',
       ]);
       expect(text('.count-row')).toBe('0 of 3 lines practised as white, 0 mastered');
       expect(

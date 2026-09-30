@@ -69,8 +69,8 @@ describe('EngineLines', () => {
 
     expect(element.querySelector('.depth')?.textContent?.trim()).toBe('Profundidad 18');
     expect(texts(element, '.score')).toEqual(['+0.3', '#-3']);
-    expect(shownTexts(element, '.pv')).toEqual(['1. e4 e5 2. Nf3', '1. f3 e5']);
-    expect(shownTexts(element, '.pv b')).toEqual(['1. e4', '1. f3']);
+    expect(shownTexts(element, '.pv')).toEqual(['1.e4 e5 2.Nf3', '1.f3 e5']);
+    expect(shownTexts(element, '.pv b')).toEqual(['1.e4', '1.f3']);
   });
 
   it('should mark the best line and the scores that favour Black', async () => {
@@ -87,7 +87,7 @@ describe('EngineLines', () => {
     TestBed.inject(I18nService).setLang('es');
     await render({ lines: LINES });
 
-    expect(shownTexts(element, '.pv')[0]).toBe('1. e4 e5 2. Cf3');
+    expect(shownTexts(element, '.pv')[0]).toBe('1.e4 e5 2.Cf3');
     localStorage.clear();
   });
 
@@ -115,13 +115,13 @@ describe('EngineLines', () => {
   it('should number from the given ply when Black is to move', async () => {
     await render({ lines: [{ ...LINES[0], sanPv: ['Nf6', 'c4', 'e6'] }], startPly: 19 });
 
-    expect(shownTexts(element, '.pv')).toEqual(['10... Nf6 11. c4 e6']);
+    expect(shownTexts(element, '.pv')).toEqual(['10...Nf6 11.c4 e6']);
   });
 
   it('should cut long lines to the most moves allowed', async () => {
     await render({ lines: LINES, maxMoves: 1 });
 
-    expect(shownTexts(element, '.pv')).toEqual(['1. e4', '1. f3']);
+    expect(shownTexts(element, '.pv')).toEqual(['1.e4', '1.f3']);
   });
 
   it('should leave out lines without moves', async () => {
