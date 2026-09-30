@@ -1,7 +1,7 @@
 import { Component, inject, input, output } from '@angular/core';
 import { I18nService } from '../../../core/i18n';
 import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
-import type { MoveNode } from '../../../core/move-tree';
+import type { MoveNode, MoveTree } from '../../../core/move-tree';
 import { Icon } from '../../../shared/icon';
 import { MoveText } from '../../../shared/move';
 import { moveNumber } from '../move-label';
@@ -24,6 +24,8 @@ export class Variation {
 
   readonly view = input.required<VariationView>();
   readonly currentId = input.required<string>();
+  /** The tree the nodes belong to: each move is played from the position of its parent. */
+  readonly tree = input<MoveTree | undefined>(undefined);
   readonly freshId = input<string | undefined>(undefined);
   /** Names of the opening variations, by node id, already translated. */
   readonly names = input<ReadonlyMap<string, string>>(new Map());
@@ -35,6 +37,10 @@ export class Variation {
 
   protected readonly moveNumber = moveNumber;
   protected readonly colorOfPly = colorOfPly;
+
+  protected before(node: MoveNode): string | undefined {
+    return this.tree()?.parent(node.id)?.fen;
+  }
 
   protected label(node: MoveNode): string {
     const text = `${moveNumber(node)} ${this.reading.spoken(node.san)}`;

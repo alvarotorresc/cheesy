@@ -271,6 +271,37 @@ describe('PositionPage', () => {
     });
   });
 
+  describe('square highlight', () => {
+    it('should mark on the board a square hovered in the explanation', async () => {
+      const pointed: CuratedPosition = {
+        ...SMOTHERED,
+        explanation: {
+          es: [
+            { kind: 'text', text: 'Mira ' },
+            { kind: 'square', square: 'f7' },
+          ],
+          en: [
+            { kind: 'text', text: 'Look at ' },
+            { kind: 'square', square: 'f7' },
+          ],
+        },
+      };
+      await open('/positions/3', async () => [pointed, KIENINGER, BROKEN]);
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+      await moveOnBoard({ from: 'h6', to: 'f7' });
+
+      const square = element().querySelector('.explanation .square')!;
+      square.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      await harness.fixture.whenStable();
+      await new Promise((r) => requestAnimationFrame(() => r(null)));
+
+      expect(element().querySelectorAll('cg-board square.mark-spot')).toHaveLength(1);
+    });
+  });
+
   describe('replay', () => {
     beforeEach(async () => {
       await open('/positions/3');

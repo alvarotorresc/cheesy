@@ -23,7 +23,7 @@ import { GameService } from '../../core/game';
 import { I18nService } from '../../core/i18n';
 import { colorOfPly, ReadingModeService } from '../../core/reading-mode';
 import { PageTitle } from '../../core/page-title';
-import { BoardComponent, type BoardMark, type BoardRing } from '../../shared/board';
+import { BoardComponent, BoardSpotlight, type BoardMark, type BoardRing } from '../../shared/board';
 import { Icon } from '../../shared/icon';
 import type { IconName } from '../../shared/icon';
 import { isFormField } from '../../shared/keyboard';
@@ -73,7 +73,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
 @Component({
   selector: 'app-position-page',
   imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RichTextView, RouterLink],
-  providers: [GameService, PositionTrainer, PositionList],
+  providers: [GameService, PositionTrainer, PositionList, BoardSpotlight],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
   host: {

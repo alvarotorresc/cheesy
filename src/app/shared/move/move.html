@@ -1,14 +1,16 @@
-<span class="shown" [class.compact]="!!parts()" aria-hidden="true">
-  @if (parts(); as parts) {
-    @for (part of parts; track $index) {
-      @if (part.kind === 'piece') {
-        <span [class]="'pc icon pc-' + part.code"></span>
-      } @else {
-        <ng-container>{{ part.text }}</ng-container>
+<span class="spot" [appSpot]="spot()" [focusable]="focusable()">
+  <span class="shown" [class.compact]="!!parts()" aria-hidden="true">
+    @if (parts(); as parts) {
+      @for (part of parts; track $index) {
+        @if (part.kind === 'piece') {
+          <span [class]="'pc icon pc-' + part.code"></span>
+        } @else {
+          <ng-container>{{ part.text }}</ng-container>
+        }
       }
+    } @else {
+      <ng-container>{{ text() }}</ng-container>
     }
-  } @else {
-    <ng-container>{{ text() }}</ng-container>
-  }
+  </span>
+  <span class="visually-hidden">{{ sentence() }}</span>
 </span>
-<span class="visually-hidden">{{ sentence() }}</span>

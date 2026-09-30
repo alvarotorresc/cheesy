@@ -34,10 +34,12 @@
           <span class="score" [class.black]="row.black">{{ row.score }}</span>
           <span class="pv"
             ><b
-              >{{ row.first.prefix }}<app-move [san]="row.first.san" [color]="row.first.color"
+              >{{ row.first.prefix
+              }}<app-move [san]="row.first.san" [color]="row.first.color" [focusable]="false"
             /></b>
             @for (move of row.rest; track $index) {
-              {{ move.prefix }}<app-move [san]="move.san" [color]="move.color" />
+              {{ move.prefix
+              }}<app-move [san]="move.san" [color]="move.color" [focusable]="false" />
             }
           </span>
         </button>

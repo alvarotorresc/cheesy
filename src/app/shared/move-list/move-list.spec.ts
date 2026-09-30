@@ -1,6 +1,7 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nService } from '../../core/i18n';
 import { ReadingModeService } from '../../core/reading-mode';
+import { BoardSpotlight } from '../board';
 import { MoveList } from './move-list';
 
 const texts = (element: HTMLElement, selector: string): string[] =>
@@ -101,5 +102,64 @@ describe('MoveList', () => {
     const [, black] = Array.from(element.querySelectorAll('button.move'));
     expect(black.querySelector('.pc-bN')).not.toBeNull();
     expect(black.querySelector('.visually-hidden')?.textContent?.trim()).toBe('Knight to c6');
+  });
+
+  it('should give each move the position it is played from', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const f = TestBed.createComponent(MoveList);
+    f.componentRef.setInput('label', 'Moves');
+    f.componentRef.setInput('emptyLabel', 'No moves yet.');
+    f.componentRef.setInput('moves', ['e4', 'e5']);
+    await f.whenStable();
+    const second = (f.nativeElement as HTMLElement).querySelectorAll('[data-spot]')[1];
+    second.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+    expect(TestBed.inject(BoardSpotlight).request()).toMatchObject({
+      kind: 'move',
+      san: 'e5',
+      before: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+    });
+  });
+
+  it('should play the moves from the start position given', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const f = TestBed.createComponent(MoveList);
+    f.componentRef.setInput('label', 'Moves');
+    f.componentRef.setInput('emptyLabel', 'No moves yet.');
+    f.componentRef.setInput('startFen', '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1');
+    f.componentRef.setInput('moves', ['e4']);
+    await f.whenStable();
+    const first = (f.nativeElement as HTMLElement).querySelector('[data-spot]')!;
+    first.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+    expect(TestBed.inject(BoardSpotlight).request()).toMatchObject({
+      before: '4k3/8/8/8/8/8/4P3/4K3 w - - 0 1',
+    });
+  });
+
+  it('should leave no position on the moves after an illegal one', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const f = TestBed.createComponent(MoveList);
+    f.componentRef.setInput('label', 'Moves');
+    f.componentRef.setInput('emptyLabel', 'No moves yet.');
+    f.componentRef.setInput('moves', ['e5', 'e5']);
+    await f.whenStable();
+    const second = (f.nativeElement as HTMLElement).querySelectorAll('[data-spot]')[1];
+    second.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+    expect(TestBed.inject(BoardSpotlight).request()).toEqual({ kind: 'move', san: 'e5' });
+  });
+
+  it('should not add a tab stop to a move inside a button', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const f = TestBed.createComponent(MoveList);
+    f.componentRef.setInput('label', 'Moves');
+    f.componentRef.setInput('emptyLabel', 'No moves yet.');
+    f.componentRef.setInput('moves', ['e4']);
+    await f.whenStable();
+    expect(
+      (f.nativeElement as HTMLElement).querySelector('[data-spot]')?.hasAttribute('tabindex'),
+    ).toBe(false);
   });
 });

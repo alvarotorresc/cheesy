@@ -21,7 +21,12 @@
     (click)="pick.emit(line.start.id)"
   >
     <span class="n">{{ moveNumber(line.start) }}</span
-    ><app-move [san]="line.start.san" [color]="colorOfPly(line.start.ply)" />
+    ><app-move
+      [san]="line.start.san"
+      [color]="colorOfPly(line.start.ply)"
+      [before]="before(line.start)"
+      [focusable]="false"
+    />
   </button>
   @if (line.folded) {
     <span class="var-more">{{ i18n.t().analysis.moreMoves(line.hidden) }}</span>
@@ -42,13 +47,19 @@
           @if (item.number) {
             <span class="n">{{ item.number }}</span>
           }
-          <app-move [san]="item.node.san" [color]="colorOfPly(item.node.ply)" />
+          <app-move
+            [san]="item.node.san"
+            [color]="colorOfPly(item.node.ply)"
+            [before]="before(item.node)"
+            [focusable]="false"
+          />
         </button>
       } @else {
         <app-variation
           [view]="item.view"
           [currentId]="currentId()"
           [freshId]="freshId()"
+          [tree]="tree()"
           [names]="names()"
           (pick)="pick.emit($event)"
           (fold)="fold.emit($event)"

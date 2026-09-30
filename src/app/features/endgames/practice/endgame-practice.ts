@@ -24,7 +24,7 @@ import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { ReadingModeService } from '../../../core/reading-mode';
 import { TablebaseLookup, type TablebaseOutcome } from '../../../core/tablebase';
-import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { BoardComponent, BoardSpotlight, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { Icon } from '../../../shared/icon';
 import { isFormField } from '../../../shared/keyboard';
@@ -46,6 +46,8 @@ interface MoveView {
   readonly ply: number;
   readonly number: string;
   readonly san: string;
+  /** FEN of the position the move is played from. */
+  readonly before: string;
   readonly color: Color;
   readonly label: string;
   readonly mine: boolean;
@@ -66,7 +68,7 @@ interface MoveView {
     RouterLink,
     TablebasePanel,
   ],
-  providers: [GameService, EngineService, EndgameSession, TablebaseLookup],
+  providers: [GameService, EngineService, EndgameSession, TablebaseLookup, BoardSpotlight],
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',
   host: {
@@ -147,7 +149,8 @@ export class EndgamePractice {
     const ply = this.game.ply();
     const player = this.session.playerSide();
     const bad = this.session.resultChange()?.ply;
-    return this.game.moves().map((move, index) => {
+    const moves = this.game.moves();
+    return moves.map((move, index) => {
       const absolute = startPly + index;
       const white = absolute % 2 === 0;
       const number = Math.floor(absolute / 2) + 1;
@@ -157,6 +160,7 @@ export class EndgamePractice {
         ply: index + 1,
         number: prefix,
         san: move.san,
+        before: index === 0 ? this.game.startFen() : moves[index - 1].fenAfter,
         color: white ? 'white' : 'black',
         // The name of the button replaces its content, so it tells the sentence in both modes.
         label: `${number}${white ? '.' : '...'} ${this.reading.spoken(move.san)}, ${mine ? t.moveMine : t.moveRival}`,

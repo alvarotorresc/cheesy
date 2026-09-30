@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nService } from '../../core/i18n';
 import { ReadingModeService } from '../../core/reading-mode';
+import { BoardSpotlight } from '../board';
 import { MoveText } from './move';
 
 @Component({
@@ -169,5 +170,42 @@ describe('MoveText', () => {
     // The sentence is absolutely positioned; without a positioned host it escapes the strip's
     // clipping and widens the whole page (the openings shelf at 360 px).
     expect(getComputedStyle(host).position).toBe('relative');
+  });
+
+  describe('spotlight', () => {
+    const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+    const create = async (inputs: Record<string, unknown>) => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+      const f = TestBed.createComponent(MoveText);
+      for (const [name, value] of Object.entries(inputs)) f.componentRef.setInput(name, value);
+      await f.whenStable();
+      return (f.nativeElement as HTMLElement).querySelector('[data-spot]')!;
+    };
+
+    it('should point the board at the move while the mouse is over it', async () => {
+      const target = await create({ san: 'Nf3', color: 'white', format: 'compact', before: START });
+      target.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      expect(TestBed.inject(BoardSpotlight).request()).toEqual({
+        kind: 'move',
+        san: 'Nf3',
+        before: START,
+      });
+    });
+
+    it('should point at the move without a position when none is given', async () => {
+      const target = await create({ san: 'Nf3' });
+      target.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      expect(TestBed.inject(BoardSpotlight).request()).toEqual({ kind: 'move', san: 'Nf3' });
+    });
+
+    it('should take a tab stop of its own unless told otherwise', async () => {
+      expect((await create({ san: 'Nf3' })).getAttribute('tabindex')).toBe('0');
+      expect((await create({ san: 'Nf3', focusable: false })).hasAttribute('tabindex')).toBe(false);
+    });
   });
 });

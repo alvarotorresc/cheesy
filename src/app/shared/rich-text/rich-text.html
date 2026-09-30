@@ -5,4 +5,6 @@
         format="full"
         [start]="segment.start"
         [prefix]="segment.number"
-      />} @else if (segment.kind === 'square') {<span class="square">{{ segment.square }}</span>} @else {<span class="term">{{ segment.text }}</span>}}
+      />} @else if (segment.kind === 'square') {<span class="square" [appSpot]="{ kind: 'squares', squares: [segment.square] }">{{
+        segment.square
+      }}</span>} @else {<span class="term">{{ segment.text }}</span>}}

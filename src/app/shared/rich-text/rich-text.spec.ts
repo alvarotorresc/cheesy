@@ -2,6 +2,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { RichText } from '../../core/content/content.types';
 import { I18nService } from '../../core/i18n';
 import { ReadingModeService } from '../../core/reading-mode';
+import { BoardSpotlight } from '../board';
 import { RichTextView } from './rich-text';
 
 const TEXT: RichText = {
@@ -64,5 +65,16 @@ describe('RichTextView', () => {
     await fixture.whenStable();
     expect(element.querySelector('.square')?.textContent?.trim()).toBe('e6');
     expect(element.querySelector('.term')?.textContent?.trim()).toBe('oposición');
+  });
+
+  it('should point the board at a square of the text', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+    const f = TestBed.createComponent(RichTextView);
+    f.componentRef.setInput('text', TEXT);
+    await f.whenStable();
+    const square = (f.nativeElement as HTMLElement).querySelector('.square')!;
+    square.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }));
+    expect(TestBed.inject(BoardSpotlight).request()).toEqual({ kind: 'squares', squares: ['e6'] });
   });
 });

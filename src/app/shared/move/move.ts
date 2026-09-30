@@ -1,5 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import type { Color } from 'chessops';
+import { SpotTrigger, type SpotRequest } from '../board';
 import { I18nService } from '../../core/i18n';
 import { compactMove, type MovePart, ReadingModeService } from '../../core/reading-mode';
 
@@ -10,6 +11,7 @@ import { compactMove, type MovePart, ReadingModeService } from '../../core/readi
  */
 @Component({
   selector: 'app-move',
+  imports: [SpotTrigger],
   templateUrl: './move.html',
   styleUrl: './move.css',
   host: { '[attr.title]': 'title()' },
@@ -27,12 +29,20 @@ export class MoveText {
   readonly start = input(true);
   /** Move number as written ("1.", "1..."), put in front of the move only in notation mode. */
   readonly prefix = input<string | undefined>(undefined);
+  /** FEN of the position the move is played from, when known: the board then draws the move's arrow. */
+  readonly before = input<string | undefined>(undefined);
+  /** False when the move sits inside a button: it then takes no tab stop of its own. */
+  readonly focusable = input(true);
   /** False when the host already has a title of its own: the compact sentence would cover it. */
   readonly tooltip = input(true);
 
   protected readonly sentence = computed(() =>
     this.reading.spoken(this.san(), { start: this.start() }),
   );
+  protected readonly spot = computed<SpotRequest>(() => {
+    const before = this.before();
+    return { kind: 'move', san: this.san(), ...(before ? { before } : {}) };
+  });
   protected readonly parts = computed<readonly MovePart[] | undefined>(() =>
     this.reading.words() && this.format() === 'compact'
       ? compactMove(this.san(), this.color(), this.i18n.t().app.castles)

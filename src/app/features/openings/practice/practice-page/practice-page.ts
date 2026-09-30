@@ -17,6 +17,7 @@ import { PageTitle } from '../../../../core/page-title';
 import { ReadingModeService } from '../../../../core/reading-mode';
 import {
   BoardComponent,
+  BoardSpotlight,
   type BoardArrow,
   type BoardMark,
   type BoardMove,
@@ -57,7 +58,7 @@ interface FeedbackView {
     PracticeSummary,
     RouterLink,
   ],
-  providers: [GameService, PracticeSession],
+  providers: [GameService, PracticeSession, BoardSpotlight],
   templateUrl: './practice-page.html',
   styleUrls: ['../../opening-page.css', '../practice-box.css', './practice-page.css'],
   host: {

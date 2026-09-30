@@ -10,7 +10,7 @@ import {
 import { NgTemplateOutlet } from '@angular/common';
 import { I18nService } from '../../../core/i18n';
 import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
-import type { MoveNode } from '../../../core/move-tree';
+import type { MoveNode, MoveTree } from '../../../core/move-tree';
 import { MoveText } from '../../../shared/move';
 import { moveNumber } from '../move-label';
 import type { MainCell, MainItem } from './move-rows';
@@ -34,6 +34,8 @@ export class MoveTreeView {
 
   readonly items = input.required<readonly MainItem[]>();
   readonly currentId = input.required<string>();
+  /** The tree the nodes belong to: each move is played from the position of its parent. */
+  readonly tree = input<MoveTree | undefined>(undefined);
   readonly freshId = input<string | undefined>(undefined);
   /** Names of the opening variations, by node id, already translated. */
   readonly names = input<ReadonlyMap<string, string>>(new Map());
@@ -62,6 +64,10 @@ export class MoveTreeView {
 
   protected isMove(cell: MainCell): cell is MoveNode {
     return typeof cell === 'object';
+  }
+
+  protected before(node: MoveNode): string | undefined {
+    return this.tree()?.parent(node.id)?.fen;
   }
 
   protected label(node: MoveNode): string {

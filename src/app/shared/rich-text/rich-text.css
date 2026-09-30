@@ -5,3 +5,14 @@
 .square {
   font-variant-numeric: tabular-nums;
 }
+
+.square[data-spot] {
+  border-radius: 2px;
+  cursor: default;
+}
+
+.square[data-spot]:hover,
+.square[data-spot]:focus-visible {
+  background: var(--board-spot);
+  outline: none;
+}

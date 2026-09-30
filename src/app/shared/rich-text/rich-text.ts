@@ -2,6 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import type { Color } from 'chessops';
 import type { RichText, Segment } from '../../core/content/content.types';
 import { I18nService } from '../../core/i18n';
+import { SpotTrigger } from '../board';
 import { MoveText } from '../move';
 
 type MoveSegment = Extract<Segment, { kind: 'move' }>;
@@ -12,7 +13,7 @@ type MoveSegment = Extract<Segment, { kind: 'move' }>;
  */
 @Component({
   selector: 'app-rich-text',
-  imports: [MoveText],
+  imports: [MoveText, SpotTrigger],
   templateUrl: './rich-text.html',
   styleUrl: './rich-text.css',
 })
