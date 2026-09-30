@@ -35,6 +35,9 @@ Thumbs.db
 # Content verification reports
 /content/reports
 
+# Generated screenshots
+/media/out
+
 # Local notes, kept out of the repository
 /design
 /docs
