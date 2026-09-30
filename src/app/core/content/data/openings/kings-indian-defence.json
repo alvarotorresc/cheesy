@@ -10,7 +10,16 @@
     "es": [
       {
         "kind": "text",
-        "text": "Las negras ceden el centro al principio para atacarlo después con "
+        "text": "Las negras ceden el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " al principio para atacarlo después con "
       },
       {
         "kind": "move",
@@ -32,13 +41,31 @@
       },
       {
         "kind": "text",
-        "text": ". En las líneas cerradas cada bando ataca en un flanco distinto."
+        "text": ". En las líneas cerradas cada bando ataca en un "
+      },
+      {
+        "kind": "term",
+        "id": "flank",
+        "text": "flanco"
+      },
+      {
+        "kind": "text",
+        "text": " distinto."
       }
     ],
     "en": [
       {
         "kind": "text",
-        "text": "Black concedes the centre early, planning to strike at it with "
+        "text": "Black concedes the "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " early, planning to strike at it with "
       },
       {
         "kind": "move",
@@ -60,7 +87,16 @@
       },
       {
         "kind": "text",
-        "text": ". In the closed lines each side attacks on a different wing."
+        "text": ". In the closed lines each side attacks on a different "
+      },
+      {
+        "kind": "term",
+        "id": "flank",
+        "text": "wing"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ]
   },
@@ -103,7 +139,16 @@
                                     "es": [
                                       {
                                         "kind": "text",
-                                        "text": "Las negras permiten un gran centro blanco para atacarlo después con "
+                                        "text": "Las negras permiten un gran "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "centre",
+                                        "text": "centro"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " blanco para atacarlo después con "
                                       },
                                       {
                                         "kind": "move",
@@ -131,7 +176,16 @@
                                     "en": [
                                       {
                                         "kind": "text",
-                                        "text": "Black allows a big white centre, planning to attack it later with "
+                                        "text": "Black allows a big white "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "centre",
+                                        "text": "centre"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", planning to attack it later with "
                                       },
                                       {
                                         "kind": "move",
@@ -181,7 +235,16 @@
                                                     "es": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Golpe central clásico: las negras disputan "
+                                                        "text": "Golpe "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "central"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " clásico: las negras disputan "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -195,7 +258,16 @@
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "The classical central strike: Black contests "
+                                                        "text": "The classical "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "central"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " strike: Black contests "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -231,7 +303,16 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " y obliga a las blancas a cerrar el centro."
+                                                                "text": " y obliga a las blancas a cerrar el "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "centre",
+                                                                "text": "centro"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
                                                               }
                                                             ],
                                                             "en": [
@@ -245,7 +326,16 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " and forces White to close the centre."
+                                                                "text": " and forces White to close the "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "centre",
+                                                                "text": "centre"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
                                                               }
                                                             ]
                                                           },
@@ -260,8 +350,22 @@
                                                                   "comment": {
                                                                     "es": [
                                                                       {
+                                                                        "kind": "term",
+                                                                        "id": "centre",
+                                                                        "text": "Centro"
+                                                                      },
+                                                                      {
                                                                         "kind": "text",
-                                                                        "text": "Centro cerrado: las blancas atacarán en el flanco de dama y las negras en el de rey con "
+                                                                        "text": " cerrado: las blancas atacarán en el "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "flank",
+                                                                        "text": "flanco"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " de dama y las negras en el de rey con "
                                                                       },
                                                                       {
                                                                         "kind": "move",
@@ -278,7 +382,25 @@
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "A closed centre: White attacks on the queenside and Black on the kingside with "
+                                                                        "text": "A closed "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "centre",
+                                                                        "text": "centre"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": ": White attacks on the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "flank",
+                                                                        "text": "queenside"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " and Black on the kingside with "
                                                                       },
                                                                       {
                                                                         "kind": "move",
@@ -371,7 +493,16 @@
                                                                             "es": [
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": "El caballo deja paso al peón de f para la ruptura "
+                                                                                "text": "El caballo deja paso al peón de f para la "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "pawn-break",
+                                                                                "text": "ruptura"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " "
                                                                               },
                                                                               {
                                                                                 "kind": "move",
@@ -399,7 +530,16 @@
                                                                               },
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": " break."
+                                                                                "text": " "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "pawn-break",
+                                                                                "text": "break"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
                                                                               }
                                                                             ]
                                                                           },
@@ -431,7 +571,16 @@
                                                                                                     "es": [
                                                                                                       {
                                                                                                         "kind": "text",
-                                                                                                        "text": "Las negras cierran el flanco de rey y preparan "
+                                                                                                        "text": "Las negras cierran el "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "term",
+                                                                                                        "id": "flank",
+                                                                                                        "text": "flanco"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " de rey y preparan "
                                                                                                       },
                                                                                                       {
                                                                                                         "kind": "move",
@@ -456,7 +605,16 @@
                                                                                                     "en": [
                                                                                                       {
                                                                                                         "kind": "text",
-                                                                                                        "text": "Black locks the kingside and prepares "
+                                                                                                        "text": "Black locks the "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "term",
+                                                                                                        "id": "flank",
+                                                                                                        "text": "kingside"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " and prepares "
                                                                                                       },
                                                                                                       {
                                                                                                         "kind": "move",
@@ -487,13 +645,31 @@
                                                                                                         "es": [
                                                                                                           {
                                                                                                             "kind": "text",
-                                                                                                            "text": "Las blancas frenan el avance de los peones negros en el flanco de rey."
+                                                                                                            "text": "Las blancas frenan el avance de los peones negros en el "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "flank",
+                                                                                                            "text": "flanco"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": " de rey."
                                                                                                           }
                                                                                                         ],
                                                                                                         "en": [
                                                                                                           {
                                                                                                             "kind": "text",
-                                                                                                            "text": "White puts a brake on Black's kingside pawn advance."
+                                                                                                            "text": "White puts a brake on Black's "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "flank",
+                                                                                                            "text": "kingside"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": " pawn advance."
                                                                                                           }
                                                                                                         ]
                                                                                                       },
@@ -561,13 +737,31 @@
                                                                         "es": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "Ataque rápido en el flanco de dama antes de que las negras se organicen."
+                                                                            "text": "Ataque rápido en el "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "flanco"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de dama antes de que las negras se organicen."
                                                                           }
                                                                         ],
                                                                         "en": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "A fast queenside attack before Black gets organised."
+                                                                            "text": "A fast "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "queenside"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " attack before Black gets organised."
                                                                           }
                                                                         ]
                                                                       },
@@ -672,7 +866,16 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Cierra el centro de inmediato y prepara "
+                                                            "text": "Cierra el "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "centre",
+                                                            "text": "centro"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " de inmediato y prepara "
                                                           },
                                                           {
                                                             "kind": "move",
@@ -682,13 +885,31 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " para clavar el caballo."
+                                                            "text": " para "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "pin",
+                                                            "text": "clavar"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " el caballo."
                                                           }
                                                         ],
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Closes the centre at once and prepares "
+                                                            "text": "Closes the "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "centre",
+                                                            "text": "centre"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " at once and prepares "
                                                           },
                                                           {
                                                             "kind": "move",
@@ -698,7 +919,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " to pin the knight."
+                                                            "text": " to "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "pin",
+                                                            "text": "pin"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " the knight."
                                                           }
                                                         ]
                                                       },
@@ -721,13 +951,31 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " en el flanco de dama."
+                                                                "text": " en el "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "flank",
+                                                                "text": "flanco"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " de dama."
                                                               }
                                                             ],
                                                             "en": [
                                                               {
                                                                 "kind": "text",
-                                                                "text": "Stops White's queenside expansion with "
+                                                                "text": "Stops White's "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "flank",
+                                                                "text": "queenside"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " expansion with "
                                                               },
                                                               {
                                                                 "kind": "square",
@@ -772,14 +1020,28 @@
                                                       "comment": {
                                                         "es": [
                                                           {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "Cambio"
+                                                          },
+                                                          {
                                                             "kind": "text",
-                                                            "text": "Cambio de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas."
+                                                            "text": " de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas."
                                                           }
                                                         ],
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "An early queen trade: White hopes for a comfortable endgame, but Black equalises without much trouble."
+                                                            "text": "An early queen "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "trade"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ": White hopes for a comfortable endgame, but Black equalises without much trouble."
                                                           }
                                                         ]
                                                       },
@@ -943,13 +1205,49 @@
                                                     "es": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "La ruptura central clásica también contra la Sämisch."
+                                                        "text": "La "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "pawn-break",
+                                                        "text": "ruptura"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "central"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " clásica también contra la Sämisch."
                                                       }
                                                     ],
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "The classical central break, this time against the Sämisch."
+                                                        "text": "The classical "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "central"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "pawn-break",
+                                                        "text": "break"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": ", this time against the Sämisch."
                                                       }
                                                     ]
                                                   },
@@ -973,13 +1271,49 @@
                                                                     "es": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Abre la columna c para el contrajuego negro en el flanco de dama."
+                                                                        "text": "Abre la columna c para el "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "counterplay",
+                                                                        "text": "contrajuego"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " negro en el "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "flank",
+                                                                        "text": "flanco"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " de dama."
                                                                       }
                                                                     ],
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Opens the c-file for Black's queenside counterplay."
+                                                                        "text": "Opens the c-file for Black's "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "flank",
+                                                                        "text": "queenside"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "counterplay",
+                                                                        "text": "counterplay"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
                                                                       }
                                                                     ]
                                                                   },
@@ -1019,13 +1353,49 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "Cuatro peones en el centro: mucho espacio, pero también objetivos para el contraataque negro."
+                                            "text": "Cuatro peones en el "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "centro"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ": mucho "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "space",
+                                            "text": "espacio"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", pero también objetivos para el contraataque negro."
                                           }
                                         ],
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "Four central pawns: lots of space, but also targets for Black's counterattack."
+                                            "text": "Four "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "central"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " pawns: lots of "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "space",
+                                            "text": "space"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", but also targets for Black's counterattack."
                                           }
                                         ]
                                       },
@@ -1048,13 +1418,31 @@
                                                             "es": [
                                                               {
                                                                 "kind": "text",
-                                                                "text": "Las negras atacan la cadena de peones y abren la columna e."
+                                                                "text": "Las negras atacan la "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-chain",
+                                                                "text": "cadena de peones"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " y abren la columna e."
                                                               }
                                                             ],
                                                             "en": [
                                                               {
                                                                 "kind": "text",
-                                                                "text": "Black attacks the pawn chain and opens the e-file."
+                                                                "text": "Black attacks the "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-chain",
+                                                                "text": "pawn chain"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " and opens the e-file."
                                                               }
                                                             ]
                                                           },

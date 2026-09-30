@@ -18,7 +18,25 @@
       },
       {
         "kind": "text",
-        "text": " para ganar tiempo y atacar el centro con "
+        "text": " para ganar "
+      },
+      {
+        "kind": "term",
+        "id": "tempo",
+        "text": "tiempo"
+      },
+      {
+        "kind": "text",
+        "text": " y atacar el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " con "
       },
       {
         "kind": "move",
@@ -54,7 +72,25 @@
       },
       {
         "kind": "text",
-        "text": " pawn to gain time and hit the centre with "
+        "text": " pawn to gain "
+      },
+      {
+        "kind": "term",
+        "id": "tempo",
+        "text": "time"
+      },
+      {
+        "kind": "text",
+        "text": " and hit the "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " with "
       },
       {
         "kind": "move",
@@ -95,13 +131,31 @@
                 "es": [
                   {
                     "kind": "text",
-                    "text": "Gambito de Dama: no es un gambito real, porque las blancas recuperan el peón con facilidad."
+                    "text": "Gambito de Dama: no es un "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "gambit",
+                    "text": "gambito"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " real, porque las blancas recuperan el peón con facilidad."
                   }
                 ],
                 "en": [
                   {
                     "kind": "text",
-                    "text": "The Queen's Gambit: not a real gambit, since White easily regains the pawn."
+                    "text": "The Queen's Gambit: not a real "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "gambit",
+                    "text": "gambit"
+                  },
+                  {
+                    "kind": "text",
+                    "text": ", since White easily regains the pawn."
                   }
                 ]
               },
@@ -117,7 +171,25 @@
                     "es": [
                       {
                         "kind": "text",
-                        "text": "Las negras toman el peón no para conservarlo, sino para desarrollarse deprisa y atacar el centro con "
+                        "text": "Las negras toman el peón no para conservarlo, sino para "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "development",
+                        "text": "desarrollarse"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " deprisa y atacar el "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "centre",
+                        "text": "centro"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " con "
                       },
                       {
                         "kind": "move",
@@ -145,7 +217,25 @@
                     "en": [
                       {
                         "kind": "text",
-                        "text": "Black takes the pawn not to keep it, but to develop quickly and hit the centre with "
+                        "text": "Black takes the pawn not to keep it, but to "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "development",
+                        "text": "develop"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " quickly and hit the "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "centre",
+                        "text": "centre"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " with "
                       },
                       {
                         "kind": "move",
@@ -296,7 +386,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " para ganar tiempo sobre el alfil de "
+                                                        "text": " para ganar "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "tempo",
+                                                        "text": "tiempo"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " sobre el alfil de "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -321,7 +420,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " to gain time on the "
+                                                        "text": " to gain "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "tempo",
+                                                        "text": "time"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " on the "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -420,8 +528,22 @@
                                                                               "comment": {
                                                                                 "es": [
                                                                                   {
+                                                                                    "kind": "term",
+                                                                                    "id": "pawn-structure",
+                                                                                    "text": "Estructura"
+                                                                                  },
+                                                                                  {
                                                                                     "kind": "text",
-                                                                                    "text": "Estructura de peón aislado: las blancas tienen piezas activas y las negras bloquean en "
+                                                                                    "text": " de "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "peón aislado"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ": las blancas tienen piezas activas y las negras bloquean en "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -435,7 +557,25 @@
                                                                                 "en": [
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": "An isolated-pawn structure: White has active pieces while Black blockades on "
+                                                                                    "text": "An "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "isolated-pawn"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "pawn-structure",
+                                                                                    "text": "structure"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ": White has active pieces while Black blockades on "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -537,7 +677,16 @@
                                                                     "es": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "El alfil se instala en la gran diagonal y vigila "
+                                                                        "text": "El alfil se instala en la "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "long-diagonal",
+                                                                        "text": "gran diagonal"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " y vigila "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -551,7 +700,16 @@
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "The bishop settles on the long diagonal and watches "
+                                                                        "text": "The bishop settles on the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "long-diagonal",
+                                                                        "text": "long diagonal"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " and watches "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -725,13 +883,31 @@
                         "es": [
                           {
                             "kind": "text",
-                            "text": "Ocupa el centro con dos peones; las negras deben atacarlo de inmediato."
+                            "text": "Ocupa el "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centro"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " con dos peones; las negras deben atacarlo de inmediato."
                           }
                         ],
                         "en": [
                           {
                             "kind": "text",
-                            "text": "Occupies the centre with two pawns; Black must attack it at once."
+                            "text": "Occupies the "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centre"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " with two pawns; Black must attack it at once."
                           }
                         ]
                       },
@@ -746,13 +922,31 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "Contragolpe central inmediato."
+                                "text": "Contragolpe "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "central"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " inmediato."
                               }
                             ],
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "An immediate central counterstrike."
+                                "text": "An immediate "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "central"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " counterstrike."
                               }
                             ]
                           },

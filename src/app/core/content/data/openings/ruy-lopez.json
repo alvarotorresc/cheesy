@@ -26,7 +26,16 @@
       },
       {
         "kind": "text",
-        "text": ", y buscan una ventaja duradera en el centro."
+        "text": ", y buscan una ventaja duradera en el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ],
     "en": [
@@ -48,7 +57,16 @@
       },
       {
         "kind": "text",
-        "text": " pawn, aiming for a lasting central edge."
+        "text": " pawn, aiming for a lasting "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "central"
+      },
+      {
+        "kind": "text",
+        "text": " edge."
       }
     ]
   },
@@ -87,7 +105,16 @@
                           },
                           {
                             "kind": "text",
-                            "text": " y prepara el enroque rápido."
+                            "text": " y prepara el "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "castling",
+                            "text": "enroque"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " rápido."
                           }
                         ],
                         "en": [
@@ -101,7 +128,16 @@
                           },
                           {
                             "kind": "text",
-                            "text": " and prepares quick castling."
+                            "text": " and prepares quick "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "castling",
+                            "text": "castling"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
                           }
                         ]
                       },
@@ -198,7 +234,16 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " recuperan el peón con iniciativa."
+                                            "text": " recuperan el peón con "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "initiative",
+                                            "text": "iniciativa"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
                                           }
                                         ],
                                         "en": [
@@ -237,7 +282,16 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " regains the pawn with the initiative."
+                                            "text": " regains the pawn with the "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "initiative",
+                                            "text": "initiative"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
                                           }
                                         ]
                                       },
@@ -338,7 +392,16 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": ", que clavaría el caballo de "
+                                                                            "text": ", que "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "pin",
+                                                                            "text": "clavaría"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " el caballo de "
                                                                           },
                                                                           {
                                                                             "kind": "square",
@@ -371,7 +434,16 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": ", which would pin the "
+                                                                            "text": ", which would "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "pin",
+                                                                            "text": "pin"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " the "
                                                                           },
                                                                           {
                                                                             "kind": "square",
@@ -422,7 +494,25 @@
                                                                               },
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": " para ganar espacio en el flanco de dama."
+                                                                                "text": " para ganar "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "space",
+                                                                                "text": "espacio"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " en el "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "flank",
+                                                                                "text": "flanco"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " de dama."
                                                                               }
                                                                             ],
                                                                             "en": [
@@ -447,7 +537,25 @@
                                                                               },
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": " to gain queenside space."
+                                                                                "text": " to gain "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "flank",
+                                                                                "text": "queenside"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "space",
+                                                                                "text": "space"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
                                                                               }
                                                                             ]
                                                                           },
@@ -507,14 +615,28 @@
                                                                   "comment": {
                                                                     "es": [
                                                                       {
+                                                                        "kind": "term",
+                                                                        "id": "gambit",
+                                                                        "text": "Gambito"
+                                                                      },
+                                                                      {
                                                                         "kind": "text",
-                                                                        "text": "Gambito: las negras entregan un peón a cambio de un ataque duradero sobre el rey blanco."
+                                                                        "text": ": las negras entregan un peón a cambio de un ataque duradero sobre el rey blanco."
                                                                       }
                                                                     ],
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "A gambit: Black gives a pawn for a lasting attack against the white king."
+                                                                        "text": "A "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "gambit",
+                                                                        "text": "gambit"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": ": Black gives a pawn for a lasting attack against the white king."
                                                                       }
                                                                     ]
                                                                   },
@@ -715,13 +837,49 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "Las blancas ceden la pareja de alfiles a cambio de una mayoría de peones sana en el flanco de rey."
+                                    "text": "Las blancas ceden la "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "bishop-pair",
+                                    "text": "pareja de alfiles"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " a cambio de una mayoría de peones sana en el "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "flanco"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " de rey."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "White gives up the bishop pair for a healthy kingside pawn majority."
+                                    "text": "White gives up the "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "bishop-pair",
+                                    "text": "bishop pair"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " for a healthy "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "kingside"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " pawn majority."
                                   }
                                 ]
                               },
@@ -746,7 +904,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " sin cambiar el peón; el peón de "
+                                                "text": " sin "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "exchange",
+                                                "text": "cambiar"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " el peón; el peón de "
                                               },
                                               {
                                                 "kind": "square",
@@ -754,7 +921,25 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " doblado controla casillas centrales."
+                                                "text": " "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "doubled-pawns",
+                                                "text": "doblado"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " controla casillas "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "centre",
+                                                "text": "centrales"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
                                               }
                                             ],
                                             "en": [
@@ -768,7 +953,34 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " without exchanging; the doubled c-pawns still control central squares."
+                                                "text": " without "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "exchange",
+                                                "text": "exchanging"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "; the "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "doubled-pawns",
+                                                "text": "doubled"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " c-pawns still control "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "centre",
+                                                "text": "central"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " squares."
                                               }
                                             ]
                                           },
@@ -891,13 +1103,49 @@
                                                                     "es": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Se cambian damas: las negras pierden el enroque pero tienen la pareja de alfiles."
+                                                                        "text": "Se cambian damas: las negras pierden el "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "castling",
+                                                                        "text": "enroque"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " pero tienen la "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "bishop-pair",
+                                                                        "text": "pareja de alfiles"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
                                                                       }
                                                                     ],
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Queens come off: Black loses the right to castle but keeps the bishop pair."
+                                                                        "text": "Queens come off: Black loses the right to "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "castling",
+                                                                        "text": "castle"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " but keeps the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "bishop-pair",
+                                                                        "text": "bishop pair"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
                                                                       }
                                                                     ]
                                                                   },

@@ -26,7 +26,25 @@
       },
       {
         "kind": "text",
-        "text": " a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel."
+        "text": " a cambio de "
+      },
+      {
+        "kind": "term",
+        "id": "tempo",
+        "text": "tiempos"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "term",
+        "id": "space",
+        "text": "espacio"
+      },
+      {
+        "kind": "text",
+        "text": " y piezas activas. Dinámica y muy respetada al más alto nivel."
       }
     ],
     "en": [
@@ -48,7 +66,25 @@
       },
       {
         "kind": "text",
-        "text": " pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+        "text": " pawn in return for "
+      },
+      {
+        "kind": "term",
+        "id": "tempo",
+        "text": "time"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "term",
+        "id": "space",
+        "text": "space"
+      },
+      {
+        "kind": "text",
+        "text": " and active pieces. Dynamic and highly respected at top level."
       }
     ]
   },
@@ -75,7 +111,16 @@
               },
               {
                 "kind": "text",
-                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+                "text": " con un peón "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "lateral"
+              },
+              {
+                "kind": "text",
+                "text": " y crea desequilibrio desde la primera jugada."
               }
             ],
             "en": [
@@ -89,7 +134,16 @@
               },
               {
                 "kind": "text",
-                "text": " with a flank pawn and creates imbalance from move one."
+                "text": " with a "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "flank"
+              },
+              {
+                "kind": "text",
+                "text": " pawn and creates imbalance from move one."
               }
             ]
           },
@@ -133,7 +187,16 @@
                                             "es": [
                                               {
                                                 "kind": "text",
-                                                "text": "Las negras ganan tiempo sobre el caballo de "
+                                                "text": "Las negras ganan "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "tiempo"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " sobre el caballo de "
                                               },
                                               {
                                                 "kind": "square",
@@ -155,7 +218,16 @@
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "Black gains time on the "
+                                                "text": "Black gains "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "time"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " on the "
                                               },
                                               {
                                                 "kind": "square",
@@ -355,7 +427,16 @@
                                                                     "es": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Gana espacio y deja al caballo de "
+                                                                        "text": "Gana "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "space",
+                                                                        "text": "espacio"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " y deja al caballo de "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -369,7 +450,16 @@
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Gains space and keeps the "
+                                                                        "text": "Gains "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "space",
+                                                                        "text": "space"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " and keeps the "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -393,13 +483,67 @@
                                                                             "es": [
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": "Las negras aceptan peones doblados a cambio de la pareja de alfiles y el control de casillas centrales."
+                                                                                "text": "Las negras aceptan "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "doubled-pawns",
+                                                                                "text": "peones doblados"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " a cambio de la "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "bishop-pair",
+                                                                                "text": "pareja de alfiles"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " y el control de casillas "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "centre",
+                                                                                "text": "centrales"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
                                                                               }
                                                                             ],
                                                                             "en": [
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": "Black accepts doubled pawns for the bishop pair and control of central squares."
+                                                                                "text": "Black accepts "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "doubled-pawns",
+                                                                                "text": "doubled pawns"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " for the "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "bishop-pair",
+                                                                                "text": "bishop pair"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " and control of "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "centre",
+                                                                                "text": "central"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " squares."
                                                                               }
                                                                             ]
                                                                           },
@@ -572,7 +716,16 @@
                                                                                                                   },
                                                                                                                   {
                                                                                                                     "kind": "text",
-                                                                                                                    "text": " y actividad en el flanco de rey."
+                                                                                                                    "text": " y actividad en el "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "term",
+                                                                                                                    "id": "flank",
+                                                                                                                    "text": "flanco"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " de rey."
                                                                                                                   }
                                                                                                                 ],
                                                                                                                 "en": [
@@ -605,7 +758,16 @@
                                                                                                                   },
                                                                                                                   {
                                                                                                                     "kind": "text",
-                                                                                                                    "text": " and kingside activity."
+                                                                                                                    "text": " and "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "term",
+                                                                                                                    "id": "flank",
+                                                                                                                    "text": "kingside"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " activity."
                                                                                                                   }
                                                                                                                 ]
                                                                                                               },
@@ -797,13 +959,49 @@
                                                                                                         "es": [
                                                                                                           {
                                                                                                             "kind": "text",
-                                                                                                            "text": "Ataca la cadena de peones negra del flanco de dama."
+                                                                                                            "text": "Ataca la "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "pawn-chain",
+                                                                                                            "text": "cadena de peones"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": " negra del "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "flank",
+                                                                                                            "text": "flanco"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": " de dama."
                                                                                                           }
                                                                                                         ],
                                                                                                         "en": [
                                                                                                           {
                                                                                                             "kind": "text",
-                                                                                                            "text": "Attacks Black’s queenside pawn chain."
+                                                                                                            "text": "Attacks Black’s "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "flank",
+                                                                                                            "text": "queenside"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": " "
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "term",
+                                                                                                            "id": "pawn-chain",
+                                                                                                            "text": "pawn chain"
+                                                                                                          },
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": "."
                                                                                                           }
                                                                                                         ]
                                                                                                       },
@@ -874,7 +1072,16 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Otra idea: cambiar caballos en "
+                                                            "text": "Otra idea: "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "cambiar"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " caballos en "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -882,7 +1089,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " para fijar la estructura antes de "
+                                                            "text": " para fijar la "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "pawn-structure",
+                                                            "text": "estructura"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " antes de "
                                                           },
                                                           {
                                                             "kind": "move",
@@ -899,7 +1115,16 @@
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Another idea: trade knights on "
+                                                            "text": "Another idea: "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "trade"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " knights on "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -907,7 +1132,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " to fix the structure before "
+                                                            "text": " to fix the "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "pawn-structure",
+                                                            "text": "structure"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " before "
                                                           },
                                                           {
                                                             "kind": "move",
@@ -962,14 +1196,46 @@
                                               "comment": {
                                                 "es": [
                                                   {
+                                                    "kind": "term",
+                                                    "id": "exchange",
+                                                    "text": "Cambio"
+                                                  },
+                                                  {
                                                     "kind": "text",
-                                                    "text": "Cambio prematuro que da a las negras un centro de peones sólido."
+                                                    "text": " prematuro que da a las negras un "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "centre",
+                                                    "text": "centro"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " de peones sólido."
                                                   }
                                                 ],
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "A premature trade that hands Black a solid pawn centre."
+                                                    "text": "A premature "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "exchange",
+                                                    "text": "trade"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " that hands Black a solid pawn "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "centre",
+                                                    "text": "centre"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
                                                   }
                                                 ]
                                               },

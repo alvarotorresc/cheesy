@@ -10,7 +10,16 @@
     "es": [
       {
         "kind": "text",
-        "text": "Las negras colocan el alfil en fianchetto en "
+        "text": "Las negras colocan el alfil en "
+      },
+      {
+        "kind": "term",
+        "id": "fianchetto",
+        "text": "fianchetto"
+      },
+      {
+        "kind": "text",
+        "text": " en "
       },
       {
         "kind": "square",
@@ -18,13 +27,40 @@
       },
       {
         "kind": "text",
-        "text": " para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos."
+        "text": " para presionar la "
+      },
+      {
+        "kind": "term",
+        "id": "long-diagonal",
+        "text": "gran diagonal"
+      },
+      {
+        "kind": "text",
+        "text": ". Contra el Ataque Yugoslavo se juega una carrera de ataques con "
+      },
+      {
+        "kind": "term",
+        "id": "castling",
+        "text": "enroques"
+      },
+      {
+        "kind": "text",
+        "text": " opuestos."
       }
     ],
     "en": [
       {
         "kind": "text",
-        "text": "Black fianchettoes the bishop on "
+        "text": "Black "
+      },
+      {
+        "kind": "term",
+        "id": "fianchetto",
+        "text": "fianchettoes"
+      },
+      {
+        "kind": "text",
+        "text": " the bishop on "
       },
       {
         "kind": "square",
@@ -32,7 +68,25 @@
       },
       {
         "kind": "text",
-        "text": " to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+        "text": " to rake the "
+      },
+      {
+        "kind": "term",
+        "id": "long-diagonal",
+        "text": "long diagonal"
+      },
+      {
+        "kind": "text",
+        "text": ". Against the Yugoslav Attack the game becomes a race of attacks with opposite-side "
+      },
+      {
+        "kind": "term",
+        "id": "castling",
+        "text": "castling"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ]
   },
@@ -59,7 +113,16 @@
               },
               {
                 "kind": "text",
-                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+                "text": " con un peón "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "lateral"
+              },
+              {
+                "kind": "text",
+                "text": " y crea desequilibrio desde la primera jugada."
               }
             ],
             "en": [
@@ -73,7 +136,16 @@
               },
               {
                 "kind": "text",
-                "text": " with a flank pawn and creates imbalance from move one."
+                "text": " with a "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "flank"
+              },
+              {
+                "kind": "text",
+                "text": " pawn and creates imbalance from move one."
               }
             ]
           },
@@ -96,14 +168,60 @@
                           "comment": {
                             "es": [
                               {
+                                "kind": "term",
+                                "id": "exchange",
+                                "text": "Cambia"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Cambia un peón lateral por uno central: las negras tendrán mayoría central."
+                                "text": " un peón "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "flank",
+                                "text": "lateral"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " por uno "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "central"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ": las negras tendrán mayoría central."
                               }
                             ],
                             "en": [
                               {
+                                "kind": "term",
+                                "id": "exchange",
+                                "text": "Trades"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Trades a flank pawn for a centre pawn: Black gets the central majority."
+                                "text": " a "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "flank",
+                                "text": "flank"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " pawn for a "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centre"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " pawn: Black gets the central majority."
                               }
                             ]
                           },
@@ -139,7 +257,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": ", desde donde presionará la gran diagonal hacia "
+                                                "text": ", desde donde presionará la "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "long-diagonal",
+                                                "text": "gran diagonal"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " hacia "
                                               },
                                               {
                                                 "kind": "square",
@@ -169,7 +296,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": ", from where it rakes the long diagonal towards "
+                                                "text": ", from where it rakes the "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "long-diagonal",
+                                                "text": "long diagonal"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " towards "
                                               },
                                               {
                                                 "kind": "square",
@@ -229,7 +365,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " para cambiar el alfil de "
+                                                            "text": " para "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "cambiar"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " el alfil de "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -237,7 +382,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": ", enroque largo y avance "
+                                                            "text": ", "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "castling",
+                                                            "text": "enroque"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " largo y avance "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -279,7 +433,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " to trade off the "
+                                                            "text": " to "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "trade"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " off the "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -287,7 +450,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " bishop, long castling and "
+                                                            "text": " bishop, long "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "castling",
+                                                            "text": "castling"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " and "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -389,13 +561,31 @@
                                                                                     "es": [
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": "Carrera de ataques: las blancas en el flanco de rey y las negras por la columna c."
+                                                                                        "text": "Carrera de ataques: las blancas en el "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "flank",
+                                                                                        "text": "flanco"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " de rey y las negras por la columna c."
                                                                                       }
                                                                                     ],
                                                                                     "en": [
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": "A race of attacks: White on the kingside, Black down the c-file."
+                                                                                        "text": "A race of attacks: White on the "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "flank",
+                                                                                        "text": "kingside"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": ", Black down the c-file."
                                                                                       }
                                                                                     ]
                                                                                   },
@@ -415,7 +605,16 @@
                                                                                                 "es": [
                                                                                                   {
                                                                                                     "kind": "text",
-                                                                                                    "text": "Aparta al rey de la columna c y de posibles sacrificios en "
+                                                                                                    "text": "Aparta al rey de la columna c y de posibles "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "term",
+                                                                                                    "id": "sacrifice",
+                                                                                                    "text": "sacrificios"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " en "
                                                                                                   },
                                                                                                   {
                                                                                                     "kind": "square",
@@ -429,7 +628,16 @@
                                                                                                 "en": [
                                                                                                   {
                                                                                                     "kind": "text",
-                                                                                                    "text": "Takes the king off the c-file and away from sacrifices on "
+                                                                                                    "text": "Takes the king off the c-file and away from "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "term",
+                                                                                                    "id": "sacrifice",
+                                                                                                    "text": "sacrifices"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " on "
                                                                                                   },
                                                                                                   {
                                                                                                     "kind": "square",
@@ -543,13 +751,31 @@
                                                                                                                     "es": [
                                                                                                                       {
                                                                                                                         "kind": "text",
-                                                                                                                        "text": "Las negras lanzan los peones del flanco de dama contra el rey blanco."
+                                                                                                                        "text": "Las negras lanzan los peones del "
+                                                                                                                      },
+                                                                                                                      {
+                                                                                                                        "kind": "term",
+                                                                                                                        "id": "flank",
+                                                                                                                        "text": "flanco"
+                                                                                                                      },
+                                                                                                                      {
+                                                                                                                        "kind": "text",
+                                                                                                                        "text": " de dama contra el rey blanco."
                                                                                                                       }
                                                                                                                     ],
                                                                                                                     "en": [
                                                                                                                       {
                                                                                                                         "kind": "text",
-                                                                                                                        "text": "Black throws the queenside pawns at the white king."
+                                                                                                                        "text": "Black throws the "
+                                                                                                                      },
+                                                                                                                      {
+                                                                                                                        "kind": "term",
+                                                                                                                        "id": "flank",
+                                                                                                                        "text": "queenside"
+                                                                                                                      },
+                                                                                                                      {
+                                                                                                                        "kind": "text",
+                                                                                                                        "text": " pawns at the white king."
                                                                                                                       }
                                                                                                                     ]
                                                                                                                   },
@@ -671,14 +897,46 @@
                                                                           "comment": {
                                                                             "es": [
                                                                               {
+                                                                                "kind": "term",
+                                                                                "id": "pawn-break",
+                                                                                "text": "Rotura"
+                                                                              },
+                                                                              {
                                                                                 "kind": "text",
-                                                                                "text": "Rotura central inmediata: las negras abren el juego antes de que llegue el ataque blanco."
+                                                                                "text": " "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "centre",
+                                                                                "text": "central"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " inmediata: las negras abren el juego antes de que llegue el ataque blanco."
                                                                               }
                                                                             ],
                                                                             "en": [
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": "An immediate central break: Black opens the game before White’s attack arrives."
+                                                                                "text": "An immediate "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "centre",
+                                                                                "text": "central"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "pawn-break",
+                                                                                "text": "break"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": ": Black opens the game before White’s attack arrives."
                                                                               }
                                                                             ]
                                                                           },
@@ -736,7 +994,16 @@
                                                                         "es": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "Las blancas avanzan en el flanco de rey antes de decidir dónde colocar el alfil de "
+                                                                            "text": "Las blancas avanzan en el "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "flanco"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de rey antes de decidir dónde colocar el alfil de "
                                                                           },
                                                                           {
                                                                             "kind": "square",
@@ -750,7 +1017,16 @@
                                                                         "en": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "White advances on the kingside before deciding where the "
+                                                                            "text": "White advances on the "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "kingside"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " before deciding where the "
                                                                           },
                                                                           {
                                                                             "kind": "square",
@@ -810,14 +1086,46 @@
                                               "comment": {
                                                 "es": [
                                                   {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "Desarrollo"
+                                                  },
+                                                  {
                                                     "kind": "text",
-                                                    "text": "Desarrollo tranquilo y enroque corto: juego posicional sin los riesgos del Yugoslavo."
+                                                    "text": " tranquilo y "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "castling",
+                                                    "text": "enroque"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " corto: juego posicional sin los riesgos del Yugoslavo."
                                                   }
                                                 ],
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Quiet development and short castling: positional play without the Yugoslav’s risks."
+                                                    "text": "Quiet "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "development"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and short "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "castling",
+                                                    "text": "castling"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": ": positional play without the Yugoslav’s risks."
                                                   }
                                                 ]
                                               },

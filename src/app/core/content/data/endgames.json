@@ -27,7 +27,25 @@
         },
         {
           "kind": "text",
-          "text": " hace tablas: el rey negro toma la oposición frente al rey blanco. Cualquier otra jugada permite al rey blanco llegar a una casilla clave ("
+          "text": " hace tablas: el rey negro toma la "
+        },
+        {
+          "kind": "term",
+          "id": "opposition",
+          "text": "oposición"
+        },
+        {
+          "kind": "text",
+          "text": " frente al rey blanco. Cualquier otra jugada permite al rey blanco llegar a una "
+        },
+        {
+          "kind": "term",
+          "id": "key-squares",
+          "text": "casilla clave"
+        },
+        {
+          "kind": "text",
+          "text": " ("
         },
         {
           "kind": "square",
@@ -51,7 +69,25 @@
         },
         {
           "kind": "text",
-          "text": ") y el peón corona. Mantén la oposición y, cuando el peón avance, retrocede en línea recta hacia la casilla de coronación."
+          "text": ") y el peón "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "corona"
+        },
+        {
+          "kind": "text",
+          "text": ". Mantén la oposición y, cuando el peón avance, retrocede en línea recta hacia la "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "casilla de coronación"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ],
       "en": [
@@ -68,7 +104,25 @@
         },
         {
           "kind": "text",
-          "text": " draws: the black king takes the opposition against the white king. Any other move lets the white king reach a key square ("
+          "text": " draws: the black king takes the "
+        },
+        {
+          "kind": "term",
+          "id": "opposition",
+          "text": "opposition"
+        },
+        {
+          "kind": "text",
+          "text": " against the white king. Any other move lets the white king reach a "
+        },
+        {
+          "kind": "term",
+          "id": "key-squares",
+          "text": "key square"
+        },
+        {
+          "kind": "text",
+          "text": " ("
         },
         {
           "kind": "square",
@@ -92,7 +146,25 @@
         },
         {
           "kind": "text",
-          "text": ") and the pawn queens. Keep the opposition and, when the pawn advances, step straight back towards the queening square."
+          "text": ") and the pawn "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "queens"
+        },
+        {
+          "kind": "text",
+          "text": ". Keep the opposition and, when the pawn advances, step straight back towards the "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "queening square"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     }
@@ -114,7 +186,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las casillas clave del peón de "
+          "text": "Las "
+        },
+        {
+          "kind": "term",
+          "id": "key-squares",
+          "text": "casillas clave"
+        },
+        {
+          "kind": "text",
+          "text": " del peón de "
         },
         {
           "kind": "square",
@@ -146,7 +227,16 @@
         },
         {
           "kind": "text",
-          "text": ": si el rey blanco llega a una de ellas, el peón corona con cualquier defensa. Con "
+          "text": ": si el rey blanco llega a una de ellas, el peón "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "corona"
+        },
+        {
+          "kind": "text",
+          "text": " con cualquier defensa. Con "
         },
         {
           "kind": "move",
@@ -218,7 +308,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "The key squares of the "
+          "text": "The "
+        },
+        {
+          "kind": "term",
+          "id": "key-squares",
+          "text": "key squares"
+        },
+        {
+          "kind": "text",
+          "text": " of the "
         },
         {
           "kind": "square",
@@ -250,7 +349,16 @@
         },
         {
           "kind": "text",
-          "text": ": once the white king reaches one of them, the pawn queens against any defence. "
+          "text": ": once the white king reaches one of them, the pawn "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "queens"
+        },
+        {
+          "kind": "text",
+          "text": " against any defence. "
         },
         {
           "kind": "move",
@@ -338,7 +446,25 @@
       "es": [
         {
           "kind": "text",
-          "text": "Traza el cuadrado desde el peón hasta su casilla de coronación: "
+          "text": "Traza el "
+        },
+        {
+          "kind": "term",
+          "id": "rule-of-the-square",
+          "text": "cuadrado"
+        },
+        {
+          "kind": "text",
+          "text": " desde el peón hasta su "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "casilla de coronación"
+        },
+        {
+          "kind": "text",
+          "text": ": "
         },
         {
           "kind": "square",
@@ -409,7 +535,25 @@
       "en": [
         {
           "kind": "text",
-          "text": "Draw the square from the pawn to its queening square: "
+          "text": "Draw the "
+        },
+        {
+          "kind": "term",
+          "id": "rule-of-the-square",
+          "text": "square"
+        },
+        {
+          "kind": "text",
+          "text": " from the pawn to its "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "queening square"
+        },
+        {
+          "kind": "text",
+          "text": ": "
         },
         {
           "kind": "square",
@@ -507,7 +651,16 @@
         },
         {
           "kind": "text",
-          "text": " el cuadrado del peón se reduce a "
+          "text": " el "
+        },
+        {
+          "kind": "term",
+          "id": "rule-of-the-square",
+          "text": "cuadrado"
+        },
+        {
+          "kind": "text",
+          "text": " del peón se reduce a "
         },
         {
           "kind": "square",
@@ -547,7 +700,16 @@
         },
         {
           "kind": "text",
-          "text": ", ya no puede entrar: el peón corona solo. Cualquier jugada de rey permite al negro entrar en el cuadrado y hacer tablas."
+          "text": ", ya no puede entrar: el peón "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "corona"
+        },
+        {
+          "kind": "text",
+          "text": " solo. Cualquier jugada de rey permite al negro entrar en el cuadrado y hacer tablas."
         }
       ],
       "en": [
@@ -564,7 +726,16 @@
         },
         {
           "kind": "text",
-          "text": " the square shrinks to "
+          "text": " the "
+        },
+        {
+          "kind": "term",
+          "id": "rule-of-the-square",
+          "text": "square"
+        },
+        {
+          "kind": "text",
+          "text": " shrinks to "
         },
         {
           "kind": "square",
@@ -604,7 +775,16 @@
         },
         {
           "kind": "text",
-          "text": " can no longer enter it: the pawn queens on its own. Any king move lets Black step into the square and draw."
+          "text": " can no longer enter it: the pawn "
+        },
+        {
+          "kind": "term",
+          "id": "promotion",
+          "text": "queens"
+        },
+        {
+          "kind": "text",
+          "text": " on its own. Any king move lets Black step into the square and draw."
         }
       ]
     }
@@ -626,7 +806,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Con un peón de torre, si el rey defensor alcanza la casilla de coronación ("
+          "text": "Con un peón de torre, si el rey defensor alcanza la "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "casilla de coronación"
+        },
+        {
+          "kind": "text",
+          "text": " ("
         },
         {
           "kind": "square",
@@ -634,7 +823,16 @@
         },
         {
           "kind": "text",
-          "text": ") o se queda delante del peón, es tablas: el rey blanco no puede expulsarlo sin ahogarlo. Dirige el rey hacia "
+          "text": ") o se queda delante del peón, es tablas: el rey blanco no puede expulsarlo sin "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "ahogarlo"
+        },
+        {
+          "kind": "text",
+          "text": ". Dirige el rey hacia "
         },
         {
           "kind": "square",
@@ -664,7 +862,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "Against a rook pawn, once the defending king reaches the queening square ("
+          "text": "Against a rook pawn, once the defending king reaches the "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "queening square"
+        },
+        {
+          "kind": "text",
+          "text": " ("
         },
         {
           "kind": "square",
@@ -672,7 +879,16 @@
         },
         {
           "kind": "text",
-          "text": ") or stays in front of the pawn, it is a draw: the white king cannot drive it out without stalemating it. Head for "
+          "text": ") or stays in front of the pawn, it is a draw: the white king cannot drive it out without "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "stalemating"
+        },
+        {
+          "kind": "text",
+          "text": " it. Head for "
         },
         {
           "kind": "square",
@@ -718,7 +934,25 @@
       "es": [
         {
           "kind": "text",
-          "text": "El rey blanco está en la casilla de coronación y el negro, cortado por la torre en la columna d. El plan es «construir el puente»: la torre sube a la cuarta fila ("
+          "text": "El rey blanco está en la "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "casilla de coronación"
+        },
+        {
+          "kind": "text",
+          "text": " y el negro, cortado por la torre en la columna d. El plan es «"
+        },
+        {
+          "kind": "term",
+          "id": "building-a-bridge",
+          "text": "construir el puente"
+        },
+        {
+          "kind": "text",
+          "text": "»: la torre sube a la cuarta fila ("
         },
         {
           "kind": "move",
@@ -729,13 +963,40 @@
         },
         {
           "kind": "text",
-          "text": "), el rey sale de la casilla de coronación y, cuando lleguen los jaques, la torre los tapa desde la cuarta fila."
+          "text": "), el rey sale de la casilla de coronación y, cuando lleguen los "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaques"
+        },
+        {
+          "kind": "text",
+          "text": ", la torre los tapa desde la cuarta fila."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The white king sits on the queening square and the black king is cut off by the rook on the d-file. The plan is “building a bridge”: the rook goes to the fourth rank ("
+          "text": "The white king sits on the "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "queening square"
+        },
+        {
+          "kind": "text",
+          "text": " and the black king is cut off by the rook on the d-file. The plan is “"
+        },
+        {
+          "kind": "term",
+          "id": "building-a-bridge",
+          "text": "building a bridge"
+        },
+        {
+          "kind": "text",
+          "text": "”: the rook goes to the fourth rank ("
         },
         {
           "kind": "move",
@@ -746,7 +1007,16 @@
         },
         {
           "kind": "text",
-          "text": "), the king leaves the queening square and, when the checks come, the rook blocks them from the fourth rank."
+          "text": "), the king leaves the queening square and, when the "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checks"
+        },
+        {
+          "kind": "text",
+          "text": " come, the rook blocks them from the fourth rank."
         }
       ]
     }
@@ -768,7 +1038,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "El rey negro está en la casilla de coronación y la torre corta al rey blanco en la sexta fila (por ejemplo, "
+          "text": "El rey negro está en la "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "casilla de coronación"
+        },
+        {
+          "kind": "text",
+          "text": " y la torre corta al rey blanco en la sexta fila (por ejemplo, "
         },
         {
           "kind": "move",
@@ -798,13 +1077,31 @@
         },
         {
           "kind": "text",
-          "text": ", el rey blanco se queda sin refugio y la torre pasa a dar jaques desde atrás. No abandones la sexta fila antes de tiempo."
+          "text": ", el rey blanco se queda sin refugio y la torre pasa a dar "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaques"
+        },
+        {
+          "kind": "text",
+          "text": " desde atrás. No abandones la sexta fila antes de tiempo."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The black king holds the queening square and the rook keeps the white king off the sixth rank (for example "
+          "text": "The black king holds the "
+        },
+        {
+          "kind": "term",
+          "id": "queening-square",
+          "text": "queening square"
+        },
+        {
+          "kind": "text",
+          "text": " and the rook keeps the white king off the sixth rank (for example "
         },
         {
           "kind": "move",
@@ -834,7 +1131,16 @@
         },
         {
           "kind": "text",
-          "text": " the white king has no shelter, and the rook switches to checking from behind. Do not leave the sixth rank too early."
+          "text": " the white king has no shelter, and the rook switches to "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checking"
+        },
+        {
+          "kind": "text",
+          "text": " from behind. Do not leave the sixth rank too early."
         }
       ]
     }
@@ -888,7 +1194,16 @@
         },
         {
           "kind": "text",
-          "text": " sin perder el peón, y si el rey blanco se acerca, recibe jaques laterales. El rey debe quedarse cerca: "
+          "text": " sin perder el peón, y si el rey blanco se acerca, recibe "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaques"
+        },
+        {
+          "kind": "text",
+          "text": " laterales. El rey debe quedarse cerca: "
         },
         {
           "kind": "move",
@@ -959,7 +1274,16 @@
         },
         {
           "kind": "text",
-          "text": " without dropping the pawn, and if the white king approaches it gets checked from the side. The king must stay put: "
+          "text": " without dropping the pawn, and if the white king approaches it gets "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checked"
+        },
+        {
+          "kind": "text",
+          "text": " from the side. The king must stay put: "
         },
         {
           "kind": "move",
@@ -1152,7 +1476,25 @@
       "es": [
         {
           "kind": "text",
-          "text": "Contra un peón central o de caballo en séptima, la dama gana: con jaques y clavadas obliga al rey negro a ponerse delante de su peón, en "
+          "text": "Contra un peón central o de caballo en séptima, la dama gana: con "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaques"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "clavadas"
+        },
+        {
+          "kind": "text",
+          "text": " obliga al rey negro a ponerse delante de su peón, en "
         },
         {
           "kind": "square",
@@ -1160,7 +1502,16 @@
         },
         {
           "kind": "text",
-          "text": ", y cada vez que eso ocurre el rey blanco gana un tiempo para acercarse. Empieza con jaques como "
+          "text": ", y cada vez que eso ocurre el rey blanco gana un "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tiempo"
+        },
+        {
+          "kind": "text",
+          "text": " para acercarse. Empieza con jaques como "
         },
         {
           "kind": "move",
@@ -1188,7 +1539,25 @@
       "en": [
         {
           "kind": "text",
-          "text": "Against a centre or knight pawn on the seventh rank the queen wins: with checks and pins it forces the black king in front of its pawn, onto "
+          "text": "Against a centre or knight pawn on the seventh rank the queen wins: with "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checks"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "pins"
+        },
+        {
+          "kind": "text",
+          "text": " it forces the black king in front of its pawn, onto "
         },
         {
           "kind": "square",
@@ -1196,7 +1565,16 @@
         },
         {
           "kind": "text",
-          "text": ", and each time that happens the white king gains a tempo to approach. Start with checks such as "
+          "text": ", and each time that happens the white king gains a "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tempo"
+        },
+        {
+          "kind": "text",
+          "text": " to approach. Start with checks such as "
         },
         {
           "kind": "move",
@@ -1240,7 +1618,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Con peón de alfil en séptima y el rey blanco lejos, el defensor se salva gracias al ahogado: "
+          "text": "Con peón de alfil en séptima y el rey blanco lejos, el defensor se salva gracias al "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "ahogado"
+        },
+        {
+          "kind": "text",
+          "text": ": "
         },
         {
           "kind": "move",
@@ -1279,7 +1666,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "With a bishop pawn on the seventh and the white king far away, the defender is saved by stalemate: "
+          "text": "With a bishop pawn on the seventh and the white king far away, the defender is saved by "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "stalemate"
+        },
+        {
+          "kind": "text",
+          "text": ": "
         },
         {
           "kind": "move",
@@ -1334,13 +1730,49 @@
       "es": [
         {
           "kind": "text",
-          "text": "La dama reduce el espacio del rey negro hasta llevarlo al borde; después se acerca el rey blanco y se da mate. Cuidado con el ahogado: deja siempre al rey negro al menos una casilla libre hasta el mate."
+          "text": "La dama reduce el espacio del rey negro hasta llevarlo al borde; después se acerca el rey blanco y se da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": ". Cuidado con el "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "ahogado"
+        },
+        {
+          "kind": "text",
+          "text": ": deja siempre al rey negro al menos una casilla libre hasta el mate."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The queen shrinks the black king’s space until it reaches the edge; then the white king comes closer and delivers mate. Watch out for stalemate: always leave the black king at least one free square until the mate."
+          "text": "The queen shrinks the black king’s space until it reaches the edge; then the white king comes closer and delivers "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": ". Watch out for "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "stalemate"
+        },
+        {
+          "kind": "text",
+          "text": ": always leave the black king at least one free square until the mate."
         }
       ]
     }
@@ -1362,13 +1794,49 @@
       "es": [
         {
           "kind": "text",
-          "text": "La torre corta al rey negro en una fila o columna y el rey blanco se acerca. Cuando los reyes quedan enfrentados, el jaque de torre empuja al rey negro una fila hacia el borde; repite hasta dar mate en la última fila o columna."
+          "text": "La torre corta al rey negro en una fila o columna y el rey blanco se acerca. Cuando los reyes quedan enfrentados, el "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " de torre empuja al rey negro una fila hacia el borde; repite hasta dar "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " en la última fila o columna."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The rook cuts off the black king along a rank or file while the white king approaches. When the kings face each other, a rook check pushes the black king one line towards the edge; repeat until mate on the last rank or file."
+          "text": "The rook cuts off the black king along a rank or file while the white king approaches. When the kings face each other, a rook "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": " pushes the black king one line towards the edge; repeat until "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " on the last rank or file."
         }
       ]
     }
@@ -1390,13 +1858,49 @@
       "es": [
         {
           "kind": "text",
-          "text": "Los dos alfiles, uno junto al otro, forman una barrera diagonal que el rey negro no puede cruzar. Con ayuda del rey se le empuja hacia una esquina, cualquiera, y allí se da mate. Evita el ahogado en las últimas jugadas."
+          "text": "Los dos alfiles, uno junto al otro, forman una barrera diagonal que el rey negro no puede cruzar. Con ayuda del rey se le empuja hacia una esquina, cualquiera, y allí se da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": ". Evita el "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "ahogado"
+        },
+        {
+          "kind": "text",
+          "text": " en las últimas jugadas."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The two bishops side by side form a diagonal barrier the black king cannot cross. With the king’s help it is driven into a corner, any corner, and mated there. Avoid stalemate in the final moves."
+          "text": "The two bishops side by side form a diagonal barrier the black king cannot cross. With the king’s help it is driven into a corner, any corner, and "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mated"
+        },
+        {
+          "kind": "text",
+          "text": " there. Avoid "
+        },
+        {
+          "kind": "term",
+          "id": "stalemate",
+          "text": "stalemate"
+        },
+        {
+          "kind": "text",
+          "text": " in the final moves."
         }
       ]
     }

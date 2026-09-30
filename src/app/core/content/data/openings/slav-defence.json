@@ -377,7 +377,16 @@
                                                                 "es": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "Las blancas enrocan y preparan "
+                                                                    "text": "Las blancas "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "enrocan"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " y preparan "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -401,7 +410,16 @@
                                                                 "en": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "White castles and prepares "
+                                                                    "text": "White "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "castles"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " and prepares "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -451,7 +469,16 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": ", pero las negras presionan el centro con las piezas."
+                                                                                    "text": ", pero las negras presionan el "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "centre",
+                                                                                    "text": "centro"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " con las piezas."
                                                                                   }
                                                                                 ],
                                                                                 "en": [
@@ -465,7 +492,16 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": ", but Black presses the centre with pieces."
+                                                                                    "text": ", but Black presses the "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "centre",
+                                                                                    "text": "centre"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " with pieces."
                                                                                   }
                                                                                 ]
                                                                               },
@@ -848,8 +884,13 @@
                                   "comment": {
                                     "es": [
                                       {
+                                        "kind": "term",
+                                        "id": "development",
+                                        "text": "Desarrolla"
+                                      },
+                                      {
                                         "kind": "text",
-                                        "text": "Desarrolla el alfil antes de cerrar con "
+                                        "text": " el alfil antes de cerrar con "
                                       },
                                       {
                                         "kind": "move",
@@ -865,8 +906,13 @@
                                     ],
                                     "en": [
                                       {
+                                        "kind": "term",
+                                        "id": "development",
+                                        "text": "Develops"
+                                      },
+                                      {
                                         "kind": "text",
-                                        "text": "Develops the bishop before closing the chain with "
+                                        "text": " the bishop before closing the chain with "
                                       },
                                       {
                                         "kind": "move",
@@ -894,13 +940,31 @@
                                                 "es": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Persigue al alfil para conseguir la pareja de alfiles."
+                                                    "text": "Persigue al alfil para conseguir la "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "bishop-pair",
+                                                    "text": "pareja de alfiles"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
                                                   }
                                                 ],
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Chases the bishop to win the bishop pair."
+                                                    "text": "Chases the bishop to win the "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "bishop-pair",
+                                                    "text": "bishop pair"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
                                                   }
                                                 ]
                                               },
@@ -962,14 +1026,46 @@
                       "comment": {
                         "es": [
                           {
+                            "kind": "term",
+                            "id": "pawn-structure",
+                            "text": "Estructura"
+                          },
+                          {
                             "kind": "text",
-                            "text": "Estructura simétrica: las blancas conservan una ligera iniciativa gracias al primer movimiento."
+                            "text": " simétrica: las blancas conservan una ligera "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "initiative",
+                            "text": "iniciativa"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " gracias al primer movimiento."
                           }
                         ],
                         "en": [
                           {
                             "kind": "text",
-                            "text": "A symmetrical structure: White keeps a slight initiative thanks to the first move."
+                            "text": "A symmetrical "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "pawn-structure",
+                            "text": "structure"
+                          },
+                          {
+                            "kind": "text",
+                            "text": ": White keeps a slight "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "initiative",
+                            "text": "initiative"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " thanks to the first move."
                           }
                         ]
                       },
@@ -1022,7 +1118,16 @@
                                                                       },
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": " con contrajuego sobre "
+                                                                        "text": " con "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "counterplay",
+                                                                        "text": "contrajuego"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " sobre "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -1044,7 +1149,16 @@
                                                                       },
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": " with counterplay against "
+                                                                        "text": " with "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "counterplay",
+                                                                        "text": "counterplay"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " against "
                                                                       },
                                                                       {
                                                                         "kind": "square",

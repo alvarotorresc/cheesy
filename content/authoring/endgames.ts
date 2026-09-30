@@ -14,8 +14,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'Solo 1...Re7 hace tablas: el rey negro toma la oposición frente al rey blanco. Cualquier otra jugada permite al rey blanco llegar a una casilla clave (d6, e6 o f6) y el peón corona. Mantén la oposición y, cuando el peón avance, retrocede en línea recta hacia la casilla de coronación.',
-      en: 'Only 1...Ke7 draws: the black king takes the opposition against the white king. Any other move lets the white king reach a key square (d6, e6 or f6) and the pawn queens. Keep the opposition and, when the pawn advances, step straight back towards the queening square.',
+      es: 'Solo 1...Re7 hace tablas: el rey negro toma la [oposición](opposition) frente al rey blanco. Cualquier otra jugada permite al rey blanco llegar a una [casilla clave](key-squares) (d6, e6 o f6) y el peón [corona](promotion). Mantén la oposición y, cuando el peón avance, retrocede en línea recta hacia la [casilla de coronación](queening-square).',
+      en: 'Only 1...Ke7 draws: the black king takes the [opposition](opposition) against the white king. Any other move lets the white king reach a [key square](key-squares) (d6, e6 or f6) and the pawn [queens](promotion). Keep the opposition and, when the pawn advances, step straight back towards the [queening square](queening-square).',
     },
   },
   {
@@ -26,8 +26,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'Las casillas clave del peón de e4 son d6, e6 y f6: si el rey blanco llega a una de ellas, el peón corona con cualquier defensa. Con 1.Rd6, 1.Re6 o 1.Rf6 se llega de inmediato. En cambio, 1.Rd5?, 1.Rd4? o 1.Rf4? dejan escapar la victoria.',
-      en: 'The key squares of the e4 pawn are d6, e6 and f6: once the white king reaches one of them, the pawn queens against any defence. 1.Kd6, 1.Ke6 or 1.Kf6 gets there at once. By contrast, 1.Kd5?, 1.Kd4? or 1.Kf4? let the win slip.',
+      es: 'Las [casillas clave](key-squares) del peón de e4 son d6, e6 y f6: si el rey blanco llega a una de ellas, el peón [corona](promotion) con cualquier defensa. Con 1.Rd6, 1.Re6 o 1.Rf6 se llega de inmediato. En cambio, 1.Rd5?, 1.Rd4? o 1.Rf4? dejan escapar la victoria.',
+      en: 'The [key squares](key-squares) of the e4 pawn are d6, e6 and f6: once the white king reaches one of them, the pawn [queens](promotion) against any defence. 1.Kd6, 1.Ke6 or 1.Kf6 gets there at once. By contrast, 1.Kd5?, 1.Kd4? or 1.Kf4? let the win slip.',
     },
   },
   {
@@ -38,8 +38,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'Traza el cuadrado desde el peón hasta su casilla de coronación: b4-f4-f8-b8. Si el rey defensor puede entrar en él con su jugada, alcanza al peón. 1...Rf4, 1...Rf5 o 1...Rf6 hacen tablas; cualquier otra jugada pierde, porque el rey blanco está demasiado lejos para ayudar.',
-      en: 'Draw the square from the pawn to its queening square: b4-f4-f8-b8. If the defending king can step into it on its move, it catches the pawn. 1...Kf4, 1...Kf5 or 1...Kf6 draws; any other move loses, since the white king is too far away to help.',
+      es: 'Traza el [cuadrado](rule-of-the-square) desde el peón hasta su [casilla de coronación](queening-square): b4-f4-f8-b8. Si el rey defensor puede entrar en él con su jugada, alcanza al peón. 1...Rf4, 1...Rf5 o 1...Rf6 hacen tablas; cualquier otra jugada pierde, porque el rey blanco está demasiado lejos para ayudar.',
+      en: 'Draw the [square](rule-of-the-square) from the pawn to its [queening square](queening-square): b4-f4-f8-b8. If the defending king can step into it on its move, it catches the pawn. 1...Kf4, 1...Kf5 or 1...Kf6 draws; any other move loses, since the white king is too far away to help.',
     },
   },
   {
@@ -50,8 +50,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'Con 1.b5 el cuadrado del peón se reduce a b5-e5-e8-b8 y el rey negro, en g5, ya no puede entrar: el peón corona solo. Cualquier jugada de rey permite al negro entrar en el cuadrado y hacer tablas.',
-      en: 'After 1.b5 the square shrinks to b5-e5-e8-b8 and the black king on g5 can no longer enter it: the pawn queens on its own. Any king move lets Black step into the square and draw.',
+      es: 'Con 1.b5 el [cuadrado](rule-of-the-square) del peón se reduce a b5-e5-e8-b8 y el rey negro, en g5, ya no puede entrar: el peón [corona](promotion) solo. Cualquier jugada de rey permite al negro entrar en el cuadrado y hacer tablas.',
+      en: 'After 1.b5 the [square](rule-of-the-square) shrinks to b5-e5-e8-b8 and the black king on g5 can no longer enter it: the pawn [queens](promotion) on its own. Any king move lets Black step into the square and draw.',
     },
   },
   {
@@ -62,8 +62,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'Con un peón de torre, si el rey defensor alcanza la casilla de coronación (h8) o se queda delante del peón, es tablas: el rey blanco no puede expulsarlo sin ahogarlo. Dirige el rey hacia f8, g8 y h8 y quédate allí.',
-      en: 'Against a rook pawn, once the defending king reaches the queening square (h8) or stays in front of the pawn, it is a draw: the white king cannot drive it out without stalemating it. Head for f8, g8 and h8 and stay there.',
+      es: 'Con un peón de torre, si el rey defensor alcanza la [casilla de coronación](queening-square) (h8) o se queda delante del peón, es tablas: el rey blanco no puede expulsarlo sin [ahogarlo](stalemate). Dirige el rey hacia f8, g8 y h8 y quédate allí.',
+      en: 'Against a rook pawn, once the defending king reaches the [queening square](queening-square) (h8) or stays in front of the pawn, it is a draw: the white king cannot drive it out without [stalemating](stalemate) it. Head for f8, g8 and h8 and stay there.',
     },
   },
   {
@@ -74,8 +74,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'El rey blanco está en la casilla de coronación y el negro, cortado por la torre en la columna d. El plan es «construir el puente»: la torre sube a la cuarta fila (1.Td4), el rey sale de la casilla de coronación y, cuando lleguen los jaques, la torre los tapa desde la cuarta fila.',
-      en: 'The white king sits on the queening square and the black king is cut off by the rook on the d-file. The plan is “building a bridge”: the rook goes to the fourth rank (1.Rd4), the king leaves the queening square and, when the checks come, the rook blocks them from the fourth rank.',
+      es: 'El rey blanco está en la [casilla de coronación](queening-square) y el negro, cortado por la torre en la columna d. El plan es «[construir el puente](building-a-bridge)»: la torre sube a la cuarta fila (1.Td4), el rey sale de la casilla de coronación y, cuando lleguen los [jaques](check), la torre los tapa desde la cuarta fila.',
+      en: 'The white king sits on the [queening square](queening-square) and the black king is cut off by the rook on the d-file. The plan is “[building a bridge](building-a-bridge)”: the rook goes to the fourth rank (1.Rd4), the king leaves the queening square and, when the [checks](check) come, the rook blocks them from the fourth rank.',
     },
   },
   {
@@ -86,8 +86,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'El rey negro está en la casilla de coronación y la torre corta al rey blanco en la sexta fila (por ejemplo, 1...Tb6 o 1...Tg6). Si el peón avanza a e6, el rey blanco se queda sin refugio y la torre pasa a dar jaques desde atrás. No abandones la sexta fila antes de tiempo.',
-      en: 'The black king holds the queening square and the rook keeps the white king off the sixth rank (for example 1...Rb6 or 1...Rg6). Once the pawn advances to e6 the white king has no shelter, and the rook switches to checking from behind. Do not leave the sixth rank too early.',
+      es: 'El rey negro está en la [casilla de coronación](queening-square) y la torre corta al rey blanco en la sexta fila (por ejemplo, 1...Tb6 o 1...Tg6). Si el peón avanza a e6, el rey blanco se queda sin refugio y la torre pasa a dar [jaques](check) desde atrás. No abandones la sexta fila antes de tiempo.',
+      en: 'The black king holds the [queening square](queening-square) and the rook keeps the white king off the sixth rank (for example 1...Rb6 or 1...Rg6). Once the pawn advances to e6 the white king has no shelter, and the rook switches to [checking](check) from behind. Do not leave the sixth rank too early.',
     },
   },
   {
@@ -98,8 +98,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'Contra el peón de torre con la torre delante de él, la torre negra ataca el peón de lado desde f6 y el rey se queda en g7 o h7. Así la torre blanca no puede abandonar a8 sin perder el peón, y si el rey blanco se acerca, recibe jaques laterales. El rey debe quedarse cerca: 1...Rf7?, 1...Rg6? o 1...Rh6? pierden.',
-      en: 'Against a rook pawn with the rook in front of it, the black rook attacks the pawn sideways from f6 while the king stays on g7 or h7. The white rook cannot leave a8 without dropping the pawn, and if the white king approaches it gets checked from the side. The king must stay put: 1...Kf7?, 1...Kg6? or 1...Kh6? lose.',
+      es: 'Contra el peón de torre con la torre delante de él, la torre negra ataca el peón de lado desde f6 y el rey se queda en g7 o h7. Así la torre blanca no puede abandonar a8 sin perder el peón, y si el rey blanco se acerca, recibe [jaques](check) laterales. El rey debe quedarse cerca: 1...Rf7?, 1...Rg6? o 1...Rh6? pierden.',
+      en: 'Against a rook pawn with the rook in front of it, the black rook attacks the pawn sideways from f6 while the king stays on g7 or h7. The white rook cannot leave a8 without dropping the pawn, and if the white king approaches it gets [checked](check) from the side. The king must stay put: 1...Kf7?, 1...Kg6? or 1...Kh6? lose.',
     },
   },
   {
@@ -125,8 +125,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'Contra un peón central o de caballo en séptima, la dama gana: con jaques y clavadas obliga al rey negro a ponerse delante de su peón, en d1, y cada vez que eso ocurre el rey blanco gana un tiempo para acercarse. Empieza con jaques como 1.De4+ o 1.Dg2+.',
-      en: 'Against a centre or knight pawn on the seventh rank the queen wins: with checks and pins it forces the black king in front of its pawn, onto d1, and each time that happens the white king gains a tempo to approach. Start with checks such as 1.Qe4+ or 1.Qg2+.',
+      es: 'Contra un peón central o de caballo en séptima, la dama gana: con [jaques](check) y [clavadas](pin) obliga al rey negro a ponerse delante de su peón, en d1, y cada vez que eso ocurre el rey blanco gana un [tiempo](tempo) para acercarse. Empieza con jaques como 1.De4+ o 1.Dg2+.',
+      en: 'Against a centre or knight pawn on the seventh rank the queen wins: with [checks](check) and [pins](pin) it forces the black king in front of its pawn, onto d1, and each time that happens the white king gains a [tempo](tempo) to approach. Start with checks such as 1.Qe4+ or 1.Qg2+.',
     },
   },
   {
@@ -140,8 +140,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'draw',
     playerSide: 'black',
     explanation: {
-      es: 'Con peón de alfil en séptima y el rey blanco lejos, el defensor se salva gracias al ahogado: 1...Ra1! y si 2.Dxc2, el rey negro queda ahogado. 1...Rc1 también hace tablas.',
-      en: 'With a bishop pawn on the seventh and the white king far away, the defender is saved by stalemate: 1...Ka1! and if 2.Qxc2, the black king is stalemated. 1...Kc1 also draws.',
+      es: 'Con peón de alfil en séptima y el rey blanco lejos, el defensor se salva gracias al [ahogado](stalemate): 1...Ra1! y si 2.Dxc2, el rey negro queda ahogado. 1...Rc1 también hace tablas.',
+      en: 'With a bishop pawn on the seventh and the white king far away, the defender is saved by [stalemate](stalemate): 1...Ka1! and if 2.Qxc2, the black king is stalemated. 1...Kc1 also draws.',
     },
   },
   {
@@ -152,8 +152,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'La dama reduce el espacio del rey negro hasta llevarlo al borde; después se acerca el rey blanco y se da mate. Cuidado con el ahogado: deja siempre al rey negro al menos una casilla libre hasta el mate.',
-      en: 'The queen shrinks the black king’s space until it reaches the edge; then the white king comes closer and delivers mate. Watch out for stalemate: always leave the black king at least one free square until the mate.',
+      es: 'La dama reduce el espacio del rey negro hasta llevarlo al borde; después se acerca el rey blanco y se da [mate](checkmate). Cuidado con el [ahogado](stalemate): deja siempre al rey negro al menos una casilla libre hasta el mate.',
+      en: 'The queen shrinks the black king’s space until it reaches the edge; then the white king comes closer and delivers [mate](checkmate). Watch out for [stalemate](stalemate): always leave the black king at least one free square until the mate.',
     },
   },
   {
@@ -164,8 +164,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'La torre corta al rey negro en una fila o columna y el rey blanco se acerca. Cuando los reyes quedan enfrentados, el jaque de torre empuja al rey negro una fila hacia el borde; repite hasta dar mate en la última fila o columna.',
-      en: 'The rook cuts off the black king along a rank or file while the white king approaches. When the kings face each other, a rook check pushes the black king one line towards the edge; repeat until mate on the last rank or file.',
+      es: 'La torre corta al rey negro en una fila o columna y el rey blanco se acerca. Cuando los reyes quedan enfrentados, el [jaque](check) de torre empuja al rey negro una fila hacia el borde; repite hasta dar [mate](checkmate) en la última fila o columna.',
+      en: 'The rook cuts off the black king along a rank or file while the white king approaches. When the kings face each other, a rook [check](check) pushes the black king one line towards the edge; repeat until [mate](checkmate) on the last rank or file.',
     },
   },
   {
@@ -176,8 +176,8 @@ export const endgames: EndgameSpec[] = [
     goal: 'win',
     playerSide: 'white',
     explanation: {
-      es: 'Los dos alfiles, uno junto al otro, forman una barrera diagonal que el rey negro no puede cruzar. Con ayuda del rey se le empuja hacia una esquina, cualquiera, y allí se da mate. Evita el ahogado en las últimas jugadas.',
-      en: 'The two bishops side by side form a diagonal barrier the black king cannot cross. With the king’s help it is driven into a corner, any corner, and mated there. Avoid stalemate in the final moves.',
+      es: 'Los dos alfiles, uno junto al otro, forman una barrera diagonal que el rey negro no puede cruzar. Con ayuda del rey se le empuja hacia una esquina, cualquiera, y allí se da [mate](checkmate). Evita el [ahogado](stalemate) en las últimas jugadas.',
+      en: 'The two bishops side by side form a diagonal barrier the black king cannot cross. With the king’s help it is driven into a corner, any corner, and [mated](checkmate) there. Avoid [stalemate](stalemate) in the final moves.',
     },
   },
 ];

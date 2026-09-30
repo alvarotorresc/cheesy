@@ -18,7 +18,16 @@
       },
       {
         "kind": "text",
-        "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender."
+        "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. "
+      },
+      {
+        "kind": "term",
+        "id": "pawn-structure",
+        "text": "Estructura"
+      },
+      {
+        "kind": "text",
+        "text": " sencilla y sólida, fácil de aprender."
       }
     ],
     "en": [
@@ -32,7 +41,16 @@
       },
       {
         "kind": "text",
-        "text": " on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+        "text": " on move one and regains the pawn with the queen or the knight. A simple, solid "
+      },
+      {
+        "kind": "term",
+        "id": "pawn-structure",
+        "text": "structure"
+      },
+      {
+        "kind": "text",
+        "text": " that is easy to learn."
       }
     ]
   },
@@ -143,7 +161,16 @@
                               },
                               {
                                 "kind": "text",
-                                "text": " la dama está a salvo y clava el caballo de "
+                                "text": " la dama está a salvo y "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pin",
+                                "text": "clava"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " el caballo de "
                               },
                               {
                                 "kind": "square",
@@ -165,7 +192,16 @@
                               },
                               {
                                 "kind": "text",
-                                "text": " the queen is safe and pins the "
+                                "text": " the queen is safe and "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pin",
+                                "text": "pins"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " the "
                               },
                               {
                                 "kind": "square",
@@ -264,8 +300,13 @@
                                                           "comment": {
                                                             "es": [
                                                               {
+                                                                "kind": "term",
+                                                                "id": "pawn-structure",
+                                                                "text": "Estructura"
+                                                              },
+                                                              {
                                                                 "kind": "text",
-                                                                "text": "Estructura sólida de tipo Caro-Kann con el alfil de "
+                                                                "text": " sólida de tipo Caro-Kann con el alfil de "
                                                               },
                                                               {
                                                                 "kind": "square",
@@ -273,13 +314,31 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " ya fuera de la cadena."
+                                                                "text": " ya fuera de la "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-chain",
+                                                                "text": "cadena"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
                                                               }
                                                             ],
                                                             "en": [
                                                               {
                                                                 "kind": "text",
-                                                                "text": "A solid Caro-Kann-like structure with the "
+                                                                "text": "A solid Caro-Kann-like "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-structure",
+                                                                "text": "structure"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " with the "
                                                               },
                                                               {
                                                                 "kind": "square",
@@ -287,7 +346,16 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " bishop already outside the chain."
+                                                                "text": " bishop already outside the "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-chain",
+                                                                "text": "chain"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
                                                               }
                                                             ]
                                                           },
@@ -389,8 +457,13 @@
                                           "comment": {
                                             "es": [
                                               {
+                                                "kind": "term",
+                                                "id": "development",
+                                                "text": "Desarrolla"
+                                              },
+                                              {
                                                 "kind": "text",
-                                                "text": "Desarrolla el alfil antes de "
+                                                "text": " el alfil antes de "
                                               },
                                               {
                                                 "kind": "move",
@@ -406,8 +479,13 @@
                                             ],
                                             "en": [
                                               {
+                                                "kind": "term",
+                                                "id": "development",
+                                                "text": "Develops"
+                                              },
+                                              {
                                                 "kind": "text",
-                                                "text": "Develops the bishop before "
+                                                "text": " the bishop before "
                                               },
                                               {
                                                 "kind": "move",
@@ -441,7 +519,25 @@
                                                                 "es": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "Las blancas preparan el enroque largo y la ruptura "
+                                                                    "text": "Las blancas preparan el "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "enroque"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " largo y la "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "pawn-break",
+                                                                    "text": "ruptura"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " "
                                                                   },
                                                                   {
                                                                     "kind": "square",
@@ -449,7 +545,16 @@
                                                                   },
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "; las negras completan el desarrollo con "
+                                                                    "text": "; las negras completan el "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "development",
+                                                                    "text": "desarrollo"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " con "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -477,7 +582,16 @@
                                                                 "en": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "White prepares long castling and the "
+                                                                    "text": "White prepares long "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "castling"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " and the "
                                                                   },
                                                                   {
                                                                     "kind": "square",
@@ -485,7 +599,25 @@
                                                                   },
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": " break; Black completes development with "
+                                                                    "text": " "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "pawn-break",
+                                                                    "text": "break"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; Black completes "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "development",
+                                                                    "text": "development"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " with "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -742,13 +874,31 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "Retirada completa: la dama queda a salvo a costa de algo de tiempo."
+                                "text": "Retirada completa: la dama queda a salvo a costa de algo de "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "tempo",
+                                "text": "tiempo"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
                               }
                             ],
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "A full retreat: the queen is safe at the cost of some time."
+                                "text": "A full retreat: the queen is safe at the cost of some "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "tempo",
+                                "text": "time"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
                               }
                             ]
                           },
@@ -836,7 +986,16 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "El caballo recupera el peón; las blancas ganarán tiempo con "
+                                "text": "El caballo recupera el peón; las blancas ganarán "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "tempo",
+                                "text": "tiempo"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " con "
                               },
                               {
                                 "kind": "square",
@@ -850,7 +1009,16 @@
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "The knight regains the pawn; White gains time with "
+                                "text": "The knight regains the pawn; White gains "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "tempo",
+                                "text": "time"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " with "
                               },
                               {
                                 "kind": "square",
@@ -914,7 +1082,16 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "Las negras desarrollan el alfil antes de recuperar el peón de "
+                                "text": "Las negras "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "desarrollan"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " el alfil antes de recuperar el peón de "
                               },
                               {
                                 "kind": "square",
@@ -928,7 +1105,16 @@
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "Black develops the bishop before regaining the "
+                                "text": "Black "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "develops"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " the bishop before regaining the "
                               },
                               {
                                 "kind": "square",
@@ -950,8 +1136,13 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "Desarrollo"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Desarrollo sencillo: las blancas devuelven el peón y las negras recuperan "
+                                    "text": " sencillo: las blancas devuelven el peón y las negras recuperan "
                                   },
                                   {
                                     "kind": "square",
@@ -965,7 +1156,16 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Simple development: White lets the pawn go and Black regains "
+                                    "text": "Simple "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "development"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": White lets the pawn go and Black regains "
                                   },
                                   {
                                     "kind": "square",

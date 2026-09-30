@@ -34,7 +34,16 @@
       },
       {
         "kind": "text",
-        "text": " para dominar el centro."
+        "text": " para dominar el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ],
     "en": [
@@ -64,7 +73,16 @@
       },
       {
         "kind": "text",
-        "text": " to take the centre."
+        "text": " to take the "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ]
   },
@@ -207,7 +225,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " para levantar un centro de peones."
+                                    "text": " para levantar un "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "centro"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " de peones."
                                   }
                                 ],
                                 "en": [
@@ -221,7 +248,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " to build a pawn centre."
+                                    "text": " to build a pawn "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "centre"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ]
                               },
@@ -269,7 +305,25 @@
                                                                     "es": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "Golpe central clásico: las negras rompen antes de que "
+                                                                        "text": "Golpe "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "centre",
+                                                                        "text": "central"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " clásico: las negras "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "pawn-break",
+                                                                        "text": "rompen"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " antes de que "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -283,7 +337,25 @@
                                                                     "en": [
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": "The classic central strike: Black breaks before "
+                                                                        "text": "The classic "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "centre",
+                                                                        "text": "central"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " strike: Black "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "pawn-break",
+                                                                        "text": "breaks"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " before "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -327,7 +399,16 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": "; las blancas juegan con el peón aislado de "
+                                                                                    "text": "; las blancas juegan con el "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "peón aislado"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " de "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -357,7 +438,16 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": "; White plays with the isolated "
+                                                                                    "text": "; White plays with the "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "isolated"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -440,7 +530,25 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " y se maniobra antes de romper en el centro."
+                                            "text": " y se maniobra antes de "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "pawn-break",
+                                            "text": "romper"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " en el "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "centro"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
                                           }
                                         ],
                                         "en": [
@@ -454,7 +562,25 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " is protected and White manoeuvres before any central break."
+                                            "text": " is protected and White manoeuvres before any "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "central"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "pawn-break",
+                                            "text": "break"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
                                           }
                                         ]
                                       },
@@ -527,8 +653,22 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "gambit",
+                                    "text": "Gambito"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Gambito: se entrega un peón para ganar tiempos con "
+                                    "text": ": se entrega un peón para ganar "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "tempo",
+                                    "text": "tiempos"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " con "
                                   },
                                   {
                                     "kind": "square",
@@ -550,7 +690,25 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "A gambit: White gives a pawn to gain time with "
+                                    "text": "A "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "gambit",
+                                    "text": "gambit"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": White gives a pawn to gain "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "tempo",
+                                    "text": "time"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " with "
                                   },
                                   {
                                     "kind": "square",
@@ -585,14 +743,46 @@
                                               "comment": {
                                                 "es": [
                                                   {
+                                                    "kind": "term",
+                                                    "id": "centre",
+                                                    "text": "Centro"
+                                                  },
+                                                  {
                                                     "kind": "text",
-                                                    "text": "Centro de peones y desarrollo rápido a cambio del material."
+                                                    "text": " de peones y "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "desarrollo"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " rápido a cambio del material."
                                                   }
                                                 ],
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "A pawn centre and fast development in return for the material."
+                                                    "text": "A pawn "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "centre",
+                                                    "text": "centre"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and fast "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "development"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " in return for the material."
                                                   }
                                                 ]
                                               },
@@ -745,13 +935,31 @@
                                             "es": [
                                               {
                                                 "kind": "text",
-                                                "text": "Las negras entregan un peón y ganan tiempos atacando al alfil."
+                                                "text": "Las negras entregan un peón y ganan "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "tiempos"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " atacando al alfil."
                                               }
                                             ],
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "Black gives a pawn and gains time by attacking the bishop."
+                                                "text": "Black gives a pawn and gains "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "time"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " by attacking the bishop."
                                               }
                                             ]
                                           },
