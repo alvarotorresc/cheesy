@@ -7,8 +7,62 @@
   "eco": "B10-B19",
   "side": "black",
   "description": {
-    "es": "Las negras preparan ...d5 con ...c6 para disputar el centro sin encerrar a su alfil de casillas claras.",
-    "en": "Black prepares ...d5 with ...c6 to contest the centre without locking in the light-squared bishop."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras preparan "
+      },
+      {
+        "kind": "move",
+        "san": "d5",
+        "number": "...",
+        "start": false,
+        "written": "...d5"
+      },
+      {
+        "kind": "text",
+        "text": " con "
+      },
+      {
+        "kind": "move",
+        "san": "c6",
+        "number": "...",
+        "start": false,
+        "written": "...c6"
+      },
+      {
+        "kind": "text",
+        "text": " para disputar el centro sin encerrar a su alfil de casillas claras."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black prepares "
+      },
+      {
+        "kind": "move",
+        "san": "d5",
+        "number": "...",
+        "start": false,
+        "written": "...d5"
+      },
+      {
+        "kind": "text",
+        "text": " with "
+      },
+      {
+        "kind": "move",
+        "san": "c6",
+        "number": "...",
+        "start": false,
+        "written": "...c6"
+      },
+      {
+        "kind": "text",
+        "text": " to contest the centre without locking in the light-squared bishop."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +76,56 @@
             "en": "Caro-Kann Defence"
           },
           "comment": {
-            "es": "Prepara ...d5 dejando libre la diagonal del alfil de c8.",
-            "en": "Prepares ...d5 while keeping the c8 bishop’s diagonal open."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Prepara "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " dejando libre la diagonal del alfil de "
+              },
+              {
+                "kind": "square",
+                "square": "c8"
+              },
+              {
+                "kind": "text",
+                "text": "."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Prepares "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " while keeping the "
+              },
+              {
+                "kind": "square",
+                "square": "c8"
+              },
+              {
+                "kind": "text",
+                "text": " bishop’s diagonal open."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -54,8 +156,40 @@
                                     "en": "Classical Variation"
                                   },
                                   "comment": {
-                                    "es": "El alfil sale antes de ...e6, lo que resuelve el problema clásico de la pieza.",
-                                    "en": "The bishop gets out before ...e6, solving its classic problem."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "El alfil sale antes de "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", lo que resuelve el problema clásico de la pieza."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "The bishop gets out before "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", solving its classic problem."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -70,8 +204,50 @@
                                             {
                                               "san": "h4",
                                               "comment": {
-                                                "es": "Amenaza h5 para atrapar o debilitar al alfil de g6.",
-                                                "en": "Threatens h5 to trap or harass the g6 bishop."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Amenaza "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "h5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " para atrapar o debilitar al alfil de "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "g6"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Threatens "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "h5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " to trap or harass the "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "g6"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " bishop."
+                                                  }
+                                                ]
                                               },
                                               "main": true,
                                               "children": [
@@ -90,8 +266,34 @@
                                                             {
                                                               "san": "h5",
                                                               "comment": {
-                                                                "es": "El peón de h5 gana espacio y fija la estructura negra del flanco de rey.",
-                                                                "en": "The h5 pawn gains space and fixes Black’s kingside structure."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "El peón de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "h5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " gana espacio y fija la estructura negra del flanco de rey."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "The "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "h5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " pawn gains space and fixes Black’s kingside structure."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
@@ -177,8 +379,56 @@
                         "en": "Advance Variation"
                       },
                       "comment": {
-                        "es": "Las blancas ganan espacio; las negras sacan el alfil a f5 antes de ...e6.",
-                        "en": "White gains space; Black develops the bishop to f5 before ...e6."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Las blancas ganan espacio; las negras sacan el alfil a "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " antes de "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e6",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e6"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "White gains space; Black develops the bishop to "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " before "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e6",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e6"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -196,8 +446,18 @@
                                         {
                                           "san": "c5",
                                           "comment": {
-                                            "es": "Ataca la base de la cadena, como en la Francesa pero con el alfil ya fuera.",
-                                            "en": "Hits the base of the chain, as in the French but with the bishop already out."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Ataca la base de la cadena, como en la Francesa pero con el alfil ya fuera."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Hits the base of the chain, as in the French but with the bishop already out."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {
@@ -244,8 +504,54 @@
                             {
                               "san": "Bd3",
                               "comment": {
-                                "es": "Estructura simétrica; las blancas juegan con c3 y Af4 al estilo de un Gambito de Dama del Cambio invertido.",
-                                "en": "A symmetrical structure; White plays c3 and Bf4, like a reversed Queen’s Gambit Exchange."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Estructura simétrica; las blancas juegan con "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bf4",
+                                    "start": false,
+                                    "written": "Af4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " al estilo de un Gambito de Dama del Cambio invertido."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "A symmetrical structure; White plays "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bf4",
+                                    "start": false,
+                                    "written": "Bf4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", like a reversed Queen’s Gambit Exchange."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -301,8 +607,34 @@
                                 "en": "Panov–Botvinnik Attack"
                               },
                               "comment": {
-                                "es": "Las blancas aceptan un peón aislado en d4 a cambio de actividad de piezas.",
-                                "en": "White accepts an isolated d4 pawn in return for active pieces."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Las blancas aceptan un peón aislado en "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " a cambio de actividad de piezas."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "White accepts an isolated "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " pawn in return for active pieces."
+                                  }
+                                ]
                               },
                               "children": [
                                 {

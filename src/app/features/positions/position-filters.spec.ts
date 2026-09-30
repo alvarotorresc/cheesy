@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import type { CuratedPosition } from '../../core/content';
 import {
   activeFilterCount,
@@ -17,7 +18,7 @@ const position = (
   fen: '4k3/8/8/8/8/8/8/4K3 w - - 0 1',
   playerSide,
   solution,
-  explanation: { es: '', en: '' },
+  explanation: plainText('-'),
   tags: [],
 });
 

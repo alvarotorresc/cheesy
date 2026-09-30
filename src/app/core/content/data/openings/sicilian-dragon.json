@@ -7,8 +7,34 @@
   "eco": "B70-B79",
   "side": "black",
   "description": {
-    "es": "Las negras colocan el alfil en fianchetto en g7 para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos.",
-    "en": "Black fianchettoes the bishop on g7 to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras colocan el alfil en fianchetto en "
+      },
+      {
+        "kind": "square",
+        "square": "g7"
+      },
+      {
+        "kind": "text",
+        "text": " para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black fianchettoes the bishop on "
+      },
+      {
+        "kind": "square",
+        "square": "g7"
+      },
+      {
+        "kind": "text",
+        "text": " to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +48,34 @@
             "en": "Sicilian Defence"
           },
           "comment": {
-            "es": "Lucha por d4 con un peón lateral y crea desequilibrio desde la primera jugada.",
-            "en": "Fights for d4 with a flank pawn and creates imbalance from move one."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Lucha por "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Fights for "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " with a flank pawn and creates imbalance from move one."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -42,8 +94,18 @@
                         {
                           "san": "cxd4",
                           "comment": {
-                            "es": "Cambia un peón lateral por uno central: las negras tendrán mayoría central.",
-                            "en": "Trades a flank pawn for a centre pawn: Black gets the central majority."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Cambia un peón lateral por uno central: las negras tendrán mayoría central."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Trades a flank pawn for a centre pawn: Black gets the central majority."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -66,8 +128,66 @@
                                             "en": "Dragon Variation"
                                           },
                                           "comment": {
-                                            "es": "El alfil irá a g7, desde donde presionará la gran diagonal hacia d4 y b2.",
-                                            "en": "The bishop heads for g7, from where it rakes the long diagonal towards d4 and b2."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "El alfil irá a "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "g7"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ", desde donde presionará la gran diagonal hacia "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " y "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "b2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "The bishop heads for "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "g7"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ", from where it rakes the long diagonal towards "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " and "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "b2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -86,8 +206,106 @@
                                                         "en": "Yugoslav Attack"
                                                       },
                                                       "comment": {
-                                                        "es": "Plan típico: Dd2, Ah6 para cambiar el alfil de g7, enroque largo y avance h4-h5.",
-                                                        "en": "The typical plan: Qd2, Bh6 to trade off the g7 bishop, long castling and h4-h5."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Plan típico: "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Qd2",
+                                                            "start": false,
+                                                            "written": "Dd2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bh6",
+                                                            "start": false,
+                                                            "written": "Ah6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " para cambiar el alfil de "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "g7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", enroque largo y avance "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "h4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "-"
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "h5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "The typical plan: "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Qd2",
+                                                            "start": false,
+                                                            "written": "Qd2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bh6",
+                                                            "start": false,
+                                                            "written": "Bh6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " to trade off the "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "g7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " bishop, long castling and "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "h4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "-"
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "h5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "main": true,
                                                       "children": [
@@ -110,8 +328,50 @@
                                                                         "en": "Yugoslav Attack, Main Line"
                                                                       },
                                                                       "comment": {
-                                                                        "es": "El alfil controla d5 y apunta a f7, pero será un blanco del juego negro por la columna c.",
-                                                                        "en": "The bishop controls d5 and eyes f7, but it becomes a target of Black’s play on the c-file."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "El alfil controla "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " y apunta a "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f7"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": ", pero será un blanco del juego negro por la columna c."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "The bishop controls "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " and eyes "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f7"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": ", but it becomes a target of Black’s play on the c-file."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "main": true,
                                                                       "children": [
@@ -126,8 +386,18 @@
                                                                                 {
                                                                                   "san": "Rc8",
                                                                                   "comment": {
-                                                                                    "es": "Carrera de ataques: las blancas en el flanco de rey y las negras por la columna c.",
-                                                                                    "en": "A race of attacks: White on the kingside, Black down the c-file."
+                                                                                    "es": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "Carrera de ataques: las blancas en el flanco de rey y las negras por la columna c."
+                                                                                      }
+                                                                                    ],
+                                                                                    "en": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "A race of attacks: White on the kingside, Black down the c-file."
+                                                                                      }
+                                                                                    ]
                                                                                   },
                                                                                   "main": true,
                                                                                   "children": [
@@ -142,8 +412,34 @@
                                                                                             {
                                                                                               "san": "Kb1",
                                                                                               "comment": {
-                                                                                                "es": "Aparta al rey de la columna c y de posibles sacrificios en c3.",
-                                                                                                "en": "Takes the king off the c-file and away from sacrifices on c3."
+                                                                                                "es": [
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "Aparta al rey de la columna c y de posibles sacrificios en "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "c3"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "."
+                                                                                                  }
+                                                                                                ],
+                                                                                                "en": [
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "Takes the king off the c-file and away from sacrifices on "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "c3"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "."
+                                                                                                  }
+                                                                                                ]
                                                                                               },
                                                                                               "main": true,
                                                                                               "children": [
@@ -158,8 +454,82 @@
                                                                                                         {
                                                                                                           "san": "Rxc4",
                                                                                                           "comment": {
-                                                                                                            "es": "Las negras eliminan el alfil de b3 y la torre de c4 presiona c3 y e4.",
-                                                                                                            "en": "Black removes the b3 bishop and the c4 rook presses on c3 and e4."
+                                                                                                            "es": [
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": "Las negras eliminan el alfil de "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "b3"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " y la torre de "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "c4"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " presiona "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "c3"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " y "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "e4"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": "."
+                                                                                                              }
+                                                                                                            ],
+                                                                                                            "en": [
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": "Black removes the "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "b3"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " bishop and the "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "c4"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " rook presses on "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "c3"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": " and "
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "square",
+                                                                                                                "square": "e4"
+                                                                                                              },
+                                                                                                              {
+                                                                                                                "kind": "text",
+                                                                                                                "text": "."
+                                                                                                              }
+                                                                                                            ]
                                                                                                           },
                                                                                                           "main": true,
                                                                                                           "children": [
@@ -170,8 +540,18 @@
                                                                                                                 {
                                                                                                                   "san": "b5",
                                                                                                                   "comment": {
-                                                                                                                    "es": "Las negras lanzan los peones del flanco de dama contra el rey blanco.",
-                                                                                                                    "en": "Black throws the queenside pawns at the white king."
+                                                                                                                    "es": [
+                                                                                                                      {
+                                                                                                                        "kind": "text",
+                                                                                                                        "text": "Las negras lanzan los peones del flanco de dama contra el rey blanco."
+                                                                                                                      }
+                                                                                                                    ],
+                                                                                                                    "en": [
+                                                                                                                      {
+                                                                                                                        "kind": "text",
+                                                                                                                        "text": "Black throws the queenside pawns at the white king."
+                                                                                                                      }
+                                                                                                                    ]
                                                                                                                   },
                                                                                                                   "main": true,
                                                                                                                   "children": []
@@ -192,8 +572,66 @@
                                                                                                 {
                                                                                                   "san": "h5",
                                                                                                   "comment": {
-                                                                                                    "es": "Frena el avance h4-h5 a costa de debilitar la casilla g6.",
-                                                                                                    "en": "Halts h4-h5 at the cost of weakening g6."
+                                                                                                    "es": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "Frena el avance "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "h4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "-"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "h5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " a costa de debilitar la casilla "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "g6"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "."
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "en": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "Halts "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "h4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "-"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "h5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " at the cost of weakening "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "g6"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "."
+                                                                                                      }
+                                                                                                    ]
                                                                                                   },
                                                                                                   "children": [
                                                                                                     {
@@ -231,8 +669,18 @@
                                                                         {
                                                                           "san": "d5",
                                                                           "comment": {
-                                                                            "es": "Rotura central inmediata: las negras abren el juego antes de que llegue el ataque blanco.",
-                                                                            "en": "An immediate central break: Black opens the game before White’s attack arrives."
+                                                                            "es": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "Rotura central inmediata: las negras abren el juego antes de que llegue el ataque blanco."
+                                                                              }
+                                                                            ],
+                                                                            "en": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "An immediate central break: Black opens the game before White’s attack arrives."
+                                                                              }
+                                                                            ]
                                                                           },
                                                                           "children": [
                                                                             {
@@ -285,8 +733,34 @@
                                                                         "en": "Panov Variation"
                                                                       },
                                                                       "comment": {
-                                                                        "es": "Las blancas avanzan en el flanco de rey antes de decidir dónde colocar el alfil de f1.",
-                                                                        "en": "White advances on the kingside before deciding where the f1 bishop belongs."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Las blancas avanzan en el flanco de rey antes de decidir dónde colocar el alfil de "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f1"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "White advances on the kingside before deciding where the "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f1"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " bishop belongs."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "children": [
                                                                         {
@@ -334,8 +808,18 @@
                                                 "en": "Classical Variation"
                                               },
                                               "comment": {
-                                                "es": "Desarrollo tranquilo y enroque corto: juego posicional sin los riesgos del Yugoslavo.",
-                                                "en": "Quiet development and short castling: positional play without the Yugoslav’s risks."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Desarrollo tranquilo y enroque corto: juego posicional sin los riesgos del Yugoslavo."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Quiet development and short castling: positional play without the Yugoslav’s risks."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -391,8 +875,56 @@
                                                 "en": "Levenfish Variation"
                                               },
                                               "comment": {
-                                                "es": "Amenaza e5 de inmediato; ...Cbd7 controla esa casilla.",
-                                                "en": "Threatens e5 at once; ...Nbd7 covers that square."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Amenaza "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " de inmediato; "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "Nbd7",
+                                                    "number": "...",
+                                                    "start": false,
+                                                    "written": "...Cbd7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " controla esa casilla."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Threatens "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " at once; "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "Nbd7",
+                                                    "number": "...",
+                                                    "start": false,
+                                                    "written": "...Nbd7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " covers that square."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {

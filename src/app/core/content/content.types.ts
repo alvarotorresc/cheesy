@@ -31,8 +31,8 @@ export interface OpeningTree {
   eco: string;
   /** Side the opening is studied from. */
   side: Side;
-  /** One or two sentences. */
-  description: Localized;
+  /** One or two sentences, cut into segments by the content build. */
+  description: RichText;
   /** Moves playable from the initial position. */
   root: OpeningNode[];
 }
@@ -42,8 +42,8 @@ export interface OpeningNode {
   san: string;
   /** Name of the variation that starts with this move. */
   name?: Localized;
-  /** Short idea behind the move. */
-  comment?: Localized;
+  /** Short idea behind the move, cut into segments by the content build. */
+  comment?: RichText;
   /** Present, and true, only on the moves of the main line. */
   main?: boolean;
   /** Continuations. The main-line child, if any, comes first. */
@@ -82,8 +82,8 @@ export interface EndgamePosition {
   /** Goal of the practising side. */
   goal: 'win' | 'draw';
   playerSide: Side;
-  /** Key idea, two to four sentences. */
-  explanation: Localized;
+  /** Key idea, two to four sentences, cut into segments by the content build. */
+  explanation: RichText;
 }
 
 export interface CuratedPosition {
@@ -95,7 +95,8 @@ export interface CuratedPosition {
   playerSide: Side;
   /** SAN moves, alternating sides, starting and ending with the player. */
   solution: string[];
-  explanation: Localized;
+  /** One or two sentences, cut into segments by the content build. */
+  explanation: RichText;
   /** English, kebab-case: "back-rank", "smothered-mate"... */
   tags: string[];
 }

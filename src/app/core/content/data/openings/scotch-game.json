@@ -7,8 +7,48 @@
   "eco": "C44-C45",
   "side": "white",
   "description": {
-    "es": "Las blancas abren el centro con 3.d4 y cambian su peón de d por el de e5: juego de piezas libre y algo más de espacio.",
-    "en": "White opens the centre with 3.d4 and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las blancas abren el centro con "
+      },
+      {
+        "kind": "move",
+        "san": "d4",
+        "number": "3.",
+        "start": false,
+        "written": "3.d4"
+      },
+      {
+        "kind": "text",
+        "text": " y cambian su peón de d por el de "
+      },
+      {
+        "kind": "square",
+        "square": "e5"
+      },
+      {
+        "kind": "text",
+        "text": ": juego de piezas libre y algo más de espacio."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "White opens the centre with "
+      },
+      {
+        "kind": "move",
+        "san": "d4",
+        "number": "3.",
+        "start": false,
+        "written": "3.d4"
+      },
+      {
+        "kind": "text",
+        "text": " and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+      }
+    ]
   },
   "root": [
     {
@@ -34,8 +74,34 @@
                         "en": "Scotch Game"
                       },
                       "comment": {
-                        "es": "Las blancas atacan e5 de inmediato y abren el centro en la tercera jugada.",
-                        "en": "White strikes at e5 at once and opens the centre on move three."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Las blancas atacan "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " de inmediato y abren el centro en la tercera jugada."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "White strikes at "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " at once and opens the centre on move three."
+                          }
+                        ]
                       },
                       "main": true,
                       "children": [
@@ -46,8 +112,18 @@
                             {
                               "san": "Nxd4",
                               "comment": {
-                                "es": "El caballo recupera el peón en una casilla central; las negras intentarán hostigarlo con sus piezas.",
-                                "en": "The knight regains the pawn on a central square; Black will try to harass it with pieces."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "El caballo recupera el peón en una casilla central; las negras intentarán hostigarlo con sus piezas."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "The knight regains the pawn on a central square; Black will try to harass it with pieces."
+                                  }
+                                ]
                               },
                               "main": true,
                               "children": [
@@ -58,8 +134,34 @@
                                     "en": "Schmidt Variation"
                                   },
                                   "comment": {
-                                    "es": "Desarrolla y ataca el peón de e4.",
-                                    "en": "Develops while attacking the e4 pawn."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Desarrolla y ataca el peón de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Develops while attacking the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " pawn."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -78,16 +180,88 @@
                                                 "en": "Mieses Variation"
                                               },
                                               "comment": {
-                                                "es": "Gana espacio y expulsa al caballo de f6 de su mejor casilla.",
-                                                "en": "Gains space and drives the f6 knight from its best square."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Gana espacio y expulsa al caballo de "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f6"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " de su mejor casilla."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Gains space and drives the "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f6"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " knight from its best square."
+                                                  }
+                                                ]
                                               },
                                               "main": true,
                                               "children": [
                                                 {
                                                   "san": "Qe7",
                                                   "comment": {
-                                                    "es": "Clava el peón de e5 contra el rey y obliga a De2.",
-                                                    "en": "Pins the e5 pawn against the king and forces Qe2."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Clava el peón de "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e5"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " contra el rey y obliga a "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Qe2",
+                                                        "start": false,
+                                                        "written": "De2"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Pins the "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e5"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " pawn against the king and forces "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Qe2",
+                                                        "start": false,
+                                                        "written": "Qe2"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
@@ -102,16 +276,116 @@
                                                             {
                                                               "san": "c4",
                                                               "comment": {
-                                                                "es": "Expulsa al caballo de d5, aunque la dama de e2 sigue tapando al alfil de f1.",
-                                                                "en": "Kicks the d5 knight, although the queen on e2 still blocks the f1 bishop."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Expulsa al caballo de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": ", aunque la dama de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e2"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " sigue tapando al alfil de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f1"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Kicks the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " knight, although the queen on "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e2"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " still blocks the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f1"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " bishop."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
                                                                 {
                                                                   "san": "Ba6",
                                                                   "comment": {
-                                                                    "es": "Clava el peón de c4 contra la dama y mantiene el caballo en d5.",
-                                                                    "en": "Pins the c4 pawn against the queen and keeps the knight on d5."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Clava el peón de "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " contra la dama y mantiene el caballo en "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Pins the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " pawn against the queen and keeps the knight on "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "main": true,
                                                                   "children": [
@@ -126,8 +400,34 @@
                                                                             {
                                                                               "san": "g3",
                                                                               "comment": {
-                                                                                "es": "Como la dama tapa al alfil de f1, las blancas lo desarrollan en fianchetto y enrocan.",
-                                                                                "en": "With the queen blocking the f1 bishop, White fianchettoes it and castles."
+                                                                                "es": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Como la dama tapa al alfil de "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "f1"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ", las blancas lo desarrollan en fianchetto y enrocan."
+                                                                                  }
+                                                                                ],
+                                                                                "en": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "With the queen blocking the "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "f1"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " bishop, White fianchettoes it and castles."
+                                                                                  }
+                                                                                ]
                                                                               },
                                                                               "main": true,
                                                                               "children": [
@@ -177,8 +477,50 @@
                                                                 {
                                                                   "san": "Nb6",
                                                                   "comment": {
-                                                                    "es": "Retirada más tranquila: el caballo vigila c4 y d5.",
-                                                                    "en": "A calmer retreat: the knight keeps an eye on c4 and d5."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Retirada más tranquila: el caballo vigila "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " y "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "A calmer retreat: the knight keeps an eye on "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " and "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": [
                                                                     {
@@ -255,8 +597,34 @@
                                     "en": "Classical Variation"
                                   },
                                   "comment": {
-                                    "es": "El alfil ataca al caballo de d4 y obliga a las blancas a decidir.",
-                                    "en": "The bishop hits the d4 knight and forces White to decide."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "El alfil ataca al caballo de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " y obliga a las blancas a decidir."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "The bishop hits the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " knight and forces White to decide."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -269,8 +637,50 @@
                                             "en": "Intermezzo Variation"
                                           },
                                           "comment": {
-                                            "es": "Jugada intermedia: amenaza mate en f2 antes de recapturar en c6.",
-                                            "en": "An in-between move: it threatens mate on f2 before recapturing on c6."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Jugada intermedia: amenaza mate en "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "f2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " antes de recapturar en "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "c6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "An in-between move: it threatens mate on "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "f2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " before recapturing on "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "c6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {
@@ -339,8 +749,42 @@
                                     {
                                       "san": "Be3",
                                       "comment": {
-                                        "es": "Refuerza el caballo de d4 y ofrece cambiar el alfil activo de c5.",
-                                        "en": "Supports the d4 knight and offers to trade Black’s active bishop."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Refuerza el caballo de "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y ofrece cambiar el alfil activo de "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "c5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Supports the "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " knight and offers to trade Black’s active bishop."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -408,8 +852,34 @@
                                     "en": "Steinitz Variation"
                                   },
                                   "comment": {
-                                    "es": "Ataca e4 de inmediato, pero la dama sale muy pronto y puede ser perseguida.",
-                                    "en": "Attacks e4 at once, but the early queen sortie can be chased."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Ataca "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " de inmediato, pero la dama sale muy pronto y puede ser perseguida."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Attacks "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " at once, but the early queen sortie can be chased."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -427,8 +897,50 @@
                                                     {
                                                       "san": "Nb5",
                                                       "comment": {
-                                                        "es": "Las blancas han entregado el peón de e4 a cambio de desarrollo y presión sobre c7.",
-                                                        "en": "White has given the e4 pawn for development and pressure on c7."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Las blancas han entregado el peón de "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "e4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " a cambio de desarrollo y presión sobre "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "c7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "White has given the "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "e4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " pawn for development and pressure on "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "c7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -476,8 +988,34 @@
                                 "en": "Scotch Gambit"
                               },
                               "comment": {
-                                "es": "Gambito: en lugar de recuperar el peón, las blancas desarrollan el alfil apuntando a f7.",
-                                "en": "A gambit: instead of regaining the pawn, White develops the bishop towards f7."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Gambito: en lugar de recuperar el peón, las blancas desarrollan el alfil apuntando a "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "A gambit: instead of regaining the pawn, White develops the bishop towards "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -489,8 +1027,34 @@
                                         {
                                           "san": "d5",
                                           "comment": {
-                                            "es": "Golpe central: las negras atacan al alfil antes de que e5 las incomode.",
-                                            "en": "A central strike: Black attacks the bishop before e5 becomes a nuisance."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Golpe central: las negras atacan al alfil antes de que "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "e5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " las incomode."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "A central strike: Black attacks the bishop before "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "e5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " becomes a nuisance."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {

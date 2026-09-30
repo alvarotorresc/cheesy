@@ -8,8 +8,50 @@
     "eco": "C60-C99",
     "side": "white",
     "description": {
-      "es": "Las blancas presionan el caballo de c6, defensor del peón de e5, y buscan una ventaja duradera en el centro.",
-      "en": "White pressures the c6 knight, the defender of the e5 pawn, aiming for a lasting central edge."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las blancas presionan el caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "c6"
+        },
+        {
+          "kind": "text",
+          "text": ", defensor del peón de "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ", y buscan una ventaja duradera en el centro."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "White pressures the "
+        },
+        {
+          "kind": "square",
+          "square": "c6"
+        },
+        {
+          "kind": "text",
+          "text": " knight, the defender of the "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": " pawn, aiming for a lasting central edge."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -62,8 +104,66 @@
     "eco": "C50-C59",
     "side": "white",
     "description": {
-      "es": "El alfil apunta a f7, el punto débil del enroque negro, y las blancas preparan c3 y d4 para dominar el centro.",
-      "en": "The bishop aims at f7, the weak point near the black king, while White prepares c3 and d4 to take the centre."
+      "es": [
+        {
+          "kind": "text",
+          "text": "El alfil apunta a "
+        },
+        {
+          "kind": "square",
+          "square": "f7"
+        },
+        {
+          "kind": "text",
+          "text": ", el punto débil del enroque negro, y las blancas preparan "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": " para dominar el centro."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The bishop aims at "
+        },
+        {
+          "kind": "square",
+          "square": "f7"
+        },
+        {
+          "kind": "text",
+          "text": ", the weak point near the black king, while White prepares "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": " to take the centre."
+        }
+      ]
     },
     "lineCount": 4,
     "preview": {
@@ -116,8 +216,100 @@
     "eco": "B90-B99",
     "side": "black",
     "description": {
-      "es": "Con 5...a6 las negras controlan b5 y mantienen opciones de ...e5 o ...e6; posiciones asimétricas y muy dinámicas.",
-      "en": "With 5...a6 Black controls b5 and keeps both ...e5 and ...e6 in reserve; sharp, unbalanced positions."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Con "
+        },
+        {
+          "kind": "move",
+          "san": "a6",
+          "number": "5...",
+          "start": false,
+          "written": "5...a6"
+        },
+        {
+          "kind": "text",
+          "text": " las negras controlan "
+        },
+        {
+          "kind": "square",
+          "square": "b5"
+        },
+        {
+          "kind": "text",
+          "text": " y mantienen opciones de "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": "; posiciones asimétricas y muy dinámicas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "With "
+        },
+        {
+          "kind": "move",
+          "san": "a6",
+          "number": "5...",
+          "start": false,
+          "written": "5...a6"
+        },
+        {
+          "kind": "text",
+          "text": " Black controls "
+        },
+        {
+          "kind": "square",
+          "square": "b5"
+        },
+        {
+          "kind": "text",
+          "text": " and keeps both "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": " in reserve; sharp, unbalanced positions."
+        }
+      ]
     },
     "lineCount": 4,
     "preview": {
@@ -170,8 +362,62 @@
     "eco": "C00-C19",
     "side": "black",
     "description": {
-      "es": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con ...c5 y ...f6.",
-      "en": "Black accepts less space for a solid structure and central counterplay with ...c5 and ...f6."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "move",
+          "san": "f6",
+          "number": "...",
+          "start": false,
+          "written": "...f6"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black accepts less space for a solid structure and central counterplay with "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "move",
+          "san": "f6",
+          "number": "...",
+          "start": false,
+          "written": "...f6"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -221,8 +467,62 @@
     "eco": "B10-B19",
     "side": "black",
     "description": {
-      "es": "Las negras preparan ...d5 con ...c6 para disputar el centro sin encerrar a su alfil de casillas claras.",
-      "en": "Black prepares ...d5 with ...c6 to contest the centre without locking in the light-squared bishop."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras preparan "
+        },
+        {
+          "kind": "move",
+          "san": "d5",
+          "number": "...",
+          "start": false,
+          "written": "...d5"
+        },
+        {
+          "kind": "text",
+          "text": " con "
+        },
+        {
+          "kind": "move",
+          "san": "c6",
+          "number": "...",
+          "start": false,
+          "written": "...c6"
+        },
+        {
+          "kind": "text",
+          "text": " para disputar el centro sin encerrar a su alfil de casillas claras."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black prepares "
+        },
+        {
+          "kind": "move",
+          "san": "d5",
+          "number": "...",
+          "start": false,
+          "written": "...d5"
+        },
+        {
+          "kind": "text",
+          "text": " with "
+        },
+        {
+          "kind": "move",
+          "san": "c6",
+          "number": "...",
+          "start": false,
+          "written": "...c6"
+        },
+        {
+          "kind": "text",
+          "text": " to contest the centre without locking in the light-squared bishop."
+        }
+      ]
     },
     "lineCount": 4,
     "preview": {
@@ -272,8 +572,48 @@
     "eco": "C44-C45",
     "side": "white",
     "description": {
-      "es": "Las blancas abren el centro con 3.d4 y cambian su peón de d por el de e5: juego de piezas libre y algo más de espacio.",
-      "en": "White opens the centre with 3.d4 and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las blancas abren el centro con "
+        },
+        {
+          "kind": "move",
+          "san": "d4",
+          "number": "3.",
+          "start": false,
+          "written": "3.d4"
+        },
+        {
+          "kind": "text",
+          "text": " y cambian su peón de d por el de "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ": juego de piezas libre y algo más de espacio."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "White opens the centre with "
+        },
+        {
+          "kind": "move",
+          "san": "d4",
+          "number": "3.",
+          "start": false,
+          "written": "3.d4"
+        },
+        {
+          "kind": "text",
+          "text": " and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -326,8 +666,50 @@
     "eco": "C42-C43",
     "side": "black",
     "description": {
-      "es": "Las negras contraatacan e4 en lugar de defender e5: una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel.",
-      "en": "Black counterattacks e4 instead of defending e5: a symmetrical, very solid defence valued for its reliability at top level."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras contraatacan "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " en lugar de defender "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ": una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black counterattacks "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " instead of defending "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ": a symmetrical, very solid defence valued for its reliability at top level."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -380,8 +762,50 @@
     "eco": "C30-C39",
     "side": "white",
     "description": {
-      "es": "Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un centro con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.",
-      "en": "White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a centre with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las blancas entregan el peón de f para desviar el de "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ", abrir la columna f y levantar un centro con "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": ". Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "White gives up the f-pawn to deflect the "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": " pawn, open the f-file and build a centre with "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": ". A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+        }
+      ]
     },
     "lineCount": 7,
     "preview": {
@@ -440,8 +864,34 @@
     "eco": "B70-B79",
     "side": "black",
     "description": {
-      "es": "Las negras colocan el alfil en fianchetto en g7 para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos.",
-      "en": "Black fianchettoes the bishop on g7 to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras colocan el alfil en fianchetto en "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black fianchettoes the bishop on "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -491,8 +941,50 @@
     "eco": "B33",
     "side": "black",
     "description": {
-      "es": "Las negras aceptan un agujero permanente en d5 y un peón retrasado en d6 a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel.",
-      "en": "Black accepts a permanent hole on d5 and a backward d6 pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras aceptan un agujero permanente en "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " y un peón retrasado en "
+        },
+        {
+          "kind": "square",
+          "square": "d6"
+        },
+        {
+          "kind": "text",
+          "text": " a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black accepts a permanent hole on "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " and a backward "
+        },
+        {
+          "kind": "square",
+          "square": "d6"
+        },
+        {
+          "kind": "text",
+          "text": " pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -542,8 +1034,56 @@
     "eco": "B22",
     "side": "white",
     "description": {
-      "es": "Con 2.c3 las blancas preparan d4 para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas.",
-      "en": "With 2.c3 White prepares d4 to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Con "
+        },
+        {
+          "kind": "move",
+          "san": "c3",
+          "number": "2.",
+          "start": false,
+          "written": "2.c3"
+        },
+        {
+          "kind": "text",
+          "text": " las blancas preparan "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": " para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "With "
+        },
+        {
+          "kind": "move",
+          "san": "c3",
+          "number": "2.",
+          "start": false,
+          "written": "2.c3"
+        },
+        {
+          "kind": "text",
+          "text": " White prepares "
+        },
+        {
+          "kind": "square",
+          "square": "d4"
+        },
+        {
+          "kind": "text",
+          "text": " to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -599,8 +1139,34 @@
     "eco": "B01",
     "side": "black",
     "description": {
-      "es": "Las negras atacan e4 en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender.",
-      "en": "Black hits e4 on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras atacan "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black hits "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -650,8 +1216,78 @@
     "eco": "B07-B09",
     "side": "black",
     "description": {
-      "es": "Las negras permiten un centro blanco amplio para socavarlo después con ...c5 o ...e5 y la presión del alfil de g7.",
-      "en": "Black allows a broad white centre and undermines it later with ...c5 or ...e5 and pressure from the g7 bishop."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras permiten un centro blanco amplio para socavarlo después con "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " y la presión del alfil de "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black allows a broad white centre and undermines it later with "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " and pressure from the "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " bishop."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -704,8 +1340,116 @@
     "eco": "D30-D69",
     "side": "black",
     "description": {
-      "es": "Las negras mantienen el peón de d5 con ...e6: planteamiento sólido y clásico. El reto es liberar el alfil de c8 y romper con ...c5 o ...e5.",
-      "en": "Black keeps the d5 pawn with ...e6: a solid, classical approach. The challenge is freeing the c8 bishop and breaking with ...c5 or ...e5."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras mantienen el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " con "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": ": planteamiento sólido y clásico. El reto es liberar el alfil de "
+        },
+        {
+          "kind": "square",
+          "square": "c8"
+        },
+        {
+          "kind": "text",
+          "text": " y romper con "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black keeps the "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " pawn with "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": ": a solid, classical approach. The challenge is freeing the "
+        },
+        {
+          "kind": "square",
+          "square": "c8"
+        },
+        {
+          "kind": "text",
+          "text": " bishop and breaking with "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -755,8 +1499,78 @@
     "eco": "D20-D29",
     "side": "black",
     "description": {
-      "es": "Las negras toman el peón de c4 para ganar tiempo y atacar el centro con ...c5 o ...e5, sin intentar conservarlo.",
-      "en": "Black takes the c4 pawn to gain time and hit the centre with ...c5 or ...e5, without trying to keep it."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras toman el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "c4"
+        },
+        {
+          "kind": "text",
+          "text": " para ganar tiempo y atacar el centro con "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": ", sin intentar conservarlo."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black takes the "
+        },
+        {
+          "kind": "square",
+          "square": "c4"
+        },
+        {
+          "kind": "text",
+          "text": " pawn to gain time and hit the centre with "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": ", without trying to keep it."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -812,8 +1626,126 @@
     "eco": "D10-D19",
     "side": "black",
     "description": {
-      "es": "Las negras defienden d5 con ...c6, lo que deja libre al alfil de c8 para salir a f5 o g4 antes de jugar ...e6.",
-      "en": "Black defends d5 with ...c6, leaving the c8 bishop free to reach f5 or g4 before ...e6."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras defienden "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " con "
+        },
+        {
+          "kind": "move",
+          "san": "c6",
+          "number": "...",
+          "start": false,
+          "written": "...c6"
+        },
+        {
+          "kind": "text",
+          "text": ", lo que deja libre al alfil de "
+        },
+        {
+          "kind": "square",
+          "square": "c8"
+        },
+        {
+          "kind": "text",
+          "text": " para salir a "
+        },
+        {
+          "kind": "square",
+          "square": "f5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "square",
+          "square": "g4"
+        },
+        {
+          "kind": "text",
+          "text": " antes de jugar "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black defends "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " with "
+        },
+        {
+          "kind": "move",
+          "san": "c6",
+          "number": "...",
+          "start": false,
+          "written": "...c6"
+        },
+        {
+          "kind": "text",
+          "text": ", leaving the "
+        },
+        {
+          "kind": "square",
+          "square": "c8"
+        },
+        {
+          "kind": "text",
+          "text": " bishop free to reach "
+        },
+        {
+          "kind": "square",
+          "square": "f5"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "square",
+          "square": "g4"
+        },
+        {
+          "kind": "text",
+          "text": " before "
+        },
+        {
+          "kind": "move",
+          "san": "e6",
+          "number": "...",
+          "start": false,
+          "written": "...e6"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -866,8 +1798,90 @@
     "eco": "D02",
     "side": "white",
     "description": {
-      "es": "Sistema de las blancas basado en Af4, e3, c3 y Cbd2: una estructura sólida que se juega casi contra cualquier defensa, con menos teoría que el Gambito de Dama.",
-      "en": "A White system built on Bf4, e3, c3 and Nbd2: a solid structure that works against almost any defence, with less theory than the Queen's Gambit."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Sistema de las blancas basado en "
+        },
+        {
+          "kind": "move",
+          "san": "Bf4",
+          "start": false,
+          "written": "Af4"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "square",
+          "square": "e3"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "move",
+          "san": "Nbd2",
+          "start": false,
+          "written": "Cbd2"
+        },
+        {
+          "kind": "text",
+          "text": ": una estructura sólida que se juega casi contra cualquier defensa, con menos teoría que el Gambito de Dama."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A White system built on "
+        },
+        {
+          "kind": "move",
+          "san": "Bf4",
+          "start": false,
+          "written": "Bf4"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "square",
+          "square": "e3"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "move",
+          "san": "Nbd2",
+          "start": false,
+          "written": "Nbd2"
+        },
+        {
+          "kind": "text",
+          "text": ": a solid structure that works against almost any defence, with less theory than the Queen's Gambit."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -914,8 +1928,62 @@
     "eco": "E60-E99",
     "side": "black",
     "description": {
-      "es": "Las negras ceden el centro al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un flanco distinto.",
-      "en": "Black concedes the centre early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different wing."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras ceden el centro al principio para atacarlo después con "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": ". En las líneas cerradas cada bando ataca en un flanco distinto."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black concedes the centre early, planning to strike at it with "
+        },
+        {
+          "kind": "move",
+          "san": "e5",
+          "number": "...",
+          "start": false,
+          "written": "...e5"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": ". In the closed lines each side attacks on a different wing."
+        }
+      ]
     },
     "lineCount": 7,
     "preview": {
@@ -965,8 +2033,72 @@
     "eco": "E20-E59",
     "side": "black",
     "description": {
-      "es": "Con 3...Ab4 las negras clavan el caballo de c3 para impedir e4, y a menudo cambian el alfil por el caballo para dañar la estructura blanca.",
-      "en": "With 3...Bb4 Black pins the c3 knight to stop e4, often trading bishop for knight to damage White's pawn structure."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Con "
+        },
+        {
+          "kind": "move",
+          "san": "Bb4",
+          "number": "3...",
+          "start": false,
+          "written": "3...Ab4"
+        },
+        {
+          "kind": "text",
+          "text": " las negras clavan el caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " para impedir "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": ", y a menudo cambian el alfil por el caballo para dañar la estructura blanca."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "With "
+        },
+        {
+          "kind": "move",
+          "san": "Bb4",
+          "number": "3...",
+          "start": false,
+          "written": "3...Bb4"
+        },
+        {
+          "kind": "text",
+          "text": " Black pins the "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " knight to stop "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": ", often trading bishop for knight to damage White's pawn structure."
+        }
+      ]
     },
     "lineCount": 6,
     "preview": {
@@ -1019,8 +2151,72 @@
     "eco": "D70-D99",
     "side": "black",
     "description": {
-      "es": "Las negras permiten que las blancas levanten un gran centro con e4 para atacarlo después con el alfil de g7 y ...c5. Apertura muy dinámica.",
-      "en": "Black lets White build a big centre with e4 and then attacks it with the g7 bishop and ...c5. A highly dynamic opening."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras permiten que las blancas levanten un gran centro con "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " para atacarlo después con el alfil de "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": ". Apertura muy dinámica."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black lets White build a big centre with "
+        },
+        {
+          "kind": "square",
+          "square": "e4"
+        },
+        {
+          "kind": "text",
+          "text": " and then attacks it with the "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " bishop and "
+        },
+        {
+          "kind": "move",
+          "san": "c5",
+          "number": "...",
+          "start": false,
+          "written": "...c5"
+        },
+        {
+          "kind": "text",
+          "text": ". A highly dynamic opening."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {
@@ -1070,8 +2266,56 @@
     "eco": "A10-A39",
     "side": "white",
     "description": {
-      "es": "Las blancas controlan d5 desde el flanco con 1.c4, a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.",
-      "en": "White controls d5 from the flank with 1.c4, often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las blancas controlan "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " desde el flanco con "
+        },
+        {
+          "kind": "move",
+          "san": "c4",
+          "number": "1.",
+          "start": false,
+          "written": "1.c4"
+        },
+        {
+          "kind": "text",
+          "text": ", a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "White controls "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " from the flank with "
+        },
+        {
+          "kind": "move",
+          "san": "c4",
+          "number": "1.",
+          "start": false,
+          "written": "1.c4"
+        },
+        {
+          "kind": "text",
+          "text": ", often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+        }
+      ]
     },
     "lineCount": 5,
     "preview": {

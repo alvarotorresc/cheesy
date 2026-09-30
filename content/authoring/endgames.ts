@@ -1,11 +1,11 @@
-import type { EndgamePosition, Localized } from '../types.ts';
+import type { EndgameSpec, Localized } from '../types.ts';
 
 const KP: Localized = { es: 'Rey y peón', en: 'King and pawn' };
 const RP: Localized = { es: 'Torre y peón', en: 'Rook and pawn' };
 const QP: Localized = { es: 'Dama contra peón', en: 'Queen against pawn' };
 const MATE: Localized = { es: 'Mates básicos', en: 'Basic mates' };
 
-export const endgames: EndgamePosition[] = [
+export const endgames: EndgameSpec[] = [
   {
     id: 'kp-opposition-defence',
     name: { es: 'La oposición: defensa', en: 'The opposition: defence' },

@@ -1,8 +1,9 @@
-import { bundledContentLoaders } from './testing';
-import type { Localized, OpeningNode, OpeningTree } from './content.types';
+import { bundledContentLoaders, plainText } from './testing';
+import type { Localized, OpeningNode, OpeningTree, RichText } from './content.types';
 import { OpeningBook } from './opening-book';
 
 const named = (en: string): Localized => ({ es: `${en} (es)`, en });
+const rich = (en: string): RichText => plainText(`${en} (es)`, en);
 
 type NodeExtras = Partial<Pick<OpeningNode, 'name' | 'comment' | 'main'>>;
 
@@ -20,7 +21,7 @@ const treeOf = (root: OpeningNode[]): OpeningTree => ({
   name: named('Test Opening'),
   eco: 'C20',
   side: 'white',
-  description: named('A tree built for the tests.'),
+  description: rich('A tree built for the tests.'),
   root,
 });
 
@@ -47,14 +48,14 @@ const buildSample = (): OpeningTree =>
                       'Bc4',
                       [
                         node('Nf6', [], { name: named('Two Knights Defence') }),
-                        main('Bc5', [main('O-O', [], { comment: named('Castles.') })], {
+                        main('Bc5', [main('O-O', [], { comment: rich('Castles.') })], {
                           name: named('Giuoco Piano'),
                         }),
                       ],
                       { name: named('Italian Game') },
                     ),
                   ],
-                  { comment: named('Defends e5.') },
+                  { comment: rich('Defends e5.') },
                 ),
                 node('Nf6', [node('Nxe5')], { name: named('Petrov Defence') }),
               ],
@@ -133,7 +134,7 @@ describe('OpeningBook', () => {
       expect(e4.name?.en).toBe("King's Pawn");
       expect(e4.comment).toBeUndefined();
       expect(nc6.name).toBeUndefined();
-      expect(nc6.comment?.en).toBe('Defends e5.');
+      expect(nc6.comment).toEqual(rich('Defends e5.'));
     });
 
     it('should inherit the variation name from the closest named move when unnamed', () => {

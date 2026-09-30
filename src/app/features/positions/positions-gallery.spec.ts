@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
@@ -15,7 +16,7 @@ const POSITIONS: CuratedPosition[] = [
     fen: '4k3/8/8/8/8/8/8/4K2R w K - 0 1',
     playerSide: 'white',
     solution: ['Rh8#'],
-    explanation: { es: 'Mate.', en: 'Mate.' },
+    explanation: plainText('Mate.', 'Mate.'),
     tags: ['back-rank', 'windmill-attack'],
   },
   {
@@ -24,7 +25,7 @@ const POSITIONS: CuratedPosition[] = [
     fen: '4k2r/8/8/8/8/8/8/4K3 b k - 0 1',
     playerSide: 'black',
     solution: ['Rh1#'],
-    explanation: { es: 'Mate.', en: 'Mate.' },
+    explanation: plainText('Mate.', 'Mate.'),
     tags: ['pin'],
   },
   {
@@ -33,7 +34,7 @@ const POSITIONS: CuratedPosition[] = [
     fen: '4k3/8/8/8/8/8/8/R3K3 w Q - 0 1',
     playerSide: 'white',
     solution: ['Ra8+', 'Kd7', 'Ra7+'],
-    explanation: { es: 'Jaques.', en: 'Checks.' },
+    explanation: plainText('Jaques.', 'Checks.'),
     tags: ['fork'],
   },
 ];

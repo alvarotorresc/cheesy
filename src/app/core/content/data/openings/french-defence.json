@@ -7,8 +7,62 @@
   "eco": "C00-C19",
   "side": "black",
   "description": {
-    "es": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con ...c5 y ...f6.",
-    "en": "Black accepts less space for a solid structure and central counterplay with ...c5 and ...f6."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": " y "
+      },
+      {
+        "kind": "move",
+        "san": "f6",
+        "number": "...",
+        "start": false,
+        "written": "...f6"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black accepts less space for a solid structure and central counterplay with "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": " and "
+      },
+      {
+        "kind": "move",
+        "san": "f6",
+        "number": "...",
+        "start": false,
+        "written": "...f6"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +76,56 @@
             "en": "French Defence"
           },
           "comment": {
-            "es": "Prepara ...d5 apoyado por el peón de e6.",
-            "en": "Prepares ...d5 with the support of the e6 pawn."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Prepara "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " apoyado por el peón de "
+              },
+              {
+                "kind": "square",
+                "square": "e6"
+              },
+              {
+                "kind": "text",
+                "text": "."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Prepares "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " with the support of the "
+              },
+              {
+                "kind": "square",
+                "square": "e6"
+              },
+              {
+                "kind": "text",
+                "text": " pawn."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -46,8 +148,34 @@
                             "en": "Winawer Variation"
                           },
                           "comment": {
-                            "es": "Clava el caballo y presiona e4; las negras aceptan ceder el alfil a cambio de dañar la estructura blanca.",
-                            "en": "Pins the knight and hits e4; Black is ready to give up the bishop to damage White’s structure."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Clava el caballo y presiona "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; las negras aceptan ceder el alfil a cambio de dañar la estructura blanca."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Pins the knight and hits "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; Black is ready to give up the bishop to damage White’s structure."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -58,8 +186,18 @@
                                 {
                                   "san": "c5",
                                   "comment": {
-                                    "es": "Ataque inmediato a la base de la cadena de peones blanca.",
-                                    "en": "An immediate strike at the base of White’s pawn chain."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Ataque inmediato a la base de la cadena de peones blanca."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "An immediate strike at the base of White’s pawn chain."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -82,8 +220,34 @@
                                                     {
                                                       "san": "Qg4",
                                                       "comment": {
-                                                        "es": "Ataca g7, debilitado tras la marcha del alfil negro de casillas oscuras.",
-                                                        "en": "Attacks g7, weakened after Black’s dark-squared bishop left."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Ataca "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "g7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", debilitado tras la marcha del alfil negro de casillas oscuras."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Attacks "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "g7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", weakened after Black’s dark-squared bishop left."
+                                                          }
+                                                        ]
                                                       },
                                                       "main": true,
                                                       "children": [
@@ -94,8 +258,34 @@
                                                             "en": "Poisoned Pawn Variation"
                                                           },
                                                           "comment": {
-                                                            "es": "Las negras entregan el flanco de rey a cambio de un contrajuego fuerte contra c3 y el centro.",
-                                                            "en": "Black gives up the kingside for strong counterplay against c3 and the centre."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Las negras entregan el flanco de rey a cambio de un contrajuego fuerte contra "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "c3"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " y el centro."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Black gives up the kingside for strong counterplay against "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "c3"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " and the centre."
+                                                              }
+                                                            ]
                                                           },
                                                           "main": true,
                                                           "children": [
@@ -183,8 +373,34 @@
                             "en": "Classical Variation"
                           },
                           "comment": {
-                            "es": "Desarrollo natural que presiona e4.",
-                            "en": "Natural development that pressures e4."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Desarrollo natural que presiona "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Natural development that pressures "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -249,8 +465,94 @@
                                     {
                                       "san": "f4",
                                       "comment": {
-                                        "es": "Refuerza e5 con f4; las negras atacan la cadena con ...c5 y ...Cc6.",
-                                        "en": "Reinforces e5 with f4; Black hits the chain with ...c5 and ...Nc6."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Refuerza "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " con "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; las negras atacan la cadena con "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "c5",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...c5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Nc6",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...Cc6"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Reinforces "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " with "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; Black hits the chain with "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "c5",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...c5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Nc6",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...Nc6"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -324,8 +626,40 @@
                         "en": "Advance Variation"
                       },
                       "comment": {
-                        "es": "Las blancas ganan espacio; las negras atacan la cadena de peones desde su base con ...c5.",
-                        "en": "White gains space; Black attacks the pawn chain at its base with ...c5."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Las blancas ganan espacio; las negras atacan la cadena de peones desde su base con "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "c5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...c5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "White gains space; Black attacks the pawn chain at its base with "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "c5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...c5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -343,8 +677,50 @@
                                         {
                                           "san": "Qb6",
                                           "comment": {
-                                            "es": "Suma presión sobre d4 y b2.",
-                                            "en": "Adds pressure on d4 and b2."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Suma presión sobre "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " y "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "b2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Adds pressure on "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " and "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "b2"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {
@@ -385,8 +761,34 @@
                         "en": "Exchange Variation"
                       },
                       "comment": {
-                        "es": "Estructura simétrica: el alfil negro de c8 queda liberado.",
-                        "en": "A symmetrical structure that frees Black’s c8 bishop."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Estructura simétrica: el alfil negro de "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "c8"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " queda liberado."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "A symmetrical structure that frees Black’s "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "c8"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " bishop."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -442,8 +844,40 @@
                         "en": "Tarrasch Variation"
                       },
                       "comment": {
-                        "es": "Evita la clavada ...Ab4 y mantiene libre el peón de c.",
-                        "en": "Avoids the ...Bb4 pin and keeps the c-pawn free."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Evita la clavada "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Bb4",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Ab4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " y mantiene libre el peón de c."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Avoids the "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Bb4",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Bb4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " pin and keeps the c-pawn free."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -455,8 +889,18 @@
                                 {
                                   "san": "Qxd5",
                                   "comment": {
-                                    "es": "Las negras recuperan el peón con la dama y aceptan perder algo de tiempo a cambio de una estructura sin debilidades.",
-                                    "en": "Black recaptures with the queen, accepting some lost time for a structure without weaknesses."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Las negras recuperan el peón con la dama y aceptan perder algo de tiempo a cambio de una estructura sin debilidades."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Black recaptures with the queen, accepting some lost time for a structure without weaknesses."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {

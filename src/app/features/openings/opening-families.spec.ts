@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import type { OpeningSummary } from '../../core/content';
 import { familyOf, groupByFamily } from './opening-families';
 
@@ -6,7 +7,7 @@ const summary = (id: string, eco: string): OpeningSummary => ({
   name: { es: id, en: id },
   eco,
   side: 'white',
-  description: { es: '', en: '' },
+  description: plainText('-'),
   lineCount: 1,
   preview: { sans: [], names: [], namedPly: 4 },
 });

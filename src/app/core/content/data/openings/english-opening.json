@@ -7,8 +7,56 @@
   "eco": "A10-A39",
   "side": "white",
   "description": {
-    "es": "Las blancas controlan d5 desde el flanco con 1.c4, a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.",
-    "en": "White controls d5 from the flank with 1.c4, often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las blancas controlan "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " desde el flanco con "
+      },
+      {
+        "kind": "move",
+        "san": "c4",
+        "number": "1.",
+        "start": false,
+        "written": "1.c4"
+      },
+      {
+        "kind": "text",
+        "text": ", a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "White controls "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " from the flank with "
+      },
+      {
+        "kind": "move",
+        "san": "c4",
+        "number": "1.",
+        "start": false,
+        "written": "1.c4"
+      },
+      {
+        "kind": "text",
+        "text": ", often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+      }
+    ]
   },
   "root": [
     {
@@ -18,8 +66,50 @@
         "en": "English Opening"
       },
       "comment": {
-        "es": "Controla d5 desde el flanco; las blancas suelen combinarlo con un fianchetto en g2.",
-        "en": "Controls d5 from the flank; White often combines it with a fianchetto on g2."
+        "es": [
+          {
+            "kind": "text",
+            "text": "Controla "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " desde el flanco; las blancas suelen combinarlo con un fianchetto en "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Controls "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " from the flank; White often combines it with a fianchetto on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
       },
       "main": true,
       "children": [
@@ -30,8 +120,18 @@
             "en": "King's English Variation"
           },
           "comment": {
-            "es": "Las negras ocupan el centro con el peón de rey.",
-            "en": "Black occupies the centre with the king's pawn."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Las negras ocupan el centro con el peón de rey."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Black occupies the centre with the king's pawn."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -42,8 +142,18 @@
                 "en": "Reversed Sicilian"
               },
               "comment": {
-                "es": "Una Siciliana con los colores cambiados y un tiempo más para las blancas.",
-                "en": "A Sicilian with colours reversed and an extra tempo for White."
+                "es": [
+                  {
+                    "kind": "text",
+                    "text": "Una Siciliana con los colores cambiados y un tiempo más para las blancas."
+                  }
+                ],
+                "en": [
+                  {
+                    "kind": "text",
+                    "text": "A Sicilian with colours reversed and an extra tempo for White."
+                  }
+                ]
               },
               "main": true,
               "children": [
@@ -66,8 +176,66 @@
                             {
                               "san": "g3",
                               "comment": {
-                                "es": "Fianchetto: el alfil de g2 presionará d5 y b7.",
-                                "en": "A fianchetto: the g2 bishop will press d5 and b7."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Fianchetto: el alfil de "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "g2"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " presionará "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "b7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "A fianchetto: the "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "g2"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " bishop will press "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "b7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ]
                               },
                               "main": true,
                               "children": [
@@ -82,8 +250,18 @@
                                         {
                                           "san": "Nxd5",
                                           "comment": {
-                                            "es": "Estructura de Dragón invertido: las blancas juegan un Dragón con un tiempo más.",
-                                            "en": "A reversed Dragon structure: White plays a Dragon with an extra tempo."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Estructura de Dragón invertido: las blancas juegan un Dragón con un tiempo más."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "A reversed Dragon structure: White plays a Dragon with an extra tempo."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -114,8 +292,66 @@
                                                                     {
                                                                       "san": "a3",
                                                                       "comment": {
-                                                                        "es": "Prepara b4-b5 para expulsar al caballo de c6 y ganar espacio en el flanco de dama.",
-                                                                        "en": "Prepares b4-b5 to drive away the c6 knight and gain queenside space."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Prepara "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "b4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "-"
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "b5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " para expulsar al caballo de "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "c6"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " y ganar espacio en el flanco de dama."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Prepares "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "b4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "-"
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "b5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " to drive away the "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "c6"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " knight and gain queenside space."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "main": true,
                                                                       "children": [
@@ -198,8 +434,50 @@
                                         "en": "Closed System"
                                       },
                                       "comment": {
-                                        "es": "Juego lento: las blancas maniobran antes de romper con b4 o f4.",
-                                        "en": "Slow play: White manoeuvres before breaking with b4 or f4."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Juego lento: las blancas maniobran antes de romper con "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " o "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Slow play: White manoeuvres before breaking with "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " or "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -212,8 +490,102 @@
                                                 "en": "Botvinnik System"
                                               },
                                               "comment": {
-                                                "es": "Los peones de c4 y e4 controlan d5; el plan es Cge2 y f4.",
-                                                "en": "The c4 and e4 pawns control d5; the plan is Nge2 and f4."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Los peones de "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "c4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " y "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " controlan "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "d5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "; el plan es "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "Nge2",
+                                                    "start": false,
+                                                    "written": "Cge2"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " y "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "The "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "c4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " pawns control "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "d5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "; the plan is "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "Nge2",
+                                                    "start": false,
+                                                    "written": "Nge2"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -267,8 +639,34 @@
             "en": "Symmetrical Variation"
           },
           "comment": {
-            "es": "Las negras copian la jugada y disputan d4.",
-            "en": "Black mirrors the move and contests d4."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Las negras copian la jugada y disputan "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": "."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Black mirrors the move and contests "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": "."
+              }
+            ]
           },
           "children": [
             {
@@ -304,8 +702,18 @@
                                                     {
                                                       "san": "d4",
                                                       "comment": {
-                                                        "es": "Las blancas rompen la simetría abriendo el centro.",
-                                                        "en": "White breaks the symmetry by opening the centre."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Las blancas rompen la simetría abriendo el centro."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "White breaks the symmetry by opening the centre."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -381,8 +789,56 @@
                         "en": "Mikenas–Carls Variation"
                       },
                       "comment": {
-                        "es": "Ocupa el centro de inmediato e invita a ...d5 y e5.",
-                        "en": "Occupies the centre at once, inviting ...d5 and e5."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Ocupa el centro de inmediato e invita a "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "d5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...d5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " y "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Occupies the centre at once, inviting "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "d5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...d5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " and "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -449,8 +905,40 @@
             "en": "Agincourt Defence"
           },
           "comment": {
-            "es": "Las negras preparan ...d5 con una estructura de tipo Gambito de Dama.",
-            "en": "Black prepares ...d5 with a Queen's Gambit-style structure."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Las negras preparan "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " con una estructura de tipo Gambito de Dama."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Black prepares "
+              },
+              {
+                "kind": "move",
+                "san": "d5",
+                "number": "...",
+                "start": false,
+                "written": "...d5"
+              },
+              {
+                "kind": "text",
+                "text": " with a Queen's Gambit-style structure."
+              }
+            ]
           },
           "children": [
             {

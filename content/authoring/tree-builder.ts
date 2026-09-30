@@ -1,5 +1,5 @@
 // Authoring helper: builds OpeningTree JSON from move lines + annotations keyed by move path.
-import type { Localized, OpeningNode, OpeningTree } from '../types.ts';
+import type { AuthoringNode, AuthoringTree, Localized } from '../types.ts';
 
 export interface OpeningSpec {
   id: string;
@@ -12,8 +12,8 @@ export interface OpeningSpec {
   notes: Record<string, { name?: Localized; comment?: Localized }>; // key = full move path
 }
 
-export function buildTree(spec: OpeningSpec): OpeningTree {
-  const root: OpeningNode[] = [];
+export function buildTree(spec: OpeningSpec): AuthoringTree {
+  const root: AuthoringNode[] = [];
   const insert = (line: string, main: boolean) => {
     let level = root;
     for (const san of line.trim().split(/\s+/)) {
@@ -30,7 +30,7 @@ export function buildTree(spec: OpeningSpec): OpeningTree {
   for (const l of spec.lines) insert(l, false);
 
   const used = new Set<string>();
-  const annotate = (nodes: OpeningNode[], path: string[]) => {
+  const annotate = (nodes: AuthoringNode[], path: string[]) => {
     for (const n of nodes) {
       const p = [...path, n.san];
       const key = p.join(' ');
@@ -49,7 +49,7 @@ export function buildTree(spec: OpeningSpec): OpeningTree {
   }
 
   // Stable key order in JSON output, main child first.
-  const tidy = (nodes: OpeningNode[]): OpeningNode[] =>
+  const tidy = (nodes: AuthoringNode[]): AuthoringNode[] =>
     [...nodes]
       .sort((a, b) => Number(!!b.main) - Number(!!a.main))
       .map((n) => ({

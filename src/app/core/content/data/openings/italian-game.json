@@ -7,8 +7,66 @@
   "eco": "C50-C59",
   "side": "white",
   "description": {
-    "es": "El alfil apunta a f7, el punto débil del enroque negro, y las blancas preparan c3 y d4 para dominar el centro.",
-    "en": "The bishop aims at f7, the weak point near the black king, while White prepares c3 and d4 to take the centre."
+    "es": [
+      {
+        "kind": "text",
+        "text": "El alfil apunta a "
+      },
+      {
+        "kind": "square",
+        "square": "f7"
+      },
+      {
+        "kind": "text",
+        "text": ", el punto débil del enroque negro, y las blancas preparan "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " y "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": " para dominar el centro."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "The bishop aims at "
+      },
+      {
+        "kind": "square",
+        "square": "f7"
+      },
+      {
+        "kind": "text",
+        "text": ", the weak point near the black king, while White prepares "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " and "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": " to take the centre."
+      }
+    ]
   },
   "root": [
     {
@@ -34,8 +92,66 @@
                         "en": "Italian Game"
                       },
                       "comment": {
-                        "es": "El alfil se sitúa en la diagonal a2-g8, apuntando a f7.",
-                        "en": "The bishop takes the a2-g8 diagonal, eyeing f7."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "El alfil se sitúa en la diagonal "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "a2"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "-"
+                          },
+                          {
+                            "kind": "square",
+                            "square": "g8"
+                          },
+                          {
+                            "kind": "text",
+                            "text": ", apuntando a "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f7"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "The bishop takes the "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "a2"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "-"
+                          },
+                          {
+                            "kind": "square",
+                            "square": "g8"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " diagonal, eyeing "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f7"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "main": true,
                       "children": [
@@ -46,16 +162,68 @@
                             "en": "Giuoco Piano"
                           },
                           "comment": {
-                            "es": "Respuesta simétrica: el alfil negro también apunta al punto f2.",
-                            "en": "The symmetrical reply: the black bishop also eyes f2."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Respuesta simétrica: el alfil negro también apunta al punto "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f2"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "The symmetrical reply: the black bishop also eyes "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f2"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
                             {
                               "san": "c3",
                               "comment": {
-                                "es": "Prepara d4 para levantar un centro de peones.",
-                                "en": "Prepares d4 to build a pawn centre."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Prepara "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " para levantar un centro de peones."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Prepares "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " to build a pawn centre."
+                                  }
+                                ]
                               },
                               "main": true,
                               "children": [
@@ -98,8 +266,34 @@
                                                                 {
                                                                   "san": "d5",
                                                                   "comment": {
-                                                                    "es": "Golpe central clásico: las negras rompen antes de que e5 las encierre.",
-                                                                    "en": "The classic central strike: Black breaks before e5 can cramp them."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Golpe central clásico: las negras rompen antes de que "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " las encierre."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "The classic central strike: Black breaks before "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " can cramp them."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "main": true,
                                                                   "children": [
@@ -114,8 +308,66 @@
                                                                             {
                                                                               "san": "Qb3",
                                                                               "comment": {
-                                                                                "es": "Presiona d5 y b7; las blancas juegan con el peón aislado de d4 y piezas activas.",
-                                                                                "en": "Hits d5 and b7; White plays with the isolated d4 pawn and active pieces."
+                                                                                "es": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Presiona "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d5"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " y "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "b7"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "; las blancas juegan con el peón aislado de "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " y piezas activas."
+                                                                                  }
+                                                                                ],
+                                                                                "en": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Hits "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d5"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " and "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "b7"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "; White plays with the isolated "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " pawn and active pieces."
+                                                                                  }
+                                                                                ]
                                                                               },
                                                                               "main": true,
                                                                               "children": [
@@ -177,8 +429,34 @@
                                         "en": "Giuoco Pianissimo"
                                       },
                                       "comment": {
-                                        "es": "Plan lento y flexible: se protege e4 y se maniobra antes de romper en el centro.",
-                                        "en": "A slow, flexible plan: e4 is protected and White manoeuvres before any central break."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Plan lento y flexible: se protege "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y se maniobra antes de romper en el centro."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "A slow, flexible plan: "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " is protected and White manoeuvres before any central break."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -202,8 +480,18 @@
                                                                 {
                                                                   "san": "Ba7",
                                                                   "comment": {
-                                                                    "es": "Ambos alfiles se ponen a salvo de ataques de peones antes de continuar la maniobra.",
-                                                                    "en": "Both bishops step out of reach of pawn attacks before the manoeuvring continues."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Ambos alfiles se ponen a salvo de ataques de peones antes de continuar la maniobra."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Both bishops step out of reach of pawn attacks before the manoeuvring continues."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": [
                                                                     {
@@ -237,8 +525,50 @@
                                 "en": "Evans Gambit"
                               },
                               "comment": {
-                                "es": "Gambito: se entrega un peón para ganar tiempos con c3 y d4.",
-                                "en": "A gambit: White gives a pawn to gain time with c3 and d4."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Gambito: se entrega un peón para ganar tiempos con "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "A gambit: White gives a pawn to gain time with "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -253,8 +583,18 @@
                                             {
                                               "san": "d4",
                                               "comment": {
-                                                "es": "Centro de peones y desarrollo rápido a cambio del material.",
-                                                "en": "A pawn centre and fast development in return for the material."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Centro de peones y desarrollo rápido a cambio del material."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "A pawn centre and fast development in return for the material."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -310,15 +650,87 @@
                             "en": "Two Knights Defence"
                           },
                           "comment": {
-                            "es": "Contraataque sobre e4 que invita a Cg5.",
-                            "en": "A counterattack on e4 that invites Ng5."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Contraataque sobre "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " que invita a "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Ng5",
+                                "start": false,
+                                "written": "Cg5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "A counterattack on "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " that invites "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Ng5",
+                                "start": false,
+                                "written": "Ng5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "children": [
                             {
                               "san": "Ng5",
                               "comment": {
-                                "es": "Ataca f7 con dos piezas; las negras deben responder con precisión.",
-                                "en": "Hits f7 twice; Black must respond accurately."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Ataca "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " con dos piezas; las negras deben responder con precisión."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Hits "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " twice; Black must respond accurately."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -330,8 +742,18 @@
                                         {
                                           "san": "Na5",
                                           "comment": {
-                                            "es": "Las negras entregan un peón y ganan tiempos atacando al alfil.",
-                                            "en": "Black gives a pawn and gains time by attacking the bishop."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Las negras entregan un peón y ganan tiempos atacando al alfil."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Black gives a pawn and gains time by attacking the bishop."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {

@@ -29,6 +29,7 @@ import { gameEndMessage } from '../../../shared/game-end';
 import { Icon } from '../../../shared/icon';
 import { isFormField } from '../../../shared/keyboard';
 import { MoveText } from '../../../shared/move';
+import { RichTextView } from '../../../shared/rich-text';
 import { DRAW_TARGET } from '../endgame-milestones';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
@@ -56,7 +57,15 @@ interface MoveView {
 /** One endgame: the player plays their side against a rival that answers from the tablebase. */
 @Component({
   selector: 'app-endgame-practice',
-  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink, TablebasePanel],
+  imports: [
+    BoardComponent,
+    Icon,
+    MoveText,
+    NgTemplateOutlet,
+    RichTextView,
+    RouterLink,
+    TablebasePanel,
+  ],
   providers: [GameService, EngineService, EndgameSession, TablebaseLookup],
   templateUrl: './endgame-practice.html',
   styleUrl: './endgame-practice.css',

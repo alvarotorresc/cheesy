@@ -28,6 +28,7 @@ import { Icon } from '../../shared/icon';
 import type { IconName } from '../../shared/icon';
 import { isFormField } from '../../shared/keyboard';
 import { MoveText } from '../../shared/move';
+import { RichTextView } from '../../shared/rich-text';
 import { sideToPlayLabel, tagLabel } from './position-labels';
 import { numberOfContentId, POSITION_NUMBER } from './position-order';
 import { PositionList } from './position-list';
@@ -71,7 +72,7 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RouterLink],
+  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RichTextView, RouterLink],
   providers: [GameService, PositionTrainer, PositionList],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',

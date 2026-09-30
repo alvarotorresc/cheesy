@@ -1,8 +1,9 @@
 import { Component, computed, inject, input } from '@angular/core';
 import type { Color } from 'chessops';
-import type { OpeningSummary } from '../../../core/content';
+import type { OpeningSummary, RichText } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { ReadingModeService } from '../../../core/reading-mode';
+import { RichTextView } from '../../../shared/rich-text';
 import type { Theory } from '../opening-theory';
 
 /**
@@ -12,6 +13,7 @@ import type { Theory } from '../opening-theory';
  */
 @Component({
   selector: 'app-theory-panel',
+  imports: [RichTextView],
   templateUrl: './theory-panel.html',
   styleUrl: './theory-panel.css',
 })
@@ -29,10 +31,10 @@ export class TheoryPanel {
   );
 
   /** Idea behind the last move; at the start, the description of the opening. */
-  protected readonly comment = computed(() => {
+  protected readonly comment = computed<RichText | undefined>(() => {
     const theory = this.theory();
-    if (theory.comment) return this.i18n.localize(theory.comment);
-    return theory.node ? undefined : this.i18n.localize(this.opening().description);
+    if (theory.comment) return theory.comment;
+    return theory.node ? undefined : this.opening().description;
   });
 
   protected readonly deviation = computed(() => {

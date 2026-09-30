@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { checkRichText } from '../../lib/schema.ts';
 import { movesOf, richOf, stripNote, termsOf, tokenize } from '../../lib/rich-text.ts';
 
 describe('tokenize', () => {
@@ -125,5 +126,27 @@ describe('termsOf', () => {
   it('lists the term ids once and sorted', () => {
     const segments = tokenize('[b](pin) y [a](fork) y otra [b](pin)', 'es');
     expect(termsOf(segments)).toEqual(['fork', 'pin']);
+  });
+});
+
+describe('checkRichText', () => {
+  const errorsOf = (value: unknown): string[] => {
+    const errs: string[] = [];
+    checkRichText(value, 'x', errs);
+    return errs;
+  };
+
+  it('accepts cut texts', () => {
+    expect(errorsOf(richOf({ es: 'Juega Cf3 hacia [e5](centre).', en: 'Play Nf3.' }))).toEqual([]);
+  });
+
+  it('rejects plain strings and unknown segments', () => {
+    expect(errorsOf({ es: 'texto', en: 'text' })).not.toEqual([]);
+    expect(errorsOf({ es: [{ kind: 'bold', text: 'x' }], en: [] })).not.toEqual([]);
+    expect(errorsOf({ es: [{ kind: 'square', square: 'z9' }], en: [] })).not.toEqual([]);
+  });
+
+  it('rejects an empty language', () => {
+    expect(errorsOf({ es: [], en: [{ kind: 'text', text: 'x' }] })).not.toEqual([]);
   });
 });

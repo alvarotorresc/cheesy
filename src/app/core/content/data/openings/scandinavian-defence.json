@@ -7,8 +7,34 @@
   "eco": "B01",
   "side": "black",
   "description": {
-    "es": "Las negras atacan e4 en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender.",
-    "en": "Black hits e4 on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras atacan "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black hits "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +48,34 @@
             "en": "Scandinavian Defence"
           },
           "comment": {
-            "es": "Ataca e4 de inmediato: las negras aceptan sacar pronto la dama.",
-            "en": "Attacks e4 at once: Black accepts an early queen sortie."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Ataca "
+              },
+              {
+                "kind": "square",
+                "square": "e4"
+              },
+              {
+                "kind": "text",
+                "text": " de inmediato: las negras aceptan sacar pronto la dama."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Attacks "
+              },
+              {
+                "kind": "square",
+                "square": "e4"
+              },
+              {
+                "kind": "text",
+                "text": " at once: Black accepts an early queen sortie."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -34,8 +86,38 @@
                 {
                   "san": "Qxd5",
                   "comment": {
-                    "es": "La dama recupera el peón, pero será perseguida con Cc3.",
-                    "en": "The queen regains the pawn but will be chased by Nc3."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "La dama recupera el peón, pero será perseguida con "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "Nc3",
+                        "start": false,
+                        "written": "Cc3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "The queen regains the pawn but will be chased by "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "Nc3",
+                        "start": false,
+                        "written": "Nc3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -50,8 +132,50 @@
                             "en": "Scandinavian Defence, Main Line"
                           },
                           "comment": {
-                            "es": "Desde a5 la dama está a salvo y clava el caballo de c3 en cuanto avance el peón de d.",
-                            "en": "On a5 the queen is safe and pins the c3 knight once the d-pawn advances."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Desde "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "a5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " la dama está a salvo y clava el caballo de "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c3"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " en cuanto avance el peón de d."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "On "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "a5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " the queen is safe and pins the "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c3"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " knight once the d-pawn advances."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -70,8 +194,56 @@
                                         {
                                           "san": "c6",
                                           "comment": {
-                                            "es": "Da a la dama una casilla de retirada en c7 y prepara ...Af5.",
-                                            "en": "Gives the queen a retreat square on c7 and prepares ...Bf5."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Da a la dama una casilla de retirada en "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "c7"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " y prepara "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Bf5",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...Af5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Gives the queen a retreat square on "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "c7"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " and prepares "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Bf5",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...Bf5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -90,8 +262,34 @@
                                                         {
                                                           "san": "e6",
                                                           "comment": {
-                                                            "es": "Estructura sólida de tipo Caro-Kann con el alfil de c8 ya fuera de la cadena.",
-                                                            "en": "A solid Caro-Kann-like structure with the c8 bishop already outside the chain."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Estructura sólida de tipo Caro-Kann con el alfil de "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "c8"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " ya fuera de la cadena."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "A solid Caro-Kann-like structure with the "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "c8"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " bishop already outside the chain."
+                                                              }
+                                                            ]
                                                           },
                                                           "main": true,
                                                           "children": [
@@ -126,8 +324,34 @@
                                                                                         {
                                                                                           "san": "Qc7",
                                                                                           "comment": {
-                                                                                            "es": "Las negras ceden el alfil para aliviar la presión y la dama queda a salvo en c7.",
-                                                                                            "en": "Black gives up the bishop to ease the pressure and the queen is safe on c7."
+                                                                                            "es": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Las negras ceden el alfil para aliviar la presión y la dama queda a salvo en "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "c7"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "."
+                                                                                              }
+                                                                                            ],
+                                                                                            "en": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Black gives up the bishop to ease the pressure and the queen is safe on "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "c7"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "."
+                                                                                              }
+                                                                                            ]
                                                                                           },
                                                                                           "main": true,
                                                                                           "children": []
@@ -163,8 +387,40 @@
                                             "en": "Classical Variation"
                                           },
                                           "comment": {
-                                            "es": "Desarrolla el alfil antes de ...c6.",
-                                            "en": "Develops the bishop before ...c6."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Desarrolla el alfil antes de "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "c6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...c6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Develops the bishop before "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "c6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...c6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {
@@ -182,8 +438,78 @@
                                                             {
                                                               "san": "Qe2",
                                                               "comment": {
-                                                                "es": "Las blancas preparan el enroque largo y la ruptura d5; las negras completan el desarrollo con ...Dc7 y ...e6.",
-                                                                "en": "White prepares long castling and the d5 break; Black completes development with ...Qc7 and ...e6."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Las blancas preparan el enroque largo y la ruptura "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; las negras completan el desarrollo con "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "Qc7",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...Dc7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " y "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "e6",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...e6"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "White prepares long castling and the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " break; Black completes development with "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "Qc7",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...Qc7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " and "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "e6",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...e6"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ]
                                                               },
                                                               "children": [
                                                                 {
@@ -227,8 +553,50 @@
                             "en": "Gubinsky–Melts Defence"
                           },
                           "comment": {
-                            "es": "Planteamiento moderno: desde d6 la dama controla e5 y puede replegarse a defender.",
-                            "en": "A modern setup: from d6 the queen controls e5 and can drop back to defend."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Planteamiento moderno: desde "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d6"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " la dama controla "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " y puede replegarse a defender."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "A modern setup: from "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d6"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " the queen controls "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " and can drop back to defend."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -247,8 +615,82 @@
                                             "en": "Bronstein Variation"
                                           },
                                           "comment": {
-                                            "es": "Prepara ...b5 o ...Cc6 sin temer Cb5.",
-                                            "en": "Prepares ...b5 or ...Nc6 without fearing Nb5."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Prepara "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "b5",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...b5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " o "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Nc6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...Cc6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " sin temer "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Nb5",
+                                                "start": false,
+                                                "written": "Cb5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Prepares "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "b5",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...b5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " or "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Nc6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...Nc6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " without fearing "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Nb5",
+                                                "start": false,
+                                                "written": "Nb5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "children": [
                                             {
@@ -297,8 +739,18 @@
                             "en": "Valencian Variation"
                           },
                           "comment": {
-                            "es": "Retirada completa: la dama queda a salvo a costa de algo de tiempo.",
-                            "en": "A full retreat: the queen is safe at the cost of some time."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Retirada completa: la dama queda a salvo a costa de algo de tiempo."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "A full retreat: the queen is safe at the cost of some time."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -357,8 +809,18 @@
                     "en": "Modern Variation"
                   },
                   "comment": {
-                    "es": "Las negras recuperarán el peón con el caballo en lugar de con la dama.",
-                    "en": "Black will regain the pawn with the knight rather than the queen."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Las negras recuperarán el peón con el caballo en lugar de con la dama."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Black will regain the pawn with the knight rather than the queen."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -371,8 +833,34 @@
                             "en": "Marshall Variation"
                           },
                           "comment": {
-                            "es": "El caballo recupera el peón; las blancas ganarán tiempo con c4.",
-                            "en": "The knight regains the pawn; White gains time with c4."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "El caballo recupera el peón; las blancas ganarán tiempo con "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "The knight regains the pawn; White gains time with "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -423,8 +911,34 @@
                             "en": "Portuguese Gambit"
                           },
                           "comment": {
-                            "es": "Las negras desarrollan el alfil antes de recuperar el peón de d5.",
-                            "en": "Black develops the bishop before regaining the d5 pawn."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Las negras desarrollan el alfil antes de recuperar el peón de "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Black develops the bishop before regaining the "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " pawn."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -434,8 +948,34 @@
                                 "en": "Portuguese Gambit, Classical Variation"
                               },
                               "comment": {
-                                "es": "Desarrollo sencillo: las blancas devuelven el peón y las negras recuperan d5 con la dama.",
-                                "en": "Simple development: White lets the pawn go and Black regains d5 with the queen."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Desarrollo sencillo: las blancas devuelven el peón y las negras recuperan "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " con la dama."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Simple development: White lets the pawn go and Black regains "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " with the queen."
+                                  }
+                                ]
                               },
                               "children": [
                                 {

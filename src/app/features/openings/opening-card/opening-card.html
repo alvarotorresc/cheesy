@@ -47,7 +47,7 @@
       </span>
       <span>{{ t.lineCount(o.lineCount) }}</span>
     </p>
-    <p class="card-desc">{{ i18n.localize(o.description) }}</p>
+    <p class="card-desc"><app-rich-text [text]="o.description" /></p>
   </div>
   @if (rows().length) {
     <div class="progress">

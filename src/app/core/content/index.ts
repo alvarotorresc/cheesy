@@ -8,5 +8,6 @@ export type {
   OpeningNode,
   OpeningSummary,
   OpeningTree,
+  RichText,
   Side,
 } from './content.types';

@@ -1,5 +1,5 @@
 import type { Color } from 'chessops';
-import type { BookNode, OpeningBook } from '../../core/content';
+import type { BookNode, OpeningBook, RichText } from '../../core/content';
 import type { Localized } from '../../core/i18n';
 
 /**
@@ -35,7 +35,7 @@ export interface Theory {
   /** Name of the variation reached, if the tree names one. */
   readonly variation: Localized | undefined;
   /** Idea behind the last move, only while the position is still the one in the tree. */
-  readonly comment: Localized | undefined;
+  readonly comment: RichText | undefined;
   /** Preferred book continuation, only while `in-book`. */
   readonly next: BookNode | undefined;
   /** Other book continuations, only while `in-book`. */

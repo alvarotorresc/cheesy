@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import type { EndgamePosition } from '../../core/content';
 
 /** Lucena position: White to move and win. */
@@ -8,7 +9,7 @@ export const LUCENA: EndgamePosition = {
   fen: '1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 0 1',
   goal: 'win',
   playerSide: 'white',
-  explanation: { es: 'Construye el puente.', en: 'Build the bridge.' },
+  explanation: plainText('Construye el puente.', 'Build the bridge.'),
 };
 
 /** Rule of the square: Black to move and draw. */
@@ -19,7 +20,7 @@ export const SQUARE_RULE: EndgamePosition = {
   fen: '8/8/8/6k1/1P6/8/8/7K b - - 0 1',
   goal: 'draw',
   playerSide: 'black',
-  explanation: { es: 'Entra en el cuadrado.', en: 'Step into the square.' },
+  explanation: plainText('Entra en el cuadrado.', 'Step into the square.'),
 };
 
 /** Mate with the queen, but White starts with Black to move: the engine moves first. */
@@ -30,5 +31,5 @@ export const ENGINE_FIRST: EndgamePosition = {
   fen: '8/8/8/4k3/8/8/8/3QK3 b - - 0 1',
   goal: 'win',
   playerSide: 'white',
-  explanation: { es: 'Espera.', en: 'Wait.' },
+  explanation: plainText('Espera.', 'Wait.'),
 };

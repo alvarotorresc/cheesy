@@ -8,6 +8,7 @@ import { colorOfPly, ReadingModeService } from '../../../core/reading-mode';
 import { MASTERY_STREAK, type ProgressColor } from '../../../core/progress';
 import { Icon } from '../../../shared/icon';
 import { MoveText } from '../../../shared/move';
+import { RichTextView } from '../../../shared/rich-text';
 import { createReplay, framesFromLine, MiniBoard, ReplayTrigger } from '../../../shared/mini-board';
 import type { ColorProgress } from '../opening-progress';
 
@@ -32,7 +33,7 @@ interface ProgressRow {
  */
 @Component({
   selector: 'app-opening-card',
-  imports: [Icon, MiniBoard, MoveText, ReplayTrigger, RouterLink],
+  imports: [Icon, MiniBoard, MoveText, ReplayTrigger, RichTextView, RouterLink],
   templateUrl: './opening-card.html',
 })
 export class OpeningCard {

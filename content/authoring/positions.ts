@@ -1,9 +1,10 @@
 // Curated tactical positions. Positions taken from games are rebuilt by replaying the game moves
 // with chessops (see build.ts), so the stored FEN can never drift from the move record.
-import type { CuratedPosition } from '../types.ts';
+import type { CuratedPosition, Localized } from '../types.ts';
 
-export type PositionSpec = Omit<CuratedPosition, 'fen'> &
-  ({ fen: string } | { moves: string; gameEnd?: string });
+export type PositionSpec = Omit<CuratedPosition, 'fen' | 'explanation'> & {
+  explanation: Localized;
+} & ({ fen: string } | { moves: string; gameEnd?: string });
 
 export const positions: PositionSpec[] = [
   {

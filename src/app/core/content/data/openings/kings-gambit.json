@@ -7,8 +7,50 @@
   "eco": "C30-C39",
   "side": "white",
   "description": {
-    "es": "Las blancas entregan el peón de f para desviar el de e5, abrir la columna f y levantar un centro con d4. Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable.",
-    "en": "White gives up the f-pawn to deflect the e5 pawn, open the f-file and build a centre with d4. A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las blancas entregan el peón de f para desviar el de "
+      },
+      {
+        "kind": "square",
+        "square": "e5"
+      },
+      {
+        "kind": "text",
+        "text": ", abrir la columna f y levantar un centro con "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": ". Apertura romántica y agresiva: el motor la considera algo peor para las blancas, pero es teoría jugable."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "White gives up the f-pawn to deflect the "
+      },
+      {
+        "kind": "square",
+        "square": "e5"
+      },
+      {
+        "kind": "text",
+        "text": " pawn, open the f-file and build a centre with "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": ". A romantic, aggressive opening: engines rate it slightly worse for White, but it is playable theory."
+      }
+    ]
   },
   "root": [
     {
@@ -26,8 +68,34 @@
                 "en": "King's Gambit"
               },
               "comment": {
-                "es": "Gambito: se ofrece el peón de f para desviar el peón de e5 y abrir la columna f.",
-                "en": "A gambit: White offers the f-pawn to deflect the e5 pawn and open the f-file."
+                "es": [
+                  {
+                    "kind": "text",
+                    "text": "Gambito: se ofrece el peón de f para desviar el peón de "
+                  },
+                  {
+                    "kind": "square",
+                    "square": "e5"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " y abrir la columna f."
+                  }
+                ],
+                "en": [
+                  {
+                    "kind": "text",
+                    "text": "A gambit: White offers the f-pawn to deflect the "
+                  },
+                  {
+                    "kind": "square",
+                    "square": "e5"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " pawn and open the f-file."
+                  }
+                ]
               },
               "main": true,
               "children": [
@@ -38,8 +106,18 @@
                     "en": "King's Gambit Accepted"
                   },
                   "comment": {
-                    "es": "Las negras aceptan el peón y deben decidir si lo defienden o lo devuelven para desarrollarse.",
-                    "en": "Black takes the pawn and must decide whether to hold it or give it back for development."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Las negras aceptan el peón y deben decidir si lo defienden o lo devuelven para desarrollarse."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Black takes the pawn and must decide whether to hold it or give it back for development."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -50,8 +128,76 @@
                         "en": "King's Knight's Gambit"
                       },
                       "comment": {
-                        "es": "Impide ...Dh4+ y prepara d4 y Axf4.",
-                        "en": "Prevents ...Qh4+ and prepares d4 and Bxf4."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Impide "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Qh4+",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Dh4+"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " y prepara "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "d4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " y "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Bxf4",
+                            "start": false,
+                            "written": "Axf4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Prevents "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Qh4+",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Qh4+"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " and prepares "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "d4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " and "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Bxf4",
+                            "start": false,
+                            "written": "Bxf4"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "main": true,
                       "children": [
@@ -62,8 +208,18 @@
                             "en": "Modern Defence"
                           },
                           "comment": {
-                            "es": "Las negras golpean en el centro para abrir líneas y desarrollarse deprisa.",
-                            "en": "Black strikes in the centre to open lines and develop quickly."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Las negras golpean en el centro para abrir líneas y desarrollarse deprisa."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Black strikes in the centre to open lines and develop quickly."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -82,8 +238,34 @@
                                     {
                                       "san": "Bb5+",
                                       "comment": {
-                                        "es": "Jaque intermedio que complica la recuperación del peón de d5.",
-                                        "en": "An in-between check that makes it harder for Black to regain the d5 pawn."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Jaque intermedio que complica la recuperación del peón de "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "An in-between check that makes it harder for Black to regain the "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " pawn."
+                                          }
+                                        ]
                                       },
                                       "main": true,
                                       "children": [
@@ -110,16 +292,84 @@
                                                             "en": "Abbazia Defence, Main Line"
                                                           },
                                                           "comment": {
-                                                            "es": "Las negras conservan el peón de f4 y centralizan el caballo; las blancas buscan actividad a cambio.",
-                                                            "en": "Black keeps the f4 pawn and centralises the knight; White seeks activity in return."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Las negras conservan el peón de "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "f4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " y centralizan el caballo; las blancas buscan actividad a cambio."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Black keeps the "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "f4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " pawn and centralises the knight; White seeks activity in return."
+                                                              }
+                                                            ]
                                                           },
                                                           "main": true,
                                                           "children": [
                                                             {
                                                               "san": "O-O",
                                                               "comment": {
-                                                                "es": "Las blancas enrocan: la torre de f1 apuntará al peón de f4.",
-                                                                "en": "White castles: the f1 rook will target the f4 pawn."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Las blancas enrocan: la torre de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f1"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " apuntará al peón de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "White castles: the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f1"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " rook will target the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "f4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " pawn."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
@@ -187,15 +437,127 @@
                         {
                           "san": "g5",
                           "comment": {
-                            "es": "Defiende f4 con otro peón: el planteamiento clásico y más agudo.",
-                            "en": "Defends f4 with another pawn: the classical and sharpest approach."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Defiende "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " con otro peón: el planteamiento clásico y más agudo."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Defends "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " with another pawn: the classical and sharpest approach."
+                              }
+                            ]
                           },
                           "children": [
                             {
                               "san": "h4",
                               "comment": {
-                                "es": "Ataca la cadena g5-f4 antes de que las negras la consoliden con ...h6 y ...Ag7.",
-                                "en": "Undermines the g5-f4 chain before Black can consolidate with ...h6 and ...Bg7."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Ataca la cadena "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "g5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "-"
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " antes de que las negras la consoliden con "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "h6",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...h6"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bg7",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...Ag7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Undermines the "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "g5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "-"
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "f4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " chain before Black can consolidate with "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "h6",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...h6"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bg7",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...Bg7"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -208,8 +570,50 @@
                                         "en": "Kieseritzky Gambit"
                                       },
                                       "comment": {
-                                        "es": "El caballo salta al centro; las blancas atacarán g4 y f4 en cuanto puedan.",
-                                        "en": "The knight jumps to the centre; White will go after g4 and f4."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "El caballo salta al centro; las blancas atacarán "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "g4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " en cuanto puedan."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "The knight jumps to the centre; White will go after "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "g4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "f4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -280,8 +684,72 @@
                             "en": "Fischer Defence"
                           },
                           "comment": {
-                            "es": "Quita la casilla e5 al caballo antes de defender f4 con ...g5.",
-                            "en": "Takes e5 away from the knight before defending f4 with ...g5."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Quita la casilla "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " al caballo antes de defender "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " con "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "g5",
+                                "number": "...",
+                                "start": false,
+                                "written": "...g5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Takes "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " away from the knight before defending "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " with "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "g5",
+                                "number": "...",
+                                "start": false,
+                                "written": "...g5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -299,8 +767,34 @@
                                             {
                                               "san": "Ng1",
                                               "comment": {
-                                                "es": "Retirada paradójica: el caballo esquiva el ataque del peón y se reubicará por e2.",
-                                                "en": "A paradoxical retreat: the knight dodges the pawn and will be redeployed via e2."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Retirada paradójica: el caballo esquiva el ataque del peón y se reubicará por "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e2"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "A paradoxical retreat: the knight dodges the pawn and will be redeployed via "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e2"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -336,8 +830,40 @@
                             "en": "Cunningham Defence"
                           },
                           "comment": {
-                            "es": "Amenaza ...Ah4+ para incomodar al rey blanco.",
-                            "en": "Threatens ...Bh4+ to harass the white king."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Amenaza "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Bh4+",
+                                "number": "...",
+                                "start": false,
+                                "written": "...Ah4+"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " para incomodar al rey blanco."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Threatens "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Bh4+",
+                                "number": "...",
+                                "start": false,
+                                "written": "...Bh4+"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " to harass the white king."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -380,8 +906,76 @@
                         "en": "Bishop's Gambit"
                       },
                       "comment": {
-                        "es": "El alfil apunta a f7; las blancas aceptan un posible ...Dh4+ seguido de Rf1.",
-                        "en": "The bishop eyes f7; White accepts a possible ...Qh4+ followed by Kf1."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "El alfil apunta a "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f7"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; las blancas aceptan un posible "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Qh4+",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Dh4+"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " seguido de "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Kf1",
+                            "start": false,
+                            "written": "Rf1"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "The bishop eyes "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "f7"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; White accepts a possible "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Qh4+",
+                            "number": "...",
+                            "start": false,
+                            "written": "...Qh4+"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " followed by "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "Kf1",
+                            "start": false,
+                            "written": "Kf1"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -439,8 +1033,18 @@
                     "en": "Falkbeer Countergambit"
                   },
                   "comment": {
-                    "es": "Las negras rehúsan el peón y contraatacan en el centro.",
-                    "en": "Black declines the pawn and hits back in the centre."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Las negras rehúsan el peón y contraatacan en el centro."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Black declines the pawn and hits back in the centre."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -449,8 +1053,34 @@
                         {
                           "san": "exf4",
                           "comment": {
-                            "es": "Ahora sí se toma en f4: la posición recuerda a la Defensa Moderna.",
-                            "en": "Now Black does take on f4, reaching a position similar to the Modern Defence."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Ahora sí se toma en "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ": la posición recuerda a la Defensa Moderna."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Now Black does take on "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "f4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ", reaching a position similar to the Modern Defence."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -505,8 +1135,34 @@
                     "en": "King's Gambit Declined, Classical Variation"
                   },
                   "comment": {
-                    "es": "El alfil controla g1 e impide el enroque corto blanco.",
-                    "en": "The bishop covers g1 and stops White from castling short."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "El alfil controla "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "g1"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " e impide el enroque corto blanco."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "The bishop covers "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "g1"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " and stops White from castling short."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -518,8 +1174,34 @@
                             {
                               "san": "c3",
                               "comment": {
-                                "es": "Prepara d4 para expulsar al alfil y levantar un centro fuerte.",
-                                "en": "Prepares d4 to kick the bishop and build a strong centre."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Prepara "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " para expulsar al alfil y levantar un centro fuerte."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Prepares "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "d4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " to kick the bishop and build a strong centre."
+                                  }
+                                ]
                               },
                               "children": [
                                 {

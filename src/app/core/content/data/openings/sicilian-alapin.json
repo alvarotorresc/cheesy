@@ -7,8 +7,56 @@
   "eco": "B22",
   "side": "white",
   "description": {
-    "es": "Con 2.c3 las blancas preparan d4 para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas.",
-    "en": "With 2.c3 White prepares d4 to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Con "
+      },
+      {
+        "kind": "move",
+        "san": "c3",
+        "number": "2.",
+        "start": false,
+        "written": "2.c3"
+      },
+      {
+        "kind": "text",
+        "text": " las blancas preparan "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": " para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "With "
+      },
+      {
+        "kind": "move",
+        "san": "c3",
+        "number": "2.",
+        "start": false,
+        "written": "2.c3"
+      },
+      {
+        "kind": "text",
+        "text": " White prepares "
+      },
+      {
+        "kind": "square",
+        "square": "d4"
+      },
+      {
+        "kind": "text",
+        "text": " to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +70,34 @@
             "en": "Sicilian Defence"
           },
           "comment": {
-            "es": "Lucha por d4 con un peón lateral y crea desequilibrio desde la primera jugada.",
-            "en": "Fights for d4 with a flank pawn and creates imbalance from move one."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Lucha por "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Fights for "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " with a flank pawn and creates imbalance from move one."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -34,16 +108,146 @@
                 "en": "Alapin Variation"
               },
               "comment": {
-                "es": "Prepara d4 para responder a ...cxd4 con cxd4 y quedarse con un centro de peones.",
-                "en": "Prepares d4 so that ...cxd4 can be met by cxd4, keeping a pawn centre."
+                "es": [
+                  {
+                    "kind": "text",
+                    "text": "Prepara "
+                  },
+                  {
+                    "kind": "square",
+                    "square": "d4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " para responder a "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "cxd4",
+                    "number": "...",
+                    "start": false,
+                    "written": "...cxd4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " con "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "cxd4",
+                    "start": false,
+                    "written": "cxd4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " y quedarse con un centro de peones."
+                  }
+                ],
+                "en": [
+                  {
+                    "kind": "text",
+                    "text": "Prepares "
+                  },
+                  {
+                    "kind": "square",
+                    "square": "d4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " so that "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "cxd4",
+                    "number": "...",
+                    "start": false,
+                    "written": "...cxd4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " can be met by "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "cxd4",
+                    "start": false,
+                    "written": "cxd4"
+                  },
+                  {
+                    "kind": "text",
+                    "text": ", keeping a pawn centre."
+                  }
+                ]
               },
               "main": true,
               "children": [
                 {
                   "san": "d5",
                   "comment": {
-                    "es": "Aprovecha que c3 quita esa casilla al caballo blanco: la dama podrá recapturar en d5 sin ser atacada por Cc3.",
-                    "en": "Exploits the fact that c3 takes that square from the white knight: the queen can recapture on d5 without being hit by Nc3."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Aprovecha que "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "c3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " quita esa casilla al caballo blanco: la dama podrá recapturar en "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " sin ser atacada por "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "Nc3",
+                        "start": false,
+                        "written": "Cc3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Exploits the fact that "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "c3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " takes that square from the white knight: the queen can recapture on "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " without being hit by "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "Nc3",
+                        "start": false,
+                        "written": "Nc3"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -78,8 +282,50 @@
                                             "en": "Barmen Defence, Modern Line"
                                           },
                                           "comment": {
-                                            "es": "Presiona d4 clavando el caballo de f3.",
-                                            "en": "Pressures d4 by pinning the f3 knight."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Presiona "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " clavando el caballo de "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "f3"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Pressures "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " by pinning the "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "f3"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " knight."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -118,8 +364,34 @@
                                                                             {
                                                                               "san": "cxd4",
                                                                               "comment": {
-                                                                                "es": "Estructura de peón aislado en d4: las blancas tienen actividad y las negras apuntan al peón débil.",
-                                                                                "en": "An isolated d4 pawn: White has activity while Black targets the weak pawn."
+                                                                                "es": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Estructura de peón aislado en "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ": las blancas tienen actividad y las negras apuntan al peón débil."
+                                                                                  }
+                                                                                ],
+                                                                                "en": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "An isolated "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " pawn: White has activity while Black targets the weak pawn."
+                                                                                  }
+                                                                                ]
                                                                               },
                                                                               "main": true,
                                                                               "children": [
@@ -138,8 +410,50 @@
                                                                                             {
                                                                                               "san": "Nb5",
                                                                                               "comment": {
-                                                                                                "es": "Gana tiempo sobre la dama y vigila las casillas d6 y c7.",
-                                                                                                "en": "Gains time on the queen and eyes the d6 and c7 squares."
+                                                                                                "es": [
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "Gana tiempo sobre la dama y vigila las casillas "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "d6"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " y "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "c7"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "."
+                                                                                                  }
+                                                                                                ],
+                                                                                                "en": [
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": "Gains time on the queen and eyes the "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "d6"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " and "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "square",
+                                                                                                    "square": "c7"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " squares."
+                                                                                                  }
+                                                                                                ]
                                                                                               },
                                                                                               "main": true,
                                                                                               "children": [
@@ -183,8 +497,34 @@
                                 {
                                   "san": "Nc6",
                                   "comment": {
-                                    "es": "Presiona d4 con el caballo antes de decidir dónde colocar el alfil.",
-                                    "en": "Pressures d4 with the knight before committing the bishop."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Presiona "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " con el caballo antes de decidir dónde colocar el alfil."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Pressures "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " with the knight before committing the bishop."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -239,8 +579,66 @@
                 {
                   "san": "Nf6",
                   "comment": {
-                    "es": "Ataca e4 y provoca e5; el caballo se instalará en d5.",
-                    "en": "Hits e4 and provokes e5; the knight settles on d5."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Ataca "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " y provoca "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "; el caballo se instalará en "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Hits "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " and provokes "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "; the knight settles on "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -258,8 +656,34 @@
                                     {
                                       "san": "Nf3",
                                       "comment": {
-                                        "es": "Las blancas no recapturan todavía: prefieren desarrollarse, aun a costa de entregar el peón de d4.",
-                                        "en": "White does not recapture yet, preferring development even at the cost of the d4 pawn."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Las blancas no recapturan todavía: prefieren desarrollarse, aun a costa de entregar el peón de "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "White does not recapture yet, preferring development even at the cost of the "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " pawn."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -341,8 +765,34 @@
                                                 "en": "Stoltz Attack"
                                               },
                                               "comment": {
-                                                "es": "El alfil se retira sin salir de la diagonal que apunta a f7.",
-                                                "en": "The bishop retreats while staying on the diagonal aimed at f7."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "El alfil se retira sin salir de la diagonal que apunta a "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "The bishop retreats while staying on the diagonal aimed at "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -364,8 +814,56 @@
                                                                     "en": "Ivanchuk Line"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "Ataque directo contra e5: las negras quieren ...g4 para desalojar al caballo que lo defiende.",
-                                                                    "en": "A direct assault on e5: Black wants ...g4 to dislodge the knight defending it."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Ataque directo contra "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": ": las negras quieren "
+                                                                      },
+                                                                      {
+                                                                        "kind": "move",
+                                                                        "san": "g4",
+                                                                        "number": "...",
+                                                                        "start": false,
+                                                                        "written": "...g4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " para desalojar al caballo que lo defiende."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "A direct assault on "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": ": Black wants "
+                                                                      },
+                                                                      {
+                                                                        "kind": "move",
+                                                                        "san": "g4",
+                                                                        "number": "...",
+                                                                        "start": false,
+                                                                        "written": "...g4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " to dislodge the knight defending it."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": []
                                                                 }
@@ -396,8 +894,40 @@
                 {
                   "san": "e6",
                   "comment": {
-                    "es": "Planteamiento de tipo francés: las negras preparan ...d5.",
-                    "en": "A French-style setup: Black prepares ...d5."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Planteamiento de tipo francés: las negras preparan "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "d5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "A French-style setup: Black prepares "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "d5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -412,8 +942,50 @@
                                 {
                                   "san": "exd5",
                                   "comment": {
-                                    "es": "Si las blancas cambian en c5, las negras quedarán con un peón aislado en d5 pero con piezas activas.",
-                                    "en": "If White takes on c5, Black is left with an isolated d5 pawn but active pieces."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Si las blancas cambian en "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", las negras quedarán con un peón aislado en "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " pero con piezas activas."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "If White takes on "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", Black is left with an isolated "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " pawn but active pieces."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {

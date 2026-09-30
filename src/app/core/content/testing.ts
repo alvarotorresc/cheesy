@@ -4,6 +4,7 @@ import type {
   EndgamePosition,
   OpeningSummary,
   OpeningTree,
+  RichText,
 } from './content.types';
 
 /**
@@ -19,3 +20,9 @@ export const bundledContentLoaders: ContentLoaders = {
   endgames: async () => (await import('./data/endgames.json')).default as EndgamePosition[],
   positions: async () => (await import('./data/positions.json')).default as CuratedPosition[],
 };
+
+/** A text of the content with no moves, squares or terms, for the specs. */
+export const plainText = (es: string, en: string = es): RichText => ({
+  es: [{ kind: 'text', text: es }],
+  en: [{ kind: 'text', text: en }],
+});
