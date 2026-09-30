@@ -156,7 +156,12 @@
   }
 
   .head.revealing .theme-tag {
-    animation: pop 380ms var(--ease-out) both;
+    /*
+     * "backwards", not "both": the end frame of pop is an identity transform, and a filled
+     * transform (even none-like) would make the tag the containing block of position: fixed
+     * descendants. The tag is hidden during the delay and has no transform once it has settled.
+     */
+    animation: pop 380ms var(--ease-out) backwards;
     animation-delay: calc(820ms + var(--i) * 90ms);
   }
 
