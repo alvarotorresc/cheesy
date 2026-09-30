@@ -282,6 +282,26 @@ describe('TermView', () => {
     expect(popup()).toBeNull();
   });
 
+  it('should close a popup when another term opens', async () => {
+    const other = TestBed.createComponent(TermView);
+    other.componentRef.setInput('id', 'pin');
+    other.componentRef.setInput('text', 'otra');
+    const otherElement = other.nativeElement as HTMLElement;
+    document.body.appendChild(otherElement);
+    await other.whenStable();
+    try {
+      button().click();
+      await fixture.whenStable();
+      expect(popup()).not.toBeNull();
+      (otherElement.querySelector('button.term') as HTMLButtonElement).click();
+      await other.whenStable();
+      expect(popup()).toBeNull();
+      expect(otherElement.querySelector('[role="dialog"]')).not.toBeNull();
+    } finally {
+      otherElement.remove();
+    }
+  });
+
   it('should name the dialog after the term, not the written word', async () => {
     button().click();
     await fixture.whenStable();

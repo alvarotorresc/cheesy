@@ -19,6 +19,7 @@ import type { GlossaryTerm } from '../../core/content/content.types';
 import { I18nService } from '../../core/i18n';
 import { frameFromFen, MiniBoard } from '../mini-board';
 import { RichTextView } from '../rich-text';
+import { TermRegistry } from './term-registry';
 
 type State =
   | { kind: 'closed' }
@@ -67,6 +68,9 @@ export class TermView {
   private readonly content = inject(ContentService);
   private readonly document = inject(DOCUMENT);
   private readonly injector = inject(Injector);
+  private readonly registry = inject(TermRegistry);
+  /** What the registry calls to close this term when another one opens. */
+  private readonly handle = { close: () => this.close(false) };
   private readonly button = viewChild.required<ElementRef<HTMLButtonElement>>('button');
   private readonly popup = viewChild<ElementRef<HTMLElement>>('popup');
 
@@ -117,6 +121,7 @@ export class TermView {
     inject(DestroyRef).onDestroy(() => {
       clearTimeout(this.hoverTimer);
       clearTimeout(this.leaveTimer);
+      this.registry.release(this.handle);
       this.document.removeEventListener('pointerdown', onPress, { capture: true });
       this.document.removeEventListener('keydown', onKey, { capture: true });
       view?.removeEventListener('scroll', onViewChange);
@@ -182,6 +187,7 @@ export class TermView {
   private show(byHover: boolean): void {
     clearTimeout(this.hoverTimer);
     this.openedByHover = byHover;
+    this.registry.claim(this.handle);
     this.state.set({ kind: 'loading' });
     this.content.glossaryTerm(this.id()).then(
       (term) => this.open() && this.state.set({ kind: 'ready', term }),
@@ -193,6 +199,7 @@ export class TermView {
     clearTimeout(this.hoverTimer);
     this.cancelLeave();
     this.openedByHover = false;
+    this.registry.release(this.handle);
     this.state.set({ kind: 'closed' });
     if (focus) this.button().nativeElement.focus();
   }
