@@ -1,4 +1,5 @@
 import { OpeningBook, type OpeningNode } from '../../core/content';
+import { rich } from '../../core/content/testing';
 import { describeTheory } from './opening-theory';
 import { testTree } from './testing/test-opening';
 
@@ -19,7 +20,7 @@ describe('opening theory', () => {
 
       expect(theory.status).toBe('in-book');
       expect(theory.variation?.en).toBe('King Knight Opening');
-      expect(theory.comment?.en).toBe('Attacks e5.');
+      expect(theory.comment).toEqual(rich('Attacks e5.'));
       expect(theory.next?.san).toBe('Nc6');
       expect(theory.alternatives.map((node) => node.san)).toEqual(['Nf6']);
       expect(theory.deviation).toBeUndefined();
@@ -70,7 +71,7 @@ describe('opening theory', () => {
       const theory = describeTheory(book, ['e4', 'e5', 'Nf3', 'Nc6', 'Bb5']);
 
       expect(theory.status).toBe('end-of-book');
-      expect(theory.comment?.en).toBe('Pins nothing yet.');
+      expect(theory.comment).toEqual(rich('Pins nothing yet.'));
       expect(theory.next).toBeUndefined();
     });
 

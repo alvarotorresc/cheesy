@@ -251,7 +251,7 @@ export const najdorf: OpeningSpec = {
       name: { es: 'Variante Najdorf', en: 'Najdorf Variation' },
       comment: {
         es: 'Controla b5 (sin Cb5 ni Ab5) y prepara ...e5 o ...b5.',
-        en: 'Takes b5 away from White pieces and prepares ...e5 or ...b5.',
+        en: 'Controls b5 (no Nb5 or Bb5) and prepares ...e5 or ...b5.',
       },
     },
     [`${NAJ} Bg5`]: {

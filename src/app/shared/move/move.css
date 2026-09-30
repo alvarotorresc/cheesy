@@ -18,3 +18,25 @@
   margin-right: 0.05em;
   vertical-align: -0.2em;
 }
+
+/* A move with a tab stop of its own (in a text, the tablebase hint, the steps of a position) lights
+   up as the board points at it; inside a button (no tab stop) the button does, cursor included.
+   A faint solid underline tells it apart at rest (the dotted one is for glossary terms). */
+.spot[data-spot][tabindex] {
+  border-radius: 2px;
+  cursor: default;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.spot[data-spot][tabindex]:hover,
+.spot[data-spot][tabindex]:focus-visible {
+  background: var(--board-spot);
+}
+
+/* The tint alone is too faint to find the keyboard focus: the site's focus ring goes around it. */
+.spot[data-spot][tabindex]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}

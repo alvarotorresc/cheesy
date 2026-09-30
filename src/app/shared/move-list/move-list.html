@@ -15,7 +15,12 @@
                 [attr.aria-current]="cell.ply === currentPly() ? 'step' : null"
                 (click)="selectPly.emit(cell.ply)"
               >
-                <app-move [san]="cell.san" [color]="cell.color" />
+                <app-move
+                  [san]="cell.san"
+                  [color]="cell.color"
+                  [before]="cell.before"
+                  [focusable]="false"
+                />
               </button>
             } @else if ($first) {
               <span class="move placeholder" aria-hidden="true">…</span>

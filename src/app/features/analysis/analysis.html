@@ -226,6 +226,7 @@
         [items]="moveItems()"
         [currentId]="session.currentId()"
         [freshId]="session.fresh()"
+        [tree]="session.tree()"
         [names]="names()"
         [hasVariations]="session.hasVariations()"
         (pick)="session.goTo($event)"

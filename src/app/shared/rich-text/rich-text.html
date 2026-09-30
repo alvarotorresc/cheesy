@@ -1,0 +1,10 @@
+@for (segment of segments(); track $index) {@if (segment.kind === 'text') {<ng-container>{{ segment.text }}</ng-container>} @else if (segment.kind === 'move') {<app-move
+        class="move"
+        [san]="segment.san"
+        [color]="colorOf(segment)"
+        format="full"
+        [start]="segment.start"
+        [prefix]="segment.number"
+      />} @else if (segment.kind === 'square') {<span class="square" [appSpot]="{ kind: 'squares', squares: [segment.square] }">{{
+        segment.square
+      }}</span>} @else {<span class="term">{{ segment.text }}</span>}}

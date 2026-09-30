@@ -1,5 +1,5 @@
 import type { CuratedPosition } from '../../core/content';
-import { bundledContentLoaders } from '../../core/content/testing';
+import { bundledContentLoaders, plainText } from '../../core/content/testing';
 import {
   numberOfContentId,
   orderPositions,
@@ -13,7 +13,7 @@ const position = (id: string, solution: string[]): CuratedPosition => ({
   fen: '4k3/8/8/8/8/8/8/4K3 w - - 0 1',
   playerSide: 'white',
   solution,
-  explanation: { es: '', en: '' },
+  explanation: plainText('-'),
   tags: [],
 });
 

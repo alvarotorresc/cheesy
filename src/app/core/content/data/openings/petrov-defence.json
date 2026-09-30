@@ -7,8 +7,50 @@
   "eco": "C42-C43",
   "side": "black",
   "description": {
-    "es": "Las negras contraatacan e4 en lugar de defender e5: una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel.",
-    "en": "Black counterattacks e4 instead of defending e5: a symmetrical, very solid defence valued for its reliability at top level."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras contraatacan "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " en lugar de defender "
+      },
+      {
+        "kind": "square",
+        "square": "e5"
+      },
+      {
+        "kind": "text",
+        "text": ": una defensa simétrica y muy sólida, apreciada por su fiabilidad al máximo nivel."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black counterattacks "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " instead of defending "
+      },
+      {
+        "kind": "square",
+        "square": "e5"
+      },
+      {
+        "kind": "text",
+        "text": ": a symmetrical, very solid defence valued for its reliability at top level."
+      }
+    ]
   },
   "root": [
     {
@@ -30,8 +72,50 @@
                     "en": "Petrov's Defence"
                   },
                   "comment": {
-                    "es": "Respuesta simétrica: en lugar de defender e5, las negras atacan e4.",
-                    "en": "The symmetrical reply: instead of defending e5, Black attacks e4."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Respuesta simétrica: en lugar de defender "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": ", las negras atacan "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "The symmetrical reply: instead of defending "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": ", Black attacks "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "e4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -42,8 +126,54 @@
                         {
                           "san": "d6",
                           "comment": {
-                            "es": "Primero se expulsa al caballo: tomar e4 de inmediato permite De2 y las negras pasan apuros para igualar.",
-                            "en": "Kick the knight first: taking on e4 at once allows Qe2, and Black struggles to equalise."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Primero se expulsa al caballo: tomar "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " de inmediato permite "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Qe2",
+                                "start": false,
+                                "written": "De2"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " y las negras pasan apuros para igualar."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Kick the knight first: taking on "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " at once allows "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "Qe2",
+                                "start": false,
+                                "written": "Qe2"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ", and Black struggles to equalise."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -54,8 +184,18 @@
                                 {
                                   "san": "Nxe4",
                                   "comment": {
-                                    "es": "Las negras recuperan el peón con una posición simétrica y sólida.",
-                                    "en": "Black regains the pawn with a symmetrical, solid position."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Las negras recuperan el peón con una posición simétrica y sólida."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Black regains the pawn with a symmetrical, solid position."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -66,8 +206,54 @@
                                         "en": "Classical Attack"
                                       },
                                       "comment": {
-                                        "es": "Gana espacio en el centro y prepara Ad3 para desafiar al caballo de e4.",
-                                        "en": "Gains central space and prepares Bd3 to challenge the e4 knight."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Gana espacio en el centro y prepara "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Bd3",
+                                            "start": false,
+                                            "written": "Ad3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " para desafiar al caballo de "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Gains central space and prepares "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Bd3",
+                                            "start": false,
+                                            "written": "Bd3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " to challenge the "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " knight."
+                                          }
+                                        ]
                                       },
                                       "main": true,
                                       "children": [
@@ -86,8 +272,78 @@
                                                     "en": "Mason–Showalter Variation"
                                                   },
                                                   "comment": {
-                                                    "es": "Desarrolla y prepara ...Ae7 y ...0-0 manteniendo el caballo en e4.",
-                                                    "en": "Develops and prepares ...Be7 and ...O-O while keeping the knight on e4."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Desarrolla y prepara "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Be7",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...Ae7"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " y "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "O-O",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...0-0"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " manteniendo el caballo en "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Develops and prepares "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Be7",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...Be7"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " and "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "O-O",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...O-O"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " while keeping the knight on "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
@@ -106,16 +362,84 @@
                                                                 "en": "Jaenisch Variation"
                                                               },
                                                               "comment": {
-                                                                "es": "Ataca d5, el apoyo del caballo de e4.",
-                                                                "en": "Hits d5, the support of the e4 knight."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Ataca "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": ", el apoyo del caballo de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Hits "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "d5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": ", the support of the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " knight."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
                                                                 {
                                                                   "san": "Nb4",
                                                                   "comment": {
-                                                                    "es": "El caballo ataca al alfil de d3, que apuntaba al enroque negro.",
-                                                                    "en": "The knight attacks the d3 bishop, which was aiming at Black’s king."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "El caballo ataca al alfil de "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": ", que apuntaba al enroque negro."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "The knight attacks the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "d3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " bishop, which was aiming at Black’s king."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "main": true,
                                                                   "children": [
@@ -150,8 +474,58 @@
                                                                                                 {
                                                                                                   "san": "Nc6",
                                                                                                   "comment": {
-                                                                                                    "es": "Posición típica de la línea principal: las blancas presionan con Te1 y Af4; las negras siguen sólidas.",
-                                                                                                    "en": "A typical main-line position: White presses with Re1 and Bf4 while Black stays solid."
+                                                                                                    "es": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "Posición típica de la línea principal: las blancas presionan con "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "Re1",
+                                                                                                        "start": false,
+                                                                                                        "written": "Te1"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " y "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "Bf4",
+                                                                                                        "start": false,
+                                                                                                        "written": "Af4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "; las negras siguen sólidas."
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "en": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "A typical main-line position: White presses with "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "Re1",
+                                                                                                        "start": false,
+                                                                                                        "written": "Re1"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " and "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "Bf4",
+                                                                                                        "start": false,
+                                                                                                        "written": "Bf4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " while Black stays solid."
+                                                                                                      }
+                                                                                                    ]
                                                                                                   },
                                                                                                   "main": true,
                                                                                                   "children": [
@@ -205,8 +579,18 @@
                                                     "en": "Marshall Variation"
                                                   },
                                                   "comment": {
-                                                    "es": "Desarrollo más activo del alfil, que apunta hacia el flanco de rey blanco.",
-                                                    "en": "A more active bishop development, eyeing White’s kingside."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Desarrollo más activo del alfil, que apunta hacia el flanco de rey blanco."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "A more active bishop development, eyeing White’s kingside."
+                                                      }
+                                                    ]
                                                   },
                                                   "children": [
                                                     {
@@ -253,8 +637,38 @@
                                         "en": "Nimzowitsch Attack"
                                       },
                                       "comment": {
-                                        "es": "Fuerza el cambio de caballos; tras dxc3 las blancas suelen enrocar largo y atacar.",
-                                        "en": "Forces a knight trade; after dxc3 White usually castles long and attacks."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Fuerza el cambio de caballos; tras "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "dxc3",
+                                            "start": false,
+                                            "written": "dxc3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " las blancas suelen enrocar largo y atacar."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Forces a knight trade; after "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "dxc3",
+                                            "start": false,
+                                            "written": "dxc3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " White usually castles long and attacks."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -310,8 +724,18 @@
                                         "en": "Cozio Attack"
                                       },
                                       "comment": {
-                                        "es": "Clava el caballo y fuerza el cambio de damas: una línea muy tranquila.",
-                                        "en": "Pins the knight and forces a queen trade: a very quiet line."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Clava el caballo y fuerza el cambio de damas: una línea muy tranquila."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Pins the knight and forces a queen trade: a very quiet line."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -375,8 +799,34 @@
                         "en": "Modern Attack"
                       },
                       "comment": {
-                        "es": "Abre el centro de inmediato en lugar de capturar en e5.",
-                        "en": "Opens the centre at once instead of capturing on e5."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Abre el centro de inmediato en lugar de capturar en "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Opens the centre at once instead of capturing on "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -388,8 +838,34 @@
                                 {
                                   "san": "d5",
                                   "comment": {
-                                    "es": "Apoya el caballo de e4 y mantiene una posición sólida.",
-                                    "en": "Supports the e4 knight and keeps a solid position."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Apoya el caballo de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " y mantiene una posición sólida."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Supports the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "e4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " knight and keeps a solid position."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {

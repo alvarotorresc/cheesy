@@ -7,8 +7,78 @@
   "eco": "D20-D29",
   "side": "black",
   "description": {
-    "es": "Las negras toman el peón de c4 para ganar tiempo y atacar el centro con ...c5 o ...e5, sin intentar conservarlo.",
-    "en": "Black takes the c4 pawn to gain time and hit the centre with ...c5 or ...e5, without trying to keep it."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras toman el peón de "
+      },
+      {
+        "kind": "square",
+        "square": "c4"
+      },
+      {
+        "kind": "text",
+        "text": " para ganar tiempo y atacar el centro con "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": " o "
+      },
+      {
+        "kind": "move",
+        "san": "e5",
+        "number": "...",
+        "start": false,
+        "written": "...e5"
+      },
+      {
+        "kind": "text",
+        "text": ", sin intentar conservarlo."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black takes the "
+      },
+      {
+        "kind": "square",
+        "square": "c4"
+      },
+      {
+        "kind": "text",
+        "text": " pawn to gain time and hit the centre with "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": " or "
+      },
+      {
+        "kind": "move",
+        "san": "e5",
+        "number": "...",
+        "start": false,
+        "written": "...e5"
+      },
+      {
+        "kind": "text",
+        "text": ", without trying to keep it."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +92,18 @@
             {
               "san": "c4",
               "comment": {
-                "es": "Gambito de Dama: no es un gambito real, porque las blancas recuperan el peón con facilidad.",
-                "en": "The Queen's Gambit: not a real gambit, since White easily regains the pawn."
+                "es": [
+                  {
+                    "kind": "text",
+                    "text": "Gambito de Dama: no es un gambito real, porque las blancas recuperan el peón con facilidad."
+                  }
+                ],
+                "en": [
+                  {
+                    "kind": "text",
+                    "text": "The Queen's Gambit: not a real gambit, since White easily regains the pawn."
+                  }
+                ]
               },
               "main": true,
               "children": [
@@ -34,8 +114,62 @@
                     "en": "Queen's Gambit Accepted"
                   },
                   "comment": {
-                    "es": "Las negras toman el peón no para conservarlo, sino para desarrollarse deprisa y atacar el centro con ...c5 o ...e5.",
-                    "en": "Black takes the pawn not to keep it, but to develop quickly and hit the centre with ...c5 or ...e5."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Las negras toman el peón no para conservarlo, sino para desarrollarse deprisa y atacar el centro con "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "c5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...c5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " o "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "e5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Black takes the pawn not to keep it, but to develop quickly and hit the centre with "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "c5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...c5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " or "
+                      },
+                      {
+                        "kind": "move",
+                        "san": "e5",
+                        "number": "...",
+                        "start": false,
+                        "written": "...e5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -46,8 +180,40 @@
                         "en": "Normal Variation"
                       },
                       "comment": {
-                        "es": "Impide ...e5 antes de recuperar el peón.",
-                        "en": "Prevents ...e5 before regaining the pawn."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Impide "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " antes de recuperar el peón."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Prevents "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " before regaining the pawn."
+                          }
+                        ]
                       },
                       "main": true,
                       "children": [
@@ -74,8 +240,34 @@
                                             "en": "Classical Defence"
                                           },
                                           "comment": {
-                                            "es": "El golpe típico contra d4.",
-                                            "en": "The typical strike at d4."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "El golpe típico contra "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "The typical strike at "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -90,8 +282,56 @@
                                                     "en": "Classical Defence, Main Line"
                                                   },
                                                   "comment": {
-                                                    "es": "Prepara ...b5 para ganar tiempo sobre el alfil de c4.",
-                                                    "en": "Prepares ...b5 to gain time on the c4 bishop."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Prepara "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "b5",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...b5"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " para ganar tiempo sobre el alfil de "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "c4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Prepares "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "b5",
+                                                        "number": "...",
+                                                        "start": false,
+                                                        "written": "...b5"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " to gain time on the "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "c4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " bishop."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
@@ -102,8 +342,56 @@
                                                         "en": "Rubinstein Variation"
                                                       },
                                                       "comment": {
-                                                        "es": "Impide ...b5 a costa de debilitar la casilla b4.",
-                                                        "en": "Stops ...b5 at the cost of weakening b4."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Impide "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "b5",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...b5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " a costa de debilitar la casilla "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "b4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Stops "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "b5",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...b5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " at the cost of weakening "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "b4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "main": true,
                                                       "children": [
@@ -130,8 +418,34 @@
                                                                             {
                                                                               "san": "exd4",
                                                                               "comment": {
-                                                                                "es": "Estructura de peón aislado: las blancas tienen piezas activas y las negras bloquean en d5.",
-                                                                                "en": "An isolated-pawn structure: White has active pieces while Black blockades on d5."
+                                                                                "es": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Estructura de peón aislado: las blancas tienen piezas activas y las negras bloquean en "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d5"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "."
+                                                                                  }
+                                                                                ],
+                                                                                "en": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "An isolated-pawn structure: White has active pieces while Black blockades on "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "d5"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "."
+                                                                                  }
+                                                                                ]
                                                                               },
                                                                               "main": true,
                                                                               "children": [
@@ -173,8 +487,38 @@
                                                         "en": "Alekhine System"
                                                       },
                                                       "comment": {
-                                                        "es": "Prepara Td1 para presionar la columna d.",
-                                                        "en": "Prepares Rd1 to press on the d-file."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Prepara "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Rd1",
+                                                            "start": false,
+                                                            "written": "Td1"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " para presionar la columna d."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Prepares "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Rd1",
+                                                            "start": false,
+                                                            "written": "Rd1"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " to press on the d-file."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -190,8 +534,34 @@
                                                                     "en": "Alekhine System, Main Line"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "El alfil se instala en la gran diagonal y vigila e4.",
-                                                                    "en": "The bishop settles on the long diagonal and watches e4."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "El alfil se instala en la gran diagonal y vigila "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "The bishop settles on the long diagonal and watches "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "e4"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": [
                                                                     {
@@ -234,8 +604,72 @@
                                 {
                                   "san": "Bg4",
                                   "comment": {
-                                    "es": "El alfil sale antes de ...e6 y presiona d4 a través del caballo de f3.",
-                                    "en": "The bishop comes out before ...e6 and pressures d4 through the f3 knight."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "El alfil sale antes de "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " y presiona "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " a través del caballo de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "f3"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "The bishop comes out before "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " and pressures "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "d4"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " through the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "f3"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " knight."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -288,8 +722,18 @@
                     {
                       "san": "e4",
                       "comment": {
-                        "es": "Ocupa el centro con dos peones; las negras deben atacarlo de inmediato.",
-                        "en": "Occupies the centre with two pawns; Black must attack it at once."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Ocupa el centro con dos peones; las negras deben atacarlo de inmediato."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Occupies the centre with two pawns; Black must attack it at once."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -299,8 +743,18 @@
                             "en": "McDonnell Defence"
                           },
                           "comment": {
-                            "es": "Contragolpe central inmediato.",
-                            "en": "An immediate central counterstrike."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Contragolpe central inmediato."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "An immediate central counterstrike."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -361,8 +815,66 @@
                             "en": "Central Variation, Alekhine System"
                           },
                           "comment": {
-                            "es": "Ataca e4 y provoca e5; el caballo se instalará en d5.",
-                            "en": "Hits e4 and provokes e5; the knight will settle on d5."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Ataca "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " y provoca "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; el caballo se instalará en "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Hits "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " and provokes "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; the knight will settle on "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "d5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -435,8 +947,40 @@
                         "en": "Old Variation"
                       },
                       "comment": {
-                        "es": "Recupera el peón con el alfil, pero permite ...e5.",
-                        "en": "Regains the pawn with the bishop but allows ...e5."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Recupera el peón con el alfil, pero permite "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Regains the pawn with the bishop but allows "
+                          },
+                          {
+                            "kind": "move",
+                            "san": "e5",
+                            "number": "...",
+                            "start": false,
+                            "written": "...e5"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "."
+                          }
+                        ]
                       },
                       "children": [
                         {

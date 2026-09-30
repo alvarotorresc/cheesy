@@ -2,18 +2,28 @@ import { Component, input } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nService } from '../../core/i18n';
 import { ReadingModeService } from '../../core/reading-mode';
+import { BoardSpotlight } from '../board';
 import { MoveText } from './move';
 
 @Component({
   imports: [MoveText],
   template: `<button type="button">
-    <app-move [san]="san()" [color]="color()" [format]="format()" [tooltip]="tooltip()" />
+    <app-move
+      [san]="san()"
+      [color]="color()"
+      [format]="format()"
+      [start]="start()"
+      [prefix]="prefix()"
+      [tooltip]="tooltip()"
+    />
   </button>`,
 })
 class Host {
   readonly san = input('Nxf7+');
   readonly color = input<'white' | 'black'>('white');
   readonly format = input<'compact' | 'full'>('compact');
+  readonly start = input(true);
+  readonly prefix = input<string | undefined>(undefined);
   readonly tooltip = input(true);
 }
 
@@ -113,6 +123,23 @@ describe('MoveText', () => {
     expect(visible()).toBe('O-O-O#');
   });
 
+  it('should write the move in lower case when it does not open a sentence', async () => {
+    await render({ san: 'Ke7', color: 'black', format: 'full', start: false });
+
+    expect(visible()).toBe('rey a e7');
+    expect(spoken()).toBe('rey a e7');
+  });
+
+  it('should put the move number in front only in notation mode', async () => {
+    await render({ san: 'Ke7', color: 'black', format: 'full', prefix: '1...' });
+    expect(visible()).toBe('Rey a e7');
+
+    mode.setMode('notation');
+    await fixture.whenStable();
+    expect(visible()).toBe('1...Re7');
+    expect(spoken()).toBe('Rey a e7');
+  });
+
   it('should follow a mode change', async () => {
     await render();
     mode.setMode('notation');
@@ -143,5 +170,56 @@ describe('MoveText', () => {
     // The sentence is absolutely positioned; without a positioned host it escapes the strip's
     // clipping and widens the whole page (the openings shelf at 360 px).
     expect(getComputedStyle(host).position).toBe('relative');
+  });
+
+  describe('spotlight', () => {
+    const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+    const create = async (inputs: Record<string, unknown>) => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({ providers: [BoardSpotlight] });
+      const f = TestBed.createComponent(MoveText);
+      for (const [name, value] of Object.entries(inputs)) f.componentRef.setInput(name, value);
+      await f.whenStable();
+      return (f.nativeElement as HTMLElement).querySelector('[data-spot]')!;
+    };
+
+    it('should point the board at the move while the mouse is over it', async () => {
+      const target = await create({ san: 'Nf3', color: 'white', format: 'compact', before: START });
+      target.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      expect(TestBed.inject(BoardSpotlight).request()).toEqual({
+        kind: 'move',
+        san: 'Nf3',
+        before: START,
+      });
+    });
+
+    it('should point at the move without a position when none is given', async () => {
+      const target = await create({ san: 'Nf3' });
+      target.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      expect(TestBed.inject(BoardSpotlight).request()).toEqual({ kind: 'move', san: 'Nf3' });
+    });
+
+    it('should take a tab stop of its own unless told otherwise', async () => {
+      expect((await create({ san: 'Nf3' })).getAttribute('tabindex')).toBe('0');
+      expect((await create({ san: 'Nf3', focusable: false })).hasAttribute('tabindex')).toBe(false);
+    });
+
+    it('should look pointable wherever it has a tab stop of its own, not only in a text', async () => {
+      // The tablebase hint and the steps of a position hold a bare <app-move>, without class="move".
+      // (The test DOM keeps the `text-decoration` shorthand as written: it is read as such.)
+      const own = getComputedStyle(await create({ san: 'Nf3' }));
+      expect(own.textDecoration).toBe('underline');
+      expect(own.cursor).toBe('default');
+    });
+
+    it('should leave the look to the button when the move sits inside one', async () => {
+      const inButton = getComputedStyle(await create({ san: 'Nf3', focusable: false }));
+      expect(inButton.textDecoration).not.toBe('underline');
+      expect(inButton.cursor).not.toBe('default');
+    });
   });
 });

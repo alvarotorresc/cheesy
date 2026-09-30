@@ -15,7 +15,29 @@ import {
   OPENINGS_DIR,
   POSITIONS_FILE,
 } from '../lib/content.ts';
-import type { CuratedPosition, OpeningSummary } from '../types.ts';
+import { richOf } from '../lib/rich-text.ts';
+import type {
+  AuthoringNode,
+  AuthoringTree,
+  CuratedPosition,
+  OpeningNode,
+  OpeningSummary,
+  OpeningTree,
+} from '../types.ts';
+
+const richNode = (n: AuthoringNode): OpeningNode => ({
+  san: n.san,
+  ...(n.name ? { name: n.name } : {}),
+  ...(n.comment ? { comment: richOf(n.comment) } : {}),
+  ...(n.main ? { main: true } : {}),
+  children: n.children.map(richNode),
+});
+
+const richTree = (t: AuthoringTree): OpeningTree => ({
+  ...t,
+  description: richOf(t.description),
+  root: t.root.map(richNode),
+});
 
 const out = (file: string, data: unknown) => {
   mkdirSync(path.dirname(file), { recursive: true });
@@ -27,7 +49,7 @@ const out = (file: string, data: unknown) => {
 // downloading their move trees.
 const catalog: OpeningSummary[] = [];
 for (const spec of allOpenings) {
-  const tree = buildTree(spec);
+  const tree = richTree(buildTree(spec));
   out(path.join(OPENINGS_DIR, `${tree.id}.json`), tree);
   const { id, name, eco, side, description } = tree;
   catalog.push({
@@ -69,9 +91,12 @@ const curated: CuratedPosition[] = positions.map((p) => {
     fen,
     playerSide: p.playerSide,
     solution: p.solution,
-    explanation: p.explanation,
+    explanation: richOf(p.explanation),
     tags: p.tags,
   };
 });
 out(POSITIONS_FILE, curated);
-out(ENDGAMES_FILE, endgames);
+out(
+  ENDGAMES_FILE,
+  endgames.map((e) => ({ ...e, explanation: richOf(e.explanation) })),
+);

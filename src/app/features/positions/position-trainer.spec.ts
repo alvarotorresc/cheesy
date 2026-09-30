@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import type { CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
@@ -11,7 +12,7 @@ const position = (overrides: Partial<CuratedPosition>): CuratedPosition => ({
   fen: '2q2r1k/6pp/7N/3Q4/8/8/5PPP/6K1 w - - 0 1',
   playerSide: 'white',
   solution: ['Qg8+', 'Rxg8', 'Nf7#'],
-  explanation: { es: 'Explicación', en: 'Explanation' },
+  explanation: plainText('Explicación', 'Explanation'),
   tags: ['smothered-mate'],
   ...overrides,
 });

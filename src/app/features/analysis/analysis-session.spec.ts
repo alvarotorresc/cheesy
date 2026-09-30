@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { convertToParamMap } from '@angular/router';
 import { parseAnalysisParams } from '../../core/analysis-link';
@@ -159,7 +160,7 @@ describe('AnalysisSession', () => {
         name: { es: '', en: '' },
         eco: '',
         side: 'white',
-        description: { es: '', en: '' },
+        description: plainText('-'),
         root: [],
       }),
       back: ['/openings', 'french-defence'],

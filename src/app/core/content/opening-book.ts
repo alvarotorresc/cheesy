@@ -3,7 +3,7 @@ import { castlingSide } from 'chessops/chess';
 import { INITIAL_FEN, makeFen, parseFen } from 'chessops/fen';
 import { parseSan } from 'chessops/san';
 import { kingCastlesTo } from 'chessops/util';
-import type { Localized, OpeningNode, OpeningTree, Side } from './content.types';
+import type { Localized, OpeningNode, OpeningTree, RichText, Side } from './content.types';
 
 /** A move of an opening tree, with the positions computed from the initial position. */
 export interface BookNode {
@@ -24,7 +24,7 @@ export interface BookNode {
   /** Name of the variation that starts with this move. */
   readonly name: Localized | undefined;
   /** Idea behind the move. */
-  readonly comment: Localized | undefined;
+  readonly comment: RichText | undefined;
   /** Name of the closest variation at or before this move: what a panel shows as "you are in". */
   readonly variation: Localized | undefined;
   /** Whether the move belongs to the main line of the opening. */

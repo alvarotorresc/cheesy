@@ -13,8 +13,66 @@
       "Nd5#"
     ],
     "explanation": {
-      "es": "Las negras se han llevado la dama, pero sus casillas alrededor del rey están indefensas. El alfil da jaque protegido por el caballo de e5, el rey solo puede ir a e7 y el otro caballo remata en d5.",
-      "en": "Black has won the queen, but the squares around the king are undefended. The bishop checks with the support of the e5 knight, the king can only go to e7 and the other knight finishes on d5."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras se han llevado la dama, pero sus casillas alrededor del rey están indefensas. El alfil da jaque protegido por el caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": ", el rey solo puede ir a "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " y el otro caballo remata en "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black has won the queen, but the squares around the king are undefended. The bishop checks with the support of the "
+        },
+        {
+          "kind": "square",
+          "square": "e5"
+        },
+        {
+          "kind": "text",
+          "text": " knight, the king can only go to "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " and the other knight finishes on "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "tags": [
       "legal-mate",
@@ -39,8 +97,154 @@
       "Bd8#"
     ],
     "explanation": {
-      "es": "La dama se entrega para atraer al rey a d8, donde queda alineado con la torre de d1. Ag5 da jaque doble (alfil y torre) y el rey no tiene defensa: si ...Re8, Td8 es mate; si ...Rc7, Ad8 es mate.",
-      "en": "The queen is given up to drag the king to d8, in line with the d1 rook. Bg5 is a double check (bishop and rook) with no defence: after ...Ke8, Rd8 is mate; after ...Kc7, Bd8 is mate."
+      "es": [
+        {
+          "kind": "text",
+          "text": "La dama se entrega para atraer al rey a "
+        },
+        {
+          "kind": "square",
+          "square": "d8"
+        },
+        {
+          "kind": "text",
+          "text": ", donde queda alineado con la torre de "
+        },
+        {
+          "kind": "square",
+          "square": "d1"
+        },
+        {
+          "kind": "text",
+          "text": ". "
+        },
+        {
+          "kind": "move",
+          "san": "Bg5",
+          "start": true,
+          "written": "Ag5"
+        },
+        {
+          "kind": "text",
+          "text": " da jaque doble (alfil y torre) y el rey no tiene defensa: si "
+        },
+        {
+          "kind": "move",
+          "san": "Ke8",
+          "number": "...",
+          "start": false,
+          "written": "...Re8"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "move",
+          "san": "Rd8",
+          "start": false,
+          "written": "Td8"
+        },
+        {
+          "kind": "text",
+          "text": " es mate; si "
+        },
+        {
+          "kind": "move",
+          "san": "Kc7",
+          "number": "...",
+          "start": false,
+          "written": "...Rc7"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "move",
+          "san": "Bd8",
+          "start": false,
+          "written": "Ad8"
+        },
+        {
+          "kind": "text",
+          "text": " es mate."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The queen is given up to drag the king to "
+        },
+        {
+          "kind": "square",
+          "square": "d8"
+        },
+        {
+          "kind": "text",
+          "text": ", in line with the "
+        },
+        {
+          "kind": "square",
+          "square": "d1"
+        },
+        {
+          "kind": "text",
+          "text": " rook. "
+        },
+        {
+          "kind": "move",
+          "san": "Bg5",
+          "start": true,
+          "written": "Bg5"
+        },
+        {
+          "kind": "text",
+          "text": " is a double check (bishop and rook) with no defence: after "
+        },
+        {
+          "kind": "move",
+          "san": "Ke8",
+          "number": "...",
+          "start": false,
+          "written": "...Ke8"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "move",
+          "san": "Rd8",
+          "start": false,
+          "written": "Rd8"
+        },
+        {
+          "kind": "text",
+          "text": " is mate; after "
+        },
+        {
+          "kind": "move",
+          "san": "Kc7",
+          "number": "...",
+          "start": false,
+          "written": "...Kc7"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "move",
+          "san": "Bd8",
+          "start": false,
+          "written": "Bd8"
+        },
+        {
+          "kind": "text",
+          "text": " is mate."
+        }
+      ]
     },
     "tags": [
       "attraction",
@@ -63,8 +267,82 @@
       "Rd8#"
     ],
     "explanation": {
-      "es": "El caballo de d7 es el único defensor de d8. La dama se sacrifica en b8 para desviarlo y la torre da mate en la octava fila, apoyada por el alfil de g5.",
-      "en": "The d7 knight is the only defender of d8. The queen sacrifice on b8 deflects it and the rook mates on the back rank, supported by the g5 bishop."
+      "es": [
+        {
+          "kind": "text",
+          "text": "El caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "d7"
+        },
+        {
+          "kind": "text",
+          "text": " es el único defensor de "
+        },
+        {
+          "kind": "square",
+          "square": "d8"
+        },
+        {
+          "kind": "text",
+          "text": ". La dama se sacrifica en "
+        },
+        {
+          "kind": "square",
+          "square": "b8"
+        },
+        {
+          "kind": "text",
+          "text": " para desviarlo y la torre da mate en la octava fila, apoyada por el alfil de "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The "
+        },
+        {
+          "kind": "square",
+          "square": "d7"
+        },
+        {
+          "kind": "text",
+          "text": " knight is the only defender of "
+        },
+        {
+          "kind": "square",
+          "square": "d8"
+        },
+        {
+          "kind": "text",
+          "text": ". The queen sacrifice on "
+        },
+        {
+          "kind": "square",
+          "square": "b8"
+        },
+        {
+          "kind": "text",
+          "text": " deflects it and the rook mates on the back rank, supported by the "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": " bishop."
+        }
+      ]
     },
     "tags": [
       "deflection",
@@ -84,8 +362,66 @@
       "Nd3#"
     ],
     "explanation": {
-      "es": "Las blancas han ganado el alfil, pero el peón de e2 está clavado por la dama de e7. El caballo salta a d3 con jaque y nadie puede capturarlo: el rey no tiene casillas libres.",
-      "en": "White has won the bishop, but the e2 pawn is pinned by the queen on e7. The knight jumps to d3 with check and nothing can take it: the king has no free squares."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las blancas han ganado el alfil, pero el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "e2"
+        },
+        {
+          "kind": "text",
+          "text": " está clavado por la dama de "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": ". El caballo salta a "
+        },
+        {
+          "kind": "square",
+          "square": "d3"
+        },
+        {
+          "kind": "text",
+          "text": " con jaque y nadie puede capturarlo: el rey no tiene casillas libres."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "White has won the bishop, but the "
+        },
+        {
+          "kind": "square",
+          "square": "e2"
+        },
+        {
+          "kind": "text",
+          "text": " pawn is pinned by the queen on "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": ". The knight jumps to "
+        },
+        {
+          "kind": "square",
+          "square": "d3"
+        },
+        {
+          "kind": "text",
+          "text": " with check and nothing can take it: the king has no free squares."
+        }
+      ]
     },
     "tags": [
       "pin",
@@ -107,8 +443,50 @@
       "Nf7#"
     ],
     "explanation": {
-      "es": "La dama se ofrece en g8, protegida por el caballo, para que la torre tape la última casilla libre del rey. El caballo da mate en f7: el rey queda ahogado por sus propias piezas.",
-      "en": "The queen is offered on g8, protected by the knight, so that the rook blocks the king’s last free square. The knight mates on f7: the king is smothered by its own pieces."
+      "es": [
+        {
+          "kind": "text",
+          "text": "La dama se ofrece en "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": ", protegida por el caballo, para que la torre tape la última casilla libre del rey. El caballo da mate en "
+        },
+        {
+          "kind": "square",
+          "square": "f7"
+        },
+        {
+          "kind": "text",
+          "text": ": el rey queda ahogado por sus propias piezas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The queen is offered on "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": ", protected by the knight, so that the rook blocks the king’s last free square. The knight mates on "
+        },
+        {
+          "kind": "square",
+          "square": "f7"
+        },
+        {
+          "kind": "text",
+          "text": ": the king is smothered by its own pieces."
+        }
+      ]
     },
     "tags": [
       "smothered-mate",
@@ -135,8 +513,70 @@
       "Bxe7#"
     ],
     "explanation": {
-      "es": "Tras el sacrificio de dama, Af5 descubre el jaque de la torre de d1: jaque doble. Los dos alfiles y el peón de f6 cierran la red de mate alrededor del rey negro.",
-      "en": "After the queen sacrifice, Bf5 uncovers the d1 rook: a double check. The two bishops and the f6 pawn close the mating net around the black king."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Tras el sacrificio de dama, "
+        },
+        {
+          "kind": "move",
+          "san": "Bf5",
+          "start": false,
+          "written": "Af5"
+        },
+        {
+          "kind": "text",
+          "text": " descubre el jaque de la torre de "
+        },
+        {
+          "kind": "square",
+          "square": "d1"
+        },
+        {
+          "kind": "text",
+          "text": ": jaque doble. Los dos alfiles y el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "f6"
+        },
+        {
+          "kind": "text",
+          "text": " cierran la red de mate alrededor del rey negro."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "After the queen sacrifice, "
+        },
+        {
+          "kind": "move",
+          "san": "Bf5",
+          "start": false,
+          "written": "Bf5"
+        },
+        {
+          "kind": "text",
+          "text": " uncovers the "
+        },
+        {
+          "kind": "square",
+          "square": "d1"
+        },
+        {
+          "kind": "text",
+          "text": " rook: a double check. The two bishops and the "
+        },
+        {
+          "kind": "square",
+          "square": "f6"
+        },
+        {
+          "kind": "text",
+          "text": " pawn close the mating net around the black king."
+        }
+      ]
     },
     "tags": [
       "queen-sacrifice",
@@ -159,8 +599,66 @@
       "Ba3#"
     ],
     "explanation": {
-      "es": "La dama se sacrifica en c3 para abrir la diagonal a3-f8. Los dos alfiles, cruzados en diagonales, dan mate al rey enrocado largo, bloqueado por su propia torre y caballo.",
-      "en": "The queen sacrifice on c3 opens the a3-f8 diagonal. The two bishops on crossing diagonals mate the long-castled king, which is boxed in by its own rook and knight."
+      "es": [
+        {
+          "kind": "text",
+          "text": "La dama se sacrifica en "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " para abrir la diagonal "
+        },
+        {
+          "kind": "square",
+          "square": "a3"
+        },
+        {
+          "kind": "text",
+          "text": "-"
+        },
+        {
+          "kind": "square",
+          "square": "f8"
+        },
+        {
+          "kind": "text",
+          "text": ". Los dos alfiles, cruzados en diagonales, dan mate al rey enrocado largo, bloqueado por su propia torre y caballo."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The queen sacrifice on "
+        },
+        {
+          "kind": "square",
+          "square": "c3"
+        },
+        {
+          "kind": "text",
+          "text": " opens the "
+        },
+        {
+          "kind": "square",
+          "square": "a3"
+        },
+        {
+          "kind": "text",
+          "text": "-"
+        },
+        {
+          "kind": "square",
+          "square": "f8"
+        },
+        {
+          "kind": "text",
+          "text": " diagonal. The two bishops on crossing diagonals mate the long-castled king, which is boxed in by its own rook and knight."
+        }
+      ]
     },
     "tags": [
       "boden-mate",
@@ -181,8 +679,34 @@
       "Rxe8#"
     ],
     "explanation": {
-      "es": "El rey negro no tiene casillas de escape porque sus peones siguen en la segunda fila. La batería en la columna e gana la lucha por e8: tras el cambio, la torre da mate en la octava.",
-      "en": "The black king has no escape square because its pawns are still on their starting rank. The battery on the e-file wins the fight for e8: after the exchange, the rook mates on the back rank."
+      "es": [
+        {
+          "kind": "text",
+          "text": "El rey negro no tiene casillas de escape porque sus peones siguen en la segunda fila. La batería en la columna e gana la lucha por "
+        },
+        {
+          "kind": "square",
+          "square": "e8"
+        },
+        {
+          "kind": "text",
+          "text": ": tras el cambio, la torre da mate en la octava."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The black king has no escape square because its pawns are still on their starting rank. The battery on the e-file wins the fight for "
+        },
+        {
+          "kind": "square",
+          "square": "e8"
+        },
+        {
+          "kind": "text",
+          "text": ": after the exchange, the rook mates on the back rank."
+        }
+      ]
     },
     "tags": [
       "back-rank"
@@ -202,8 +726,114 @@
       "Rh3#"
     ],
     "explanation": {
-      "es": "El caballo de e7 controla g8 y g6, y el peón de g7 tapa la otra salida del rey. La dama se sacrifica en h7 para abrir la columna h y la torre da mate desde h3.",
-      "en": "The e7 knight covers g8 and g6, and the g7 pawn blocks the king’s other exit. The queen sacrifice on h7 opens the h-file and the rook mates from h3."
+      "es": [
+        {
+          "kind": "text",
+          "text": "El caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " controla "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "square",
+          "square": "g6"
+        },
+        {
+          "kind": "text",
+          "text": ", y el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " tapa la otra salida del rey. La dama se sacrifica en "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " para abrir la columna h y la torre da mate desde "
+        },
+        {
+          "kind": "square",
+          "square": "h3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " knight covers "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "square",
+          "square": "g6"
+        },
+        {
+          "kind": "text",
+          "text": ", and the "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": " pawn blocks the king’s other exit. The queen sacrifice on "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " opens the h-file and the rook mates from "
+        },
+        {
+          "kind": "square",
+          "square": "h3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "tags": [
       "anastasia-mate",
@@ -222,8 +852,82 @@
       "Rxh7#"
     ],
     "explanation": {
-      "es": "Las negras tienen ventaja material, pero juegan las blancas. La torre captura en h7 protegida por el caballo de f6, que además controla g8; la propia torre cubre g7.",
-      "en": "Black is ahead in material, but it is White’s move. The rook captures on h7 protected by the f6 knight, which also covers g8; the rook itself covers g7."
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las negras tienen ventaja material, pero juegan las blancas. La torre captura en "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " protegida por el caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "f6"
+        },
+        {
+          "kind": "text",
+          "text": ", que además controla "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": "; la propia torre cubre "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Black is ahead in material, but it is White’s move. The rook captures on "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " protected by the "
+        },
+        {
+          "kind": "square",
+          "square": "f6"
+        },
+        {
+          "kind": "text",
+          "text": " knight, which also covers "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": "; the rook itself covers "
+        },
+        {
+          "kind": "square",
+          "square": "g7"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
     },
     "tags": [
       "arabian-mate",
@@ -244,8 +948,50 @@
       "Nxc6"
     ],
     "explanation": {
-      "es": "La dama negra ataca al caballo de d5, pero el caballo salta a e7 con jaque y ataca a la vez al rey y a la dama. Tras mover el rey, el caballo captura la dama.",
-      "en": "The black queen attacks the d5 knight, but the knight jumps to e7 with check, hitting king and queen at once. After the king moves, the knight takes the queen."
+      "es": [
+        {
+          "kind": "text",
+          "text": "La dama negra ataca al caballo de "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": ", pero el caballo salta a "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " con jaque y ataca a la vez al rey y a la dama. Tras mover el rey, el caballo captura la dama."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The black queen attacks the "
+        },
+        {
+          "kind": "square",
+          "square": "d5"
+        },
+        {
+          "kind": "text",
+          "text": " knight, but the knight jumps to "
+        },
+        {
+          "kind": "square",
+          "square": "e7"
+        },
+        {
+          "kind": "text",
+          "text": " with check, hitting king and queen at once. After the king moves, the knight takes the queen."
+        }
+      ]
     },
     "tags": [
       "fork",
@@ -264,8 +1010,34 @@
       "Re1"
     ],
     "explanation": {
-      "es": "La torre ocupa la columna e y clava la dama negra contra su rey: la dama no puede apartarse. Las negras pierden la dama a cambio de la torre, porque e1 está protegida por la dama blanca.",
-      "en": "The rook takes the e-file and pins the black queen to its king: the queen cannot step aside. Black loses the queen for the rook, because e1 is protected by the white queen."
+      "es": [
+        {
+          "kind": "text",
+          "text": "La torre ocupa la columna e y clava la dama negra contra su rey: la dama no puede apartarse. Las negras pierden la dama a cambio de la torre, porque "
+        },
+        {
+          "kind": "square",
+          "square": "e1"
+        },
+        {
+          "kind": "text",
+          "text": " está protegida por la dama blanca."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The rook takes the e-file and pins the black queen to its king: the queen cannot step aside. Black loses the queen for the rook, because "
+        },
+        {
+          "kind": "square",
+          "square": "e1"
+        },
+        {
+          "kind": "text",
+          "text": " is protected by the white queen."
+        }
+      ]
     },
     "tags": [
       "pin"
@@ -283,8 +1055,34 @@
       "Rh6+"
     ],
     "explanation": {
-      "es": "El rey negro y su dama están en la misma fila. La torre da jaque desde h6; el rey tiene que apartarse y, en la jugada siguiente, la torre captura la dama que quedaba detrás.",
-      "en": "The black king and queen stand on the same rank. The rook checks from h6; the king has to step aside and, next move, the rook takes the queen standing behind it."
+      "es": [
+        {
+          "kind": "text",
+          "text": "El rey negro y su dama están en la misma fila. La torre da jaque desde "
+        },
+        {
+          "kind": "square",
+          "square": "h6"
+        },
+        {
+          "kind": "text",
+          "text": "; el rey tiene que apartarse y, en la jugada siguiente, la torre captura la dama que quedaba detrás."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "The black king and queen stand on the same rank. The rook checks from "
+        },
+        {
+          "kind": "square",
+          "square": "h6"
+        },
+        {
+          "kind": "text",
+          "text": "; the king has to step aside and, next move, the rook takes the queen standing behind it."
+        }
+      ]
     },
     "tags": [
       "skewer"

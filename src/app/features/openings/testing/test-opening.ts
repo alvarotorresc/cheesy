@@ -1,3 +1,4 @@
+import { rich } from '../../../core/content/testing';
 import type {
   ContentLoaders,
   OpeningNode,
@@ -25,7 +26,7 @@ export const testTree = (overrides: Partial<OpeningTree> = {}): OpeningTree => (
   name: named('Test Opening'),
   eco: 'C20',
   side: 'white',
-  description: named('A tree built for the tests.'),
+  description: rich('A tree built for the tests.'),
   root: [
     node(
       'e4',
@@ -36,16 +37,12 @@ export const testTree = (overrides: Partial<OpeningTree> = {}): OpeningTree => (
             node(
               'Nf3',
               [
-                node(
-                  'Nc6',
-                  [node('Bb5', [], { main: true, comment: named('Pins nothing yet.') })],
-                  {
-                    main: true,
-                  },
-                ),
+                node('Nc6', [node('Bb5', [], { main: true, comment: rich('Pins nothing yet.') })], {
+                  main: true,
+                }),
                 node('Nf6', [], { name: named('Petrov Defence') }),
               ],
-              { main: true, name: named('King Knight Opening'), comment: named('Attacks e5.') },
+              { main: true, name: named('King Knight Opening'), comment: rich('Attacks e5.') },
             ),
             node('d4', [], { name: named('Centre Game') }),
           ],

@@ -7,8 +7,50 @@
   "eco": "B33",
   "side": "black",
   "description": {
-    "es": "Las negras aceptan un agujero permanente en d5 y un peón retrasado en d6 a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel.",
-    "en": "Black accepts a permanent hole on d5 and a backward d6 pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras aceptan un agujero permanente en "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " y un peón retrasado en "
+      },
+      {
+        "kind": "square",
+        "square": "d6"
+      },
+      {
+        "kind": "text",
+        "text": " a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black accepts a permanent hole on "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " and a backward "
+      },
+      {
+        "kind": "square",
+        "square": "d6"
+      },
+      {
+        "kind": "text",
+        "text": " pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+      }
+    ]
   },
   "root": [
     {
@@ -22,8 +64,34 @@
             "en": "Sicilian Defence"
           },
           "comment": {
-            "es": "Lucha por d4 con un peón lateral y crea desequilibrio desde la primera jugada.",
-            "en": "Fights for d4 with a flank pawn and creates imbalance from move one."
+            "es": [
+              {
+                "kind": "text",
+                "text": "Lucha por "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+              }
+            ],
+            "en": [
+              {
+                "kind": "text",
+                "text": "Fights for "
+              },
+              {
+                "kind": "square",
+                "square": "d4"
+              },
+              {
+                "kind": "text",
+                "text": " with a flank pawn and creates imbalance from move one."
+              }
+            ]
           },
           "main": true,
           "children": [
@@ -62,8 +130,50 @@
                                             "en": "Lasker–Pelikan Variation"
                                           },
                                           "comment": {
-                                            "es": "Las negras ganan tiempo sobre el caballo de d4 a cambio de dejar un agujero en d5.",
-                                            "en": "Black gains time on the d4 knight at the cost of a hole on d5."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Las negras ganan tiempo sobre el caballo de "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " a cambio de dejar un agujero en "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "Black gains time on the "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d4"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " knight at the cost of a hole on "
+                                              },
+                                              {
+                                                "kind": "square",
+                                                "square": "d5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -74,16 +184,104 @@
                                                 {
                                                   "san": "d6",
                                                   "comment": {
-                                                    "es": "Impide Cd6+; el peón de d6 quedará retrasado, pero bien protegido.",
-                                                    "en": "Stops Nd6+; the d6 pawn will be backward but well protected."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Impide "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Nd6+",
+                                                        "start": false,
+                                                        "written": "Cd6+"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "; el peón de "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "d6"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " quedará retrasado, pero bien protegido."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Stops "
+                                                      },
+                                                      {
+                                                        "kind": "move",
+                                                        "san": "Nd6+",
+                                                        "start": false,
+                                                        "written": "Nd6+"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "; the "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "d6"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " pawn will be backward but well protected."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
                                                     {
                                                       "san": "Bg5",
                                                       "comment": {
-                                                        "es": "Presiona el caballo de f6, uno de los defensores de d5.",
-                                                        "en": "Pressures the f6 knight, one of the defenders of d5."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Presiona el caballo de "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "f6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": ", uno de los defensores de "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Pressures the "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "f6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " knight, one of the defenders of "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "main": true,
                                                       "children": [
@@ -94,8 +292,56 @@
                                                             {
                                                               "san": "Na3",
                                                               "comment": {
-                                                                "es": "El caballo queda mal situado en a3; las negras lo aprovechan con ...b5.",
-                                                                "en": "The knight is offside on a3; Black exploits that with ...b5."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "El caballo queda mal situado en "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "a3"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; las negras lo aprovechan con "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "b5",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...b5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "The knight is offside on "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "a3"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; Black exploits that with "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "b5",
+                                                                    "number": "...",
+                                                                    "start": false,
+                                                                    "written": "...b5"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
@@ -106,8 +352,34 @@
                                                                     "en": "Sveshnikov Variation"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "Gana espacio y deja al caballo de a3 fuera de juego.",
-                                                                    "en": "Gains space and keeps the a3 knight out of play."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Gana espacio y deja al caballo de "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "a3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " fuera de juego."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Gains space and keeps the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "a3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " knight out of play."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "main": true,
                                                                   "children": [
@@ -118,8 +390,18 @@
                                                                         {
                                                                           "san": "gxf6",
                                                                           "comment": {
-                                                                            "es": "Las negras aceptan peones doblados a cambio de la pareja de alfiles y el control de casillas centrales.",
-                                                                            "en": "Black accepts doubled pawns for the bishop pair and control of central squares."
+                                                                            "es": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "Las negras aceptan peones doblados a cambio de la pareja de alfiles y el control de casillas centrales."
+                                                                              }
+                                                                            ],
+                                                                            "en": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "Black accepts doubled pawns for the bishop pair and control of central squares."
+                                                                              }
+                                                                            ]
                                                                           },
                                                                           "main": true,
                                                                           "children": [
@@ -130,16 +412,110 @@
                                                                                 {
                                                                                   "san": "f5",
                                                                                   "comment": {
-                                                                                    "es": "Ataca e4 y abre la diagonal para ...Ag7.",
-                                                                                    "en": "Hits e4 and opens the diagonal for ...Bg7."
+                                                                                    "es": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "Ataca "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "square",
+                                                                                        "square": "e4"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " y abre la diagonal para "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "move",
+                                                                                        "san": "Bg7",
+                                                                                        "number": "...",
+                                                                                        "start": false,
+                                                                                        "written": "...Ag7"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "."
+                                                                                      }
+                                                                                    ],
+                                                                                    "en": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "Hits "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "square",
+                                                                                        "square": "e4"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " and opens the diagonal for "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "move",
+                                                                                        "san": "Bg7",
+                                                                                        "number": "...",
+                                                                                        "start": false,
+                                                                                        "written": "...Bg7"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "."
+                                                                                      }
+                                                                                    ]
                                                                                   },
                                                                                   "main": true,
                                                                                   "children": [
                                                                                     {
                                                                                       "san": "c3",
                                                                                       "comment": {
-                                                                                        "es": "Prepara Cc2 para devolver al juego el caballo de a3.",
-                                                                                        "en": "Prepares Nc2 to bring the a3 knight back into play."
+                                                                                        "es": [
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": "Prepara "
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "move",
+                                                                                            "san": "Nc2",
+                                                                                            "start": false,
+                                                                                            "written": "Cc2"
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": " para devolver al juego el caballo de "
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "square",
+                                                                                            "square": "a3"
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": "."
+                                                                                          }
+                                                                                        ],
+                                                                                        "en": [
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": "Prepares "
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "move",
+                                                                                            "san": "Nc2",
+                                                                                            "start": false,
+                                                                                            "written": "Nc2"
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": " to bring the "
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "square",
+                                                                                            "square": "a3"
+                                                                                          },
+                                                                                          {
+                                                                                            "kind": "text",
+                                                                                            "text": " knight back into play."
+                                                                                          }
+                                                                                        ]
                                                                                       },
                                                                                       "main": true,
                                                                                       "children": [
@@ -166,8 +542,72 @@
                                                                                                             {
                                                                                                               "san": "Nce3",
                                                                                                               "comment": {
-                                                                                                                "es": "Los caballos blancos vigilan d5 y f5; las negras buscan ...f5 y actividad en el flanco de rey.",
-                                                                                                                "en": "White’s knights watch d5 and f5; Black looks for ...f5 and kingside activity."
+                                                                                                                "es": [
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": "Los caballos blancos vigilan "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "square",
+                                                                                                                    "square": "d5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " y "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "square",
+                                                                                                                    "square": "f5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": "; las negras buscan "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "move",
+                                                                                                                    "san": "f5",
+                                                                                                                    "number": "...",
+                                                                                                                    "start": false,
+                                                                                                                    "written": "...f5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " y actividad en el flanco de rey."
+                                                                                                                  }
+                                                                                                                ],
+                                                                                                                "en": [
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": "White’s knights watch "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "square",
+                                                                                                                    "square": "d5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " and "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "square",
+                                                                                                                    "square": "f5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": "; Black looks for "
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "move",
+                                                                                                                    "san": "f5",
+                                                                                                                    "number": "...",
+                                                                                                                    "start": false,
+                                                                                                                    "written": "...f5"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                    "kind": "text",
+                                                                                                                    "text": " and kingside activity."
+                                                                                                                  }
+                                                                                                                ]
                                                                                                               },
                                                                                                               "main": true,
                                                                                                               "children": [
@@ -262,8 +702,72 @@
                                                                         "en": "Chelyabinsk Variation (9.Nd5)"
                                                                       },
                                                                       "comment": {
-                                                                        "es": "Ocupa d5 de inmediato; las negras responden ...Ae7 para recapturar en f6 con el alfil.",
-                                                                        "en": "Occupies d5 at once; Black answers ...Be7 to recapture on f6 with the bishop."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Ocupa "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de inmediato; las negras responden "
+                                                                          },
+                                                                          {
+                                                                            "kind": "move",
+                                                                            "san": "Be7",
+                                                                            "number": "...",
+                                                                            "start": false,
+                                                                            "written": "...Ae7"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " para recapturar en "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f6"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " con el alfil."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Occupies "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " at once; Black answers "
+                                                                          },
+                                                                          {
+                                                                            "kind": "move",
+                                                                            "san": "Be7",
+                                                                            "number": "...",
+                                                                            "start": false,
+                                                                            "written": "...Be7"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " to recapture on "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f6"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " with the bishop."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "children": [
                                                                         {
@@ -290,8 +794,18 @@
                                                                                                     {
                                                                                                       "san": "a4",
                                                                                                       "comment": {
-                                                                                                        "es": "Ataca la cadena de peones negra del flanco de dama.",
-                                                                                                        "en": "Attacks Black’s queenside pawn chain."
+                                                                                                        "es": [
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": "Ataca la cadena de peones negra del flanco de dama."
+                                                                                                          }
+                                                                                                        ],
+                                                                                                        "en": [
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": "Attacks Black’s queenside pawn chain."
+                                                                                                          }
+                                                                                                        ]
                                                                                                       },
                                                                                                       "children": [
                                                                                                         {
@@ -357,8 +871,56 @@
                                                     {
                                                       "san": "Nd5",
                                                       "comment": {
-                                                        "es": "Otra idea: cambiar caballos en d5 para fijar la estructura antes de ...a6.",
-                                                        "en": "Another idea: trade knights on d5 to fix the structure before ...a6."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Otra idea: cambiar caballos en "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " para fijar la estructura antes de "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "a6",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...a6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Another idea: trade knights on "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " to fix the structure before "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "a6",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...a6"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -398,8 +960,18 @@
                                                 "en": "Exchange Variation"
                                               },
                                               "comment": {
-                                                "es": "Cambio prematuro que da a las negras un centro de peones sólido.",
-                                                "en": "A premature trade that hands Black a solid pawn centre."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Cambio prematuro que da a las negras un centro de peones sólido."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "A premature trade that hands Black a solid pawn centre."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {

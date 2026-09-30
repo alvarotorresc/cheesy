@@ -274,7 +274,7 @@
           <span class="hint">{{ t.keyIdeaHint }}</span>
           <app-icon name="caret-down" />
         </summary>
-        <p>{{ i18n.localize(current.explanation) }}</p>
+        <p><app-rich-text [text]="current.explanation" /></p>
       </details>
 
       <section class="moves" aria-labelledby="moves-title">
@@ -297,7 +297,12 @@
                   [attr.aria-label]="move.label"
                   (click)="game.goTo(move.ply)"
                 >
-                  <app-move [san]="move.san" [color]="move.color" />
+                  <app-move
+                    [san]="move.san"
+                    [color]="move.color"
+                    [before]="move.before"
+                    [focusable]="false"
+                  />
                 </button>
               </li>
             }

@@ -7,8 +7,72 @@
   "eco": "D70-D99",
   "side": "black",
   "description": {
-    "es": "Las negras permiten que las blancas levanten un gran centro con e4 para atacarlo después con el alfil de g7 y ...c5. Apertura muy dinámica.",
-    "en": "Black lets White build a big centre with e4 and then attacks it with the g7 bishop and ...c5. A highly dynamic opening."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras permiten que las blancas levanten un gran centro con "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " para atacarlo después con el alfil de "
+      },
+      {
+        "kind": "square",
+        "square": "g7"
+      },
+      {
+        "kind": "text",
+        "text": " y "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": ". Apertura muy dinámica."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black lets White build a big centre with "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": " and then attacks it with the "
+      },
+      {
+        "kind": "square",
+        "square": "g7"
+      },
+      {
+        "kind": "text",
+        "text": " bishop and "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": ". A highly dynamic opening."
+      }
+    ]
   },
   "root": [
     {
@@ -38,8 +102,56 @@
                             "en": "Grünfeld Defence"
                           },
                           "comment": {
-                            "es": "Las negras desafían el centro de inmediato; si las blancas lo ocupan con e4, lo atacarán con piezas y ...c5.",
-                            "en": "Black challenges the centre at once; if White occupies it with e4, Black attacks it with pieces and ...c5."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Las negras desafían el centro de inmediato; si las blancas lo ocupan con "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ", lo atacarán con piezas y "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "c5",
+                                "number": "...",
+                                "start": false,
+                                "written": "...c5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Black challenges the centre at once; if White occupies it with "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ", Black attacks it with pieces and "
+                              },
+                              {
+                                "kind": "move",
+                                "san": "c5",
+                                "number": "...",
+                                "start": false,
+                                "written": "...c5"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -66,8 +178,56 @@
                                             {
                                               "san": "bxc3",
                                               "comment": {
-                                                "es": "Las blancas consiguen un gran centro de peones; las negras lo atacarán con el alfil de g7 y ...c5.",
-                                                "en": "White gets a big pawn centre; Black will attack it with the g7 bishop and ...c5."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Las blancas consiguen un gran centro de peones; las negras lo atacarán con el alfil de "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "g7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " y "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "c5",
+                                                    "number": "...",
+                                                    "start": false,
+                                                    "written": "...c5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "White gets a big pawn centre; Black will attack it with the "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "g7"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " bishop and "
+                                                  },
+                                                  {
+                                                    "kind": "move",
+                                                    "san": "c5",
+                                                    "number": "...",
+                                                    "start": false,
+                                                    "written": "...c5"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ]
                                               },
                                               "main": true,
                                               "children": [
@@ -90,8 +250,50 @@
                                                             {
                                                               "san": "Rb1",
                                                               "comment": {
-                                                                "es": "La torre sale de la diagonal del alfil de g7 y presiona b7.",
-                                                                "en": "The rook leaves the g7 bishop’s diagonal and presses b7."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "La torre sale de la diagonal del alfil de "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "g7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " y presiona "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "b7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "The rook leaves the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "g7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " bishop’s diagonal and presses "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "b7"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
@@ -122,8 +324,34 @@
                                                                                         {
                                                                                           "san": "Qxa2",
                                                                                           "comment": {
-                                                                                            "es": "Las negras capturan el peón de a2 a cambio de tiempo; las blancas buscan compensación en el centro.",
-                                                                                            "en": "Black grabs the a2 pawn at the cost of time; White seeks compensation in the centre."
+                                                                                            "es": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Las negras capturan el peón de "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "a2"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": " a cambio de tiempo; las blancas buscan compensación en el centro."
+                                                                                              }
+                                                                                            ],
+                                                                                            "en": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Black grabs the "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "a2"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": " pawn at the cost of time; White seeks compensation in the centre."
+                                                                                              }
+                                                                                            ]
                                                                                           },
                                                                                           "main": true,
                                                                                           "children": [
@@ -183,8 +411,72 @@
                                                         "en": "Classical Exchange Variation"
                                                       },
                                                       "comment": {
-                                                        "es": "El alfil apunta a f7 y el caballo irá a e2 para evitar la clavada ...Ag4.",
-                                                        "en": "The bishop eyes f7 and the knight goes to e2 to avoid the ...Bg4 pin."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "El alfil apunta a "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "f7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " y el caballo irá a "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "e2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " para evitar la clavada "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bg4",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...Ag4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "The bishop eyes "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "f7"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " and the knight goes to "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "e2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " to avoid the "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bg4",
+                                                            "number": "...",
+                                                            "start": false,
+                                                            "written": "...Bg4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " pin."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -214,8 +506,50 @@
                                                                                         {
                                                                                           "san": "Na5",
                                                                                           "comment": {
-                                                                                            "es": "Las negras presionan d4 y atacan el alfil de c4.",
-                                                                                            "en": "Black presses d4 and attacks the c4 bishop."
+                                                                                            "es": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Las negras presionan "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "d4"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": " y atacan el alfil de "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "c4"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "."
+                                                                                              }
+                                                                                            ],
+                                                                                            "en": [
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": "Black presses "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "d4"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": " and attacks the "
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "square",
+                                                                                                "square": "c4"
+                                                                                              },
+                                                                                              {
+                                                                                                "kind": "text",
+                                                                                                "text": " bishop."
+                                                                                              }
+                                                                                            ]
                                                                                           },
                                                                                           "children": [
                                                                                             {
@@ -260,8 +594,74 @@
                                                     {
                                                       "san": "Be3",
                                                       "comment": {
-                                                        "es": "Refuerza d4 y prepara Dd2 y Tc1.",
-                                                        "en": "Reinforces d4 and prepares Qd2 and Rc1."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Refuerza "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " y prepara "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Qd2",
+                                                            "start": false,
+                                                            "written": "Dd2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " y "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Rc1",
+                                                            "start": false,
+                                                            "written": "Tc1"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Reinforces "
+                                                          },
+                                                          {
+                                                            "kind": "square",
+                                                            "square": "d4"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " and prepares "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Qd2",
+                                                            "start": false,
+                                                            "written": "Qd2"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " and "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Rc1",
+                                                            "start": false,
+                                                            "written": "Rc1"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -335,8 +735,50 @@
                                         "en": "Russian Variation"
                                       },
                                       "comment": {
-                                        "es": "Presiona d5 y obliga a las negras a tomar en c4.",
-                                        "en": "Pressures d5 and forces Black to take on c4."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Presiona "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y obliga a las negras a tomar en "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "c4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Pressures "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "d5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and forces Black to take on "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "c4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -358,8 +800,50 @@
                                                             "en": "Smyslov Variation"
                                                           },
                                                           "comment": {
-                                                            "es": "Presiona d4 mediante la clavada del caballo de f3.",
-                                                            "en": "Pressures d4 by pinning the f3 knight."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Presiona "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "d4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " mediante la clavada del caballo de "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "f3"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Pressures "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "d4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " by pinning the "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "f3"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " knight."
+                                                              }
+                                                            ]
                                                           },
                                                           "children": [
                                                             {
@@ -408,8 +892,62 @@
                                 "en": "Brinckmann Attack"
                               },
                               "comment": {
-                                "es": "Desarrollo activo del alfil; las negras responden con ...c5 y ...Da5 para recuperar el peón con juego activo.",
-                                "en": "Active bishop development; Black replies ...c5 and ...Qa5 to regain the pawn with active play."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Desarrollo activo del alfil; las negras responden con "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "c5",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...c5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Qa5",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...Da5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " para recuperar el peón con juego activo."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Active bishop development; Black replies "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "c5",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...c5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Qa5",
+                                    "number": "...",
+                                    "start": false,
+                                    "written": "...Qa5"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " to regain the pawn with active play."
+                                  }
+                                ]
                               },
                               "children": [
                                 {

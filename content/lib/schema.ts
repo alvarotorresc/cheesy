@@ -31,6 +31,50 @@ function checkId(v: unknown, at: string, errs: Errors) {
     errs.push(`${at}: id must be kebab-case, got ${JSON.stringify(v)}`);
 }
 
+const SQUARE = /^[a-h][1-8]$/;
+
+function checkSegment(s: unknown, at: string, errs: Errors) {
+  if (!isObj(s)) return void errs.push(`${at}: segment must be an object`);
+  switch (s.kind) {
+    case 'text':
+      checkKeys(s, ['kind', 'text'], [], at, errs);
+      if (typeof s.text !== 'string' || s.text === '')
+        errs.push(`${at}.text: must be a non-empty string`);
+      return;
+    case 'move':
+      checkKeys(s, ['kind', 'san', 'start', 'written'], ['number'], at, errs);
+      if (!nonEmpty(s.san)) errs.push(`${at}.san: must be a non-empty string`);
+      if (typeof s.start !== 'boolean') errs.push(`${at}.start: must be a boolean`);
+      if (!nonEmpty(s.written)) errs.push(`${at}.written: must be a non-empty string`);
+      if (s.number !== undefined && !nonEmpty(s.number))
+        errs.push(`${at}.number: must be a non-empty string`);
+      return;
+    case 'square':
+      checkKeys(s, ['kind', 'square'], [], at, errs);
+      if (typeof s.square !== 'string' || !SQUARE.test(s.square))
+        errs.push(`${at}.square: bad square`);
+      return;
+    case 'term':
+      checkKeys(s, ['kind', 'id', 'text'], [], at, errs);
+      checkId(s.id, `${at}.id`, errs);
+      if (!nonEmpty(s.text)) errs.push(`${at}.text: must be a non-empty string`);
+      return;
+    default:
+      errs.push(`${at}.kind: unknown segment kind ${JSON.stringify(s.kind)}`);
+  }
+}
+
+export function checkRichText(v: unknown, at: string, errs: Errors) {
+  if (!isObj(v)) return void errs.push(`${at}: RichText must be an object`);
+  checkKeys(v, ['es', 'en'], [], at, errs);
+  for (const lang of ['es', 'en'] as const) {
+    const segments = v[lang];
+    if (!Array.isArray(segments) || segments.length === 0)
+      errs.push(`${at}.${lang}: must be a non-empty array of segments`);
+    else segments.forEach((s, i) => checkSegment(s, `${at}.${lang}[${i}]`, errs));
+  }
+}
+
 const SIDES = ['white', 'black'];
 
 function checkNode(n: unknown, at: string, errs: Errors) {
@@ -38,7 +82,7 @@ function checkNode(n: unknown, at: string, errs: Errors) {
   checkKeys(n, ['san', 'children'], ['name', 'comment', 'main'], at, errs);
   if (!nonEmpty(n.san)) errs.push(`${at}.san: must be a non-empty string`);
   if (n.name !== undefined) checkLocalized(n.name, `${at}.name`, errs);
-  if (n.comment !== undefined) checkLocalized(n.comment, `${at}.comment`, errs);
+  if (n.comment !== undefined) checkRichText(n.comment, `${at}.comment`, errs);
   if (n.main !== undefined && n.main !== true) errs.push(`${at}.main: must be true when present`);
   if (!Array.isArray(n.children)) return void errs.push(`${at}.children: must be an array`);
   n.children.forEach((c, i) =>
@@ -55,7 +99,7 @@ export function validateOpeningTree(t: unknown): Errors {
   if (typeof t.eco !== 'string' || !/^[A-E]\d\d(-[A-E]\d\d)?$/.test(t.eco))
     errs.push(`eco: bad value ${JSON.stringify(t.eco)}`);
   if (!SIDES.includes(t.side as string)) errs.push(`side: must be white|black`);
-  checkLocalized(t.description, 'description', errs);
+  checkRichText(t.description, 'description', errs);
   if (!Array.isArray(t.root) || t.root.length === 0) errs.push('root: must be a non-empty array');
   else
     t.root.forEach((n, i) =>
@@ -80,7 +124,7 @@ export function validateEndgame(e: unknown, at: string): Errors {
   if (!nonEmpty(e.fen)) errs.push(`${at}.fen: must be a non-empty string`);
   if (e.goal !== 'win' && e.goal !== 'draw') errs.push(`${at}.goal: must be win|draw`);
   if (!SIDES.includes(e.playerSide as string)) errs.push(`${at}.playerSide: must be white|black`);
-  checkLocalized(e.explanation, `${at}.explanation`, errs);
+  checkRichText(e.explanation, `${at}.explanation`, errs);
   return errs;
 }
 
@@ -102,7 +146,7 @@ export function validateCurated(p: unknown, at: string): Errors {
   if (!SIDES.includes(p.playerSide as string)) errs.push(`${at}.playerSide: must be white|black`);
   if (!Array.isArray(p.solution) || p.solution.length === 0 || !p.solution.every(nonEmpty))
     errs.push(`${at}.solution: must be a non-empty array of SAN strings`);
-  checkLocalized(p.explanation, `${at}.explanation`, errs);
+  checkRichText(p.explanation, `${at}.explanation`, errs);
   if (!Array.isArray(p.tags) || p.tags.length === 0)
     errs.push(`${at}.tags: must be a non-empty array`);
   else

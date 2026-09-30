@@ -128,6 +128,11 @@ cg-board square.mark-hint {
   background: rgb(244 197 66 / 30%);
 }
 
+cg-board square.mark-spot {
+  box-shadow: inset 0 0 0 4px var(--board-spot);
+  background: var(--board-spot);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   cg-board square.mark-hint {
     animation: mark-ping 900ms ease-in-out 2;
@@ -151,4 +156,12 @@ cg-board square.mark-hint {
 
 .cg-wrap svg.cg-shapes marker path[fill='#15781b'] {
   fill: var(--board-arrow);
+}
+
+.cg-wrap svg.cg-shapes line[stroke='#2f6fb3'] {
+  stroke: var(--board-spot-arrow);
+}
+
+.cg-wrap svg.cg-shapes marker path[fill='#2f6fb3'] {
+  fill: var(--board-spot-arrow);
 }

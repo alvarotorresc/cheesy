@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { en } from '../../core/i18n/dictionaries/en';
@@ -10,7 +11,7 @@ const POSITION: CuratedPosition = {
   fen: '4k3/8/8/8/8/8/8/4K2R w K - 0 1',
   playerSide: 'white',
   solution: ['Rh8#'],
-  explanation: { es: 'Mate.', en: 'Mate.' },
+  explanation: plainText('Mate.'),
   tags: ['back-rank'],
 };
 

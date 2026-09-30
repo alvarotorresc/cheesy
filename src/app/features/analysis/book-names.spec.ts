@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { OpeningBook, type OpeningTree } from '../../core/content';
 import { MoveTree } from '../../core/move-tree';
 import { bookNames } from './book-names';
@@ -7,7 +8,7 @@ const TREE: OpeningTree = {
   name: { es: 'Prueba', en: 'Test' },
   eco: 'C00',
   side: 'black',
-  description: { es: '', en: '' },
+  description: plainText('-'),
   root: [
     {
       san: 'e4',

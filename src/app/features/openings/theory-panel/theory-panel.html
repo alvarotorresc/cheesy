@@ -5,7 +5,7 @@
     <p class="variation">{{ name }}</p>
   }
   @if (comment(); as comment) {
-    <p class="comment">{{ comment }}</p>
+    <p class="comment"><app-rich-text [text]="comment" /></p>
   }
   @switch (theory().status) {
     @case ('in-book') {

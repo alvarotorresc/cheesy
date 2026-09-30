@@ -7,8 +7,72 @@
   "eco": "E20-E59",
   "side": "black",
   "description": {
-    "es": "Con 3...Ab4 las negras clavan el caballo de c3 para impedir e4, y a menudo cambian el alfil por el caballo para dañar la estructura blanca.",
-    "en": "With 3...Bb4 Black pins the c3 knight to stop e4, often trading bishop for knight to damage White's pawn structure."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Con "
+      },
+      {
+        "kind": "move",
+        "san": "Bb4",
+        "number": "3...",
+        "start": false,
+        "written": "3...Ab4"
+      },
+      {
+        "kind": "text",
+        "text": " las negras clavan el caballo de "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " para impedir "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": ", y a menudo cambian el alfil por el caballo para dañar la estructura blanca."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "With "
+      },
+      {
+        "kind": "move",
+        "san": "Bb4",
+        "number": "3...",
+        "start": false,
+        "written": "3...Bb4"
+      },
+      {
+        "kind": "text",
+        "text": " Black pins the "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " knight to stop "
+      },
+      {
+        "kind": "square",
+        "square": "e4"
+      },
+      {
+        "kind": "text",
+        "text": ", often trading bishop for knight to damage White's pawn structure."
+      }
+    ]
   },
   "root": [
     {
@@ -38,8 +102,50 @@
                             "en": "Nimzo-Indian Defence"
                           },
                           "comment": {
-                            "es": "Clava el caballo de c3 para impedir e4; las negras están dispuestas a ceder el alfil a cambio de dañar la estructura blanca.",
-                            "en": "Pins the c3 knight to stop e4; Black is ready to give up the bishop to damage White's structure."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Clava el caballo de "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c3"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " para impedir "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; las negras están dispuestas a ceder el alfil a cambio de dañar la estructura blanca."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Pins the "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "c3"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " knight to stop "
+                              },
+                              {
+                                "kind": "square",
+                                "square": "e4"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "; Black is ready to give up the bishop to damage White's structure."
+                              }
+                            ]
                           },
                           "main": true,
                           "children": [
@@ -50,8 +156,18 @@
                                 "en": "Rubinstein System"
                               },
                               "comment": {
-                                "es": "Desarrollo sólido: las blancas completan el flanco de rey antes de decidir su plan.",
-                                "en": "Solid development: White completes the kingside before choosing a plan."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Desarrollo sólido: las blancas completan el flanco de rey antes de decidir su plan."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Solid development: White completes the kingside before choosing a plan."
+                                  }
+                                ]
                               },
                               "main": true,
                               "children": [
@@ -78,8 +194,18 @@
                                                     "en": "Gligoric System"
                                                   },
                                                   "comment": {
-                                                    "es": "Las negras golpean en el centro con ambos peones.",
-                                                    "en": "Black strikes in the centre with both pawns."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Las negras golpean en el centro con ambos peones."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Black strikes in the centre with both pawns."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
@@ -106,8 +232,18 @@
                                                                     {
                                                                       "san": "bxc3",
                                                                       "comment": {
-                                                                        "es": "Las blancas obtienen la pareja de alfiles y un centro de peones a cambio de los peones doblados en c.",
-                                                                        "en": "White gets the bishop pair and a pawn centre in exchange for doubled c-pawns."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Las blancas obtienen la pareja de alfiles y un centro de peones a cambio de los peones doblados en c."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "White gets the bishop pair and a pawn centre in exchange for doubled c-pawns."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "main": true,
                                                                       "children": [
@@ -122,8 +258,40 @@
                                                                                 {
                                                                                   "san": "Qc7",
                                                                                   "comment": {
-                                                                                    "es": "Prepara ...e5 para disputar el centro.",
-                                                                                    "en": "Prepares ...e5 to contest the centre."
+                                                                                    "es": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "Prepara "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "move",
+                                                                                        "san": "e5",
+                                                                                        "number": "...",
+                                                                                        "start": false,
+                                                                                        "written": "...e5"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " para disputar el centro."
+                                                                                      }
+                                                                                    ],
+                                                                                    "en": [
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "Prepares "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "move",
+                                                                                        "san": "e5",
+                                                                                        "number": "...",
+                                                                                        "start": false,
+                                                                                        "written": "...e5"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " to contest the centre."
+                                                                                      }
+                                                                                    ]
                                                                                   },
                                                                                   "main": true,
                                                                                   "children": [
@@ -201,8 +369,40 @@
                                                             "en": "Hübner Variation"
                                                           },
                                                           "comment": {
-                                                            "es": "Estructura cerrada con ...e5: los caballos negros luchan contra los alfiles blancos.",
-                                                            "en": "A closed structure with ...e5: Black's knights take on White's bishops."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Estructura cerrada con "
+                                                              },
+                                                              {
+                                                                "kind": "move",
+                                                                "san": "e5",
+                                                                "number": "...",
+                                                                "start": false,
+                                                                "written": "...e5"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": ": los caballos negros luchan contra los alfiles blancos."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "A closed structure with "
+                                                              },
+                                                              {
+                                                                "kind": "move",
+                                                                "san": "e5",
+                                                                "number": "...",
+                                                                "start": false,
+                                                                "written": "...e5"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": ": Black's knights take on White's bishops."
+                                                              }
+                                                            ]
                                                           },
                                                           "children": []
                                                         }
@@ -227,8 +427,34 @@
                                 "en": "Classical Variation"
                               },
                               "comment": {
-                                "es": "Recapturará en c3 con la dama para evitar los peones doblados.",
-                                "en": "White will recapture on c3 with the queen to avoid doubled pawns."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Recapturará en "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " con la dama para evitar los peones doblados."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "White will recapture on "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " with the queen to avoid doubled pawns."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -250,8 +476,50 @@
                                                     "en": "Keres Defence"
                                                   },
                                                   "comment": {
-                                                    "es": "El alfil irá a b7 para controlar e4.",
-                                                    "en": "The bishop goes to b7 to control e4."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "El alfil irá a "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "b7"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " para controlar "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "The bishop goes to "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "b7"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " to control "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "e4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
+                                                      }
+                                                    ]
                                                   },
                                                   "children": [
                                                     {
@@ -300,8 +568,18 @@
                                     "en": "Noa Variation"
                                   },
                                   "comment": {
-                                    "es": "Golpe central inmediato.",
-                                    "en": "An immediate central strike."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Golpe central inmediato."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "An immediate central strike."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -364,8 +642,18 @@
                                 "en": "Three Knights Variation"
                               },
                               "comment": {
-                                "es": "Desarrollo flexible que mantiene abiertas varias estructuras.",
-                                "en": "Flexible development that keeps several structures open."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Desarrollo flexible que mantiene abiertas varias estructuras."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Flexible development that keeps several structures open."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -399,8 +687,34 @@
                                                                     "en": "English Hybrid"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "Posición abierta de tipo Inglesa: el alfil de g2 presiona la gran diagonal.",
-                                                                    "en": "An open, English-like position: the g2 bishop presses the long diagonal."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Posición abierta de tipo Inglesa: el alfil de "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "g2"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " presiona la gran diagonal."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "An open, English-like position: the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "g2"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " bishop presses the long diagonal."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": []
                                                                 }
@@ -429,8 +743,34 @@
                                 "en": "Sämisch Variation"
                               },
                               "comment": {
-                                "es": "Fuerza el cambio en c3: las blancas obtienen la pareja de alfiles a cambio de peones doblados.",
-                                "en": "Forces the trade on c3: White gets the bishop pair in exchange for doubled pawns."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Fuerza el cambio en "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": las blancas obtienen la pareja de alfiles a cambio de peones doblados."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Forces the trade on "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": White gets the bishop pair in exchange for doubled pawns."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -466,8 +806,60 @@
                                                                         {
                                                                           "san": "Ne8",
                                                                           "comment": {
-                                                                            "es": "Maniobra típica: el caballo evita la clavada Ag5 y prepara ...f5.",
-                                                                            "en": "A typical manoeuvre: the knight sidesteps the Bg5 pin and prepares ...f5."
+                                                                            "es": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "Maniobra típica: el caballo evita la clavada "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "Bg5",
+                                                                                "start": false,
+                                                                                "written": "Ag5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " y prepara "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
+                                                                              }
+                                                                            ],
+                                                                            "en": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "A typical manoeuvre: the knight sidesteps the "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "Bg5",
+                                                                                "start": false,
+                                                                                "written": "Bg5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " pin and prepares "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
+                                                                              }
+                                                                            ]
                                                                           },
                                                                           "children": []
                                                                         }

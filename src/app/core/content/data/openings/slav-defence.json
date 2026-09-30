@@ -7,8 +7,126 @@
   "eco": "D10-D19",
   "side": "black",
   "description": {
-    "es": "Las negras defienden d5 con ...c6, lo que deja libre al alfil de c8 para salir a f5 o g4 antes de jugar ...e6.",
-    "en": "Black defends d5 with ...c6, leaving the c8 bishop free to reach f5 or g4 before ...e6."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras defienden "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " con "
+      },
+      {
+        "kind": "move",
+        "san": "c6",
+        "number": "...",
+        "start": false,
+        "written": "...c6"
+      },
+      {
+        "kind": "text",
+        "text": ", lo que deja libre al alfil de "
+      },
+      {
+        "kind": "square",
+        "square": "c8"
+      },
+      {
+        "kind": "text",
+        "text": " para salir a "
+      },
+      {
+        "kind": "square",
+        "square": "f5"
+      },
+      {
+        "kind": "text",
+        "text": " o "
+      },
+      {
+        "kind": "square",
+        "square": "g4"
+      },
+      {
+        "kind": "text",
+        "text": " antes de jugar "
+      },
+      {
+        "kind": "move",
+        "san": "e6",
+        "number": "...",
+        "start": false,
+        "written": "...e6"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black defends "
+      },
+      {
+        "kind": "square",
+        "square": "d5"
+      },
+      {
+        "kind": "text",
+        "text": " with "
+      },
+      {
+        "kind": "move",
+        "san": "c6",
+        "number": "...",
+        "start": false,
+        "written": "...c6"
+      },
+      {
+        "kind": "text",
+        "text": ", leaving the "
+      },
+      {
+        "kind": "square",
+        "square": "c8"
+      },
+      {
+        "kind": "text",
+        "text": " bishop free to reach "
+      },
+      {
+        "kind": "square",
+        "square": "f5"
+      },
+      {
+        "kind": "text",
+        "text": " or "
+      },
+      {
+        "kind": "square",
+        "square": "g4"
+      },
+      {
+        "kind": "text",
+        "text": " before "
+      },
+      {
+        "kind": "move",
+        "san": "e6",
+        "number": "...",
+        "start": false,
+        "written": "...e6"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      }
+    ]
   },
   "root": [
     {
@@ -30,8 +148,50 @@
                     "en": "Slav Defence"
                   },
                   "comment": {
-                    "es": "Defiende d5 con el peón de c sin encerrar al alfil de c8.",
-                    "en": "Defends d5 with the c-pawn without shutting in the c8 bishop."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Defiende "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " con el peón de c sin encerrar al alfil de "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "c8"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "Defends "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d5"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " with the c-pawn without shutting in the "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "c8"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " bishop."
+                      }
+                    ]
                   },
                   "main": true,
                   "children": [
@@ -50,8 +210,40 @@
                                 {
                                   "san": "dxc4",
                                   "comment": {
-                                    "es": "Toma el peón y amenaza conservarlo con ...b5.",
-                                    "en": "Takes the pawn and threatens to hold it with ...b5."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Toma el peón y amenaza conservarlo con "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "b5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...b5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Takes the pawn and threatens to hold it with "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "b5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...b5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -62,8 +254,56 @@
                                         "en": "Alapin Variation"
                                       },
                                       "comment": {
-                                        "es": "Impide ...b5; a cambio debilita la casilla b4.",
-                                        "en": "Stops ...b5, at the cost of weakening b4."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Impide "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "b5",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...b5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; a cambio debilita la casilla "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Stops "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "b5",
+                                            "number": "...",
+                                            "start": false,
+                                            "written": "...b5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", at the cost of weakening "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "main": true,
                                       "children": [
@@ -74,8 +314,40 @@
                                             "en": "Czech Variation"
                                           },
                                           "comment": {
-                                            "es": "El alfil sale antes de ...e6: la gran ventaja de la Eslava.",
-                                            "en": "The bishop gets out before ...e6: the Slav's great advantage."
+                                            "es": [
+                                              {
+                                                "kind": "text",
+                                                "text": "El alfil sale antes de "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "e6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...e6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ": la gran ventaja de la Eslava."
+                                              }
+                                            ],
+                                            "en": [
+                                              {
+                                                "kind": "text",
+                                                "text": "The bishop gets out before "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "e6",
+                                                "number": "...",
+                                                "start": false,
+                                                "written": "...e6"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ": the Slav's great advantage."
+                                              }
+                                            ]
                                           },
                                           "main": true,
                                           "children": [
@@ -102,8 +374,54 @@
                                                                 "en": "Dutch Variation"
                                                               },
                                                               "comment": {
-                                                                "es": "Las blancas enrocan y preparan De2 y e4.",
-                                                                "en": "White castles and prepares Qe2 and e4."
+                                                                "es": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "Las blancas enrocan y preparan "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "Qe2",
+                                                                    "start": false,
+                                                                    "written": "De2"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " y "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ],
+                                                                "en": [
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "White castles and prepares "
+                                                                  },
+                                                                  {
+                                                                    "kind": "move",
+                                                                    "san": "Qe2",
+                                                                    "start": false,
+                                                                    "written": "Qe2"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " and "
+                                                                  },
+                                                                  {
+                                                                    "kind": "square",
+                                                                    "square": "e4"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
+                                                                  }
+                                                                ]
                                                               },
                                                               "main": true,
                                                               "children": [
@@ -122,8 +440,34 @@
                                                                             {
                                                                               "san": "e4",
                                                                               "comment": {
-                                                                                "es": "Las blancas consiguen e4, pero las negras presionan el centro con las piezas.",
-                                                                                "en": "White achieves e4, but Black presses the centre with pieces."
+                                                                                "es": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "Las blancas consiguen "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "e4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ", pero las negras presionan el centro con las piezas."
+                                                                                  }
+                                                                                ],
+                                                                                "en": [
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "White achieves "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "square",
+                                                                                    "square": "e4"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": ", but Black presses the centre with pieces."
+                                                                                  }
+                                                                                ]
                                                                               },
                                                                               "main": true,
                                                                               "children": [
@@ -146,8 +490,34 @@
                                                                                                 {
                                                                                                   "san": "Nd5",
                                                                                                   "comment": {
-                                                                                                    "es": "El caballo se instala en d5, una casilla fuerte delante del peón bloqueado.",
-                                                                                                    "en": "The knight settles on d5, a strong square in front of the blocked pawn."
+                                                                                                    "es": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "El caballo se instala en "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "d5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": ", una casilla fuerte delante del peón bloqueado."
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "en": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "The knight settles on "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "d5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": ", a strong square in front of the blocked pawn."
+                                                                                                      }
+                                                                                                    ]
                                                                                                   },
                                                                                                   "main": true,
                                                                                                   "children": []
@@ -185,8 +555,66 @@
                                                 "en": "Krause Attack"
                                               },
                                               "comment": {
-                                                "es": "Busca recuperar c4 con el caballo y jugar f3 y e4.",
-                                                "en": "Aims to regain c4 with the knight and play f3 and e4."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Busca recuperar "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "c4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " con el caballo y jugar "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f3"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " y "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Aims to regain "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "c4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " with the knight and play "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "f3"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and "
+                                                  },
+                                                  {
+                                                    "kind": "square",
+                                                    "square": "e4"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -263,8 +691,56 @@
                                     "en": "Chebanenko Variation"
                                   },
                                   "comment": {
-                                    "es": "Prepara ...b5 y deja abiertas varias opciones para el alfil de c8.",
-                                    "en": "Prepares ...b5 and keeps several options open for the c8 bishop."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Prepara "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "b5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...b5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " y deja abiertas varias opciones para el alfil de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c8"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Prepares "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "b5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...b5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " and keeps several options open for the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c8"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " bishop."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -317,8 +793,50 @@
                                 "en": "Quiet Variation"
                               },
                               "comment": {
-                                "es": "Protege c4 pero encierra al alfil de c1.",
-                                "en": "Protects c4 but shuts in the c1 bishop."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Protege "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " pero encierra al alfil de "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c1"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Protects "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c4"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " but shuts in the "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c1"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " bishop."
+                                  }
+                                ]
                               },
                               "children": [
                                 {
@@ -328,8 +846,40 @@
                                     "en": "Schallopp Defence"
                                   },
                                   "comment": {
-                                    "es": "Desarrolla el alfil antes de cerrar con ...e6.",
-                                    "en": "Develops the bishop before closing the chain with ...e6."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Desarrolla el alfil antes de cerrar con "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Develops the bishop before closing the chain with "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e6",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e6"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -341,8 +891,18 @@
                                             {
                                               "san": "Nh4",
                                               "comment": {
-                                                "es": "Persigue al alfil para conseguir la pareja de alfiles.",
-                                                "en": "Chases the bishop to win the bishop pair."
+                                                "es": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Persigue al alfil para conseguir la pareja de alfiles."
+                                                  }
+                                                ],
+                                                "en": [
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "Chases the bishop to win the bishop pair."
+                                                  }
+                                                ]
                                               },
                                               "children": [
                                                 {
@@ -400,8 +960,18 @@
                         "en": "Exchange Variation"
                       },
                       "comment": {
-                        "es": "Estructura simétrica: las blancas conservan una ligera iniciativa gracias al primer movimiento.",
-                        "en": "A symmetrical structure: White keeps a slight initiative thanks to the first move."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Estructura simétrica: las blancas conservan una ligera iniciativa gracias al primer movimiento."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "A symmetrical structure: White keeps a slight initiative thanks to the first move."
+                          }
+                        ]
                       },
                       "children": [
                         {
@@ -441,8 +1011,50 @@
                                                                     "en": "Trifunovic Variation"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "Responde a la presión sobre b7 con contrajuego sobre c3.",
-                                                                    "en": "Meets the pressure on b7 with counterplay against c3."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Responde a la presión sobre "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "b7"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " con contrajuego sobre "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Meets the pressure on "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "b7"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": " with counterplay against "
+                                                                      },
+                                                                      {
+                                                                        "kind": "square",
+                                                                        "square": "c3"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": [
                                                                     {

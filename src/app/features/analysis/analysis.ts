@@ -6,7 +6,7 @@ import { ContentService } from '../../core/content';
 import { EngineService, type EngineMove } from '../../core/engine';
 import { I18nService } from '../../core/i18n';
 import { buildMoveRows } from './move-tree/move-rows';
-import { BoardComponent, type BoardArrow } from '../../shared/board';
+import { BoardComponent, BoardSpotlight, type BoardArrow } from '../../shared/board';
 import { EngineLines } from '../../shared/engine-lines';
 import { EvalBar, type EvalBarMode, type EvalOutcome } from '../../shared/eval-bar';
 import { gameEndMessage } from '../../shared/game-end';
@@ -41,7 +41,7 @@ const KEYS: Record<string, (session: AnalysisSession) => void> = {
 @Component({
   selector: 'app-analysis',
   imports: [BoardComponent, EngineLines, EvalBar, IoPanel, MoveTreeView, RouterLink],
-  providers: [AnalysisSession, EngineService],
+  providers: [AnalysisSession, EngineService, BoardSpotlight],
   templateUrl: './analysis.html',
   styleUrl: './analysis.css',
   host: { '(document:keydown)': 'onKey($event)' },

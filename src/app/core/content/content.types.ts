@@ -1,8 +1,26 @@
+import type { SquareName } from 'chessops';
 import type { Localized } from '../i18n/i18n.types';
 
 export type { Localized };
 
 export type Side = 'white' | 'black';
+
+/**
+ * A piece of a text of the content, cut by the content build. Moves are stored in English SAN
+ * whatever the language of the text; `number` is the move number as written ("1.", "1...", "...");
+ * `start` says whether the move opens a sentence; `written` is the move exactly as the author wrote it.
+ */
+export type Segment =
+  | { kind: 'text'; text: string }
+  | { kind: 'move'; san: string; number?: string; start: boolean; written: string }
+  | { kind: 'square'; square: SquareName }
+  | { kind: 'term'; id: string; text: string };
+
+/** A text of the content in every language, already cut into segments. */
+export interface RichText {
+  es: Segment[];
+  en: Segment[];
+}
 
 /** An opening as a tree of moves. Positions are not stored: they are computed with chessops. */
 export interface OpeningTree {
@@ -13,8 +31,8 @@ export interface OpeningTree {
   eco: string;
   /** Side the opening is studied from. */
   side: Side;
-  /** One or two sentences. */
-  description: Localized;
+  /** One or two sentences, cut into segments by the content build. */
+  description: RichText;
   /** Moves playable from the initial position. */
   root: OpeningNode[];
 }
@@ -24,8 +42,8 @@ export interface OpeningNode {
   san: string;
   /** Name of the variation that starts with this move. */
   name?: Localized;
-  /** Short idea behind the move. */
-  comment?: Localized;
+  /** Short idea behind the move, cut into segments by the content build. */
+  comment?: RichText;
   /** Present, and true, only on the moves of the main line. */
   main?: boolean;
   /** Continuations. The main-line child, if any, comes first. */
@@ -64,8 +82,8 @@ export interface EndgamePosition {
   /** Goal of the practising side. */
   goal: 'win' | 'draw';
   playerSide: Side;
-  /** Key idea, two to four sentences. */
-  explanation: Localized;
+  /** Key idea, two to four sentences, cut into segments by the content build. */
+  explanation: RichText;
 }
 
 export interface CuratedPosition {
@@ -77,7 +95,8 @@ export interface CuratedPosition {
   playerSide: Side;
   /** SAN moves, alternating sides, starting and ending with the player. */
   solution: string[];
-  explanation: Localized;
+  /** One or two sentences, cut into segments by the content build. */
+  explanation: RichText;
   /** English, kebab-case: "back-rank", "smothered-mate"... */
   tags: string[];
 }

@@ -29,6 +29,7 @@ import {
   type PendingPromotion,
   type PromotionRole,
 } from './board.types';
+import { BoardSpotlight, resolveSpot } from './spotlight';
 
 const PROMOTION_GLYPHS: Record<PromotionRole, string> = {
   queen: '♛',
@@ -45,6 +46,9 @@ const prefersReducedMotion = (): boolean =>
 
 /** Brush of the best move arrow. The colour is remapped to a theme token in board.css. */
 const BEST_BRUSH = { key: 'best', color: '#15781b', opacity: 0.82, lineWidth: 11 };
+
+/** Brush of the arrow of a pointed move. Remapped to a theme token in board.css. */
+const SPOT_BRUSH = { key: 'spot', color: '#2f6fb3', opacity: 0.7, lineWidth: 9 };
 
 /**
  * Presentational chess board backed by chessground. It renders whatever its inputs describe and
@@ -102,6 +106,39 @@ export class BoardComponent {
   /** Bumped after each user move to force a re-sync even when the inputs did not change. */
   private readonly syncRequest = signal(0);
 
+  private readonly spotlight = inject(BoardSpotlight, { optional: true });
+  private readonly spot = computed(() => resolveSpot(this.spotlight?.request(), this.fen()));
+
+  /**
+   * Squares and shapes drawn over the position. They are applied without `fen`: chessground resets
+   * its pieces from the fen it is given, which would snap back a pawn waiting for its promotion
+   * every time a text is pointed at.
+   */
+  private readonly overlay = computed<Config>(() => {
+    const spot = this.spot();
+    return {
+      highlight: {
+        // The marks of the page go after the pointed squares, so they win on a shared square.
+        custom: new Map<Key, string>([
+          ...spot.squares.map((square) => [square as Key, 'mark-spot'] as const),
+          ...[...this.marks()].map(([key, mark]) => [key, `mark-${mark}`] as const),
+        ]),
+      },
+      drawable: {
+        autoShapes: [
+          ...this.arrows().map((arrow) => ({
+            orig: arrow.from,
+            dest: arrow.to,
+            brush: BEST_BRUSH.key,
+          })),
+          ...(spot.arrow
+            ? [{ orig: spot.arrow.from, dest: spot.arrow.to, brush: SPOT_BRUSH.key }]
+            : []),
+        ],
+      },
+    };
+  });
+
   private readonly config = computed<Config>(() => {
     const viewOnly = this.viewOnly();
     const lastMove = this.lastMove();
@@ -119,20 +156,8 @@ export class BoardComponent {
       },
       draggable: { enabled: !viewOnly },
       selectable: { enabled: !viewOnly },
-      highlight: {
-        lastMove: true,
-        check: true,
-        custom: new Map([...this.marks()].map(([key, mark]) => [key, `mark-${mark}`])),
-      },
-      drawable: {
-        enabled: false,
-        visible: true,
-        autoShapes: this.arrows().map((arrow) => ({
-          orig: arrow.from,
-          dest: arrow.to,
-          brush: BEST_BRUSH.key,
-        })),
-      },
+      highlight: { lastMove: true, check: true },
+      drawable: { enabled: false, visible: true },
     };
   });
 
@@ -144,6 +169,7 @@ export class BoardComponent {
       // Chessground watches the board size itself (ResizeObserver), so it follows the layout.
       const api = Chessground(this.boardElement().nativeElement, {
         ...this.config(),
+        highlight: { ...this.config().highlight, ...this.overlay().highlight },
         // Both are read once, when chessground wraps the element.
         coordinates: this.coordinates(),
         ranksPosition: 'left',
@@ -152,8 +178,12 @@ export class BoardComponent {
         draggable: { ...this.config().draggable, showGhost: true },
         drawable: {
           ...this.config().drawable,
+          ...this.overlay().drawable,
           // Chessground merges this into its default brushes; the type wants them all.
-          brushes: { [BEST_BRUSH.key]: BEST_BRUSH } as unknown as DrawBrushes,
+          brushes: {
+            [BEST_BRUSH.key]: BEST_BRUSH,
+            [SPOT_BRUSH.key]: SPOT_BRUSH,
+          } as unknown as DrawBrushes,
         },
         movable: {
           ...this.config().movable,
@@ -185,6 +215,11 @@ export class BoardComponent {
       const config = this.config();
       this.syncRequest();
       this.api?.set(config);
+    });
+
+    effect(() => {
+      const overlay = this.overlay();
+      this.api?.set(overlay);
     });
 
     afterRenderEffect(() => {

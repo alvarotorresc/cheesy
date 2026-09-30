@@ -170,6 +170,7 @@
             [moves]="sans()"
             [currentPly]="game.ply()"
             [startPly]="game.startPly()"
+            [startFen]="game.startFen()"
             [label]="i18n.t().analysis.moves"
             [emptyLabel]="i18n.t().analysis.noMoves"
             (selectPly)="game.goTo($event)"

@@ -11,7 +11,12 @@
         [attr.aria-current]="cell.id === currentId() ? 'true' : null"
         (click)="pick.emit(cell.id)"
       >
-        <app-move [san]="cell.san" [color]="colorOfPly(cell.ply)" />
+        <app-move
+          [san]="cell.san"
+          [color]="colorOfPly(cell.ply)"
+          [before]="before(cell)"
+          [focusable]="false"
+        />
       </button>
       @if (names().get(cell.id); as name) {
         <span class="mv-name">{{ name }}</span>
@@ -35,6 +40,7 @@
         [view]="item.view"
         [currentId]="currentId()"
         [freshId]="freshId()"
+        [tree]="tree()"
         [names]="names()"
         (pick)="pick.emit($event)"
         (fold)="fold.emit($event)"

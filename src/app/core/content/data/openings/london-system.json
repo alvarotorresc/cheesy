@@ -7,8 +7,90 @@
   "eco": "D02",
   "side": "white",
   "description": {
-    "es": "Sistema de las blancas basado en Af4, e3, c3 y Cbd2: una estructura sólida que se juega casi contra cualquier defensa, con menos teoría que el Gambito de Dama.",
-    "en": "A White system built on Bf4, e3, c3 and Nbd2: a solid structure that works against almost any defence, with less theory than the Queen's Gambit."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Sistema de las blancas basado en "
+      },
+      {
+        "kind": "move",
+        "san": "Bf4",
+        "start": false,
+        "written": "Af4"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "square",
+        "square": "e3"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " y "
+      },
+      {
+        "kind": "move",
+        "san": "Nbd2",
+        "start": false,
+        "written": "Cbd2"
+      },
+      {
+        "kind": "text",
+        "text": ": una estructura sólida que se juega casi contra cualquier defensa, con menos teoría que el Gambito de Dama."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "A White system built on "
+      },
+      {
+        "kind": "move",
+        "san": "Bf4",
+        "start": false,
+        "written": "Bf4"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "square",
+        "square": "e3"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "square",
+        "square": "c3"
+      },
+      {
+        "kind": "text",
+        "text": " and "
+      },
+      {
+        "kind": "move",
+        "san": "Nbd2",
+        "start": false,
+        "written": "Nbd2"
+      },
+      {
+        "kind": "text",
+        "text": ": a solid structure that works against almost any defence, with less theory than the Queen's Gambit."
+      }
+    ]
   },
   "root": [
     {
@@ -34,8 +116,34 @@
                         "en": "London System"
                       },
                       "comment": {
-                        "es": "El alfil sale antes de e3; las blancas montan la misma estructura casi contra cualquier defensa.",
-                        "en": "The bishop comes out before e3; White sets up the same structure against almost anything."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "El alfil sale antes de "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e3"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; las blancas montan la misma estructura casi contra cualquier defensa."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "The bishop comes out before "
+                          },
+                          {
+                            "kind": "square",
+                            "square": "e3"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; White sets up the same structure against almost anything."
+                          }
+                        ]
                       },
                       "main": true,
                       "children": [
@@ -46,8 +154,90 @@
                             {
                               "san": "e3",
                               "comment": {
-                                "es": "Estructura típica: e3, c3, Cbd2 y Ad3, sólida y fácil de jugar.",
-                                "en": "The typical setup: e3, c3, Nbd2 and Bd3, solid and easy to play."
+                                "es": [
+                                  {
+                                    "kind": "text",
+                                    "text": "Estructura típica: "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "e3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Nbd2",
+                                    "start": false,
+                                    "written": "Cbd2"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " y "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bd3",
+                                    "start": false,
+                                    "written": "Ad3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", sólida y fácil de jugar."
+                                  }
+                                ],
+                                "en": [
+                                  {
+                                    "kind": "text",
+                                    "text": "The typical setup: "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "e3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", "
+                                  },
+                                  {
+                                    "kind": "square",
+                                    "square": "c3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Nbd2",
+                                    "start": false,
+                                    "written": "Nbd2"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " and "
+                                  },
+                                  {
+                                    "kind": "move",
+                                    "san": "Bd3",
+                                    "start": false,
+                                    "written": "Bd3"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ", solid and easy to play."
+                                  }
+                                ]
                               },
                               "main": true,
                               "children": [
@@ -74,8 +264,18 @@
                                                     {
                                                       "san": "Bg3",
                                                       "comment": {
-                                                        "es": "Mantiene el alfil en su diagonal en lugar de permitir un cambio favorable a las negras.",
-                                                        "en": "Keeps the bishop on its diagonal instead of allowing a trade that suits Black."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Mantiene el alfil en su diagonal en lugar de permitir un cambio favorable a las negras."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Keeps the bishop on its diagonal instead of allowing a trade that suits Black."
+                                                          }
+                                                        ]
                                                       },
                                                       "main": true,
                                                       "children": [
@@ -94,8 +294,50 @@
                                                                     {
                                                                       "san": "Ne5",
                                                                       "comment": {
-                                                                        "es": "El caballo se instala en e5; con f4 las blancas preparan un ataque en el flanco de rey.",
-                                                                        "en": "The knight settles on e5; with f4 White prepares a kingside attack."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "El caballo se instala en "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "e5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "; con "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " las blancas preparan un ataque en el flanco de rey."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "The knight settles on "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "e5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "; with "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " White prepares a kingside attack."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "main": true,
                                                                       "children": [
@@ -145,8 +387,50 @@
                                 {
                                   "san": "Qb6",
                                   "comment": {
-                                    "es": "Ataca b2, que queda débil tras la salida del alfil de c1.",
-                                    "en": "Hits b2, which is weak once the c1 bishop has left."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Ataca "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "b2"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", que queda débil tras la salida del alfil de "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c1"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Hits "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "b2"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": ", which is weak once the "
+                                      },
+                                      {
+                                        "kind": "square",
+                                        "square": "c1"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " bishop has left."
+                                      }
+                                    ]
                                   },
                                   "children": [
                                     {
@@ -156,8 +440,74 @@
                                         "en": "Poisoned Pawn Variation"
                                       },
                                       "comment": {
-                                        "es": "Las blancas ofrecen b2: tomarlo con la dama es arriesgado por Cb5 y Tb1.",
-                                        "en": "White offers b2: taking it with the queen is risky because of Nb5 and Rb1."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Las blancas ofrecen "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b2"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ": tomarlo con la dama es arriesgado por "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Nb5",
+                                            "start": false,
+                                            "written": "Cb5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Rb1",
+                                            "start": false,
+                                            "written": "Tb1"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "White offers "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "b2"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ": taking it with the queen is risky because of "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Nb5",
+                                            "start": false,
+                                            "written": "Nb5"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Rb1",
+                                            "start": false,
+                                            "written": "Rb1"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -239,8 +589,18 @@
                         {
                           "san": "Bf5",
                           "comment": {
-                            "es": "Las negras copian la idea y desarrollan su alfil fuera de la cadena.",
-                            "en": "Black copies the idea and develops the bishop outside the chain."
+                            "es": [
+                              {
+                                "kind": "text",
+                                "text": "Las negras copian la idea y desarrollan su alfil fuera de la cadena."
+                              }
+                            ],
+                            "en": [
+                              {
+                                "kind": "text",
+                                "text": "Black copies the idea and develops the bishop outside the chain."
+                              }
+                            ]
                           },
                           "children": [
                             {
@@ -283,15 +643,87 @@
             {
               "san": "Bf4",
               "comment": {
-                "es": "Orden moderno: el alfil sale en la segunda jugada, antes de Cf3.",
-                "en": "The modern move order: the bishop comes out on move two, before Nf3."
+                "es": [
+                  {
+                    "kind": "text",
+                    "text": "Orden moderno: el alfil sale en la segunda jugada, antes de "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "Nf3",
+                    "start": false,
+                    "written": "Cf3"
+                  },
+                  {
+                    "kind": "text",
+                    "text": "."
+                  }
+                ],
+                "en": [
+                  {
+                    "kind": "text",
+                    "text": "The modern move order: the bishop comes out on move two, before "
+                  },
+                  {
+                    "kind": "move",
+                    "san": "Nf3",
+                    "start": false,
+                    "written": "Nf3"
+                  },
+                  {
+                    "kind": "text",
+                    "text": "."
+                  }
+                ]
               },
               "children": [
                 {
                   "san": "c5",
                   "comment": {
-                    "es": "Golpe inmediato contra d4, aprovechando que b2 ha perdido la protección del alfil.",
-                    "en": "An immediate strike at d4, exploiting the fact that b2 has lost the bishop’s protection."
+                    "es": [
+                      {
+                        "kind": "text",
+                        "text": "Golpe inmediato contra "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": ", aprovechando que "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "b2"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " ha perdido la protección del alfil."
+                      }
+                    ],
+                    "en": [
+                      {
+                        "kind": "text",
+                        "text": "An immediate strike at "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "d4"
+                      },
+                      {
+                        "kind": "text",
+                        "text": ", exploiting the fact that "
+                      },
+                      {
+                        "kind": "square",
+                        "square": "b2"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " has lost the bishop’s protection."
+                      }
+                    ]
                   },
                   "children": [
                     {
@@ -366,8 +798,18 @@
                     {
                       "san": "Bf4",
                       "comment": {
-                        "es": "Contra la India de Rey, las blancas mantienen el mismo esquema y evitan la teoría principal.",
-                        "en": "Against the King's Indian, White keeps the same setup and avoids main-line theory."
+                        "es": [
+                          {
+                            "kind": "text",
+                            "text": "Contra la India de Rey, las blancas mantienen el mismo esquema y evitan la teoría principal."
+                          }
+                        ],
+                        "en": [
+                          {
+                            "kind": "text",
+                            "text": "Against the King's Indian, White keeps the same setup and avoids main-line theory."
+                          }
+                        ]
                       },
                       "children": [
                         {

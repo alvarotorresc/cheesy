@@ -9,7 +9,7 @@ import { GameService } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { ReadingModeService } from '../../../core/reading-mode';
-import { BoardComponent, type BoardMove } from '../../../shared/board';
+import { BoardComponent, BoardSpotlight, type BoardMove } from '../../../shared/board';
 import { gameEndMessage } from '../../../shared/game-end';
 import { isFormField } from '../../../shared/keyboard';
 import { OpeningMoves } from '../opening-moves/opening-moves';
@@ -39,7 +39,7 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
 @Component({
   selector: 'app-opening-play',
   imports: [BoardComponent, NgTemplateOutlet, OpeningMoves, PlayOptions, RouterLink, TheoryPanel],
-  providers: [GameService, EngineService, OpeningSession],
+  providers: [GameService, EngineService, OpeningSession, BoardSpotlight],
   templateUrl: './opening-play.html',
   styleUrls: ['../opening-page.css', './opening-play.css'],
   host: {

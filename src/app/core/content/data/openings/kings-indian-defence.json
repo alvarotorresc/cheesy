@@ -7,8 +7,62 @@
   "eco": "E60-E99",
   "side": "black",
   "description": {
-    "es": "Las negras ceden el centro al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un flanco distinto.",
-    "en": "Black concedes the centre early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different wing."
+    "es": [
+      {
+        "kind": "text",
+        "text": "Las negras ceden el centro al principio para atacarlo después con "
+      },
+      {
+        "kind": "move",
+        "san": "e5",
+        "number": "...",
+        "start": false,
+        "written": "...e5"
+      },
+      {
+        "kind": "text",
+        "text": " o "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": ". En las líneas cerradas cada bando ataca en un flanco distinto."
+      }
+    ],
+    "en": [
+      {
+        "kind": "text",
+        "text": "Black concedes the centre early, planning to strike at it with "
+      },
+      {
+        "kind": "move",
+        "san": "e5",
+        "number": "...",
+        "start": false,
+        "written": "...e5"
+      },
+      {
+        "kind": "text",
+        "text": " or "
+      },
+      {
+        "kind": "move",
+        "san": "c5",
+        "number": "...",
+        "start": false,
+        "written": "...c5"
+      },
+      {
+        "kind": "text",
+        "text": ". In the closed lines each side attacks on a different wing."
+      }
+    ]
   },
   "root": [
     {
@@ -46,8 +100,62 @@
                                     "en": "Normal Variation"
                                   },
                                   "comment": {
-                                    "es": "Las negras permiten un gran centro blanco para atacarlo después con ...e5 o ...c5.",
-                                    "en": "Black allows a big white centre, planning to attack it later with ...e5 or ...c5."
+                                    "es": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Las negras permiten un gran centro blanco para atacarlo después con "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " o "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "c5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...c5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ],
+                                    "en": [
+                                      {
+                                        "kind": "text",
+                                        "text": "Black allows a big white centre, planning to attack it later with "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "e5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...e5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " or "
+                                      },
+                                      {
+                                        "kind": "move",
+                                        "san": "c5",
+                                        "number": "...",
+                                        "start": false,
+                                        "written": "...c5"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": "."
+                                      }
+                                    ]
                                   },
                                   "main": true,
                                   "children": [
@@ -70,8 +178,34 @@
                                                     "en": "Orthodox Variation"
                                                   },
                                                   "comment": {
-                                                    "es": "Golpe central clásico: las negras disputan d4 con un peón.",
-                                                    "en": "The classical central strike: Black contests d4 with a pawn."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "Golpe central clásico: las negras disputan "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "d4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " con un peón."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "The classical central strike: Black contests "
+                                                      },
+                                                      {
+                                                        "kind": "square",
+                                                        "square": "d4"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " with a pawn."
+                                                      }
+                                                    ]
                                                   },
                                                   "main": true,
                                                   "children": [
@@ -86,8 +220,34 @@
                                                             "en": "Aronin–Taimanov Defence"
                                                           },
                                                           "comment": {
-                                                            "es": "Presiona d4 y obliga a las blancas a cerrar el centro.",
-                                                            "en": "Pressures d4 and forces White to close the centre."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Presiona "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "d4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " y obliga a las blancas a cerrar el centro."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Pressures "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "d4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " and forces White to close the centre."
+                                                              }
+                                                            ]
                                                           },
                                                           "main": true,
                                                           "children": [
@@ -98,8 +258,40 @@
                                                                 {
                                                                   "san": "Ne7",
                                                                   "comment": {
-                                                                    "es": "Centro cerrado: las blancas atacarán en el flanco de dama y las negras en el de rey con ...f5.",
-                                                                    "en": "A closed centre: White attacks on the queenside and Black on the kingside with ...f5."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Centro cerrado: las blancas atacarán en el flanco de dama y las negras en el de rey con "
+                                                                      },
+                                                                      {
+                                                                        "kind": "move",
+                                                                        "san": "f5",
+                                                                        "number": "...",
+                                                                        "start": false,
+                                                                        "written": "...f5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "A closed centre: White attacks on the queenside and Black on the kingside with "
+                                                                      },
+                                                                      {
+                                                                        "kind": "move",
+                                                                        "san": "f5",
+                                                                        "number": "...",
+                                                                        "start": false,
+                                                                        "written": "...f5"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "main": true,
                                                                   "children": [
@@ -110,16 +302,106 @@
                                                                         "en": "Classical System"
                                                                       },
                                                                       "comment": {
-                                                                        "es": "El caballo se dirige a d3 para apoyar c5 y vigilar f4.",
-                                                                        "en": "The knight heads for d3 to support c5 and watch f4."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "El caballo se dirige a "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d3"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " para apoyar "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "c5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " y vigilar "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "The knight heads for "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "d3"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " to support "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "c5"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " and watch "
+                                                                          },
+                                                                          {
+                                                                            "kind": "square",
+                                                                            "square": "f4"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "main": true,
                                                                       "children": [
                                                                         {
                                                                           "san": "Nd7",
                                                                           "comment": {
-                                                                            "es": "El caballo deja paso al peón de f para la ruptura ...f5.",
-                                                                            "en": "The knight makes way for the ...f5 break."
+                                                                            "es": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "El caballo deja paso al peón de f para la ruptura "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
+                                                                              }
+                                                                            ],
+                                                                            "en": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "The knight makes way for the "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " break."
+                                                                              }
+                                                                            ]
                                                                           },
                                                                           "main": true,
                                                                           "children": [
@@ -146,16 +428,74 @@
                                                                                                 {
                                                                                                   "san": "f4",
                                                                                                   "comment": {
-                                                                                                    "es": "Las negras cierran el flanco de rey y preparan ...g5-g4 para atacar.",
-                                                                                                    "en": "Black locks the kingside and prepares ...g5-g4 to attack."
+                                                                                                    "es": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "Las negras cierran el flanco de rey y preparan "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "g5",
+                                                                                                        "number": "...",
+                                                                                                        "start": false,
+                                                                                                        "written": "...g5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "-"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "g4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " para atacar."
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "en": [
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "Black locks the kingside and prepares "
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "move",
+                                                                                                        "san": "g5",
+                                                                                                        "number": "...",
+                                                                                                        "start": false,
+                                                                                                        "written": "...g5"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": "-"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "square",
+                                                                                                        "square": "g4"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "kind": "text",
+                                                                                                        "text": " to attack."
+                                                                                                      }
+                                                                                                    ]
                                                                                                   },
                                                                                                   "main": true,
                                                                                                   "children": [
                                                                                                     {
                                                                                                       "san": "g4",
                                                                                                       "comment": {
-                                                                                                        "es": "Las blancas frenan el avance de los peones negros en el flanco de rey.",
-                                                                                                        "en": "White puts a brake on Black's kingside pawn advance."
+                                                                                                        "es": [
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": "Las blancas frenan el avance de los peones negros en el flanco de rey."
+                                                                                                          }
+                                                                                                        ],
+                                                                                                        "en": [
+                                                                                                          {
+                                                                                                            "kind": "text",
+                                                                                                            "text": "White puts a brake on Black's kingside pawn advance."
+                                                                                                          }
+                                                                                                        ]
                                                                                                       },
                                                                                                       "main": true,
                                                                                                       "children": [
@@ -218,15 +558,73 @@
                                                                         "en": "Bayonet Attack"
                                                                       },
                                                                       "comment": {
-                                                                        "es": "Ataque rápido en el flanco de dama antes de que las negras se organicen.",
-                                                                        "en": "A fast queenside attack before Black gets organised."
+                                                                        "es": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "Ataque rápido en el flanco de dama antes de que las negras se organicen."
+                                                                          }
+                                                                        ],
+                                                                        "en": [
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "A fast queenside attack before Black gets organised."
+                                                                          }
+                                                                        ]
                                                                       },
                                                                       "children": [
                                                                         {
                                                                           "san": "Nh5",
                                                                           "comment": {
-                                                                            "es": "El caballo deja paso a ...f5 y vigila f4.",
-                                                                            "en": "The knight makes way for ...f5 and watches f4."
+                                                                            "es": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "El caballo deja paso a "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " y vigila "
+                                                                              },
+                                                                              {
+                                                                                "kind": "square",
+                                                                                "square": "f4"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
+                                                                              }
+                                                                            ],
+                                                                            "en": [
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "The knight makes way for "
+                                                                              },
+                                                                              {
+                                                                                "kind": "move",
+                                                                                "san": "f5",
+                                                                                "number": "...",
+                                                                                "start": false,
+                                                                                "written": "...f5"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " and watches "
+                                                                              },
+                                                                              {
+                                                                                "kind": "square",
+                                                                                "square": "f4"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": "."
+                                                                              }
+                                                                            ]
                                                                           },
                                                                           "children": [
                                                                             {
@@ -271,8 +669,38 @@
                                                         "en": "Petrosian Variation"
                                                       },
                                                       "comment": {
-                                                        "es": "Cierra el centro de inmediato y prepara Ag5 para clavar el caballo.",
-                                                        "en": "Closes the centre at once and prepares Bg5 to pin the knight."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Cierra el centro de inmediato y prepara "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bg5",
+                                                            "start": false,
+                                                            "written": "Ag5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " para clavar el caballo."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Closes the centre at once and prepares "
+                                                          },
+                                                          {
+                                                            "kind": "move",
+                                                            "san": "Bg5",
+                                                            "start": false,
+                                                            "written": "Bg5"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " to pin the knight."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -282,8 +710,34 @@
                                                             "en": "Stein Defence"
                                                           },
                                                           "comment": {
-                                                            "es": "Frena la expansión blanca con b4 en el flanco de dama.",
-                                                            "en": "Stops White's queenside expansion with b4."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Frena la expansión blanca con "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "b4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " en el flanco de dama."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Stops White's queenside expansion with "
+                                                              },
+                                                              {
+                                                                "kind": "square",
+                                                                "square": "b4"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "."
+                                                              }
+                                                            ]
                                                           },
                                                           "children": [
                                                             {
@@ -316,8 +770,18 @@
                                                         "en": "Exchange Variation"
                                                       },
                                                       "comment": {
-                                                        "es": "Cambio de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas.",
-                                                        "en": "An early queen trade: White hopes for a comfortable endgame, but Black equalises without much trouble."
+                                                        "es": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "Cambio de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas."
+                                                          }
+                                                        ],
+                                                        "en": [
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "An early queen trade: White hopes for a comfortable endgame, but Black equalises without much trouble."
+                                                          }
+                                                        ]
                                                       },
                                                       "children": [
                                                         {
@@ -361,8 +825,106 @@
                                         "en": "Sämisch Variation"
                                       },
                                       "comment": {
-                                        "es": "Refuerza e4 y prepara Ae3, Dd2 y un posible ataque con g4 y h4.",
-                                        "en": "Reinforces e4 and prepares Be3, Qd2 and a possible attack with g4 and h4."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Refuerza "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y prepara "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Be3",
+                                            "start": false,
+                                            "written": "Ae3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Qd2",
+                                            "start": false,
+                                            "written": "Dd2"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y un posible ataque con "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "g4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "h4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Reinforces "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "e4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and prepares "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Be3",
+                                            "start": false,
+                                            "written": "Be3"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", "
+                                          },
+                                          {
+                                            "kind": "move",
+                                            "san": "Qd2",
+                                            "start": false,
+                                            "written": "Qd2"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and a possible attack with "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "g4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and "
+                                          },
+                                          {
+                                            "kind": "square",
+                                            "square": "h4"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -378,8 +940,18 @@
                                                     "en": "Sämisch Variation, Orthodox Variation"
                                                   },
                                                   "comment": {
-                                                    "es": "La ruptura central clásica también contra la Sämisch.",
-                                                    "en": "The classical central break, this time against the Sämisch."
+                                                    "es": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "La ruptura central clásica también contra la Sämisch."
+                                                      }
+                                                    ],
+                                                    "en": [
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "The classical central break, this time against the Sämisch."
+                                                      }
+                                                    ]
                                                   },
                                                   "children": [
                                                     {
@@ -398,8 +970,18 @@
                                                                     "en": "Sämisch Variation, Closed Variation, Main Line"
                                                                   },
                                                                   "comment": {
-                                                                    "es": "Abre la columna c para el contrajuego negro en el flanco de dama.",
-                                                                    "en": "Opens the c-file for Black's queenside counterplay."
+                                                                    "es": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Abre la columna c para el contrajuego negro en el flanco de dama."
+                                                                      }
+                                                                    ],
+                                                                    "en": [
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "Opens the c-file for Black's queenside counterplay."
+                                                                      }
+                                                                    ]
                                                                   },
                                                                   "children": [
                                                                     {
@@ -434,8 +1016,18 @@
                                         "en": "Four Pawns Attack"
                                       },
                                       "comment": {
-                                        "es": "Cuatro peones en el centro: mucho espacio, pero también objetivos para el contraataque negro.",
-                                        "en": "Four central pawns: lots of space, but also targets for Black's counterattack."
+                                        "es": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Cuatro peones en el centro: mucho espacio, pero también objetivos para el contraataque negro."
+                                          }
+                                        ],
+                                        "en": [
+                                          {
+                                            "kind": "text",
+                                            "text": "Four central pawns: lots of space, but also targets for Black's counterattack."
+                                          }
+                                        ]
                                       },
                                       "children": [
                                         {
@@ -453,8 +1045,18 @@
                                                         {
                                                           "san": "e6",
                                                           "comment": {
-                                                            "es": "Las negras atacan la cadena de peones y abren la columna e.",
-                                                            "en": "Black attacks the pawn chain and opens the e-file."
+                                                            "es": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Las negras atacan la cadena de peones y abren la columna e."
+                                                              }
+                                                            ],
+                                                            "en": [
+                                                              {
+                                                                "kind": "text",
+                                                                "text": "Black attacks the pawn chain and opens the e-file."
+                                                              }
+                                                            ]
                                                           },
                                                           "children": [
                                                             {

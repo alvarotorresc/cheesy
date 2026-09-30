@@ -1,3 +1,4 @@
+import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
@@ -20,7 +21,7 @@ const SMOTHERED: CuratedPosition = {
   fen: '2q2r1k/6pp/7N/3Q4/8/8/5PPP/6K1 w - - 0 1',
   playerSide: 'white',
   solution: ['Qg8+', 'Rxg8', 'Nf7#'],
-  explanation: { es: 'La dama se sacrifica.', en: 'The queen is sacrificed.' },
+  explanation: plainText('La dama se sacrifica.', 'The queen is sacrificed.'),
   tags: ['smothered-mate'],
 };
 
@@ -30,7 +31,7 @@ const KIENINGER: CuratedPosition = {
   fen: 'r1b1k2r/ppppqppp/2n5/4n3/1PP2B2/5N2/1P1NPPPP/R2QKB1R b KQkq - 0 8',
   playerSide: 'black',
   solution: ['Nd3#'],
-  explanation: { es: 'Mate ahogado.', en: 'Smothered.' },
+  explanation: plainText('Mate ahogado.', 'Smothered.'),
   tags: ['pin'],
 };
 
@@ -267,6 +268,37 @@ describe('PositionPage', () => {
       );
       expect(board().viewOnly()).toBe(true);
       expect(text('.step-text')).toBe('Your move: 2. Nf7# (checkmate).');
+    });
+  });
+
+  describe('square highlight', () => {
+    it('should mark on the board a square hovered in the explanation', async () => {
+      const pointed: CuratedPosition = {
+        ...SMOTHERED,
+        explanation: {
+          es: [
+            { kind: 'text', text: 'Mira ' },
+            { kind: 'square', square: 'f7' },
+          ],
+          en: [
+            { kind: 'text', text: 'Look at ' },
+            { kind: 'square', square: 'f7' },
+          ],
+        },
+      };
+      await open('/positions/3', async () => [pointed, KIENINGER, BROKEN]);
+      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+      await moveOnBoard({ from: 'h6', to: 'f7' });
+
+      const square = element().querySelector('.explanation .square')!;
+      square.dispatchEvent(
+        new PointerEvent('pointerenter', { bubbles: true, pointerType: 'mouse' }),
+      );
+      await harness.fixture.whenStable();
+      await new Promise((r) => requestAnimationFrame(() => r(null)));
+
+      expect(element().querySelectorAll('cg-board square.mark-spot')).toHaveLength(1);
     });
   });
 

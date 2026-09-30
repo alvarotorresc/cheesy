@@ -17,7 +17,13 @@
               [attr.title]="cell.off ? outOfLines() : null"
               (click)="selectPly.emit(cell.ply)"
             >
-              <app-move [san]="cell.san" [color]="cell.color" [tooltip]="!cell.off" />
+              <app-move
+                [san]="cell.san"
+                [color]="cell.color"
+                [tooltip]="!cell.off"
+                [before]="cell.before"
+                [focusable]="false"
+              />
             </button>
           } @else {
             <span class="empty-cell"></span>

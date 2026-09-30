@@ -220,7 +220,8 @@
                     (click)="trainer.goTo(view.ply)"
                   >
                     <span
-                      >{{ view.number }} <app-move [san]="view.step.san" [color]="view.color"
+                      >{{ view.number }}
+                      <app-move [san]="view.step.san" [color]="view.color" [focusable]="false"
                     /></span>
                   </button>
                 </li>
@@ -278,7 +279,7 @@
           </div>
           <div class="block revealing-late">
             <h2 class="box-title">{{ t.explanation }}</h2>
-            <p class="explanation">{{ i18n.localize(position.explanation) }}</p>
+            <p class="explanation"><app-rich-text [text]="position.explanation" /></p>
           </div>
           <div class="after-actions revealing-late">
             @if (nextId(); as id) {
