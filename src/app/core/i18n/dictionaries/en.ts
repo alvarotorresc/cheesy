@@ -5,6 +5,9 @@ export const en = {
     mainNavigation: 'Main navigation',
     language: 'Language',
     homeLabel: 'Cheesy, home',
+    readingMode: 'Reading mode',
+    words: 'Words',
+    notation: 'Notation',
   },
   nav: {
     home: 'Home',

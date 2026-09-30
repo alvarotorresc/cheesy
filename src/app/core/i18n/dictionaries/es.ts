@@ -7,6 +7,9 @@ export const es: Messages = {
     mainNavigation: 'Navegación principal',
     language: 'Idioma',
     homeLabel: 'Cheesy, inicio',
+    readingMode: 'Modo de lectura',
+    words: 'Palabras',
+    notation: 'Notación',
   },
   nav: {
     home: 'Inicio',

@@ -4,6 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { appConfig } from './app.config';
 import { I18nService } from './core/i18n';
+import { ReadingModeService } from './core/reading-mode';
 
 describe('App', () => {
   beforeEach(() => {
@@ -155,6 +156,27 @@ describe('App', () => {
     expect(TestBed.inject(I18nService).lang()).toBe('es');
     expect(element.querySelector('nav')?.textContent).toContain('Aperturas');
     expect(spanish?.getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('should switch between words and notation from the header', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const fixture = TestBed.createComponent(App);
+    await TestBed.inject(Router).navigateByUrl('/');
+    await fixture.whenStable();
+    const root = fixture.nativeElement as HTMLElement;
+    const group = root.querySelector<HTMLElement>('[role="group"].reading');
+    const [words, notation] = Array.from(group?.querySelectorAll('button') ?? []);
+
+    expect(group?.getAttribute('aria-label')).toBe('Reading mode');
+    expect(words.textContent?.trim()).toBe('Words');
+    expect(words.getAttribute('aria-pressed')).toBe('true');
+
+    notation.click();
+    await fixture.whenStable();
+
+    expect(TestBed.inject(ReadingModeService).mode()).toBe('notation');
+    expect(notation.getAttribute('aria-pressed')).toBe('true');
   });
 
   it('should focus the main content without navigating when the skip link is used', async () => {
