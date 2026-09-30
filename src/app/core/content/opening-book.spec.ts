@@ -1,5 +1,4 @@
-import { rich } from '../../features/openings/testing/test-opening';
-import { bundledContentLoaders } from './testing';
+import { bundledContentLoaders, rich } from './testing';
 import type { Localized, OpeningNode, OpeningTree } from './content.types';
 import { OpeningBook } from './opening-book';
 

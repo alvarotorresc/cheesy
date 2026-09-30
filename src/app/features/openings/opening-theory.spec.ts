@@ -1,6 +1,7 @@
 import { OpeningBook, type OpeningNode } from '../../core/content';
+import { rich } from '../../core/content/testing';
 import { describeTheory } from './opening-theory';
-import { rich, testTree } from './testing/test-opening';
+import { testTree } from './testing/test-opening';
 
 describe('opening theory', () => {
   const book = OpeningBook.from(testTree());

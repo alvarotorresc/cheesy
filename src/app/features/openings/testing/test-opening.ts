@@ -1,17 +1,15 @@
-import { plainText } from '../../../core/content/testing';
+import { rich } from '../../../core/content/testing';
 import type {
   ContentLoaders,
   OpeningNode,
   OpeningSummary,
   OpeningTree,
-  RichText,
 } from '../../../core/content';
 import type { Localized } from '../../../core/i18n';
 
 /** Test data shared by the specs of this feature. Never imported by the app. */
 
 const named = (en: string): Localized => ({ es: `${en} (es)`, en });
-export const rich = (en: string): RichText => plainText(`${en} (es)`, en);
 
 const node = (
   san: string,
