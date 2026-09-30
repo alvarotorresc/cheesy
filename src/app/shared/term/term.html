@@ -19,6 +19,7 @@
       (pointerenter)="onPopupEnter($event)"
       [style.top.px]="place().above ? null : place().edge"
       [style.bottom.px]="place().above ? place().edge : null"
+      [style.max-height.px]="place().maxHeight"
       [style.left.px]="place().left"
       [style.width.px]="place().width"
     >

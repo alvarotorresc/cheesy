@@ -32,6 +32,8 @@ interface Place {
   /** Distance from the top of the screen (below the word) or from the bottom (above it). */
   readonly edge: number;
   readonly above: boolean;
+  /** Room left on the chosen side: the popup scrolls inside rather than past the screen. */
+  readonly maxHeight: number;
 }
 
 const HOVER_MS = 300;
@@ -72,7 +74,13 @@ export class TermView {
   protected readonly nameId = `${this.popupId}-name`;
   protected readonly state = signal<State>({ kind: 'closed' });
   protected readonly open = computed(() => this.state().kind !== 'closed');
-  protected readonly place = signal<Place>({ left: 0, width: WIDTH, edge: 0, above: false });
+  protected readonly place = signal<Place>({
+    left: 0,
+    width: WIDTH,
+    edge: 0,
+    above: false,
+    maxHeight: 0,
+  });
   protected readonly readyTerm = computed<GlossaryTerm | undefined>(() => {
     const state = this.state();
     return state.kind === 'ready' ? state.term : undefined;
@@ -156,6 +164,7 @@ export class TermView {
   }
 
   private show(byHover: boolean): void {
+    clearTimeout(this.hoverTimer);
     this.openedByHover = byHover;
     this.position();
     this.state.set({ kind: 'loading' });
@@ -183,18 +192,21 @@ export class TermView {
     const rect = this.button().nativeElement.getBoundingClientRect();
     const viewportWidth = view?.innerWidth ?? WIDTH + 2 * GUTTER;
     const viewportHeight = view?.innerHeight ?? ESTIMATED_HEIGHT + 2 * GUTTER;
-    const height = this.popup()?.nativeElement.offsetHeight || ESTIMATED_HEIGHT;
+    // Until the content is there the popup is a one-line status: place it as if it were full size.
+    const kind = this.state().kind;
+    const measured = kind === 'ready' || kind === 'failed';
+    const height = (measured && this.popup()?.nativeElement.offsetHeight) || ESTIMATED_HEIGHT;
     const width = Math.min(WIDTH, viewportWidth - 2 * GUTTER);
     const left = Math.min(Math.max(rect.left, GUTTER), viewportWidth - GUTTER - width);
-    const fitsBelow = rect.bottom + GAP + height <= viewportHeight - GUTTER;
-    const roomAbove = rect.top - GAP;
-    const roomBelow = viewportHeight - rect.bottom - GAP;
-    const above = !fitsBelow && roomAbove > roomBelow;
+    const roomBelow = viewportHeight - rect.bottom - GAP - GUTTER;
+    const roomAbove = rect.top - GAP - GUTTER;
+    const above = height > roomBelow && roomAbove > roomBelow;
     this.place.set({
       left,
       width,
       above,
       edge: above ? viewportHeight - rect.top + GAP : rect.bottom + GAP,
+      maxHeight: Math.max(above ? roomAbove : roomBelow, 0),
     });
   }
 }

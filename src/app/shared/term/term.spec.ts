@@ -308,4 +308,39 @@ describe('TermView', () => {
     expect(popup()?.querySelector('a.term')?.getAttribute('href')).toBe('/learn/glossary#check');
     expect(popup()?.querySelector('app-term')).toBeNull();
   });
+
+  it('should shrink to the room of the chosen side when neither side fits', async () => {
+    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(600);
+    vi.spyOn(button(), 'getBoundingClientRect').mockReturnValue(new DOMRect(40, 300, 30, 20));
+    button().click();
+    await fixture.whenStable();
+    const box = popup() as HTMLElement;
+    // Room below: 600 - 320 - 8 - 16 = 256. Room above: 300 - 8 - 16 = 276, so it goes above.
+    expect(box.classList.contains('above')).toBe(true);
+    expect(parseFloat(box.style.maxHeight)).toBe(276);
+    expect(box.offsetHeight).toBeLessThanOrEqual(276);
+  });
+
+  it('should not turn a click into a hover popup when the hover timer was pending', async () => {
+    vi.useFakeTimers();
+    button().dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }));
+    button().click();
+    vi.advanceTimersByTime(300);
+    leave();
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
+    await fixture.whenStable();
+    expect(popup()).not.toBeNull();
+  });
+
+  it('should stay closed when a click opens and closes it before the hover timer fires', async () => {
+    vi.useFakeTimers();
+    button().dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }));
+    button().click();
+    button().click();
+    vi.advanceTimersByTime(300);
+    vi.useRealTimers();
+    await fixture.whenStable();
+    expect(popup()).toBeNull();
+  });
 });
