@@ -25,6 +25,8 @@ export class MoveText {
   readonly format = input<'compact' | 'full'>('compact');
   /** False when the sentence goes in the middle of a text: it starts in lower case. */
   readonly start = input(true);
+  /** Move number as written ("1.", "1..."), put in front of the move only in notation mode. */
+  readonly prefix = input<string | undefined>(undefined);
   /** False when the host already has a title of its own: the compact sentence would cover it. */
   readonly tooltip = input(true);
 
@@ -37,7 +39,7 @@ export class MoveText {
       : undefined,
   );
   protected readonly text = computed(() =>
-    this.reading.words() ? this.sentence() : this.i18n.san(this.san()),
+    this.reading.words() ? this.sentence() : `${this.prefix() ?? ''}${this.i18n.san(this.san())}`,
   );
   protected readonly title = computed(() =>
     this.tooltip() && this.format() === 'compact' ? this.sentence() : null,

@@ -1,0 +1,7 @@
+:host {
+  display: contents;
+}
+
+.square {
+  font-variant-numeric: tabular-nums;
+}

@@ -7,13 +7,22 @@ import { MoveText } from './move';
 @Component({
   imports: [MoveText],
   template: `<button type="button">
-    <app-move [san]="san()" [color]="color()" [format]="format()" [tooltip]="tooltip()" />
+    <app-move
+      [san]="san()"
+      [color]="color()"
+      [format]="format()"
+      [start]="start()"
+      [prefix]="prefix()"
+      [tooltip]="tooltip()"
+    />
   </button>`,
 })
 class Host {
   readonly san = input('Nxf7+');
   readonly color = input<'white' | 'black'>('white');
   readonly format = input<'compact' | 'full'>('compact');
+  readonly start = input(true);
+  readonly prefix = input<string | undefined>(undefined);
   readonly tooltip = input(true);
 }
 
@@ -111,6 +120,23 @@ describe('MoveText', () => {
     mode.setMode('notation');
     await render({ format: 'compact' });
     expect(visible()).toBe('O-O-O#');
+  });
+
+  it('should write the move in lower case when it does not open a sentence', async () => {
+    await render({ san: 'Ke7', color: 'black', format: 'full', start: false });
+
+    expect(visible()).toBe('rey a e7');
+    expect(spoken()).toBe('rey a e7');
+  });
+
+  it('should put the move number in front only in notation mode', async () => {
+    await render({ san: 'Ke7', color: 'black', format: 'full', prefix: '1...' });
+    expect(visible()).toBe('Rey a e7');
+
+    mode.setMode('notation');
+    await fixture.whenStable();
+    expect(visible()).toBe('1...Re7');
+    expect(spoken()).toBe('Rey a e7');
   });
 
   it('should follow a mode change', async () => {

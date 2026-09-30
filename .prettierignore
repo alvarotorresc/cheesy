@@ -11,3 +11,6 @@ content/tablebase-cache.json
 # Local tool folders (agent worktrees, plan workspaces), never part of the repo
 .claude
 .superpowers
+
+# Segments are written with no whitespace between them: the text already carries its spaces
+src/app/shared/rich-text/rich-text.html
