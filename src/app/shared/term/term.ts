@@ -178,7 +178,6 @@ export class TermView {
   private show(byHover: boolean): void {
     clearTimeout(this.hoverTimer);
     this.openedByHover = byHover;
-    this.position();
     this.state.set({ kind: 'loading' });
     this.content.glossaryTerm(this.id()).then(
       (term) => this.open() && this.state.set({ kind: 'ready', term }),
