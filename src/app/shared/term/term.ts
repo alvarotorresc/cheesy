@@ -107,16 +107,20 @@ export class TermView {
       event.stopPropagation();
       this.close(host()?.contains(event.target as Node) ?? false);
     };
-    const onScroll = () => this.open() && this.close(false);
+    // The popup was placed for one window size and scroll position: close it rather than chase them.
+    const onViewChange = () => this.open() && this.close(false);
     this.document.addEventListener('pointerdown', onPress, { capture: true, passive: true });
     this.document.addEventListener('keydown', onKey, { capture: true });
-    this.document.defaultView?.addEventListener('scroll', onScroll, { passive: true });
+    const view = this.document.defaultView;
+    view?.addEventListener('scroll', onViewChange, { passive: true });
+    view?.addEventListener('resize', onViewChange, { passive: true });
     inject(DestroyRef).onDestroy(() => {
       clearTimeout(this.hoverTimer);
       clearTimeout(this.leaveTimer);
       this.document.removeEventListener('pointerdown', onPress, { capture: true });
       this.document.removeEventListener('keydown', onKey, { capture: true });
-      this.document.defaultView?.removeEventListener('scroll', onScroll);
+      view?.removeEventListener('scroll', onViewChange);
+      view?.removeEventListener('resize', onViewChange);
     });
 
     // The popup grows when its content arrives: place it again once it has been drawn.

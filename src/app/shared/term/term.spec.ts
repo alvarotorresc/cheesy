@@ -274,6 +274,14 @@ describe('TermView', () => {
     expect(popup()).toBeNull();
   });
 
+  it('should close when the window is resized or rotated', async () => {
+    button().click();
+    await fixture.whenStable();
+    window.dispatchEvent(new Event('resize'));
+    await fixture.whenStable();
+    expect(popup()).toBeNull();
+  });
+
   it('should name the dialog after the term, not the written word', async () => {
     button().click();
     await fixture.whenStable();
