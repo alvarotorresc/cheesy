@@ -91,4 +91,13 @@ describe('MoveText', () => {
 
     expect(visible()).toBe('Cxf7+');
   });
+
+  it('should hold its hidden sentence, so a scrolling strip clips it', async () => {
+    await render();
+    const host = element.querySelector('app-move') as HTMLElement;
+
+    // The sentence is absolutely positioned; without a positioned host it escapes the strip's
+    // clipping and widens the whole page (the openings shelf at 360 px).
+    expect(getComputedStyle(host).position).toBe('relative');
+  });
 });

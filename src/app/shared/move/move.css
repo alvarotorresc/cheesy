@@ -1,5 +1,8 @@
+/* Positioned so the hidden sentence (absolute) stays inside the move: otherwise it escapes the
+   clipping of a scrolling strip and widens the page. */
 :host {
   display: inline;
+  position: relative;
 }
 
 /* The piece image sits on the text line, as tall as a capital letter. */
