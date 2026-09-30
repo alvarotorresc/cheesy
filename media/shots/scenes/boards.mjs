@@ -28,17 +28,17 @@ cg-board piece, cg-board square { will-change: auto !important; }
 `;
 
 /** Adds the rules that keep a page with a played board identical between runs. */
-export async function steadyBoard(page) {
+async function steadyBoard(page) {
   await page.addStyleTag({ content: STEADY_CSS });
 }
 
 /** Number of half moves the app has registered, read from the move list. */
-export function moveCount(page, moves = MOVE_BUTTONS) {
+function moveCount(page, moves = MOVE_BUTTONS) {
   return page.locator(moves).count();
 }
 
 /** Waits until the move list holds exactly `count` half moves. */
-export async function waitForMoves(page, count, { moves = MOVE_BUTTONS, what = 'moves' } = {}) {
+async function waitForMoves(page, count, { moves = MOVE_BUTTONS, what = 'moves' } = {}) {
   try {
     await page.waitForFunction(
       ([selector, n]) => document.querySelectorAll(selector).length === n,
@@ -77,7 +77,7 @@ async function squareCentre(page, board, square) {
  * It throws if the origin square cannot be selected (not the player's turn, no piece to move) or
  * if the move list does not grow (an illegal move, or one the app took back).
  */
-export async function playMove(
+async function playMove(
   page,
   uci,
   { board = 'app-board', moves = MOVE_BUTTONS, reply = false } = {},
