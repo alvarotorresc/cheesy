@@ -48,7 +48,8 @@ export function resolveSpot(request: SpotRequest | undefined, boardFen: string):
 /**
  * What a page with a main board is pointing at: a move or squares of a text or a list. Each page
  * with a board provides its own. A request is cleared only by whoever made it, so moving from one
- * move to the next never blinks. A request from a tap lasts until a press outside any trigger (SpotTrigger never clears it).
+ * move to the next never blinks. A request from a tap lasts until a press outside any trigger
+ * (SpotTrigger never clears it).
  */
 @Injectable()
 export class BoardSpotlight {

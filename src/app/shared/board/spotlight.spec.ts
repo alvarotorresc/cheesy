@@ -72,13 +72,13 @@ describe('BoardSpotlight', () => {
     expect(spotlight.request()).toBeUndefined();
   });
 
-  it('should clear a sticky request on a press outside any spot trigger', () => {
+  it('should clear a request from a tap on a press outside any spot trigger', () => {
     spotlight.point({ kind: 'squares', squares: ['e4'] }, a);
     document.body.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
     expect(spotlight.request()).toBeUndefined();
   });
 
-  it('should keep a sticky request on a press inside a spot trigger', () => {
+  it('should keep a request from a tap on a press inside a spot trigger', () => {
     const trigger = document.createElement('span');
     trigger.setAttribute('data-spot', '');
     document.body.append(trigger);
