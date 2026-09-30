@@ -267,13 +267,31 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Mantiene el alfil en su diagonal en lugar de permitir un cambio favorable a las negras."
+                                                            "text": "Mantiene el alfil en su diagonal en lugar de permitir un "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "cambio"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " favorable a las negras."
                                                           }
                                                         ],
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Keeps the bishop on its diagonal instead of allowing a trade that suits Black."
+                                                            "text": "Keeps the bishop on its diagonal instead of allowing a "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "exchange",
+                                                            "text": "trade"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " that suits Black."
                                                           }
                                                         ]
                                                       },
@@ -313,7 +331,16 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": " las blancas preparan un ataque en el flanco de rey."
+                                                                            "text": " las blancas preparan un ataque en el "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "flanco"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de rey."
                                                                           }
                                                                         ],
                                                                         "en": [
@@ -335,7 +362,16 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": " White prepares a kingside attack."
+                                                                            "text": " White prepares a "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "kingside"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " attack."
                                                                           }
                                                                         ]
                                                                       },
@@ -592,13 +628,49 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "Las negras copian la idea y desarrollan su alfil fuera de la cadena."
+                                "text": "Las negras copian la idea y "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "desarrollan"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " su alfil fuera de la "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pawn-chain",
+                                "text": "cadena"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
                               }
                             ],
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "Black copies the idea and develops the bishop outside the chain."
+                                "text": "Black copies the idea and "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "develops"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " the bishop outside the "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pawn-chain",
+                                "text": "chain"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
                               }
                             ]
                           },

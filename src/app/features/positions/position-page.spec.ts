@@ -269,6 +269,14 @@ describe('PositionPage', () => {
       expect(board().viewOnly()).toBe(true);
       expect(text('.step-text')).toBe('Your move: 2. Nf7# (checkmate).');
     });
+
+    it('should let each theme tag open its glossary term', async () => {
+      await moveOnBoard({ from: 'd5', to: 'g8' });
+      await moveOnBoard({ from: 'h6', to: 'f7' });
+
+      const tag = element().querySelector('.theme-tag app-term button.term');
+      expect(tag?.textContent?.trim()).toBe('Smothered mate');
+    });
   });
 
   describe('square highlight', () => {

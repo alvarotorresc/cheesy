@@ -209,7 +209,25 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "Gana espacio en el centro y prepara "
+                                            "text": "Gana "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "space",
+                                            "text": "espacio"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " en el "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "centro"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " y prepara "
                                           },
                                           {
                                             "kind": "move",
@@ -233,7 +251,25 @@
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "Gains central space and prepares "
+                                            "text": "Gains "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "central"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "space",
+                                            "text": "space"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " and prepares "
                                           },
                                           {
                                             "kind": "move",
@@ -274,8 +310,13 @@
                                                   "comment": {
                                                     "es": [
                                                       {
+                                                        "kind": "term",
+                                                        "id": "development",
+                                                        "text": "Desarrolla"
+                                                      },
+                                                      {
                                                         "kind": "text",
-                                                        "text": "Desarrolla y prepara "
+                                                        "text": " y prepara "
                                                       },
                                                       {
                                                         "kind": "move",
@@ -310,8 +351,13 @@
                                                     ],
                                                     "en": [
                                                       {
+                                                        "kind": "term",
+                                                        "id": "development",
+                                                        "text": "Develops"
+                                                      },
+                                                      {
                                                         "kind": "text",
-                                                        "text": "Develops and prepares "
+                                                        "text": " and prepares "
                                                       },
                                                       {
                                                         "kind": "move",
@@ -581,14 +627,46 @@
                                                   "comment": {
                                                     "es": [
                                                       {
+                                                        "kind": "term",
+                                                        "id": "development",
+                                                        "text": "Desarrollo"
+                                                      },
+                                                      {
                                                         "kind": "text",
-                                                        "text": "Desarrollo más activo del alfil, que apunta hacia el flanco de rey blanco."
+                                                        "text": " más activo del alfil, que apunta hacia el "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "flank",
+                                                        "text": "flanco"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " de rey blanco."
                                                       }
                                                     ],
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "A more active bishop development, eyeing White’s kingside."
+                                                        "text": "A more active bishop "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "development",
+                                                        "text": "development"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": ", eyeing White’s "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "flank",
+                                                        "text": "kingside"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
                                                       }
                                                     ]
                                                   },
@@ -640,7 +718,16 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "Fuerza el cambio de caballos; tras "
+                                            "text": "Fuerza el "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "cambio"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " de caballos; tras "
                                           },
                                           {
                                             "kind": "move",
@@ -650,13 +737,31 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " las blancas suelen enrocar largo y atacar."
+                                            "text": " las blancas suelen "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "castling",
+                                            "text": "enrocar"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " largo y atacar."
                                           }
                                         ],
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "Forces a knight trade; after "
+                                            "text": "Forces a knight "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "trade"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; after "
                                           },
                                           {
                                             "kind": "move",
@@ -666,7 +771,16 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " White usually castles long and attacks."
+                                            "text": " White usually "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "castling",
+                                            "text": "castles"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " long and attacks."
                                           }
                                         ]
                                       },
@@ -726,14 +840,42 @@
                                       "comment": {
                                         "es": [
                                           {
+                                            "kind": "term",
+                                            "id": "pin",
+                                            "text": "Clava"
+                                          },
+                                          {
                                             "kind": "text",
-                                            "text": "Clava el caballo y fuerza el cambio de damas: una línea muy tranquila."
+                                            "text": " el caballo y fuerza el "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "cambio"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " de damas: una línea muy tranquila."
                                           }
                                         ],
                                         "en": [
                                           {
+                                            "kind": "term",
+                                            "id": "pin",
+                                            "text": "Pins"
+                                          },
+                                          {
                                             "kind": "text",
-                                            "text": "Pins the knight and forces a queen trade: a very quiet line."
+                                            "text": " the knight and forces a queen "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "trade"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ": a very quiet line."
                                           }
                                         ]
                                       },
@@ -802,7 +944,16 @@
                         "es": [
                           {
                             "kind": "text",
-                            "text": "Abre el centro de inmediato en lugar de capturar en "
+                            "text": "Abre el "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centro"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " de inmediato en lugar de capturar en "
                           },
                           {
                             "kind": "square",
@@ -816,7 +967,16 @@
                         "en": [
                           {
                             "kind": "text",
-                            "text": "Opens the centre at once instead of capturing on "
+                            "text": "Opens the "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centre"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " at once instead of capturing on "
                           },
                           {
                             "kind": "square",

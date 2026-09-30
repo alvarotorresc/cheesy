@@ -27,7 +27,16 @@
         },
         {
           "kind": "text",
-          "text": ", y buscan una ventaja duradera en el centro."
+          "text": ", y buscan una ventaja duradera en el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ],
       "en": [
@@ -49,7 +58,16 @@
         },
         {
           "kind": "text",
-          "text": " pawn, aiming for a lasting central edge."
+          "text": " pawn, aiming for a lasting "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "central"
+        },
+        {
+          "kind": "text",
+          "text": " edge."
         }
       ]
     },
@@ -131,7 +149,16 @@
         },
         {
           "kind": "text",
-          "text": " para dominar el centro."
+          "text": " para dominar el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ],
       "en": [
@@ -161,7 +188,16 @@
         },
         {
           "kind": "text",
-          "text": " to take the centre."
+          "text": " to take the "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -365,7 +401,34 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras aceptan algo de espacio menos a cambio de una estructura sólida y contraataques en el centro con "
+          "text": "Las negras aceptan algo de "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "espacio"
+        },
+        {
+          "kind": "text",
+          "text": " menos a cambio de una "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "estructura"
+        },
+        {
+          "kind": "text",
+          "text": " sólida y contraataques en el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "move",
@@ -393,7 +456,34 @@
       "en": [
         {
           "kind": "text",
-          "text": "Black accepts less space for a solid structure and central counterplay with "
+          "text": "Black accepts less "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "space"
+        },
+        {
+          "kind": "text",
+          "text": " for a solid "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "structure"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "central"
+        },
+        {
+          "kind": "text",
+          "text": " counterplay with "
         },
         {
           "kind": "move",
@@ -492,7 +582,16 @@
         },
         {
           "kind": "text",
-          "text": " para disputar el centro sin encerrar a su alfil de casillas claras."
+          "text": " para disputar el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " sin encerrar a su alfil de casillas claras."
         }
       ],
       "en": [
@@ -520,7 +619,16 @@
         },
         {
           "kind": "text",
-          "text": " to contest the centre without locking in the light-squared bishop."
+          "text": " to contest the "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " without locking in the light-squared bishop."
         }
       ]
     },
@@ -575,7 +683,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las blancas abren el centro con "
+          "text": "Las blancas abren el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "move",
@@ -586,7 +703,16 @@
         },
         {
           "kind": "text",
-          "text": " y cambian su peón de d por el de "
+          "text": " y "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "cambian"
+        },
+        {
+          "kind": "text",
+          "text": " su peón de d por el de "
         },
         {
           "kind": "square",
@@ -594,13 +720,31 @@
         },
         {
           "kind": "text",
-          "text": ": juego de piezas libre y algo más de espacio."
+          "text": ": juego de piezas libre y algo más de "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "espacio"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "White opens the centre with "
+          "text": "White opens the "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "move",
@@ -611,7 +755,25 @@
         },
         {
           "kind": "text",
-          "text": " and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+          "text": " and "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "trades"
+        },
+        {
+          "kind": "text",
+          "text": " the d-pawn for Black’s e-pawn: free piece play and a little extra "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "space"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -765,7 +927,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las blancas entregan el peón de f para desviar el de "
+          "text": "Las blancas "
+        },
+        {
+          "kind": "term",
+          "id": "sacrifice",
+          "text": "entregan"
+        },
+        {
+          "kind": "text",
+          "text": " el peón de f para desviar el de "
         },
         {
           "kind": "square",
@@ -773,7 +944,16 @@
         },
         {
           "kind": "text",
-          "text": ", abrir la columna f y levantar un centro con "
+          "text": ", abrir la columna f y levantar un "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "square",
@@ -787,7 +967,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "White gives up the f-pawn to deflect the "
+          "text": "White "
+        },
+        {
+          "kind": "term",
+          "id": "sacrifice",
+          "text": "gives up"
+        },
+        {
+          "kind": "text",
+          "text": " the f-pawn to deflect the "
         },
         {
           "kind": "square",
@@ -795,7 +984,16 @@
         },
         {
           "kind": "text",
-          "text": " pawn, open the f-file and build a centre with "
+          "text": " pawn, open the f-file and build a "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "square",
@@ -867,7 +1065,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras colocan el alfil en fianchetto en "
+          "text": "Las negras colocan el alfil en "
+        },
+        {
+          "kind": "term",
+          "id": "fianchetto",
+          "text": "fianchetto"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -875,13 +1082,40 @@
         },
         {
           "kind": "text",
-          "text": " para presionar la gran diagonal. Contra el Ataque Yugoslavo se juega una carrera de ataques con enroques opuestos."
+          "text": " para presionar la "
+        },
+        {
+          "kind": "term",
+          "id": "long-diagonal",
+          "text": "gran diagonal"
+        },
+        {
+          "kind": "text",
+          "text": ". Contra el Ataque Yugoslavo se juega una carrera de ataques con "
+        },
+        {
+          "kind": "term",
+          "id": "castling",
+          "text": "enroques"
+        },
+        {
+          "kind": "text",
+          "text": " opuestos."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "Black fianchettoes the bishop on "
+          "text": "Black "
+        },
+        {
+          "kind": "term",
+          "id": "fianchetto",
+          "text": "fianchettoes"
+        },
+        {
+          "kind": "text",
+          "text": " the bishop on "
         },
         {
           "kind": "square",
@@ -889,7 +1123,25 @@
         },
         {
           "kind": "text",
-          "text": " to rake the long diagonal. Against the Yugoslav Attack the game becomes a race of attacks with opposite-side castling."
+          "text": " to rake the "
+        },
+        {
+          "kind": "term",
+          "id": "long-diagonal",
+          "text": "long diagonal"
+        },
+        {
+          "kind": "text",
+          "text": ". Against the Yugoslav Attack the game becomes a race of attacks with opposite-side "
+        },
+        {
+          "kind": "term",
+          "id": "castling",
+          "text": "castling"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -960,7 +1212,25 @@
         },
         {
           "kind": "text",
-          "text": " a cambio de tiempos, espacio y piezas activas. Dinámica y muy respetada al más alto nivel."
+          "text": " a cambio de "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tiempos"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "espacio"
+        },
+        {
+          "kind": "text",
+          "text": " y piezas activas. Dinámica y muy respetada al más alto nivel."
         }
       ],
       "en": [
@@ -982,7 +1252,25 @@
         },
         {
           "kind": "text",
-          "text": " pawn in return for time, space and active pieces. Dynamic and highly respected at top level."
+          "text": " pawn in return for "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "time"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "space"
+        },
+        {
+          "kind": "text",
+          "text": " and active pieces. Dynamic and highly respected at top level."
         }
       ]
     },
@@ -1056,7 +1344,16 @@
         },
         {
           "kind": "text",
-          "text": " para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas."
+          "text": " para mantener un "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " de peones y evitar las Sicilianas abiertas más teóricas."
         }
       ],
       "en": [
@@ -1081,7 +1378,16 @@
         },
         {
           "kind": "text",
-          "text": " to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+          "text": " to keep a pawn "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " and sidestep the most theoretical Open Sicilians."
         }
       ]
     },
@@ -1150,7 +1456,16 @@
         },
         {
           "kind": "text",
-          "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. Estructura sencilla y sólida, fácil de aprender."
+          "text": " en la primera jugada y recuperan el peón con la dama o con el caballo. "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "Estructura"
+        },
+        {
+          "kind": "text",
+          "text": " sencilla y sólida, fácil de aprender."
         }
       ],
       "en": [
@@ -1164,7 +1479,16 @@
         },
         {
           "kind": "text",
-          "text": " on move one and regains the pawn with the queen or the knight. A simple, solid structure that is easy to learn."
+          "text": " on move one and regains the pawn with the queen or the knight. A simple, solid "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "structure"
+        },
+        {
+          "kind": "text",
+          "text": " that is easy to learn."
         }
       ]
     },
@@ -1219,7 +1543,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras permiten un centro blanco amplio para socavarlo después con "
+          "text": "Las negras permiten un "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " blanco amplio para socavarlo después con "
         },
         {
           "kind": "move",
@@ -1255,7 +1588,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "Black allows a broad white centre and undermines it later with "
+          "text": "Black allows a broad white "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " and undermines it later with "
         },
         {
           "kind": "move",
@@ -1370,7 +1712,16 @@
         },
         {
           "kind": "text",
-          "text": " y romper con "
+          "text": " y "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-break",
+          "text": "romper"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "move",
@@ -1425,7 +1776,16 @@
         },
         {
           "kind": "text",
-          "text": " bishop and breaking with "
+          "text": " bishop and "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-break",
+          "text": "breaking"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "move",
@@ -1510,7 +1870,25 @@
         },
         {
           "kind": "text",
-          "text": " para ganar tiempo y atacar el centro con "
+          "text": " para ganar "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tiempo"
+        },
+        {
+          "kind": "text",
+          "text": " y atacar el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "move",
@@ -1546,7 +1924,25 @@
         },
         {
           "kind": "text",
-          "text": " pawn to gain time and hit the centre with "
+          "text": " pawn to gain "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "time"
+        },
+        {
+          "kind": "text",
+          "text": " and hit the "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "move",
@@ -1931,7 +2327,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras ceden el centro al principio para atacarlo después con "
+          "text": "Las negras ceden el "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " al principio para atacarlo después con "
         },
         {
           "kind": "move",
@@ -1953,13 +2358,31 @@
         },
         {
           "kind": "text",
-          "text": ". En las líneas cerradas cada bando ataca en un flanco distinto."
+          "text": ". En las líneas cerradas cada bando ataca en un "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "flanco"
+        },
+        {
+          "kind": "text",
+          "text": " distinto."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "Black concedes the centre early, planning to strike at it with "
+          "text": "Black concedes the "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " early, planning to strike at it with "
         },
         {
           "kind": "move",
@@ -1981,7 +2404,16 @@
         },
         {
           "kind": "text",
-          "text": ". In the closed lines each side attacks on a different wing."
+          "text": ". In the closed lines each side attacks on a different "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "wing"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -2047,7 +2479,16 @@
         },
         {
           "kind": "text",
-          "text": " las negras clavan el caballo de "
+          "text": " las negras "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "clavan"
+        },
+        {
+          "kind": "text",
+          "text": " el caballo de "
         },
         {
           "kind": "square",
@@ -2063,7 +2504,25 @@
         },
         {
           "kind": "text",
-          "text": ", y a menudo cambian el alfil por el caballo para dañar la estructura blanca."
+          "text": ", y a menudo "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "cambian"
+        },
+        {
+          "kind": "text",
+          "text": " el alfil por el caballo para dañar la "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "estructura"
+        },
+        {
+          "kind": "text",
+          "text": " blanca."
         }
       ],
       "en": [
@@ -2080,7 +2539,16 @@
         },
         {
           "kind": "text",
-          "text": " Black pins the "
+          "text": " Black "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "pins"
+        },
+        {
+          "kind": "text",
+          "text": " the "
         },
         {
           "kind": "square",
@@ -2096,7 +2564,25 @@
         },
         {
           "kind": "text",
-          "text": ", often trading bishop for knight to damage White's pawn structure."
+          "text": ", often "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "trading"
+        },
+        {
+          "kind": "text",
+          "text": " bishop for knight to damage White's "
+        },
+        {
+          "kind": "term",
+          "id": "pawn-structure",
+          "text": "pawn structure"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -2154,7 +2640,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras permiten que las blancas levanten un gran centro con "
+          "text": "Las negras permiten que las blancas levanten un gran "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centro"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "square",
@@ -2187,7 +2682,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "Black lets White build a big centre with "
+          "text": "Black lets White build a big "
+        },
+        {
+          "kind": "term",
+          "id": "centre",
+          "text": "centre"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "square",
@@ -2277,7 +2781,16 @@
         },
         {
           "kind": "text",
-          "text": " desde el flanco con "
+          "text": " desde el "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "flanco"
+        },
+        {
+          "kind": "text",
+          "text": " con "
         },
         {
           "kind": "move",
@@ -2288,7 +2801,16 @@
         },
         {
           "kind": "text",
-          "text": ", a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
+          "text": ", a menudo con "
+        },
+        {
+          "kind": "term",
+          "id": "fianchetto",
+          "text": "fianchetto"
+        },
+        {
+          "kind": "text",
+          "text": " del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
         }
       ],
       "en": [
@@ -2302,7 +2824,16 @@
         },
         {
           "kind": "text",
-          "text": " from the flank with "
+          "text": " from the "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "flank"
+        },
+        {
+          "kind": "text",
+          "text": " with "
         },
         {
           "kind": "move",
@@ -2313,7 +2844,16 @@
         },
         {
           "kind": "text",
-          "text": ", often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+          "text": ", often with a kingside "
+        },
+        {
+          "kind": "term",
+          "id": "fianchetto",
+          "text": "fianchetto"
+        },
+        {
+          "kind": "text",
+          "text": ". Flexible positional play that can transpose into many openings."
         }
       ]
     },

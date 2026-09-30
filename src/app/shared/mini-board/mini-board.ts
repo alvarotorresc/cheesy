@@ -19,6 +19,11 @@ interface Placed {
   readonly transform: string;
 }
 
+export interface MiniArrow {
+  readonly from: SquareName;
+  readonly to: SquareName;
+}
+
 /** Percentages of the board (0 to 7 squares from the top left) where a square sits. */
 const position = (square: SquareName, flipped: boolean): { x: number; y: number } => {
   const file = square.charCodeAt(0) - 97;
@@ -62,6 +67,9 @@ export class MiniBoard {
   /** Highlights a whole rank (1 to 8), for the About page. */
   readonly highlightRank = input<number | undefined>(undefined);
 
+  /** Arrows drawn over the pieces (the glossary examples). */
+  readonly arrows = input<readonly MiniArrow[]>([]);
+
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
 
@@ -94,6 +102,14 @@ export class MiniBoard {
 
   protected readonly ringSquares = computed(() =>
     this.rings().map((square) => translate(square, this.flipped())),
+  );
+
+  protected readonly arrowLines = computed(() =>
+    this.arrows().map((arrow) => {
+      const from = position(arrow.from, this.flipped());
+      const to = position(arrow.to, this.flipped());
+      return { x1: from.x + 0.5, y1: from.y + 0.5, x2: to.x + 0.5, y2: to.y + 0.5 };
+    }),
   );
 
   protected readonly rankTransform = computed(() => {

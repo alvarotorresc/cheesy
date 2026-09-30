@@ -3,6 +3,7 @@ import { isContentId } from './content-id';
 import type {
   CuratedPosition,
   EndgamePosition,
+  GlossaryTerm,
   OpeningSummary,
   OpeningTree,
 } from './content.types';
@@ -66,3 +67,13 @@ export const CONTENT_LOADERS = new InjectionToken<ContentLoaders>('CONTENT_LOADE
   providedIn: 'root',
   factory: () => createFetchContentLoaders(inject(DOCUMENT).baseURI),
 });
+
+/** Loads the glossary. A token of its own: the glossary is fetched only when a term is opened. */
+export const createFetchGlossaryLoader =
+  (baseUrl: string) => (): Promise<readonly GlossaryTerm[]> =>
+    download(new URL(`${CONTENT_PATH}glossary.json`, baseUrl), (data) => isListOf(data, 'id'));
+
+export const GLOSSARY_LOADER = new InjectionToken<() => Promise<readonly GlossaryTerm[]>>(
+  'GLOSSARY_LOADER',
+  { providedIn: 'root', factory: () => createFetchGlossaryLoader(inject(DOCUMENT).baseURI) },
+);

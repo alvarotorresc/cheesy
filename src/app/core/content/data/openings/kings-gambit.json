@@ -10,7 +10,16 @@
     "es": [
       {
         "kind": "text",
-        "text": "Las blancas entregan el peón de f para desviar el de "
+        "text": "Las blancas "
+      },
+      {
+        "kind": "term",
+        "id": "sacrifice",
+        "text": "entregan"
+      },
+      {
+        "kind": "text",
+        "text": " el peón de f para desviar el de "
       },
       {
         "kind": "square",
@@ -18,7 +27,16 @@
       },
       {
         "kind": "text",
-        "text": ", abrir la columna f y levantar un centro con "
+        "text": ", abrir la columna f y levantar un "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " con "
       },
       {
         "kind": "square",
@@ -32,7 +50,16 @@
     "en": [
       {
         "kind": "text",
-        "text": "White gives up the f-pawn to deflect the "
+        "text": "White "
+      },
+      {
+        "kind": "term",
+        "id": "sacrifice",
+        "text": "gives up"
+      },
+      {
+        "kind": "text",
+        "text": " the f-pawn to deflect the "
       },
       {
         "kind": "square",
@@ -40,7 +67,16 @@
       },
       {
         "kind": "text",
-        "text": " pawn, open the f-file and build a centre with "
+        "text": " pawn, open the f-file and build a "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " with "
       },
       {
         "kind": "square",
@@ -70,8 +106,13 @@
               "comment": {
                 "es": [
                   {
+                    "kind": "term",
+                    "id": "gambit",
+                    "text": "Gambito"
+                  },
+                  {
                     "kind": "text",
-                    "text": "Gambito: se ofrece el peón de f para desviar el peón de "
+                    "text": ": se ofrece el peón de f para desviar el peón de "
                   },
                   {
                     "kind": "square",
@@ -85,7 +126,16 @@
                 "en": [
                   {
                     "kind": "text",
-                    "text": "A gambit: White offers the f-pawn to deflect the "
+                    "text": "A "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "gambit",
+                    "text": "gambit"
+                  },
+                  {
+                    "kind": "text",
+                    "text": ": White offers the f-pawn to deflect the "
                   },
                   {
                     "kind": "square",
@@ -109,13 +159,31 @@
                     "es": [
                       {
                         "kind": "text",
-                        "text": "Las negras aceptan el peón y deben decidir si lo defienden o lo devuelven para desarrollarse."
+                        "text": "Las negras aceptan el peón y deben decidir si lo defienden o lo devuelven para "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "development",
+                        "text": "desarrollarse"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
                       }
                     ],
                     "en": [
                       {
                         "kind": "text",
-                        "text": "Black takes the pawn and must decide whether to hold it or give it back for development."
+                        "text": "Black takes the pawn and must decide whether to hold it or give it back for "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "development",
+                        "text": "development"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
                       }
                     ]
                   },
@@ -211,13 +279,49 @@
                             "es": [
                               {
                                 "kind": "text",
-                                "text": "Las negras golpean en el centro para abrir líneas y desarrollarse deprisa."
+                                "text": "Las negras golpean en el "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centro"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " para abrir líneas y "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "desarrollarse"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " deprisa."
                               }
                             ],
                             "en": [
                               {
                                 "kind": "text",
-                                "text": "Black strikes in the centre to open lines and develop quickly."
+                                "text": "Black strikes in the "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centre"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " to open lines and "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "development",
+                                "text": "develop"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " quickly."
                               }
                             ]
                           },
@@ -240,8 +344,22 @@
                                       "comment": {
                                         "es": [
                                           {
+                                            "kind": "term",
+                                            "id": "check",
+                                            "text": "Jaque"
+                                          },
+                                          {
                                             "kind": "text",
-                                            "text": "Jaque intermedio que complica la recuperación del peón de "
+                                            "text": " "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "intermediate-move",
+                                            "text": "intermedio"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " que complica la recuperación del peón de "
                                           },
                                           {
                                             "kind": "square",
@@ -255,7 +373,25 @@
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "An in-between check that makes it harder for Black to regain the "
+                                            "text": "An "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "intermediate-move",
+                                            "text": "in-between"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "check",
+                                            "text": "check"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " that makes it harder for Black to regain the "
                                           },
                                           {
                                             "kind": "square",
@@ -303,7 +439,16 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " y centralizan el caballo; las blancas buscan actividad a cambio."
+                                                                "text": " y "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "centre",
+                                                                "text": "centralizan"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " el caballo; las blancas buscan actividad a cambio."
                                                               }
                                                             ],
                                                             "en": [
@@ -317,7 +462,16 @@
                                                               },
                                                               {
                                                                 "kind": "text",
-                                                                "text": " pawn and centralises the knight; White seeks activity in return."
+                                                                "text": " pawn and "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "centre",
+                                                                "text": "centralises"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " the knight; White seeks activity in return."
                                                               }
                                                             ]
                                                           },
@@ -329,7 +483,16 @@
                                                                 "es": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "Las blancas enrocan: la torre de "
+                                                                    "text": "Las blancas "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "enrocan"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": ": la torre de "
                                                                   },
                                                                   {
                                                                     "kind": "square",
@@ -351,7 +514,16 @@
                                                                 "en": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "White castles: the "
+                                                                    "text": "White "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "castling",
+                                                                    "text": "castles"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": ": the "
                                                                   },
                                                                   {
                                                                     "kind": "square",
@@ -473,7 +645,16 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "Ataca la cadena "
+                                    "text": "Ataca la "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "pawn-chain",
+                                    "text": "cadena"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " "
                                   },
                                   {
                                     "kind": "square",
@@ -533,7 +714,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " chain before Black can consolidate with "
+                                    "text": " "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "pawn-chain",
+                                    "text": "chain"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " before Black can consolidate with "
                                   },
                                   {
                                     "kind": "move",
@@ -573,7 +763,16 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "El caballo salta al centro; las blancas atacarán "
+                                            "text": "El caballo salta al "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "centro"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; las blancas atacarán "
                                           },
                                           {
                                             "kind": "square",
@@ -595,7 +794,16 @@
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "The knight jumps to the centre; White will go after "
+                                            "text": "The knight jumps to the "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "centre",
+                                            "text": "centre"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": "; White will go after "
                                           },
                                           {
                                             "kind": "square",
@@ -1036,13 +1244,31 @@
                     "es": [
                       {
                         "kind": "text",
-                        "text": "Las negras rehúsan el peón y contraatacan en el centro."
+                        "text": "Las negras rehúsan el peón y contraatacan en el "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "centre",
+                        "text": "centro"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
                       }
                     ],
                     "en": [
                       {
                         "kind": "text",
-                        "text": "Black declines the pawn and hits back in the centre."
+                        "text": "Black declines the pawn and hits back in the "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "centre",
+                        "text": "centre"
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
                       }
                     ]
                   },
@@ -1146,7 +1372,16 @@
                       },
                       {
                         "kind": "text",
-                        "text": " e impide el enroque corto blanco."
+                        "text": " e impide el "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "castling",
+                        "text": "enroque"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " corto blanco."
                       }
                     ],
                     "en": [
@@ -1160,7 +1395,16 @@
                       },
                       {
                         "kind": "text",
-                        "text": " and stops White from castling short."
+                        "text": " and stops White from "
+                      },
+                      {
+                        "kind": "term",
+                        "id": "castling",
+                        "text": "castling"
+                      },
+                      {
+                        "kind": "text",
+                        "text": " short."
                       }
                     ]
                   },
@@ -1185,7 +1429,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " para expulsar al alfil y levantar un centro fuerte."
+                                    "text": " para expulsar al alfil y levantar un "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "centro"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " fuerte."
                                   }
                                 ],
                                 "en": [
@@ -1199,7 +1452,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " to kick the bishop and build a strong centre."
+                                    "text": " to kick the bishop and build a strong "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "centre"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ]
                               },

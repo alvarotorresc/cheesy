@@ -16,7 +16,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Las negras se han llevado la dama, pero sus casillas alrededor del rey están indefensas. El alfil da jaque protegido por el caballo de "
+          "text": "Las negras se han llevado la dama, pero sus casillas alrededor del rey están indefensas. El alfil da "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " protegido por el caballo de "
         },
         {
           "kind": "square",
@@ -46,7 +55,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "Black has won the queen, but the squares around the king are undefended. The bishop checks with the support of the "
+          "text": "Black has won the queen, but the squares around the king are undefended. The bishop "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checks"
+        },
+        {
+          "kind": "text",
+          "text": " with the support of the "
         },
         {
           "kind": "square",
@@ -100,7 +118,25 @@
       "es": [
         {
           "kind": "text",
-          "text": "La dama se entrega para atraer al rey a "
+          "text": "La "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "dama se entrega"
+        },
+        {
+          "kind": "text",
+          "text": " para "
+        },
+        {
+          "kind": "term",
+          "id": "attraction",
+          "text": "atraer"
+        },
+        {
+          "kind": "text",
+          "text": " al rey a "
         },
         {
           "kind": "square",
@@ -126,7 +162,16 @@
         },
         {
           "kind": "text",
-          "text": " da jaque doble (alfil y torre) y el rey no tiene defensa: si "
+          "text": " da "
+        },
+        {
+          "kind": "term",
+          "id": "double-check",
+          "text": "jaque doble"
+        },
+        {
+          "kind": "text",
+          "text": " (alfil y torre) y el rey no tiene defensa: si "
         },
         {
           "kind": "move",
@@ -147,7 +192,16 @@
         },
         {
           "kind": "text",
-          "text": " es mate; si "
+          "text": " es "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": "; si "
         },
         {
           "kind": "move",
@@ -174,7 +228,25 @@
       "en": [
         {
           "kind": "text",
-          "text": "The queen is given up to drag the king to "
+          "text": "The "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen is given up"
+        },
+        {
+          "kind": "text",
+          "text": " to "
+        },
+        {
+          "kind": "term",
+          "id": "attraction",
+          "text": "drag"
+        },
+        {
+          "kind": "text",
+          "text": " the king to "
         },
         {
           "kind": "square",
@@ -200,7 +272,16 @@
         },
         {
           "kind": "text",
-          "text": " is a double check (bishop and rook) with no defence: after "
+          "text": " is a "
+        },
+        {
+          "kind": "term",
+          "id": "double-check",
+          "text": "double check"
+        },
+        {
+          "kind": "text",
+          "text": " (bishop and rook) with no defence: after "
         },
         {
           "kind": "move",
@@ -221,7 +302,16 @@
         },
         {
           "kind": "text",
-          "text": " is mate; after "
+          "text": " is "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": "; after "
         },
         {
           "kind": "move",
@@ -286,7 +376,16 @@
         },
         {
           "kind": "text",
-          "text": ". La dama se sacrifica en "
+          "text": ". La "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "dama se sacrifica"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -294,7 +393,34 @@
         },
         {
           "kind": "text",
-          "text": " para desviarlo y la torre da mate en la octava fila, apoyada por el alfil de "
+          "text": " para "
+        },
+        {
+          "kind": "term",
+          "id": "deflection",
+          "text": "desviarlo"
+        },
+        {
+          "kind": "text",
+          "text": " y la torre da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " en la "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "octava fila"
+        },
+        {
+          "kind": "text",
+          "text": ", apoyada por el alfil de "
         },
         {
           "kind": "square",
@@ -324,7 +450,16 @@
         },
         {
           "kind": "text",
-          "text": ". The queen sacrifice on "
+          "text": ". The "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen sacrifice"
+        },
+        {
+          "kind": "text",
+          "text": " on "
         },
         {
           "kind": "square",
@@ -332,7 +467,34 @@
         },
         {
           "kind": "text",
-          "text": " deflects it and the rook mates on the back rank, supported by the "
+          "text": " "
+        },
+        {
+          "kind": "term",
+          "id": "deflection",
+          "text": "deflects"
+        },
+        {
+          "kind": "text",
+          "text": " it and the rook "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mates"
+        },
+        {
+          "kind": "text",
+          "text": " on the "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "back rank"
+        },
+        {
+          "kind": "text",
+          "text": ", supported by the "
         },
         {
           "kind": "square",
@@ -373,7 +535,16 @@
         },
         {
           "kind": "text",
-          "text": " está clavado por la dama de "
+          "text": " está "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "clavado"
+        },
+        {
+          "kind": "text",
+          "text": " por la dama de "
         },
         {
           "kind": "square",
@@ -389,7 +560,16 @@
         },
         {
           "kind": "text",
-          "text": " con jaque y nadie puede capturarlo: el rey no tiene casillas libres."
+          "text": " con "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " y nadie puede capturarlo: el rey no tiene casillas libres."
         }
       ],
       "en": [
@@ -403,7 +583,16 @@
         },
         {
           "kind": "text",
-          "text": " pawn is pinned by the queen on "
+          "text": " pawn is "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "pinned"
+        },
+        {
+          "kind": "text",
+          "text": " by the queen on "
         },
         {
           "kind": "square",
@@ -419,7 +608,16 @@
         },
         {
           "kind": "text",
-          "text": " with check and nothing can take it: the king has no free squares."
+          "text": " with "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": " and nothing can take it: the king has no free squares."
         }
       ]
     },
@@ -446,7 +644,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "La dama se ofrece en "
+          "text": "La "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "dama se ofrece"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -454,7 +661,16 @@
         },
         {
           "kind": "text",
-          "text": ", protegida por el caballo, para que la torre tape la última casilla libre del rey. El caballo da mate en "
+          "text": ", protegida por el caballo, para que la torre tape la última casilla libre del rey. El caballo da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -462,13 +678,31 @@
         },
         {
           "kind": "text",
-          "text": ": el rey queda ahogado por sus propias piezas."
+          "text": ": el rey queda "
+        },
+        {
+          "kind": "term",
+          "id": "smothered-mate",
+          "text": "ahogado"
+        },
+        {
+          "kind": "text",
+          "text": " por sus propias piezas."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The queen is offered on "
+          "text": "The "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen is offered"
+        },
+        {
+          "kind": "text",
+          "text": " on "
         },
         {
           "kind": "square",
@@ -476,7 +710,16 @@
         },
         {
           "kind": "text",
-          "text": ", protected by the knight, so that the rook blocks the king’s last free square. The knight mates on "
+          "text": ", protected by the knight, so that the rook blocks the king’s last free square. The knight "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mates"
+        },
+        {
+          "kind": "text",
+          "text": " on "
         },
         {
           "kind": "square",
@@ -484,7 +727,16 @@
         },
         {
           "kind": "text",
-          "text": ": the king is smothered by its own pieces."
+          "text": ": the king is "
+        },
+        {
+          "kind": "term",
+          "id": "smothered-mate",
+          "text": "smothered"
+        },
+        {
+          "kind": "text",
+          "text": " by its own pieces."
         }
       ]
     },
@@ -516,7 +768,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Tras el sacrificio de dama, "
+          "text": "Tras el "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "sacrificio de dama"
+        },
+        {
+          "kind": "text",
+          "text": ", "
         },
         {
           "kind": "move",
@@ -526,7 +787,16 @@
         },
         {
           "kind": "text",
-          "text": " descubre el jaque de la torre de "
+          "text": " "
+        },
+        {
+          "kind": "term",
+          "id": "discovered-attack",
+          "text": "descubre"
+        },
+        {
+          "kind": "text",
+          "text": " el jaque de la torre de "
         },
         {
           "kind": "square",
@@ -534,7 +804,16 @@
         },
         {
           "kind": "text",
-          "text": ": jaque doble. Los dos alfiles y el peón de "
+          "text": ": "
+        },
+        {
+          "kind": "term",
+          "id": "double-check",
+          "text": "jaque doble"
+        },
+        {
+          "kind": "text",
+          "text": ". Los dos alfiles y el peón de "
         },
         {
           "kind": "square",
@@ -542,13 +821,31 @@
         },
         {
           "kind": "text",
-          "text": " cierran la red de mate alrededor del rey negro."
+          "text": " cierran la red de "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " alrededor del rey negro."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "After the queen sacrifice, "
+          "text": "After the "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen sacrifice"
+        },
+        {
+          "kind": "text",
+          "text": ", "
         },
         {
           "kind": "move",
@@ -558,7 +855,16 @@
         },
         {
           "kind": "text",
-          "text": " uncovers the "
+          "text": " "
+        },
+        {
+          "kind": "term",
+          "id": "discovered-attack",
+          "text": "uncovers"
+        },
+        {
+          "kind": "text",
+          "text": " the "
         },
         {
           "kind": "square",
@@ -566,7 +872,16 @@
         },
         {
           "kind": "text",
-          "text": " rook: a double check. The two bishops and the "
+          "text": " rook: a "
+        },
+        {
+          "kind": "term",
+          "id": "double-check",
+          "text": "double check"
+        },
+        {
+          "kind": "text",
+          "text": ". The two bishops and the "
         },
         {
           "kind": "square",
@@ -574,7 +889,16 @@
         },
         {
           "kind": "text",
-          "text": " pawn close the mating net around the black king."
+          "text": " pawn close the "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mating"
+        },
+        {
+          "kind": "text",
+          "text": " net around the black king."
         }
       ]
     },
@@ -602,7 +926,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "La dama se sacrifica en "
+          "text": "La "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "dama se sacrifica"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -626,13 +959,40 @@
         },
         {
           "kind": "text",
-          "text": ". Los dos alfiles, cruzados en diagonales, dan mate al rey enrocado largo, bloqueado por su propia torre y caballo."
+          "text": ". Los dos alfiles, cruzados en diagonales, dan "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " al rey "
+        },
+        {
+          "kind": "term",
+          "id": "castling",
+          "text": "enrocado"
+        },
+        {
+          "kind": "text",
+          "text": " largo, bloqueado por su propia torre y caballo."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The queen sacrifice on "
+          "text": "The "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen sacrifice"
+        },
+        {
+          "kind": "text",
+          "text": " on "
         },
         {
           "kind": "square",
@@ -656,7 +1016,25 @@
         },
         {
           "kind": "text",
-          "text": " diagonal. The two bishops on crossing diagonals mate the long-castled king, which is boxed in by its own rook and knight."
+          "text": " diagonal. The two bishops on crossing diagonals "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " the "
+        },
+        {
+          "kind": "term",
+          "id": "castling",
+          "text": "long-castled"
+        },
+        {
+          "kind": "text",
+          "text": " king, which is boxed in by its own rook and knight."
         }
       ]
     },
@@ -690,7 +1068,34 @@
         },
         {
           "kind": "text",
-          "text": ": tras el cambio, la torre da mate en la octava."
+          "text": ": tras el "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "cambio"
+        },
+        {
+          "kind": "text",
+          "text": ", la torre da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " en la "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "octava"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ],
       "en": [
@@ -704,7 +1109,34 @@
         },
         {
           "kind": "text",
-          "text": ": after the exchange, the rook mates on the back rank."
+          "text": ": after the "
+        },
+        {
+          "kind": "term",
+          "id": "exchange",
+          "text": "exchange"
+        },
+        {
+          "kind": "text",
+          "text": ", the rook "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mates"
+        },
+        {
+          "kind": "text",
+          "text": " on the "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "back rank"
+        },
+        {
+          "kind": "text",
+          "text": "."
         }
       ]
     },
@@ -761,7 +1193,16 @@
         },
         {
           "kind": "text",
-          "text": " tapa la otra salida del rey. La dama se sacrifica en "
+          "text": " tapa la otra salida del rey. La "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "dama se sacrifica"
+        },
+        {
+          "kind": "text",
+          "text": " en "
         },
         {
           "kind": "square",
@@ -769,7 +1210,16 @@
         },
         {
           "kind": "text",
-          "text": " para abrir la columna h y la torre da mate desde "
+          "text": " para abrir la columna h y la torre da "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mate"
+        },
+        {
+          "kind": "text",
+          "text": " desde "
         },
         {
           "kind": "square",
@@ -815,7 +1265,16 @@
         },
         {
           "kind": "text",
-          "text": " pawn blocks the king’s other exit. The queen sacrifice on "
+          "text": " pawn blocks the king’s other exit. The "
+        },
+        {
+          "kind": "term",
+          "id": "queen-sacrifice",
+          "text": "queen sacrifice"
+        },
+        {
+          "kind": "text",
+          "text": " on "
         },
         {
           "kind": "square",
@@ -823,7 +1282,16 @@
         },
         {
           "kind": "text",
-          "text": " opens the h-file and the rook mates from "
+          "text": " opens the h-file and the rook "
+        },
+        {
+          "kind": "term",
+          "id": "checkmate",
+          "text": "mates"
+        },
+        {
+          "kind": "text",
+          "text": " from "
         },
         {
           "kind": "square",
@@ -967,7 +1435,16 @@
         },
         {
           "kind": "text",
-          "text": " con jaque y ataca a la vez al rey y a la dama. Tras mover el rey, el caballo captura la dama."
+          "text": " con "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " y ataca a la vez al rey y a la dama. Tras mover el rey, el caballo captura la dama."
         }
       ],
       "en": [
@@ -989,7 +1466,16 @@
         },
         {
           "kind": "text",
-          "text": " with check, hitting king and queen at once. After the king moves, the knight takes the queen."
+          "text": " with "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": ", hitting king and queen at once. After the king moves, the knight takes the queen."
         }
       ]
     },
@@ -1013,7 +1499,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "La torre ocupa la columna e y clava la dama negra contra su rey: la dama no puede apartarse. Las negras pierden la dama a cambio de la torre, porque "
+          "text": "La torre ocupa la columna e y "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "clava"
+        },
+        {
+          "kind": "text",
+          "text": " la dama negra contra su rey: la dama no puede apartarse. Las negras pierden la dama a cambio de la torre, porque "
         },
         {
           "kind": "square",
@@ -1027,7 +1522,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "The rook takes the e-file and pins the black queen to its king: the queen cannot step aside. Black loses the queen for the rook, because "
+          "text": "The rook takes the e-file and "
+        },
+        {
+          "kind": "term",
+          "id": "pin",
+          "text": "pins"
+        },
+        {
+          "kind": "text",
+          "text": " the black queen to its king: the queen cannot step aside. Black loses the queen for the rook, because "
         },
         {
           "kind": "square",
@@ -1058,7 +1562,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "El rey negro y su dama están en la misma fila. La torre da jaque desde "
+          "text": "El rey negro y su dama están en la misma fila. La torre da "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " desde "
         },
         {
           "kind": "square",
@@ -1072,7 +1585,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "The black king and queen stand on the same rank. The rook checks from "
+          "text": "The black king and queen stand on the same rank. The rook "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checks"
+        },
+        {
+          "kind": "text",
+          "text": " from "
         },
         {
           "kind": "square",

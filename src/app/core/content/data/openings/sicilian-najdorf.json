@@ -125,7 +125,16 @@
               },
               {
                 "kind": "text",
-                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+                "text": " con un peón "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "lateral"
+              },
+              {
+                "kind": "text",
+                "text": " y crea desequilibrio desde la primera jugada."
               }
             ],
             "en": [
@@ -139,7 +148,16 @@
               },
               {
                 "kind": "text",
-                "text": " with a flank pawn and creates imbalance from move one."
+                "text": " with a "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "flank"
+              },
+              {
+                "kind": "text",
+                "text": " pawn and creates imbalance from move one."
               }
             ]
           },
@@ -162,14 +180,60 @@
                           "comment": {
                             "es": [
                               {
+                                "kind": "term",
+                                "id": "exchange",
+                                "text": "Cambia"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Cambia un peón lateral por uno central: las negras tendrán mayoría central."
+                                "text": " un peón "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "flank",
+                                "text": "lateral"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " por uno "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "central"
+                              },
+                              {
+                                "kind": "text",
+                                "text": ": las negras tendrán mayoría central."
                               }
                             ],
                             "en": [
                               {
+                                "kind": "term",
+                                "id": "exchange",
+                                "text": "Trades"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Trades a flank pawn for a centre pawn: Black gets the central majority."
+                                "text": " a "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "flank",
+                                "text": "flank"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " pawn for a "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centre"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " pawn: Black gets the central majority."
                               }
                             ]
                           },
@@ -501,13 +565,31 @@
                                                                                     "es": [
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": "Carrera de ataques: las blancas avanzan en el flanco de rey y las negras contraatacan en el de dama."
+                                                                                        "text": "Carrera de ataques: las blancas avanzan en el "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "flank",
+                                                                                        "text": "flanco"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " de rey y las negras contraatacan en el de dama."
                                                                                       }
                                                                                     ],
                                                                                     "en": [
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": "A race of attacks: White storms the kingside while Black counterattacks on the queenside."
+                                                                                        "text": "A race of attacks: White storms the "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "flank",
+                                                                                        "text": "kingside"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": " while Black counterattacks on the queenside."
                                                                                       }
                                                                                     ]
                                                                                   },
@@ -622,7 +704,16 @@
                                                   },
                                                   {
                                                     "kind": "text",
-                                                    "text": " para atacar en el flanco de rey."
+                                                    "text": " para atacar en el "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "flank",
+                                                    "text": "flanco"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " de rey."
                                                   }
                                                 ],
                                                 "en": [
@@ -672,7 +763,16 @@
                                                   },
                                                   {
                                                     "kind": "text",
-                                                    "text": " to attack on the kingside."
+                                                    "text": " to attack on the "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "flank",
+                                                    "text": "kingside"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "."
                                                   }
                                                 ]
                                               },
@@ -683,7 +783,16 @@
                                                     "es": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Gana espacio y expulsa al caballo de "
+                                                        "text": "Gana "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "space",
+                                                        "text": "espacio"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " y expulsa al caballo de "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -705,7 +814,16 @@
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Gains space and kicks the "
+                                                        "text": "Gains "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "space",
+                                                        "text": "space"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " and kicks the "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -798,14 +916,46 @@
                                               "comment": {
                                                 "es": [
                                                   {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "Desarrollo"
+                                                  },
+                                                  {
                                                     "kind": "text",
-                                                    "text": "Desarrollo tranquilo y enroque corto: juego posicional."
+                                                    "text": " tranquilo y "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "castling",
+                                                    "text": "enroque"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " corto: juego posicional."
                                                   }
                                                 ],
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Quiet development and short castling: a positional approach."
+                                                    "text": "Quiet "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "development"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and short "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "castling",
+                                                    "text": "castling"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": ": a positional approach."
                                                   }
                                                 ]
                                               },
@@ -816,7 +966,16 @@
                                                     "es": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Contra un plan tranquilo, las negras ocupan el centro y vigilan "
+                                                        "text": "Contra un plan tranquilo, las negras ocupan el "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "centro"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " y vigilan "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -830,7 +989,16 @@
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Against a quiet setup Black claims the centre and keeps an eye on "
+                                                        "text": "Against a quiet setup Black claims the "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "centre"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " and keeps an eye on "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -1013,7 +1181,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " gana tiempo sobre él."
+                                                        "text": " gana "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "tempo",
+                                                        "text": "tiempo"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " sobre él."
                                                       }
                                                     ],
                                                     "en": [
@@ -1030,7 +1207,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " then gains time against it."
+                                                        "text": " then gains "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "tempo",
+                                                        "text": "time"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " against it."
                                                       }
                                                     ]
                                                   },

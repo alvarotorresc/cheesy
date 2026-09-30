@@ -21,7 +21,16 @@
       },
       {
         "kind": "text",
-        "text": " las negras clavan el caballo de "
+        "text": " las negras "
+      },
+      {
+        "kind": "term",
+        "id": "pin",
+        "text": "clavan"
+      },
+      {
+        "kind": "text",
+        "text": " el caballo de "
       },
       {
         "kind": "square",
@@ -37,7 +46,25 @@
       },
       {
         "kind": "text",
-        "text": ", y a menudo cambian el alfil por el caballo para dañar la estructura blanca."
+        "text": ", y a menudo "
+      },
+      {
+        "kind": "term",
+        "id": "exchange",
+        "text": "cambian"
+      },
+      {
+        "kind": "text",
+        "text": " el alfil por el caballo para dañar la "
+      },
+      {
+        "kind": "term",
+        "id": "pawn-structure",
+        "text": "estructura"
+      },
+      {
+        "kind": "text",
+        "text": " blanca."
       }
     ],
     "en": [
@@ -54,7 +81,16 @@
       },
       {
         "kind": "text",
-        "text": " Black pins the "
+        "text": " Black "
+      },
+      {
+        "kind": "term",
+        "id": "pin",
+        "text": "pins"
+      },
+      {
+        "kind": "text",
+        "text": " the "
       },
       {
         "kind": "square",
@@ -70,7 +106,25 @@
       },
       {
         "kind": "text",
-        "text": ", often trading bishop for knight to damage White's pawn structure."
+        "text": ", often "
+      },
+      {
+        "kind": "term",
+        "id": "exchange",
+        "text": "trading"
+      },
+      {
+        "kind": "text",
+        "text": " bishop for knight to damage White's "
+      },
+      {
+        "kind": "term",
+        "id": "pawn-structure",
+        "text": "pawn structure"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ]
   },
@@ -104,8 +158,13 @@
                           "comment": {
                             "es": [
                               {
+                                "kind": "term",
+                                "id": "pin",
+                                "text": "Clava"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Clava el caballo de "
+                                "text": " el caballo de "
                               },
                               {
                                 "kind": "square",
@@ -121,13 +180,27 @@
                               },
                               {
                                 "kind": "text",
-                                "text": "; las negras están dispuestas a ceder el alfil a cambio de dañar la estructura blanca."
+                                "text": "; las negras están dispuestas a ceder el alfil a cambio de dañar la "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pawn-structure",
+                                "text": "estructura"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " blanca."
                               }
                             ],
                             "en": [
                               {
+                                "kind": "term",
+                                "id": "pin",
+                                "text": "Pins"
+                              },
+                              {
                                 "kind": "text",
-                                "text": "Pins the "
+                                "text": " the "
                               },
                               {
                                 "kind": "square",
@@ -143,7 +216,16 @@
                               },
                               {
                                 "kind": "text",
-                                "text": "; Black is ready to give up the bishop to damage White's structure."
+                                "text": "; Black is ready to give up the bishop to damage White's "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "pawn-structure",
+                                "text": "structure"
+                              },
+                              {
+                                "kind": "text",
+                                "text": "."
                               }
                             ]
                           },
@@ -158,14 +240,46 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "Desarrollo"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Desarrollo sólido: las blancas completan el flanco de rey antes de decidir su plan."
+                                    "text": " sólido: las blancas completan el "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "flanco"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " de rey antes de decidir su plan."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Solid development: White completes the kingside before choosing a plan."
+                                    "text": "Solid "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "development"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": White completes the "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "kingside"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " before choosing a plan."
                                   }
                                 ]
                               },
@@ -197,13 +311,31 @@
                                                     "es": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Las negras golpean en el centro con ambos peones."
+                                                        "text": "Las negras golpean en el "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "centro"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " con ambos peones."
                                                       }
                                                     ],
                                                     "en": [
                                                       {
                                                         "kind": "text",
-                                                        "text": "Black strikes in the centre with both pawns."
+                                                        "text": "Black strikes in the "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "centre",
+                                                        "text": "centre"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " with both pawns."
                                                       }
                                                     ]
                                                   },
@@ -235,13 +367,67 @@
                                                                         "es": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "Las blancas obtienen la pareja de alfiles y un centro de peones a cambio de los peones doblados en c."
+                                                                            "text": "Las blancas obtienen la "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "bishop-pair",
+                                                                            "text": "pareja de alfiles"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " y un "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "centre",
+                                                                            "text": "centro"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de peones a cambio de los "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "doubled-pawns",
+                                                                            "text": "peones doblados"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " en c."
                                                                           }
                                                                         ],
                                                                         "en": [
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": "White gets the bishop pair and a pawn centre in exchange for doubled c-pawns."
+                                                                            "text": "White gets the "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "bishop-pair",
+                                                                            "text": "bishop pair"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " and a pawn "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "centre",
+                                                                            "text": "centre"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " in exchange for "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "doubled-pawns",
+                                                                            "text": "doubled"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " c-pawns."
                                                                           }
                                                                         ]
                                                                       },
@@ -272,7 +458,16 @@
                                                                                       },
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": " para disputar el centro."
+                                                                                        "text": " para disputar el "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "centre",
+                                                                                        "text": "centro"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "."
                                                                                       }
                                                                                     ],
                                                                                     "en": [
@@ -289,7 +484,16 @@
                                                                                       },
                                                                                       {
                                                                                         "kind": "text",
-                                                                                        "text": " to contest the centre."
+                                                                                        "text": " to contest the "
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "term",
+                                                                                        "id": "centre",
+                                                                                        "text": "centre"
+                                                                                      },
+                                                                                      {
+                                                                                        "kind": "text",
+                                                                                        "text": "."
                                                                                       }
                                                                                     ]
                                                                                   },
@@ -371,8 +575,13 @@
                                                           "comment": {
                                                             "es": [
                                                               {
+                                                                "kind": "term",
+                                                                "id": "pawn-structure",
+                                                                "text": "Estructura"
+                                                              },
+                                                              {
                                                                 "kind": "text",
-                                                                "text": "Estructura cerrada con "
+                                                                "text": " cerrada con "
                                                               },
                                                               {
                                                                 "kind": "move",
@@ -389,7 +598,16 @@
                                                             "en": [
                                                               {
                                                                 "kind": "text",
-                                                                "text": "A closed structure with "
+                                                                "text": "A closed "
+                                                              },
+                                                              {
+                                                                "kind": "term",
+                                                                "id": "pawn-structure",
+                                                                "text": "structure"
+                                                              },
+                                                              {
+                                                                "kind": "text",
+                                                                "text": " with "
                                                               },
                                                               {
                                                                 "kind": "move",
@@ -438,7 +656,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " con la dama para evitar los peones doblados."
+                                    "text": " con la dama para evitar los "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "doubled-pawns",
+                                    "text": "peones doblados"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ],
                                 "en": [
@@ -452,7 +679,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " with the queen to avoid doubled pawns."
+                                    "text": " with the queen to avoid "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "doubled-pawns",
+                                    "text": "doubled pawns"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ]
                               },
@@ -571,13 +807,31 @@
                                     "es": [
                                       {
                                         "kind": "text",
-                                        "text": "Golpe central inmediato."
+                                        "text": "Golpe "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "centre",
+                                        "text": "central"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " inmediato."
                                       }
                                     ],
                                     "en": [
                                       {
                                         "kind": "text",
-                                        "text": "An immediate central strike."
+                                        "text": "An immediate "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "centre",
+                                        "text": "central"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " strike."
                                       }
                                     ]
                                   },
@@ -644,14 +898,46 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "Desarrollo"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Desarrollo flexible que mantiene abiertas varias estructuras."
+                                    "text": " flexible que mantiene abiertas varias "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "pawn-structure",
+                                    "text": "estructuras"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Flexible development that keeps several structures open."
+                                    "text": "Flexible "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "development"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " that keeps several "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "pawn-structure",
+                                    "text": "structures"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " open."
                                   }
                                 ]
                               },
@@ -698,7 +984,16 @@
                                                                       },
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": " presiona la gran diagonal."
+                                                                        "text": " presiona la "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "long-diagonal",
+                                                                        "text": "gran diagonal"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
                                                                       }
                                                                     ],
                                                                     "en": [
@@ -712,7 +1007,16 @@
                                                                       },
                                                                       {
                                                                         "kind": "text",
-                                                                        "text": " bishop presses the long diagonal."
+                                                                        "text": " bishop presses the "
+                                                                      },
+                                                                      {
+                                                                        "kind": "term",
+                                                                        "id": "long-diagonal",
+                                                                        "text": "long diagonal"
+                                                                      },
+                                                                      {
+                                                                        "kind": "text",
+                                                                        "text": "."
                                                                       }
                                                                     ]
                                                                   },
@@ -746,7 +1050,16 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "Fuerza el cambio en "
+                                    "text": "Fuerza el "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "exchange",
+                                    "text": "cambio"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " en "
                                   },
                                   {
                                     "kind": "square",
@@ -754,13 +1067,40 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": ": las blancas obtienen la pareja de alfiles a cambio de peones doblados."
+                                    "text": ": las blancas obtienen la "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "bishop-pair",
+                                    "text": "pareja de alfiles"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " a cambio de "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "doubled-pawns",
+                                    "text": "peones doblados"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Forces the trade on "
+                                    "text": "Forces the "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "exchange",
+                                    "text": "trade"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " on "
                                   },
                                   {
                                     "kind": "square",
@@ -768,7 +1108,25 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": ": White gets the bishop pair in exchange for doubled pawns."
+                                    "text": ": White gets the "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "bishop-pair",
+                                    "text": "bishop pair"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " in exchange for "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "doubled-pawns",
+                                    "text": "doubled pawns"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "."
                                   }
                                 ]
                               },
@@ -809,7 +1167,16 @@
                                                                             "es": [
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": "Maniobra típica: el caballo evita la clavada "
+                                                                                "text": "Maniobra típica: el caballo evita la "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "pin",
+                                                                                "text": "clavada"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " "
                                                                               },
                                                                               {
                                                                                 "kind": "move",
@@ -846,7 +1213,16 @@
                                                                               },
                                                                               {
                                                                                 "kind": "text",
-                                                                                "text": " pin and prepares "
+                                                                                "text": " "
+                                                                              },
+                                                                              {
+                                                                                "kind": "term",
+                                                                                "id": "pin",
+                                                                                "text": "pin"
+                                                                              },
+                                                                              {
+                                                                                "kind": "text",
+                                                                                "text": " and prepares "
                                                                               },
                                                                               {
                                                                                 "kind": "move",

@@ -10,7 +10,16 @@
     "es": [
       {
         "kind": "text",
-        "text": "Las blancas abren el centro con "
+        "text": "Las blancas abren el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " con "
       },
       {
         "kind": "move",
@@ -21,7 +30,16 @@
       },
       {
         "kind": "text",
-        "text": " y cambian su peón de d por el de "
+        "text": " y "
+      },
+      {
+        "kind": "term",
+        "id": "exchange",
+        "text": "cambian"
+      },
+      {
+        "kind": "text",
+        "text": " su peón de d por el de "
       },
       {
         "kind": "square",
@@ -29,13 +47,31 @@
       },
       {
         "kind": "text",
-        "text": ": juego de piezas libre y algo más de espacio."
+        "text": ": juego de piezas libre y algo más de "
+      },
+      {
+        "kind": "term",
+        "id": "space",
+        "text": "espacio"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ],
     "en": [
       {
         "kind": "text",
-        "text": "White opens the centre with "
+        "text": "White opens the "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " with "
       },
       {
         "kind": "move",
@@ -46,7 +82,25 @@
       },
       {
         "kind": "text",
-        "text": " and trades the d-pawn for Black’s e-pawn: free piece play and a little extra space."
+        "text": " and "
+      },
+      {
+        "kind": "term",
+        "id": "exchange",
+        "text": "trades"
+      },
+      {
+        "kind": "text",
+        "text": " the d-pawn for Black’s e-pawn: free piece play and a little extra "
+      },
+      {
+        "kind": "term",
+        "id": "space",
+        "text": "space"
+      },
+      {
+        "kind": "text",
+        "text": "."
       }
     ]
   },
@@ -85,7 +139,16 @@
                           },
                           {
                             "kind": "text",
-                            "text": " de inmediato y abren el centro en la tercera jugada."
+                            "text": " de inmediato y abren el "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centro"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " en la tercera jugada."
                           }
                         ],
                         "en": [
@@ -99,7 +162,16 @@
                           },
                           {
                             "kind": "text",
-                            "text": " at once and opens the centre on move three."
+                            "text": " at once and opens the "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centre"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " on move three."
                           }
                         ]
                       },
@@ -115,13 +187,31 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "El caballo recupera el peón en una casilla central; las negras intentarán hostigarlo con sus piezas."
+                                    "text": "El caballo recupera el peón en una casilla "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "central"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "; las negras intentarán hostigarlo con sus piezas."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "The knight regains the pawn on a central square; Black will try to harass it with pieces."
+                                    "text": "The knight regains the pawn on a "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "central"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " square; Black will try to harass it with pieces."
                                   }
                                 ]
                               },
@@ -136,8 +226,13 @@
                                   "comment": {
                                     "es": [
                                       {
+                                        "kind": "term",
+                                        "id": "development",
+                                        "text": "Desarrolla"
+                                      },
+                                      {
                                         "kind": "text",
-                                        "text": "Desarrolla y ataca el peón de "
+                                        "text": " y ataca el peón de "
                                       },
                                       {
                                         "kind": "square",
@@ -150,8 +245,13 @@
                                     ],
                                     "en": [
                                       {
+                                        "kind": "term",
+                                        "id": "development",
+                                        "text": "Develops"
+                                      },
+                                      {
                                         "kind": "text",
-                                        "text": "Develops while attacking the "
+                                        "text": " while attacking the "
                                       },
                                       {
                                         "kind": "square",
@@ -183,7 +283,16 @@
                                                 "es": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Gana espacio y expulsa al caballo de "
+                                                    "text": "Gana "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "space",
+                                                    "text": "espacio"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " y expulsa al caballo de "
                                                   },
                                                   {
                                                     "kind": "square",
@@ -197,7 +306,16 @@
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Gains space and drives the "
+                                                    "text": "Gains "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "space",
+                                                    "text": "space"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": " and drives the "
                                                   },
                                                   {
                                                     "kind": "square",
@@ -216,8 +334,13 @@
                                                   "comment": {
                                                     "es": [
                                                       {
+                                                        "kind": "term",
+                                                        "id": "pin",
+                                                        "text": "Clava"
+                                                      },
+                                                      {
                                                         "kind": "text",
-                                                        "text": "Clava el peón de "
+                                                        "text": " el peón de "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -240,8 +363,13 @@
                                                     ],
                                                     "en": [
                                                       {
+                                                        "kind": "term",
+                                                        "id": "pin",
+                                                        "text": "Pins"
+                                                      },
+                                                      {
                                                         "kind": "text",
-                                                        "text": "Pins the "
+                                                        "text": " the "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -344,8 +472,13 @@
                                                                   "comment": {
                                                                     "es": [
                                                                       {
+                                                                        "kind": "term",
+                                                                        "id": "pin",
+                                                                        "text": "Clava"
+                                                                      },
+                                                                      {
                                                                         "kind": "text",
-                                                                        "text": "Clava el peón de "
+                                                                        "text": " el peón de "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -366,8 +499,13 @@
                                                                     ],
                                                                     "en": [
                                                                       {
+                                                                        "kind": "term",
+                                                                        "id": "pin",
+                                                                        "text": "Pins"
+                                                                      },
+                                                                      {
                                                                         "kind": "text",
-                                                                        "text": "Pins the "
+                                                                        "text": " the "
                                                                       },
                                                                       {
                                                                         "kind": "square",
@@ -411,7 +549,25 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": ", las blancas lo desarrollan en fianchetto y enrocan."
+                                                                                    "text": ", las blancas lo desarrollan en "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "fianchetto",
+                                                                                    "text": "fianchetto"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " y "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "castling",
+                                                                                    "text": "enrocan"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "."
                                                                                   }
                                                                                 ],
                                                                                 "en": [
@@ -425,7 +581,25 @@
                                                                                   },
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": " bishop, White fianchettoes it and castles."
+                                                                                    "text": " bishop, White "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "fianchetto",
+                                                                                    "text": "fianchettoes"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " it and "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "castling",
+                                                                                    "text": "castles"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": "."
                                                                                   }
                                                                                 ]
                                                                               },
@@ -639,8 +813,22 @@
                                           "comment": {
                                             "es": [
                                               {
+                                                "kind": "term",
+                                                "id": "intermediate-move",
+                                                "text": "Jugada intermedia"
+                                              },
+                                              {
                                                 "kind": "text",
-                                                "text": "Jugada intermedia: amenaza mate en "
+                                                "text": ": amenaza "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "checkmate",
+                                                "text": "mate"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " en "
                                               },
                                               {
                                                 "kind": "square",
@@ -662,7 +850,25 @@
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "An in-between move: it threatens mate on "
+                                                "text": "An "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "intermediate-move",
+                                                "text": "in-between move"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ": it threatens "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "checkmate",
+                                                "text": "mate"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " on "
                                               },
                                               {
                                                 "kind": "square",
@@ -760,7 +966,16 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " y ofrece cambiar el alfil activo de "
+                                            "text": " y ofrece "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "cambiar"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " el alfil activo de "
                                           },
                                           {
                                             "kind": "square",
@@ -782,7 +997,16 @@
                                           },
                                           {
                                             "kind": "text",
-                                            "text": " knight and offers to trade Black’s active bishop."
+                                            "text": " knight and offers to "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "exchange",
+                                            "text": "trade"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " Black’s active bishop."
                                           }
                                         ]
                                       },
@@ -900,7 +1124,16 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Las blancas han entregado el peón de "
+                                                            "text": "Las blancas "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "sacrifice",
+                                                            "text": "han entregado"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " el peón de "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -908,7 +1141,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " a cambio de desarrollo y presión sobre "
+                                                            "text": " a cambio de "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "development",
+                                                            "text": "desarrollo"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " y presión sobre "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -922,7 +1164,16 @@
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "White has given the "
+                                                            "text": "White "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "sacrifice",
+                                                            "text": "has given"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " the "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -930,7 +1181,16 @@
                                                           },
                                                           {
                                                             "kind": "text",
-                                                            "text": " pawn for development and pressure on "
+                                                            "text": " pawn for "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "development",
+                                                            "text": "development"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": " and pressure on "
                                                           },
                                                           {
                                                             "kind": "square",
@@ -990,8 +1250,22 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "gambit",
+                                    "text": "Gambito"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Gambito: en lugar de recuperar el peón, las blancas desarrollan el alfil apuntando a "
+                                    "text": ": en lugar de recuperar el peón, las blancas "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "desarrollan"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " el alfil apuntando a "
                                   },
                                   {
                                     "kind": "square",
@@ -1005,7 +1279,25 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "A gambit: instead of regaining the pawn, White develops the bishop towards "
+                                    "text": "A "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "gambit",
+                                    "text": "gambit"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": instead of regaining the pawn, White "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "develops"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " the bishop towards "
                                   },
                                   {
                                     "kind": "square",
@@ -1030,7 +1322,16 @@
                                             "es": [
                                               {
                                                 "kind": "text",
-                                                "text": "Golpe central: las negras atacan al alfil antes de que "
+                                                "text": "Golpe "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "centre",
+                                                "text": "central"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ": las negras atacan al alfil antes de que "
                                               },
                                               {
                                                 "kind": "square",
@@ -1044,7 +1345,16 @@
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "A central strike: Black attacks the bishop before "
+                                                "text": "A "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "centre",
+                                                "text": "central"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " strike: Black attacks the bishop before "
                                               },
                                               {
                                                 "kind": "square",

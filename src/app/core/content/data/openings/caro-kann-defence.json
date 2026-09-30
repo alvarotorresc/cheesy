@@ -32,7 +32,16 @@
       },
       {
         "kind": "text",
-        "text": " para disputar el centro sin encerrar a su alfil de casillas claras."
+        "text": " para disputar el "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " sin encerrar a su alfil de casillas claras."
       }
     ],
     "en": [
@@ -60,7 +69,16 @@
       },
       {
         "kind": "text",
-        "text": " to contest the centre without locking in the light-squared bishop."
+        "text": " to contest the "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " without locking in the light-squared bishop."
       }
     ]
   },
@@ -277,7 +295,34 @@
                                                                   },
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": " gana espacio y fija la estructura negra del flanco de rey."
+                                                                    "text": " gana "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "space",
+                                                                    "text": "espacio"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " y fija la "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "pawn-structure",
+                                                                    "text": "estructura"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " negra del "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "flank",
+                                                                    "text": "flanco"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " de rey."
                                                                   }
                                                                 ],
                                                                 "en": [
@@ -291,7 +336,34 @@
                                                                   },
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": " pawn gains space and fixes Black’s kingside structure."
+                                                                    "text": " pawn gains "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "space",
+                                                                    "text": "space"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " and fixes Black’s "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "flank",
+                                                                    "text": "kingside"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "pawn-structure",
+                                                                    "text": "structure"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "."
                                                                   }
                                                                 ]
                                                               },
@@ -382,7 +454,16 @@
                         "es": [
                           {
                             "kind": "text",
-                            "text": "Las blancas ganan espacio; las negras sacan el alfil a "
+                            "text": "Las blancas ganan "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "space",
+                            "text": "espacio"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; las negras sacan el alfil a "
                           },
                           {
                             "kind": "square",
@@ -407,7 +488,16 @@
                         "en": [
                           {
                             "kind": "text",
-                            "text": "White gains space; Black develops the bishop to "
+                            "text": "White gains "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "space",
+                            "text": "space"
+                          },
+                          {
+                            "kind": "text",
+                            "text": "; Black develops the bishop to "
                           },
                           {
                             "kind": "square",
@@ -449,13 +539,31 @@
                                             "es": [
                                               {
                                                 "kind": "text",
-                                                "text": "Ataca la base de la cadena, como en la Francesa pero con el alfil ya fuera."
+                                                "text": "Ataca la base de la "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "pawn-chain",
+                                                "text": "cadena"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ", como en la Francesa pero con el alfil ya fuera."
                                               }
                                             ],
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "Hits the base of the chain, as in the French but with the bishop already out."
+                                                "text": "Hits the base of the "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "pawn-chain",
+                                                "text": "chain"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ", as in the French but with the bishop already out."
                                               }
                                             ]
                                           },
@@ -506,8 +614,13 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "pawn-structure",
+                                    "text": "Estructura"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Estructura simétrica; las blancas juegan con "
+                                    "text": " simétrica; las blancas juegan con "
                                   },
                                   {
                                     "kind": "square",
@@ -531,7 +644,16 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "A symmetrical structure; White plays "
+                                    "text": "A symmetrical "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "pawn-structure",
+                                    "text": "structure"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": "; White plays "
                                   },
                                   {
                                     "kind": "square",
@@ -610,7 +732,16 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "Las blancas aceptan un peón aislado en "
+                                    "text": "Las blancas aceptan un "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "isolated-pawn",
+                                    "text": "peón aislado"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " en "
                                   },
                                   {
                                     "kind": "square",
@@ -624,7 +755,16 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "White accepts an isolated "
+                                    "text": "White accepts an "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "isolated-pawn",
+                                    "text": "isolated"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " "
                                   },
                                   {
                                     "kind": "square",

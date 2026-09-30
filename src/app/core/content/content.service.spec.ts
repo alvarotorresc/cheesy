@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { CONTENT_LOADERS, type ContentLoaders } from './content-loaders';
+import { CONTENT_LOADERS, GLOSSARY_LOADER, type ContentLoaders } from './content-loaders';
 import { bundledContentLoaders } from './testing';
 import { ContentService } from './content.service';
-import type { OpeningSummary, OpeningTree } from './content.types';
+import type { GlossaryTerm, OpeningSummary, OpeningTree } from './content.types';
 import { OpeningBook } from './opening-book';
 
 const OPENING_IDS = [
@@ -234,5 +234,28 @@ describe('ContentService', () => {
 
       await expect(content.openingBook('ruy-lopez')).rejects.toThrowError(/Illegal move/);
     });
+  });
+});
+
+describe('ContentService glossary', () => {
+  it('should load the glossary once and find a term by id', async () => {
+    const load = vi.fn(async () => [
+      { id: 'pin', name: { es: 'Clavada', en: 'Pin' } } as GlossaryTerm,
+    ]);
+    TestBed.configureTestingModule({ providers: [{ provide: GLOSSARY_LOADER, useValue: load }] });
+    const content = TestBed.inject(ContentService);
+
+    expect((await content.glossaryTerm('pin'))?.name.en).toBe('Pin');
+    expect(await content.glossaryTerm('nope')).toBeUndefined();
+    expect(load).toHaveBeenCalledTimes(1);
+  });
+
+  it('should ask for the glossary again after a failed download', async () => {
+    const load = vi.fn().mockRejectedValueOnce(new Error('offline')).mockResolvedValue([]);
+    TestBed.configureTestingModule({ providers: [{ provide: GLOSSARY_LOADER, useValue: load }] });
+    const content = TestBed.inject(ContentService);
+
+    await expect(content.glossary()).rejects.toThrow('offline');
+    await expect(content.glossary()).resolves.toEqual([]);
   });
 });

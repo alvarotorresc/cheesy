@@ -14,3 +14,6 @@ content/tablebase-cache.json
 
 # Segments are written with no whitespace between them: the text already carries its spaces
 src/app/shared/rich-text/rich-text.html
+
+# The word sits against its button and popup: any whitespace there would show in the text
+src/app/shared/term/term.html

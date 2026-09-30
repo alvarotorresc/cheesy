@@ -7,10 +7,12 @@ import { allOpenings } from './openings.ts';
 import { countLeaves, openingPreview } from '../lib/opening-walk.ts';
 import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
+import { glossary } from './glossary.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
   DATA_DIR,
   ENDGAMES_FILE,
+  GLOSSARY_FILE,
   OPENING_CATALOG_FILE,
   OPENINGS_DIR,
   POSITIONS_FILE,
@@ -99,4 +101,8 @@ out(POSITIONS_FILE, curated);
 out(
   ENDGAMES_FILE,
   endgames.map((e) => ({ ...e, explanation: richOf(e.explanation) })),
+);
+out(
+  GLOSSARY_FILE,
+  glossary.map((t) => ({ ...t, definition: richOf(t.definition) })),
 );

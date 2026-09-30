@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { loadEndgames, loadGlossaryIds, loadOpenings, loadPositions } from '../../lib/content.ts';
+import {
+  loadEndgames,
+  loadGlossary,
+  loadGlossaryIds,
+  loadOpenings,
+  loadPositions,
+} from '../../lib/content.ts';
 import { playSan, positionFromFen } from '../../lib/chess.ts';
 import { movesOf, stripNote, termsOf } from '../../lib/rich-text.ts';
 import type { OpeningNode, RichText, Segment } from '../../types.ts';
@@ -20,6 +26,8 @@ for (const tree of loadOpenings()) {
 for (const e of loadEndgames())
   texts.push({ at: `${e.id}.explanation`, text: e.explanation, fen: e.fen });
 for (const p of loadPositions()) texts.push({ at: `${p.id}.explanation`, text: p.explanation });
+for (const t of loadGlossary())
+  texts.push({ at: `glossary.${t.id}.definition`, text: t.definition });
 
 const glossary = loadGlossaryIds();
 
@@ -144,6 +152,7 @@ describe('cut texts of the content', () => {
       );
     }
     for (const p of loadPositions()) names.push({ at: `${p.id}.title`, value: p.title });
+    for (const t of loadGlossary()) names.push({ at: `glossary.${t.id}.name`, value: t.name });
     const errors = names.flatMap(({ at, value }) =>
       (['es', 'en'] as const)
         .filter((lang) => MARK.test(value[lang]))

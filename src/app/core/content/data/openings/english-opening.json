@@ -18,7 +18,16 @@
       },
       {
         "kind": "text",
-        "text": " desde el flanco con "
+        "text": " desde el "
+      },
+      {
+        "kind": "term",
+        "id": "flank",
+        "text": "flanco"
+      },
+      {
+        "kind": "text",
+        "text": " con "
       },
       {
         "kind": "move",
@@ -29,7 +38,16 @@
       },
       {
         "kind": "text",
-        "text": ", a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
+        "text": ", a menudo con "
+      },
+      {
+        "kind": "term",
+        "id": "fianchetto",
+        "text": "fianchetto"
+      },
+      {
+        "kind": "text",
+        "text": " del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas."
       }
     ],
     "en": [
@@ -43,7 +61,16 @@
       },
       {
         "kind": "text",
-        "text": " from the flank with "
+        "text": " from the "
+      },
+      {
+        "kind": "term",
+        "id": "flank",
+        "text": "flank"
+      },
+      {
+        "kind": "text",
+        "text": " with "
       },
       {
         "kind": "move",
@@ -54,7 +81,16 @@
       },
       {
         "kind": "text",
-        "text": ", often with a kingside fianchetto. Flexible positional play that can transpose into many openings."
+        "text": ", often with a kingside "
+      },
+      {
+        "kind": "term",
+        "id": "fianchetto",
+        "text": "fianchetto"
+      },
+      {
+        "kind": "text",
+        "text": ". Flexible positional play that can transpose into many openings."
       }
     ]
   },
@@ -77,7 +113,25 @@
           },
           {
             "kind": "text",
-            "text": " desde el flanco; las blancas suelen combinarlo con un fianchetto en "
+            "text": " desde el "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flanco"
+          },
+          {
+            "kind": "text",
+            "text": "; las blancas suelen combinarlo con un "
+          },
+          {
+            "kind": "term",
+            "id": "fianchetto",
+            "text": "fianchetto"
+          },
+          {
+            "kind": "text",
+            "text": " en "
           },
           {
             "kind": "square",
@@ -99,7 +153,25 @@
           },
           {
             "kind": "text",
-            "text": " from the flank; White often combines it with a fianchetto on "
+            "text": " from the "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flank"
+          },
+          {
+            "kind": "text",
+            "text": "; White often combines it with a "
+          },
+          {
+            "kind": "term",
+            "id": "fianchetto",
+            "text": "fianchetto"
+          },
+          {
+            "kind": "text",
+            "text": " on "
           },
           {
             "kind": "square",
@@ -123,13 +195,31 @@
             "es": [
               {
                 "kind": "text",
-                "text": "Las negras ocupan el centro con el peón de rey."
+                "text": "Las negras ocupan el "
+              },
+              {
+                "kind": "term",
+                "id": "centre",
+                "text": "centro"
+              },
+              {
+                "kind": "text",
+                "text": " con el peón de rey."
               }
             ],
             "en": [
               {
                 "kind": "text",
-                "text": "Black occupies the centre with the king's pawn."
+                "text": "Black occupies the "
+              },
+              {
+                "kind": "term",
+                "id": "centre",
+                "text": "centre"
+              },
+              {
+                "kind": "text",
+                "text": " with the king's pawn."
               }
             ]
           },
@@ -145,13 +235,31 @@
                 "es": [
                   {
                     "kind": "text",
-                    "text": "Una Siciliana con los colores cambiados y un tiempo más para las blancas."
+                    "text": "Una Siciliana con los colores cambiados y un "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "tempo",
+                    "text": "tiempo"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " más para las blancas."
                   }
                 ],
                 "en": [
                   {
                     "kind": "text",
-                    "text": "A Sicilian with colours reversed and an extra tempo for White."
+                    "text": "A Sicilian with colours reversed and an extra "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "tempo",
+                    "text": "tempo"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " for White."
                   }
                 ]
               },
@@ -178,8 +286,13 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "fianchetto",
+                                    "text": "Fianchetto"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Fianchetto: el alfil de "
+                                    "text": ": el alfil de "
                                   },
                                   {
                                     "kind": "square",
@@ -209,7 +322,16 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "A fianchetto: the "
+                                    "text": "A "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "fianchetto",
+                                    "text": "fianchetto"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": the "
                                   },
                                   {
                                     "kind": "square",
@@ -252,14 +374,46 @@
                                           "comment": {
                                             "es": [
                                               {
+                                                "kind": "term",
+                                                "id": "pawn-structure",
+                                                "text": "Estructura"
+                                              },
+                                              {
                                                 "kind": "text",
-                                                "text": "Estructura de Dragón invertido: las blancas juegan un Dragón con un tiempo más."
+                                                "text": " de Dragón invertido: las blancas juegan un Dragón con un "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "tiempo"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " más."
                                               }
                                             ],
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "A reversed Dragon structure: White plays a Dragon with an extra tempo."
+                                                "text": "A reversed Dragon "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "pawn-structure",
+                                                "text": "structure"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ": White plays a Dragon with an extra "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "tempo",
+                                                "text": "tempo"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
                                               }
                                             ]
                                           },
@@ -319,7 +473,25 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": " y ganar espacio en el flanco de dama."
+                                                                            "text": " y ganar "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "space",
+                                                                            "text": "espacio"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " en el "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "flanco"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " de dama."
                                                                           }
                                                                         ],
                                                                         "en": [
@@ -349,7 +521,25 @@
                                                                           },
                                                                           {
                                                                             "kind": "text",
-                                                                            "text": " knight and gain queenside space."
+                                                                            "text": " knight and gain "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "flank",
+                                                                            "text": "queenside"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": " "
+                                                                          },
+                                                                          {
+                                                                            "kind": "term",
+                                                                            "id": "space",
+                                                                            "text": "space"
+                                                                          },
+                                                                          {
+                                                                            "kind": "text",
+                                                                            "text": "."
                                                                           }
                                                                         ]
                                                                       },
@@ -437,7 +627,16 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "Juego lento: las blancas maniobran antes de romper con "
+                                            "text": "Juego lento: las blancas maniobran antes de "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "pawn-break",
+                                            "text": "romper"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " con "
                                           },
                                           {
                                             "kind": "square",
@@ -459,7 +658,16 @@
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "Slow play: White manoeuvres before breaking with "
+                                            "text": "Slow play: White manoeuvres before "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "pawn-break",
+                                            "text": "breaking"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " with "
                                           },
                                           {
                                             "kind": "square",
@@ -705,13 +913,31 @@
                                                         "es": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "Las blancas rompen la simetría abriendo el centro."
+                                                            "text": "Las blancas rompen la simetría abriendo el "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "centre",
+                                                            "text": "centro"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
                                                           }
                                                         ],
                                                         "en": [
                                                           {
                                                             "kind": "text",
-                                                            "text": "White breaks the symmetry by opening the centre."
+                                                            "text": "White breaks the symmetry by opening the "
+                                                          },
+                                                          {
+                                                            "kind": "term",
+                                                            "id": "centre",
+                                                            "text": "centre"
+                                                          },
+                                                          {
+                                                            "kind": "text",
+                                                            "text": "."
                                                           }
                                                         ]
                                                       },
@@ -792,7 +1018,16 @@
                         "es": [
                           {
                             "kind": "text",
-                            "text": "Ocupa el centro de inmediato e invita a "
+                            "text": "Ocupa el "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centro"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " de inmediato e invita a "
                           },
                           {
                             "kind": "move",
@@ -817,7 +1052,16 @@
                         "en": [
                           {
                             "kind": "text",
-                            "text": "Occupies the centre at once, inviting "
+                            "text": "Occupies the "
+                          },
+                          {
+                            "kind": "term",
+                            "id": "centre",
+                            "text": "centre"
+                          },
+                          {
+                            "kind": "text",
+                            "text": " at once, inviting "
                           },
                           {
                             "kind": "move",
@@ -919,7 +1163,16 @@
               },
               {
                 "kind": "text",
-                "text": " con una estructura de tipo Gambito de Dama."
+                "text": " con una "
+              },
+              {
+                "kind": "term",
+                "id": "pawn-structure",
+                "text": "estructura"
+              },
+              {
+                "kind": "text",
+                "text": " de tipo Gambito de Dama."
               }
             ],
             "en": [
@@ -936,7 +1189,16 @@
               },
               {
                 "kind": "text",
-                "text": " with a Queen's Gambit-style structure."
+                "text": " with a Queen's Gambit-style "
+              },
+              {
+                "kind": "term",
+                "id": "pawn-structure",
+                "text": "structure"
+              },
+              {
+                "kind": "text",
+                "text": "."
               }
             ]
           },

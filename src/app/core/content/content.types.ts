@@ -100,3 +100,36 @@ export interface CuratedPosition {
   /** English, kebab-case: "back-rank", "smothered-mate"... */
   tags: string[];
 }
+
+export type GlossaryLevel = 'beginner' | 'intermediate' | 'advanced';
+
+/** An arrow of a glossary example. `move` says it is a legal move of the position (checked in CI). */
+export interface GlossaryArrow {
+  from: SquareName;
+  to: SquareName;
+  move: boolean;
+}
+
+export interface GlossaryExample {
+  fen: string;
+  orientation: Side;
+  /** Squares ringed on the small board. */
+  highlights: SquareName[];
+  arrows: GlossaryArrow[];
+}
+
+/** A chess term explained in plain words, with a small board that shows it. */
+export interface GlossaryTerm {
+  /** English, kebab-case: "opposition". The same id marks the term in the texts. */
+  id: string;
+  name: Localized;
+  /** One or two sentences, cut into segments by the content build. */
+  definition: RichText;
+  example: GlossaryExample;
+  /** Level of the "Learn" section it belongs to (not used until that section exists). */
+  level: GlossaryLevel;
+  /** URLs the definition was checked against. At least one. */
+  sources: string[];
+  /** Id of the lesson that teaches it, once "Learn" exists. */
+  lesson?: string;
+}

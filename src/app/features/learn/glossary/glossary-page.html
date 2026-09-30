@@ -1,0 +1,43 @@
+@let g = i18n.t().glossary;
+
+<section class="intro" aria-labelledby="glossary-title">
+  <h1 id="glossary-title">{{ g.title }}</h1>
+  <p class="lead">{{ g.intro }}</p>
+  <label class="search">
+    <span class="visually-hidden">{{ g.searchLabel }}</span>
+    <input
+      type="search"
+      [placeholder]="g.search"
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+    />
+  </label>
+</section>
+
+<p class="status" role="status">{{ noMatch() ? g.empty : '' }}</p>
+
+@if (glossary.error()) {
+  <p class="notice" role="alert">{{ g.failed }}</p>
+} @else if (glossary.isLoading()) {
+  <p class="notice">{{ g.loading }}</p>
+} @else {
+  <div class="terms">
+    @for (term of terms(); track term.id) {
+      <article class="term" [id]="term.id">
+        <app-mini-board
+          class="board"
+          [frames]="frameOf(term)"
+          [orientation]="term.example.orientation"
+          [rings]="term.example.highlights"
+          [ringsOn]="true"
+          [arrows]="term.example.arrows"
+          [label]="g.boardLabel(i18n.localize(term.name))"
+        />
+        <div class="text">
+          <h2>{{ i18n.localize(term.name) }}</h2>
+          <p><app-rich-text [text]="term.definition" [termLinks]="true" /></p>
+        </div>
+      </article>
+    }
+  </div>
+}

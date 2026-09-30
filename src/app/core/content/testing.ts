@@ -2,6 +2,7 @@ import type { ContentLoaders } from './content-loaders';
 import type {
   CuratedPosition,
   EndgamePosition,
+  GlossaryTerm,
   OpeningSummary,
   OpeningTree,
   RichText,
@@ -20,6 +21,10 @@ export const bundledContentLoaders: ContentLoaders = {
   endgames: async () => (await import('./data/endgames.json')).default as EndgamePosition[],
   positions: async () => (await import('./data/positions.json')).default as CuratedPosition[],
 };
+
+/** The glossary imported straight from the source tree, like `bundledContentLoaders`. */
+export const bundledGlossaryLoader = async () =>
+  (await import('./data/glossary.json')).default as GlossaryTerm[];
 
 /** A text of the content with no moves, squares or terms, for the specs. */
 export const plainText = (es: string, en: string = es): RichText => ({

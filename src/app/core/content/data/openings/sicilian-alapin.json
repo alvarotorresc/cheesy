@@ -29,7 +29,16 @@
       },
       {
         "kind": "text",
-        "text": " para mantener un centro de peones y evitar las Sicilianas abiertas más teóricas."
+        "text": " para mantener un "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " de peones y evitar las Sicilianas abiertas más teóricas."
       }
     ],
     "en": [
@@ -54,7 +63,16 @@
       },
       {
         "kind": "text",
-        "text": " to keep a pawn centre and sidestep the most theoretical Open Sicilians."
+        "text": " to keep a pawn "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " and sidestep the most theoretical Open Sicilians."
       }
     ]
   },
@@ -81,7 +99,16 @@
               },
               {
                 "kind": "text",
-                "text": " con un peón lateral y crea desequilibrio desde la primera jugada."
+                "text": " con un peón "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "lateral"
+              },
+              {
+                "kind": "text",
+                "text": " y crea desequilibrio desde la primera jugada."
               }
             ],
             "en": [
@@ -95,7 +122,16 @@
               },
               {
                 "kind": "text",
-                "text": " with a flank pawn and creates imbalance from move one."
+                "text": " with a "
+              },
+              {
+                "kind": "term",
+                "id": "flank",
+                "text": "flank"
+              },
+              {
+                "kind": "text",
+                "text": " pawn and creates imbalance from move one."
               }
             ]
           },
@@ -140,7 +176,16 @@
                   },
                   {
                     "kind": "text",
-                    "text": " y quedarse con un centro de peones."
+                    "text": " y quedarse con un "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "centre",
+                    "text": "centro"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " de peones."
                   }
                 ],
                 "en": [
@@ -175,7 +220,16 @@
                   },
                   {
                     "kind": "text",
-                    "text": ", keeping a pawn centre."
+                    "text": ", keeping a pawn "
+                  },
+                  {
+                    "kind": "term",
+                    "id": "centre",
+                    "text": "centre"
+                  },
+                  {
+                    "kind": "text",
+                    "text": "."
                   }
                 ]
               },
@@ -293,7 +347,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " clavando el caballo de "
+                                                "text": " "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "pin",
+                                                "text": "clavando"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " el caballo de "
                                               },
                                               {
                                                 "kind": "square",
@@ -315,7 +378,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " by pinning the "
+                                                "text": " by "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "pin",
+                                                "text": "pinning"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " the "
                                               },
                                               {
                                                 "kind": "square",
@@ -367,7 +439,16 @@
                                                                                 "es": [
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": "Estructura de peón aislado en "
+                                                                                    "text": "Estructura de "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "peón aislado"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " en "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -381,7 +462,16 @@
                                                                                 "en": [
                                                                                   {
                                                                                     "kind": "text",
-                                                                                    "text": "An isolated "
+                                                                                    "text": "An "
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "term",
+                                                                                    "id": "isolated-pawn",
+                                                                                    "text": "isolated"
+                                                                                  },
+                                                                                  {
+                                                                                    "kind": "text",
+                                                                                    "text": " "
                                                                                   },
                                                                                   {
                                                                                     "kind": "square",
@@ -413,7 +503,16 @@
                                                                                                 "es": [
                                                                                                   {
                                                                                                     "kind": "text",
-                                                                                                    "text": "Gana tiempo sobre la dama y vigila las casillas "
+                                                                                                    "text": "Gana "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "term",
+                                                                                                    "id": "tempo",
+                                                                                                    "text": "tiempo"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " sobre la dama y vigila las casillas "
                                                                                                   },
                                                                                                   {
                                                                                                     "kind": "square",
@@ -435,7 +534,16 @@
                                                                                                 "en": [
                                                                                                   {
                                                                                                     "kind": "text",
-                                                                                                    "text": "Gains time on the queen and eyes the "
+                                                                                                    "text": "Gains "
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "term",
+                                                                                                    "id": "tempo",
+                                                                                                    "text": "time"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "kind": "text",
+                                                                                                    "text": " on the queen and eyes the "
                                                                                                   },
                                                                                                   {
                                                                                                     "kind": "square",
@@ -659,7 +767,16 @@
                                         "es": [
                                           {
                                             "kind": "text",
-                                            "text": "Las blancas no recapturan todavía: prefieren desarrollarse, aun a costa de entregar el peón de "
+                                            "text": "Las blancas no recapturan todavía: prefieren "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "development",
+                                            "text": "desarrollarse"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": ", aun a costa de entregar el peón de "
                                           },
                                           {
                                             "kind": "square",
@@ -673,7 +790,16 @@
                                         "en": [
                                           {
                                             "kind": "text",
-                                            "text": "White does not recapture yet, preferring development even at the cost of the "
+                                            "text": "White does not recapture yet, preferring "
+                                          },
+                                          {
+                                            "kind": "term",
+                                            "id": "development",
+                                            "text": "development"
+                                          },
+                                          {
+                                            "kind": "text",
+                                            "text": " even at the cost of the "
                                           },
                                           {
                                             "kind": "square",
@@ -953,7 +1079,16 @@
                                       },
                                       {
                                         "kind": "text",
-                                        "text": ", las negras quedarán con un peón aislado en "
+                                        "text": ", las negras quedarán con un "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "isolated-pawn",
+                                        "text": "peón aislado"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " en "
                                       },
                                       {
                                         "kind": "square",
@@ -975,7 +1110,16 @@
                                       },
                                       {
                                         "kind": "text",
-                                        "text": ", Black is left with an isolated "
+                                        "text": ", Black is left with an "
+                                      },
+                                      {
+                                        "kind": "term",
+                                        "id": "isolated-pawn",
+                                        "text": "isolated"
+                                      },
+                                      {
+                                        "kind": "text",
+                                        "text": " "
                                       },
                                       {
                                         "kind": "square",

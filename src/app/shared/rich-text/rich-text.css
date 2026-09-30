@@ -6,6 +6,20 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* A term inside a popup links to the glossary page: dotted underline, like the term button. */
+a.term {
+  border-radius: 2px;
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a.term:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
 /* On a page with a board the square can point at it: a faint solid underline says so at rest. */
 .square[data-spot] {
   border-radius: 2px;

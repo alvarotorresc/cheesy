@@ -1,0 +1,58 @@
+<span class="wrap" (pointerleave)="onLeave($event)"
+  ><button
+    #button
+    type="button"
+    class="term"
+    aria-haspopup="dialog"
+    [attr.aria-expanded]="open()"
+    [attr.aria-controls]="open() ? popupId : null"
+    (click)="toggle()"
+    (pointerenter)="onEnter($event)"
+  >{{ text() }}</button
+  >@if (open()) {<span
+      #popup
+      class="popup"
+      popover="manual"
+      role="dialog"
+      [class.above]="place().above"
+      [id]="popupId"
+      [attr.aria-labelledby]="readyTerm() ? nameId : null"
+      [attr.aria-label]="readyTerm() ? null : text()"
+      (pointerenter)="onPopupEnter($event)"
+      (pointerdown)="onPopupPress()"
+      [style.top.px]="place().above ? null : place().edge"
+      [style.bottom.px]="place().above ? place().edge : null"
+      [style.max-height.px]="place().maxHeight"
+      [style.left.px]="place().left"
+      [style.width.px]="place().width"
+    >
+      @switch (state().kind) {
+        @case ('loading') {
+          <span class="status">{{ i18n.t().glossary.loading }}</span>
+        }
+        @case ('failed') {
+          <span class="status">{{ text() }} — {{ i18n.t().glossary.failed }}</span>
+        }
+        @case ('ready') {
+          @if (readyTerm(); as term) {
+            <span class="name" [id]="nameId">{{ i18n.localize(term.name) }}</span>
+            <span class="definition"><app-rich-text [text]="term.definition" [termLinks]="true" /></span>
+            <app-mini-board
+              class="board"
+              [frames]="frames()"
+              [orientation]="term.example.orientation"
+              [rings]="term.example.highlights"
+              [ringsOn]="true"
+              [arrows]="term.example.arrows"
+              [label]="i18n.t().glossary.boardLabel(i18n.localize(term.name))"
+            />
+            <a class="more" routerLink="/learn/glossary" [fragment]="term.id">{{
+              i18n.t().glossary.seeInGlossary
+            }}</a>
+          } @else {
+            <span class="status">{{ text() }}</span>
+          }
+        }
+      }
+    </span>}</span
+>

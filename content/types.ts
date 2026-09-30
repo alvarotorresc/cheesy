@@ -1,5 +1,6 @@
 import type {
   EndgamePosition,
+  GlossaryTerm,
   Localized,
   OpeningTree,
 } from '../src/app/core/content/content.types.ts';
@@ -8,6 +9,10 @@ import type {
 export type {
   CuratedPosition,
   EndgamePosition,
+  GlossaryArrow,
+  GlossaryExample,
+  GlossaryLevel,
+  GlossaryTerm,
   Localized,
   OpeningNode,
   OpeningSummary,
@@ -31,3 +36,5 @@ export type AuthoringTree = Omit<OpeningTree, 'description' | 'root'> & {
 };
 
 export type EndgameSpec = Omit<EndgamePosition, 'explanation'> & { explanation: Localized };
+
+export type GlossarySpec = Omit<GlossaryTerm, 'definition'> & { definition: Localized };

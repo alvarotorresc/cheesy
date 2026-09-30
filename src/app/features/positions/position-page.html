@@ -99,7 +99,9 @@
             <div class="found">
               <ul class="tags" [attr.aria-label]="t.themes">
                 @for (tag of position.tags; track tag; let i = $index) {
-                  <li class="theme-tag" [style.--i]="i">{{ tagLabel(tag, t) }}</li>
+                  <li class="theme-tag" [style.--i]="i">
+                    <app-term [id]="tag" [text]="tagLabel(tag, t)" />
+                  </li>
                 }
               </ul>
               @if (position.source) {

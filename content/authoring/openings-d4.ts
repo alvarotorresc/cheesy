@@ -11,8 +11,8 @@ export const qgd: OpeningSpec = {
   eco: 'D30-D69',
   side: 'black',
   description: {
-    es: 'Las negras mantienen el peón de d5 con ...e6: planteamiento sólido y clásico. El reto es liberar el alfil de c8 y romper con ...c5 o ...e5.',
-    en: 'Black keeps the d5 pawn with ...e6: a solid, classical approach. The challenge is freeing the c8 bishop and breaking with ...c5 or ...e5.',
+    es: 'Las negras mantienen el peón de d5 con ...e6: planteamiento sólido y clásico. El reto es liberar el alfil de c8 y [romper](pawn-break) con ...c5 o ...e5.',
+    en: 'Black keeps the d5 pawn with ...e6: a solid, classical approach. The challenge is freeing the c8 bishop and [breaking](pawn-break) with ...c5 or ...e5.',
   },
   main: `${QGD_BG5} h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Qa4 c5 Qa3 Rc8 Bb5`,
   lines: [
@@ -24,22 +24,22 @@ export const qgd: OpeningSpec = {
   notes: {
     'd4 d5 c4': {
       comment: {
-        es: 'Gambito de Dama: no es un gambito real, porque las blancas recuperan el peón con facilidad.',
-        en: "The Queen's Gambit: not a real gambit, since White easily regains the pawn.",
+        es: 'Gambito de Dama: no es un [gambito](gambit) real, porque las blancas recuperan el peón con facilidad.',
+        en: "The Queen's Gambit: not a real [gambit](gambit), since White easily regains the pawn.",
       },
     },
     'd4 d5 c4 e6': {
       name: { es: 'Gambito de Dama Rehusado', en: "Queen's Gambit Declined" },
       comment: {
-        es: 'Las negras mantienen d5 con un peón: estructura muy sólida, aunque el alfil de c8 queda encerrado.',
-        en: 'Black holds d5 with a pawn: a very solid structure, though the c8 bishop is shut in.',
+        es: 'Las negras mantienen d5 con un peón: [estructura](pawn-structure) muy sólida, aunque el alfil de c8 queda encerrado.',
+        en: 'Black holds d5 with a pawn: a very solid [structure](pawn-structure), though the c8 bishop is shut in.',
       },
     },
     [`${QGD} Bg5`]: {
       name: { es: 'Variante Moderna (4.Ag5)', en: 'Modern Variation (4.Bg5)' },
       comment: {
-        es: 'Clava el caballo de f6, uno de los defensores de d5.',
-        en: 'Pins the f6 knight, one of the defenders of d5.',
+        es: '[Clava](pin) el caballo de f6, uno de los defensores de d5.',
+        en: '[Pins](pin) the f6 knight, one of the defenders of d5.',
       },
     },
     [`${QGD_BG5} h6 Bh4 b6`]: {
@@ -51,42 +51,42 @@ export const qgd: OpeningSpec = {
     },
     [`${QGD_BG5} h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5`]: {
       comment: {
-        es: 'Tras los cambios, las negras juegan ...Ae6 y ...c5 y aceptan peones colgantes a cambio de actividad.',
-        en: 'After the trades Black plays ...Be6 and ...c5, accepting hanging pawns in return for activity.',
+        es: 'Tras los [cambios](exchange), las negras juegan ...Ae6 y ...c5 y aceptan [peones colgantes](hanging-pawns) a cambio de actividad.',
+        en: 'After the [trades](exchange) Black plays ...Be6 and ...c5, accepting [hanging pawns](hanging-pawns) in return for activity.',
       },
     },
     [`${QGD_BG5} h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Qa4 c5 Qa3`]: {
       comment: {
-        es: 'Presiona c5 y pone a prueba los peones colgantes.',
-        en: 'Pressures c5 and tests the hanging pawns.',
+        es: 'Presiona c5 y pone a prueba los [peones colgantes](hanging-pawns).',
+        en: 'Pressures c5 and tests the [hanging pawns](hanging-pawns).',
       },
     },
     [`${QGD_BG5} h6 Bh4 Ne4`]: {
       name: { es: 'Defensa Lasker', en: 'Lasker Defence' },
       comment: {
-        es: 'Cambia piezas para liberar la posición negra.',
-        en: "Trades pieces to free Black's position.",
+        es: '[Cambia](exchange) piezas para liberar la posición negra.',
+        en: "[Trades](exchange) pieces to free Black's position.",
       },
     },
     [`${QGD_BG5} Nbd7`]: {
       name: { es: 'Defensa Ortodoxa', en: 'Orthodox Defence' },
       comment: {
-        es: 'Desarrollo clásico: las negras mantienen d5 y preparan ...c6 y ...dxc4 en el momento oportuno.',
-        en: 'Classical development: Black holds d5 and prepares ...c6 and ...dxc4 at the right moment.',
+        es: '[Desarrollo](development) clásico: las negras mantienen d5 y preparan ...c6 y ...dxc4 en el momento oportuno.',
+        en: 'Classical [development](development): Black holds d5 and prepares ...c6 and ...dxc4 at the right moment.',
       },
     },
     [`${QGD_BG5} Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5`]: {
       name: { es: 'Sistema Capablanca', en: 'Capablanca System' },
       comment: {
-        es: 'Maniobra liberadora: cambios en d5 y e7 y, después, la ruptura ...e5.',
-        en: 'The freeing manoeuvre: trades on d5 and e7, followed by the ...e5 break.',
+        es: 'Maniobra liberadora: [cambios](exchange) en d5 y e7 y, después, la [ruptura](pawn-break) ...e5.',
+        en: 'The freeing manoeuvre: [trades](exchange) on d5 and e7, followed by the ...e5 [break](pawn-break).',
       },
     },
     [`${QGD} cxd5`]: {
       name: { es: 'Variante del Cambio', en: 'Exchange Variation' },
       comment: {
-        es: 'Fija la estructura; las blancas suelen plantear el ataque de minorías con b4-b5.',
-        en: 'Fixes the structure; White often plans the minority attack with b4-b5.',
+        es: 'Fija la [estructura](pawn-structure); las blancas suelen plantear el [ataque de minorías](minority-attack) con b4-b5.',
+        en: 'Fixes the [structure](pawn-structure); White often plans the [minority attack](minority-attack) with b4-b5.',
       },
     },
     [`${QGD} cxd5 exd5 Bg5 c6 Qc2`]: {
@@ -97,15 +97,15 @@ export const qgd: OpeningSpec = {
     },
     [`${QGD} cxd5 exd5 Bg5 c6 Qc2 Be7 e3 Nbd7 Bd3 O-O Nge2`]: {
       comment: {
-        es: 'Con Cge2 las blancas pueden preparar f3 y e4 en lugar del ataque de minorías.',
-        en: 'With Nge2 White can prepare f3 and e4 instead of the minority attack.',
+        es: 'Con Cge2 las blancas pueden preparar f3 y e4 en lugar del [ataque de minorías](minority-attack).',
+        en: 'With Nge2 White can prepare f3 and e4 instead of the [minority attack](minority-attack).',
       },
     },
     [`${QGD} Nf3 Be7 Bf4`]: {
       name: { es: 'Ataque Harrwitz', en: 'Harrwitz Attack' },
       comment: {
-        es: 'El alfil se desarrolla fuera de la cadena sin clavar el caballo.',
-        en: 'The bishop develops outside the pawn chain without pinning the knight.',
+        es: 'El alfil se [desarrolla](development) fuera de la [cadena](pawn-chain) sin [clavar](pin) el caballo.',
+        en: 'The bishop [develops](development) outside the [pawn chain](pawn-chain) without [pinning](pin) the knight.',
       },
     },
     [`${QGD} Nf3 Be7 Bf4 O-O e3 c5 dxc5 Bxc5`]: {
@@ -127,8 +127,8 @@ export const qga: OpeningSpec = {
   eco: 'D20-D29',
   side: 'black',
   description: {
-    es: 'Las negras toman el peón de c4 para ganar tiempo y atacar el centro con ...c5 o ...e5, sin intentar conservarlo.',
-    en: 'Black takes the c4 pawn to gain time and hit the centre with ...c5 or ...e5, without trying to keep it.',
+    es: 'Las negras toman el peón de c4 para ganar [tiempo](tempo) y atacar el [centro](centre) con ...c5 o ...e5, sin intentar conservarlo.',
+    en: 'Black takes the c4 pawn to gain [time](tempo) and hit the [centre](centre) with ...c5 or ...e5, without trying to keep it.',
   },
   main: `${QGA_CL} a4 Nc6 Qe2 cxd4 Rd1 Be7 exd4 O-O Nc3 Nd5`,
   lines: [
@@ -141,15 +141,15 @@ export const qga: OpeningSpec = {
   notes: {
     'd4 d5 c4': {
       comment: {
-        es: 'Gambito de Dama: no es un gambito real, porque las blancas recuperan el peón con facilidad.',
-        en: "The Queen's Gambit: not a real gambit, since White easily regains the pawn.",
+        es: 'Gambito de Dama: no es un [gambito](gambit) real, porque las blancas recuperan el peón con facilidad.',
+        en: "The Queen's Gambit: not a real [gambit](gambit), since White easily regains the pawn.",
       },
     },
     [QGA]: {
       name: { es: 'Gambito de Dama Aceptado', en: "Queen's Gambit Accepted" },
       comment: {
-        es: 'Las negras toman el peón no para conservarlo, sino para desarrollarse deprisa y atacar el centro con ...c5 o ...e5.',
-        en: 'Black takes the pawn not to keep it, but to develop quickly and hit the centre with ...c5 or ...e5.',
+        es: 'Las negras toman el peón no para conservarlo, sino para [desarrollarse](development) deprisa y atacar el [centro](centre) con ...c5 o ...e5.',
+        en: 'Black takes the pawn not to keep it, but to [develop](development) quickly and hit the [centre](centre) with ...c5 or ...e5.',
       },
     },
     [`${QGA} Nf3`]: {
@@ -169,8 +169,8 @@ export const qga: OpeningSpec = {
     [QGA_CL]: {
       name: { es: 'Defensa Clásica, línea principal', en: 'Classical Defence, Main Line' },
       comment: {
-        es: 'Prepara ...b5 para ganar tiempo sobre el alfil de c4.',
-        en: 'Prepares ...b5 to gain time on the c4 bishop.',
+        es: 'Prepara ...b5 para ganar [tiempo](tempo) sobre el alfil de c4.',
+        en: 'Prepares ...b5 to gain [time](tempo) on the c4 bishop.',
       },
     },
     [`${QGA_CL} a4`]: {
@@ -182,8 +182,8 @@ export const qga: OpeningSpec = {
     },
     [`${QGA_CL} a4 Nc6 Qe2 cxd4 Rd1 Be7 exd4`]: {
       comment: {
-        es: 'Estructura de peón aislado: las blancas tienen piezas activas y las negras bloquean en d5.',
-        en: 'An isolated-pawn structure: White has active pieces while Black blockades on d5.',
+        es: '[Estructura](pawn-structure) de [peón aislado](isolated-pawn): las blancas tienen piezas activas y las negras bloquean en d5.',
+        en: 'An [isolated-pawn](isolated-pawn) [structure](pawn-structure): White has active pieces while Black blockades on d5.',
       },
     },
     [`${QGA_CL} Qe2`]: {
@@ -196,21 +196,21 @@ export const qga: OpeningSpec = {
     [`${QGA_CL} Qe2 b5 Bb3 Bb7`]: {
       name: { es: 'Sistema Alekhine, línea principal', en: 'Alekhine System, Main Line' },
       comment: {
-        es: 'El alfil se instala en la gran diagonal y vigila e4.',
-        en: 'The bishop settles on the long diagonal and watches e4.',
+        es: 'El alfil se instala en la [gran diagonal](long-diagonal) y vigila e4.',
+        en: 'The bishop settles on the [long diagonal](long-diagonal) and watches e4.',
       },
     },
     [`${QGA} e4`]: {
       comment: {
-        es: 'Ocupa el centro con dos peones; las negras deben atacarlo de inmediato.',
-        en: 'Occupies the centre with two pawns; Black must attack it at once.',
+        es: 'Ocupa el [centro](centre) con dos peones; las negras deben atacarlo de inmediato.',
+        en: 'Occupies the [centre](centre) with two pawns; Black must attack it at once.',
       },
     },
     [`${QGA} e4 e5`]: {
       name: { es: 'Defensa McDonnell', en: 'McDonnell Defence' },
       comment: {
-        es: 'Contragolpe central inmediato.',
-        en: 'An immediate central counterstrike.',
+        es: 'Contragolpe [central](centre) inmediato.',
+        en: 'An immediate [central](centre) counterstrike.',
       },
     },
     [`${QGA} e4 Nf6`]: {
@@ -286,14 +286,14 @@ export const slav: OpeningSpec = {
     [`${SL_CZ} e3 e6 Bxc4 Bb4 O-O`]: {
       name: { es: 'Variante Holandesa', en: 'Dutch Variation' },
       comment: {
-        es: 'Las blancas enrocan y preparan De2 y e4.',
-        en: 'White castles and prepares Qe2 and e4.',
+        es: 'Las blancas [enrocan](castling) y preparan De2 y e4.',
+        en: 'White [castles](castling) and prepares Qe2 and e4.',
       },
     },
     [`${SL_CZ} e3 e6 Bxc4 Bb4 O-O Nbd7 Qe2 Bg6 e4`]: {
       comment: {
-        es: 'Las blancas consiguen e4, pero las negras presionan el centro con las piezas.',
-        en: 'White achieves e4, but Black presses the centre with pieces.',
+        es: 'Las blancas consiguen e4, pero las negras presionan el [centro](centre) con las piezas.',
+        en: 'White achieves e4, but Black presses the [centre](centre) with pieces.',
       },
     },
     [`${SL_CZ} e3 e6 Bxc4 Bb4 O-O Nbd7 Qe2 Bg6 e4 O-O Bd3 Bh5 e5 Nd5`]: {
@@ -326,28 +326,28 @@ export const slav: OpeningSpec = {
     [`${SL} Nf3 Nf6 e3 Bf5`]: {
       name: { es: 'Defensa Schallopp', en: 'Schallopp Defence' },
       comment: {
-        es: 'Desarrolla el alfil antes de cerrar con ...e6.',
-        en: 'Develops the bishop before closing the chain with ...e6.',
+        es: '[Desarrolla](development) el alfil antes de cerrar con ...e6.',
+        en: '[Develops](development) the bishop before closing the chain with ...e6.',
       },
     },
     [`${SL} Nf3 Nf6 e3 Bf5 Nc3 e6 Nh4`]: {
       comment: {
-        es: 'Persigue al alfil para conseguir la pareja de alfiles.',
-        en: 'Chases the bishop to win the bishop pair.',
+        es: 'Persigue al alfil para conseguir la [pareja de alfiles](bishop-pair).',
+        en: 'Chases the bishop to win the [bishop pair](bishop-pair).',
       },
     },
     [`${SL} cxd5`]: {
       name: { es: 'Variante del Cambio', en: 'Exchange Variation' },
       comment: {
-        es: 'Estructura simétrica: las blancas conservan una ligera iniciativa gracias al primer movimiento.',
-        en: 'A symmetrical structure: White keeps a slight initiative thanks to the first move.',
+        es: '[Estructura](pawn-structure) simétrica: las blancas conservan una ligera [iniciativa](initiative) gracias al primer movimiento.',
+        en: 'A symmetrical [structure](pawn-structure): White keeps a slight [initiative](initiative) thanks to the first move.',
       },
     },
     [`${SL} cxd5 cxd5 Nc3 Nf6 Bf4 Nc6 e3 Bf5 Nf3 e6 Qb3 Bb4`]: {
       name: { es: 'Variante Trifunovic', en: 'Trifunovic Variation' },
       comment: {
-        es: 'Responde a la presión sobre b7 con contrajuego sobre c3.',
-        en: 'Meets the pressure on b7 with counterplay against c3.',
+        es: 'Responde a la presión sobre b7 con [contrajuego](counterplay) sobre c3.',
+        en: 'Meets the pressure on b7 with [counterplay](counterplay) against c3.',
       },
     },
   },
@@ -388,14 +388,14 @@ export const london: OpeningSpec = {
     },
     [`${LON} c5 e3 Nc6 Nbd2 e6 c3 Bd6 Bg3`]: {
       comment: {
-        es: 'Mantiene el alfil en su diagonal en lugar de permitir un cambio favorable a las negras.',
-        en: 'Keeps the bishop on its diagonal instead of allowing a trade that suits Black.',
+        es: 'Mantiene el alfil en su diagonal en lugar de permitir un [cambio](exchange) favorable a las negras.',
+        en: 'Keeps the bishop on its diagonal instead of allowing a [trade](exchange) that suits Black.',
       },
     },
     [`${LON} c5 e3 Nc6 Nbd2 e6 c3 Bd6 Bg3 O-O Bd3 b6 Ne5`]: {
       comment: {
-        es: 'El caballo se instala en e5; con f4 las blancas preparan un ataque en el flanco de rey.',
-        en: 'The knight settles on e5; with f4 White prepares a kingside attack.',
+        es: 'El caballo se instala en e5; con f4 las blancas preparan un ataque en el [flanco](flank) de rey.',
+        en: 'The knight settles on e5; with f4 White prepares a [kingside](flank) attack.',
       },
     },
     [`${LON} c5 e3 Qb6`]: {
@@ -413,8 +413,8 @@ export const london: OpeningSpec = {
     },
     [`${LON} Bf5`]: {
       comment: {
-        es: 'Las negras copian la idea y desarrollan su alfil fuera de la cadena.',
-        en: 'Black copies the idea and develops the bishop outside the chain.',
+        es: 'Las negras copian la idea y [desarrollan](development) su alfil fuera de la [cadena](pawn-chain).',
+        en: 'Black copies the idea and [develops](development) the bishop outside the [chain](pawn-chain).',
       },
     },
     'd4 d5 Bf4': {
@@ -450,8 +450,8 @@ export const kingsIndian: OpeningSpec = {
   eco: 'E60-E99',
   side: 'black',
   description: {
-    es: 'Las negras ceden el centro al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un flanco distinto.',
-    en: 'Black concedes the centre early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different wing.',
+    es: 'Las negras ceden el [centro](centre) al principio para atacarlo después con ...e5 o ...c5. En las líneas cerradas cada bando ataca en un [flanco](flank) distinto.',
+    en: 'Black concedes the [centre](centre) early, planning to strike at it with ...e5 or ...c5. In the closed lines each side attacks on a different [wing](flank).',
   },
   main: `${KID_MDP} Ne1 Nd7 Nd3 f5 Bd2 Nf6 f3 f4 g4 g5`,
   lines: [
@@ -466,28 +466,28 @@ export const kingsIndian: OpeningSpec = {
     [KID]: {
       name: { es: 'Variante Normal', en: 'Normal Variation' },
       comment: {
-        es: 'Las negras permiten un gran centro blanco para atacarlo después con ...e5 o ...c5.',
-        en: 'Black allows a big white centre, planning to attack it later with ...e5 or ...c5.',
+        es: 'Las negras permiten un gran [centro](centre) blanco para atacarlo después con ...e5 o ...c5.',
+        en: 'Black allows a big white [centre](centre), planning to attack it later with ...e5 or ...c5.',
       },
     },
     [KID_CL]: {
       name: { es: 'Variante Ortodoxa', en: 'Orthodox Variation' },
       comment: {
-        es: 'Golpe central clásico: las negras disputan d4 con un peón.',
-        en: 'The classical central strike: Black contests d4 with a pawn.',
+        es: 'Golpe [central](centre) clásico: las negras disputan d4 con un peón.',
+        en: 'The classical [central](centre) strike: Black contests d4 with a pawn.',
       },
     },
     [`${KID_CL} O-O Nc6`]: {
       name: { es: 'Defensa Aronin-Taimanov', en: 'Aronin–Taimanov Defence' },
       comment: {
-        es: 'Presiona d4 y obliga a las blancas a cerrar el centro.',
-        en: 'Pressures d4 and forces White to close the centre.',
+        es: 'Presiona d4 y obliga a las blancas a cerrar el [centro](centre).',
+        en: 'Pressures d4 and forces White to close the [centre](centre).',
       },
     },
     [KID_MDP]: {
       comment: {
-        es: 'Centro cerrado: las blancas atacarán en el flanco de dama y las negras en el de rey con ...f5.',
-        en: 'A closed centre: White attacks on the queenside and Black on the kingside with ...f5.',
+        es: '[Centro](centre) cerrado: las blancas atacarán en el [flanco](flank) de dama y las negras en el de rey con ...f5.',
+        en: 'A closed [centre](centre): White attacks on the [queenside](flank) and Black on the kingside with ...f5.',
       },
     },
     [`${KID_MDP} Ne1`]: {
@@ -499,27 +499,27 @@ export const kingsIndian: OpeningSpec = {
     },
     [`${KID_MDP} Ne1 Nd7`]: {
       comment: {
-        es: 'El caballo deja paso al peón de f para la ruptura ...f5.',
-        en: 'The knight makes way for the ...f5 break.',
+        es: 'El caballo deja paso al peón de f para la [ruptura](pawn-break) ...f5.',
+        en: 'The knight makes way for the ...f5 [break](pawn-break).',
       },
     },
     [`${KID_MDP} Ne1 Nd7 Nd3 f5 Bd2 Nf6 f3 f4`]: {
       comment: {
-        es: 'Las negras cierran el flanco de rey y preparan ...g5-g4 para atacar.',
-        en: 'Black locks the kingside and prepares ...g5-g4 to attack.',
+        es: 'Las negras cierran el [flanco](flank) de rey y preparan ...g5-g4 para atacar.',
+        en: 'Black locks the [kingside](flank) and prepares ...g5-g4 to attack.',
       },
     },
     [`${KID_MDP} Ne1 Nd7 Nd3 f5 Bd2 Nf6 f3 f4 g4`]: {
       comment: {
-        es: 'Las blancas frenan el avance de los peones negros en el flanco de rey.',
-        en: "White puts a brake on Black's kingside pawn advance.",
+        es: 'Las blancas frenan el avance de los peones negros en el [flanco](flank) de rey.',
+        en: "White puts a brake on Black's [kingside](flank) pawn advance.",
       },
     },
     [`${KID_MDP} b4`]: {
       name: { es: 'Ataque de la Bayoneta', en: 'Bayonet Attack' },
       comment: {
-        es: 'Ataque rápido en el flanco de dama antes de que las negras se organicen.',
-        en: 'A fast queenside attack before Black gets organised.',
+        es: 'Ataque rápido en el [flanco](flank) de dama antes de que las negras se organicen.',
+        en: 'A fast [queenside](flank) attack before Black gets organised.',
       },
     },
     [`${KID_MDP} b4 Nh5`]: {
@@ -534,22 +534,22 @@ export const kingsIndian: OpeningSpec = {
     [`${KID_CL} d5`]: {
       name: { es: 'Variante Petrosian', en: 'Petrosian Variation' },
       comment: {
-        es: 'Cierra el centro de inmediato y prepara Ag5 para clavar el caballo.',
-        en: 'Closes the centre at once and prepares Bg5 to pin the knight.',
+        es: 'Cierra el [centro](centre) de inmediato y prepara Ag5 para [clavar](pin) el caballo.',
+        en: 'Closes the [centre](centre) at once and prepares Bg5 to [pin](pin) the knight.',
       },
     },
     [`${KID_CL} d5 a5`]: {
       name: { es: 'Defensa Stein', en: 'Stein Defence' },
       comment: {
-        es: 'Frena la expansión blanca con b4 en el flanco de dama.',
-        en: "Stops White's queenside expansion with b4.",
+        es: 'Frena la expansión blanca con b4 en el [flanco](flank) de dama.',
+        en: "Stops White's [queenside](flank) expansion with b4.",
       },
     },
     [`${KID_CL} dxe5`]: {
       name: { es: 'Variante del Cambio', en: 'Exchange Variation' },
       comment: {
-        es: 'Cambio de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas.',
-        en: 'An early queen trade: White hopes for a comfortable endgame, but Black equalises without much trouble.',
+        es: '[Cambio](exchange) de damas temprano: las blancas buscan un final cómodo, pero las negras igualan sin grandes problemas.',
+        en: 'An early queen [trade](exchange): White hopes for a comfortable endgame, but Black equalises without much trouble.',
       },
     },
     [`${KID} f3`]: {
@@ -562,8 +562,8 @@ export const kingsIndian: OpeningSpec = {
     [`${KID} f3 O-O Be3 e5`]: {
       name: { es: 'Variante Sämisch, línea ortodoxa', en: 'Sämisch Variation, Orthodox Variation' },
       comment: {
-        es: 'La ruptura central clásica también contra la Sämisch.',
-        en: 'The classical central break, this time against the Sämisch.',
+        es: 'La [ruptura](pawn-break) [central](centre) clásica también contra la Sämisch.',
+        en: 'The classical [central](centre) [break](pawn-break), this time against the Sämisch.',
       },
     },
     [`${KID} f3 O-O Be3 e5 Nge2 c6 d5 cxd5`]: {
@@ -572,21 +572,21 @@ export const kingsIndian: OpeningSpec = {
         en: 'Sämisch Variation, Closed Variation, Main Line',
       },
       comment: {
-        es: 'Abre la columna c para el contrajuego negro en el flanco de dama.',
-        en: "Opens the c-file for Black's queenside counterplay.",
+        es: 'Abre la columna c para el [contrajuego](counterplay) negro en el [flanco](flank) de dama.',
+        en: "Opens the c-file for Black's [queenside](flank) [counterplay](counterplay).",
       },
     },
     [`${KID} f4`]: {
       name: { es: 'Ataque de los Cuatro Peones', en: 'Four Pawns Attack' },
       comment: {
-        es: 'Cuatro peones en el centro: mucho espacio, pero también objetivos para el contraataque negro.',
-        en: "Four central pawns: lots of space, but also targets for Black's counterattack.",
+        es: 'Cuatro peones en el [centro](centre): mucho [espacio](space), pero también objetivos para el contraataque negro.',
+        en: "Four [central](centre) pawns: lots of [space](space), but also targets for Black's counterattack.",
       },
     },
     [`${KID} f4 O-O Nf3 c5 d5 e6`]: {
       comment: {
-        es: 'Las negras atacan la cadena de peones y abren la columna e.',
-        en: 'Black attacks the pawn chain and opens the e-file.',
+        es: 'Las negras atacan la [cadena de peones](pawn-chain) y abren la columna e.',
+        en: 'Black attacks the [pawn chain](pawn-chain) and opens the e-file.',
       },
     },
   },
@@ -601,8 +601,8 @@ export const nimzoIndian: OpeningSpec = {
   eco: 'E20-E59',
   side: 'black',
   description: {
-    es: 'Con 3...Ab4 las negras clavan el caballo de c3 para impedir e4, y a menudo cambian el alfil por el caballo para dañar la estructura blanca.',
-    en: "With 3...Bb4 Black pins the c3 knight to stop e4, often trading bishop for knight to damage White's pawn structure.",
+    es: 'Con 3...Ab4 las negras [clavan](pin) el caballo de c3 para impedir e4, y a menudo [cambian](exchange) el alfil por el caballo para dañar la [estructura](pawn-structure) blanca.',
+    en: "With 3...Bb4 Black [pins](pin) the c3 knight to stop e4, often [trading](exchange) bishop for knight to damage White's [pawn structure](pawn-structure).",
   },
   main: `${NI_RUB} dxc4 Bxc4 Qc7 Bd3 e5 Qc2 Re8`,
   lines: [
@@ -616,22 +616,22 @@ export const nimzoIndian: OpeningSpec = {
     [NI]: {
       name: { es: 'Defensa Nimzoindia', en: 'Nimzo-Indian Defence' },
       comment: {
-        es: 'Clava el caballo de c3 para impedir e4; las negras están dispuestas a ceder el alfil a cambio de dañar la estructura blanca.',
-        en: "Pins the c3 knight to stop e4; Black is ready to give up the bishop to damage White's structure.",
+        es: '[Clava](pin) el caballo de c3 para impedir e4; las negras están dispuestas a ceder el alfil a cambio de dañar la [estructura](pawn-structure) blanca.',
+        en: "[Pins](pin) the c3 knight to stop e4; Black is ready to give up the bishop to damage White's [structure](pawn-structure).",
       },
     },
     [`${NI} e3`]: {
       name: { es: 'Sistema Rubinstein', en: 'Rubinstein System' },
       comment: {
-        es: 'Desarrollo sólido: las blancas completan el flanco de rey antes de decidir su plan.',
-        en: 'Solid development: White completes the kingside before choosing a plan.',
+        es: '[Desarrollo](development) sólido: las blancas completan el [flanco](flank) de rey antes de decidir su plan.',
+        en: 'Solid [development](development): White completes the [kingside](flank) before choosing a plan.',
       },
     },
     [`${NI} e3 O-O Bd3 d5 Nf3 c5`]: {
       name: { es: 'Sistema Gligoric', en: 'Gligoric System' },
       comment: {
-        es: 'Las negras golpean en el centro con ambos peones.',
-        en: 'Black strikes in the centre with both pawns.',
+        es: 'Las negras golpean en el [centro](centre) con ambos peones.',
+        en: 'Black strikes in the [centre](centre) with both pawns.',
       },
     },
     [`${NI} e3 O-O Bd3 d5 Nf3 c5 O-O Nc6`]: {
@@ -639,28 +639,28 @@ export const nimzoIndian: OpeningSpec = {
     },
     [NI_RUB]: {
       comment: {
-        es: 'Las blancas obtienen la pareja de alfiles y un centro de peones a cambio de los peones doblados en c.',
-        en: 'White gets the bishop pair and a pawn centre in exchange for doubled c-pawns.',
+        es: 'Las blancas obtienen la [pareja de alfiles](bishop-pair) y un [centro](centre) de peones a cambio de los [peones doblados](doubled-pawns) en c.',
+        en: 'White gets the [bishop pair](bishop-pair) and a pawn [centre](centre) in exchange for [doubled](doubled-pawns) c-pawns.',
       },
     },
     [`${NI_RUB} dxc4 Bxc4 Qc7`]: {
       comment: {
-        es: 'Prepara ...e5 para disputar el centro.',
-        en: 'Prepares ...e5 to contest the centre.',
+        es: 'Prepara ...e5 para disputar el [centro](centre).',
+        en: 'Prepares ...e5 to contest the [centre](centre).',
       },
     },
     [`${NI} e3 c5 Bd3 Nc6 Nf3 Bxc3+ bxc3 d6`]: {
       name: { es: 'Variante Hübner', en: 'Hübner Variation' },
       comment: {
-        es: 'Estructura cerrada con ...e5: los caballos negros luchan contra los alfiles blancos.',
-        en: "A closed structure with ...e5: Black's knights take on White's bishops.",
+        es: '[Estructura](pawn-structure) cerrada con ...e5: los caballos negros luchan contra los alfiles blancos.',
+        en: "A closed [structure](pawn-structure) with ...e5: Black's knights take on White's bishops.",
       },
     },
     [`${NI} Qc2`]: {
       name: { es: 'Variante Clásica', en: 'Classical Variation' },
       comment: {
-        es: 'Recapturará en c3 con la dama para evitar los peones doblados.',
-        en: 'White will recapture on c3 with the queen to avoid doubled pawns.',
+        es: 'Recapturará en c3 con la dama para evitar los [peones doblados](doubled-pawns).',
+        en: 'White will recapture on c3 with the queen to avoid [doubled pawns](doubled-pawns).',
       },
     },
     [`${NI} Qc2 O-O a3 Bxc3+ Qxc3 b6`]: {
@@ -673,35 +673,35 @@ export const nimzoIndian: OpeningSpec = {
     [`${NI} Qc2 d5`]: {
       name: { es: 'Variante Noa', en: 'Noa Variation' },
       comment: {
-        es: 'Golpe central inmediato.',
-        en: 'An immediate central strike.',
+        es: 'Golpe [central](centre) inmediato.',
+        en: 'An immediate [central](centre) strike.',
       },
     },
     [`${NI} Nf3`]: {
       name: { es: 'Variante de los Tres Caballos', en: 'Three Knights Variation' },
       comment: {
-        es: 'Desarrollo flexible que mantiene abiertas varias estructuras.',
-        en: 'Flexible development that keeps several structures open.',
+        es: '[Desarrollo](development) flexible que mantiene abiertas varias [estructuras](pawn-structure).',
+        en: 'Flexible [development](development) that keeps several [structures](pawn-structure) open.',
       },
     },
     [`${NI} Nf3 c5 g3 cxd4 Nxd4 O-O Bg2 d5 cxd5 Nxd5`]: {
       name: { es: 'Híbrido Inglés', en: 'English Hybrid' },
       comment: {
-        es: 'Posición abierta de tipo Inglesa: el alfil de g2 presiona la gran diagonal.',
-        en: 'An open, English-like position: the g2 bishop presses the long diagonal.',
+        es: 'Posición abierta de tipo Inglesa: el alfil de g2 presiona la [gran diagonal](long-diagonal).',
+        en: 'An open, English-like position: the g2 bishop presses the [long diagonal](long-diagonal).',
       },
     },
     [`${NI} a3`]: {
       name: { es: 'Variante Sämisch', en: 'Sämisch Variation' },
       comment: {
-        es: 'Fuerza el cambio en c3: las blancas obtienen la pareja de alfiles a cambio de peones doblados.',
-        en: 'Forces the trade on c3: White gets the bishop pair in exchange for doubled pawns.',
+        es: 'Fuerza el [cambio](exchange) en c3: las blancas obtienen la [pareja de alfiles](bishop-pair) a cambio de [peones doblados](doubled-pawns).',
+        en: 'Forces the [trade](exchange) on c3: White gets the [bishop pair](bishop-pair) in exchange for [doubled pawns](doubled-pawns).',
       },
     },
     [`${NI} a3 Bxc3+ bxc3 c5 e3 Nc6 Bd3 O-O Ne2 b6 e4 Ne8`]: {
       comment: {
-        es: 'Maniobra típica: el caballo evita la clavada Ag5 y prepara ...f5.',
-        en: 'A typical manoeuvre: the knight sidesteps the Bg5 pin and prepares ...f5.',
+        es: 'Maniobra típica: el caballo evita la [clavada](pin) Ag5 y prepara ...f5.',
+        en: 'A typical manoeuvre: the knight sidesteps the Bg5 [pin](pin) and prepares ...f5.',
       },
     },
   },
@@ -716,8 +716,8 @@ export const grunfeld: OpeningSpec = {
   eco: 'D70-D99',
   side: 'black',
   description: {
-    es: 'Las negras permiten que las blancas levanten un gran centro con e4 para atacarlo después con el alfil de g7 y ...c5. Apertura muy dinámica.',
-    en: 'Black lets White build a big centre with e4 and then attacks it with the g7 bishop and ...c5. A highly dynamic opening.',
+    es: 'Las negras permiten que las blancas levanten un gran [centro](centre) con e4 para atacarlo después con el alfil de g7 y ...c5. Apertura muy dinámica.',
+    en: 'Black lets White build a big [centre](centre) with e4 and then attacks it with the g7 bishop and ...c5. A highly dynamic opening.',
   },
   main: `${GR_EX} Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2 O-O Bg4 Bg5 h6 Be3`,
   lines: [
@@ -730,8 +730,8 @@ export const grunfeld: OpeningSpec = {
     [GR]: {
       name: { es: 'Defensa Grünfeld', en: 'Grünfeld Defence' },
       comment: {
-        es: 'Las negras desafían el centro de inmediato; si las blancas lo ocupan con e4, lo atacarán con piezas y ...c5.',
-        en: 'Black challenges the centre at once; if White occupies it with e4, Black attacks it with pieces and ...c5.',
+        es: 'Las negras desafían el [centro](centre) de inmediato; si las blancas lo ocupan con e4, lo atacarán con piezas y ...c5.',
+        en: 'Black challenges the [centre](centre) at once; if White occupies it with e4, Black attacks it with pieces and ...c5.',
       },
     },
     [`${GR} cxd5 Nxd5`]: {
@@ -739,8 +739,8 @@ export const grunfeld: OpeningSpec = {
     },
     [`${GR} cxd5 Nxd5 e4 Nxc3 bxc3`]: {
       comment: {
-        es: 'Las blancas consiguen un gran centro de peones; las negras lo atacarán con el alfil de g7 y ...c5.',
-        en: 'White gets a big pawn centre; Black will attack it with the g7 bishop and ...c5.',
+        es: 'Las blancas consiguen un gran [centro](centre) de peones; las negras lo atacarán con el alfil de g7 y ...c5.',
+        en: 'White gets a big pawn [centre](centre); Black will attack it with the g7 bishop and ...c5.',
       },
     },
     [`${GR_EX} Nf3`]: {
@@ -754,15 +754,15 @@ export const grunfeld: OpeningSpec = {
     },
     [`${GR_EX} Nf3 c5 Rb1 O-O Be2 cxd4 cxd4 Qa5+ Bd2 Qxa2`]: {
       comment: {
-        es: 'Las negras capturan el peón de a2 a cambio de tiempo; las blancas buscan compensación en el centro.',
-        en: 'Black grabs the a2 pawn at the cost of time; White seeks compensation in the centre.',
+        es: 'Las negras capturan el peón de a2 a cambio de [tiempo](tempo); las blancas buscan compensación en el [centro](centre).',
+        en: 'Black grabs the a2 pawn at the cost of [time](tempo); White seeks compensation in the [centre](centre).',
       },
     },
     [`${GR_EX} Bc4`]: {
       name: { es: 'Variante del Cambio Clásica', en: 'Classical Exchange Variation' },
       comment: {
-        es: 'El alfil apunta a f7 y el caballo irá a e2 para evitar la clavada ...Ag4.',
-        en: 'The bishop eyes f7 and the knight goes to e2 to avoid the ...Bg4 pin.',
+        es: 'El alfil apunta a f7 y el caballo irá a e2 para evitar la [clavada](pin) ...Ag4.',
+        en: 'The bishop eyes f7 and the knight goes to e2 to avoid the ...Bg4 [pin](pin).',
       },
     },
     [`${GR_EX} Bc4 c5 Ne2 Nc6 Be3 O-O O-O Bg4 f3 Na5`]: {
@@ -787,8 +787,8 @@ export const grunfeld: OpeningSpec = {
     [`${GR} Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Bg4`]: {
       name: { es: 'Variante Smyslov', en: 'Smyslov Variation' },
       comment: {
-        es: 'Presiona d4 mediante la clavada del caballo de f3.',
-        en: 'Pressures d4 by pinning the f3 knight.',
+        es: 'Presiona d4 mediante la [clavada](pin) del caballo de f3.',
+        en: 'Pressures d4 by [pinning](pin) the f3 knight.',
       },
     },
     [`${GR} Nf3 Bg7 Qb3 dxc4 Qxc4 O-O e4 Bg4 Be3 Nfd7 Qb3 c5`]: {
@@ -797,8 +797,8 @@ export const grunfeld: OpeningSpec = {
     [`${GR} Bf4`]: {
       name: { es: 'Ataque Brinckmann', en: 'Brinckmann Attack' },
       comment: {
-        es: 'Desarrollo activo del alfil; las negras responden con ...c5 y ...Da5 para recuperar el peón con juego activo.',
-        en: 'Active bishop development; Black replies ...c5 and ...Qa5 to regain the pawn with active play.',
+        es: '[Desarrollo](development) activo del alfil; las negras responden con ...c5 y ...Da5 para recuperar el peón con juego activo.',
+        en: 'Active bishop [development](development); Black replies ...c5 and ...Qa5 to regain the pawn with active play.',
       },
     },
   },
@@ -814,8 +814,8 @@ export const english: OpeningSpec = {
   eco: 'A10-A39',
   side: 'white',
   description: {
-    es: 'Las blancas controlan d5 desde el flanco con 1.c4, a menudo con fianchetto del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.',
-    en: 'White controls d5 from the flank with 1.c4, often with a kingside fianchetto. Flexible positional play that can transpose into many openings.',
+    es: 'Las blancas controlan d5 desde el [flanco](flank) con 1.c4, a menudo con [fianchetto](fianchetto) del alfil de rey. Juego posicional y flexible que puede transponer a muchas aperturas.',
+    en: 'White controls d5 from the [flank](flank) with 1.c4, often with a kingside [fianchetto](fianchetto). Flexible positional play that can transpose into many openings.',
   },
   main: `${ENG_4N} g3 d5 cxd5 Nxd5 Bg2 Nb6 O-O Be7 d3 O-O a3 Be6 b4 a5 b5 Nd4`,
   lines: [
@@ -828,22 +828,22 @@ export const english: OpeningSpec = {
     c4: {
       name: { es: 'Apertura Inglesa', en: 'English Opening' },
       comment: {
-        es: 'Controla d5 desde el flanco; las blancas suelen combinarlo con un fianchetto en g2.',
-        en: 'Controls d5 from the flank; White often combines it with a fianchetto on g2.',
+        es: 'Controla d5 desde el [flanco](flank); las blancas suelen combinarlo con un [fianchetto](fianchetto) en g2.',
+        en: 'Controls d5 from the [flank](flank); White often combines it with a [fianchetto](fianchetto) on g2.',
       },
     },
     'c4 e5': {
       name: { es: 'Variante inglesa de rey (1...e5)', en: "King's English Variation" },
       comment: {
-        es: 'Las negras ocupan el centro con el peón de rey.',
-        en: "Black occupies the centre with the king's pawn.",
+        es: 'Las negras ocupan el [centro](centre) con el peón de rey.',
+        en: "Black occupies the [centre](centre) with the king's pawn.",
       },
     },
     'c4 e5 Nc3': {
       name: { es: 'Siciliana invertida', en: 'Reversed Sicilian' },
       comment: {
-        es: 'Una Siciliana con los colores cambiados y un tiempo más para las blancas.',
-        en: 'A Sicilian with colours reversed and an extra tempo for White.',
+        es: 'Una Siciliana con los colores cambiados y un [tiempo](tempo) más para las blancas.',
+        en: 'A Sicilian with colours reversed and an extra [tempo](tempo) for White.',
       },
     },
     [ENG_4N]: {
@@ -851,27 +851,27 @@ export const english: OpeningSpec = {
     },
     [`${ENG_4N} g3`]: {
       comment: {
-        es: 'Fianchetto: el alfil de g2 presionará d5 y b7.',
-        en: 'A fianchetto: the g2 bishop will press d5 and b7.',
+        es: '[Fianchetto](fianchetto): el alfil de g2 presionará d5 y b7.',
+        en: 'A [fianchetto](fianchetto): the g2 bishop will press d5 and b7.',
       },
     },
     [`${ENG_4N} g3 d5 cxd5 Nxd5`]: {
       comment: {
-        es: 'Estructura de Dragón invertido: las blancas juegan un Dragón con un tiempo más.',
-        en: 'A reversed Dragon structure: White plays a Dragon with an extra tempo.',
+        es: '[Estructura](pawn-structure) de Dragón invertido: las blancas juegan un Dragón con un [tiempo](tempo) más.',
+        en: 'A reversed Dragon [structure](pawn-structure): White plays a Dragon with an extra [tempo](tempo).',
       },
     },
     [`${ENG_4N} g3 d5 cxd5 Nxd5 Bg2 Nb6 O-O Be7 d3 O-O a3`]: {
       comment: {
-        es: 'Prepara b4-b5 para expulsar al caballo de c6 y ganar espacio en el flanco de dama.',
-        en: 'Prepares b4-b5 to drive away the c6 knight and gain queenside space.',
+        es: 'Prepara b4-b5 para expulsar al caballo de c6 y ganar [espacio](space) en el [flanco](flank) de dama.',
+        en: 'Prepares b4-b5 to drive away the c6 knight and gain [queenside](flank) [space](space).',
       },
     },
     'c4 e5 Nc3 Nc6 g3 g6 Bg2 Bg7 d3': {
       name: { es: 'Sistema cerrado', en: 'Closed System' },
       comment: {
-        es: 'Juego lento: las blancas maniobran antes de romper con b4 o f4.',
-        en: 'Slow play: White manoeuvres before breaking with b4 or f4.',
+        es: 'Juego lento: las blancas maniobran antes de [romper](pawn-break) con b4 o f4.',
+        en: 'Slow play: White manoeuvres before [breaking](pawn-break) with b4 or f4.',
       },
     },
     'c4 e5 Nc3 Nc6 g3 g6 Bg2 Bg7 d3 d6 e4': {
@@ -890,8 +890,8 @@ export const english: OpeningSpec = {
     },
     'c4 c5 Nf3 Nf6 Nc3 Nc6 g3 g6 Bg2 Bg7 O-O O-O d4': {
       comment: {
-        es: 'Las blancas rompen la simetría abriendo el centro.',
-        en: 'White breaks the symmetry by opening the centre.',
+        es: 'Las blancas rompen la simetría abriendo el [centro](centre).',
+        en: 'White breaks the symmetry by opening the [centre](centre).',
       },
     },
     'c4 Nf6': {
@@ -900,15 +900,15 @@ export const english: OpeningSpec = {
     'c4 Nf6 Nc3 e6 e4': {
       name: { es: 'Variante Mikenas-Carls', en: 'Mikenas–Carls Variation' },
       comment: {
-        es: 'Ocupa el centro de inmediato e invita a ...d5 y e5.',
-        en: 'Occupies the centre at once, inviting ...d5 and e5.',
+        es: 'Ocupa el [centro](centre) de inmediato e invita a ...d5 y e5.',
+        en: 'Occupies the [centre](centre) at once, inviting ...d5 and e5.',
       },
     },
     'c4 e6': {
       name: { es: 'Defensa Agincourt', en: 'Agincourt Defence' },
       comment: {
-        es: 'Las negras preparan ...d5 con una estructura de tipo Gambito de Dama.',
-        en: "Black prepares ...d5 with a Queen's Gambit-style structure.",
+        es: 'Las negras preparan ...d5 con una [estructura](pawn-structure) de tipo Gambito de Dama.',
+        en: "Black prepares ...d5 with a Queen's Gambit-style [structure](pawn-structure).",
       },
     },
     'c4 e6 Nf3 d5 g3 Nf6 Bg2 Be7 O-O': {

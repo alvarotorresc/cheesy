@@ -10,7 +10,16 @@
     "es": [
       {
         "kind": "text",
-        "text": "Las negras permiten un centro blanco amplio para socavarlo después con "
+        "text": "Las negras permiten un "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centro"
+      },
+      {
+        "kind": "text",
+        "text": " blanco amplio para socavarlo después con "
       },
       {
         "kind": "move",
@@ -46,7 +55,16 @@
     "en": [
       {
         "kind": "text",
-        "text": "Black allows a broad white centre and undermines it later with "
+        "text": "Black allows a broad white "
+      },
+      {
+        "kind": "term",
+        "id": "centre",
+        "text": "centre"
+      },
+      {
+        "kind": "text",
+        "text": " and undermines it later with "
       },
       {
         "kind": "move",
@@ -91,13 +109,49 @@
             "es": [
               {
                 "kind": "text",
-                "text": "Las negras dejan que las blancas ocupen el centro para atacarlo después con piezas y rupturas de peón."
+                "text": "Las negras dejan que las blancas ocupen el "
+              },
+              {
+                "kind": "term",
+                "id": "centre",
+                "text": "centro"
+              },
+              {
+                "kind": "text",
+                "text": " para atacarlo después con piezas y "
+              },
+              {
+                "kind": "term",
+                "id": "pawn-break",
+                "text": "rupturas"
+              },
+              {
+                "kind": "text",
+                "text": " de peón."
               }
             ],
             "en": [
               {
                 "kind": "text",
-                "text": "Black lets White occupy the centre, planning to attack it later with pieces and pawn breaks."
+                "text": "Black lets White occupy the "
+              },
+              {
+                "kind": "term",
+                "id": "centre",
+                "text": "centre"
+              },
+              {
+                "kind": "text",
+                "text": ", planning to attack it later with pieces and pawn "
+              },
+              {
+                "kind": "term",
+                "id": "pawn-break",
+                "text": "breaks"
+              },
+              {
+                "kind": "text",
+                "text": "."
               }
             ]
           },
@@ -133,7 +187,16 @@
                               },
                               {
                                 "kind": "text",
-                                "text": " para presionar el centro blanco desde lejos."
+                                "text": " para presionar el "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centro"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " blanco desde lejos."
                               }
                             ],
                             "en": [
@@ -147,7 +210,16 @@
                               },
                               {
                                 "kind": "text",
-                                "text": " to pressure White’s centre from afar."
+                                "text": " to pressure White’s "
+                              },
+                              {
+                                "kind": "term",
+                                "id": "centre",
+                                "text": "centre"
+                              },
+                              {
+                                "kind": "text",
+                                "text": " from afar."
                               }
                             ]
                           },
@@ -163,7 +235,16 @@
                                 "es": [
                                   {
                                     "kind": "text",
-                                    "text": "Tres peones en el centro: las blancas buscan "
+                                    "text": "Tres peones en el "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "centro"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": las blancas buscan "
                                   },
                                   {
                                     "kind": "square",
@@ -171,13 +252,31 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " y un ataque en el flanco de rey."
+                                    "text": " y un ataque en el "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "flanco"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " de rey."
                                   }
                                 ],
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Three central pawns: White aims for "
+                                    "text": "Three "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "centre",
+                                    "text": "central"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " pawns: White aims for "
                                   },
                                   {
                                     "kind": "square",
@@ -185,7 +284,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " and a kingside attack."
+                                    "text": " and a "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "flank",
+                                    "text": "kingside"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " attack."
                                   }
                                 ]
                               },
@@ -212,8 +320,13 @@
                                               "comment": {
                                                 "es": [
                                                   {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "Desarrollo"
+                                                  },
+                                                  {
                                                     "kind": "text",
-                                                    "text": "Desarrollo flexible: el alfil apoya "
+                                                    "text": " flexible: el alfil apoya "
                                                   },
                                                   {
                                                     "kind": "square",
@@ -227,7 +340,16 @@
                                                 "en": [
                                                   {
                                                     "kind": "text",
-                                                    "text": "Flexible development: the bishop supports "
+                                                    "text": "Flexible "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "development",
+                                                    "text": "development"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": ": the bishop supports "
                                                   },
                                                   {
                                                     "kind": "square",
@@ -343,7 +465,25 @@
                                                                 "es": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "Las blancas cierran el centro; las negras juegan en el flanco de dama con "
+                                                                    "text": "Las blancas cierran el "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "centre",
+                                                                    "text": "centro"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; las negras juegan en el "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "flank",
+                                                                    "text": "flanco"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " de dama con "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -371,7 +511,25 @@
                                                                 "en": [
                                                                   {
                                                                     "kind": "text",
-                                                                    "text": "White closes the centre; Black plays on the queenside with "
+                                                                    "text": "White closes the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "centre",
+                                                                    "text": "centre"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": "; Black plays on the "
+                                                                  },
+                                                                  {
+                                                                    "kind": "term",
+                                                                    "id": "flank",
+                                                                    "text": "queenside"
+                                                                  },
+                                                                  {
+                                                                    "kind": "text",
+                                                                    "text": " with "
                                                                   },
                                                                   {
                                                                     "kind": "move",
@@ -456,7 +614,16 @@
                                                   },
                                                   {
                                                     "kind": "text",
-                                                    "text": " y gana espacio; las negras contraatacan con "
+                                                    "text": " y gana "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "space",
+                                                    "text": "espacio"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "; las negras contraatacan con "
                                                   },
                                                   {
                                                     "kind": "move",
@@ -481,7 +648,16 @@
                                                   },
                                                   {
                                                     "kind": "text",
-                                                    "text": " knight and gains space; Black hits back with "
+                                                    "text": " knight and gains "
+                                                  },
+                                                  {
+                                                    "kind": "term",
+                                                    "id": "space",
+                                                    "text": "space"
+                                                  },
+                                                  {
+                                                    "kind": "text",
+                                                    "text": "; Black hits back with "
                                                   },
                                                   {
                                                     "kind": "move",
@@ -553,7 +729,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": ", antes de que las blancas completen el desarrollo."
+                                                "text": ", antes de que las blancas completen el "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "development",
+                                                "text": "desarrollo"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
                                               }
                                             ],
                                             "en": [
@@ -567,7 +752,16 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " before White completes development."
+                                                "text": " before White completes "
+                                              },
+                                              {
+                                                "kind": "term",
+                                                "id": "development",
+                                                "text": "development"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": "."
                                               }
                                             ]
                                           },
@@ -638,8 +832,13 @@
                               "comment": {
                                 "es": [
                                   {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "Desarrollo"
+                                  },
+                                  {
                                     "kind": "text",
-                                    "text": "Desarrollo sólido: las blancas renuncian a "
+                                    "text": " sólido: las blancas renuncian a "
                                   },
                                   {
                                     "kind": "square",
@@ -653,7 +852,16 @@
                                 "en": [
                                   {
                                     "kind": "text",
-                                    "text": "Solid development: White forgoes "
+                                    "text": "Solid "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "development",
+                                    "text": "development"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": ": White forgoes "
                                   },
                                   {
                                     "kind": "square",
@@ -710,7 +918,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " con una estructura flexible."
+                                                        "text": " con una "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "pawn-structure",
+                                                        "text": "estructura"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " flexible."
                                                       }
                                                     ],
                                                     "en": [
@@ -738,7 +955,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": " with a flexible structure."
+                                                        "text": " with a flexible "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "pawn-structure",
+                                                        "text": "structure"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": "."
                                                       }
                                                     ]
                                                   },
@@ -782,7 +1008,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": ", dispuesto a cambiar el alfil por el caballo de "
+                                                        "text": ", dispuesto a "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "exchange",
+                                                        "text": "cambiar"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " el alfil por el caballo de "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -804,7 +1039,16 @@
                                                       },
                                                       {
                                                         "kind": "text",
-                                                        "text": ", ready to trade the bishop for the "
+                                                        "text": ", ready to "
+                                                      },
+                                                      {
+                                                        "kind": "term",
+                                                        "id": "exchange",
+                                                        "text": "trade"
+                                                      },
+                                                      {
+                                                        "kind": "text",
+                                                        "text": " the bishop for the "
                                                       },
                                                       {
                                                         "kind": "square",
@@ -894,7 +1138,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " para cambiar el alfil de "
+                                    "text": " para "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "exchange",
+                                    "text": "cambiar"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " el alfil de "
                                   },
                                   {
                                     "kind": "square",
@@ -938,7 +1191,16 @@
                                   },
                                   {
                                     "kind": "text",
-                                    "text": " to trade off the "
+                                    "text": " to "
+                                  },
+                                  {
+                                    "kind": "term",
+                                    "id": "exchange",
+                                    "text": "trade"
+                                  },
+                                  {
+                                    "kind": "text",
+                                    "text": " off the "
                                   },
                                   {
                                     "kind": "square",
