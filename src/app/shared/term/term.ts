@@ -122,7 +122,13 @@ export class TermView {
     // The popup grows when its content arrives: place it again once it has been drawn.
     effect(() => {
       if (!this.state() || !this.open()) return;
-      afterNextRender(() => this.position(), { injector: this.injector });
+      afterNextRender(
+        () => {
+          this.raise();
+          this.position();
+        },
+        { injector: this.injector },
+      );
     });
   }
 
@@ -182,9 +188,16 @@ export class TermView {
     if (focus) this.button().nativeElement.focus();
   }
 
+  /** Puts the popup in the top layer once (it leaves it by itself when it is removed). */
+  private raise(): void {
+    const popup = this.popup()?.nativeElement;
+    if (!popup || typeof popup.showPopover !== 'function' || popup.matches(':popover-open')) return;
+    popup.showPopover();
+  }
+
   /**
-   * Under the word, or above it when it would not fit below; never past the screen edges (fixed, so
-   * it ignores any scroll container).
+   * Under the word, or above it when it would not fit below; never past the screen edges (fixed in
+   * the top layer, so it ignores any scroll container and any transformed ancestor).
    */
   private position(): void {
     if (!this.open()) return;

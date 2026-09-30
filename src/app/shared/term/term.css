@@ -21,8 +21,15 @@
   border-radius: 2px;
 }
 
+/*
+ * Shown as a popover, in the top layer: a transformed ancestor (the theme tags on Positions keep the
+ * transform their reveal animation ends on) would otherwise become the box that "fixed" is measured
+ * from. The popover defaults (centred, inset 0, thin border) give way to the placement below.
+ */
 .popup {
   position: fixed;
+  inset: auto;
+  margin: 0;
   z-index: 40;
   display: grid;
   gap: var(--space-2);
@@ -34,8 +41,12 @@
   color: var(--color-text);
   box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
   font-size: 0.95rem;
+  font-weight: 400;
   line-height: 1.45;
+  letter-spacing: normal;
   text-align: start;
+  text-transform: none;
+  white-space: normal;
   /* Never taller than the screen: whatever does not fit scrolls inside. */
   max-height: calc(100dvh - 2 * 16px);
   overflow-y: auto;

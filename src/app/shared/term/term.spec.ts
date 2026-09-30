@@ -168,6 +168,23 @@ describe('TermView', () => {
     expect(left + width).toBeLessThanOrEqual(360 - 16);
   });
 
+  it('should show the popup in the top layer, where no ancestor can move or clip it', async () => {
+    // jsdom has no Popover API: a stand-in records which element was shown.
+    const shown: Element[] = [];
+    const proto = HTMLElement.prototype as unknown as Record<string, unknown>;
+    proto['showPopover'] = function (this: Element) {
+      shown.push(this);
+    };
+    try {
+      button().click();
+      await fixture.whenStable();
+      expect(popup()?.getAttribute('popover')).toBe('manual');
+      expect(shown).toContain(popup());
+    } finally {
+      delete proto['showPopover'];
+    }
+  });
+
   const openByMouse = async () => {
     vi.useFakeTimers();
     button().dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }));
