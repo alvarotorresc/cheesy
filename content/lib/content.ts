@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { CuratedPosition, EndgamePosition, OpeningTree } from '../types.ts';
@@ -12,6 +12,7 @@ export const OPENINGS_DIR = path.join(DATA_DIR, 'openings');
 export const OPENING_CATALOG_FILE = path.join(DATA_DIR, 'opening-catalog.json');
 export const ENDGAMES_FILE = path.join(DATA_DIR, 'endgames.json');
 export const POSITIONS_FILE = path.join(DATA_DIR, 'positions.json');
+export const GLOSSARY_FILE = path.join(DATA_DIR, 'glossary.json');
 
 const readJson = (file: string): unknown => JSON.parse(readFileSync(file, 'utf8'));
 
@@ -28,3 +29,9 @@ export const loadEndgamesRaw = () => readJson(ENDGAMES_FILE);
 export const loadEndgames = () => loadEndgamesRaw() as EndgamePosition[];
 export const loadPositionsRaw = () => readJson(POSITIONS_FILE);
 export const loadPositions = () => loadPositionsRaw() as CuratedPosition[];
+
+/** Ids of the glossary terms; none while the glossary does not exist yet. */
+export const loadGlossaryIds = (): Set<string> =>
+  existsSync(GLOSSARY_FILE)
+    ? new Set((readJson(GLOSSARY_FILE) as { id: string }[]).map((t) => t.id))
+    : new Set();

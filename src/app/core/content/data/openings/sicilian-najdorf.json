@@ -253,7 +253,7 @@
                                             "en": [
                                               {
                                                 "kind": "text",
-                                                "text": "Takes "
+                                                "text": "Controls "
                                               },
                                               {
                                                 "kind": "square",
@@ -261,7 +261,27 @@
                                               },
                                               {
                                                 "kind": "text",
-                                                "text": " away from White pieces and prepares "
+                                                "text": " (no "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Nb5",
+                                                "start": false,
+                                                "written": "Nb5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": " or "
+                                              },
+                                              {
+                                                "kind": "move",
+                                                "san": "Bb5",
+                                                "start": false,
+                                                "written": "Bb5"
+                                              },
+                                              {
+                                                "kind": "text",
+                                                "text": ") and prepares "
                                               },
                                               {
                                                 "kind": "move",
