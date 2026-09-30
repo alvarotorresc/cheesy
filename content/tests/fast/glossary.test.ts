@@ -79,15 +79,42 @@ describe('glossary', () => {
     expect(unknown).toEqual([]);
   });
 
-  it.todo('holds every term of the closed list'); // Task 2 turns this into a real test.
+  it('holds every term of the closed list', () => {
+    expect(glossary.map((t) => t.id).sort()).toEqual(EXPECTED_IDS);
+  });
 
   it('every tag of the positions is a glossary term', () => {
     const ids = new Set(glossary.map((t) => t.id));
     const missing = [...new Set(loadPositions().flatMap((p) => p.tags))].filter(
       (tag) => !ids.has(tag),
     );
-    // Until task 2 fills the glossary this list is not empty; task 2 removes this guard.
-    expect(missing.every((tag) => EXPECTED_IDS.includes(tag))).toBe(true);
+    expect(missing).toEqual([]);
+  });
+
+  describe('validateGlossaryTerm rejects bad values', () => {
+    const good = (raw as Record<string, unknown>[])[0]!;
+    const withExample = (patch: Record<string, unknown>) => ({
+      ...good,
+      example: { ...(good.example as object), ...patch },
+    });
+    const arrow = (a: object) =>
+      withExample({ arrows: [{ from: 'e2', to: 'e4', move: true, ...a }] });
+    const cases: [string, unknown][] = [
+      ['a highlight off the board', withExample({ highlights: ['e9'] })],
+      ['a highlight that is not a square', withExample({ highlights: ['e'] })],
+      ['an arrow origin off the board', arrow({ from: 'i2' })],
+      ['an arrow target off the board', arrow({ to: 'a0' })],
+      ['a source that is not a URL', { ...good, sources: ['not a url'] }],
+      ['a source over http', { ...good, sources: ['http://lichess.org/x'] }],
+    ];
+
+    it('accepts the untouched term', () => {
+      expect(validateGlossaryTerm(good, 'g')).toEqual([]);
+    });
+
+    it.each(cases)('rejects %s', (_name, term) => {
+      expect(validateGlossaryTerm(term, 'g')).not.toEqual([]);
+    });
   });
 
   describe.each(glossary)('$id', (term) => {

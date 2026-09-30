@@ -108,6 +108,10 @@ export function validateOpeningTree(t: unknown): Errors {
   return errs;
 }
 
+const isSquareName = (v: unknown): boolean => typeof v === 'string' && /^[a-h][1-8]$/.test(v);
+const isHttpsUrl = (v: unknown): boolean =>
+  typeof v === 'string' && URL.parse(v)?.protocol === 'https:';
+
 const LEVELS = ['beginner', 'intermediate', 'advanced'];
 
 export function validateGlossaryTerm(t: unknown, at: string): Errors {
@@ -119,8 +123,8 @@ export function validateGlossaryTerm(t: unknown, at: string): Errors {
   checkRichText(t.definition, `${at}.definition`, errs);
   if (!LEVELS.includes(t.level as string))
     errs.push(`${at}.level: must be beginner|intermediate|advanced`);
-  if (!Array.isArray(t.sources) || t.sources.length === 0 || !t.sources.every(nonEmpty))
-    errs.push(`${at}.sources: must be a non-empty array of URLs`);
+  if (!Array.isArray(t.sources) || t.sources.length === 0 || !t.sources.every(isHttpsUrl))
+    errs.push(`${at}.sources: must be a non-empty array of https URLs`);
   if (t.lesson !== undefined) checkId(t.lesson, `${at}.lesson`, errs);
   const ex = t.example;
   if (!isObj(ex)) errs.push(`${at}.example: must be an object`);
@@ -130,11 +134,19 @@ export function validateGlossaryTerm(t: unknown, at: string): Errors {
     if (!SIDES.includes(ex.orientation as string))
       errs.push(`${at}.example.orientation: must be white|black`);
     if (!Array.isArray(ex.highlights)) errs.push(`${at}.example.highlights: must be an array`);
+    else
+      ex.highlights.forEach((sq, i) => {
+        if (!isSquareName(sq))
+          errs.push(`${at}.example.highlights[${i}]: bad square ${JSON.stringify(sq)}`);
+      });
     if (!Array.isArray(ex.arrows)) errs.push(`${at}.example.arrows: must be an array`);
     else
       ex.arrows.forEach((a, i) => {
         if (!isObj(a)) return void errs.push(`${at}.example.arrows[${i}]: must be an object`);
         checkKeys(a, ['from', 'to', 'move'], [], `${at}.example.arrows[${i}]`, errs);
+        for (const end of ['from', 'to'] as const)
+          if (!isSquareName(a[end]))
+            errs.push(`${at}.example.arrows[${i}].${end}: bad square ${JSON.stringify(a[end])}`);
         if (typeof a.move !== 'boolean')
           errs.push(`${at}.example.arrows[${i}].move: must be a boolean`);
       });
