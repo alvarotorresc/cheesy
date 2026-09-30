@@ -50,6 +50,10 @@ export class GlossaryPage {
       matchesSearch(t, query, lang),
     );
   });
+  /** The search found nothing in a loaded glossary (what the always-present live region says). */
+  protected readonly noMatch = computed(
+    () => this.glossary.hasValue() && this.terms().length === 0,
+  );
   protected readonly frameOf = (term: GlossaryTerm) => [frameFromFen(term.example.fen)];
 
   constructor() {

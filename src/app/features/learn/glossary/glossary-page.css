@@ -30,6 +30,15 @@
   min-height: var(--tap);
 }
 
+.status {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.status:empty {
+  margin: 0;
+}
+
 .notice {
   color: var(--color-text-muted);
 }

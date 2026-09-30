@@ -59,6 +59,10 @@ describe('GlossaryPage', () => {
     const root = fixture.nativeElement as HTMLElement;
     const input = root.querySelector<HTMLInputElement>('input[type=search]')!;
     expect(root.querySelector('label')?.textContent).toContain('Buscar');
+    // One live region, there from the start, so a screen reader announces the change of its text.
+    const status = root.querySelector('[role="status"]');
+    expect(status).not.toBeNull();
+    expect(status?.textContent?.trim()).toBe('');
 
     input.value = 'OPOSICION';
     input.dispatchEvent(new Event('input'));
@@ -70,7 +74,14 @@ describe('GlossaryPage', () => {
     input.dispatchEvent(new Event('input'));
     await fixture.whenStable();
     expect(root.querySelectorAll('article')).toHaveLength(0);
-    expect(root.querySelector('.notice')?.textContent).toContain('Ningún');
+    expect(root.querySelector('[role="status"]')).toBe(status);
+    expect(status?.textContent).toContain('Ningún');
+
+    input.value = 'oposicion';
+    input.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+    expect(root.querySelector('[role="status"]')).toBe(status);
+    expect(status?.textContent?.trim()).toBe('');
   });
 
   it('should scroll to the term of the fragment once the glossary is drawn', async () => {
