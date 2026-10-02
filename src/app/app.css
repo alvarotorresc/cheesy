@@ -74,7 +74,9 @@
 .nav {
   grid-area: nav;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Five items on a phone: the width of each word, spread over the row. */
+  grid-template-columns: repeat(5, auto);
+  justify-content: space-between;
 }
 
 .nav-link {
@@ -84,7 +86,7 @@
   min-height: var(--tap);
   padding: var(--space-2) var(--space-1);
   color: var(--color-on-ink-muted);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -197,6 +199,10 @@
 
   .reading .lang-button {
     flex: none;
+  }
+
+  .nav {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .nav-link {

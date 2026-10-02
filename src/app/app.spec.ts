@@ -152,7 +152,7 @@ describe('App', () => {
     ).toBe('Cheesy, home');
   });
 
-  it('should link to the four sections when rendered', async () => {
+  it('should link to the five sections, Learn first, when rendered', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
@@ -161,7 +161,7 @@ describe('App', () => {
       link.getAttribute('href'),
     );
 
-    expect(links).toEqual(['/openings', '/endgames', '/positions', '/analysis']);
+    expect(links).toEqual(['/learn', '/openings', '/endgames', '/positions', '/analysis']);
   });
 
   it('should translate the navigation when the language button is pressed', async () => {

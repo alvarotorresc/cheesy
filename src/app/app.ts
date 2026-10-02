@@ -24,7 +24,7 @@ export class App {
   protected readonly langs = LANGS;
   protected readonly reading = inject(ReadingModeService);
   protected readonly readingModes: readonly ReadingMode[] = ['words', 'notation'];
-  protected readonly sections = ['openings', 'endgames', 'positions', 'analysis'] as const;
+  protected readonly sections = ['learn', 'openings', 'endgames', 'positions', 'analysis'] as const;
 
   private readonly router = inject(Router);
 
