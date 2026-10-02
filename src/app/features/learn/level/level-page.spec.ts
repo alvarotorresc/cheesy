@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, TitleStrategy } from '@angular/router';
+import { provideRouter, Router, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
 import { bundledGlossaryLoader } from '../../../core/content/testing';
@@ -46,9 +46,38 @@ describe('LevelPage', () => {
     const items = Array.from(root.querySelectorAll('.lesson-item'));
     expect(items).toHaveLength(2);
     expect(items[0].classList).toContain('done');
-    expect(items[0].textContent).toContain('Completed');
     expect(items[1].classList).toContain('next');
-    expect(items[1].querySelector('a')?.getAttribute('href')).toBe('/learn/beginner/knight-moves');
+  });
+
+  it('should make the whole card one link to its lesson', async () => {
+    const root = await render('/learn/beginner');
+    const items = Array.from(root.querySelectorAll('.lesson-item'));
+    for (const item of items) expect(item.querySelectorAll('a')).toHaveLength(1);
+    const card = items[1].querySelector('a');
+    expect(card?.getAttribute('href')).toBe('/learn/beginner/knight-moves');
+    expect(card?.contains(items[1].querySelector('.summary'))).toBe(true);
+    expect(card?.contains(items[1].querySelector('.order'))).toBe(true);
+    (items[1].querySelector('.summary') as HTMLElement).click();
+    const router = TestBed.inject(Router);
+    await vi.waitFor(() => expect(router.url).toBe('/learn/beginner/knight-moves'));
+  });
+
+  it('should put the next tag in the title row and name the completed lessons', async () => {
+    await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 });
+    const root = await render('/learn/beginner');
+    const items = Array.from(root.querySelectorAll('.lesson-item'));
+    const row = items[1].querySelector('.title-row');
+    expect(row?.querySelector('.title')?.textContent).toBe('Knight moves');
+    expect(row?.querySelector('.tag')?.textContent).toBe('Next');
+    expect(items[0].querySelector('.tag')).toBeNull();
+    expect(items[0].querySelector('a')?.textContent).toContain('Completed');
+  });
+
+  it('should link to the glossary after the list', async () => {
+    const root = await render('/learn/beginner');
+    const link = root.querySelector('.glossary-link');
+    expect(link?.getAttribute('href')).toBe('/learn/glossary');
+    expect(link?.textContent).toContain('A word you don’t know?');
   });
 
   it('should name the tab after the level, in the active language', async () => {
