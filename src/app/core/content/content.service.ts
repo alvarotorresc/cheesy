@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { CONTENT_LOADERS, GLOSSARY_LOADER } from './content-loaders';
+import { CONTENT_LOADERS, GLOSSARY_LOADER, LESSON_LOADERS } from './content-loaders';
 import type {
   CuratedPosition,
   EndgamePosition,
   GlossaryTerm,
+  Lesson,
+  LessonSummary,
   OpeningSummary,
   OpeningTree,
 } from './content.types';
@@ -21,6 +23,7 @@ import { OpeningBook } from './opening-book';
 export class ContentService {
   private readonly loaders = inject(CONTENT_LOADERS);
   private readonly glossaryLoader = inject(GLOSSARY_LOADER);
+  private readonly lessonLoaders = inject(LESSON_LOADERS);
   private readonly cache = new Map<string, Promise<unknown>>();
 
   /** Every opening, in display order, without its move tree. */
@@ -64,6 +67,16 @@ export class ContentService {
 
   async glossaryTerm(id: string): Promise<GlossaryTerm | undefined> {
     return (await this.glossary()).find((term) => term.id === id);
+  }
+
+  /** Every lesson of every level, by level and order, without their steps. */
+  lessonCatalog(): Promise<readonly LessonSummary[]> {
+    return this.cached('lesson-catalog', () => this.lessonLoaders.catalog());
+  }
+
+  async lesson(id: string): Promise<Lesson | undefined> {
+    if (!(await this.lessonCatalog()).some((lesson) => lesson.id === id)) return undefined;
+    return this.cached(`lesson:${id}`, () => this.lessonLoaders.lesson(id));
   }
 
   /** Shared by `opening` and `openingBook`, so the file is downloaded once. */

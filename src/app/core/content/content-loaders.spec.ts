@@ -1,4 +1,8 @@
-import { createFetchContentLoaders, createFetchGlossaryLoader } from './content-loaders';
+import {
+  createFetchContentLoaders,
+  createFetchGlossaryLoader,
+  createFetchLessonLoaders,
+} from './content-loaders';
 import { bundledContentLoaders, bundledGlossaryLoader } from './testing';
 
 const BASE = 'https://chess.example/app/';
@@ -152,5 +156,43 @@ describe('createFetchGlossaryLoader', () => {
     await expect(load()).rejects.toThrowError(/content/);
     fetchMock.mockResolvedValue(reply([{ name: 'Pin' }]));
     await expect(load()).rejects.toThrowError(/content/);
+  });
+});
+
+describe('createFetchLessonLoaders', () => {
+  let fetchMock: ReturnType<typeof vi.fn<(url: URL | string) => Promise<Response>>>;
+
+  beforeEach(() => {
+    fetchMock = vi.fn<(url: URL | string) => Promise<Response>>();
+    vi.stubGlobal('fetch', fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should request the catalogue and a lesson from the content folder', async () => {
+    const lesson = { id: 'knight-moves', steps: [] };
+    const catalog = [{ id: 'a', level: 'beginner' }];
+    fetchMock.mockImplementation(async (url) =>
+      reply(new URL(url).pathname.endsWith('lesson-catalog.json') ? catalog : lesson),
+    );
+    const loaders = createFetchLessonLoaders(BASE);
+
+    expect(await loaders.catalog()).toEqual(catalog);
+    expect(await loaders.lesson('knight-moves')).toEqual(lesson);
+    expect(fetchMock.mock.calls.map(([url]) => url.toString())).toEqual([
+      'https://chess.example/app/content/lesson-catalog.json',
+      'https://chess.example/app/content/lessons/knight-moves.json',
+    ]);
+  });
+
+  it('should refuse an id that is not a content id and a file of another lesson', async () => {
+    fetchMock.mockImplementation(async () => reply({ id: 'other', steps: [] }));
+    const loaders = createFetchLessonLoaders(BASE);
+
+    await expect(loaders.lesson('../secret')).rejects.toThrowError(/Invalid lesson id/);
+    await expect(loaders.lesson('knight-moves')).rejects.toThrowError(/Unexpected content/);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });
