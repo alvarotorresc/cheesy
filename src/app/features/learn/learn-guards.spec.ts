@@ -38,4 +38,20 @@ describe('learn guards', () => {
     expect(await open('/learn/beginner/nope')).toBe('/learn');
     expect(await open('/learn/advanced/knight-moves')).toBe('/learn');
   });
+
+  it('should send an unknown level to /learn even when the catalogue cannot be loaded', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        {
+          provide: LESSON_LOADERS,
+          useValue: { ...fixtureLessonLoaders, catalog: () => Promise.reject(new Error('off')) },
+        },
+      ],
+    });
+    harness = await RouterTestingHarness.create();
+    expect(await open('/learn/foo')).toBe('/learn');
+    expect(await open('/learn/foo/bar')).toBe('/learn');
+  });
 });

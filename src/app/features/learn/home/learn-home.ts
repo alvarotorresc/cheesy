@@ -40,7 +40,12 @@ export class LearnHome {
   protected readonly continueWith = computed(() => {
     const current = this.state();
     return current.status === 'ready' && current.done.size
-      ? nextLesson(current.catalog, current.done)
+      ? nextLesson(
+          [...current.catalog].sort(
+            (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
+          ),
+          current.done,
+        )
       : undefined;
   });
 

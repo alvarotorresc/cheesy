@@ -54,4 +54,27 @@ describe('LearnHome', () => {
       '/learn/beginner/knight-moves',
     );
   });
+
+  it('should continue with the lowest order not completed even if the catalogue is unsorted', async () => {
+    const [board, knight] = await fixtureLessonLoaders.catalog();
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        {
+          provide: LESSON_LOADERS,
+          useValue: { ...fixtureLessonLoaders, catalog: async () => [knight, board] },
+        },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+      ],
+    });
+    TestBed.inject(I18nService).setLang('en');
+    await TestBed.inject(ProgressService).recordLesson({
+      lessonId: 'zzz',
+      exercises: 1,
+      firstTry: 1,
+    });
+    const root = await render('/learn');
+    expect(root.querySelector('.continue')?.textContent).toContain('The board');
+  });
 });
