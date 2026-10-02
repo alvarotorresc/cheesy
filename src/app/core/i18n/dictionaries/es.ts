@@ -61,7 +61,6 @@ export const es: Messages = {
     },
     soon: 'Próximamente',
     continueWith: (title: string) => `Continuar: ${title}`,
-    start: 'Empezar',
     lessonCount: (n: number) => (n === 1 ? '1 lección' : `${n} lecciones`),
     completed: 'Completada',
     nextLesson: 'La siguiente',

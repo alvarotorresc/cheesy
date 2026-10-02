@@ -61,7 +61,6 @@ export const en = {
     },
     soon: 'Coming soon',
     continueWith: (title: string) => `Continue: ${title}`,
-    start: 'Start',
     lessonCount: (n: number) => (n === 1 ? '1 lesson' : `${n} lessons`),
     completed: 'Completed',
     nextLesson: 'Next',
