@@ -145,6 +145,10 @@ export const en = {
         text: 'And which ones you solved at the first try.',
       },
       { title: 'The language', text: 'Whether you choose Spanish or English.' },
+      {
+        title: 'The reading mode',
+        text: 'Whether you read the moves in Words or in Notation.',
+      },
       { title: 'The tablebase panel', text: 'Whether you want it open or folded in Endgames.' },
     ],
     staysNote:

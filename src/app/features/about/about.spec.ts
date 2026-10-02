@@ -81,7 +81,8 @@ describe('About', () => {
   it('should say what is saved and how to clear it, section by section', async () => {
     const element = await open();
 
-    expect(element.querySelectorAll('.stays li')).toHaveLength(5);
+    expect(element.querySelectorAll('.stays li')).toHaveLength(6);
+    expect(text(element.querySelector('.stays li:nth-child(5)'))).toContain('El modo de lectura');
     expect(text(element.querySelector('.stays li:nth-child(2)'))).toContain(
       'Las lecciones completadas',
     );

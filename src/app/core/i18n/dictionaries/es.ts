@@ -143,6 +143,7 @@ export const es: Messages = {
         text: 'Y cuáles resolviste a la primera.',
       },
       { title: 'El idioma', text: 'Si eliges español o inglés.' },
+      { title: 'El modo de lectura', text: 'Si lees las jugadas en Palabras o en Notación.' },
       { title: 'El panel de la tablebase', text: 'Si lo quieres abierto o plegado en Finales.' },
     ],
     staysNote:
