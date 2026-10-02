@@ -15,6 +15,7 @@ import { BoardComponent, type BoardMove } from '../../../../shared/board';
 import { RichTextView } from '../../../../shared/rich-text';
 import { ReachSession } from '../reach-session';
 import { prefersReducedMotion } from './reduced-motion';
+import { stepFocus } from './step-focus';
 
 /** Pause between the moves of the solution when it is shown. */
 const SOLUTION_DELAY_MS = 600;
@@ -55,6 +56,7 @@ export class ReachStepView {
       : [];
   });
 
+  private readonly focus = stepFocus();
   private emittedFor: ReachSession | undefined;
   private readonly timers = new Set<ReturnType<typeof setTimeout>>();
 
@@ -78,7 +80,14 @@ export class ReachStepView {
     this.session().move(move.to as SquareName);
   }
 
+  /** Starts again after a capture. */
+  protected restart(): void {
+    this.session().restart();
+    this.focus.toHeading();
+  }
+
   protected showHint(): void {
+    this.focus.toHeading();
     const session = this.session();
     // The arrow starts at the start square: begin again if the piece is elsewhere (not a mistake).
     if (!this.step().hint && (session.moves() > 0 || session.status() !== 'playing'))
@@ -89,6 +98,7 @@ export class ReachStepView {
   /** Starts again and walks the shortest way, one move at a time (all at once with reduced motion). */
   protected showSolution(): void {
     if (this.showingSolution()) return;
+    this.focus.toHeading();
     this.clearTimers();
     const session = this.session();
     session.tracker.reveal();

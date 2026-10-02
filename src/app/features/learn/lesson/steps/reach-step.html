@@ -29,7 +29,7 @@
   </div>
   <div class="actions">
     @if (s.status() === 'captured') {
-      <button type="button" class="button restart" (click)="s.restart()">{{ t.restart }}</button>
+      <button type="button" class="button restart" (click)="restart()">{{ t.restart }}</button>
     }
     @if (s.tracker.canHint() && s.status() !== 'done' && !hintShown() && !showingSolution()) {
       <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>

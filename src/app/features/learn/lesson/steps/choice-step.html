@@ -65,7 +65,7 @@
   </div>
   @if (session().tracker.canReveal() && !session().solved()) {
     <div class="actions">
-      <button type="button" class="button solution" (click)="session().reveal()">
+      <button type="button" class="button solution" (click)="showSolution()">
         {{ t.showSolution }}
       </button>
     </div>

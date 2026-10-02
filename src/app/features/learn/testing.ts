@@ -70,3 +70,27 @@ export const fixtureLessonLoaders: LessonLoaders = {
     return found;
   },
 };
+
+/**
+ * The heading and the Next button the lesson page projects into a step, for the step specs. The
+ * heading is where focus goes after an action, and Next where it goes after skipping.
+ */
+export const addStepFrame = (host: HTMLElement): { heading: HTMLElement; next: HTMLElement } => {
+  const heading = document.createElement('h1');
+  heading.setAttribute('data-step-heading', '');
+  heading.tabIndex = -1;
+  heading.textContent = 'Lesson';
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.setAttribute('data-step-next', '');
+  next.textContent = 'Next';
+  host.prepend(heading);
+  host.append(next);
+  return { heading, next };
+};
+
+/** Presses a button as a keyboard user does: it has the focus when it is clicked. */
+export const pressFocused = (button: HTMLElement): void => {
+  button.focus();
+  button.click();
+};

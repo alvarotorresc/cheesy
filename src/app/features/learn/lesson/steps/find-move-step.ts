@@ -17,6 +17,7 @@ import { I18nService } from '../../../../core/i18n';
 import { BoardComponent, type BoardMark, type BoardMove } from '../../../../shared/board';
 import { RichTextView } from '../../../../shared/rich-text';
 import { FindMoveSession } from '../find-move-session';
+import { stepFocus } from './step-focus';
 
 /** How long a wrong square stays marked, and how long the rival waits before answering. */
 const WRONG_MS = 700;
@@ -81,6 +82,7 @@ export class FindMoveStepView {
     return marks;
   });
 
+  private readonly focus = stepFocus();
   private wrongTimer: ReturnType<typeof setTimeout> | undefined;
   private readonly timers = new Set<ReturnType<typeof setTimeout>>();
 
@@ -123,10 +125,12 @@ export class FindMoveStepView {
 
   protected showHint(): void {
     this.hintShown.set(true);
+    this.focus.toHeading();
   }
 
   /** Shows the move: the session counts it as seen, then the move is played like the player's own. */
   protected showSolution(): void {
+    this.focus.toHeading();
     const session = this.session();
     session.reveal();
     const san = session.solutionMove();

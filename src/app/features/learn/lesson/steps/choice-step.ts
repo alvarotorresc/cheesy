@@ -8,6 +8,7 @@ import { BoardComponent, type BoardMark } from '../../../../shared/board';
 import { MoveText } from '../../../../shared/move';
 import { RichTextView } from '../../../../shared/rich-text';
 import { ChoiceSession } from '../choice-session';
+import { stepFocus } from './step-focus';
 
 /** A question with options; a wrong option says why, and the right one explains the answer. */
 @Component({
@@ -41,6 +42,7 @@ export class ChoiceStepView {
     return wrong === undefined ? null : (this.step().whyWrong?.[wrong] ?? null);
   });
 
+  private readonly focus = stepFocus();
   private emittedFor: ChoiceSession | undefined;
 
   constructor() {
@@ -50,6 +52,11 @@ export class ChoiceStepView {
       this.emittedFor = session;
       this.done.emit({ firstTry: session.tracker.firstTry() });
     });
+  }
+
+  protected showSolution(): void {
+    this.session().reveal();
+    this.focus.toHeading();
   }
 
   protected statusName(index: number): string {

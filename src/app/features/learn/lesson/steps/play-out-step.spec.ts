@@ -8,6 +8,7 @@ import { I18nService } from '../../../../core/i18n';
 import { TABLEBASE_HTTP } from '../../../../core/tablebase';
 import { FakeTablebaseHttp } from '../../../../core/tablebase/testing';
 import { BoardComponent, type BoardMove } from '../../../../shared/board';
+import { addStepFrame, pressFocused } from '../../testing';
 import { PlayOutStepView } from './play-out-step';
 
 /** Queen and king against king: Qf8 mates, Qf7 stalemates. */
@@ -117,5 +118,14 @@ describe('PlayOutStepView', () => {
     expect(element.querySelector('button.hint')).toBeNull();
     await play('f1', 'f8');
     expect(done).toEqual([{ firstTry: false }, { firstTry: true }]);
+  });
+
+  it('should move the focus to the step heading after Start again', async () => {
+    const { heading } = addStepFrame(element);
+    await play('f1', 'f7');
+    pressFocused(element.querySelector<HTMLButtonElement>('button.restart')!);
+    await settle();
+    expect(element.querySelector('button.restart')).toBeNull();
+    expect(document.activeElement).toBe(heading);
   });
 });

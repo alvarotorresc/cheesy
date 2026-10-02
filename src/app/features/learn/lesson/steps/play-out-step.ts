@@ -18,6 +18,7 @@ import { BoardComponent, type BoardArrow, type BoardMove } from '../../../../sha
 import { RichTextView } from '../../../../shared/rich-text';
 import { EndgameSession } from '../../../endgames/practice/endgame-session';
 import { ExerciseTracker } from '../exercise-tracker';
+import { stepFocus } from './step-focus';
 
 /**
  * "Play it out": the player plays a position to its goal against the rival of the endgames, which
@@ -57,6 +58,7 @@ export class PlayOutStepView {
       : [];
   });
 
+  private readonly focus = stepFocus();
   /** The failure of this game was already counted; a new game counts again. */
   private missCounted = false;
   private emitted = false;
@@ -97,6 +99,7 @@ export class PlayOutStepView {
   protected restart(): void {
     this.missCounted = false;
     this.session.restart();
+    this.focus.toHeading();
   }
 
   /** Shows the hint text and, on the board, the best move of the tablebase for this position. */

@@ -5,6 +5,7 @@ import type { FindMoveStep } from '../../../../core/content';
 import { plainText } from '../../../../core/content/testing';
 import { I18nService } from '../../../../core/i18n';
 import { BoardComponent } from '../../../../shared/board';
+import { addStepFrame, pressFocused } from '../../testing';
 import { FindMoveStepView } from './find-move-step';
 
 /** The queen takes the loose bishop; taking the pawn on c6 loses her to the b7 pawn. */
@@ -222,5 +223,43 @@ describe('FindMoveStepView', () => {
     wrong();
     await fixture.whenStable();
     expect(textOf()).not.toBe(first);
+  });
+
+  describe('focus after an action', () => {
+    let heading: HTMLElement;
+    const press = (selector: string) => {
+      pressFocused(element.querySelector<HTMLButtonElement>(selector)!);
+      fixture.detectChanges();
+    };
+
+    const open = (step: FindMoveStep) => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', step);
+      fixture.detectChanges();
+      heading = addStepFrame(element).heading;
+    };
+
+    it('should move the focus to the step heading after Hint and Show solution', () => {
+      open(captureStep);
+      for (let i = 0; i < 2; i++) wrong();
+      fixture.detectChanges();
+      press('button.hint');
+      expect(element.querySelector('button.hint')).toBeNull();
+      expect(document.activeElement).toBe(heading);
+      wrong();
+      fixture.detectChanges();
+      press('button.solution');
+      expect(element.querySelector('.actions')).toBeNull();
+      expect(document.activeElement).toBe(heading);
+    });
+
+    it('should move the focus to the heading when the solution hides the actions while waiting', () => {
+      open(lineStep);
+      for (let i = 0; i < 3; i++) board().move.emit({ from: 'a1' as never, to: 'a2' as never });
+      fixture.detectChanges();
+      press('button.solution');
+      expect(element.querySelector('.actions')).toBeNull();
+      expect(document.activeElement).toBe(heading);
+    });
   });
 });

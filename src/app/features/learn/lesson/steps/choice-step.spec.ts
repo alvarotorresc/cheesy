@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import type { ChoiceStep } from '../../../../core/content';
 import { plainText } from '../../../../core/content/testing';
 import { I18nService } from '../../../../core/i18n';
+import { addStepFrame, pressFocused } from '../../testing';
 import { ChoiceStepView } from './choice-step';
 
 const factStep: ChoiceStep = {
@@ -171,5 +172,31 @@ describe('ChoiceStepView', () => {
     await fixture.whenStable();
     expect(element.querySelector('.feedback')!.textContent).toContain('Not this one. Try again.');
     expect(textOf()).not.toBe(first);
+  });
+
+  it('should move the focus to the step heading after Show solution', async () => {
+    const step: ChoiceStep = {
+      ...factStep,
+      answer: {
+        by: 'fact',
+        options: [
+          { es: 'a', en: 'A' },
+          { es: 'b', en: 'B' },
+          { es: 'c', en: 'C' },
+          { es: 'd', en: 'D' },
+        ],
+        correct: 3,
+      },
+      whyWrong: [null, null, null, null],
+    };
+    fixture.componentRef.setInput('step', step);
+    await fixture.whenStable();
+    const { heading } = addStepFrame(element);
+    for (const index of [0, 1, 2]) options()[index].click();
+    await fixture.whenStable();
+    pressFocused(element.querySelector<HTMLButtonElement>('button.solution')!);
+    await fixture.whenStable();
+    expect(element.querySelector('button.solution')).toBeNull();
+    expect(document.activeElement).toBe(heading);
   });
 });

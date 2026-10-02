@@ -7,6 +7,7 @@ import { I18nService } from '../../../../core/i18n';
 import { en } from '../../../../core/i18n/dictionaries/en';
 import { es } from '../../../../core/i18n/dictionaries/es';
 import { BoardComponent } from '../../../../shared/board';
+import { addStepFrame, pressFocused } from '../../testing';
 import { ReachStepView } from './reach-step';
 
 const knightStep: ReachStep = {
@@ -216,6 +217,58 @@ describe('ReachStepView', () => {
     fixture.detectChanges();
     expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
     expect(element.textContent).toContain('0 of 1 star · 0 moves');
+  });
+});
+
+describe('ReachStepView focus', () => {
+  let fixture: ComponentFixture<ReachStepView>;
+  let element: HTMLElement;
+  let heading: HTMLElement;
+
+  const board = () =>
+    fixture.debugElement.query(By.directive(BoardComponent)).componentInstance as BoardComponent;
+  const press = (selector: string) => {
+    pressFocused(element.querySelector<HTMLButtonElement>(selector)!);
+    fixture.detectChanges();
+  };
+  const capture = () => {
+    board().move.emit({ from: 'g1' as never, to: 'f3' as never });
+    fixture.detectChanges();
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.inject(I18nService).setLang('en');
+    fixture = TestBed.createComponent(ReachStepView);
+    element = fixture.nativeElement as HTMLElement;
+    fixture.componentRef.setInput('step', guardedStep);
+    fixture.detectChanges();
+    heading = addStepFrame(element).heading;
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+    vi.useRealTimers();
+  });
+
+  it('should move the focus to the step heading after Start again, Hint and Show solution', () => {
+    capture();
+    press('button.restart');
+    expect(element.querySelector('button.restart')).toBeNull();
+    expect(document.activeElement).toBe(heading);
+
+    capture();
+    press('button.restart');
+    press('button.hint');
+    expect(element.querySelector('button.hint')).toBeNull();
+    expect(document.activeElement).toBe(heading);
+
+    capture();
+    press('button.restart');
+    press('button.solution');
+    expect(element.querySelector('button.solution')).toBeNull();
+    expect(document.activeElement).toBe(heading);
   });
 });
 
