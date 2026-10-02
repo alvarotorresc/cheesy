@@ -6,6 +6,7 @@ const base = {
   kind: 'choice' as const,
   text: plainText('¿?'),
   explanation: plainText('Porque sí'),
+  whyWrong: [],
 };
 
 describe('ChoiceSession', () => {

@@ -3,7 +3,7 @@ import {
   createFetchGlossaryLoader,
   createFetchLessonLoaders,
 } from './content-loaders';
-import { bundledContentLoaders, bundledGlossaryLoader } from './testing';
+import { bundledContentLoaders, bundledGlossaryLoader, bundledLessonLoaders } from './testing';
 
 const BASE = 'https://chess.example/app/';
 
@@ -194,5 +194,18 @@ describe('createFetchLessonLoaders', () => {
     await expect(loaders.lesson('../secret')).rejects.toThrowError(/Invalid lesson id/);
     await expect(loaders.lesson('knight-moves')).rejects.toThrowError(/Unexpected content/);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('bundledLessonLoaders', () => {
+  it('should load the real catalogue and a real lesson through the variable import path', async () => {
+    const catalog = await bundledLessonLoaders.catalog();
+    const ids = catalog.map((entry) => entry.id);
+    expect(ids).toContain('the-board');
+    expect(ids).toContain('knight-moves');
+
+    const lesson = await bundledLessonLoaders.lesson('knight-moves');
+    expect(lesson.id).toBe('knight-moves');
+    expect(lesson.steps.length).toBeGreaterThanOrEqual(5);
   });
 });

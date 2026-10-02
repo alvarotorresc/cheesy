@@ -16,7 +16,7 @@ const factStep: ChoiceStep = {
     ],
     correct: 0,
   },
-  whyWrong: [plainText('-'), plainText('That is the rook.')],
+  whyWrong: [null, plainText('That is the rook.')],
   explanation: plainText('Well done.'),
 };
 
@@ -28,6 +28,7 @@ const statusStep: ChoiceStep = {
     orientation: 'white',
   },
   answer: { by: 'status' },
+  whyWrong: [plainText('No check.'), plainText('Not mate.'), plainText('Not stalemate.'), null],
   explanation: plainText('Nothing special.'),
 };
 
@@ -90,7 +91,7 @@ describe('ChoiceStepView', () => {
   it('should fall back to a generic message when the wrong option has no text of its own', async () => {
     fixture.componentRef.setInput('step', {
       ...factStep,
-      whyWrong: [null, null] as never,
+      whyWrong: [null, null],
     } satisfies ChoiceStep);
     await fixture.whenStable();
     options()[1].click();
@@ -111,7 +112,7 @@ describe('ChoiceStepView', () => {
         ],
         correct: 3,
       },
-      whyWrong: undefined,
+      whyWrong: [plainText('a'), plainText('b'), plainText('c'), null],
     };
     fixture.componentRef.setInput('step', step);
     await fixture.whenStable();
@@ -155,7 +156,7 @@ describe('ChoiceStepView', () => {
         ],
         correct: 2,
       },
-      whyWrong: undefined,
+      whyWrong: [null, null, null],
     } satisfies ChoiceStep);
     await fixture.whenStable();
     options()[0].click();

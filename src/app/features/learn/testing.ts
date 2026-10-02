@@ -28,6 +28,7 @@ const choice = (question: string): ChoiceStep => ({
     ],
     correct: 0,
   },
+  whyWrong: [null, plainText('Look again.')],
   explanation: plainText('Right.'),
 });
 
