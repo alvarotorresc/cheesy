@@ -118,6 +118,7 @@
 
 /* ---- Form controls ------------------------------------------------------------------------ */
 
+.input,
 .select,
 .textarea {
   min-height: var(--tap);
@@ -129,6 +130,11 @@
   /* 16px keeps mobile browsers from zooming into the field. */
   font: inherit;
   font-size: 1rem;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
 }
 
 .textarea {

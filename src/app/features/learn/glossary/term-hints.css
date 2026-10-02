@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+/*
+ * A small bubble with the first sentence of a term: in the top layer (a popover), fixed to the
+ * window and placed next to the word by the component. Hidden until it has been measured and placed.
+ */
+.hint {
+  position: fixed;
+  inset: auto;
+  z-index: 40;
+  box-sizing: border-box;
+  max-width: min(32ch, calc(100vw - 2 * 16px));
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 16%);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: start;
+  white-space: normal;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.hint.placed {
+  visibility: visible;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hint {
+    border-color: var(--color-control);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 45%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hint.placed {
+    animation: hint-in 140ms var(--ease-out);
+  }
+
+  @keyframes hint-in {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+  }
+}

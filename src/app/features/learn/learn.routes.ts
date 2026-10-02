@@ -15,7 +15,6 @@ export const LEARN_ROUTES: Routes = [
   {
     path: 'glossary',
     title: 'glossary' satisfies PageSection,
-    data: { main: 'about' } satisfies { main: MainKind },
     loadComponent: () => import('./glossary/glossary-page').then((m) => m.GlossaryPage),
   },
   {

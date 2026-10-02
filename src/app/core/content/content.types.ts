@@ -103,6 +103,17 @@ export interface CuratedPosition {
 
 export type GlossaryLevel = 'beginner' | 'intermediate' | 'advanced';
 
+/** Family of a glossary term; the glossary page shows the families in this order. */
+export const GLOSSARY_GROUPS = [
+  'rules',
+  'tactics',
+  'mates',
+  'strategy',
+  'pawns',
+  'endgames',
+] as const;
+export type GlossaryGroup = (typeof GLOSSARY_GROUPS)[number];
+
 /** An arrow of a glossary example. `move` says it is a legal move of the position (checked in CI). */
 export interface GlossaryArrow {
   from: SquareName;
@@ -126,7 +137,9 @@ export interface GlossaryTerm {
   /** One or two sentences, cut into segments by the content build. */
   definition: RichText;
   example: GlossaryExample;
-  /** Level of the "Learn" section it belongs to (not used until that section exists). */
+  /** Family the term belongs to: rules, tactics, named mates... */
+  group: GlossaryGroup;
+  /** Level of the "Learn" section it belongs to. */
   level: GlossaryLevel;
   /** URLs the definition was checked against. At least one. */
   sources: string[];

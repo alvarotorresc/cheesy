@@ -18,6 +18,7 @@ const PIN: GlossaryTerm = {
     highlights: ['c3'],
     arrows: [{ from: 'a1', to: 'e5', move: false }],
   },
+  group: 'tactics',
   level: 'intermediate',
   sources: ['https://en.wikipedia.org/wiki/Glossary_of_chess'],
 };

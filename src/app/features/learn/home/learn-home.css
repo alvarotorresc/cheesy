@@ -22,18 +22,6 @@
   max-width: 34rem;
 }
 
-.glossary-link {
-  justify-self: start;
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-
 .continue {
   margin-bottom: var(--space-6);
 }
@@ -47,7 +35,8 @@
   list-style: none;
 }
 
-.level-card {
+.level-card,
+.glossary-card {
   display: grid;
   align-content: start;
   gap: var(--space-3);
@@ -57,12 +46,14 @@
   background: var(--color-surface);
 }
 
-.level-card h2 {
+.level-card h2,
+.glossary-card h2 {
   font-size: var(--text-xl, 1.25rem);
   font-weight: 700;
 }
 
-.level-card p {
+.level-card p,
+.glossary-card p {
   color: var(--color-text-muted);
 }
 
@@ -94,4 +85,9 @@
   min-height: 1.5em;
   font-weight: 600;
   color: var(--color-text);
+}
+
+/* When the lessons fail, the glossary card stays under the notice. */
+.notice + .levels {
+  margin-top: var(--space-6);
 }
