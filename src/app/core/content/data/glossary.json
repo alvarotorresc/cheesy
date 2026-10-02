@@ -1,5 +1,132 @@
 [
   {
+    "id": "rank",
+    "name": {
+      "es": "Fila",
+      "en": "Rank"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cada una de las ocho líneas de casillas que cruzan el tablero de lado a lado. Se numeran del 1 al 8, empezando por el lado de las blancas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A row of squares running across the board from side to side. There are eight, numbered 1 to 8 starting from White’s side."
+        }
+      ]
+    },
+    "example": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "a4",
+        "b4",
+        "c4",
+        "d4",
+        "e4",
+        "f4",
+        "g4",
+        "h4"
+      ],
+      "arrows": []
+    },
+    "level": "beginner",
+    "lesson": "the-board",
+    "sources": [
+      "https://handbook.fide.com/chapter/E012023",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chessboard"
+    ]
+  },
+  {
+    "id": "file",
+    "name": {
+      "es": "Columna",
+      "en": "File"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cada una de las ocho líneas de casillas que van de un jugador al otro. Se nombran con las letras de la a a la h, de izquierda a derecha según las ven las blancas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A column of squares running from one player to the other. There are eight, named with the letters a to h, left to right as White sees them."
+        }
+      ]
+    },
+    "example": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6",
+        "e7",
+        "e8"
+      ],
+      "arrows": []
+    },
+    "level": "beginner",
+    "lesson": "the-board",
+    "sources": [
+      "https://handbook.fide.com/chapter/E012023",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chessboard"
+    ]
+  },
+  {
+    "id": "diagonal",
+    "name": {
+      "es": "Diagonal",
+      "en": "Diagonal"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Línea de casillas que se tocan solo por las esquinas y cruza el tablero en oblicuo. Todas sus casillas son del mismo color."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A slanting line of squares that touch only at their corners. All its squares are the same colour."
+        }
+      ]
+    },
+    "example": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c1",
+        "d2",
+        "e3",
+        "f4",
+        "g5",
+        "h6"
+      ],
+      "arrows": []
+    },
+    "level": "beginner",
+    "lesson": "the-board",
+    "sources": [
+      "https://handbook.fide.com/chapter/E012023",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chessboard"
+    ]
+  },
+  {
     "id": "check",
     "name": {
       "es": "Jaque",
@@ -263,7 +390,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "La casilla del otro extremo del tablero a la que llega un peón avanzando por su columna, donde se "
+          "text": "La casilla del otro extremo del tablero a la que llega un peón avanzando por su "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columna"
+        },
+        {
+          "kind": "text",
+          "text": ", donde se "
         },
         {
           "kind": "term",
@@ -286,7 +422,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "The square at the far end of the board that a pawn reaches by moving straight up its column, where it "
+          "text": "The square at the far end of the board that a pawn reaches by moving straight up its "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "column"
+        },
+        {
+          "kind": "text",
+          "text": ", where it "
         },
         {
           "kind": "term",
@@ -861,7 +1006,16 @@
         },
         {
           "kind": "text",
-          "text": ". El flanco de dama son las columnas a, b y c; el flanco de rey, las columnas f, g y h."
+          "text": ". El flanco de dama son las "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " a, b y c; el flanco de rey, las columnas f, g y h."
         }
       ],
       "en": [
@@ -876,7 +1030,16 @@
         },
         {
           "kind": "text",
-          "text": ": the queen’s flank is the a, b and c columns, and the king’s flank is the f, g and h columns."
+          "text": ": the queen’s flank is the a, b and c "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columns"
+        },
+        {
+          "kind": "text",
+          "text": ", and the king’s flank is the f, g and h columns."
         }
       ]
     },
@@ -1182,13 +1345,31 @@
       "es": [
         {
           "kind": "text",
-          "text": "Peón que no tiene peones de su color en las columnas de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas."
+          "text": "Peón que no tiene peones de su color en las "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "A pawn with no pawns of its own colour on the columns next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job."
+          "text": "A pawn with no pawns of its own colour on the "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columns"
+        },
+        {
+          "kind": "text",
+          "text": " next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job."
         }
       ]
     },
@@ -1216,13 +1397,31 @@
       "es": [
         {
           "kind": "text",
-          "text": "Dos peones del mismo color en la misma columna, uno delante del otro. Suele ser una debilidad: no pueden protegerse entre sí y el de delante le corta el paso al de detrás."
+          "text": "Dos peones del mismo color en la misma "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columna"
+        },
+        {
+          "kind": "text",
+          "text": ", uno delante del otro. Suele ser una debilidad: no pueden protegerse entre sí y el de delante le corta el paso al de detrás."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "Two pawns of the same colour on the same column, one in front of the other. It is usually a weakness: they cannot guard each other, and the front one blocks the one behind."
+          "text": "Two pawns of the same colour on the same "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "column"
+        },
+        {
+          "kind": "text",
+          "text": ", one in front of the other. It is usually a weakness: they cannot guard each other, and the front one blocks the one behind."
         }
       ]
     },
@@ -1251,7 +1450,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "Dos peones del mismo color, uno al lado del otro en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el "
+          "text": "Dos peones del mismo color, uno al lado del otro en "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el "
         },
         {
           "kind": "term",
@@ -1266,7 +1474,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "Two pawns of the same colour standing side by side on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the "
+          "text": "Two pawns of the same colour standing side by side on neighbouring "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columns"
+        },
+        {
+          "kind": "text",
+          "text": ", with no other friendly pawns on the columns around them. They give strength in the "
         },
         {
           "kind": "term",
@@ -1946,7 +2163,16 @@
       "es": [
         {
           "kind": "text",
-          "text": "La fila del borde del tablero en el lado de cada jugador, donde empiezan sus piezas. Si el rey se queda en ella detrás de sus peones sin salida, una torre o la dama rival puede darle "
+          "text": "La "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "fila"
+        },
+        {
+          "kind": "text",
+          "text": " del borde del tablero en el lado de cada jugador, donde empiezan sus piezas. Si el rey se queda en ella detrás de sus peones sin salida, una torre o la dama rival puede darle "
         },
         {
           "kind": "term",
@@ -1961,7 +2187,16 @@
       "en": [
         {
           "kind": "text",
-          "text": "The row (rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver "
+          "text": "The "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "row"
+        },
+        {
+          "kind": "text",
+          "text": " (rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver "
         },
         {
           "kind": "term",
@@ -2406,7 +2641,16 @@
         },
         {
           "kind": "text",
-          "text": " en el que un caballo y una torre encierran al rey contra un lado del tablero: el caballo le corta la huida y la torre da el jaque por la columna del borde. Un peón del propio rey suele taparle la última salida."
+          "text": " en el que un caballo y una torre encierran al rey contra un lado del tablero: el caballo le corta la huida y la torre da el jaque por la "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columna"
+        },
+        {
+          "kind": "text",
+          "text": " del borde. Un peón del propio rey suele taparle la última salida."
         }
       ],
       "en": [
@@ -2417,7 +2661,16 @@
         },
         {
           "kind": "text",
-          "text": " in which a knight and a rook trap the king against one side of the board: the knight cuts off its escape and the rook gives check along the edge column. One of the king’s own pawns usually blocks the last way out."
+          "text": " in which a knight and a rook trap the king against one side of the board: the knight cuts off its escape and the rook gives check along the edge "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "column"
+        },
+        {
+          "kind": "text",
+          "text": ". One of the king’s own pawns usually blocks the last way out."
         }
       ]
     },
@@ -2507,13 +2760,49 @@
       "es": [
         {
           "kind": "text",
-          "text": "Los dos reyes están en la misma columna o fila con una sola casilla entre ellos. Como no pueden acercarse más, el que tiene que mover debe ceder el paso, y se dice que el otro tiene la oposición."
+          "text": "Los dos reyes están en la misma "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columna"
+        },
+        {
+          "kind": "text",
+          "text": " o "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "fila"
+        },
+        {
+          "kind": "text",
+          "text": " con una sola casilla entre ellos. Como no pueden acercarse más, el que tiene que mover debe ceder el paso, y se dice que el otro tiene la oposición."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "The two kings stand on the same column or row with exactly one square between them. Since they cannot come any closer, the one who has to move must give way, and the other side is said to have the opposition."
+          "text": "The two kings stand on the same "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "column"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "row"
+        },
+        {
+          "kind": "text",
+          "text": " with exactly one square between them. Since they cannot come any closer, the one who has to move must give way, and the other side is said to have the opposition."
         }
       ]
     },
@@ -2766,7 +3055,16 @@
         },
         {
           "kind": "text",
-          "text": " y su torre, en la tercera fila desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da "
+          "text": " y su torre, en la tercera "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "fila"
+        },
+        {
+          "kind": "text",
+          "text": " desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da "
         },
         {
           "kind": "term",
@@ -2790,7 +3088,16 @@
         },
         {
           "kind": "text",
-          "text": " and its rook, on the third row from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives "
+          "text": " and its rook, on the third "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "row"
+        },
+        {
+          "kind": "text",
+          "text": " from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives "
         },
         {
           "kind": "term",
@@ -2845,7 +3152,16 @@
         },
         {
           "kind": "text",
-          "text": ": la torre se coloca en la cuarta fila para que, cuando el rey salga de delante del peón, pueda interponerse y cortar los "
+          "text": ": la torre se coloca en la cuarta "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "fila"
+        },
+        {
+          "kind": "text",
+          "text": " para que, cuando el rey salga de delante del peón, pueda interponerse y cortar los "
         },
         {
           "kind": "term",
@@ -2869,7 +3185,16 @@
         },
         {
           "kind": "text",
-          "text": ": the rook goes to the fourth row so that, once the king walks out from in front of the pawn, it can step in between and stop the enemy rook’s "
+          "text": ": the rook goes to the fourth "
+        },
+        {
+          "kind": "term",
+          "id": "rank",
+          "text": "row"
+        },
+        {
+          "kind": "text",
+          "text": " so that, once the king walks out from in front of the pawn, it can step in between and stop the enemy rook’s "
         },
         {
           "kind": "term",

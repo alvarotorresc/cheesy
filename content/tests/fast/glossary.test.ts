@@ -7,6 +7,9 @@ import { validateGlossaryTerm } from '../../lib/schema.ts';
 
 /** The closed list of the plan (docs/superpowers/plans/2026-09-30-lenguaje-llano-pr3-glosario.md). */
 const EXPECTED_IDS = [
+  'rank',
+  'file',
+  'diagonal',
   'check',
   'checkmate',
   'stalemate',

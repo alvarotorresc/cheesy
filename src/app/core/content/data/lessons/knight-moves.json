@@ -1,0 +1,451 @@
+{
+  "id": "knight-moves",
+  "level": "beginner",
+  "order": 2,
+  "title": {
+    "es": "El caballo",
+    "en": "The knight"
+  },
+  "summary": {
+    "es": "El caballo salta en forma de L por encima de las demás piezas.",
+    "en": "The knight jumps in an L shape over the other pieces."
+  },
+  "terms": [],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo se mueve en forma de L: dos casillas en línea recta y luego una hacia un lado. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " tiene las ocho casillas de las flechas. Fíjate: cada vez que salta, cambia de color de casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight moves in an L shape: two squares in a straight line and then one to the side. From "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " it has the eight squares at the ends of the arrows. Notice that every time it jumps, it changes square colour."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/3N4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "d4",
+            "to": "c6"
+          },
+          {
+            "from": "d4",
+            "to": "e6"
+          },
+          {
+            "from": "d4",
+            "to": "f5"
+          },
+          {
+            "from": "d4",
+            "to": "f3"
+          },
+          {
+            "from": "d4",
+            "to": "e2"
+          },
+          {
+            "from": "d4",
+            "to": "c2"
+          },
+          {
+            "from": "d4",
+            "to": "b3"
+          },
+          {
+            "from": "d4",
+            "to": "b5"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Recoge las estrellas con el caballo. Cuenta la L antes de mover: dos y una."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Collect the stars with the knight. Count the L before you move: two and one."
+          }
+        ]
+      },
+      "piece": {
+        "role": "knight",
+        "color": "white",
+        "square": "g1"
+      },
+      "targets": [
+        "f3",
+        "e5"
+      ],
+      "minMoves": 2
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo es la única pieza que salta por encima de las demás, sean suyas o del rival. Por eso, al empezar la partida, puede salir por encima de sus peones."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight is the only piece that jumps over the others, its own or the rival’s. That is why, at the start of the game, it can come out over its pawns."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Nf3"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo está rodeado de peones blancos que no se mueven. No puede pisarlos, pero sí saltarlos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight is surrounded by white pawns that do not move. It cannot step on them, but it can jump over them."
+          }
+        ]
+      },
+      "piece": {
+        "role": "knight",
+        "color": "white",
+        "square": "e4"
+      },
+      "targets": [
+        "f6",
+        "c3"
+      ],
+      "blockers": [
+        "d3",
+        "e3",
+        "f3",
+        "d4",
+        "f4",
+        "d5",
+        "e5",
+        "f5"
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las dos estrellas no están a un salto la una de la otra. Puedes volver a la casilla del centro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The two stars are not one jump apart. You can go back to the centre square."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un alfil negro ataca sus dos "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonales"
+          },
+          {
+            "kind": "text",
+            "text": ". Llega a la estrella sin pararte en ninguna de sus casillas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A black bishop attacks its two "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": ". Reach the star without stopping on any of its squares."
+          }
+        ]
+      },
+      "piece": {
+        "role": "knight",
+        "color": "white",
+        "square": "b1"
+      },
+      "targets": [
+        "e6"
+      ],
+      "enemies": [
+        {
+          "role": "bishop",
+          "square": "e5"
+        }
+      ],
+      "minMoves": 4,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Por el centro está todo vigilado. Da la vuelta por el lado izquierdo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Everything in the centre is watched. Go round by the left side."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "En el borde, el caballo tiene menos saltos. En una esquina, solo le quedan dos: desde "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " puede ir a "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " o a "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": ". Por eso un caballo en el borde suele estar peor que uno en el centro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "On the edge, the knight has fewer jumps. In a corner it has only two: from "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " it can go to "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " or to "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": ". That is why a knight on the edge is usually worse off than one in the centre."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/8/8/8/N3K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "a1",
+            "to": "b3"
+          },
+          {
+            "from": "a1",
+            "to": "c2"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un recorrido clásico: lleva el caballo de una esquina a la contraria. Parece cerca, pero el caballo necesita varios saltos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A classic journey: take the knight from one corner to the opposite one. It looks close, but the knight needs several jumps."
+          }
+        ]
+      },
+      "piece": {
+        "role": "knight",
+        "color": "white",
+        "square": "a1"
+      },
+      "targets": [
+        "h8"
+      ],
+      "minMoves": 6,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Piensa al revés: a "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " solo se llega desde "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": " o desde "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". Busca primero el camino hasta una de esas dos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Think backwards: "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " can only be reached from "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". First find the way to one of those two."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: el caballo salta en L, dos casillas y una, por encima de lo que haya en medio. Siempre cambia de color de casilla, y en el centro tiene más saltos que en el borde. Cada bando empieza con dos, entre las torres y los alfiles: los marcados."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the knight jumps in an L, two squares and one, over whatever is in between. It always changes square colour, and it has more jumps in the centre than on the edge. Each side starts with two, between the rooks and the bishops: the marked ones."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "b1",
+          "g1",
+          "b8",
+          "g8"
+        ]
+      }
+    }
+  ]
+}
