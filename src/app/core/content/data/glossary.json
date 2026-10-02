@@ -34,6 +34,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "the-board",
     "sources": [
@@ -77,6 +78,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "the-board",
     "sources": [
@@ -118,6 +120,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "the-board",
     "sources": [
@@ -161,6 +164,7 @@
         }
       ]
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "check-mate-stalemate",
     "sources": [
@@ -212,6 +216,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "check-mate-stalemate",
     "sources": [
@@ -269,6 +274,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "check-mate-stalemate",
     "sources": [
@@ -335,6 +341,7 @@
         }
       ]
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "castling-en-passant",
     "sources": [
@@ -377,6 +384,7 @@
         }
       ]
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "castling-en-passant",
     "sources": [
@@ -419,6 +427,7 @@
         }
       ]
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "pawn-moves",
     "sources": [
@@ -513,6 +522,7 @@
         }
       ]
     },
+    "group": "rules",
     "level": "beginner",
     "sources": [
       "https://en.wikipedia.org/wiki/King_and_pawn_versus_king_endgame",
@@ -552,6 +562,7 @@
       ],
       "arrows": []
     },
+    "group": "rules",
     "level": "beginner",
     "lesson": "captures-and-values",
     "sources": [
@@ -654,6 +665,7 @@
       ],
       "arrows": []
     },
+    "group": "strategy",
     "level": "beginner",
     "lesson": "opening-principles",
     "sources": [
@@ -732,6 +744,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "beginner",
     "lesson": "opening-principles",
     "sources": [
@@ -774,6 +787,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "beginner",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -868,6 +882,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -945,6 +960,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1069,6 +1085,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1144,6 +1161,7 @@
       ],
       "arrows": []
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1181,6 +1199,7 @@
       ],
       "arrows": []
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1226,6 +1245,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1286,6 +1306,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1323,6 +1344,7 @@
       ],
       "arrows": []
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1359,6 +1381,7 @@
       ],
       "arrows": []
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1417,6 +1440,7 @@
         }
       ]
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1469,6 +1493,7 @@
       ],
       "arrows": []
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1522,6 +1547,7 @@
       ],
       "arrows": []
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1593,6 +1619,7 @@
       ],
       "arrows": []
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1628,6 +1655,7 @@
       ],
       "arrows": []
     },
+    "group": "strategy",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1705,6 +1733,7 @@
         }
       ]
     },
+    "group": "pawns",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1746,6 +1775,7 @@
         }
       ]
     },
+    "group": "strategy",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1810,6 +1840,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1853,6 +1884,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1895,6 +1927,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -1951,6 +1984,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2011,6 +2045,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2067,6 +2102,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2114,6 +2150,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2156,6 +2193,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2234,6 +2272,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2314,6 +2353,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2356,6 +2396,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2430,6 +2471,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Queen_sacrifice",
@@ -2490,6 +2532,7 @@
         }
       ]
     },
+    "group": "tactics",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2544,6 +2587,7 @@
         }
       ]
     },
+    "group": "mates",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2619,6 +2663,7 @@
         }
       ]
     },
+    "group": "mates",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Legal_Trap",
@@ -2707,6 +2752,7 @@
         }
       ]
     },
+    "group": "mates",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Checkmate_pattern",
@@ -2778,6 +2824,7 @@
         }
       ]
     },
+    "group": "mates",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Checkmate_pattern",
@@ -2830,6 +2877,7 @@
         }
       ]
     },
+    "group": "mates",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Checkmate_pattern",
@@ -2903,6 +2951,7 @@
       ],
       "arrows": []
     },
+    "group": "endgames",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -2958,6 +3007,7 @@
       ],
       "arrows": []
     },
+    "group": "endgames",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -3038,6 +3088,7 @@
         }
       ]
     },
+    "group": "endgames",
     "level": "intermediate",
     "sources": [
       "https://en.wikipedia.org/wiki/King_and_pawn_versus_king_endgame",
@@ -3116,6 +3167,7 @@
         }
       ]
     },
+    "group": "endgames",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -3213,6 +3265,7 @@
         }
       ]
     },
+    "group": "endgames",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
@@ -3310,6 +3363,7 @@
         }
       ]
     },
+    "group": "endgames",
     "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",

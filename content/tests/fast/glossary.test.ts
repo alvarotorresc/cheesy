@@ -63,6 +63,70 @@ const EXPECTED_IDS = [
   'building-a-bridge',
 ].sort();
 
+/** The family of every term: the glossary page groups the terms by it, in this order. */
+const GROUPS: Record<string, string[]> = {
+  rules: [
+    'check',
+    'checkmate',
+    'stalemate',
+    'castling',
+    'promotion',
+    'en-passant',
+    'rank',
+    'file',
+    'diagonal',
+    'queening-square',
+    'piece-value',
+  ],
+  tactics: [
+    'pin',
+    'fork',
+    'knight-fork',
+    'skewer',
+    'double-check',
+    'discovered-attack',
+    'deflection',
+    'attraction',
+    'intermediate-move',
+    'sacrifice',
+    'queen-sacrifice',
+    'back-rank',
+    'opening-trap',
+  ],
+  mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
+  strategy: [
+    'centre',
+    'development',
+    'gambit',
+    'fianchetto',
+    'long-diagonal',
+    'flank',
+    'space',
+    'initiative',
+    'counterplay',
+    'tempo',
+    'exchange',
+    'bishop-pair',
+  ],
+  pawns: [
+    'pawn-structure',
+    'pawn-chain',
+    'pawn-break',
+    'isolated-pawn',
+    'doubled-pawns',
+    'hanging-pawns',
+    'minority-attack',
+  ],
+  endgames: [
+    'opposition',
+    'key-squares',
+    'rule-of-the-square',
+    'lucena-position',
+    'philidor-position',
+    'building-a-bridge',
+  ],
+};
+
 const SOURCE_HOSTS = ['fide.com', 'lichess.org', 'wikipedia.org', 'chess.com'];
 
 const raw = loadGlossaryRaw();
@@ -88,6 +152,17 @@ describe('glossary', () => {
     expect(glossary.map((t) => t.id).sort()).toEqual(EXPECTED_IDS);
   });
 
+  it('the families cover the closed list, each term in exactly one', () => {
+    expect(Object.values(GROUPS).flat().sort()).toEqual(EXPECTED_IDS);
+  });
+
+  it('every term belongs to its family', () => {
+    const wrong = glossary
+      .filter((t) => !GROUPS[t.group]?.includes(t.id))
+      .map((t) => `${t.id}: ${String(t.group)}`);
+    expect(wrong).toEqual([]);
+  });
+
   it('every tag of the positions is a glossary term', () => {
     const ids = new Set(glossary.map((t) => t.id));
     const missing = [...new Set(loadPositions().flatMap((p) => p.tags))].filter(
@@ -111,6 +186,8 @@ describe('glossary', () => {
       ['an arrow target off the board', arrow({ to: 'a0' })],
       ['a source that is not a URL', { ...good, sources: ['not a url'] }],
       ['a source over http', { ...good, sources: ['http://lichess.org/x'] }],
+      ['an unknown family', { ...good, group: 'openings' }],
+      ['no family', { ...good, group: undefined }],
     ];
 
     it('accepts the untouched term', () => {

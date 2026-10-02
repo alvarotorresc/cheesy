@@ -113,14 +113,23 @@ const isHttpsUrl = (v: unknown): boolean =>
   typeof v === 'string' && URL.parse(v)?.protocol === 'https:';
 
 const LEVELS = ['beginner', 'intermediate', 'advanced'];
+const GLOSSARY_GROUPS = ['rules', 'tactics', 'mates', 'strategy', 'pawns', 'endgames'];
 
 export function validateGlossaryTerm(t: unknown, at: string): Errors {
   const errs: Errors = [];
   if (!isObj(t)) return [`${at}: must be an object`];
-  checkKeys(t, ['id', 'name', 'definition', 'example', 'level', 'sources'], ['lesson'], at, errs);
+  checkKeys(
+    t,
+    ['id', 'name', 'definition', 'example', 'group', 'level', 'sources'],
+    ['lesson'],
+    at,
+    errs,
+  );
   checkId(t.id, `${at}.id`, errs);
   checkLocalized(t.name, `${at}.name`, errs);
   checkRichText(t.definition, `${at}.definition`, errs);
+  if (!GLOSSARY_GROUPS.includes(t.group as string))
+    errs.push(`${at}.group: must be ${GLOSSARY_GROUPS.join('|')}`);
   if (!LEVELS.includes(t.level as string))
     errs.push(`${at}.level: must be beginner|intermediate|advanced`);
   if (!Array.isArray(t.sources) || t.sources.length === 0 || !t.sources.every(isHttpsUrl))
