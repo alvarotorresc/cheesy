@@ -68,7 +68,9 @@ describe('ExplainStepView', () => {
     fixture.detectChanges();
     expect(board().fen()).toContain('4p3');
 
-    element.querySelector<HTMLButtonElement>('button.replay')!.click();
+    const replay = element.querySelector<HTMLButtonElement>('button.replay')!;
+    expect(replay.textContent?.trim()).toBe('Play again');
+    replay.click();
     fixture.detectChanges();
     expect(board().fen()).toBe(START);
   });

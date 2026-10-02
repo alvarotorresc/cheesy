@@ -75,6 +75,7 @@ export const es: Messages = {
     showSolution: 'Ver solución',
     restart: 'Empezar de nuevo',
     skip: 'Saltar este ejercicio',
+    replay: 'Ver otra vez',
     correct: '¡Eso es!',
     wrongMove: 'Esa no. Prueba otra vez.',
     captured: 'Han capturado tu pieza en una casilla atacada. Empieza de nuevo.',
