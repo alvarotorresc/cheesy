@@ -192,6 +192,18 @@ describe('GlossaryPage', () => {
     expect(chip(root, 'Todas').getAttribute('aria-pressed')).toBe('true');
   });
 
+  it('should take the reader to the card again when a link goes to the term of the address', async () => {
+    const root = await open('/learn/glossary#check');
+    expect(scrolled).toContain(root.querySelector('article#check'));
+    scrolled.length = 0;
+    // Typing leaves the router's address behind: the next link to #check is the same URL to it.
+    await type(root, 'a');
+    root.querySelector<HTMLAnchorElement>('article#stalemate a.term[href$="#check"]')!.click();
+    await settle();
+    expect(scrolled).toContain(root.querySelector('article#check'));
+    expect(root.querySelector('article#check')?.classList).toContain('arrived');
+  });
+
   it('should write the groups and the copy in English too', async () => {
     TestBed.inject(I18nService).setLang('en');
     const root = await open();

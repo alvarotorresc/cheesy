@@ -11,7 +11,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, ViewportScroller } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
@@ -39,6 +39,8 @@ import { TermHints } from './term-hints';
 
 /** How long the card of the address keeps its ring after the page has taken the reader to it. */
 export const ARRIVAL_MS = 2200;
+/** Room left above a card the page scrolls to: the `scroll-margin-top` of the cards (1.5rem). */
+const ARRIVAL_MARGIN_REM = 1.5;
 
 const LEVEL_RANK: Record<GlossaryLevel, number> = { beginner: 1, intermediate: 2, advanced: 3 };
 
@@ -52,7 +54,7 @@ const LEVEL_RANK: Record<GlossaryLevel, number> = { beginner: 1, intermediate: 2
   imports: [MiniBoard, RichTextView, RouterLink, TermHints],
   templateUrl: './glossary-page.html',
   styleUrl: './glossary-page.css',
-  host: { class: 'catalog' },
+  host: { class: 'catalog', '(click)': 'onClick($event)' },
 })
 export class GlossaryPage {
   protected readonly i18n = inject(I18nService);
@@ -117,7 +119,18 @@ export class GlossaryPage {
       const id = this.fragment();
       if (id && this.settled()) untracked(() => this.reveal(id));
     });
-    inject(DestroyRef).onDestroy(() => clearTimeout(this.arrivalTimer));
+    // The router scrolls to the anchor of a link itself, after the page: leave it the same room.
+    const scroller = inject(ViewportScroller);
+    scroller.setOffset(() => [0, ARRIVAL_MARGIN_REM * this.remPx()]);
+    inject(DestroyRef).onDestroy(() => {
+      clearTimeout(this.arrivalTimer);
+      scroller.setOffset([0, 0]);
+    });
+  }
+
+  private remPx(): number {
+    const view = this.document.defaultView;
+    return parseFloat(view?.getComputedStyle(this.document.documentElement).fontSize ?? '') || 16;
   }
 
   protected frameOf(term: GlossaryTerm): readonly MiniFrame[] {
@@ -131,6 +144,16 @@ export class GlossaryPage {
 
   protected lessonOf(term: GlossaryTerm): LessonSummary | undefined {
     return term.lesson ? this.lessonById().get(term.lesson) : undefined;
+  }
+
+  /**
+   * A link to the term the address already names is the same URL to the router, which ignores it:
+   * the page takes the reader to that card itself.
+   */
+  protected onClick(event: MouseEvent): void {
+    const link = (event.target as Element | null)?.closest?.<HTMLAnchorElement>('a.term');
+    const id = link?.hash.slice(1);
+    if (id && id === this.fragment()) this.reveal(id);
   }
 
   protected setGroup(group: GroupFilter): void {
