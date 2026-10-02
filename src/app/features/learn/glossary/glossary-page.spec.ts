@@ -24,7 +24,7 @@ describe('GlossaryPage', () => {
     const fixture = TestBed.createComponent(GlossaryPage);
     await fixture.whenStable();
     const listed = names(fixture.nativeElement as HTMLElement);
-    expect(listed).toHaveLength(52);
+    expect(listed).toHaveLength(53);
     expect(listed).toEqual([...listed].sort((a, b) => a.localeCompare(b, 'es')));
   });
 

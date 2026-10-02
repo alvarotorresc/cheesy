@@ -7,6 +7,7 @@ import { queenMoves } from './beginner/04-queen-moves.ts';
 import { kingMoves } from './beginner/05-king-moves.ts';
 import { knightMoves } from './beginner/06-knight-moves.ts';
 import { pawnMoves } from './beginner/07-pawn-moves.ts';
+import { capturesAndValues } from './beginner/08-captures-and-values.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -16,4 +17,5 @@ export const lessons: LessonSpec[] = [
   kingMoves,
   knightMoves,
   pawnMoves,
+  capturesAndValues,
 ];

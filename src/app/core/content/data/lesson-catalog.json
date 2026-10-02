@@ -103,5 +103,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 4
+  },
+  {
+    "id": "captures-and-values",
+    "level": "beginner",
+    "order": 8,
+    "title": {
+      "es": "Capturar y el valor de las piezas",
+      "en": "Capturing and piece values"
+    },
+    "summary": {
+      "es": "Cómo se captura, cuándo conviene y cuánto vale cada pieza.",
+      "en": "How to capture, when it pays and what each piece is worth."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
   }
 ]

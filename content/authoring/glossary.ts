@@ -176,6 +176,26 @@ export const glossary: GlossarySpec[] = [
     level: 'beginner',
     sources: [WIKI_KP_ENDGAME, WIKI_PHILIDOR, `${WIKI}Chess_endgame`],
   },
+  {
+    id: 'piece-value',
+    name: { es: 'Valor de las piezas', en: 'Piece value' },
+    definition: {
+      es: 'Puntos que se dan a cada pieza para comparar cuánto vale: peón 1, caballo 3, alfil 3, torre 5 y dama 9. El rey no se cuenta, porque nunca sale del tablero. No es una regla del juego, sino una guía para decidir qué capturar y qué cambiar.',
+      en: 'Points given to each piece to compare what it is worth: pawn 1, knight 3, bishop 3, rook 5 and queen 9. The king is not counted, because it never leaves the board. It is not a rule of the game but a guide for deciding what to capture and what to trade.',
+    },
+    example: {
+      fen: '7k/8/8/8/8/8/P7/1NBRQK2 w - - 0 1',
+      orientation: 'white',
+      highlights: ['a2', 'b1', 'c1', 'd1', 'e1'],
+      arrows: [],
+    },
+    level: 'beginner',
+    lesson: 'captures-and-values',
+    sources: [
+      `${WIKI}Chess_piece_relative_value`,
+      `${CHESSCOM_ES}el-valor-de-las-piezas-de-ajedrez`,
+    ],
+  },
 
   // ─── Opening and strategy ────────────────────────────────────────────────────────────────────
   {

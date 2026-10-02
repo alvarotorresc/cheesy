@@ -16,6 +16,7 @@ const EXPECTED_IDS = [
   'castling',
   'promotion',
   'queening-square',
+  'piece-value',
   'centre',
   'development',
   'exchange',
