@@ -1,0 +1,52 @@
+@let t = i18n.t().learn;
+@let s = session();
+<div class="play-board">
+  <app-board
+    [fen]="s.fen()"
+    [orientation]="step().board.orientation"
+    [turnColor]="s.turn()"
+    [dests]="dests()"
+    [lastMove]="s.lastMove()"
+    [marks]="marks()"
+    [arrows]="step().board.arrows ?? []"
+    [labels]="i18n.t().board"
+    (move)="onMove($event)"
+  />
+</div>
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  <div
+    class="feedback"
+    aria-live="polite"
+    [class.right]="feedback()?.kind === 'solved'"
+    [class.wrong]="feedback()?.kind === 'wrong'"
+  >
+    @let current = feedback();
+    @if (current?.kind === 'solved') {
+      <app-rich-text [text]="step().explanation" />
+    } @else if (current?.kind === 'wrong') {
+      @if (current.message; as message) {
+        <app-rich-text [text]="message" />
+      } @else {
+        {{ t.wrongMove }}
+      }
+    }
+  </div>
+  @if (hintShown() && step().hint; as hint) {
+    <p class="hint-text"><app-rich-text [text]="hint" /></p>
+  }
+  @if (!s.solved()) {
+    <div class="actions">
+      @if (s.tracker.canHint() && !hintShown()) {
+        <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>
+      }
+      @if (s.tracker.canReveal()) {
+        <button type="button" class="button solution" (click)="showSolution()">
+          {{ t.showSolution }}
+        </button>
+      }
+    </div>
+  }
+  <ng-content select="[lessonNav]" />
+</div>

@@ -39,8 +39,14 @@ describe('App', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/glossary#pin');
     expect(TestBed.inject(Router).url).toBe('/learn/glossary#pin');
+  });
+
+  it('should open the Learn landing at /learn instead of the glossary', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/learn');
-    expect(TestBed.inject(Router).url).toBe('/learn/glossary');
+    expect(TestBed.inject(Router).url).toBe('/learn');
   });
 
   it('should name the glossary tab', async () => {
