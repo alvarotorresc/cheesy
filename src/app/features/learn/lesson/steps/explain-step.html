@@ -1,0 +1,26 @@
+@let t = i18n.t().learn;
+@let board = step().board;
+@if (board && frame(); as shown) {
+  <div class="play-board">
+    <app-board
+      [fen]="shown.fen"
+      [orientation]="board.orientation"
+      [turnColor]="board.orientation"
+      [viewOnly]="true"
+      [lastMove]="shown.lastMove"
+      [marks]="marks()"
+      [arrows]="board.arrows ?? []"
+      [labels]="i18n.t().board"
+    />
+  </div>
+}
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  @if (hasMoves() && !reduced()) {
+    <div class="actions">
+      <button type="button" class="button replay" (click)="replay()">{{ t.replay }}</button>
+    </div>
+  }
+  <ng-content select="[lessonNav]" />
+</div>

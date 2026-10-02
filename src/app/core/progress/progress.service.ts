@@ -4,12 +4,20 @@ import {
   applyResult,
   isValidResult,
   parseEndgameProgress,
+  parseLessonProgress,
   parseLineProgress,
   parsePositionProgress,
   progressKey,
 } from './progress-record';
 import { PROGRESS_STORE_LOADER, type ProgressStore } from './progress-store';
-import type { EndgameProgress, LineProgress, LineResult, PositionProgress } from './progress.types';
+import type {
+  EndgameProgress,
+  LessonProgress,
+  LessonResult,
+  LineProgress,
+  LineResult,
+  PositionProgress,
+} from './progress.types';
 
 /**
  * `unknown`: the store has not been opened yet. `ready`: progress is read and saved.
@@ -19,10 +27,10 @@ import type { EndgameProgress, LineProgress, LineResult, PositionProgress } from
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 
 /** The parts of the app that keep progress, each one deleted on its own. */
-export type ProgressSection = 'openings' | 'endgames' | 'positions';
+export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons';
 
 /**
- * Progress of the practised lines, endgames and positions, kept only in this browser (IndexedDB). Nothing is ever sent
+ * Progress of the practised lines, endgames, positions and lessons, kept only in this browser (IndexedDB). Nothing is ever sent
  * anywhere.
  *
  * Storage is best effort: every method resolves, never rejects. When the store cannot be opened
@@ -131,9 +139,30 @@ export class ProgressService {
     });
   }
 
+  /** Every valid row of the lessons. */
+  async lessons(): Promise<LessonProgress[]> {
+    const rows = await this.run((store) => store.lessons.all());
+    return (rows ?? []).flatMap((row) => parseLessonProgress(row) ?? []);
+  }
+
+  /** Saves that a lesson reached its summary, replacing an earlier result. */
+  async recordLesson(result: LessonResult, now = Date.now()): Promise<LessonProgress | undefined> {
+    const next = parseLessonProgress({ ...result, completedAt: now });
+    if (!next) return undefined;
+    return this.save(async (store) => {
+      await store.lessons.put(next);
+      return next;
+    });
+  }
+
   /** Deletes the progress of one section, and only that one. Resolves with false on failure. */
   async clear(section: ProgressSection): Promise<boolean> {
-    const table = { openings: 'lines', endgames: 'endgames', positions: 'positions' } as const;
+    const table = {
+      openings: 'lines',
+      endgames: 'endgames',
+      positions: 'positions',
+      lessons: 'lessons',
+    } as const;
     const cleared = await this.run(async (store) => {
       await store[table[section]].clear();
       return true;

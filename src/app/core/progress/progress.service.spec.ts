@@ -47,6 +47,56 @@ describe('ProgressService', () => {
     vi.restoreAllMocks();
   });
 
+  describe('lessons', () => {
+    beforeEach(() => setupWithDatabase());
+
+    it('should record a lesson and replace it when it is done again', async () => {
+      const first = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 2 },
+        10,
+      );
+      const again = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 4 },
+        20,
+      );
+
+      expect(first).toEqual({
+        lessonId: 'knight-moves',
+        completedAt: 10,
+        exercises: 4,
+        firstTry: 2,
+      });
+      expect(again).toEqual({
+        lessonId: 'knight-moves',
+        completedAt: 20,
+        exercises: 4,
+        firstTry: 4,
+      });
+      expect(await service.lessons()).toEqual([again]);
+    });
+
+    it('should ignore lesson rows that were tampered with', async () => {
+      const good = await service.recordLesson(
+        { lessonId: 'knight-moves', exercises: 4, firstTry: 2 },
+        10,
+      );
+      await store.lessons.put({ lessonId: 'Bad Id', completedAt: 5, exercises: 1, firstTry: 0 });
+      await store.lessons.put({ lessonId: 'the-board', completedAt: 5, exercises: 1, firstTry: 3 });
+      await store.lessons.put({ lessonId: 'pawns', completedAt: -1, exercises: 1, firstTry: 0 });
+
+      expect(await service.lessons()).toEqual([good]);
+    });
+
+    it('should refuse a lesson result that makes no sense', async () => {
+      expect(
+        await service.recordLesson({ lessonId: 'Bad Id', exercises: 1, firstTry: 0 }),
+      ).toBeUndefined();
+      expect(
+        await service.recordLesson({ lessonId: 'ok', exercises: 1, firstTry: 2 }),
+      ).toBeUndefined();
+    });
+  });
+
   describe('with a working store', () => {
     beforeEach(() => setupWithDatabase());
 
@@ -294,6 +344,26 @@ describe('ProgressService', () => {
 
       expect(await service.clear('positions')).toBe(true);
       expect(await service.positions()).toEqual([]);
+    });
+
+    it('should delete the lessons on their own and keep them when another section is cleared', async () => {
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+      await service.recordPositionSolve('legal-mate');
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 });
+
+      for (const section of ['openings', 'endgames', 'positions'] as const)
+        expect(await service.clear(section)).toBe(true);
+      expect(await service.lessons()).toHaveLength(1);
+
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+      await service.recordPositionSolve('legal-mate');
+      expect(await service.clear('lessons')).toBe(true);
+      expect(await service.lessons()).toEqual([]);
+      expect(await service.lines()).toHaveLength(1);
+      expect(await service.endgames()).toHaveLength(1);
+      expect(await service.positions()).toHaveLength(1);
     });
   });
 

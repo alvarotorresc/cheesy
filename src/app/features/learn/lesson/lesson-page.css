@@ -1,0 +1,128 @@
+:host {
+  display: block;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---- Head of every step: way back, title, where you are -------------------------------------- */
+
+.lesson-head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.lesson-head h1 {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1:focus,
+h2:focus {
+  outline: none;
+}
+
+.step-of {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-bar {
+  height: 0.375rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-hover);
+  overflow: hidden;
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .progress-bar span {
+    transition: width var(--duration) var(--ease-out);
+  }
+}
+
+/* ---- Previous and next ----------------------------------------------------------------------- */
+
+.step-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* ---- Summary --------------------------------------------------------------------------------- */
+
+.summary {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+}
+
+/* The h1 of the summary reads as a small label above "Lesson complete". */
+.summary .lesson-title {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.summary h2 {
+  font-size: var(--text-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.first-try {
+  font-size: var(--text-lg);
+}
+
+.terms {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.terms h3 {
+  font-size: var(--text-md);
+}
+
+.terms ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.terms a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+}
+
+.summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

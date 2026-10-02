@@ -81,9 +81,13 @@ describe('About', () => {
   it('should say what is saved and how to clear it, section by section', async () => {
     const element = await open();
 
-    expect(element.querySelectorAll('.stays li')).toHaveLength(4);
+    expect(element.querySelectorAll('.stays li')).toHaveLength(6);
+    expect(text(element.querySelector('.stays li:nth-child(5)'))).toContain('El modo de lectura');
+    expect(text(element.querySelector('.stays li:nth-child(2)'))).toContain(
+      'Las lecciones completadas',
+    );
     expect(text(element.querySelector('.erase p'))).toBe(
-      'Borrar el progreso, en Aperturas, Finales y Posiciones, borra el de esa sección.',
+      'Borrar el progreso, en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     );
   });
 

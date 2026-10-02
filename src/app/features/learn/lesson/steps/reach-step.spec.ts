@@ -1,0 +1,329 @@
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import type { ReachStep } from '../../../../core/content';
+import { plainText } from '../../../../core/content/testing';
+import { I18nService } from '../../../../core/i18n';
+import { en } from '../../../../core/i18n/dictionaries/en';
+import { es } from '../../../../core/i18n/dictionaries/es';
+import { BoardComponent } from '../../../../shared/board';
+import { addStepFrame, pressFocused } from '../../testing';
+import { ReachStepView } from './reach-step';
+
+const knightStep: ReachStep = {
+  kind: 'reach',
+  text: plainText('Collect the stars'),
+  piece: { role: 'knight', color: 'white', square: 'g1' },
+  targets: ['e2', 'f3'],
+  minMoves: 3,
+};
+
+/** Two moves to the star, because the bishop guards f3: g1, h3, g5. */
+const roundStep: ReachStep = {
+  kind: 'reach',
+  text: plainText('Go round'),
+  piece: { role: 'knight', color: 'white', square: 'g1' },
+  targets: ['g5'],
+  enemies: [{ role: 'bishop', square: 'd5' }],
+  minMoves: 2,
+};
+
+/** The bishop on d5 guards f3, so the knight must not step there on its way to h3. */
+const guardedStep: ReachStep = {
+  kind: 'reach',
+  text: plainText('Avoid the bishop'),
+  piece: { role: 'knight', color: 'white', square: 'g1' },
+  targets: ['h3'],
+  enemies: [{ role: 'bishop', square: 'd5' }],
+  minMoves: 1,
+};
+
+describe('ReachStepView', () => {
+  let fixture: ComponentFixture<ReachStepView>;
+  let element: HTMLElement;
+  let done: { firstTry: boolean }[];
+
+  const board = () =>
+    fixture.debugElement.query(By.directive(BoardComponent)).componentInstance as BoardComponent;
+  const move = (from: string, to: string) =>
+    board().move.emit({ from: from as never, to: to as never });
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.inject(I18nService).setLang('en');
+    fixture = TestBed.createComponent(ReachStepView);
+    element = fixture.nativeElement as HTMLElement;
+    done = [];
+    fixture.componentInstance.done.subscribe((value) => done.push(value));
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+    vi.useRealTimers();
+  });
+
+  it('should count stars and moves and emit done when every star is collected', async () => {
+    fixture.componentRef.setInput('step', knightStep);
+    await fixture.whenStable();
+    expect(element.textContent).toContain('0 of 2 stars · 0 moves (fewest 3)');
+    for (const to of ['e2', 'g1', 'f3']) move('x', to);
+    await fixture.whenStable();
+    expect(element.textContent).toContain('2 of 2 stars · 3 moves (fewest 3)');
+    expect(done).toEqual([{ firstTry: true }]);
+  });
+
+  it('should show the stars as marks and let only the piece move', async () => {
+    fixture.componentRef.setInput('step', knightStep);
+    await fixture.whenStable();
+    expect(board().marks().get('e2')).toBe('star');
+    expect([...board().dests().keys()]).toEqual(['g1']);
+    expect(board().orientation()).toBe('white');
+  });
+
+  it('should say the piece was captured and offer to start again', async () => {
+    fixture.componentRef.setInput('step', guardedStep);
+    await fixture.whenStable();
+    move('g1', 'f3');
+    await fixture.whenStable();
+    expect(element.textContent).toContain('captured');
+    element.querySelector<HTMLButtonElement>('button.restart')!.click();
+    await fixture.whenStable();
+    expect(element.textContent).toContain('0 of 1 star');
+    expect(element.querySelector('button.restart')).toBeNull();
+  });
+
+  it('should offer the hint after two captures and the solution after three', async () => {
+    fixture.componentRef.setInput('step', { ...guardedStep, hint: plainText('Go round it') });
+    await fixture.whenStable();
+    const captured = async () => {
+      move('g1', 'f3');
+      await fixture.whenStable();
+      element.querySelector<HTMLButtonElement>('button.restart')!.click();
+      await fixture.whenStable();
+    };
+    await captured();
+    expect(element.querySelector('button.hint')).toBeNull();
+    await captured();
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    await fixture.whenStable();
+    expect(element.textContent).toContain('Go round it');
+    expect(element.querySelector('button.solution')).toBeNull();
+    await captured();
+    expect(element.querySelector('button.solution')).not.toBeNull();
+  });
+
+  it('should point an arrow at the first square of the way when there is no hint text', async () => {
+    fixture.componentRef.setInput('step', guardedStep);
+    await fixture.whenStable();
+    for (let i = 0; i < 2; i++) {
+      move('g1', 'f3');
+      await fixture.whenStable();
+      element.querySelector<HTMLButtonElement>('button.restart')!.click();
+      await fixture.whenStable();
+    }
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    await fixture.whenStable();
+    expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
+    expect(board().marks().get('h3')).toBe('star');
+  });
+
+  it('should play the solution on request and count it as not a first try', async () => {
+    vi.useFakeTimers();
+    fixture.componentRef.setInput('step', guardedStep);
+    fixture.detectChanges();
+    for (let i = 0; i < 3; i++) {
+      move('g1', 'f3');
+      fixture.detectChanges();
+      element.querySelector<HTMLButtonElement>('button.restart')!.click();
+      fixture.detectChanges();
+    }
+    element.querySelector<HTMLButtonElement>('button.solution')!.click();
+    fixture.detectChanges();
+    vi.advanceTimersByTime(600 * 10);
+    fixture.detectChanges();
+    expect(element.textContent).toContain('1 of 1 star');
+    expect(done).toEqual([{ firstTry: false }]);
+  });
+
+  describe('showing the solution', () => {
+    const captureThrice = () => {
+      for (let i = 0; i < 3; i++) {
+        move('g1', 'f3');
+        fixture.detectChanges();
+        element.querySelector<HTMLButtonElement>('button.restart')!.click();
+        fixture.detectChanges();
+      }
+    };
+
+    it('should play the path once when the button is pressed twice, holding the board until the end', () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', roundStep);
+      fixture.detectChanges();
+      captureThrice();
+      const solution = element.querySelector<HTMLButtonElement>('button.solution')!;
+      solution.click();
+      solution.click();
+      fixture.detectChanges();
+      expect(element.querySelector('button.solution')).toBeNull();
+      expect(element.querySelector('button.hint')).toBeNull();
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('0 of 1 star · 1 move (fewest 2)');
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(600 * 5);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('1 of 1 star · 2 moves (fewest 2)');
+      expect(done).toEqual([{ firstTry: false }]);
+    });
+
+    it('should keep the board held for the new step until its own playback ends', () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', roundStep);
+      fixture.detectChanges();
+      captureThrice();
+      element.querySelector<HTMLButtonElement>('button.solution')!.click();
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      fixture.componentRef.setInput('step', { ...roundStep });
+      fixture.detectChanges();
+      captureThrice();
+      element.querySelector<HTMLButtonElement>('button.solution')!.click();
+      fixture.detectChanges();
+      // t = 1200: the old playback would end now, but it belongs to the old step.
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(board().dests().size).toBe(0);
+      expect(element.querySelector('button.solution')).toBeNull();
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('1 of 1 star · 2 moves');
+      expect(done).toEqual([{ firstTry: false }]);
+    });
+  });
+
+  it('should draw the hint arrow from the start square even when pressed mid-route', () => {
+    fixture.componentRef.setInput('step', roundStep);
+    fixture.detectChanges();
+    for (let i = 0; i < 2; i++) {
+      move('g1', 'f3');
+      fixture.detectChanges();
+      element.querySelector<HTMLButtonElement>('button.restart')!.click();
+      fixture.detectChanges();
+    }
+    move('g1', 'h3');
+    fixture.detectChanges();
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    fixture.detectChanges();
+    expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
+    expect(element.textContent).toContain('0 of 1 star · 0 moves');
+  });
+});
+
+describe('ReachStepView focus', () => {
+  let fixture: ComponentFixture<ReachStepView>;
+  let element: HTMLElement;
+  let heading: HTMLElement;
+
+  const board = () =>
+    fixture.debugElement.query(By.directive(BoardComponent)).componentInstance as BoardComponent;
+  const press = (selector: string) => {
+    pressFocused(element.querySelector<HTMLButtonElement>(selector)!);
+    fixture.detectChanges();
+  };
+  const capture = () => {
+    board().move.emit({ from: 'g1' as never, to: 'f3' as never });
+    fixture.detectChanges();
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.inject(I18nService).setLang('en');
+    fixture = TestBed.createComponent(ReachStepView);
+    element = fixture.nativeElement as HTMLElement;
+    fixture.componentRef.setInput('step', guardedStep);
+    fixture.detectChanges();
+    heading = addStepFrame(element).heading;
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+    vi.useRealTimers();
+  });
+
+  it('should move the focus to the step heading after Start again, Hint and Show solution', () => {
+    capture();
+    press('button.restart');
+    expect(element.querySelector('button.restart')).toBeNull();
+    expect(document.activeElement).toBe(heading);
+
+    capture();
+    press('button.restart');
+    press('button.hint');
+    expect(element.querySelector('button.hint')).toBeNull();
+    expect(document.activeElement).toBe(heading);
+
+    capture();
+    press('button.restart');
+    press('button.solution');
+    expect(element.querySelector('button.solution')).toBeNull();
+    expect(document.activeElement).toBe(heading);
+  });
+});
+
+describe('ReachStepView skip', () => {
+  let fixture: ComponentFixture<ReachStepView>;
+  let element: HTMLElement;
+  let done: { firstTry: boolean }[];
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.inject(I18nService).setLang('en');
+    fixture = TestBed.createComponent(ReachStepView);
+    element = fixture.nativeElement as HTMLElement;
+    done = [];
+    fixture.componentInstance.done.subscribe((value) => done.push(value));
+    fixture.componentRef.setInput('step', knightStep);
+    await fixture.whenStable();
+  });
+
+  afterEach(() => localStorage.clear());
+
+  const skip = () => element.querySelector<HTMLButtonElement>('button.skip');
+
+  it('should offer a skip button, hidden until it has the focus, right after the actions', () => {
+    expect(skip()?.textContent?.trim()).toBe('Skip this exercise');
+    expect(skip()!.classList).toContain('visually-hidden-focusable');
+    expect(skip()!.previousElementSibling?.classList).toContain('actions');
+  });
+
+  it('should complete the step as not a first try and move the focus to Next', async () => {
+    const { next } = addStepFrame(element);
+    pressFocused(skip()!);
+    await fixture.whenStable();
+    expect(done).toEqual([{ firstTry: false }]);
+    expect(skip()).toBeNull();
+    expect(document.activeElement).toBe(next);
+  });
+
+  it('should not offer to skip a step that is done', async () => {
+    const board = fixture.debugElement.query(By.directive(BoardComponent))
+      .componentInstance as BoardComponent;
+    for (const to of ['e2', 'g1', 'f3']) board.move.emit({ from: 'x' as never, to: to as never });
+    await fixture.whenStable();
+    expect(skip()).toBeNull();
+  });
+});
+
+describe('stars count text', () => {
+  it('should say star in the singular when there is only one', () => {
+    expect(en.learn.stars(0, 1, 0, 4)).toBe('0 of 1 star · 0 moves (fewest 4)');
+    expect(es.learn.stars(0, 1, 0, 4)).toBe('0 de 1 estrella · 0 jugadas (mínimo 4)');
+  });
+
+  it('should keep stars in the plural for two or more', () => {
+    expect(en.learn.stars(1, 2, 1, 2)).toBe('1 of 2 stars · 1 move (fewest 2)');
+    expect(es.learn.stars(1, 2, 1, 2)).toBe('1 de 2 estrellas · 1 jugada (mínimo 2)');
+  });
+});

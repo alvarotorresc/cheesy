@@ -1,8 +1,10 @@
-import type { ContentLoaders } from './content-loaders';
+import type { ContentLoaders, LessonLoaders } from './content-loaders';
 import type {
   CuratedPosition,
   EndgamePosition,
   GlossaryTerm,
+  Lesson,
+  LessonSummary,
   OpeningSummary,
   OpeningTree,
   RichText,
@@ -20,6 +22,18 @@ export const bundledContentLoaders: ContentLoaders = {
   opening: async (id) => (await import(`./data/openings/${id}.json`)).default as OpeningTree,
   endgames: async () => (await import('./data/endgames.json')).default as EndgamePosition[],
   positions: async () => (await import('./data/positions.json')).default as CuratedPosition[],
+};
+
+/**
+ * The lessons imported straight from the source tree, like `bundledContentLoaders`. The files are
+ * built by the lesson build; the path goes through a variable so this compiles before they exist
+ * (a spec that reads them fails at run time until then).
+ */
+const dataFile = async (path: string): Promise<unknown> =>
+  (await import(`./data/${path}.json`)).default;
+export const bundledLessonLoaders: LessonLoaders = {
+  catalog: async () => (await dataFile('lesson-catalog')) as LessonSummary[],
+  lesson: async (id) => (await dataFile(`lessons/${id}`)) as Lesson,
 };
 
 /** The glossary imported straight from the source tree, like `bundledContentLoaders`. */

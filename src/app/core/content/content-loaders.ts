@@ -4,6 +4,8 @@ import type {
   CuratedPosition,
   EndgamePosition,
   GlossaryTerm,
+  Lesson,
+  LessonSummary,
   OpeningSummary,
   OpeningTree,
 } from './content.types';
@@ -77,3 +79,29 @@ export const GLOSSARY_LOADER = new InjectionToken<() => Promise<readonly Glossar
   'GLOSSARY_LOADER',
   { providedIn: 'root', factory: () => createFetchGlossaryLoader(inject(DOCUMENT).baseURI) },
 );
+
+/** How the lessons are fetched: a token of its own, so the older specs keep their loaders. */
+export interface LessonLoaders {
+  catalog(): Promise<readonly LessonSummary[]>;
+  /** Only called with ids taken from the catalogue. */
+  lesson(id: string): Promise<Lesson>;
+}
+
+export const createFetchLessonLoaders = (baseUrl: string): LessonLoaders => {
+  const file = (path: string) => new URL(`${CONTENT_PATH}${path}`, baseUrl);
+  return {
+    catalog: () => download(file('lesson-catalog.json'), (data) => isListOf(data, 'id', 'level')),
+    lesson: async (id) => {
+      if (!isContentId(id)) throw new Error(`Invalid lesson id: ${id}`);
+      return download(
+        file(`lessons/${id}.json`),
+        (data) => isRecord(data) && data['id'] === id && Array.isArray(data['steps']),
+      );
+    },
+  };
+};
+
+export const LESSON_LOADERS = new InjectionToken<LessonLoaders>('LESSON_LOADERS', {
+  providedIn: 'root',
+  factory: () => createFetchLessonLoaders(inject(DOCUMENT).baseURI),
+});

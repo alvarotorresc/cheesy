@@ -1,0 +1,39 @@
+@let t = i18n.t().learn;
+<a class="back" routerLink="/learn">← {{ t.backToLearn }}</a>
+<header class="page-head">
+  <h1>{{ t.levels[level()].name }}</h1>
+  <p class="lede">{{ t.levels[level()].description }}</p>
+</header>
+@switch (state().status) {
+  @case ('loading') {
+    <p class="notice" role="status">{{ t.loading }}</p>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ t.loadError }}</p>
+      <button type="button" class="button" (click)="load()">{{ t.retry }}</button>
+    </div>
+  }
+  @case ('ready') {
+    <ol class="lessons">
+      @for (lesson of lessons(); track lesson.id) {
+        <li
+          class="lesson-item"
+          [class.done]="done().has(lesson.id)"
+          [class.next]="next()?.id === lesson.id"
+        >
+          <span class="order" aria-hidden="true">{{ lesson.order }}</span>
+          <div class="body">
+            <a [routerLink]="['/learn', level(), lesson.id]">{{ i18n.localize(lesson.title) }}</a>
+            <p>{{ i18n.localize(lesson.summary) }}</p>
+          </div>
+          @if (done().has(lesson.id)) {
+            <span class="tag">{{ t.completed }}</span>
+          } @else if (next()?.id === lesson.id) {
+            <span class="tag">{{ t.nextLesson }}</span>
+          }
+        </li>
+      }
+    </ol>
+  }
+}

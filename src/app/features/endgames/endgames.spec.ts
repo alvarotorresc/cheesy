@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
 import { CONTENT_LOADERS } from '../../core/content';
 import { bundledContentLoaders } from '../../core/content/testing';
 import { I18nService } from '../../core/i18n';
@@ -106,6 +107,46 @@ describe('Endgames list', () => {
     element.querySelector<HTMLButtonElement>('.notice .button')?.click();
     await fixture.whenStable();
     expect(element.querySelectorAll('.card')).toHaveLength(3);
+  });
+
+  describe('opened on a category from the address', () => {
+    const open = async (url: string) => {
+      TestBed.configureTestingModule({
+        providers: [
+          provideRouter([{ path: 'endgames', component: Endgames }]),
+          {
+            provide: CONTENT_LOADERS,
+            useValue: {
+              ...bundledContentLoaders,
+              endgames: async () => [SQUARE_RULE, LUCENA, ENGINE_FIRST],
+            },
+          },
+          { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        ],
+      });
+      TestBed.inject(I18nService).setLang('en');
+      const harness = await RouterTestingHarness.create();
+      await harness.navigateByUrl(url);
+      const element = harness.routeNativeElement as HTMLElement;
+      await vi.waitFor(() => {
+        harness.detectChanges();
+        expect(element.querySelector('.tab')).not.toBeNull();
+      });
+      return element;
+    };
+
+    it('should show only that category, with its tab pressed', async () => {
+      const element = await open('/endgames?category=Basic%20mates');
+      expect(element.querySelectorAll('.card')).toHaveLength(1);
+      expect(element.querySelector('.tab[aria-pressed="true"]')?.textContent).toContain(
+        'Basic mates',
+      );
+    });
+
+    it('should show everything for a category it does not know', async () => {
+      const element = await open('/endgames?category=Nope');
+      expect(element.querySelectorAll('.card')).toHaveLength(3);
+    });
   });
 
   it('should delete only the endgames progress after confirming', async () => {

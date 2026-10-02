@@ -1,0 +1,35 @@
+:host {
+  display: contents;
+}
+
+.prompt {
+  font-weight: 600;
+}
+
+.step-text {
+  line-height: 1.5;
+}
+
+.feedback {
+  margin-block: var(--space-3);
+  min-height: 1.5em;
+}
+
+.feedback:empty {
+  margin-block: 0;
+  min-height: 0;
+}
+
+.feedback.right {
+  font-weight: 600;
+}
+
+.feedback.wrong {
+  color: var(--color-danger);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

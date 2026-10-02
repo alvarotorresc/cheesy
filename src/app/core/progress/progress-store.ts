@@ -1,5 +1,10 @@
 import { InjectionToken } from '@angular/core';
-import type { EndgameProgress, LineProgress, PositionProgress } from './progress.types';
+import type {
+  EndgameProgress,
+  LessonProgress,
+  LineProgress,
+  PositionProgress,
+} from './progress.types';
 
 /** A row as it is stored: the progress of a line plus its key (see `progressKey`). */
 export interface StoredLineProgress extends LineProgress {
@@ -22,6 +27,7 @@ export interface ProgressStore {
   readonly lines: TableStore<StoredLineProgress>;
   readonly endgames: TableStore<EndgameProgress>;
   readonly positions: TableStore<PositionProgress>;
+  readonly lessons: TableStore<LessonProgress>;
 }
 
 /** Opens the store. May reject: IndexedDB can be missing, blocked or full. */

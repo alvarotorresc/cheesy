@@ -1,0 +1,59 @@
+@let t = i18n.t().learn;
+@let e = i18n.t().endgames;
+@let s = session;
+<div class="play-board">
+  <app-board
+    [fen]="game.fen()"
+    [orientation]="step().playerSide"
+    [turnColor]="game.turn()"
+    [dests]="s.dests()"
+    [lastMove]="game.lastMove()"
+    [check]="game.isCheck()"
+    [arrows]="arrows()"
+    [labels]="i18n.t().board"
+    (move)="onMove($event)"
+  />
+</div>
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  <p class="prompt">{{ step().goal === 'win' ? t.playWin : t.playDraw }}</p>
+  @if (s.milestone(); as milestone) {
+    @if (milestone.kind === 'draw') {
+      <p class="progress">{{ milestone.held }} {{ e.drawOf }}</p>
+    }
+  }
+  <div class="feedback" aria-live="polite" [class.right]="achieved()" [class.wrong]="failed()">
+    @if (achieved()) {
+      {{ t.correct }}
+    } @else if (failed()) {
+      {{ t.playFailed }}
+    }
+  </div>
+  @if (s.rivalSource() === 'none') {
+    <p class="feedback wrong" role="alert">{{ e.noAnswer }}</p>
+  }
+  @if (hintShown() && step().hint; as hint) {
+    <p class="hint-text"><app-rich-text [text]="hint" /></p>
+  }
+  @if (!achieved()) {
+    <div class="actions">
+      @if (failed()) {
+        <button type="button" class="button primary restart" (click)="restart()">
+          {{ t.restart }}
+        </button>
+      } @else if (tracker().canHint() && s.isPlayerTurn()) {
+        <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>
+      }
+      @if (s.rivalSource() === 'none') {
+        <button type="button" class="button" (click)="s.retryEngine()">{{ e.engineRetry }}</button>
+      }
+    </div>
+  }
+  @if (!achieved() && !skipped()) {
+    <button type="button" class="button skip visually-hidden-focusable" (click)="skip()">
+      {{ t.skip }}
+    </button>
+  }
+  <ng-content select="[lessonNav]" />
+</div>

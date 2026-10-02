@@ -1,8 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import { CONTENT_LOADERS, GLOSSARY_LOADER, type ContentLoaders } from './content-loaders';
+import {
+  CONTENT_LOADERS,
+  GLOSSARY_LOADER,
+  LESSON_LOADERS,
+  type ContentLoaders,
+} from './content-loaders';
 import { bundledContentLoaders } from './testing';
 import { ContentService } from './content.service';
-import type { GlossaryTerm, OpeningSummary, OpeningTree } from './content.types';
+import type {
+  GlossaryTerm,
+  Lesson,
+  LessonSummary,
+  OpeningSummary,
+  OpeningTree,
+} from './content.types';
 import { OpeningBook } from './opening-book';
 
 const OPENING_IDS = [
@@ -257,5 +268,61 @@ describe('ContentService glossary', () => {
 
     await expect(content.glossary()).rejects.toThrow('offline');
     await expect(content.glossary()).resolves.toEqual([]);
+  });
+});
+
+describe('ContentService lessons', () => {
+  const summary = (id: string): LessonSummary => ({
+    id,
+    level: 'beginner',
+    order: 1,
+    title: { es: id, en: id },
+    summary: { es: id, en: id },
+    stepCount: 5,
+    exerciseCount: 2,
+  });
+  const lessonOf = (id: string): Lesson => ({
+    ...summary(id),
+    terms: [],
+    sources: ['https://example.org'],
+    steps: [],
+  });
+
+  const setupLessons = () => {
+    const loaders = {
+      catalog: vi.fn(async () => [summary('knight-moves')]),
+      lesson: vi.fn(async (id: string) => lessonOf(id)),
+    };
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: CONTENT_LOADERS, useValue: bundledContentLoaders },
+        { provide: LESSON_LOADERS, useValue: loaders },
+      ],
+    });
+    return { content: TestBed.inject(ContentService), loaders };
+  };
+
+  it('should list the lessons and load one by id', async () => {
+    const { content } = setupLessons();
+
+    expect((await content.lessonCatalog()).map((l) => l.id)).toEqual(['knight-moves']);
+    expect((await content.lesson('knight-moves'))?.id).toBe('knight-moves');
+  });
+
+  it('should resolve an unknown id to undefined without downloading it', async () => {
+    const { content, loaders } = setupLessons();
+
+    expect(await content.lesson('nope')).toBeUndefined();
+    expect(loaders.lesson).not.toHaveBeenCalled();
+  });
+
+  it('should download the catalogue and each lesson once', async () => {
+    const { content, loaders } = setupLessons();
+
+    await content.lesson('knight-moves');
+    await content.lesson('knight-moves');
+
+    expect(loaders.catalog).toHaveBeenCalledTimes(1);
+    expect(loaders.lesson).toHaveBeenCalledTimes(1);
   });
 });

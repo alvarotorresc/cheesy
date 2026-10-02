@@ -1,0 +1,49 @@
+@let t = i18n.t().learn;
+@let s = session();
+<div class="play-board">
+  <app-board
+    [fen]="s.fen()"
+    [orientation]="step().piece.color"
+    [turnColor]="step().piece.color"
+    [dests]="dests()"
+    [marks]="marks()"
+    [arrows]="arrows()"
+    [labels]="i18n.t().board"
+    (move)="onMove($event)"
+  />
+</div>
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  <p class="prompt">
+    {{ t.stars(s.collected().size, step().targets.length, s.moves(), step().minMoves) }}
+  </p>
+  <div class="feedback" aria-live="polite" [class.wrong]="s.status() === 'captured'">
+    @if (s.status() === 'captured') {
+      {{ t.captured }}
+    } @else if (s.status() === 'done') {
+      {{ t.correct }}
+    } @else if (hintShown() && step().hint; as hint) {
+      <app-rich-text [text]="hint" />
+    }
+  </div>
+  <div class="actions">
+    @if (s.status() === 'captured') {
+      <button type="button" class="button restart" (click)="restart()">{{ t.restart }}</button>
+    }
+    @if (s.tracker.canHint() && s.status() !== 'done' && !hintShown() && !showingSolution()) {
+      <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>
+    }
+    @if (s.tracker.canReveal() && s.status() !== 'done' && !showingSolution()) {
+      <button type="button" class="button solution" (click)="showSolution()">
+        {{ t.showSolution }}
+      </button>
+    }
+  </div>
+  @if (s.status() !== 'done' && !skipped()) {
+    <button type="button" class="button skip visually-hidden-focusable" (click)="skip()">
+      {{ t.skip }}
+    </button>
+  }
+  <ng-content select="[lessonNav]" />
+</div>

@@ -1,0 +1,74 @@
+@let t = i18n.t().learn;
+@let board = step().board;
+@if (board) {
+  <div class="play-board">
+    <app-board
+      [fen]="board.fen"
+      [orientation]="board.orientation"
+      [viewOnly]="true"
+      [marks]="marks()"
+      [arrows]="board.arrows ?? []"
+      [labels]="i18n.t().board"
+    />
+  </div>
+}
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  <div class="options" role="group" [attr.aria-label]="t.optionsLabel">
+    @for (index of indexes(); track index) {
+      <button
+        type="button"
+        class="option"
+        [class.correct]="session().solved() && index === session().correct"
+        [attr.aria-disabled]="session().tried().has(index) || session().solved() || null"
+        (click)="session().choose(index)"
+      >
+        @switch (step().answer.by) {
+          @case ('status') {
+            {{ statusName(index) }}
+          }
+          @case ('engine') {
+            <app-move
+              [san]="sanOf(index)"
+              [color]="turn()"
+              format="full"
+              [focusable]="false"
+              [tooltip]="false"
+            />
+          }
+          @default {
+            {{ factText(index) }}
+          }
+        }
+      </button>
+    }
+  </div>
+  <div
+    class="feedback"
+    aria-live="polite"
+    [class.right]="session().solved()"
+    [class.wrong]="!session().solved()"
+  >
+    <!-- Keyed by the attempt, so the same message twice is announced twice. -->
+    @for (attempt of [session().tracker.mistakes()]; track attempt) {
+      @if (session().solved()) {
+        <app-rich-text [text]="step().explanation" />
+      } @else if (session().lastWrong() !== undefined) {
+        @if (whyWrong(); as why) {
+          <app-rich-text [text]="why" />
+        } @else {
+          {{ t.wrongMove }}
+        }
+      }
+    }
+  </div>
+  @if (session().tracker.canReveal() && !session().solved()) {
+    <div class="actions">
+      <button type="button" class="button solution" (click)="showSolution()">
+        {{ t.showSolution }}
+      </button>
+    </div>
+  }
+  <ng-content select="[lessonNav]" />
+</div>

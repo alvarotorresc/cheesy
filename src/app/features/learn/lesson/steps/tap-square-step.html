@@ -1,0 +1,40 @@
+@let t = i18n.t().learn;
+@let s = session();
+<div class="play-board">
+  <div class="grid" role="group" [attr.aria-label]="t.tapBoardLabel">
+    @for (cell of squares; track cell.square) {
+      @let square = cell.square;
+      <button
+        type="button"
+        class="square"
+        [class.dark]="cell.dark"
+        [attr.data-square]="square"
+        [attr.aria-label]="square"
+        [class.right]="stateOf(square) === 'right'"
+        [class.wrong]="stateOf(square) === 'wrong'"
+        [class.expected]="stateOf(square) === 'expected'"
+        (click)="tap(square)"
+      ></button>
+    }
+  </div>
+</div>
+<div class="panel play-panel">
+  <ng-content select="[lessonHead]" />
+  <div class="step-text"><app-rich-text [text]="step().text" /></div>
+  <!-- Live, so the next square asked for is heard after each tap: the squares only say their name. -->
+  <p class="prompt" aria-live="polite">
+    @if (s.target(); as target) {
+      {{ t.tapPrompt(target) }}
+    }
+  </p>
+  <p class="progress">{{ t.tapProgress(s.index(), step().count) }}</p>
+  <p class="feedback" aria-live="polite" [class.wrong]="s.last() && !s.last()?.right">
+    <!-- Keyed by the tap, so the same message twice is announced twice. -->
+    @for (tap of [s.index()]; track tap) {
+      @if (s.last(); as last) {
+        {{ last.right ? t.correct : t.tapWrong(last.expected) }}
+      }
+    }
+  </p>
+  <ng-content select="[lessonNav]" />
+</div>

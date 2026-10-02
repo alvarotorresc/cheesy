@@ -39,8 +39,14 @@ describe('App', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/glossary#pin');
     expect(TestBed.inject(Router).url).toBe('/learn/glossary#pin');
+  });
+
+  it('should open the Learn landing at /learn instead of the glossary', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/learn');
-    expect(TestBed.inject(Router).url).toBe('/learn/glossary');
+    expect(TestBed.inject(Router).url).toBe('/learn');
   });
 
   it('should name the glossary tab', async () => {
@@ -152,7 +158,7 @@ describe('App', () => {
     ).toBe('Cheesy, home');
   });
 
-  it('should link to the four sections when rendered', async () => {
+  it('should link to the five sections, Learn first, when rendered', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
@@ -161,7 +167,7 @@ describe('App', () => {
       link.getAttribute('href'),
     );
 
-    expect(links).toEqual(['/openings', '/endgames', '/positions', '/analysis']);
+    expect(links).toEqual(['/learn', '/openings', '/endgames', '/positions', '/analysis']);
   });
 
   it('should translate the navigation when the language button is pressed', async () => {

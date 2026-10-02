@@ -86,6 +86,19 @@ describe('Home', () => {
     expect(element.querySelectorAll('app-mini-board')).toHaveLength(5);
   });
 
+  it('should invite beginners to learn right below the hero', async () => {
+    TestBed.inject(I18nService).setLang('en');
+    const fixture = TestBed.createComponent(Home);
+    await fixture.whenStable();
+    const band = (fixture.nativeElement as HTMLElement).querySelector(
+      'app-home-hero + .learn-band',
+    );
+
+    expect(band?.querySelector('a')?.getAttribute('href')).toBe('/learn/beginner');
+    expect(band?.textContent).toContain('Starting from scratch?');
+    expect(band?.nextElementSibling?.tagName).toBe('APP-HOME-SECTIONS');
+  });
+
   it('should offer to try again when the content does not load', async () => {
     loaders.openingCatalog = () => Promise.reject(new Error('offline'));
     const fixture = TestBed.createComponent(Home);

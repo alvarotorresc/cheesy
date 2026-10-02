@@ -6,6 +6,7 @@ import { I18nService, type Messages } from '../i18n';
 /** Sections a route can name as its `title`, with their translated name. */
 const SECTIONS = {
   home: (t) => t.nav.home,
+  learn: (t) => t.nav.learn,
   openings: (t) => t.nav.openings,
   practice: (t) => t.practice.title,
   endgames: (t) => t.nav.endgames,

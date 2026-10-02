@@ -2,6 +2,7 @@ import { isContentId } from '../content/content-id';
 import {
   MASTERY_STREAK,
   type EndgameProgress,
+  type LessonProgress,
   type LineProgress,
   type LineResult,
   type PositionProgress,
@@ -131,3 +132,12 @@ export const applyResult = (
  */
 export const isMastered = (progress: LineProgress | undefined): boolean =>
   (progress?.streak ?? 0) >= MASTERY_STREAK;
+
+/** Checks a lesson row read from the database. Only the known fields are copied. */
+export const parseLessonProgress = (value: unknown): LessonProgress | undefined => {
+  if (typeof value !== 'object' || value === null) return undefined;
+  const { lessonId, completedAt, exercises, firstTry } = value as Record<string, unknown>;
+  if (!isContentId(lessonId) || !isDate(completedAt)) return undefined;
+  if (!isCount(exercises) || !isCount(firstTry) || firstTry > exercises) return undefined;
+  return { lessonId, completedAt, exercises, firstTry };
+};

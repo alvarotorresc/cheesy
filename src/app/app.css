@@ -74,17 +74,20 @@
 .nav {
   grid-area: nav;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Five items on a phone: the width of each word, spread over the row. */
+  grid-template-columns: repeat(5, auto);
+  justify-content: space-between;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: var(--tap);
   min-height: var(--tap);
   padding: var(--space-2) var(--space-1);
   color: var(--color-on-ink-muted);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -184,6 +187,14 @@
   padding-bottom: var(--space-16);
 }
 
+/* The narrowest phones (under 360px): five words still fit on one row. */
+@media (max-width: 22.49rem) {
+  .nav-link {
+    padding-inline: 2px;
+    font-size: 0.75rem;
+  }
+}
+
 /* Tablet: the brand and both switches on one row, the navigation on its own row below. */
 @media (min-width: 48rem) {
   .header-inner {
@@ -197,6 +208,10 @@
 
   .reading .lang-button {
     flex: none;
+  }
+
+  .nav {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .nav-link {

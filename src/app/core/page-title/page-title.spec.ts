@@ -45,6 +45,7 @@ describe('PageTitle', () => {
           section('openings', 'openings'),
           section('openings/:id', 'openings', Detail),
           section('analysis', 'analysis'),
+          section('learn', 'learn'),
           section('unknown', 'not-a-section'),
         ]),
         { provide: TitleStrategy, useExisting: PageTitle },
@@ -68,6 +69,13 @@ describe('PageTitle', () => {
 
     await go('/analysis');
     expect(title()).toBe('Analysis · Cheesy');
+
+    await go('/learn');
+    expect(title()).toBe('Learn · Cheesy');
+
+    i18n.setLang('es');
+    await harness.fixture.whenStable();
+    expect(title()).toBe('Aprender · Cheesy');
   });
 
   it('should translate the title and follow a change of language', async () => {

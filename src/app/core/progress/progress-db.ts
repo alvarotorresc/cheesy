@@ -1,5 +1,5 @@
 import Dexie, { type DexieOptions, type Table } from 'dexie';
-import type { EndgameProgress, PositionProgress } from './progress.types';
+import type { EndgameProgress, LessonProgress, PositionProgress } from './progress.types';
 import type { ProgressStore, StoredLineProgress, TableStore } from './progress-store';
 
 export const PROGRESS_DB_NAME = 'cheesy';
@@ -8,6 +8,7 @@ type ProgressDatabase = Dexie & {
   lines: Table<StoredLineProgress, string>;
   endgames: Table<EndgameProgress, string>;
   positions: Table<PositionProgress, string>;
+  lessons: Table<LessonProgress, string>;
 };
 
 /**
@@ -16,6 +17,7 @@ type ProgressDatabase = Dexie & {
  *
  * Version 1: one row per line and colour, keyed by `progressKey`, with an index on the opening.
  * Version 2: adds the run streak to each line and the tables of endgames and positions.
+ * Version 3: adds the table of lessons. Existing rows are untouched, so there is no upgrade.
  */
 const declareSchema = (db: Dexie): void => {
   db.version(1).stores({ lines: 'key, openingId' });
@@ -35,6 +37,7 @@ const declareSchema = (db: Dexie): void => {
             Number.isSafeInteger(practiced) && practiced > 0 && clean === practiced ? practiced : 0;
         }),
     );
+  db.version(3).stores({ lessons: 'lessonId' });
 };
 
 const tableOf = <Row>(table: Table<Row, string>): TableStore<Row> => ({
@@ -62,5 +65,6 @@ export const openProgressStore = async (
     lines: tableOf(db.lines),
     endgames: tableOf(db.endgames),
     positions: tableOf(db.positions),
+    lessons: tableOf(db.lessons),
   };
 };
