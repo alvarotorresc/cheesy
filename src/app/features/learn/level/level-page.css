@@ -1,5 +1,8 @@
 :host {
   display: block;
+  /* One centred reading column: the list is a sequence, not a grid, so it does not span the page. */
+  max-width: 44rem;
+  margin-inline: auto;
 }
 
 .back {
@@ -36,7 +39,6 @@
 .lessons {
   display: grid;
   gap: var(--space-3);
-  max-width: 44rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -164,7 +166,6 @@
   align-items: center;
   gap: var(--space-1) var(--space-2);
   min-height: var(--tap);
-  max-width: 44rem;
   margin-top: var(--space-6);
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-border);
