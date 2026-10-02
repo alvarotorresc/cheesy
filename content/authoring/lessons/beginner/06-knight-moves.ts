@@ -8,7 +8,7 @@ const WIKI_RULES = 'https://en.wikipedia.org/wiki/Rules_of_chess';
 export const knightMoves: LessonSpec = {
   id: 'knight-moves',
   level: 'beginner',
-  order: 2, // Final order: 6 (lessons 2-5 arrive in PR 3).
+  order: 6,
   title: { es: 'El caballo', en: 'The knight' },
   summary: {
     es: 'El caballo salta en forma de L por encima de las demás piezas.',

@@ -1,0 +1,520 @@
+{
+  "id": "queen-moves",
+  "level": "beginner",
+  "order": 4,
+  "title": {
+    "es": "La dama",
+    "en": "The queen"
+  },
+  "summary": {
+    "es": "La dama se mueve como la torre y como el alfil a la vez.",
+    "en": "The queen moves like the rook and the bishop at once."
+  },
+  "terms": [],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama junta la torre y el alfil: se mueve por "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonales"
+          },
+          {
+            "kind": "text",
+            "text": ", tantas casillas como quiera. Es la pieza más fuerte del tablero, pero tampoco salta. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " tiene ocho direcciones."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The queen combines the rook and the bishop: she moves along "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": ", as many squares as she likes. She is the strongest piece on the board, but she cannot jump either. From "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " she has eight directions."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/3Q4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "d4",
+            "to": "d8"
+          },
+          {
+            "from": "d4",
+            "to": "h8"
+          },
+          {
+            "from": "d4",
+            "to": "h4"
+          },
+          {
+            "from": "d4",
+            "to": "g1"
+          },
+          {
+            "from": "d4",
+            "to": "d1"
+          },
+          {
+            "from": "d4",
+            "to": "a1"
+          },
+          {
+            "from": "d4",
+            "to": "a4"
+          },
+          {
+            "from": "d4",
+            "to": "a7"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama empieza detrás de sus peones, que no se mueven. Recoge las estrellas con el menor número de jugadas que puedas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The queen starts behind her pawns, which do not move. Collect the stars in as few moves as you can."
+          }
+        ]
+      },
+      "piece": {
+        "role": "queen",
+        "color": "white",
+        "square": "d1"
+      },
+      "targets": [
+        "a5",
+        "h5",
+        "e8"
+      ],
+      "blockers": [
+        "c2",
+        "d2",
+        "e2"
+      ],
+      "minMoves": 4,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Hacia arriba y en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " está tapada. Sal primero de lado, por la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " de abajo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Up and along the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": " she is blocked. First go sideways, along the bottom "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Aunque sea tan fuerte, a la dama también la pueden capturar. El alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": " ataca las casillas marcadas: si la dama se para en una, el alfil se la come."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Strong as she is, the queen can be captured too. The black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the marked squares: if the queen stops on one, the bishop takes her."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/5b2/8/8/8/Q3K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4",
+          "d3",
+          "c2",
+          "b1",
+          "g4",
+          "h3",
+          "e6",
+          "d7",
+          "c8",
+          "g6",
+          "h7"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una torre y un alfil negros vigilan el tablero. Recoge las estrellas sin pararte en ninguna casilla que ataquen."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A black rook and a black bishop are watching the board. Collect the stars without stopping on any square they attack."
+          }
+        ]
+      },
+      "piece": {
+        "role": "queen",
+        "color": "white",
+        "square": "d1"
+      },
+      "targets": [
+        "h7",
+        "b6"
+      ],
+      "enemies": [
+        {
+          "role": "rook",
+          "square": "f4"
+        },
+        {
+          "role": "bishop",
+          "square": "c4"
+        }
+      ],
+      "minMoves": 4,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " b es un buen pasillo. A veces conviene volver por donde has venido."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The b "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " is a good corridor. Sometimes it pays to go back the way you came."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Con el tablero vacío a su alrededor, ¿en cuántas direcciones puede moverse la dama?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "With an empty board around her, in how many directions can the queen move?"
+          }
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "Cuatro",
+            "en": "Four"
+          },
+          {
+            "es": "Ocho",
+            "en": "Eight"
+          },
+          {
+            "es": "Dos",
+            "en": "Two"
+          }
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ocho: cuatro en línea recta, como la torre, y cuatro en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", como el alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Eight: four in straight lines, like the rook, and four along the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": ", like the bishop."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Cuatro son las de la torre, o las del alfil. La dama tiene las dos cosas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Four are the rook’s directions, or the bishop’s. The queen has both."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Muy pocas. Piensa en la torre y en el alfil juntos."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Far too few. Think of the rook and the bishop together."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: la dama va en línea recta y en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", tan lejos como quiera, y no salta. Cada bando tiene una, y empieza en su color: la blanca en "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " y la negra en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the queen goes in straight lines and along "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": ", as far as she likes, and she does not jump. Each side has one, and she starts on her own colour: the white queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " and the black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d1",
+          "d8"
+        ]
+      }
+    }
+  ]
+}

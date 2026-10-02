@@ -15,9 +15,69 @@
     "exerciseCount": 3
   },
   {
-    "id": "knight-moves",
+    "id": "rook-moves",
     "level": "beginner",
     "order": 2,
+    "title": {
+      "es": "La torre",
+      "en": "The rook"
+    },
+    "summary": {
+      "es": "La torre va en línea recta, tan lejos como quiera.",
+      "en": "The rook goes in a straight line, as far as it likes."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "bishop-moves",
+    "level": "beginner",
+    "order": 3,
+    "title": {
+      "es": "El alfil",
+      "en": "The bishop"
+    },
+    "summary": {
+      "es": "El alfil va en diagonal y nunca cambia de color de casilla.",
+      "en": "The bishop moves diagonally and never changes square colour."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "queen-moves",
+    "level": "beginner",
+    "order": 4,
+    "title": {
+      "es": "La dama",
+      "en": "The queen"
+    },
+    "summary": {
+      "es": "La dama se mueve como la torre y como el alfil a la vez.",
+      "en": "The queen moves like the rook and the bishop at once."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-moves",
+    "level": "beginner",
+    "order": 5,
+    "title": {
+      "es": "El rey",
+      "en": "The king"
+    },
+    "summary": {
+      "es": "El rey va de casilla en casilla y nunca a una casilla atacada.",
+      "en": "The king moves one square at a time and never onto an attacked square."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "knight-moves",
+    "level": "beginner",
+    "order": 6,
     "title": {
       "es": "El caballo",
       "en": "The knight"
