@@ -362,7 +362,7 @@
           },
           {
             "kind": "text",
-            "text": ", the ones at the arrows. On the other hand, it cannot capture anything right in front of it."
+            "text": ", the ones the arrows point to. On the other hand, it cannot capture anything right in front of it."
           }
         ]
       },
@@ -395,7 +395,7 @@
           },
           {
             "kind": "text",
-            "text": " puede capturar dos piezas negras, pero solo una está sin defender. Captúrala."
+            "text": " puede capturar dos piezas negras. Una está defendida: si la capturas, otra pieza negra capturaría tu peón. Captura la que no lo está."
           }
         ],
         "en": [
@@ -409,7 +409,7 @@
           },
           {
             "kind": "text",
-            "text": " can capture two black pieces, but only one of them is undefended. Capture it."
+            "text": " can capture two black pieces. One is defended: if you take it, another black piece would capture your pawn. Capture the other one."
           }
         ]
       },

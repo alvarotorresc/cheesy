@@ -72,7 +72,7 @@ export const pawnMoves: LessonSpec = {
       kind: 'explain',
       text: {
         es: 'El peón captura una casilla en [diagonal](diagonal) hacia delante. El peón blanco de d4 puede capturar el peón de c5 o el caballo de e5, los de las flechas. En cambio, no puede capturar nada que tenga justo delante.',
-        en: 'The pawn captures one square [diagonally](diagonal) forwards. The white pawn on d4 can capture the pawn on c5 or the knight on e5, the ones at the arrows. On the other hand, it cannot capture anything right in front of it.',
+        en: 'The pawn captures one square [diagonally](diagonal) forwards. The white pawn on d4 can capture the pawn on c5 or the knight on e5, the ones the arrows point to. On the other hand, it cannot capture anything right in front of it.',
       },
       board: {
         fen: '4k3/8/8/2p1n3/3P4/8/8/4K3 w - - 0 1',
@@ -86,8 +86,8 @@ export const pawnMoves: LessonSpec = {
     {
       kind: 'find-move',
       text: {
-        es: 'Tu turno. El peón de e4 puede capturar dos piezas negras, pero solo una está sin defender. Captúrala.',
-        en: 'Your turn. The pawn on e4 can capture two black pieces, but only one of them is undefended. Capture it.',
+        es: 'Tu turno. El peón de e4 puede capturar dos piezas negras. Una está defendida: si la capturas, otra pieza negra capturaría tu peón. Captura la que no lo está.',
+        en: 'Your turn. The pawn on e4 can capture two black pieces. One is defended: if you take it, another black piece would capture your pawn. Capture the other one.',
       },
       board: { fen: '4k3/8/6p1/3n1p2/4P3/8/8/4K3 w - - 0 1', orientation: 'white' },
       check: { by: 'rule', rule: 'capture-undefended' },

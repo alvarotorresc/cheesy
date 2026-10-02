@@ -55,8 +55,8 @@ export const castlingEnPassant: LessonSpec = {
           en: 'That moves the king just one square. It is not [castling](castling), and you also lose the right to castle.',
         },
         Rf1: {
-          es: 'Así solo se mueve la torre, y pierde el derecho a [enrocar](castling). Para enrocar se mueve el rey dos casillas.',
-          en: 'That only moves the rook, and it loses the right to [castle](castling). To castle, you move the king two squares.',
+          es: 'Así solo se mueve la torre, y pierdes el derecho a [enrocar](castling) por ese lado. Para enrocar se mueve el rey dos casillas.',
+          en: 'That only moves the rook, and you lose the right to [castle](castling) on that side. To castle, you move the king two squares.',
         },
       },
       hint: {

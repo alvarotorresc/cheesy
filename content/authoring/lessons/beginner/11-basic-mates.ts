@@ -3,6 +3,7 @@ import type { LessonSpec } from '../../../types.ts';
 
 const FIDE = 'https://handbook.fide.com/chapter/E012023';
 const WIKI_CHECKMATE = 'https://en.wikipedia.org/wiki/Checkmate';
+const LICHESS_PIECE_MATES = 'https://lichess.org/practice/checkmates/piece-checkmates-i/BJy6fEDf';
 
 export const basicMates: LessonSpec = {
   id: 'basic-mates',
@@ -14,7 +15,7 @@ export const basicMates: LessonSpec = {
     en: 'Winning with queen and king, or rook and king, against the lone king.',
   },
   terms: [],
-  sources: [WIKI_CHECKMATE, FIDE],
+  sources: [WIKI_CHECKMATE, LICHESS_PIECE_MATES, FIDE],
   steps: [
     {
       kind: 'explain',
@@ -40,7 +41,7 @@ export const basicMates: LessonSpec = {
       kind: 'choice',
       text: {
         es: 'Cuidado con las prisas. Las blancas acaban de llevar la dama a f7. Juegan las negras: ¿qué pasa?',
-        en: 'Beware of rushing. White has just put the queen on f7. Black to move: what is going on?',
+        en: 'Don’t rush. White has just put the queen on f7. Black to move: what is going on?',
       },
       board: { fen: '7k/5Q2/8/6K1/8/8/8/8 b - - 0 1', orientation: 'white' },
       answer: { by: 'status' },
@@ -68,7 +69,7 @@ export const basicMates: LessonSpec = {
       kind: 'play-out',
       text: {
         es: 'Ahora tú: da [mate](checkmate) con la dama y el rey. El rival se defiende lo mejor posible. Encierra al rey negro contra un borde, acerca tu rey y vigila que no quede [ahogado](stalemate).',
-        en: 'Now you: give [checkmate](checkmate) with the queen and king. The rival defends as well as possible. Shut the black king in against an edge, bring your king closer and make sure he is not left in [stalemate](stalemate).',
+        en: 'Your turn: give [checkmate](checkmate) with the queen and king. The rival defends as well as possible. Shut the black king in against an edge, bring your king closer and make sure he is not left in [stalemate](stalemate).',
       },
       fen: '8/8/3k4/8/8/4K3/8/7Q w - - 0 1',
       goal: 'win',

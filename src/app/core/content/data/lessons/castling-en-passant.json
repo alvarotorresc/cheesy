@@ -421,7 +421,7 @@
           "es": [
             {
               "kind": "text",
-              "text": "Así solo se mueve la torre, y pierde el derecho a "
+              "text": "Así solo se mueve la torre, y pierdes el derecho a "
             },
             {
               "kind": "term",
@@ -430,13 +430,13 @@
             },
             {
               "kind": "text",
-              "text": ". Para enrocar se mueve el rey dos casillas."
+              "text": " por ese lado. Para enrocar se mueve el rey dos casillas."
             }
           ],
           "en": [
             {
               "kind": "text",
-              "text": "That only moves the rook, and it loses the right to "
+              "text": "That only moves the rook, and you lose the right to "
             },
             {
               "kind": "term",
@@ -445,7 +445,7 @@
             },
             {
               "kind": "text",
-              "text": ". To castle, you move the king two squares."
+              "text": " on that side. To castle, you move the king two squares."
             }
           ]
         }

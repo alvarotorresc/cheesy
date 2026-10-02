@@ -62,8 +62,8 @@ export const capturesAndValues: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Para decidir qué capturar, ayuda conocer el [valor de las piezas](piece-value). Es una costumbre, no una regla del juego: peón 1, caballo 3, alfil 3, torre 5 y dama 9. Las piezas marcadas están en ese orden. El rey no se cuenta: nunca se captura, y la partida gira a su alrededor.',
-        en: 'To decide what to capture, it helps to know the [piece values](piece-value). They are a custom, not a rule of the game: pawn 1, knight 3, bishop 3, rook 5 and queen 9. The marked pieces are in that order. The king is not counted: he is never captured, and the whole game revolves around him.',
+        es: 'Para decidir qué capturar, ayuda conocer el [valor de las piezas](piece-value). Es una guía, no una regla del juego: peón 1, caballo 3, alfil 3, torre 5 y dama 9. Las piezas marcadas están en ese orden. El rey no se cuenta: nunca se captura, y la partida gira a su alrededor.',
+        en: 'To decide what to capture, it helps to know the [piece values](piece-value). They are a rule of thumb, not a rule of the game: pawn 1, knight 3, bishop 3, rook 5 and queen 9. The marked pieces are in that order. The king is not counted: he is never captured, and the whole game revolves around him.',
       },
       board: {
         fen: '7k/8/8/8/8/8/P7/1NBRQK2 w - - 0 1',

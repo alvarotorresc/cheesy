@@ -49,15 +49,7 @@
           },
           {
             "kind": "text",
-            "text": ", tantas casillas como quiera. Es la pieza más fuerte del tablero, pero tampoco salta. Desde "
-          },
-          {
-            "kind": "square",
-            "square": "d4"
-          },
-          {
-            "kind": "text",
-            "text": " tiene ocho direcciones."
+            "text": ", tantas casillas como quiera. Es la pieza más fuerte del tablero, pero tampoco salta."
           }
         ],
         "en": [
@@ -90,15 +82,7 @@
           },
           {
             "kind": "text",
-            "text": ", as many squares as she likes. She is the strongest piece on the board, but she cannot jump either. From "
-          },
-          {
-            "kind": "square",
-            "square": "d4"
-          },
-          {
-            "kind": "text",
-            "text": " she has eight directions."
+            "text": ", as many squares as she likes. She is the strongest piece on the board, but she cannot jump either."
           }
         ]
       },

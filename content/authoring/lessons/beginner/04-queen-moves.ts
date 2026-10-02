@@ -20,8 +20,8 @@ export const queenMoves: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'La dama junta la torre y el alfil: se mueve por [filas](rank), [columnas](file) y [diagonales](diagonal), tantas casillas como quiera. Es la pieza más fuerte del tablero, pero tampoco salta. Desde d4 tiene ocho direcciones.',
-        en: 'The queen combines the rook and the bishop: she moves along [ranks](rank), [files](file) and [diagonals](diagonal), as many squares as she likes. She is the strongest piece on the board, but she cannot jump either. From d4 she has eight directions.',
+        es: 'La dama junta la torre y el alfil: se mueve por [filas](rank), [columnas](file) y [diagonales](diagonal), tantas casillas como quiera. Es la pieza más fuerte del tablero, pero tampoco salta.',
+        en: 'The queen combines the rook and the bishop: she moves along [ranks](rank), [files](file) and [diagonals](diagonal), as many squares as she likes. She is the strongest piece on the board, but she cannot jump either.',
       },
       board: {
         fen: '4k3/8/8/8/3Q4/8/8/4K3 w - - 0 1',
