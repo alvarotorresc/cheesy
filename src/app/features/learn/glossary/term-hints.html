@@ -1,0 +1,14 @@
+<ng-content />
+@if (hint(); as h) {
+  <span
+    #bubble
+    class="hint"
+    popover="manual"
+    role="tooltip"
+    [id]="id"
+    [class.placed]="place() !== null"
+    [style.left.px]="place()?.left ?? 0"
+    [style.top.px]="place()?.top ?? 0"
+    >{{ h.text }}</span
+  >
+}

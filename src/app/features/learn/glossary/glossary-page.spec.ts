@@ -208,4 +208,17 @@ describe('GlossaryPage', () => {
       root.querySelector('article#rank .lesson')?.textContent?.replace(/\s+/g, ' ').trim(),
     ).toBe('Taught in: The board');
   });
+
+  it('should explain a term linked from a definition when the keyboard reaches it', async () => {
+    const root = await open();
+    const link = root.querySelector<HTMLAnchorElement>('article#queening-square a.term')!;
+    expect(link.textContent?.trim()).toBe('columna');
+    link.focus();
+    await settle();
+    const hint = document.querySelector('[role="tooltip"]');
+    expect(hint?.textContent?.trim()).toBe(
+      'Cada una de las ocho líneas de casillas que van de un jugador al otro.',
+    );
+    expect(link.getAttribute('aria-describedby')).toBe(hint?.id);
+  });
 });

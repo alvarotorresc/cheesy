@@ -35,6 +35,7 @@ import {
   type GroupFilter,
   type LevelFilter,
 } from './glossary-catalog';
+import { TermHints } from './term-hints';
 
 /** How long the card of the address keeps its ring after the page has taken the reader to it. */
 export const ARRIVAL_MS = 2200;
@@ -48,7 +49,7 @@ const LEVEL_RANK: Record<GlossaryLevel, number> = { beginner: 1, intermediate: 2
  */
 @Component({
   selector: 'app-glossary-page',
-  imports: [MiniBoard, RichTextView, RouterLink],
+  imports: [MiniBoard, RichTextView, RouterLink, TermHints],
   templateUrl: './glossary-page.html',
   styleUrl: './glossary-page.css',
   host: { class: 'catalog' },
@@ -76,7 +77,7 @@ export class GlossaryPage {
   /** Id of the card the reader has just been taken to (it wears the accent ring for a moment). */
   protected readonly arrived = signal<string | null>(null);
 
-  private readonly all = computed<readonly GlossaryTerm[]>(() =>
+  protected readonly all = computed<readonly GlossaryTerm[]>(() =>
     this.glossary.hasValue() ? this.glossary.value() : [],
   );
   private readonly lessonById = computed(

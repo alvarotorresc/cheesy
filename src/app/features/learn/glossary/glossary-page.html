@@ -84,7 +84,7 @@
     </div>
   </section>
 
-  <div class="groups">
+  <app-term-hints class="groups" [terms]="all()">
     @for (group of groups(); track group.key) {
       <section class="group" [attr.aria-labelledby]="'glossary-group-' + group.key">
         <div class="group-head">
@@ -143,5 +143,5 @@
         <button type="button" class="button" (click)="clearFilters()">{{ g.clearFilters }}</button>
       </div>
     }
-  </div>
+  </app-term-hints>
 }
