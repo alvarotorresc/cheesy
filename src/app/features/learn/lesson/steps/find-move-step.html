@@ -22,14 +22,17 @@
     [class.right]="feedback()?.kind === 'solved'"
     [class.wrong]="feedback()?.kind === 'wrong'"
   >
-    @let current = feedback();
-    @if (current?.kind === 'solved') {
-      <app-rich-text [text]="step().explanation" />
-    } @else if (current?.kind === 'wrong') {
-      @if (current.message; as message) {
-        <app-rich-text [text]="message" />
-      } @else {
-        {{ t.wrongMove }}
+    <!-- Keyed by the mistakes, so the same message twice is announced twice. -->
+    @for (key of [session().tracker.mistakes()]; track key) {
+      @let current = feedback();
+      @if (current?.kind === 'solved') {
+        <app-rich-text [text]="step().explanation" />
+      } @else if (current?.kind === 'wrong') {
+        @if (current.message; as message) {
+          <app-rich-text [text]="message" />
+        } @else {
+          {{ t.wrongMove }}
+        }
       }
     }
   </div>

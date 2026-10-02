@@ -184,19 +184,43 @@ describe('FindMoveStepView', () => {
     expect(element.querySelector('button.solution')).not.toBeNull();
   });
 
-  it('should let a new step be played at once and untouched by a reply of the old one', () => {
+  it('should keep the board held for the new step until its own reply', () => {
     vi.useFakeTimers();
+    const play = () => board().move.emit({ from: 'a1' as never, to: 'a7' as never });
     fixture.componentRef.setInput('step', lineStep);
     fixture.detectChanges();
-    board().move.emit({ from: 'a1' as never, to: 'a7' as never });
+    play();
+    vi.advanceTimersByTime(200);
+    fixture.componentRef.setInput('step', { ...lineStep });
+    fixture.detectChanges();
+    play();
+    fixture.detectChanges();
+    // t = 500: the reply of the old step is due now, but it belongs to the old step.
+    vi.advanceTimersByTime(300);
     fixture.detectChanges();
     expect(board().dests().size).toBe(0);
-    fixture.componentRef.setInput('step', captureStep);
+    expect(board().fen()).toContain('7k');
+    vi.advanceTimersByTime(200);
     fixture.detectChanges();
+    expect(board().fen()).toContain('6k1');
     expect(board().dests().size).toBeGreaterThan(0);
-    const fen = board().fen();
-    vi.advanceTimersByTime(1000);
-    fixture.detectChanges();
-    expect(board().fen()).toBe(fen);
+  });
+
+  it('should write the message again for a repeated mistake, so it is announced again', async () => {
+    fixture.componentRef.setInput('step', captureStep);
+    await fixture.whenStable();
+    const textOf = () =>
+      [...element.querySelector('.feedback')!.childNodes].find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+      );
+    fixture.componentRef.setInput('step', { ...captureStep, wrong: undefined });
+    await fixture.whenStable();
+    wrong();
+    await fixture.whenStable();
+    const first = textOf();
+    expect(first).toBeDefined();
+    wrong();
+    await fixture.whenStable();
+    expect(textOf()).not.toBe(first);
   });
 });

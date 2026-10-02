@@ -174,7 +174,7 @@ describe('ReachStepView', () => {
       expect(done).toEqual([{ firstTry: false }]);
     });
 
-    it('should let a new step be played at once and untouched by the old playback', () => {
+    it('should keep the board held for the new step until its own playback ends', () => {
       vi.useFakeTimers();
       fixture.componentRef.setInput('step', roundStep);
       fixture.detectChanges();
@@ -182,13 +182,37 @@ describe('ReachStepView', () => {
       element.querySelector<HTMLButtonElement>('button.solution')!.click();
       vi.advanceTimersByTime(600);
       fixture.detectChanges();
-      fixture.componentRef.setInput('step', knightStep);
+      fixture.componentRef.setInput('step', { ...roundStep });
       fixture.detectChanges();
-      expect(board().dests().size).toBe(1);
-      vi.advanceTimersByTime(600 * 10);
+      captureThrice();
+      element.querySelector<HTMLButtonElement>('button.solution')!.click();
       fixture.detectChanges();
-      expect(element.textContent).toContain('0 of 2 stars · 0 moves (fewest 3)');
-      expect(done).toEqual([]);
+      // t = 1200: the old playback would end now, but it belongs to the old step.
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(board().dests().size).toBe(0);
+      expect(element.querySelector('button.solution')).toBeNull();
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('1 of 1 stars · 2 moves');
+      expect(done).toEqual([{ firstTry: false }]);
     });
+  });
+
+  it('should draw the hint arrow from the start square even when pressed mid-route', () => {
+    fixture.componentRef.setInput('step', roundStep);
+    fixture.detectChanges();
+    for (let i = 0; i < 2; i++) {
+      move('g1', 'f3');
+      fixture.detectChanges();
+      element.querySelector<HTMLButtonElement>('button.restart')!.click();
+      fixture.detectChanges();
+    }
+    move('g1', 'h3');
+    fixture.detectChanges();
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    fixture.detectChanges();
+    expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
+    expect(element.textContent).toContain('0 of 1 stars · 0 moves');
   });
 });

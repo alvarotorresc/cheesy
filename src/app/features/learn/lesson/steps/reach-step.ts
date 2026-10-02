@@ -79,6 +79,10 @@ export class ReachStepView {
   }
 
   protected showHint(): void {
+    const session = this.session();
+    // The arrow starts at the start square: begin again if the piece is elsewhere (not a mistake).
+    if (!this.step().hint && (session.moves() > 0 || session.status() !== 'playing'))
+      session.restart();
     this.hintShown.set(true);
   }
 
