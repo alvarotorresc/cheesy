@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { LESSON_LOADERS } from '../../core/content';
+import { mainKindOf } from '../../layout/main-kind';
 import { LEARN_ROUTES } from './learn.routes';
 import { fixtureLessonLoaders } from './testing';
 
@@ -58,5 +59,10 @@ describe('learn guards', () => {
   it('should send an old glossary link with a term to the glossary, keeping the term', async () => {
     expect(await open('/learn#pin')).toBe('/learn/glossary#pin');
     expect(await open('/learn')).toBe('/learn');
+  });
+
+  it('should lay the glossary out as a list, in the same container as the other catalogues', async () => {
+    expect(await open('/learn/glossary')).toBe('/learn/glossary');
+    expect(mainKindOf(TestBed.inject(Router).routerState.snapshot.root)).toBeUndefined();
   });
 });
