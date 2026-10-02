@@ -1,4 +1,5 @@
 import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
@@ -20,7 +21,7 @@ type HomeState =
  */
 @Component({
   selector: 'app-learn-home',
-  imports: [RouterLink],
+  imports: [NgTemplateOutlet, RouterLink],
   templateUrl: './learn-home.html',
   styleUrl: './learn-home.css',
 })

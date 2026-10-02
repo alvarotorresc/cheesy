@@ -57,12 +57,6 @@
   color: var(--color-text-muted);
 }
 
-/* The glossary is not a level: a dashed edge sets it apart while it keeps the card's shape. */
-.glossary-card {
-  border-style: dashed;
-  border-color: var(--color-control);
-}
-
 .soon {
   font-weight: 600;
 }
@@ -91,4 +85,9 @@
   min-height: 1.5em;
   font-weight: 600;
   color: var(--color-text);
+}
+
+/* When the lessons fail, the glossary card stays under the notice. */
+.notice + .levels {
+  margin-top: var(--space-6);
 }

@@ -64,6 +64,13 @@ describe('LearnHome', () => {
     expect(glossary).not.toHaveBeenCalled();
   });
 
+  it('should keep the glossary card when the lessons cannot be loaded', async () => {
+    vi.spyOn(fixtureLessonLoaders, 'catalog').mockRejectedValueOnce(new Error('offline'));
+    const root = await render('/learn');
+    expect(root.querySelector('.notice[role=alert]')).not.toBeNull();
+    expect(root.querySelector('.glossary-card a')?.getAttribute('href')).toBe('/learn/glossary');
+  });
+
   it('should offer to continue with the next lesson once one is completed', async () => {
     await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
     const root = await render('/learn');

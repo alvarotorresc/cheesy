@@ -13,6 +13,10 @@
       <p>{{ t.loadError }}</p>
       <button type="button" class="button" (click)="load()">{{ t.retry }}</button>
     </div>
+    <!-- The glossary does not need the lessons: it stays within reach when they fail. -->
+    <ul class="levels">
+      <ng-container [ngTemplateOutlet]="glossaryCard" />
+    </ul>
   }
   @case ('ready') {
     @if (continueWith(); as next) {
@@ -34,11 +38,7 @@
           }
         </li>
       }
-      <li class="glossary-card">
-        <h2>{{ g.title }}</h2>
-        <p>{{ g.cardDescription }}</p>
-        <a class="button" routerLink="/learn/glossary">{{ g.open }}</a>
-      </li>
+      <ng-container [ngTemplateOutlet]="glossaryCard" />
     </ul>
     <section class="privacy" aria-labelledby="progress-title">
       <h2 id="progress-title" class="visually-hidden">{{ t.progressTitle }}</h2>
@@ -55,6 +55,14 @@
     </section>
   }
 }
+
+<ng-template #glossaryCard>
+  <li class="glossary-card">
+    <h2>{{ g.title }}</h2>
+    <p>{{ g.cardDescription }}</p>
+    <a class="button" routerLink="/learn/glossary">{{ g.open }}</a>
+  </li>
+</ng-template>
 
 <dialog #dialog aria-labelledby="confirm-title">
   <h2 id="confirm-title">{{ t.confirmTitle }}</h2>
