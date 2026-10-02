@@ -68,7 +68,9 @@
             >
           }
           @if (practice(); as link) {
-            <a class="button practise" [routerLink]="link">{{ t.practise }}</a>
+            <a class="button practise" [routerLink]="link.path" [queryParams]="link.queryParams">{{
+              t.practise
+            }}</a>
           }
           <a class="button back-to-level" [routerLink]="['/learn', level()]">{{
             t.backToLevel(levelName)

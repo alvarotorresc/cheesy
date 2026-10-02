@@ -42,16 +42,22 @@ type LessonState =
       readonly next?: LessonSummary;
     };
 
+/** No step has the focus yet, but the next heading to show must take it. */
+const NO_STEP = -1;
+
 /** Where "Practise" leads after a lesson; undefined when the lesson has nowhere to practise. */
-const practiceLink = (lesson: Lesson): string | undefined => {
-  switch (lesson.next?.kind) {
-    // The endgame list does not read a category from the address yet: it opens whole.
+const practiceLink = (
+  lesson: Lesson,
+): { path: string; queryParams?: Record<string, string> } | undefined => {
+  const next = lesson.next;
+  switch (next?.kind) {
+    // The endgame list opens on the category named by its English name.
     case 'endgames':
-      return '/endgames';
+      return { path: '/endgames', queryParams: { category: next.category } };
     case 'positions':
-      return '/positions';
+      return { path: '/positions' };
     case 'openings':
-      return '/openings';
+      return { path: '/openings' };
     default:
       return undefined;
   }
@@ -127,6 +133,8 @@ export class LessonPage {
 
   /** The index of the step whose heading has the focus, so the first render keeps the page's. */
   private focusedIndex: number | undefined;
+  /** A lesson has been shown on this page already. */
+  private shownOnce = false;
   /** Whether this arrival at the summary was already saved. */
   private saved = false;
 
@@ -168,7 +176,9 @@ export class LessonPage {
     this.state.set({ status: 'loading' });
     this.index.set(0);
     this.outcomes.set(new Map());
-    this.focusedIndex = undefined;
+    // The first lesson of the visit keeps the focus where the page put it; one reached by a link
+    // from another lesson (the same page, new address) gets it on its title, like a new step.
+    this.focusedIndex = this.shownOnce ? NO_STEP : undefined;
     try {
       const [lesson, catalog] = await Promise.all([
         this.content.lesson(id),
@@ -183,6 +193,7 @@ export class LessonPage {
         lesson.terms.map((term) => this.content.glossaryTerm(term).catch(() => undefined)),
       );
       if (id !== this.params().id) return;
+      this.shownOnce = true;
       this.state.set({
         status: 'ready',
         lesson,

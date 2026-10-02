@@ -178,7 +178,9 @@ describe('LessonPage', () => {
       const terms = Array.from(summary.querySelectorAll<HTMLAnchorElement>('.terms a'));
       expect(terms.map((link) => link.textContent?.trim())).toEqual(['Check', 'Checkmate']);
       expect(terms[0].getAttribute('href')).toBe('/learn/glossary#check');
-      expect(summary.querySelector('a.practise')?.getAttribute('href')).toBe('/endgames');
+      expect(summary.querySelector('a.practise')?.getAttribute('href')).toBe(
+        '/endgames?category=Basic%20mates',
+      );
       expect(summary.querySelector('a.back-to-level')?.getAttribute('href')).toBe(
         '/learn/beginner',
       );
@@ -219,6 +221,8 @@ describe('LessonPage', () => {
         expect(root().querySelector('h1')?.textContent).toContain('Knight moves');
       });
       expect(stepOf()).toBe('Step 1 of 5');
+      // The new lesson is announced by moving the focus to its title.
+      await vi.waitFor(() => expect(document.activeElement).toBe(root().querySelector('h1')));
       await goToFirstExercise();
       expect(nextButton()!.disabled).toBe(true);
     });

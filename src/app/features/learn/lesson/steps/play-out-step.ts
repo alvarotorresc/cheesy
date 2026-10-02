@@ -3,9 +3,9 @@ import {
   computed,
   effect,
   inject,
+  linkedSignal,
   input,
   output,
-  signal,
   untracked,
 } from '@angular/core';
 import type { SquareName } from 'chessops';
@@ -39,8 +39,12 @@ export class PlayOutStepView {
   protected readonly i18n = inject(I18nService);
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
-  protected readonly tracker = new ExerciseTracker();
-  protected readonly hintShown = signal(false);
+  /** The mistakes of this step: a new step starts with none. */
+  protected readonly tracker = linkedSignal({
+    source: this.step,
+    computation: () => new ExerciseTracker(),
+  });
+  protected readonly hintShown = linkedSignal({ source: this.step, computation: () => false });
 
   protected readonly achieved = computed(() => this.session.goalState() === 'achieved');
   protected readonly failed = computed(() => this.session.goalState() === 'failed');
@@ -63,6 +67,7 @@ export class PlayOutStepView {
       untracked(() => {
         const name = { es: this.title(), en: this.title() };
         this.missCounted = false;
+        this.emitted = false;
         this.session.start({
           id: 'lesson-play-out',
           name,
@@ -77,10 +82,10 @@ export class PlayOutStepView {
     effect(() => {
       if (this.achieved() && !this.emitted) {
         this.emitted = true;
-        untracked(() => this.done.emit({ firstTry: this.tracker.firstTry() }));
+        untracked(() => this.done.emit({ firstTry: this.tracker().firstTry() }));
       } else if (this.failed() && !this.missCounted) {
         this.missCounted = true;
-        untracked(() => this.tracker.miss());
+        untracked(() => this.tracker().miss());
       }
     });
   }

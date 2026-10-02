@@ -42,7 +42,7 @@
         <button type="button" class="button primary restart" (click)="restart()">
           {{ t.restart }}
         </button>
-      } @else if (tracker.canHint() && s.isPlayerTurn()) {
+      } @else if (tracker().canHint() && s.isPlayerTurn()) {
         <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>
       }
       @if (s.rivalSource() === 'none') {

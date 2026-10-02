@@ -100,4 +100,22 @@ describe('PlayOutStepView', () => {
     await play('f1', 'f8');
     expect(done).toEqual([{ firstTry: false }]);
   });
+
+  it('should start over, mistakes and hint included, when given a new step', async () => {
+    await play('f1', 'f7');
+    await restart();
+    await play('f1', 'f7');
+    await restart();
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    await play('f1', 'f8');
+    expect(done).toEqual([{ firstTry: false }]);
+
+    fixture.componentRef.setInput('step', { ...step, text: plainText('Otra vez', 'Again') });
+    await settle();
+    expect(board().fen()).toBe(START);
+    expect(element.textContent).not.toContain('Use the queen');
+    expect(element.querySelector('button.hint')).toBeNull();
+    await play('f1', 'f8');
+    expect(done).toEqual([{ firstTry: false }, { firstTry: true }]);
+  });
 });
