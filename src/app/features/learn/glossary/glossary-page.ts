@@ -2,68 +2,192 @@ import {
   afterNextRender,
   Component,
   computed,
+  DestroyRef,
+  DOCUMENT,
   effect,
   inject,
   Injector,
   resource,
   signal,
+  untracked,
 } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { Location } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { ContentService } from '../../../core/content';
-import type { GlossaryTerm } from '../../../core/content/content.types';
-import { I18nService, type Lang } from '../../../core/i18n';
-import { frameFromFen, MiniBoard } from '../../../shared/mini-board';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ContentService, type LessonSummary } from '../../../core/content';
+import {
+  GLOSSARY_GROUPS,
+  type GlossaryLevel,
+  type GlossaryTerm,
+} from '../../../core/content/content.types';
+import { I18nService } from '../../../core/i18n';
+import { frameFromFen, MiniBoard, type MiniFrame } from '../../../shared/mini-board';
 import { RichTextView } from '../../../shared/rich-text';
+import {
+  applyFilters,
+  filtersFromParams,
+  GLOSSARY_LEVELS,
+  groupCounts,
+  groupTerms,
+  NO_FILTERS,
+  paramsOf,
+  type GlossaryFilters,
+  type GroupFilter,
+  type LevelFilter,
+} from './glossary-catalog';
 
-const fold = (text: string): string =>
-  text.toLocaleLowerCase().normalize('NFD').replace(/\p{M}/gu, '').trim();
+/** How long the card of the address keeps its ring after the page has taken the reader to it. */
+export const ARRIVAL_MS = 2200;
 
-export const sortTerms = (terms: readonly GlossaryTerm[], lang: Lang): GlossaryTerm[] =>
-  [...terms].sort((a, b) => a.name[lang].localeCompare(b.name[lang], lang));
+const LEVEL_RANK: Record<GlossaryLevel, number> = { beginner: 1, intermediate: 2, advanced: 3 };
 
-/** Whether the name of the term, in the given language, contains the query (case and accents aside). */
-export const matchesSearch = (term: GlossaryTerm, query: string, lang: Lang): boolean =>
-  fold(term.name[lang]).includes(fold(query));
-
-/** Every glossary term, in alphabetical order, with a search box and a small board each. */
+/**
+ * Every glossary term, by family: a search box, family chips and a level switch (all three kept in
+ * the address), and a card per term with a large board, its level and the lesson that teaches it.
+ * A link to `#term` takes the reader to that card and rings it for a moment.
+ */
 @Component({
   selector: 'app-glossary-page',
-  imports: [MiniBoard, RichTextView],
+  imports: [MiniBoard, RichTextView, RouterLink],
   templateUrl: './glossary-page.html',
   styleUrl: './glossary-page.css',
+  host: { class: 'catalog' },
 })
 export class GlossaryPage {
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   private readonly injector = inject(Injector);
-  private readonly scroller = inject(ViewportScroller);
-  private readonly fragment = toSignal(inject(ActivatedRoute).fragment);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
+  private readonly document = inject(DOCUMENT);
+  private readonly fragment = toSignal(this.route.fragment);
 
-  protected readonly query = signal('');
+  protected readonly groupKeys = GLOSSARY_GROUPS;
+  protected readonly levels = GLOSSARY_LEVELS;
+  protected readonly levelRank = LEVEL_RANK;
+
   protected readonly glossary = resource({ loader: () => this.content.glossary() });
-  protected readonly terms = computed(() => {
-    const lang = this.i18n.lang();
-    const query = this.query();
-    return sortTerms(this.glossary.value() ?? [], lang).filter((t) =>
-      matchesSearch(t, query, lang),
-    );
-  });
-  /** The search found nothing in a loaded glossary (what the always-present live region says). */
-  protected readonly noMatch = computed(
-    () => this.glossary.hasValue() && this.terms().length === 0,
+  private readonly lessons = resource({ loader: () => this.content.lessonCatalog() });
+
+  protected readonly filters = signal<GlossaryFilters>(
+    filtersFromParams(this.route.snapshot.queryParamMap),
   );
-  protected readonly frameOf = (term: GlossaryTerm) => [frameFromFen(term.example.fen)];
+  /** Id of the card the reader has just been taken to (it wears the accent ring for a moment). */
+  protected readonly arrived = signal<string | null>(null);
+
+  private readonly all = computed<readonly GlossaryTerm[]>(() =>
+    this.glossary.hasValue() ? this.glossary.value() : [],
+  );
+  private readonly lessonById = computed(
+    () =>
+      new Map<string, LessonSummary>(
+        (this.lessons.hasValue() ? this.lessons.value() : []).map((lesson) => [lesson.id, lesson]),
+      ),
+  );
+  protected readonly visible = computed(() =>
+    applyFilters(this.all(), this.filters(), this.i18n.lang()),
+  );
+  protected readonly groups = computed(() => groupTerms(this.visible(), this.i18n.lang()));
+  protected readonly counts = computed(() =>
+    groupCounts(this.all(), this.filters(), this.i18n.lang()),
+  );
+  protected readonly filtered = computed(() => {
+    const { group, level, query } = this.filters();
+    return group !== 'all' || level !== 'all' || query.trim() !== '';
+  });
+  protected readonly resultCount = computed(() => {
+    const g = this.i18n.t().glossary;
+    const total = this.all().length;
+    const shown = this.visible().length;
+    return shown === total ? g.count(total) : g.countSome(shown, total);
+  });
+
+  /** Both the terms and the lessons have answered: nothing will push the cards down any more. */
+  private readonly settled = computed(() => this.glossary.hasValue() && !this.lessons.isLoading());
+
+  private arrivalTimer: ReturnType<typeof setTimeout> | undefined;
+  private readonly frames = new Map<string, readonly MiniFrame[]>();
 
   constructor() {
     // The terms arrive after the router has finished, so its own anchor scrolling finds nothing:
-    // once they are drawn, the page goes to the term of the address.
+    // once they are drawn (and every later link to a term of this page), the page goes to the card.
     effect(() => {
       const id = this.fragment();
-      if (id && this.glossary.hasValue()) {
-        afterNextRender(() => this.scroller.scrollToAnchor(id), { injector: this.injector });
-      }
+      if (id && this.settled()) untracked(() => this.reveal(id));
     });
+    inject(DestroyRef).onDestroy(() => clearTimeout(this.arrivalTimer));
+  }
+
+  protected frameOf(term: GlossaryTerm): readonly MiniFrame[] {
+    let frames = this.frames.get(term.id);
+    if (!frames) {
+      frames = [frameFromFen(term.example.fen)];
+      this.frames.set(term.id, frames);
+    }
+    return frames;
+  }
+
+  protected lessonOf(term: GlossaryTerm): LessonSummary | undefined {
+    return term.lesson ? this.lessonById().get(term.lesson) : undefined;
+  }
+
+  protected setGroup(group: GroupFilter): void {
+    this.update({ group });
+  }
+
+  protected setLevel(level: LevelFilter): void {
+    this.update({ level });
+  }
+
+  protected setQuery(query: string): void {
+    this.update({ query });
+  }
+
+  protected clearFilters(): void {
+    this.filters.set(NO_FILTERS);
+    this.writeAddress();
+  }
+
+  private update(patch: Partial<GlossaryFilters>): void {
+    this.filters.update((filters) => ({ ...filters, ...patch }));
+    this.writeAddress();
+  }
+
+  /**
+   * Keeps the filters in the address without a navigation: a navigation would scroll the window
+   * to the top on every key typed in the search box.
+   */
+  private writeAddress(fragment?: string): void {
+    const tree = this.router.createUrlTree([], {
+      relativeTo: this.route,
+      queryParams: paramsOf(this.filters()),
+      ...(fragment ? { fragment } : {}),
+    });
+    this.location.replaceState(this.router.serializeUrl(tree));
+  }
+
+  /** Takes the reader to the card of a term, first clearing the filters that hide it. */
+  private reveal(id: string): void {
+    const term = this.all().find((t) => t.id === id);
+    if (!term) return;
+    if (!this.visible().some((t) => t.id === id)) this.filters.set(NO_FILTERS);
+    // A link from a definition drops the query of the address: write the filters back.
+    this.writeAddress(id);
+    clearTimeout(this.arrivalTimer);
+    this.arrived.set(id);
+    this.arrivalTimer = setTimeout(() => this.arrived.set(null), ARRIVAL_MS);
+    afterNextRender(
+      () => {
+        const card = this.document.getElementById(id);
+        if (!card) return;
+        const still = this.document.defaultView?.matchMedia?.(
+          '(prefers-reduced-motion: reduce)',
+        ).matches;
+        card.scrollIntoView?.({ block: 'start', behavior: still ? 'auto' : 'smooth' });
+        card.focus({ preventScroll: true });
+      },
+      { injector: this.injector },
+    );
   }
 }

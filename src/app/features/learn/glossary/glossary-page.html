@@ -1,43 +1,147 @@
 @let g = i18n.t().glossary;
+@let levelNames = i18n.t().learn.levels;
 
 <section class="intro" aria-labelledby="glossary-title">
   <h1 id="glossary-title">{{ g.title }}</h1>
-  <p class="lead">{{ g.intro }}</p>
-  <label class="search">
-    <span class="visually-hidden">{{ g.searchLabel }}</span>
-    <input
-      type="search"
-      [placeholder]="g.search"
-      [value]="query()"
-      (input)="query.set($any($event.target).value)"
-    />
-  </label>
+  <p class="intro-lead">{{ g.intro }}</p>
 </section>
 
-<p class="status" role="status">{{ noMatch() ? g.empty : '' }}</p>
-
 @if (glossary.error()) {
-  <p class="notice" role="alert">{{ g.failed }}</p>
+  <div class="notice" role="alert">
+    <p>{{ g.failed }}</p>
+    <button type="button" class="button" (click)="glossary.reload()">{{ g.retry }}</button>
+  </div>
 } @else if (glossary.isLoading()) {
-  <p class="notice">{{ g.loading }}</p>
+  <p class="notice" role="status">{{ g.loading }}</p>
 } @else {
-  <div class="terms">
-    @for (term of terms(); track term.id) {
-      <article class="term" [id]="term.id">
-        <app-mini-board
-          class="board"
-          [frames]="frameOf(term)"
-          [orientation]="term.example.orientation"
-          [rings]="term.example.highlights"
-          [ringsOn]="true"
-          [arrows]="term.example.arrows"
-          [label]="g.boardLabel(i18n.localize(term.name))"
+  <section class="filters" [attr.aria-label]="g.filters">
+    <div class="filter-row">
+      <label class="filter-group search">
+        <span class="filter-label">{{ g.searchLabel }}</span>
+        <input
+          class="input"
+          type="search"
+          enterkeyhint="search"
+          autocomplete="off"
+          spellcheck="false"
+          [placeholder]="g.search"
+          [value]="filters().query"
+          (input)="setQuery($any($event.target).value)"
         />
-        <div class="text">
-          <h2>{{ i18n.localize(term.name) }}</h2>
-          <p><app-rich-text [text]="term.definition" [termLinks]="true" /></p>
+      </label>
+      <div class="filter-group">
+        <p class="filter-label" id="glossary-level-label">{{ g.levelLabel }}</p>
+        <div class="segmented" role="group" aria-labelledby="glossary-level-label">
+          <button
+            type="button"
+            [attr.aria-pressed]="filters().level === 'all'"
+            (click)="setLevel('all')"
+          >
+            {{ g.allLevels }}
+          </button>
+          @for (level of levels; track level) {
+            <button
+              type="button"
+              [attr.aria-pressed]="filters().level === level"
+              (click)="setLevel(level)"
+            >
+              {{ levelNames[level].name }}
+            </button>
+          }
         </div>
-      </article>
+      </div>
+    </div>
+    <div class="filter-group">
+      <p class="filter-label" id="glossary-group-label">{{ g.groupLabel }}</p>
+      <div class="tabs" role="group" aria-labelledby="glossary-group-label">
+        <button
+          type="button"
+          class="tab"
+          [attr.aria-pressed]="filters().group === 'all'"
+          (click)="setGroup('all')"
+        >
+          {{ g.allGroups }} <span class="n">{{ counts().all }}</span>
+        </button>
+        @for (key of groupKeys; track key) {
+          <button
+            type="button"
+            class="tab"
+            [attr.aria-pressed]="filters().group === key"
+            (click)="setGroup(key)"
+          >
+            {{ g.groups[key] }} <span class="n">{{ counts()[key] }}</span>
+          </button>
+        }
+      </div>
+    </div>
+    <div class="filter-foot">
+      <p class="result-count" aria-live="polite">{{ resultCount() }}</p>
+      @if (filtered()) {
+        <button type="button" class="text-button" (click)="clearFilters()">
+          {{ g.clearFilters }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <div class="groups">
+    @for (group of groups(); track group.key) {
+      <section class="group" [attr.aria-labelledby]="'glossary-group-' + group.key">
+        <div class="group-head">
+          <h2 [id]="'glossary-group-' + group.key">{{ g.groups[group.key] }}</h2>
+          <span class="count">{{ g.count(group.terms.length) }}</span>
+        </div>
+        <ul class="terms">
+          @for (term of group.terms; track term.id) {
+            @let name = i18n.localize(term.name);
+            <li>
+              <article
+                class="card term"
+                tabindex="-1"
+                [id]="term.id"
+                [class.arrived]="arrived() === term.id"
+                [attr.aria-labelledby]="'term-' + term.id"
+              >
+                <app-mini-board
+                  class="board"
+                  [frames]="frameOf(term)"
+                  [orientation]="term.example.orientation"
+                  [rings]="term.example.highlights"
+                  [ringsOn]="true"
+                  [arrows]="term.example.arrows"
+                  [label]="g.boardLabel(name)"
+                />
+                <div class="card-body">
+                  <h3 class="card-title" [id]="'term-' + term.id">{{ name }}</h3>
+                  <p class="card-meta">
+                    <span class="level" [attr.data-rank]="levelRank[term.level]"
+                      ><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span
+                      >{{ levelNames[term.level].name }}</span
+                    >
+                  </p>
+                  <p class="definition">
+                    <app-rich-text [text]="term.definition" [termLinks]="true" />
+                  </p>
+                  @if (lessonOf(term); as lesson) {
+                    <p class="lesson">
+                      {{ g.learnedIn }}
+                      <a [routerLink]="['/learn', lesson.level, lesson.id]">{{
+                        i18n.localize(lesson.title)
+                      }}</a>
+                    </p>
+                  }
+                </div>
+              </article>
+            </li>
+          }
+        </ul>
+      </section>
+    } @empty {
+      <div class="notice">
+        <p>{{ g.noResults }}</p>
+        <p>{{ g.noResultsHint }}</p>
+        <button type="button" class="button" (click)="clearFilters()">{{ g.clearFilters }}</button>
+      </div>
     }
   </div>
 }
