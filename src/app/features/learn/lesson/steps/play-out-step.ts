@@ -46,6 +46,8 @@ export class PlayOutStepView {
     computation: () => new ExerciseTracker(),
   });
   protected readonly hintShown = linkedSignal({ source: this.step, computation: () => false });
+  /** Skipped from the keyboard: the skip button goes away. */
+  protected readonly skipped = linkedSignal({ source: this.step, computation: () => false });
 
   protected readonly achieved = computed(() => this.session.goalState() === 'achieved');
   protected readonly failed = computed(() => this.session.goalState() === 'failed');
@@ -100,6 +102,16 @@ export class PlayOutStepView {
     this.missCounted = false;
     this.session.restart();
     this.focus.toHeading();
+  }
+
+  /**
+   * Ends the exercise without playing it, as not a first try: the board cannot be used with the
+   * keyboard yet, so this is the way on for keyboard and screen reader users.
+   */
+  protected skip(): void {
+    this.skipped.set(true);
+    this.done.emit({ firstTry: false });
+    this.focus.toNext();
   }
 
   /** Shows the hint text and, on the board, the best move of the tablebase for this position. */

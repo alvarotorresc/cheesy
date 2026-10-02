@@ -272,6 +272,50 @@ describe('ReachStepView focus', () => {
   });
 });
 
+describe('ReachStepView skip', () => {
+  let fixture: ComponentFixture<ReachStepView>;
+  let element: HTMLElement;
+  let done: { firstTry: boolean }[];
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.inject(I18nService).setLang('en');
+    fixture = TestBed.createComponent(ReachStepView);
+    element = fixture.nativeElement as HTMLElement;
+    done = [];
+    fixture.componentInstance.done.subscribe((value) => done.push(value));
+    fixture.componentRef.setInput('step', knightStep);
+    await fixture.whenStable();
+  });
+
+  afterEach(() => localStorage.clear());
+
+  const skip = () => element.querySelector<HTMLButtonElement>('button.skip');
+
+  it('should offer a skip button, hidden until it has the focus, right after the actions', () => {
+    expect(skip()?.textContent?.trim()).toBe('Skip this exercise');
+    expect(skip()!.classList).toContain('visually-hidden-focusable');
+    expect(skip()!.previousElementSibling?.classList).toContain('actions');
+  });
+
+  it('should complete the step as not a first try and move the focus to Next', async () => {
+    const { next } = addStepFrame(element);
+    pressFocused(skip()!);
+    await fixture.whenStable();
+    expect(done).toEqual([{ firstTry: false }]);
+    expect(skip()).toBeNull();
+    expect(document.activeElement).toBe(next);
+  });
+
+  it('should not offer to skip a step that is done', async () => {
+    const board = fixture.debugElement.query(By.directive(BoardComponent))
+      .componentInstance as BoardComponent;
+    for (const to of ['e2', 'g1', 'f3']) board.move.emit({ from: 'x' as never, to: to as never });
+    await fixture.whenStable();
+    expect(skip()).toBeNull();
+  });
+});
+
 describe('stars count text', () => {
   it('should say star in the singular when there is only one', () => {
     expect(en.learn.stars(0, 1, 0, 4)).toBe('0 of 1 star · 0 moves (fewest 4)');

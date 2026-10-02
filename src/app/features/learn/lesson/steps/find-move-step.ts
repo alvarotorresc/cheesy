@@ -69,6 +69,12 @@ export class FindMoveStepView {
     computation: () => false,
   });
 
+  /** Skipped from the keyboard: the skip button goes away. */
+  protected readonly skipped = linkedSignal<FindMoveSession, boolean>({
+    source: this.session,
+    computation: () => false,
+  });
+
   protected readonly dests = computed(() =>
     this.waiting() ? new Map<SquareName, SquareName[]>() : this.session().dests(),
   );
@@ -121,6 +127,16 @@ export class FindMoveStepView {
     }
     this.feedback.set({ kind: 'solved' });
     this.done.emit({ firstTry: session.tracker.firstTry() });
+  }
+
+  /**
+   * Ends the exercise without playing it, as not a first try: the board cannot be used with the
+   * keyboard yet, so this is the way on for keyboard and screen reader users.
+   */
+  protected skip(): void {
+    this.skipped.set(true);
+    this.done.emit({ firstTry: false });
+    this.focus.toNext();
   }
 
   protected showHint(): void {

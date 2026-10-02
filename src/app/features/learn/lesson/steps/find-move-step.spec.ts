@@ -262,4 +262,38 @@ describe('FindMoveStepView', () => {
       expect(document.activeElement).toBe(heading);
     });
   });
+
+  describe('skip', () => {
+    const skip = () => element.querySelector<HTMLButtonElement>('button.skip');
+
+    it('should offer a skip button, hidden until it has the focus, right after the actions', async () => {
+      fixture.componentRef.setInput('step', captureStep);
+      await fixture.whenStable();
+      expect(skip()?.textContent?.trim()).toBe('Skip this exercise');
+      expect(skip()!.classList).toContain('visually-hidden-focusable');
+      // With the hint on offer, the skip button still comes right after the actions.
+      for (let i = 0; i < 2; i++) wrong();
+      await fixture.whenStable();
+      expect(skip()!.previousElementSibling?.classList).toContain('actions');
+    });
+
+    it('should complete the step as not a first try and move the focus to Next', async () => {
+      fixture.componentRef.setInput('step', captureStep);
+      await fixture.whenStable();
+      const { next } = addStepFrame(element);
+      pressFocused(skip()!);
+      await fixture.whenStable();
+      expect(done).toEqual([{ firstTry: false }]);
+      expect(skip()).toBeNull();
+      expect(document.activeElement).toBe(next);
+    });
+
+    it('should not offer to skip a step that is solved', async () => {
+      fixture.componentRef.setInput('step', captureStep);
+      await fixture.whenStable();
+      board().move.emit({ from: 'c2' as never, to: 'f5' as never });
+      await fixture.whenStable();
+      expect(skip()).toBeNull();
+    });
+  });
 });

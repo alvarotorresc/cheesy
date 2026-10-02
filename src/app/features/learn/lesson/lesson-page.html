@@ -14,7 +14,13 @@
   <button type="button" class="button previous" [disabled]="!canGoBack()" (click)="previous()">
     {{ t.previous }}
   </button>
-  <button type="button" class="button primary next" [disabled]="!canGoOn()" (click)="next()">
+  <button
+    type="button"
+    class="button primary next"
+    data-step-next
+    [disabled]="!canGoOn()"
+    (click)="next()"
+  >
     {{ isLast() ? t.finish : t.next }}
   </button>
 </ng-template>

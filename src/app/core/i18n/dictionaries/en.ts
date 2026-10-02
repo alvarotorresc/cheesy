@@ -74,6 +74,7 @@ export const en = {
     hint: 'Hint',
     showSolution: 'Show solution',
     restart: 'Start again',
+    skip: 'Skip this exercise',
     correct: 'That’s it!',
     wrongMove: 'Not this one. Try again.',
     captured: 'Your piece was captured on an attacked square. Start again.',

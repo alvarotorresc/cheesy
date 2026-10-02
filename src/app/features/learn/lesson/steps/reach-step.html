@@ -40,5 +40,10 @@
       </button>
     }
   </div>
+  @if (s.status() !== 'done' && !skipped()) {
+    <button type="button" class="button skip visually-hidden-focusable" (click)="skip()">
+      {{ t.skip }}
+    </button>
+  }
   <ng-content select="[lessonNav]" />
 </div>

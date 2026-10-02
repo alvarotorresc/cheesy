@@ -128,4 +128,28 @@ describe('PlayOutStepView', () => {
     expect(element.querySelector('button.restart')).toBeNull();
     expect(document.activeElement).toBe(heading);
   });
+
+  describe('skip', () => {
+    const skip = () => element.querySelector<HTMLButtonElement>('button.skip');
+
+    it('should offer a skip button, hidden until it has the focus, right after the actions', () => {
+      expect(skip()?.textContent?.trim()).toBe('Skip this exercise');
+      expect(skip()!.classList).toContain('visually-hidden-focusable');
+      expect(skip()!.previousElementSibling?.classList).toContain('actions');
+    });
+
+    it('should complete the step as not a first try and move the focus to Next', async () => {
+      const { next } = addStepFrame(element);
+      pressFocused(skip()!);
+      await settle();
+      expect(done).toEqual([{ firstTry: false }]);
+      expect(skip()).toBeNull();
+      expect(document.activeElement).toBe(next);
+    });
+
+    it('should not offer to skip a game that is won', async () => {
+      await play('f1', 'f8');
+      expect(skip()).toBeNull();
+    });
+  });
 });

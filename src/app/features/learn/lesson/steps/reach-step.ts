@@ -43,6 +43,12 @@ export class ReachStepView {
     computation: () => false,
   });
 
+  /** Skipped from the keyboard: the skip button goes away. */
+  protected readonly skipped = linkedSignal<ReachSession, boolean>({
+    source: this.session,
+    computation: () => false,
+  });
+
   protected readonly dests = computed(() =>
     this.showingSolution() ? new Map<SquareName, SquareName[]>() : this.session().dests(),
   );
@@ -78,6 +84,16 @@ export class ReachStepView {
   protected onMove(move: BoardMove): void {
     if (this.showingSolution()) return;
     this.session().move(move.to as SquareName);
+  }
+
+  /**
+   * Ends the exercise without playing it, as not a first try: the board cannot be used with the
+   * keyboard yet, so this is the way on for keyboard and screen reader users.
+   */
+  protected skip(): void {
+    this.skipped.set(true);
+    this.done.emit({ firstTry: false });
+    this.focus.toNext();
   }
 
   /** Starts again after a capture. */

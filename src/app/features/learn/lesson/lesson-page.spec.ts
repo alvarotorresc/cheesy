@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GLOSSARY_LOADER, LESSON_LOADERS, type LessonLoaders } from '../../../core/content';
-import { bundledGlossaryLoader } from '../../../core/content/testing';
+import { bundledGlossaryLoader, plainText } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
@@ -226,6 +226,42 @@ describe('LessonPage', () => {
       await goToFirstExercise();
       expect(nextButton()!.disabled).toBe(true);
     });
+  });
+
+  it('should let a keyboard user skip a board exercise and go on with Next', async () => {
+    const lesson = await fixtureLessonLoaders.lesson('the-board');
+    setup({
+      ...fixtureLessonLoaders,
+      lesson: async (id) =>
+        id === 'the-board'
+          ? {
+              ...lesson,
+              steps: [
+                {
+                  kind: 'reach',
+                  text: plainText('Recoge las estrellas', 'Collect the stars'),
+                  piece: { role: 'knight', color: 'white', square: 'g1' },
+                  targets: ['f3'],
+                  minMoves: 1,
+                },
+                ...lesson.steps.slice(1),
+              ],
+            }
+          : fixtureLessonLoaders.lesson(id),
+    });
+    await render('/learn/beginner/the-board');
+    expect(nextButton()!.disabled).toBe(true);
+    const skip = root().querySelector<HTMLButtonElement>('button.skip')!;
+    skip.focus();
+    skip.click();
+    await settle();
+    expect(nextButton()!.disabled).toBe(false);
+    expect(document.activeElement).toBe(nextButton());
+    await solveEveryStep();
+    // The rest go one missed, two at the first try; the skipped one does not count as a first try.
+    expect(root().querySelector('.summary')?.textContent).toContain(
+      '2 of 4 exercises on the first try',
+    );
   });
 
   it('should offer a retry when the lesson cannot be loaded', async () => {

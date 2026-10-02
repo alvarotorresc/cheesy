@@ -51,5 +51,10 @@
       }
     </div>
   }
+  @if (!s.solved() && !skipped()) {
+    <button type="button" class="button skip visually-hidden-focusable" (click)="skip()">
+      {{ t.skip }}
+    </button>
+  }
   <ng-content select="[lessonNav]" />
 </div>
