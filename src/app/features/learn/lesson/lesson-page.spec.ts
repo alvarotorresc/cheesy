@@ -189,6 +189,16 @@ describe('LessonPage', () => {
       expect(document.activeElement).toBe(summary.querySelector('h2'));
     });
 
+    it('should keep the lesson title as the h1 of the summary, above the h2 that has the focus', async () => {
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      const summary = root().querySelector('.summary')!;
+      expect(root().querySelectorAll('h1')).toHaveLength(1);
+      expect(summary.querySelector('h1')?.textContent?.trim()).toBe('Knight moves');
+      expect(summary.querySelector('h2')?.textContent?.trim()).toBe('Lesson complete');
+      expect(document.activeElement).toBe(summary.querySelector('h2'));
+    });
+
     it('should keep the first-try count when going back to a done step', async () => {
       const record = vi.spyOn(progress, 'recordLesson');
       await render('/learn/beginner/knight-moves');

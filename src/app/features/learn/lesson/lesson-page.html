@@ -46,7 +46,8 @@
     @if (onSummary()) {
       <section class="summary">
         <a class="back" [routerLink]="['/learn', level()]">← {{ t.backToLevel(levelName) }}</a>
-        <p class="lesson-title">{{ i18n.localize(current.lesson.title) }}</p>
+        <!-- The lesson stays the h1 of the page; the focus goes to "Lesson complete" below it. -->
+        <h1 class="lesson-title">{{ i18n.localize(current.lesson.title) }}</h1>
         <h2 data-step-heading tabindex="-1">{{ t.summaryTitle }}</h2>
         @if (exercises() > 0) {
           <p class="first-try">{{ t.firstTry(firstTries(), exercises()) }}</p>
