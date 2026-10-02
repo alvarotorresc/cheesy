@@ -2,6 +2,7 @@
 <header class="page-head">
   <h1>{{ t.title }}</h1>
   <p class="lede">{{ t.intro }}</p>
+  <a class="glossary-link" routerLink="/learn/glossary">{{ i18n.t().glossary.title }}</a>
 </header>
 @switch (state().status) {
   @case ('loading') {

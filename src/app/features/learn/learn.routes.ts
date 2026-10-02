@@ -1,13 +1,14 @@
 import type { Routes } from '@angular/router';
 import type { PageSection } from '../../core/page-title';
 import type { MainKind } from '../../layout/main-kind';
-import { lessonGuard, levelGuard } from './learn-guards';
+import { lessonGuard, levelGuard, oldGlossaryLinkGuard } from './learn-guards';
 
 export const LEARN_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
     title: 'learn' satisfies PageSection,
+    canActivate: [oldGlossaryLinkGuard],
     loadComponent: () => import('./home/learn-home').then((m) => m.LearnHome),
   },
   // Before ':level', so "glossary" is never read as a level.

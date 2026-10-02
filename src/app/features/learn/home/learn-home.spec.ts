@@ -49,6 +49,13 @@ describe('LearnHome', () => {
     expect(root.querySelector('.continue')).toBeNull();
   });
 
+  it('should link to the glossary', async () => {
+    const root = await render('/learn');
+    const link = root.querySelector<HTMLAnchorElement>('a.glossary-link');
+    expect(link?.textContent?.trim()).toBe('Glossary');
+    expect(link?.getAttribute('href')).toBe('/learn/glossary');
+  });
+
   it('should offer to continue with the next lesson once one is completed', async () => {
     await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
     const root = await render('/learn');

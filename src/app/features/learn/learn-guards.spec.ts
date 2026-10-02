@@ -54,4 +54,9 @@ describe('learn guards', () => {
     expect(await open('/learn/foo')).toBe('/learn');
     expect(await open('/learn/foo/bar')).toBe('/learn');
   });
+
+  it('should send an old glossary link with a term to the glossary, keeping the term', async () => {
+    expect(await open('/learn#pin')).toBe('/learn/glossary#pin');
+    expect(await open('/learn')).toBe('/learn');
+  });
 });

@@ -29,5 +29,14 @@ const guard =
     return ok || router.createUrlTree(['/learn']);
   };
 
+/**
+ * Before the lessons, /learn opened the glossary, and links to a term (/learn#pin) are out there.
+ * They still land on the term; a plain /learn opens the home of Learn.
+ */
+export const oldGlossaryLinkGuard: CanActivateFn = (route) =>
+  route.fragment
+    ? inject(Router).createUrlTree(['/learn/glossary'], { fragment: route.fragment })
+    : true;
+
 export const levelGuard = guard(false);
 export const lessonGuard = guard(true);

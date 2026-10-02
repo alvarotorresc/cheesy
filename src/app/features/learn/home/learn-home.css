@@ -22,6 +22,18 @@
   max-width: 34rem;
 }
 
+.glossary-link {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 .continue {
   margin-bottom: var(--space-6);
 }
