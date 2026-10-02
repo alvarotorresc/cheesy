@@ -121,6 +121,10 @@ export const es: Messages = {
     stays: [
       { title: 'Tu progreso en Aperturas', text: 'Qué líneas has practicado y cuáles dominas.' },
       {
+        title: 'Las lecciones completadas',
+        text: 'Qué lecciones de Aprender has terminado y cuántos ejercicios te salieron a la primera.',
+      },
+      {
         title: 'Finales superados y posiciones resueltas',
         text: 'Y cuáles resolviste a la primera.',
       },

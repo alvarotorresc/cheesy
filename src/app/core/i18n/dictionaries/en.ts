@@ -124,6 +124,10 @@ export const en = {
         text: 'Which lines you have practised and which you master.',
       },
       {
+        title: 'Lessons completed',
+        text: 'Which lessons of Learn you finished and how many exercises you got on the first try.',
+      },
+      {
         title: 'Endgames passed and positions solved',
         text: 'And which ones you solved at the first try.',
       },
