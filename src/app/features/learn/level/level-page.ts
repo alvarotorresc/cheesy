@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { ContentService, type LessonLevel, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { nextLesson } from '../learn-progress';
 
@@ -56,6 +57,8 @@ export class LevelPage {
   });
 
   constructor() {
+    const t = () => this.i18n.t();
+    inject(PageTitle).showDetail(() => `${t().learn.levels[this.level()].name} · ${t().nav.learn}`);
     void this.load();
   }
 

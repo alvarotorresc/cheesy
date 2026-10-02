@@ -1,10 +1,11 @@
 import type { DebugElement } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GLOSSARY_LOADER, LESSON_LOADERS, type LessonLoaders } from '../../../core/content';
 import { bundledGlossaryLoader, plainText } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
@@ -23,6 +24,7 @@ describe('LessonPage', () => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        { provide: TitleStrategy, useExisting: PageTitle },
         { provide: LESSON_LOADERS, useValue: loaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
@@ -113,6 +115,14 @@ describe('LessonPage', () => {
       expect(stepOf()).toBe('Step 1 of 5');
       await press('ArrowRight');
       expect(stepOf()).toBe('Step 2 of 5');
+    });
+
+    it('should name the tab after the lesson, in the active language', async () => {
+      await render('/learn/beginner/knight-moves');
+      expect(document.title).toBe('Knight moves · Learn · Cheesy');
+      TestBed.inject(I18nService).setLang('es');
+      await settle();
+      expect(document.title).toBe('Knight moves (es) · Aprender · Cheesy');
     });
 
     it('should not let the user past an exercise before it is done', async () => {

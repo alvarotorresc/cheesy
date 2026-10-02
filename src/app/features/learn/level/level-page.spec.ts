@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
 import { bundledGlossaryLoader } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
@@ -16,6 +17,7 @@ describe('LevelPage', () => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        { provide: TitleStrategy, useExisting: PageTitle },
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
@@ -47,6 +49,16 @@ describe('LevelPage', () => {
     expect(items[0].textContent).toContain('Completed');
     expect(items[1].classList).toContain('next');
     expect(items[1].querySelector('a')?.getAttribute('href')).toBe('/learn/beginner/knight-moves');
+  });
+
+  it('should name the tab after the level, in the active language', async () => {
+    await render('/learn/beginner');
+    await vi.waitFor(() => expect(document.title).toBe('Beginner · Learn · Cheesy'));
+    TestBed.inject(I18nService).setLang('es');
+    await vi.waitFor(() => {
+      TestBed.tick();
+      expect(document.title).toBe('Principiante · Aprender · Cheesy');
+    });
   });
 
   it('should still open the glossary at /learn/glossary', async () => {

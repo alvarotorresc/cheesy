@@ -20,6 +20,7 @@ import {
   type LessonSummary,
 } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
+import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { BoardSpotlight } from '../../../shared/board';
 import { isFormField } from '../../../shared/keyboard';
@@ -139,6 +140,11 @@ export class LessonPage {
   private saved = false;
 
   constructor() {
+    // "El caballo · Aprender": the lesson once it is loaded, the section until then.
+    inject(PageTitle).showDetail(() => {
+      const lesson = this.lesson();
+      return lesson && `${this.i18n.localize(lesson.title)} · ${this.i18n.t().nav.learn}`;
+    });
     effect(() => {
       const id = this.params().id;
       untracked(() => void this.load(id));
