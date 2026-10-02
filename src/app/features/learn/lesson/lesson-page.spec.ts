@@ -184,6 +184,8 @@ describe('LessonPage', () => {
       expect(summary.querySelector('a.back-to-level')?.getAttribute('href')).toBe(
         '/learn/beginner',
       );
+      // One way back to the level, not two.
+      expect(summary.querySelectorAll('a[href="/learn/beginner"]')).toHaveLength(1);
       // The last lesson of the level has no next one.
       expect(summary.querySelector('a.next-lesson')).toBeNull();
       expect(document.activeElement).toBe(summary.querySelector('h2'));
