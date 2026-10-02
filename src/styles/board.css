@@ -133,6 +133,12 @@ cg-board square.mark-spot {
   background: var(--board-spot);
 }
 
+/* A star to collect in a "reach" exercise of a lesson. */
+cg-board square.mark-star {
+  background: center / 55% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f4c542' stroke='%23775a00' stroke-width='1' d='M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21.2l1.6-7L2 9.5l7.1-.6z'/%3E%3C/svg%3E");
+}
+
 @media (prefers-reduced-motion: no-preference) {
   cg-board square.mark-hint {
     animation: mark-ping 900ms ease-in-out 2;
