@@ -1,13 +1,15 @@
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   resource,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentService, type EndgamePosition } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { ProgressService } from '../../core/progress';
@@ -58,6 +60,8 @@ export class Endgames {
   /** The seals grow in when the progress first paints, not while the filters change. */
   protected readonly reveal = signal(true);
   protected readonly message = signal('');
+  /** `?category=<English name>` opens the list on that category; an unknown one filters nothing. */
+  private pendingCategory = inject(ActivatedRoute).snapshot.queryParamMap.get('category');
 
   private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
 
@@ -108,6 +112,18 @@ export class Endgames {
   protected readonly filtered = computed(
     () => this.filters().category !== 'all' || this.filters().goal !== 'all',
   );
+
+  constructor() {
+    effect(() => {
+      const keys = this.categories().map((group) => group.key);
+      if (this.pendingCategory === null || keys.length === 0) return;
+      const category = this.pendingCategory;
+      this.pendingCategory = null;
+      if (keys.includes(category)) {
+        untracked(() => this.filters.update((filters) => ({ ...filters, category })));
+      }
+    });
+  }
 
   protected countOf(category: string): number {
     return category === 'all'
