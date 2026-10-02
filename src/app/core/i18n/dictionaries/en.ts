@@ -64,6 +64,8 @@ export const en = {
     lessonCount: (n: number) => (n === 1 ? '1 lesson' : `${n} lessons`),
     completed: 'Completed',
     nextLesson: 'Next',
+    levelGlossaryPrompt: 'A word you don’t know?',
+    levelGlossaryLink: 'Look it up in the glossary',
     backToLearn: 'Learn',
     backToLevel: (level: string) => `Back to ${level}`,
     stepOf: (step: number, total: number) => `Step ${step} of ${total}`,

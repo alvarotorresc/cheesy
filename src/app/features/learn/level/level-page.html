@@ -22,18 +22,29 @@
           [class.done]="done().has(lesson.id)"
           [class.next]="next()?.id === lesson.id"
         >
-          <span class="order" aria-hidden="true">{{ lesson.order }}</span>
-          <div class="body">
-            <a [routerLink]="['/learn', level(), lesson.id]">{{ i18n.localize(lesson.title) }}</a>
-            <p>{{ i18n.localize(lesson.summary) }}</p>
-          </div>
-          @if (done().has(lesson.id)) {
-            <span class="tag">{{ t.completed }}</span>
-          } @else if (next()?.id === lesson.id) {
-            <span class="tag">{{ t.nextLesson }}</span>
-          }
+          <a class="lesson-card" [routerLink]="['/learn', level(), lesson.id]">
+            <span class="order" aria-hidden="true">{{
+              done().has(lesson.id) ? '✓' : lesson.order
+            }}</span>
+            <span class="body">
+              <span class="title-row">
+                <span class="title">{{ i18n.localize(lesson.title) }}</span>
+                @if (next()?.id === lesson.id) {
+                  <span class="tag">{{ t.nextLesson }}</span>
+                }
+              </span>
+              <span class="summary">{{ i18n.localize(lesson.summary) }}</span>
+            </span>
+            @if (done().has(lesson.id)) {
+              <span class="visually-hidden">, {{ t.completed }}</span>
+            }
+          </a>
         </li>
       }
     </ol>
+    <a class="glossary-link" routerLink="/learn/glossary">
+      {{ t.levelGlossaryPrompt }}
+      <span class="glossary-action">{{ t.levelGlossaryLink }}</span>
+    </a>
   }
 }

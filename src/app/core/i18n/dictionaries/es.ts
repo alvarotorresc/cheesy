@@ -64,6 +64,8 @@ export const es: Messages = {
     lessonCount: (n: number) => (n === 1 ? '1 lección' : `${n} lecciones`),
     completed: 'Completada',
     nextLesson: 'La siguiente',
+    levelGlossaryPrompt: '¿Una palabra que no conoces?',
+    levelGlossaryLink: 'Consulta el glosario',
     backToLearn: 'Aprender',
     backToLevel: (level: string) => `Volver a ${level}`,
     stepOf: (step: number, total: number) => `Paso ${step} de ${total}`,
