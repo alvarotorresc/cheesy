@@ -78,7 +78,7 @@ export const es: Messages = {
     wrongMove: 'Esa no. Prueba otra vez.',
     captured: 'Han capturado tu pieza en una casilla atacada. Empieza de nuevo.',
     stars: (got: number, total: number, moves: number, min: number) =>
-      `${got} de ${total} estrellas · ${moves} ${moves === 1 ? 'jugada' : 'jugadas'} (mínimo ${min})`,
+      `${got} de ${total} ${total === 1 ? 'estrella' : 'estrellas'} · ${moves} ${moves === 1 ? 'jugada' : 'jugadas'} (mínimo ${min})`,
     status: {
       check: 'Jaque',
       checkmate: 'Jaque mate',

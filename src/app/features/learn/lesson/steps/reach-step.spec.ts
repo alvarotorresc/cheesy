@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import type { ReachStep } from '../../../../core/content';
 import { plainText } from '../../../../core/content/testing';
 import { I18nService } from '../../../../core/i18n';
+import { en } from '../../../../core/i18n/dictionaries/en';
+import { es } from '../../../../core/i18n/dictionaries/es';
 import { BoardComponent } from '../../../../shared/board';
 import { ReachStepView } from './reach-step';
 
@@ -85,7 +87,7 @@ describe('ReachStepView', () => {
     expect(element.textContent).toContain('captured');
     element.querySelector<HTMLButtonElement>('button.restart')!.click();
     await fixture.whenStable();
-    expect(element.textContent).toContain('0 of 1 stars');
+    expect(element.textContent).toContain('0 of 1 star');
     expect(element.querySelector('button.restart')).toBeNull();
   });
 
@@ -138,7 +140,7 @@ describe('ReachStepView', () => {
     fixture.detectChanges();
     vi.advanceTimersByTime(600 * 10);
     fixture.detectChanges();
-    expect(element.textContent).toContain('1 of 1 stars');
+    expect(element.textContent).toContain('1 of 1 star');
     expect(done).toEqual([{ firstTry: false }]);
   });
 
@@ -166,11 +168,11 @@ describe('ReachStepView', () => {
       expect(board().dests().size).toBe(0);
       vi.advanceTimersByTime(600);
       fixture.detectChanges();
-      expect(element.textContent).toContain('0 of 1 stars · 1 move (fewest 2)');
+      expect(element.textContent).toContain('0 of 1 star · 1 move (fewest 2)');
       expect(board().dests().size).toBe(0);
       vi.advanceTimersByTime(600 * 5);
       fixture.detectChanges();
-      expect(element.textContent).toContain('1 of 1 stars · 2 moves (fewest 2)');
+      expect(element.textContent).toContain('1 of 1 star · 2 moves (fewest 2)');
       expect(done).toEqual([{ firstTry: false }]);
     });
 
@@ -194,7 +196,7 @@ describe('ReachStepView', () => {
       expect(element.querySelector('button.solution')).toBeNull();
       vi.advanceTimersByTime(600);
       fixture.detectChanges();
-      expect(element.textContent).toContain('1 of 1 stars · 2 moves');
+      expect(element.textContent).toContain('1 of 1 star · 2 moves');
       expect(done).toEqual([{ firstTry: false }]);
     });
   });
@@ -213,6 +215,18 @@ describe('ReachStepView', () => {
     element.querySelector<HTMLButtonElement>('button.hint')!.click();
     fixture.detectChanges();
     expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
-    expect(element.textContent).toContain('0 of 1 stars · 0 moves');
+    expect(element.textContent).toContain('0 of 1 star · 0 moves');
+  });
+});
+
+describe('stars count text', () => {
+  it('should say star in the singular when there is only one', () => {
+    expect(en.learn.stars(0, 1, 0, 4)).toBe('0 of 1 star · 0 moves (fewest 4)');
+    expect(es.learn.stars(0, 1, 0, 4)).toBe('0 de 1 estrella · 0 jugadas (mínimo 4)');
+  });
+
+  it('should keep stars in the plural for two or more', () => {
+    expect(en.learn.stars(1, 2, 1, 2)).toBe('1 of 2 stars · 1 move (fewest 2)');
+    expect(es.learn.stars(1, 2, 1, 2)).toBe('1 de 2 estrellas · 1 jugada (mínimo 2)');
   });
 });

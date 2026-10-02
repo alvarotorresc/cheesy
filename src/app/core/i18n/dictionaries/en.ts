@@ -78,7 +78,7 @@ export const en = {
     wrongMove: 'Not this one. Try again.',
     captured: 'Your piece was captured on an attacked square. Start again.',
     stars: (got: number, total: number, moves: number, min: number) =>
-      `${got} of ${total} stars · ${moves} ${moves === 1 ? 'move' : 'moves'} (fewest ${min})`,
+      `${got} of ${total} ${total === 1 ? 'star' : 'stars'} · ${moves} ${moves === 1 ? 'move' : 'moves'} (fewest ${min})`,
     status: {
       check: 'Check',
       checkmate: 'Checkmate',
