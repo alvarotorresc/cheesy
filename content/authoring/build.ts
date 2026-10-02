@@ -8,11 +8,15 @@ import { countLeaves, openingPreview } from '../lib/opening-walk.ts';
 import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
 import { glossary } from './glossary.ts';
+import { lessons } from './lessons/index.ts';
+import { buildLesson, lessonSummary } from '../lib/lesson-build.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
   DATA_DIR,
   ENDGAMES_FILE,
   GLOSSARY_FILE,
+  LESSON_CATALOG_FILE,
+  LESSONS_DIR,
   OPENING_CATALOG_FILE,
   OPENINGS_DIR,
   POSITIONS_FILE,
@@ -22,6 +26,7 @@ import type {
   AuthoringNode,
   AuthoringTree,
   CuratedPosition,
+  LessonSummary,
   OpeningNode,
   OpeningSummary,
   OpeningTree,
@@ -106,3 +111,16 @@ out(
   GLOSSARY_FILE,
   glossary.map((t) => ({ ...t, definition: richOf(t.definition) })),
 );
+
+// Lessons: one file each, plus a catalogue for the lists (level, then order).
+const lessonCatalog: LessonSummary[] = [];
+for (const spec of lessons) {
+  const lesson = buildLesson(spec);
+  out(path.join(LESSONS_DIR, `${lesson.id}.json`), lesson);
+  lessonCatalog.push(lessonSummary(lesson));
+}
+const LEVELS = ['beginner', 'intermediate', 'advanced'];
+lessonCatalog.sort(
+  (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
+);
+out(LESSON_CATALOG_FILE, lessonCatalog);
