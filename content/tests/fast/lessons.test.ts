@@ -9,6 +9,7 @@ import {
 } from '../../lib/content.ts';
 import {
   animationErrors,
+  engineOptionErrors,
   fenErrors,
   fileErrors,
   findMoveErrors,
@@ -19,6 +20,7 @@ import {
   setErrors,
   statusErrors,
 } from '../../lib/lesson-checks.ts';
+import { lessons as authored } from '../../authoring/lessons/index.ts';
 import { lessonSummary } from '../../lib/lesson-build.ts';
 import { validateLesson } from '../../lib/schema.ts';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
@@ -100,6 +102,14 @@ const base = (): Lesson => ({
       goal: 'win',
       playerSide: 'white',
     },
+    {
+      kind: 'choice',
+      text: text('Best?'),
+      board: { fen: '6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', orientation: 'white' },
+      answer: { by: 'engine', options: ['Ra8#', 'Ra7'], correct: 0 },
+      whyWrong: [null, text('No.')],
+      explanation: text('Mate.'),
+    },
   ],
 });
 
@@ -129,6 +139,7 @@ describe('the seeded lesson', () => {
       findMoveErrors,
       statusErrors,
       playOutErrors,
+      engineOptionErrors,
     ])
       expect(check([lesson])).toEqual([]);
     expect(glossaryErrors([lesson], [])).toEqual([]);
@@ -317,6 +328,16 @@ describe('seeded checks', () => {
     );
   });
 
+  it('6. rejects an engine option that is not a legal move in its position', () => {
+    const bad = withStep(8, {
+      answer: { by: 'engine', options: ['Ra8#', 'Ra9', 'Qh5'], correct: 0 },
+    });
+    expect(engineOptionErrors([bad])).toEqual([
+      'sample step 9: option Ra9 is not a legal move',
+      'sample step 9: option Qh5 is not a legal move',
+    ]);
+  });
+
   it('7. rejects a play-out with more than 7 pieces or the other side to move', () => {
     const crowded = withStep(stepOf('play-out'), { fen: 'k7/pppp4/8/8/8/8/PPPP4/K7 w - - 0 1' });
     expect(playOutErrors([crowded])).toEqual(['sample step 8: more than 7 pieces']);
@@ -364,6 +385,15 @@ describe('seeded checks', () => {
 describe('lessons', () => {
   const lessons = loadLessons();
 
+  it('0. the lesson files and the catalogue hold exactly the authored lessons', () => {
+    const authoredIds = authored.map((l) => l.id).sort();
+    expect(authoredIds.length).toBeGreaterThan(0);
+    expect(lessons.map((l) => l.id).sort()).toEqual(authoredIds);
+    expect((loadLessonCatalogRaw() as { id: string }[]).map((c) => c.id).sort()).toEqual(
+      authoredIds,
+    );
+  });
+
   it('1. every lesson matches the schema, and its file is named after its id', () => {
     expect(fileErrors(loadLessonFiles())).toEqual([]);
   });
@@ -390,6 +420,10 @@ describe('lessons', () => {
 
   it('6. status questions: a legal board, a message for each wrong option, no odd endings', () => {
     expect(statusErrors(lessons)).toEqual([]);
+  });
+
+  it('6. engine questions list only legal moves', () => {
+    expect(engineOptionErrors(lessons)).toEqual([]);
   });
 
   it('7. play-out positions have at most 7 pieces and the player is to move', () => {

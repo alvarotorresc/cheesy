@@ -141,6 +141,18 @@ export const statusErrors = (lessons: Lesson[]): string[] =>
     );
   });
 
+/** Test 6: every option of an engine question is a legal move in its board position. */
+export const engineOptionErrors = (lessons: Lesson[]): string[] =>
+  stepsOf(lessons, 'choice').flatMap(({ at, s }) => {
+    if (s.answer.by !== 'engine') return [];
+    const fen = s.board?.fen;
+    const pos = fen === undefined ? undefined : positionOf(fen);
+    if (!pos) return [`${at}: an engine question needs a legal board`];
+    return s.answer.options.flatMap((san) =>
+      playSan(pos, san) ? [] : [`${at}: option ${san} is not a legal move`],
+    );
+  });
+
 /** Test 7: at most 7 pieces and the player is to move. */
 export const playOutErrors = (lessons: Lesson[]): string[] =>
   stepsOf(lessons, 'play-out').flatMap(({ at, s }) => {
