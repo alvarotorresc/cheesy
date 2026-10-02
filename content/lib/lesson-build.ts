@@ -41,7 +41,7 @@ const buildStep = (step: StepSpec): Step => {
         ...rest,
         text: richOf(step.text),
         explanation: richOf(step.explanation),
-        ...(whyWrong ? { whyWrong: whyWrong.map(richOf) } : {}),
+        whyWrong: whyWrong.map((text) => (text ? richOf(text) : null)),
       };
     }
     case 'tap-square':
@@ -75,7 +75,9 @@ export const lessonTexts = (lesson: Lesson): { at: string; text: RichText }[] =>
       for (const [san, text] of Object.entries(step.wrong ?? {}))
         out.push({ at: `${at} wrong ${san}`, text });
     if (step.kind === 'choice')
-      (step.whyWrong ?? []).forEach((text, i) => out.push({ at: `${at} whyWrong ${i + 1}`, text }));
+      step.whyWrong.forEach((text, i) => {
+        if (text) out.push({ at: `${at} whyWrong ${i + 1}`, text });
+      });
     if ('hint' in step && step.hint) out.push({ at: `${at} hint`, text: step.hint });
     if ('explanation' in step) out.push({ at: `${at} explanation`, text: step.explanation });
     return out;

@@ -83,7 +83,7 @@ export type PlayOutStepSpec = Omit<PlayOutStep, 'text' | 'hint'> & {
 };
 export type ChoiceStepSpec = Omit<ChoiceStep, 'text' | 'whyWrong' | 'explanation'> & {
   text: Localized;
-  whyWrong?: Localized[];
+  whyWrong: (Localized | null)[];
   explanation: Localized;
 };
 export type TapSquareStepSpec = Omit<TapSquareStep, 'text'> & { text: Localized };

@@ -224,8 +224,11 @@ export interface ChoiceStep {
   text: RichText;
   board?: BoardSetup;
   answer: ChoiceAnswer;
-  /** One message per option, same order; for `status`, the order of `STATUS_OPTIONS`. */
-  whyWrong?: RichText[];
+  /**
+   * One message per option, same order; for `status`, the order of `STATUS_OPTIONS`. `null` on
+   * the correct option, which needs none; every wrong option has one.
+   */
+  whyWrong: (RichText | null)[];
   explanation: RichText;
 }
 

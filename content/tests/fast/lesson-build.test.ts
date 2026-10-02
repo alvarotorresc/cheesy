@@ -18,6 +18,7 @@ const spec: LessonSpec = {
       board: { fen: '4k3/8/8/8/8/8/4r3/4K3 w - - 0 1', orientation: 'white' },
       check: { by: 'rule', rule: 'escape-check' },
       wrong: { Kd1: { es: 'Sigue en jaque.', en: 'Still in check.' } },
+      hint: { es: 'Mira la torre.', en: 'Look at the rook.' },
       explanation: { es: 'Bien.', en: 'Good.' },
     },
     {
@@ -31,10 +32,7 @@ const spec: LessonSpec = {
         ],
         correct: 0,
       },
-      whyWrong: [
-        { es: '-', en: '-' },
-        { es: 'Esa es la torre.', en: 'That is the rook.' },
-      ],
+      whyWrong: [null, { es: 'Esa es la torre.', en: 'That is the rook.' }],
       explanation: { es: 'Tres.', en: 'Three.' },
     },
   ],
@@ -82,9 +80,9 @@ describe('buildLesson', () => {
       'sample step 1 text',
       'sample step 2 text',
       'sample step 2 wrong Kd1',
+      'sample step 2 hint',
       'sample step 2 explanation',
       'sample step 3 text',
-      'sample step 3 whyWrong 1',
       'sample step 3 whyWrong 2',
       'sample step 3 explanation',
     ]);
