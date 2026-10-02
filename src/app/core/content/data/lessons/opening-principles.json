@@ -1,0 +1,889 @@
+{
+  "id": "opening-principles",
+  "level": "beginner",
+  "order": 12,
+  "title": {
+    "es": "Cómo empezar una partida",
+    "en": "How to start a game"
+  },
+  "summary": {
+    "es": "Cuatro ideas para las primeras jugadas: centro, desarrollo, enroque y paciencia con la dama.",
+    "en": "Four ideas for the first moves: centre, development, castling and patience with the queen."
+  },
+  "terms": [
+    "centre",
+    "development"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Chess_opening",
+    "https://www.chess.com/lessons/opening-principles",
+    "https://www.chess.com/terms/chess-center"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Al empezar la partida, unas pocas ideas te ayudan a elegir jugada. La primera: ocupar el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": ", que son las cuatro casillas marcadas. Desde el centro, las piezas llegan a más sitios. Por eso muchas partidas empiezan avanzando un peón central dos casillas, como aquí."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "At the start of the game, a few ideas help you choose a move. The first: take the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": ", which is the four marked squares. From the centre, pieces reach more squares. That is why many games start by pushing a central pawn two squares, like here."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4",
+          "e4",
+          "d5",
+          "e5"
+        ],
+        "moves": [
+          "e4",
+          "e5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La segunda: sacar pronto los caballos y los alfiles de su casilla inicial. Se llama "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "desarrollo"
+          },
+          {
+            "kind": "text",
+            "text": ". Llévalos hacia el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": " y procura mover cada pieza una sola vez al principio: así juegan todas. Aquí los dos bandos sacan un caballo y un alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The second: bring the knights and bishops out from their starting squares early. This is called "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "development"
+          },
+          {
+            "kind": "text",
+            "text": ". Take them towards the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": " and try to move each piece only once at the start: that way they all join in. Here both sides bring out a knight and a bishop."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "moves": [
+          "e4",
+          "e5",
+          "Nf3",
+          "Nc6",
+          "Bc4",
+          "Bc5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas. ¿Qué jugada sigue mejor estas ideas?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move. Which move follows these ideas best?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Qg4",
+          "Nf3",
+          "f3"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el caballo sale hacia el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Es "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "desarrollo"
+          },
+          {
+            "kind": "text",
+            "text": " y lucha por el centro a la vez."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the knight comes out towards the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". It is "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "development"
+          },
+          {
+            "kind": "text",
+            "text": " and a fight for the centre at the same time."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Sacar la dama tan pronto no es buena idea: las piezas rivales la atacan mientras se "
+            },
+            {
+              "kind": "term",
+              "id": "development",
+              "text": "desarrollan"
+            },
+            {
+              "kind": "text",
+              "text": ", y tendrás que moverla otra vez."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Bringing the queen out this early is not a good idea: the rival pieces attack her while they "
+            },
+            {
+              "kind": "term",
+              "id": "development",
+              "text": "develop"
+            },
+            {
+              "kind": "text",
+              "text": ", and you will have to move her again."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese peón no saca ninguna pieza: le quita al caballo su mejor casilla, "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": ", y deja al rey más al descubierto."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That pawn move brings out no piece: it takes the knight’s best square, "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": ", and leaves the king more exposed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La tercera: poner el rey a salvo. Con el rey en el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": ", cualquier ataque le llega pronto. Por eso conviene "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enrocar"
+          },
+          {
+            "kind": "text",
+            "text": " en las primeras jugadas: el rey se esconde detrás de sus peones y la torre se acerca al centro. Aquí las blancas ya han sacado el caballo y el alfil, y enrocan."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The third: keep the king safe. With the king in the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": ", any attack reaches him quickly. That is why it pays to "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castle"
+          },
+          {
+            "kind": "text",
+            "text": " in the first few moves: the king hides behind his pawns and the rook comes closer to the centre. Here White has already brought out the knight and the bishop, and castles."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+        "orientation": "white",
+        "moves": [
+          "O-O"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas. ¿Qué jugada sigue mejor las ideas de la lección?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move. Which move follows the ideas of the lesson best?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Ke2",
+          "Rg1",
+          "O-O"
+        ],
+        "correct": 2
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: con el "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroque"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey queda a salvo y la torre se une al juego. Las blancas ya tienen fuera el caballo y el alfil: era el momento."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: with "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castling"
+          },
+          {
+            "kind": "text",
+            "text": ", the king is safe and the rook joins the game. White already has the knight and the bishop out: it was the right moment."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey sale hacia el "
+            },
+            {
+              "kind": "term",
+              "id": "centre",
+              "text": "centro"
+            },
+            {
+              "kind": "text",
+              "text": ", donde es más fácil atacarlo, y pierde para siempre el derecho a "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "enrocar"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The king steps towards the "
+            },
+            {
+              "kind": "term",
+              "id": "centre",
+              "text": "centre"
+            },
+            {
+              "kind": "text",
+              "text": ", where he is easier to attack, and loses the right to "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "castle"
+            },
+            {
+              "kind": "text",
+              "text": " for good."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Mover la torre le quita el derecho a "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "enrocar"
+            },
+            {
+              "kind": "text",
+              "text": " por ese lado, y la torre no hace nada en "
+            },
+            {
+              "kind": "square",
+              "square": "g1"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Moving the rook takes away the right to "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "castle"
+            },
+            {
+              "kind": "text",
+              "text": " on that side, and the rook does nothing on "
+            },
+            {
+              "kind": "square",
+              "square": "g1"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La cuarta: no saques la dama antes de tiempo. Es la pieza más valiosa, así que, cuando sale pronto, las piezas rivales la atacan y se "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "desarrollan"
+          },
+          {
+            "kind": "text",
+            "text": " a la vez. Mira: la dama negra captura en "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", y el caballo blanco sale a "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " atacándola. Las negras tendrán que mover la dama otra vez en lugar de sacar otra pieza."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The fourth: do not bring the queen out too early. She is the most valuable piece, so when she comes out early, the rival pieces attack her and "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "develop"
+          },
+          {
+            "kind": "text",
+            "text": " at the same time. Watch: the black queen captures on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", and the white knight comes out to "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ", attacking her. Black will have to move the queen again instead of bringing out another piece."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "moves": [
+          "e4",
+          "d5",
+          "exd5",
+          "Qxd5",
+          "Nc3"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las negras. El caballo blanco ataca su peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Qué jugada sigue mejor las ideas de la lección?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black to move. The white knight attacks their pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Which move follows the ideas of the lesson best?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2",
+        "orientation": "black"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Qf6",
+          "Nc6",
+          "h6"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el caballo sale hacia el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": " y defiende el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "Desarrollo"
+          },
+          {
+            "kind": "text",
+            "text": " y defensa en una sola jugada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the knight comes out towards the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": " and defends the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "Development"
+          },
+          {
+            "kind": "text",
+            "text": " and defence in a single move."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama defiende el peón, pero sale demasiado pronto y le quita al caballo su casilla, "
+            },
+            {
+              "kind": "square",
+              "square": "f6"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen defends the pawn, but she comes out too early and takes the knight’s square, "
+            },
+            {
+              "kind": "square",
+              "square": "f6"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese peón de "
+            },
+            {
+              "kind": "term",
+              "id": "flank",
+              "text": "flanco"
+            },
+            {
+              "kind": "text",
+              "text": " no saca ninguna pieza ni ayuda en el "
+            },
+            {
+              "kind": "term",
+              "id": "centre",
+              "text": "centro"
+            },
+            {
+              "kind": "text",
+              "text": ", y el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": " sigue sin defensa."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That "
+            },
+            {
+              "kind": "term",
+              "id": "flank",
+              "text": "flank"
+            },
+            {
+              "kind": "text",
+              "text": " pawn move brings out no piece and does not help in the "
+            },
+            {
+              "kind": "term",
+              "id": "centre",
+              "text": "centre"
+            },
+            {
+              "kind": "text",
+              "text": ", and the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": " is still undefended."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: al empezar, ocupa el "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": " con los peones, saca pronto caballos y alfiles, que es el "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "desarrollo"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroca"
+          },
+          {
+            "kind": "text",
+            "text": " en las primeras jugadas y no saques la dama antes de tiempo. Son ideas generales, no reglas: te ayudan a elegir cuando no sabes qué jugar. En Aperturas verás cómo se aplican en aperturas de verdad."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: at the start, take the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": " with your pawns, bring out knights and bishops early, which is "
+          },
+          {
+            "kind": "term",
+            "id": "development",
+            "text": "development"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castle"
+          },
+          {
+            "kind": "text",
+            "text": " in the first few moves and do not bring the queen out too early. They are general ideas, not rules: they help you choose when you do not know what to play. In Openings you will see how they apply in real openings."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "openings"
+  }
+}

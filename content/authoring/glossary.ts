@@ -90,6 +90,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'e1', to: 'e8', move: false }],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}jaque-ajedrez`],
   },
   {
@@ -106,6 +107,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}jaque-mate-ajedrez`],
   },
   {
@@ -122,6 +124,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}ahogado-ajedrez`],
   },
   {
@@ -141,7 +144,25 @@ export const glossary: GlossarySpec[] = [
       ],
     },
     level: 'beginner',
+    lesson: 'castling-en-passant',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}enroque-ajedrez`],
+  },
+  {
+    id: 'en-passant',
+    name: { es: 'Captura al paso', en: 'En passant' },
+    definition: {
+      es: 'Captura especial de peón. Si un peón avanza dos casillas desde su casilla de salida y queda justo al lado de un peón rival, este puede capturarlo como si solo hubiera avanzado una, yendo a la casilla que el otro se saltó. Solo se permite en la jugada inmediatamente siguiente.',
+      en: 'A special pawn capture. If a pawn advances two squares from its starting square and lands right beside an enemy pawn, that pawn may capture it as if it had moved only one, going to the square the other one skipped. It is only allowed on the very next move.',
+    },
+    example: {
+      fen: '4k3/8/8/1Pp5/8/8/8/4K3 w - c6 0 1',
+      orientation: 'white',
+      highlights: ['c5'],
+      arrows: [{ from: 'b5', to: 'c6', move: true }],
+    },
+    level: 'beginner',
+    lesson: 'castling-en-passant',
+    sources: [FIDE_LAWS, WIKI_GLOSSARY, `${WIKI}En_passant`],
   },
   {
     id: 'promotion',
@@ -157,6 +178,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'e7', to: 'e8', move: false }],
     },
     level: 'beginner',
+    lesson: 'pawn-moves',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}coronacion-ajedrez`],
   },
   {
@@ -175,6 +197,26 @@ export const glossary: GlossarySpec[] = [
     level: 'beginner',
     sources: [WIKI_KP_ENDGAME, WIKI_PHILIDOR, `${WIKI}Chess_endgame`],
   },
+  {
+    id: 'piece-value',
+    name: { es: 'Valor de las piezas', en: 'Piece value' },
+    definition: {
+      es: 'Puntos que se dan a cada pieza para comparar cuánto vale: peón 1, caballo 3, alfil 3, torre 5 y dama 9. El rey no se cuenta, porque nunca sale del tablero. No es una regla del juego, sino una guía para decidir qué capturar y qué cambiar.',
+      en: 'Points given to each piece to compare what it is worth: pawn 1, knight 3, bishop 3, rook 5 and queen 9. The king is not counted, because it never leaves the board. It is not a rule of the game but a guide for deciding what to capture and what to trade.',
+    },
+    example: {
+      fen: '7k/8/8/8/8/8/P7/1NBRQK2 w - - 0 1',
+      orientation: 'white',
+      highlights: ['a2', 'b1', 'c1', 'd1', 'e1'],
+      arrows: [],
+    },
+    level: 'beginner',
+    lesson: 'captures-and-values',
+    sources: [
+      `${WIKI}Chess_piece_relative_value`,
+      `${CHESSCOM_ES}el-valor-de-las-piezas-de-ajedrez`,
+    ],
+  },
 
   // ─── Opening and strategy ────────────────────────────────────────────────────────────────────
   {
@@ -191,6 +233,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'opening-principles',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_EN}chess-center`],
   },
   {
@@ -207,6 +250,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'f1', to: 'c4', move: true }],
     },
     level: 'beginner',
+    lesson: 'opening-principles',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_EN}chess-openings`],
   },
   {

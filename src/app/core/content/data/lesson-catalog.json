@@ -15,9 +15,69 @@
     "exerciseCount": 3
   },
   {
-    "id": "knight-moves",
+    "id": "rook-moves",
     "level": "beginner",
     "order": 2,
+    "title": {
+      "es": "La torre",
+      "en": "The rook"
+    },
+    "summary": {
+      "es": "La torre va en línea recta, tan lejos como quiera.",
+      "en": "The rook goes in a straight line, as far as it likes."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "bishop-moves",
+    "level": "beginner",
+    "order": 3,
+    "title": {
+      "es": "El alfil",
+      "en": "The bishop"
+    },
+    "summary": {
+      "es": "El alfil va en diagonal y nunca cambia de color de casilla.",
+      "en": "The bishop moves diagonally and never changes square colour."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "queen-moves",
+    "level": "beginner",
+    "order": 4,
+    "title": {
+      "es": "La dama",
+      "en": "The queen"
+    },
+    "summary": {
+      "es": "La dama se mueve como la torre y como el alfil a la vez.",
+      "en": "The queen moves like the rook and the bishop at once."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-moves",
+    "level": "beginner",
+    "order": 5,
+    "title": {
+      "es": "El rey",
+      "en": "The king"
+    },
+    "summary": {
+      "es": "El rey va de casilla en casilla y nunca a una casilla atacada.",
+      "en": "The king moves one square at a time and never onto an attacked square."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "knight-moves",
+    "level": "beginner",
+    "order": 6,
     "title": {
       "es": "El caballo",
       "en": "The knight"
@@ -28,5 +88,95 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "pawn-moves",
+    "level": "beginner",
+    "order": 7,
+    "title": {
+      "es": "El peón",
+      "en": "The pawn"
+    },
+    "summary": {
+      "es": "El peón avanza recto, captura en diagonal y, al llegar al final, se convierte en otra pieza.",
+      "en": "The pawn moves straight ahead, captures diagonally and, at the far end, turns into another piece."
+    },
+    "stepCount": 9,
+    "exerciseCount": 4
+  },
+  {
+    "id": "captures-and-values",
+    "level": "beginner",
+    "order": 8,
+    "title": {
+      "es": "Capturar y el valor de las piezas",
+      "en": "Capturing and piece values"
+    },
+    "summary": {
+      "es": "Cómo se captura, cuándo conviene y cuánto vale cada pieza.",
+      "en": "How to capture, when it pays and what each piece is worth."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "check-mate-stalemate",
+    "level": "beginner",
+    "order": 9,
+    "title": {
+      "es": "Jaque, mate y ahogado",
+      "en": "Check, checkmate and stalemate"
+    },
+    "summary": {
+      "es": "Atacar al rey, ganar la partida y el final que acaba en tablas.",
+      "en": "Attacking the king, winning the game and the ending that is a draw."
+    },
+    "stepCount": 10,
+    "exerciseCount": 6
+  },
+  {
+    "id": "castling-en-passant",
+    "level": "beginner",
+    "order": 10,
+    "title": {
+      "es": "Enroque y captura al paso",
+      "en": "Castling and en passant"
+    },
+    "summary": {
+      "es": "Las dos jugadas especiales: el rey y la torre a la vez, y una captura de peón muy particular.",
+      "en": "The two special moves: king and rook at once, and a very particular pawn capture."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "basic-mates",
+    "level": "beginner",
+    "order": 11,
+    "title": {
+      "es": "Mates básicos",
+      "en": "Basic mates"
+    },
+    "summary": {
+      "es": "Ganar con dama y rey, o con torre y rey, contra el rey solo.",
+      "en": "Winning with queen and king, or rook and king, against the lone king."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "opening-principles",
+    "level": "beginner",
+    "order": 12,
+    "title": {
+      "es": "Cómo empezar una partida",
+      "en": "How to start a game"
+    },
+    "summary": {
+      "es": "Cuatro ideas para las primeras jugadas: centro, desarrollo, enroque y paciencia con la dama.",
+      "en": "Four ideas for the first moves: centre, development, castling and patience with the queen."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
   }
 ]

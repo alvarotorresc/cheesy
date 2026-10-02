@@ -449,6 +449,483 @@
       }
     ]
   },
+  "8/8/3k4/8/8/4K3/8/7Q w - - 0 1": {
+    "category": "win",
+    "dtz": 13,
+    "dtm": 13,
+    "checkmate": false,
+    "stalemate": false,
+    "moves": [
+      {
+        "uci": "h1d1",
+        "san": "Qd1+",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1e4",
+        "san": "Qe4",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h4",
+        "san": "Qh4",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h5",
+        "san": "Qh5",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1b7",
+        "san": "Qb7",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1a8",
+        "san": "Qa8",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d4",
+        "san": "Kd4",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3e4",
+        "san": "Ke4",
+        "category": "loss",
+        "dtz": -12,
+        "dtm": -12,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1a1",
+        "san": "Qa1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1b1",
+        "san": "Qb1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1c1",
+        "san": "Qc1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1e1",
+        "san": "Qe1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1f1",
+        "san": "Qf1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1g1",
+        "san": "Qg1",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1g2",
+        "san": "Qg2",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h2",
+        "san": "Qh2+",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1f3",
+        "san": "Qf3",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h3",
+        "san": "Qh3",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h6",
+        "san": "Qh6+",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h7",
+        "san": "Qh7",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h8",
+        "san": "Qh8",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d3",
+        "san": "Kd3",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f3",
+        "san": "Kf3",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f4",
+        "san": "Kf4",
+        "category": "loss",
+        "dtz": -14,
+        "dtm": -14,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d2",
+        "san": "Kd2",
+        "category": "loss",
+        "dtz": -16,
+        "dtm": -16,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3e2",
+        "san": "Ke2",
+        "category": "loss",
+        "dtz": -16,
+        "dtm": -16,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f2",
+        "san": "Kf2",
+        "category": "loss",
+        "dtz": -16,
+        "dtm": -16,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1d5",
+        "san": "Qd5+",
+        "category": "draw",
+        "dtz": 0,
+        "dtm": 0,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1c6",
+        "san": "Qc6+",
+        "category": "draw",
+        "dtz": 0,
+        "dtm": 0,
+        "checkmate": false,
+        "stalemate": false
+      }
+    ]
+  },
+  "8/8/3k4/8/8/4K3/8/7R w - - 0 1": {
+    "category": "win",
+    "dtz": 23,
+    "dtm": 23,
+    "checkmate": false,
+    "stalemate": false,
+    "moves": [
+      {
+        "uci": "h1d1",
+        "san": "Rd1+",
+        "category": "loss",
+        "dtz": -22,
+        "dtm": -22,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h5",
+        "san": "Rh5",
+        "category": "loss",
+        "dtz": -22,
+        "dtm": -22,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d4",
+        "san": "Kd4",
+        "category": "loss",
+        "dtz": -22,
+        "dtm": -22,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3e4",
+        "san": "Ke4",
+        "category": "loss",
+        "dtz": -22,
+        "dtm": -22,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1a1",
+        "san": "Ra1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1b1",
+        "san": "Rb1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1c1",
+        "san": "Rc1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1e1",
+        "san": "Re1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1f1",
+        "san": "Rf1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1g1",
+        "san": "Rg1",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h2",
+        "san": "Rh2",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h3",
+        "san": "Rh3",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h4",
+        "san": "Rh4",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h6",
+        "san": "Rh6+",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h7",
+        "san": "Rh7",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "h1h8",
+        "san": "Rh8",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d3",
+        "san": "Kd3",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f4",
+        "san": "Kf4",
+        "category": "loss",
+        "dtz": -24,
+        "dtm": -24,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3d2",
+        "san": "Kd2",
+        "category": "loss",
+        "dtz": -26,
+        "dtm": -26,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3e2",
+        "san": "Ke2",
+        "category": "loss",
+        "dtz": -26,
+        "dtm": -26,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f2",
+        "san": "Kf2",
+        "category": "loss",
+        "dtz": -26,
+        "dtm": -26,
+        "checkmate": false,
+        "stalemate": false
+      },
+      {
+        "uci": "e3f3",
+        "san": "Kf3",
+        "category": "loss",
+        "dtz": -26,
+        "dtm": -26,
+        "checkmate": false,
+        "stalemate": false
+      }
+    ]
+  },
   "8/8/4k3/8/7P/8/6K1/8 b - - 0 1": {
     "category": "draw",
     "dtz": 0,

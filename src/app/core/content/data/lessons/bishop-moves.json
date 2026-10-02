@@ -1,0 +1,669 @@
+{
+  "id": "bishop-moves",
+  "level": "beginner",
+  "order": 3,
+  "title": {
+    "es": "El alfil",
+    "en": "The bishop"
+  },
+  "summary": {
+    "es": "El alfil va en diagonal y nunca cambia de color de casilla.",
+    "en": "The bishop moves diagonally and never changes square colour."
+  },
+  "terms": [],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El alfil se mueve en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", hacia delante o hacia atrás, tantas casillas como quiera. Como la torre, no puede saltar. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " llega a cualquier casilla de las flechas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The bishop moves along a "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", forwards or backwards, as many squares as it likes. Like the rook, it cannot jump. From "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " it can reach any square along the arrows."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/3B4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "d4",
+            "to": "h8"
+          },
+          {
+            "from": "d4",
+            "to": "a7"
+          },
+          {
+            "from": "d4",
+            "to": "a1"
+          },
+          {
+            "from": "d4",
+            "to": "g1"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Fíjate en las casillas marcadas: todas son oscuras. Una "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " nunca cambia de color, así que este alfil, que está en "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", no pisará jamás una casilla clara. Por eso cada bando tiene dos alfiles: uno para las casillas claras y otro para las oscuras."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look at the marked squares: they are all dark. A "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " never changes colour, so this bishop, standing on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", will never step on a light square. That is why each side has two bishops: one for the light squares and one for the dark ones."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/3B4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e5",
+          "f6",
+          "g7",
+          "h8",
+          "c5",
+          "b6",
+          "a7",
+          "e3",
+          "f2",
+          "g1",
+          "c3",
+          "b2",
+          "a1"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Recoge las estrellas con el alfil. Todas están en casillas oscuras, como él."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Collect the stars with the bishop. They are all on dark squares, like the bishop."
+          }
+        ]
+      },
+      "piece": {
+        "role": "bishop",
+        "color": "white",
+        "square": "c1"
+      },
+      "targets": [
+        "a3",
+        "f8",
+        "h6"
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Sigue cada "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " con la vista antes de mover: desde la estrella de la izquierda sale una que sube hasta arriba."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Follow each "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " with your eyes before moving: from the star on the left, one runs all the way to the top."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un alfil está en una casilla clara. ¿Podrá llegar alguna vez a una casilla oscura?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A bishop stands on a light square. Will it ever reach a dark square?"
+          }
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "No, nunca",
+            "en": "No, never"
+          },
+          {
+            "es": "Sí, dando un rodeo",
+            "en": "Yes, by going the long way round"
+          },
+          {
+            "es": "Sí, si se lo permite otra pieza",
+            "en": "Yes, if another piece lets it"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Correcto. Cada jugada del alfil sigue una "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", y en una diagonal todas las casillas son del mismo color. Un alfil de casillas claras se queda en las claras toda la partida."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Right. Every bishop move follows a "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", and all the squares of a diagonal have the same colour. A light-squared bishop stays on the light squares for the whole game."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ningún rodeo sirve: cada jugada del alfil sigue una "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", y todas sus casillas son del mismo color."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "No detour helps: every bishop move follows a "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", and all its squares have the same colour."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Las demás piezas solo pueden cortarle el paso, no cambiar cómo se mueve. Sigue en su "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", del mismo color."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Other pieces can only block its way, not change how it moves. It stays on its "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", of the same colour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si una pieza de su color está en el camino, el alfil se para antes. Aquí el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " le tapa una "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", y solo le quedan "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If a piece of its own colour is in the way, the bishop stops before it. Here the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " blocks one "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", and it only has "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " left."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/8/8/4P3/4KB2 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "g2",
+          "h3"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " no se mueve y el alfil no puede saltarlo. Llega a la estrella por otro camino."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " does not move and the bishop cannot jump over it. Reach the star another way."
+          }
+        ]
+      },
+      "piece": {
+        "role": "bishop",
+        "color": "white",
+        "square": "f1"
+      },
+      "targets": [
+        "a6"
+      ],
+      "blockers": [
+        "e2"
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Sal por el otro lado, hacia "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ", y busca desde allí una "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " larga que cruce el tablero."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Leave by the other side, towards "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ", and look from there for a long "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " that crosses the board."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora hay una torre negra. No te pares en ninguna casilla de su "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " ni de su "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": ": te capturaría."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now there is a black rook. Do not stop on any square of its "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " or its "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ": it would capture you."
+          }
+        ]
+      },
+      "piece": {
+        "role": "bishop",
+        "color": "white",
+        "square": "c1"
+      },
+      "targets": [
+        "h6",
+        "b8"
+      ],
+      "enemies": [
+        {
+          "role": "rook",
+          "square": "e7"
+        }
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Pasar por una casilla atacada en mitad de una jugada sí vale. Lo que cuenta es dónde te paras."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Passing through an attacked square in the middle of a move is fine. What counts is where you stop."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: el alfil va en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", tan lejos como quiera, y no salta. Nunca cambia de color de casilla. Cada bando empieza con dos alfiles, junto al rey y a la dama: los marcados."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the bishop moves along a "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", as far as it likes, and it does not jump. It never changes square colour. Each side starts with two bishops, next to the king and the queen: the marked ones."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c1",
+          "f1",
+          "c8",
+          "f8"
+        ]
+      }
+    }
+  ]
+}

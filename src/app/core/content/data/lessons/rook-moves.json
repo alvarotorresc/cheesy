@@ -1,0 +1,534 @@
+{
+  "id": "rook-moves",
+  "level": "beginner",
+  "order": 2,
+  "title": {
+    "es": "La torre",
+    "en": "The rook"
+  },
+  "summary": {
+    "es": "La torre va en línea recta, tan lejos como quiera.",
+    "en": "The rook goes in a straight line, as far as it likes."
+  },
+  "terms": [],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre se mueve en línea recta por "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": ": hacia delante, hacia atrás o de lado, tantas casillas como quiera. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " puede ir a cualquier casilla de las flechas. Las otras dos piezas son los reyes: de momento, no te fijes en ellos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook moves in a straight line along "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": ": forwards, backwards or sideways, as many squares as it likes. From "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " it can go to any square along the arrows. The other two pieces are the kings: ignore them for now."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/3R4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "d4",
+            "to": "d8"
+          },
+          {
+            "from": "d4",
+            "to": "d1"
+          },
+          {
+            "from": "d4",
+            "to": "a4"
+          },
+          {
+            "from": "d4",
+            "to": "h4"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Recoge las estrellas con la torre, en el orden que quieras. Cada jugada puede ser tan larga como quieras, así que intenta usar pocas: el contador te dice el mínimo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Collect the stars with the rook, in any order. Each move can be as long as you like, so try to use few: the counter tells you the minimum."
+          }
+        ]
+      },
+      "piece": {
+        "role": "rook",
+        "color": "white",
+        "square": "a1"
+      },
+      "targets": [
+        "a6",
+        "f6",
+        "f2"
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Sube primero por la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " hasta la estrella de arriba y luego ve de lado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "First go up the "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " to the top star, then go sideways."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre no puede saltar. Si una pieza de su mismo color le corta el paso, se para antes: aquí el peón blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " no la deja pasar de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ". Las casillas marcadas son todas las que tiene."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook cannot jump. If a piece of its own colour is in the way, it stops before it: here the white pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " does not let it past "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ". The marked squares are all the ones it has."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/3P4/8/3R4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "d3",
+          "d2",
+          "d1",
+          "a4",
+          "b4",
+          "c4",
+          "e4",
+          "f4",
+          "g4",
+          "h4"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora hay peones blancos que no se mueven. La torre no puede pisarlos ni pasar por encima. Busca otro camino hasta la estrella."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now there are white pawns that do not move. The rook cannot step on them or pass over them. Find another way to the star."
+          }
+        ]
+      },
+      "piece": {
+        "role": "rook",
+        "color": "white",
+        "square": "a1"
+      },
+      "targets": [
+        "a8"
+      ],
+      "blockers": [
+        "a4",
+        "c1"
+      ],
+      "minMoves": 3,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Por su "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " no puede subir. Da un paso a la derecha y sube por la columna de al lado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "It cannot go up its own "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". Take one step right and go up the next file."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una pieza rival ataca casillas: si tu torre se para en una de ellas, la rival se la come. La torre negra de "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " ataca su "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " y su "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": ", que son las casillas marcadas. Puedes pasar por ellas en mitad de una jugada; lo que no puedes es pararte."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A rival piece attacks squares: if your rook stops on one of them, the rival takes it. The black rook on "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " attacks its "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " and its "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ", which are the marked squares. You can pass through them in the middle of a move; what you cannot do is stop on them."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/2r5/8/8/8/R3K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c6",
+          "c7",
+          "c8",
+          "a5",
+          "b5",
+          "d5",
+          "e5",
+          "f5",
+          "g5",
+          "h5"
+        ]
+      }
+    },
+    {
+      "kind": "reach",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Recoge las estrellas sin pararte en ninguna casilla que ataque la torre negra. Si te paras en una, te captura y empiezas de nuevo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Collect the stars without stopping on any square the black rook attacks. If you stop on one, it captures you and you start again."
+          }
+        ]
+      },
+      "piece": {
+        "role": "rook",
+        "color": "white",
+        "square": "a1"
+      },
+      "targets": [
+        "c8",
+        "h3"
+      ],
+      "enemies": [
+        {
+          "role": "rook",
+          "square": "d5"
+        }
+      ],
+      "minMoves": 4,
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Evita la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " 5 y la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " d. Cruzarlas en mitad de una jugada sí vale."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Avoid "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " 5 and the d "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". Crossing them in the middle of a move is fine."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: la torre va en línea recta por "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": ", tan lejos como quiera, y no salta. No puede pararse en una casilla atacada sin que la capturen. Cada bando empieza con dos torres, en las esquinas: las marcadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the rook goes in a straight line along "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": ", as far as it likes, and it does not jump. It cannot stop on an attacked square without being captured. Each side starts with two rooks, in the corners: the marked ones."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a1",
+          "h1",
+          "a8",
+          "h8"
+        ]
+      }
+    }
+  ]
+}
