@@ -11,6 +11,7 @@ import { capturesAndValues } from './beginner/08-captures-and-values.ts';
 import { checkMateStalemate } from './beginner/09-check-mate-stalemate.ts';
 import { castlingEnPassant } from './beginner/10-castling-en-passant.ts';
 import { basicMates } from './beginner/11-basic-mates.ts';
+import { openingPrinciples } from './beginner/12-opening-principles.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -24,4 +25,5 @@ export const lessons: LessonSpec[] = [
   checkMateStalemate,
   castlingEnPassant,
   basicMates,
+  openingPrinciples,
 ];

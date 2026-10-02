@@ -233,6 +233,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'opening-principles',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_EN}chess-center`],
   },
   {
@@ -249,6 +250,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'f1', to: 'c4', move: true }],
     },
     level: 'beginner',
+    lesson: 'opening-principles',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_EN}chess-openings`],
   },
   {

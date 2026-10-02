@@ -163,5 +163,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "opening-principles",
+    "level": "beginner",
+    "order": 12,
+    "title": {
+      "es": "Cómo empezar una partida",
+      "en": "How to start a game"
+    },
+    "summary": {
+      "es": "Cuatro ideas para las primeras jugadas: centro, desarrollo, enroque y paciencia con la dama.",
+      "en": "Four ideas for the first moves: centre, development, castling and patience with the queen."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
   }
 ]
