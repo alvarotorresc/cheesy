@@ -1,0 +1,731 @@
+{
+  "id": "the-board",
+  "level": "beginner",
+  "order": 1,
+  "title": {
+    "es": "El tablero",
+    "en": "The board"
+  },
+  "summary": {
+    "es": "Filas, columnas, diagonales y el nombre de cada casilla.",
+    "en": "Ranks, files, diagonals and the name of every square."
+  },
+  "terms": [
+    "rank",
+    "file",
+    "diagonal"
+  ],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El ajedrez se juega en un tablero de 64 casillas, ocho por ocho, que alternan claras y oscuras. Cada jugador se sienta a un lado, y el tablero se coloca con una casilla clara en la esquina de abajo a la derecha: la marcada. De las piezas hablaremos más adelante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Chess is played on a board of 64 squares, eight by eight, alternating light and dark. Each player sits on one side, and the board is placed with a light square in the bottom right corner: the marked one. We will talk about the pieces later."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "h1"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las líneas horizontales se llaman "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": ". Hay ocho, numeradas del 1 al 8 desde el lado de las blancas. Aquí está marcada la fila 4."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The horizontal lines are called "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": ". There are eight, numbered 1 to 8 from the white side. Rank 4 is marked here."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a4",
+          "b4",
+          "c4",
+          "d4",
+          "e4",
+          "f4",
+          "g4",
+          "h4"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora tú: ¿qué "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " está marcada?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your turn: which "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " is marked?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a6",
+          "b6",
+          "c6",
+          "d6",
+          "e6",
+          "f6",
+          "g6",
+          "h6"
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "La 6",
+            "en": "Rank 6"
+          },
+          {
+            "es": "La 3",
+            "en": "Rank 3"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la 6. Las "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " se cuentan desde el lado de las blancas, de abajo arriba."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: rank 6. "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "Ranks"
+          },
+          {
+            "kind": "text",
+            "text": " are counted from the white side, from the bottom up."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Has contado desde arriba. Las "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "filas"
+            },
+            {
+              "kind": "text",
+              "text": " se cuentan siempre desde el lado de las blancas: la de abajo es la 1."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You counted from the top. "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "Ranks"
+            },
+            {
+              "kind": "text",
+              "text": " are always counted from the white side: the bottom one is rank 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las líneas verticales se llaman "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": ". También hay ocho, y se nombran con letras, de la a a la h, de izquierda a derecha según las ven las blancas. Aquí está marcada la columna c."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The vertical lines are called "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": ". There are eight of them too, named with letters from a to h, left to right as White sees them. The c file is marked here."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6",
+          "c7",
+          "c8"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cada casilla se nombra con la letra de su "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " y el número de su "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ". La marcada es "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ": está donde se cruzan la columna e y la fila 4. Las letras y los números vienen escritos en el borde del tablero."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Each square is named with the letter of its "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " and the number of its "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ". The marked one is "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ": it sits where the e file and rank 4 cross. The letters and numbers are written along the edge of the board."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4"
+        ]
+      }
+    },
+    {
+      "kind": "tap-square",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "A practicar. Toca la casilla que se te pide, diez veces seguidas. Esta vez el borde no tiene letras ni números: busca la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " y la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " de memoria. No hay prisa."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Time to practise. Tap the square you are asked for, ten times in a row. This time the edge has no letters or numbers: find the "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " and the "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " from memory. There is no rush."
+          }
+        ]
+      },
+      "count": 10
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " es una línea de casillas que se tocan por las esquinas. Todas sus casillas son del mismo color. La marcada cruza el tablero de esquina a esquina, y es entera oscura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " is a line of squares that touch at their corners. All its squares have the same colour. The marked one crosses the board from corner to corner, and it is dark all the way."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a1",
+          "b2",
+          "c3",
+          "d4",
+          "e5",
+          "f6",
+          "g7",
+          "h8"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Sin mirar el tablero: ¿de qué color es la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Without looking at the board: what colour is the "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " square?"
+          }
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "Clara",
+            "en": "Light"
+          },
+          {
+            "es": "Oscura",
+            "en": "Dark"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " es la esquina de abajo a la derecha para las blancas, y esa esquina siempre es clara. Si al preparar una partida te queda oscura, gira el tablero."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " is the bottom right corner for White, and that corner is always light. If it comes out dark when you set up a game, turn the board around."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No. El tablero se coloca con una casilla clara abajo a la derecha, y esa esquina, para las blancas, es "
+            },
+            {
+              "kind": "square",
+              "square": "h1"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "No. The board is placed with a light square in the bottom right corner, and for White that corner is "
+            },
+            {
+              "kind": "square",
+              "square": "h1"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Así empieza toda partida. Cada bando tiene 16 piezas: las blancas ocupan las "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " 1 y 2, y las negras, la 7 y la 8. Un truco para colocarlas: la dama va en su color. Las dos damas están marcadas: la blanca empieza en "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ", una casilla clara, y la negra en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", una oscura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Every game starts like this. Each side has 16 pieces: White fills "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": " 1 and 2, and Black ranks 7 and 8. A trick for setting them up: the queen goes on her own colour. Both queens are marked: the white one starts on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ", a light square, and the black one on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", a dark one."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d1",
+          "d8"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: el tablero tiene 64 casillas. Las "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " van en horizontal y se numeran del 1 al 8; las "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": " van en vertical y se nombran de la a a la h; las "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonales"
+          },
+          {
+            "kind": "text",
+            "text": " son líneas de un solo color. Cada casilla se llama por su columna y su fila, como "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ". Y siempre, casilla clara abajo a la derecha."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the board has 64 squares. "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "Ranks"
+          },
+          {
+            "kind": "text",
+            "text": " run across and are numbered 1 to 8; "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": " run up and down and are named a to h; "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonals"
+          },
+          {
+            "kind": "text",
+            "text": " are lines of a single colour. Each square is called by its file and its rank, like "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ". And always, a light square in the bottom right corner."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white"
+      }
+    }
+  ]
+}

@@ -24,7 +24,7 @@ const fmt = (l: Line | undefined) =>
 
 export async function checkTactic(
   engine: Engine,
-  p: CuratedPosition,
+  p: Pick<CuratedPosition, 'fen' | 'solution'>,
   depth: number,
 ): Promise<StepReport[]> {
   const steps: StepReport[] = [];

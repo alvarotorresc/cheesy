@@ -26,6 +26,57 @@ const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 export const glossary: GlossarySpec[] = [
   // ─── Rules and basics ────────────────────────────────────────────────────────────────────────
   {
+    id: 'rank',
+    name: { es: 'Fila', en: 'Rank' },
+    definition: {
+      es: 'Cada una de las ocho líneas de casillas que cruzan el tablero de lado a lado. Se numeran del 1 al 8, empezando por el lado de las blancas.',
+      en: 'A row of squares running across the board from side to side. There are eight, numbered 1 to 8 starting from White’s side.',
+    },
+    example: {
+      fen: START,
+      orientation: 'white',
+      highlights: ['a4', 'b4', 'c4', 'd4', 'e4', 'f4', 'g4', 'h4'],
+      arrows: [],
+    },
+    level: 'beginner',
+    lesson: 'the-board',
+    sources: [FIDE_LAWS, WIKI_GLOSSARY, `${WIKI}Chessboard`],
+  },
+  {
+    id: 'file',
+    name: { es: 'Columna', en: 'File' },
+    definition: {
+      es: 'Cada una de las ocho líneas de casillas que van de un jugador al otro. Se nombran con las letras de la a a la h, de izquierda a derecha según las ven las blancas.',
+      en: 'A column of squares running from one player to the other. There are eight, named with the letters a to h, left to right as White sees them.',
+    },
+    example: {
+      fen: START,
+      orientation: 'white',
+      highlights: ['e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8'],
+      arrows: [],
+    },
+    level: 'beginner',
+    lesson: 'the-board',
+    sources: [FIDE_LAWS, WIKI_GLOSSARY, `${WIKI}Chessboard`],
+  },
+  {
+    id: 'diagonal',
+    name: { es: 'Diagonal', en: 'Diagonal' },
+    definition: {
+      es: 'Línea de casillas que se tocan solo por las esquinas y cruza el tablero en oblicuo. Todas sus casillas son del mismo color.',
+      en: 'A slanting line of squares that touch only at their corners. All its squares are the same colour.',
+    },
+    example: {
+      fen: START,
+      orientation: 'white',
+      highlights: ['c1', 'd2', 'e3', 'f4', 'g5', 'h6'],
+      arrows: [],
+    },
+    level: 'beginner',
+    lesson: 'the-board',
+    sources: [FIDE_LAWS, WIKI_GLOSSARY, `${WIKI}Chessboard`],
+  },
+  {
     id: 'check',
     name: { es: 'Jaque', en: 'Check' },
     definition: {
@@ -112,8 +163,8 @@ export const glossary: GlossarySpec[] = [
     id: 'queening-square',
     name: { es: 'Casilla de coronación', en: 'Queening square' },
     definition: {
-      es: 'La casilla del otro extremo del tablero a la que llega un peón avanzando por su columna, donde se [corona](promotion). Para un peón blanco de la columna d es d8.',
-      en: 'The square at the far end of the board that a pawn reaches by moving straight up its column, where it [promotes](promotion). For a white pawn on the d column it is d8.',
+      es: 'La casilla del otro extremo del tablero a la que llega un peón avanzando por su [columna](file), donde se [corona](promotion). Para un peón blanco de la columna d es d8.',
+      en: 'The square at the far end of the board that a pawn reaches by moving straight up its [column](file), where it [promotes](promotion). For a white pawn on the d column it is d8.',
     },
     example: {
       fen: '8/8/8/3P4/8/8/k7/4K3 w - - 0 1',
@@ -226,8 +277,8 @@ export const glossary: GlossarySpec[] = [
     id: 'flank',
     name: { es: 'Flanco', en: 'Flank' },
     definition: {
-      es: 'Cada uno de los dos lados del tablero, fuera del [centro](centre). El flanco de dama son las columnas a, b y c; el flanco de rey, las columnas f, g y h.',
-      en: 'Either side of the board, away from the [centre](centre): the queen’s flank is the a, b and c columns, and the king’s flank is the f, g and h columns.',
+      es: 'Cada uno de los dos lados del tablero, fuera del [centro](centre). El flanco de dama son las [columnas](file) a, b y c; el flanco de rey, las columnas f, g y h.',
+      en: 'Either side of the board, away from the [centre](centre): the queen’s flank is the a, b and c [columns](file), and the king’s flank is the f, g and h columns.',
     },
     example: {
       fen: START,
@@ -341,8 +392,8 @@ export const glossary: GlossarySpec[] = [
     id: 'isolated-pawn',
     name: { es: 'Peón aislado', en: 'Isolated pawn' },
     definition: {
-      es: 'Peón que no tiene peones de su color en las columnas de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas.',
-      en: 'A pawn with no pawns of its own colour on the columns next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job.',
+      es: 'Peón que no tiene peones de su color en las [columnas](file) de al lado. Mientras siga así, ningún peón puede protegerlo, así que tienen que hacerlo las piezas.',
+      en: 'A pawn with no pawns of its own colour on the [columns](file) next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job.',
     },
     example: {
       fen: '4k3/pp3ppp/4p3/8/3P4/8/PP3PPP/4K3 w - - 0 1',
@@ -357,8 +408,8 @@ export const glossary: GlossarySpec[] = [
     id: 'doubled-pawns',
     name: { es: 'Peones doblados', en: 'Doubled pawns' },
     definition: {
-      es: 'Dos peones del mismo color en la misma columna, uno delante del otro. Suele ser una debilidad: no pueden protegerse entre sí y el de delante le corta el paso al de detrás.',
-      en: 'Two pawns of the same colour on the same column, one in front of the other. It is usually a weakness: they cannot guard each other, and the front one blocks the one behind.',
+      es: 'Dos peones del mismo color en la misma [columna](file), uno delante del otro. Suele ser una debilidad: no pueden protegerse entre sí y el de delante le corta el paso al de detrás.',
+      en: 'Two pawns of the same colour on the same [column](file), one in front of the other. It is usually a weakness: they cannot guard each other, and the front one blocks the one behind.',
     },
     example: {
       fen: '4k3/pp3ppp/8/8/8/2P5/P1P2PPP/4K3 w - - 0 1',
@@ -373,8 +424,8 @@ export const glossary: GlossarySpec[] = [
     id: 'hanging-pawns',
     name: { es: 'Peones colgantes', en: 'Hanging pawns' },
     definition: {
-      es: 'Dos peones del mismo color, uno al lado del otro en columnas vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el [centro](centre) mientras aguantan juntos, pero pueden convertirse en un blanco.',
-      en: 'Two pawns of the same colour standing side by side on neighbouring columns, with no other friendly pawns on the columns around them. They give strength in the [centre](centre) while they hold together, but they can turn into a target.',
+      es: 'Dos peones del mismo color, uno al lado del otro en [columnas](file) vecinas, sin más peones propios en las columnas de alrededor. Dan fuerza en el [centro](centre) mientras aguantan juntos, pero pueden convertirse en un blanco.',
+      en: 'Two pawns of the same colour standing side by side on neighbouring [columns](file), with no other friendly pawns on the columns around them. They give strength in the [centre](centre) while they hold together, but they can turn into a target.',
     },
     example: {
       fen: '4k3/p4ppp/4p3/8/2PP4/8/P4PPP/4K3 w - - 0 1',
@@ -618,8 +669,8 @@ export const glossary: GlossarySpec[] = [
     id: 'back-rank',
     name: { es: 'Última fila', en: 'Back rank' },
     definition: {
-      es: 'La fila del borde del tablero en el lado de cada jugador, donde empiezan sus piezas. Si el rey se queda en ella detrás de sus peones sin salida, una torre o la dama rival puede darle [jaque mate](checkmate) a lo largo de esa fila.',
-      en: 'The row (rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver [checkmate](checkmate) along that row.',
+      es: 'La [fila](rank) del borde del tablero en el lado de cada jugador, donde empiezan sus piezas. Si el rey se queda en ella detrás de sus peones sin salida, una torre o la dama rival puede darle [jaque mate](checkmate) a lo largo de esa fila.',
+      en: 'The [row](rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver [checkmate](checkmate) along that row.',
     },
     example: {
       fen: '6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1',
@@ -740,8 +791,8 @@ export const glossary: GlossarySpec[] = [
     id: 'anastasia-mate',
     name: { es: 'Mate de Anastasia', en: 'Anastasia’s mate' },
     definition: {
-      es: '[Jaque mate](checkmate) en el que un caballo y una torre encierran al rey contra un lado del tablero: el caballo le corta la huida y la torre da el jaque por la columna del borde. Un peón del propio rey suele taparle la última salida.',
-      en: '[Checkmate](checkmate) in which a knight and a rook trap the king against one side of the board: the knight cuts off its escape and the rook gives check along the edge column. One of the king’s own pawns usually blocks the last way out.',
+      es: '[Jaque mate](checkmate) en el que un caballo y una torre encierran al rey contra un lado del tablero: el caballo le corta la huida y la torre da el jaque por la [columna](file) del borde. Un peón del propio rey suele taparle la última salida.',
+      en: '[Checkmate](checkmate) in which a knight and a rook trap the king against one side of the board: the knight cuts off its escape and the rook gives check along the edge [column](file). One of the king’s own pawns usually blocks the last way out.',
     },
     example: {
       fen: 'r7/4N1pk/8/3R4/8/8/5PPP/6K1 w - - 0 1',
@@ -779,8 +830,8 @@ export const glossary: GlossarySpec[] = [
     id: 'opposition',
     name: { es: 'Oposición', en: 'Opposition' },
     definition: {
-      es: 'Los dos reyes están en la misma columna o fila con una sola casilla entre ellos. Como no pueden acercarse más, el que tiene que mover debe ceder el paso, y se dice que el otro tiene la oposición.',
-      en: 'The two kings stand on the same column or row with exactly one square between them. Since they cannot come any closer, the one who has to move must give way, and the other side is said to have the opposition.',
+      es: 'Los dos reyes están en la misma [columna](file) o [fila](rank) con una sola casilla entre ellos. Como no pueden acercarse más, el que tiene que mover debe ceder el paso, y se dice que el otro tiene la oposición.',
+      en: 'The two kings stand on the same [column](file) or [row](rank) with exactly one square between them. Since they cannot come any closer, the one who has to move must give way, and the other side is said to have the opposition.',
     },
     example: {
       fen: '8/8/4k3/8/4K3/4P3/8/8 b - - 0 1',
@@ -855,8 +906,8 @@ export const glossary: GlossarySpec[] = [
     id: 'philidor-position',
     name: { es: 'Posición de Philidor', en: 'Philidor position' },
     definition: {
-      es: 'Posición del final de la partida, con torre y peón contra torre, que el bando que defiende consigue empatar: su rey está en la [casilla de coronación](queening-square) y su torre, en la tercera fila desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da [jaques](check) por detrás.',
-      en: 'A position late in the game, with a rook and a pawn against a rook, that the defending side draws: its king sits on the [queening square](queening-square) and its rook, on the third row from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives [checks](check) from behind.',
+      es: 'Posición del final de la partida, con torre y peón contra torre, que el bando que defiende consigue empatar: su rey está en la [casilla de coronación](queening-square) y su torre, en la tercera [fila](rank) desde su lado, no deja avanzar al rey rival. Cuando el peón pisa esa fila, la torre se va al otro extremo del tablero y da [jaques](check) por detrás.',
+      en: 'A position late in the game, with a rook and a pawn against a rook, that the defending side draws: its king sits on the [queening square](queening-square) and its rook, on the third [row](rank) from its own side, keeps the enemy king from coming forward. Once the pawn steps onto that row, the rook goes to the far end of the board and gives [checks](check) from behind.',
     },
     example: {
       fen: '4k3/R7/1r6/3KP3/8/8/8/8 w - - 0 1',
@@ -871,8 +922,8 @@ export const glossary: GlossarySpec[] = [
     id: 'building-a-bridge',
     name: { es: 'Construir un puente', en: 'Building a bridge' },
     definition: {
-      es: 'La forma de ganar la [posición de Lucena](lucena-position): la torre se coloca en la cuarta fila para que, cuando el rey salga de delante del peón, pueda interponerse y cortar los [jaques](check) de la torre rival.',
-      en: 'The way to win the [Lucena position](lucena-position): the rook goes to the fourth row so that, once the king walks out from in front of the pawn, it can step in between and stop the enemy rook’s [checks](check).',
+      es: 'La forma de ganar la [posición de Lucena](lucena-position): la torre se coloca en la cuarta [fila](rank) para que, cuando el rey salga de delante del peón, pueda interponerse y cortar los [jaques](check) de la torre rival.',
+      en: 'The way to win the [Lucena position](lucena-position): the rook goes to the fourth [row](rank) so that, once the king walks out from in front of the pawn, it can step in between and stop the enemy rook’s [checks](check).',
     },
     example: {
       fen: '8/3P2k1/8/3K4/5R2/8/8/3r4 w - - 10 6',

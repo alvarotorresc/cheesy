@@ -3,10 +3,12 @@ import {
   loadEndgames,
   loadGlossary,
   loadGlossaryIds,
+  loadLessons,
   loadOpenings,
   loadPositions,
 } from '../../lib/content.ts';
 import { playSan, positionFromFen } from '../../lib/chess.ts';
+import { lessonTexts } from '../../lib/lesson-build.ts';
 import { movesOf, stripNote, termsOf } from '../../lib/rich-text.ts';
 import type { OpeningNode, RichText, Segment } from '../../types.ts';
 
@@ -28,6 +30,8 @@ for (const e of loadEndgames())
 for (const p of loadPositions()) texts.push({ at: `${p.id}.explanation`, text: p.explanation });
 for (const t of loadGlossary())
   texts.push({ at: `glossary.${t.id}.definition`, text: t.definition });
+
+for (const lesson of loadLessons()) texts.push(...lessonTexts(lesson));
 
 const glossary = loadGlossaryIds();
 
@@ -153,6 +157,18 @@ describe('cut texts of the content', () => {
     }
     for (const p of loadPositions()) names.push({ at: `${p.id}.title`, value: p.title });
     for (const t of loadGlossary()) names.push({ at: `glossary.${t.id}.name`, value: t.name });
+    for (const lesson of loadLessons()) {
+      names.push(
+        { at: `${lesson.id}.title`, value: lesson.title },
+        { at: `${lesson.id}.summary`, value: lesson.summary },
+      );
+      lesson.steps.forEach((s, i) => {
+        if (s.kind === 'choice' && s.answer.by === 'fact')
+          s.answer.options.forEach((o, j) =>
+            names.push({ at: `${lesson.id} step ${i + 1} option ${j + 1}`, value: o }),
+          );
+      });
+    }
     const errors = names.flatMap(({ at, value }) =>
       (['es', 'en'] as const)
         .filter((lang) => MARK.test(value[lang]))

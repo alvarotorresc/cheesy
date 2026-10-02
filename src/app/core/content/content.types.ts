@@ -1,4 +1,4 @@
-import type { SquareName } from 'chessops';
+import type { Role, SquareName } from 'chessops';
 import type { Localized } from '../i18n/i18n.types';
 
 export type { Localized };
@@ -133,3 +133,144 @@ export interface GlossaryTerm {
   /** Id of the lesson that teaches it, once "Learn" exists. */
   lesson?: string;
 }
+
+/** Level of a lesson; the same three levels as the glossary. */
+export type LessonLevel = GlossaryLevel;
+
+/** A position shown on the board of a step. */
+export interface BoardSetup {
+  fen: string;
+  orientation: Side;
+  /** Squares ringed on the board. */
+  highlights?: SquareName[];
+  arrows?: { from: SquareName; to: SquareName }[];
+}
+
+export type ReachRole = 'king' | 'queen' | 'rook' | 'bishop' | 'knight';
+
+export interface ReachPiece {
+  role: ReachRole;
+  color: Side;
+  square: SquareName;
+}
+
+/** A rival piece that never moves: the squares it attacks cannot be stepped on. */
+export interface ReachEnemy {
+  role: Role;
+  square: SquareName;
+}
+
+export interface ExplainStep {
+  kind: 'explain';
+  text: RichText;
+  /** `moves`: SAN from `fen`, animated once when the step opens. */
+  board?: BoardSetup & { moves?: string[] };
+}
+
+/** "Collect the stars": one piece of the player, target squares in any order. */
+export interface ReachStep {
+  kind: 'reach';
+  text: RichText;
+  piece: ReachPiece;
+  targets: SquareName[];
+  /** Own pieces (pawns) that never move and cannot be stepped on. */
+  blockers?: SquareName[];
+  enemies?: ReachEnemy[];
+  /** Fewest moves that collect every star; shown as a reference and checked in CI. */
+  minMoves: number;
+  hint?: RichText;
+}
+
+export type FindMoveRule =
+  'escape-check' | 'capture-undefended' | 'castle' | 'en-passant' | 'promote';
+
+export type FindMoveCheck =
+  { by: 'engine'; solution: string[] } | { by: 'rule'; rule: FindMoveRule };
+
+export interface FindMoveStep {
+  kind: 'find-move';
+  text: RichText;
+  /** The side to move comes from the FEN. */
+  board: BoardSetup;
+  check: FindMoveCheck;
+  /** SAN → message for a typical mistake. */
+  wrong?: Record<string, RichText>;
+  hint?: RichText;
+  /** Why the move is right, shown once it is found. */
+  explanation: RichText;
+}
+
+export interface PlayOutStep {
+  kind: 'play-out';
+  text: RichText;
+  fen: string;
+  goal: 'win' | 'draw';
+  playerSide: Side;
+  hint?: RichText;
+}
+
+/**
+ * `status`: fixed options (check, checkmate, stalemate, none), the answer computed with chessops.
+ * `engine`: SAN options; `correct` is checked against Stockfish in the slow suite.
+ * `fact`: knowledge, backed by the `sources` of the lesson.
+ */
+export type ChoiceAnswer =
+  | { by: 'status' }
+  | { by: 'engine'; options: string[]; correct: number }
+  | { by: 'fact'; options: Localized[]; correct: number };
+
+export interface ChoiceStep {
+  kind: 'choice';
+  text: RichText;
+  board?: BoardSetup;
+  answer: ChoiceAnswer;
+  /**
+   * One message per option, same order; for `status`, the order of `STATUS_OPTIONS`. `null` on
+   * the correct option, which needs none; every wrong option has one.
+   */
+  whyWrong: (RichText | null)[];
+  explanation: RichText;
+}
+
+export interface TapSquareStep {
+  kind: 'tap-square';
+  text: RichText;
+  /** Squares in a row. */
+  count: number;
+  /** Fixed squares; without them, random among the 64 on every attempt. */
+  squares?: SquareName[];
+}
+
+export type Step =
+  ExplainStep | ReachStep | FindMoveStep | PlayOutStep | ChoiceStep | TapSquareStep;
+
+export type StepKind = Step['kind'];
+
+/** Where to practise after the lesson. `category` is the English name of an endgame category. */
+export type LessonNext =
+  | { kind: 'endgames'; category: string }
+  | { kind: 'positions'; tag: string }
+  | { kind: 'openings' };
+
+export interface Lesson {
+  /** English, kebab-case: "knight-moves". Also the name of its JSON file. */
+  id: string;
+  level: LessonLevel;
+  /** 1..n inside the level, without gaps. */
+  order: number;
+  title: Localized;
+  /** One sentence for the list. */
+  summary: Localized;
+  /** Ids of the glossary terms it teaches. */
+  terms: string[];
+  /** URLs the text was checked against. At least one. */
+  sources: string[];
+  steps: Step[];
+  next?: LessonNext;
+}
+
+/** The fields of a lesson that the lists need, without its steps. */
+export type LessonSummary = Pick<Lesson, 'id' | 'level' | 'order' | 'title' | 'summary'> & {
+  stepCount: number;
+  exerciseCount: number;
+};

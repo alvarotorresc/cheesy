@@ -1,0 +1,32 @@
+[
+  {
+    "id": "the-board",
+    "level": "beginner",
+    "order": 1,
+    "title": {
+      "es": "El tablero",
+      "en": "The board"
+    },
+    "summary": {
+      "es": "Filas, columnas, diagonales y el nombre de cada casilla.",
+      "en": "Ranks, files, diagonals and the name of every square."
+    },
+    "stepCount": 10,
+    "exerciseCount": 3
+  },
+  {
+    "id": "knight-moves",
+    "level": "beginner",
+    "order": 2,
+    "title": {
+      "es": "El caballo",
+      "en": "The knight"
+    },
+    "summary": {
+      "es": "El caballo salta en forma de L por encima de las demás piezas.",
+      "en": "The knight jumps in an L shape over the other pieces."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  }
+]
