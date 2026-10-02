@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { LESSON_LOADERS } from '../../../core/content';
+import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
@@ -12,14 +12,17 @@ describe('LearnHome', () => {
   let progress: ProgressService;
   let memory: ReturnType<typeof memoryProgressStore>;
   let harness: RouterTestingHarness;
+  let glossary: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     memory = memoryProgressStore();
+    glossary = vi.fn(async () => []);
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
+        { provide: GLOSSARY_LOADER, useValue: glossary },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -49,11 +52,16 @@ describe('LearnHome', () => {
     expect(root.querySelector('.continue')).toBeNull();
   });
 
-  it('should link to the glossary', async () => {
+  it('should offer the glossary as a card next to the levels, without downloading it', async () => {
     const root = await render('/learn');
-    const link = root.querySelector<HTMLAnchorElement>('a.glossary-link');
-    expect(link?.textContent?.trim()).toBe('Glossary');
+    const card = root.querySelector('.levels .glossary-card');
+    expect(card?.querySelector('h2')?.textContent?.trim()).toBe('Glossary');
+    expect(card?.textContent).toContain('Chess words in plain language');
+    const link = card?.querySelector<HTMLAnchorElement>('a');
+    expect(link?.textContent?.trim()).toBe('Open the glossary');
     expect(link?.getAttribute('href')).toBe('/learn/glossary');
+    expect(root.querySelector('.glossary-link')).toBeNull();
+    expect(glossary).not.toHaveBeenCalled();
   });
 
   it('should offer to continue with the next lesson once one is completed', async () => {

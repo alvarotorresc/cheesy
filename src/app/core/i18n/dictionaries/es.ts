@@ -54,6 +54,8 @@ export const es: Messages = {
     noResultsHint: 'Prueba con otra palabra, otra familia u otro nivel.',
     clearFilters: 'Quitar filtros',
     learnedIn: 'Se aprende en:',
+    cardDescription: 'Las palabras del ajedrez explicadas en llano, cada una con su tablero.',
+    open: 'Abrir el glosario',
     retry: 'Reintentar',
     seeInGlossary: 'Ver en el glosario',
     close: 'Cerrar',

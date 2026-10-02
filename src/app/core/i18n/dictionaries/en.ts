@@ -51,6 +51,8 @@ export const en = {
     noResultsHint: 'Try another word, another family or another level.',
     clearFilters: 'Clear filters',
     learnedIn: 'Taught in:',
+    cardDescription: 'Chess words in plain language, each one with its board.',
+    open: 'Open the glossary',
     retry: 'Try again',
     seeInGlossary: 'See in the glossary',
     close: 'Close',

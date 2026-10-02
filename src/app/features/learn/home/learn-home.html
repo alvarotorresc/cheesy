@@ -1,8 +1,8 @@
 @let t = i18n.t().learn;
+@let g = i18n.t().glossary;
 <header class="page-head">
   <h1>{{ t.title }}</h1>
   <p class="lede">{{ t.intro }}</p>
-  <a class="glossary-link" routerLink="/learn/glossary">{{ i18n.t().glossary.title }}</a>
 </header>
 @switch (state().status) {
   @case ('loading') {
@@ -34,6 +34,11 @@
           }
         </li>
       }
+      <li class="glossary-card">
+        <h2>{{ g.title }}</h2>
+        <p>{{ g.cardDescription }}</p>
+        <a class="button" routerLink="/learn/glossary">{{ g.open }}</a>
+      </li>
     </ul>
     <section class="privacy" aria-labelledby="progress-title">
       <h2 id="progress-title" class="visually-hidden">{{ t.progressTitle }}</h2>
