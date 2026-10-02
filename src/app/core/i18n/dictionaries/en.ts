@@ -88,7 +88,7 @@ export const en = {
     optionsLabel: 'Answers',
     tapBoardLabel: 'Board: tap the square you are asked for',
     tapPrompt: (square: string) => `Tap ${square}`,
-    tapWrong: (square: string) => `That was ${square}.`,
+    tapWrong: (square: string) => `The square was ${square}.`,
     tapProgress: (done: number, total: number) => `${done} of ${total}`,
     playWin: 'Win against the computer.',
     playDraw: 'Hold the draw against the computer.',

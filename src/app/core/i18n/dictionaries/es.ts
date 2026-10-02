@@ -88,7 +88,7 @@ export const es: Messages = {
     optionsLabel: 'Respuestas',
     tapBoardLabel: 'Tablero: toca la casilla que se pide',
     tapPrompt: (square: string) => `Toca ${square}`,
-    tapWrong: (square: string) => `Era ${square}.`,
+    tapWrong: (square: string) => `La casilla era ${square}.`,
     tapProgress: (done: number, total: number) => `${done} de ${total}`,
     playWin: 'Gana contra el ordenador.',
     playDraw: 'Aguanta las tablas contra el ordenador.',

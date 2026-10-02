@@ -48,6 +48,15 @@ describe('TapSquareStepView', () => {
     expect(square('h8').getAttribute('aria-label')).toBe('Tap h8');
   });
 
+  it('should name the square in Spanish after a wrong tap', async () => {
+    TestBed.inject(I18nService).setLang('es');
+    fixture.componentRef.setInput('step', step);
+    await fixture.whenStable();
+    square('d4').click();
+    await fixture.whenStable();
+    expect(element.querySelector('.feedback')?.textContent?.trim()).toBe('La casilla era e4.');
+  });
+
   it('should show the right square after a wrong tap and report it was not a first try', async () => {
     vi.useFakeTimers();
     try {
@@ -55,7 +64,7 @@ describe('TapSquareStepView', () => {
       fixture.detectChanges();
       square('d4').click();
       fixture.detectChanges();
-      expect(element.textContent).toContain('That was e4.');
+      expect(element.querySelector('.feedback')?.textContent?.trim()).toBe('The square was e4.');
       expect(square('d4').classList).toContain('wrong');
       expect(square('e4').classList).toContain('expected');
       vi.advanceTimersByTime(700);
