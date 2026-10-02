@@ -86,7 +86,7 @@ describe('About', () => {
       'Las lecciones completadas',
     );
     expect(text(element.querySelector('.erase p'))).toBe(
-      'Borrar el progreso, en Aperturas, Finales y Posiciones, borra el de esa sección.',
+      'Borrar el progreso, en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     );
   });
 

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
@@ -14,7 +14,10 @@ type HomeState =
       readonly done: ReadonlySet<string>;
     };
 
-/** The landing of "Learn": a card per level and a way to continue where the learner left off. */
+/**
+ * The landing of "Learn": a card per level, a way to continue where the learner left off, and the
+ * action to delete the saved lessons after a confirmation.
+ */
 @Component({
   selector: 'app-learn-home',
   imports: [RouterLink],
@@ -24,9 +27,12 @@ type HomeState =
 export class LearnHome {
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
-  private readonly progress = inject(ProgressService);
+  protected readonly progress = inject(ProgressService);
 
   protected readonly state = signal<HomeState>({ status: 'loading' });
+  /** Result of the last try to delete the progress, announced to screen readers. */
+  protected readonly message = signal('');
+  private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
 
   protected readonly levels = computed(() => {
     const current = this.state();
@@ -68,5 +74,30 @@ export class LearnHome {
     } catch {
       this.state.set({ status: 'error' });
     }
+  }
+
+  protected askToClear(): void {
+    const current = this.state();
+    if (current.status !== 'ready' || current.done.size === 0) {
+      this.message.set(this.i18n.t().learn.nothingSaved);
+      return;
+    }
+    this.message.set('');
+    this.dialog()?.nativeElement.showModal();
+  }
+
+  protected cancelClear(): void {
+    this.dialog()?.nativeElement.close();
+  }
+
+  protected async confirmClear(): Promise<void> {
+    this.dialog()?.nativeElement.close();
+    const t = this.i18n.t().learn;
+    const cleared = await this.progress.clear('lessons');
+    if (cleared)
+      this.state.update((current) =>
+        current.status === 'ready' ? { ...current, done: new Set<string>() } : current,
+      );
+    this.message.set(cleared ? t.cleared : t.clearFailed);
   }
 }

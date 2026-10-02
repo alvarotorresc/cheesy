@@ -345,6 +345,26 @@ describe('ProgressService', () => {
       expect(await service.clear('positions')).toBe(true);
       expect(await service.positions()).toEqual([]);
     });
+
+    it('should delete the lessons on their own and keep them when another section is cleared', async () => {
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+      await service.recordPositionSolve('legal-mate');
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 });
+
+      for (const section of ['openings', 'endgames', 'positions'] as const)
+        expect(await service.clear(section)).toBe(true);
+      expect(await service.lessons()).toHaveLength(1);
+
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+      await service.recordPositionSolve('legal-mate');
+      expect(await service.clear('lessons')).toBe(true);
+      expect(await service.lessons()).toEqual([]);
+      expect(await service.lines()).toHaveLength(1);
+      expect(await service.endgames()).toHaveLength(1);
+      expect(await service.positions()).toHaveLength(1);
+    });
   });
 
   describe('when the store cannot be opened', () => {

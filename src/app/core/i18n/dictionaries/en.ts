@@ -100,6 +100,19 @@ export const en = {
     practise: 'Practise',
     notFound: 'This lesson does not exist.',
     homeBand: { title: 'Starting from scratch?', cta: 'Learn to play' },
+    progressTitle: 'Your progress',
+    privacy:
+      'Completed lessons are saved only in this browser. No accounts, no cookies: if you clear the browser data, they are lost.',
+    progressUnavailable:
+      'This browser does not let progress be saved. You can keep learning without it.',
+    clearProgress: 'Delete progress',
+    confirmTitle: 'Delete progress?',
+    confirmBody: 'This deletes every completed lesson saved in this browser. It cannot be undone.',
+    cancel: 'Cancel',
+    confirmClear: 'Delete',
+    nothingSaved: 'There is no saved progress.',
+    cleared: 'Progress deleted.',
+    clearFailed: 'The progress could not be deleted.',
   },
   about: {
     title: 'About Cheesy',
@@ -138,7 +151,8 @@ export const en = {
       'None of this leaves your device. If you switch browser or computer, you start from scratch.',
     eraseTitle: 'How to delete it',
     eraseButton: 'Clear progress',
-    eraseButtonText: ', in Openings, Endgames and Positions, clears the progress of that section.',
+    eraseButtonText:
+      ', in Learn, Openings, Endgames and Positions, clears the progress of that section.',
     eraseAll:
       'To delete everything at once, clear the data of this site from your browser settings.',
     sendsTitle: 'Goes to Lichess',

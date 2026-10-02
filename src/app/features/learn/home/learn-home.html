@@ -34,5 +34,29 @@
         </li>
       }
     </ul>
+    <section class="privacy" aria-labelledby="progress-title">
+      <h2 id="progress-title" class="visually-hidden">{{ t.progressTitle }}</h2>
+      <p>{{ t.privacy }}</p>
+      @if (progress.status() === 'unavailable') {
+        <p>{{ t.progressUnavailable }}</p>
+      }
+      <div class="actions-inline">
+        <button type="button" class="text-button" (click)="askToClear()">
+          {{ t.clearProgress }}
+        </button>
+      </div>
+      <p class="status-msg" role="status">{{ message() }}</p>
+    </section>
   }
 }
+
+<dialog #dialog aria-labelledby="confirm-title">
+  <h2 id="confirm-title">{{ t.confirmTitle }}</h2>
+  <p>{{ t.confirmBody }}</p>
+  <div class="dialog-actions">
+    <button type="button" class="button" (click)="cancelClear()">{{ t.cancel }}</button>
+    <button type="button" class="button danger" (click)="confirmClear()">
+      {{ t.confirmClear }}
+    </button>
+  </div>
+</dialog>

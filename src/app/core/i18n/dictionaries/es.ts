@@ -100,6 +100,20 @@ export const es: Messages = {
     practise: 'Practicar',
     notFound: 'Esta lección no existe.',
     homeBand: { title: '¿Empiezas desde cero?', cta: 'Aprende a jugar' },
+    progressTitle: 'Tu progreso',
+    privacy:
+      'Las lecciones completadas se guardan solo en este navegador. Sin cuentas ni cookies: si borras los datos del navegador, se pierden.',
+    progressUnavailable:
+      'Este navegador no deja guardar el progreso. Puedes seguir aprendiendo sin él.',
+    clearProgress: 'Borrar el progreso',
+    confirmTitle: '¿Borrar el progreso?',
+    confirmBody:
+      'Se borran todas las lecciones completadas guardadas en este navegador. No se puede deshacer.',
+    cancel: 'Cancelar',
+    confirmClear: 'Borrar',
+    nothingSaved: 'No hay progreso guardado.',
+    cleared: 'Progreso borrado.',
+    clearFailed: 'No se ha podido borrar el progreso.',
   },
   about: {
     title: 'Acerca de Cheesy',
@@ -135,7 +149,7 @@ export const es: Messages = {
       'Nada de esto sale de tu dispositivo. Si cambias de navegador o de ordenador, empiezas de cero.',
     eraseTitle: 'Cómo borrarlo',
     eraseButton: 'Borrar el progreso',
-    eraseButtonText: ', en Aperturas, Finales y Posiciones, borra el de esa sección.',
+    eraseButtonText: ', en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     eraseAll:
       'Para borrarlo todo de una vez, borra los datos de este sitio desde la configuración de tu navegador.',
     sendsTitle: 'Sale hacia Lichess',

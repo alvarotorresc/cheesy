@@ -10,13 +10,16 @@ import { fixtureLessonLoaders } from '../testing';
 
 describe('LearnHome', () => {
   let progress: ProgressService;
+  let memory: ReturnType<typeof memoryProgressStore>;
+  let harness: RouterTestingHarness;
 
   beforeEach(() => {
+    memory = memoryProgressStore();
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
-        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -26,7 +29,7 @@ describe('LearnHome', () => {
   afterEach(() => localStorage.clear());
 
   const render = async (url: string): Promise<HTMLElement> => {
-    const harness = await RouterTestingHarness.create();
+    harness = await RouterTestingHarness.create();
     await harness.navigateByUrl(url);
     const root = harness.routeNativeElement as HTMLElement;
     await vi.waitFor(() => {
@@ -76,5 +79,54 @@ describe('LearnHome', () => {
     });
     const root = await render('/learn');
     expect(root.querySelector('.continue')?.textContent).toContain('The board');
+  });
+
+  describe('clearing the progress', () => {
+    const openDialog = (root: HTMLElement) => {
+      const dialog = root.querySelector('dialog') as HTMLDialogElement;
+      // The test DOM has no modal dialogs.
+      const showModal = vi.fn();
+      dialog.showModal = showModal;
+      dialog.close = vi.fn();
+      root.querySelector<HTMLButtonElement>('.privacy .text-button')!.click();
+      return showModal;
+    };
+
+    it('should ask first and then delete only the lessons', async () => {
+      await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
+      await progress.recordEndgame('lucena');
+      const root = await render('/learn');
+      expect(root.querySelector('.continue')).not.toBeNull();
+
+      const showModal = openDialog(root);
+      expect(showModal).toHaveBeenCalled();
+      expect(memory.lessonRows.size).toBe(1);
+
+      root.querySelector<HTMLButtonElement>('dialog .button.danger')!.click();
+      await vi.waitFor(() => {
+        harness.detectChanges();
+        expect(root.querySelector('.status-msg')?.textContent).toBe('Progress deleted.');
+      });
+      expect(memory.lessonRows.size).toBe(0);
+      expect(memory.endgameRows.size).toBe(1);
+      expect(root.querySelector('.continue')).toBeNull();
+    });
+
+    it('should keep the lessons when the dialog is cancelled', async () => {
+      await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
+      const root = await render('/learn');
+      openDialog(root);
+      root.querySelector<HTMLButtonElement>('dialog .button:not(.danger)')!.click();
+      harness.detectChanges();
+      expect(memory.lessonRows.size).toBe(1);
+    });
+
+    it('should say there is nothing to delete when no lesson is saved', async () => {
+      const root = await render('/learn');
+      const showModal = openDialog(root);
+      harness.detectChanges();
+      expect(showModal).not.toHaveBeenCalled();
+      expect(root.querySelector('.status-msg')?.textContent).toBe('There is no saved progress.');
+    });
   });
 });

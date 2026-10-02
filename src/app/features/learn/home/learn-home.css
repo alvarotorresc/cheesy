@@ -57,3 +57,29 @@
 .soon {
   font-weight: 600;
 }
+
+/* ---- Where the progress is kept, and how to delete it --------------------------------------- */
+
+.privacy {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  margin-top: var(--space-12);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  max-width: 44rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.actions-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.status-msg {
+  min-height: 1.5em;
+  font-weight: 600;
+  color: var(--color-text);
+}

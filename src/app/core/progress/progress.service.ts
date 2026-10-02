@@ -27,10 +27,10 @@ import type {
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 
 /** The parts of the app that keep progress, each one deleted on its own. */
-export type ProgressSection = 'openings' | 'endgames' | 'positions';
+export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons';
 
 /**
- * Progress of the practised lines, endgames and positions, kept only in this browser (IndexedDB). Nothing is ever sent
+ * Progress of the practised lines, endgames, positions and lessons, kept only in this browser (IndexedDB). Nothing is ever sent
  * anywhere.
  *
  * Storage is best effort: every method resolves, never rejects. When the store cannot be opened
@@ -157,7 +157,12 @@ export class ProgressService {
 
   /** Deletes the progress of one section, and only that one. Resolves with false on failure. */
   async clear(section: ProgressSection): Promise<boolean> {
-    const table = { openings: 'lines', endgames: 'endgames', positions: 'positions' } as const;
+    const table = {
+      openings: 'lines',
+      endgames: 'endgames',
+      positions: 'positions',
+      lessons: 'lessons',
+    } as const;
     const cleared = await this.run(async (store) => {
       await store[table[section]].clear();
       return true;
