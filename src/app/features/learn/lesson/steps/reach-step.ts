@@ -7,12 +7,11 @@ import {
   input,
   linkedSignal,
   output,
-  signal,
 } from '@angular/core';
 import type { SquareName } from 'chessops';
 import type { ReachStep } from '../../../../core/content';
 import { I18nService } from '../../../../core/i18n';
-import { BoardComponent, type BoardMark, type BoardMove } from '../../../../shared/board';
+import { BoardComponent, type BoardMove } from '../../../../shared/board';
 import { RichTextView } from '../../../../shared/rich-text';
 import { ReachSession } from '../reach-session';
 import { prefersReducedMotion } from './reduced-motion';
@@ -37,25 +36,35 @@ export class ReachStepView {
     source: this.session,
     computation: () => false,
   });
-  private readonly showingSolution = signal(false);
+  /** True while the solution is being played: the board and the buttons wait. */
+  protected readonly showingSolution = linkedSignal<ReachSession, boolean>({
+    source: this.session,
+    computation: () => false,
+  });
 
   protected readonly dests = computed(() =>
     this.showingSolution() ? new Map<SquareName, SquareName[]>() : this.session().dests(),
   );
-  protected readonly marks = computed(() => {
+  protected readonly marks = computed(() => this.session().marks());
+  /** The hint without a text: an arrow to the first square of the way, so no star is hidden. */
+  protected readonly arrows = computed(() => {
     const session = this.session();
-    const marks = new Map<SquareName, BoardMark>(session.marks());
     const first = session.solution()[0];
-    if (this.hintShown() && !this.step().hint && first && session.status() === 'playing')
-      marks.set(first, 'hint');
-    return marks;
+    return this.hintShown() && !this.step().hint && first && session.moves() === 0
+      ? [{ from: session.square(), to: first }]
+      : [];
   });
 
   private emittedFor: ReachSession | undefined;
   private readonly timers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => this.timers.forEach(clearTimeout));
+    inject(DestroyRef).onDestroy(() => this.clearTimers());
+    // A new step in place of this one must not be touched by what the old one scheduled.
+    effect((onCleanup) => {
+      this.session();
+      onCleanup(() => this.clearTimers());
+    });
     effect(() => {
       const session = this.session();
       if (session.status() !== 'done' || this.emittedFor === session) return;
@@ -75,6 +84,8 @@ export class ReachStepView {
 
   /** Starts again and walks the shortest way, one move at a time (all at once with reduced motion). */
   protected showSolution(): void {
+    if (this.showingSolution()) return;
+    this.clearTimers();
     const session = this.session();
     session.tracker.reveal();
     session.restart();
@@ -96,5 +107,10 @@ export class ReachStepView {
       );
       this.timers.add(timer);
     });
+  }
+
+  private clearTimers(): void {
+    this.timers.forEach(clearTimeout);
+    this.timers.clear();
   }
 }

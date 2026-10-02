@@ -15,6 +15,16 @@ const knightStep: ReachStep = {
   minMoves: 3,
 };
 
+/** Two moves to the star, because the bishop guards f3: g1, h3, g5. */
+const roundStep: ReachStep = {
+  kind: 'reach',
+  text: plainText('Go round'),
+  piece: { role: 'knight', color: 'white', square: 'g1' },
+  targets: ['g5'],
+  enemies: [{ role: 'bishop', square: 'd5' }],
+  minMoves: 2,
+};
+
 /** The bishop on d5 guards f3, so the knight must not step there on its way to h3. */
 const guardedStep: ReachStep = {
   kind: 'reach',
@@ -99,7 +109,7 @@ describe('ReachStepView', () => {
     expect(element.querySelector('button.solution')).not.toBeNull();
   });
 
-  it('should mark the first square of the way when there is no hint text', async () => {
+  it('should point an arrow at the first square of the way when there is no hint text', async () => {
     fixture.componentRef.setInput('step', guardedStep);
     await fixture.whenStable();
     for (let i = 0; i < 2; i++) {
@@ -110,7 +120,8 @@ describe('ReachStepView', () => {
     }
     element.querySelector<HTMLButtonElement>('button.hint')!.click();
     await fixture.whenStable();
-    expect([...board().marks().values()]).toContain('hint');
+    expect(board().arrows()).toEqual([{ from: 'g1', to: 'h3' }]);
+    expect(board().marks().get('h3')).toBe('star');
   });
 
   it('should play the solution on request and count it as not a first try', async () => {
@@ -129,5 +140,55 @@ describe('ReachStepView', () => {
     fixture.detectChanges();
     expect(element.textContent).toContain('1 of 1 stars');
     expect(done).toEqual([{ firstTry: false }]);
+  });
+
+  describe('showing the solution', () => {
+    const captureThrice = () => {
+      for (let i = 0; i < 3; i++) {
+        move('g1', 'f3');
+        fixture.detectChanges();
+        element.querySelector<HTMLButtonElement>('button.restart')!.click();
+        fixture.detectChanges();
+      }
+    };
+
+    it('should play the path once when the button is pressed twice, holding the board until the end', () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', roundStep);
+      fixture.detectChanges();
+      captureThrice();
+      const solution = element.querySelector<HTMLButtonElement>('button.solution')!;
+      solution.click();
+      solution.click();
+      fixture.detectChanges();
+      expect(element.querySelector('button.solution')).toBeNull();
+      expect(element.querySelector('button.hint')).toBeNull();
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('0 of 1 stars · 1 move (fewest 2)');
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(600 * 5);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('1 of 1 stars · 2 moves (fewest 2)');
+      expect(done).toEqual([{ firstTry: false }]);
+    });
+
+    it('should let a new step be played at once and untouched by the old playback', () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', roundStep);
+      fixture.detectChanges();
+      captureThrice();
+      element.querySelector<HTMLButtonElement>('button.solution')!.click();
+      vi.advanceTimersByTime(600);
+      fixture.detectChanges();
+      fixture.componentRef.setInput('step', knightStep);
+      fixture.detectChanges();
+      expect(board().dests().size).toBe(1);
+      vi.advanceTimersByTime(600 * 10);
+      fixture.detectChanges();
+      expect(element.textContent).toContain('0 of 2 stars · 0 moves (fewest 3)');
+      expect(done).toEqual([]);
+    });
   });
 });

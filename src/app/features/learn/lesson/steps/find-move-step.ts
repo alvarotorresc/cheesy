@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   DestroyRef,
+  effect,
   inject,
   input,
   linkedSignal,
@@ -62,7 +63,7 @@ export class FindMoveStepView {
     computation: () => undefined,
   });
   /** True from a move that continues the line until the rival has answered. */
-  private readonly waiting = linkedSignal<FindMoveSession, boolean>({
+  protected readonly waiting = linkedSignal<FindMoveSession, boolean>({
     source: this.session,
     computation: () => false,
   });
@@ -80,10 +81,16 @@ export class FindMoveStepView {
     return marks;
   });
 
+  private wrongTimer: ReturnType<typeof setTimeout> | undefined;
   private readonly timers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => this.timers.forEach(clearTimeout));
+    inject(DestroyRef).onDestroy(() => this.clearTimers());
+    // A new step in place of this one must not be touched by what the old one scheduled.
+    effect((onCleanup) => {
+      this.session();
+      onCleanup(() => this.clearTimers());
+    });
   }
 
   protected onMove(move: BoardMove): void {
@@ -95,9 +102,11 @@ export class FindMoveStepView {
     if (outcome.kind === 'wrong') {
       this.feedback.set({ kind: 'wrong', message: outcome.message });
       this.wrongSquare.set(move.to as SquareName);
-      this.later(() => this.wrongSquare.set(undefined), WRONG_MS);
+      clearTimeout(this.wrongTimer);
+      this.wrongTimer = this.later(() => this.wrongSquare.set(undefined), WRONG_MS);
       return;
     }
+    clearTimeout(this.wrongTimer);
     this.wrongSquare.set(undefined);
     if (outcome.kind === 'continue') {
       this.feedback.set(undefined);
@@ -125,11 +134,17 @@ export class FindMoveStepView {
     if (move) this.onMove(move);
   }
 
-  private later(action: () => void, ms: number): void {
+  private later(action: () => void, ms: number): ReturnType<typeof setTimeout> {
     const timer = setTimeout(() => {
       this.timers.delete(timer);
       action();
     }, ms);
     this.timers.add(timer);
+    return timer;
+  }
+
+  private clearTimers(): void {
+    this.timers.forEach(clearTimeout);
+    this.timers.clear();
   }
 }

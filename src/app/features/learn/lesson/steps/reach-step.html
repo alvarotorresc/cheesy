@@ -7,6 +7,7 @@
     [turnColor]="step().piece.color"
     [dests]="dests()"
     [marks]="marks()"
+    [arrows]="arrows()"
     [labels]="i18n.t().board"
     (move)="onMove($event)"
   />
@@ -30,10 +31,10 @@
     @if (s.status() === 'captured') {
       <button type="button" class="button restart" (click)="s.restart()">{{ t.restart }}</button>
     }
-    @if (s.tracker.canHint() && s.status() !== 'done' && !hintShown()) {
+    @if (s.tracker.canHint() && s.status() !== 'done' && !hintShown() && !showingSolution()) {
       <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>
     }
-    @if (s.tracker.canReveal() && s.status() !== 'done') {
+    @if (s.tracker.canReveal() && s.status() !== 'done' && !showingSolution()) {
       <button type="button" class="button solution" (click)="showSolution()">
         {{ t.showSolution }}
       </button>

@@ -36,7 +36,7 @@
   @if (hintShown() && step().hint; as hint) {
     <p class="hint-text"><app-rich-text [text]="hint" /></p>
   }
-  @if (!s.solved()) {
+  @if (!s.solved() && !waiting()) {
     <div class="actions">
       @if (s.tracker.canHint() && !hintShown()) {
         <button type="button" class="button hint" (click)="showHint()">{{ t.hint }}</button>

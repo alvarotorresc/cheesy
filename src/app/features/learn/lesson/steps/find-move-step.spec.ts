@@ -18,6 +18,14 @@ const captureStep: FindMoveStep = {
   explanation: plainText('Bien'),
 };
 
+const lineStep: FindMoveStep = {
+  kind: 'find-move',
+  text: plainText('Two moves'),
+  board: { fen: '7k/8/5K2/8/8/8/8/R7 w - - 0 1', orientation: 'white' },
+  check: { by: 'engine', solution: ['Ra7', 'Kg8', 'Ra8+'] },
+  explanation: plainText('Bien'),
+};
+
 describe('FindMoveStepView', () => {
   let fixture: ComponentFixture<FindMoveStepView>;
   let element: HTMLElement;
@@ -142,5 +150,53 @@ describe('FindMoveStepView', () => {
     board().move.emit({ from: 'a7' as never, to: 'a8' as never });
     fixture.detectChanges();
     expect(done).toEqual([{ firstTry: true }]);
+  });
+
+  it('should restart the time of the wrong mark on a new wrong move', () => {
+    vi.useFakeTimers();
+    fixture.componentRef.setInput('step', captureStep);
+    fixture.detectChanges();
+    wrong();
+    vi.advanceTimersByTime(400);
+    wrong();
+    fixture.detectChanges();
+    vi.advanceTimersByTime(400);
+    fixture.detectChanges();
+    expect(board().marks().get('c6')).toBe('wrong');
+    vi.advanceTimersByTime(300);
+    fixture.detectChanges();
+    expect(board().marks().has('c6')).toBe(false);
+  });
+
+  it('should hide the hint and the solution while the rival is about to answer', () => {
+    vi.useFakeTimers();
+    fixture.componentRef.setInput('step', lineStep);
+    fixture.detectChanges();
+    for (let i = 0; i < 3; i++) board().move.emit({ from: 'a1' as never, to: 'a2' as never });
+    fixture.detectChanges();
+    expect(element.querySelector('button.solution')).not.toBeNull();
+    board().move.emit({ from: 'a1' as never, to: 'a7' as never });
+    fixture.detectChanges();
+    expect(element.querySelector('button.solution')).toBeNull();
+    expect(element.querySelector('button.hint')).toBeNull();
+    vi.advanceTimersByTime(500);
+    fixture.detectChanges();
+    expect(element.querySelector('button.solution')).not.toBeNull();
+  });
+
+  it('should let a new step be played at once and untouched by a reply of the old one', () => {
+    vi.useFakeTimers();
+    fixture.componentRef.setInput('step', lineStep);
+    fixture.detectChanges();
+    board().move.emit({ from: 'a1' as never, to: 'a7' as never });
+    fixture.detectChanges();
+    expect(board().dests().size).toBe(0);
+    fixture.componentRef.setInput('step', captureStep);
+    fixture.detectChanges();
+    expect(board().dests().size).toBeGreaterThan(0);
+    const fen = board().fen();
+    vi.advanceTimersByTime(1000);
+    fixture.detectChanges();
+    expect(board().fen()).toBe(fen);
   });
 });
