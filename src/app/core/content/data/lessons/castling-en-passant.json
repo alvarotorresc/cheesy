@@ -1,0 +1,1186 @@
+{
+  "id": "castling-en-passant",
+  "level": "beginner",
+  "order": 10,
+  "title": {
+    "es": "Enroque y captura al paso",
+    "en": "Castling and en passant"
+  },
+  "summary": {
+    "es": "Las dos jugadas especiales: el rey y la torre a la vez, y una captura de peón muy particular.",
+    "en": "The two special moves: king and rook at once, and a very particular pawn capture."
+  },
+  "terms": [
+    "castling",
+    "en-passant"
+  ],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroque"
+          },
+          {
+            "kind": "text",
+            "text": " es la única jugada en la que se mueven dos piezas: el rey avanza dos casillas hacia una torre, y esa torre salta al otro lado del rey. Mira: las blancas enrocan por el lado corto, con el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ". Las negras, por el lado largo: el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "Castling"
+          },
+          {
+            "kind": "text",
+            "text": " is the only move in which two pieces move: the king goes two squares towards a rook, and that rook jumps to the other side of the king. Watch: White castles on the short side, king from "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": " and rook from "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ". Black castles on the long side: king from "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " and rook from "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+        "orientation": "white",
+        "moves": [
+          "O-O",
+          "O-O-O"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Solo se puede "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enrocar"
+          },
+          {
+            "kind": "text",
+            "text": " si el rey y esa torre no se han movido nunca, y no hay piezas entre ellos. Además, el rey no puede estar en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", ni pasar por una casilla atacada, ni terminar en una. Aquí el alfil negro ataca "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ", la casilla por la que pasaría el rey: las blancas no pueden enrocar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You may only "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castle"
+          },
+          {
+            "kind": "text",
+            "text": " if the king and that rook have never moved and there are no pieces between them. Also, the king cannot be in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", pass through an attacked square, or end up on one. Here the black bishop attacks "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ", the square the king would pass through: White cannot castle."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/2b5/8/8/4K2R w K - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f1"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las blancas han sacado el caballo y el alfil, y entre el rey y la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " no queda nada. "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "Enroca"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White has brought out the knight and the bishop, and there is nothing left between the king and the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ". "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "Castle"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "castle"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el rey queda en "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": ", protegido detrás de sus peones, y la torre sale a "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ", más cerca del "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centro"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the king ends up on "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": ", safe behind his pawns, and the rook comes out to "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": ", closer to the "
+          },
+          {
+            "kind": "term",
+            "id": "centre",
+            "text": "centre"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Kf1": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Eso mueve el rey una sola casilla. No es un "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "enroque"
+            },
+            {
+              "kind": "text",
+              "text": ", y además pierdes el derecho a enrocar."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That moves the king just one square. It is not "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "castling"
+            },
+            {
+              "kind": "text",
+              "text": ", and you also lose the right to castle."
+            }
+          ]
+        },
+        "Rf1": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Así solo se mueve la torre, y pierde el derecho a "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "enrocar"
+            },
+            {
+              "kind": "text",
+              "text": ". Para enrocar se mueve el rey dos casillas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That only moves the rook, and it loses the right to "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "castle"
+            },
+            {
+              "kind": "text",
+              "text": ". To castle, you move the king two squares."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Mueve el rey dos casillas hacia la torre; la torre salta sola."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Move the king two squares towards the rook; the rook jumps by itself."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ni el rey blanco ni sus torres se han movido todavía, y no hay piezas entre ellos. ¿Pueden "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enrocar"
+          },
+          {
+            "kind": "text",
+            "text": " las blancas?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Neither the white king nor his rooks have moved yet, and there are no pieces between them. Can White "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castle"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "4r1k1/8/8/8/8/8/8/R3K2R w KQ - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "Sí",
+            "en": "Yes"
+          },
+          {
+            "es": "No",
+            "en": "No"
+          }
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: no. La torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey, y el "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroque"
+          },
+          {
+            "kind": "text",
+            "text": " no sirve para salir del jaque."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: no. The rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king, and "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castling"
+          },
+          {
+            "kind": "text",
+            "text": " is not a way out of check."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Fíjate en la torre negra de "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey blanco está en "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", y estando en jaque no se puede "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "enrocar"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Look at the black rook on "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": ": the white king is in "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", and you cannot "
+            },
+            {
+              "kind": "term",
+              "id": "castling",
+              "text": "castle"
+            },
+            {
+              "kind": "text",
+              "text": " while in check."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "captura al paso"
+          },
+          {
+            "kind": "text",
+            "text": " es una captura especial del peón. Si un peón avanza dos casillas y queda justo al lado de un peón rival, ese peón puede capturarlo como si solo hubiera avanzado una. Mira: el peón negro de "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", junto al blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". El blanco lo captura yendo a "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": ", y el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " sale del tablero."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "En passant"
+          },
+          {
+            "kind": "text",
+            "text": " is a special pawn capture. If a pawn advances two squares and lands right beside a rival pawn, that pawn may capture it as if it had advanced only one. Watch: the black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " advances to "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", next to the white pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". The white pawn captures it by moving to "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": ", and the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " leaves the board."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/3p4/8/4P3/8/8/8/4K3 b - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "d5",
+          "exd6"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón negro acaba de avanzar dos casillas, de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": ", y ha quedado junto a tu peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". Captúralo "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "al paso"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black pawn has just advanced two squares, from "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": ", and landed next to your pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". Capture it "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "en passant"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/1Pp5/8/8/8/4K3 w - c6 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "en-passant"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: tu peón va a "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " y el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " sale del tablero, como si solo hubiera avanzado una casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: your pawn goes to "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " and the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " leaves the board, as if it had advanced only one square."
+          }
+        ]
+      },
+      "wrong": {
+        "b6": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Eso es avanzar. La captura "
+            },
+            {
+              "kind": "term",
+              "id": "en-passant",
+              "text": "al paso"
+            },
+            {
+              "kind": "text",
+              "text": " se hace en "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", hacia la casilla por la que pasó el peón negro."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That is advancing. The "
+            },
+            {
+              "kind": "term",
+              "id": "en-passant",
+              "text": "en passant"
+            },
+            {
+              "kind": "text",
+              "text": " capture goes "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonally"
+            },
+            {
+              "kind": "text",
+              "text": ", to the square the black pawn passed over."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu peón va a "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ", la casilla que el peón negro se saltó."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your pawn goes to "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ", the square the black pawn skipped."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón rival avanzó dos casillas y quedó junto al tuyo, pero en vez de capturarlo hiciste otra jugada. Ahora, una jugada después, ¿aún puedes capturarlo "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "al paso"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rival pawn advanced two squares and landed next to yours, but instead of capturing it you played another move. Now, one move later, can you still capture it "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "en passant"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "No",
+            "en": "No"
+          },
+          {
+            "es": "Sí",
+            "en": "Yes"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: no. La captura "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "al paso"
+          },
+          {
+            "kind": "text",
+            "text": " hay que hacerla enseguida, en la jugada que sigue al avance de dos. Después ya no vale."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: no. The "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "en passant"
+          },
+          {
+            "kind": "text",
+            "text": " capture must be made at once, on the move right after the two-square advance. After that it is no longer allowed."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La captura "
+            },
+            {
+              "kind": "term",
+              "id": "en-passant",
+              "text": "al paso"
+            },
+            {
+              "kind": "text",
+              "text": " solo se puede hacer justo en la jugada siguiente. Si esperas, se pierde."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The "
+            },
+            {
+              "kind": "term",
+              "id": "en-passant",
+              "text": "en passant"
+            },
+            {
+              "kind": "text",
+              "text": " capture can only be made on the very next move. If you wait, it is gone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en el "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroque"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey va dos casillas hacia una torre y la torre salta al otro lado. Solo vale si ninguno de los dos se ha movido, no hay piezas en medio y el rey no está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", ni pasa por una casilla atacada ni acaba en ella. La "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "captura al paso"
+          },
+          {
+            "kind": "text",
+            "text": " la hace un peón contra un peón rival que acaba de avanzar dos casillas, y solo vale en la jugada siguiente."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castling"
+          },
+          {
+            "kind": "text",
+            "text": ", the king goes two squares towards a rook and the rook jumps to the other side. It is only allowed if neither of them has moved, there are no pieces in between and the king is not in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", does not pass through an attacked square and does not end up on one. "
+          },
+          {
+            "kind": "term",
+            "id": "en-passant",
+            "text": "En passant"
+          },
+          {
+            "kind": "text",
+            "text": " is a capture by a pawn of a rival pawn that has just advanced two squares, and it is only allowed on the very next move."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+        "orientation": "white"
+      }
+    }
+  ]
+}

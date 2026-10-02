@@ -22,6 +22,8 @@ import {
 } from '../../lib/lesson-checks.ts';
 import { lessons as authored } from '../../authoring/lessons/index.ts';
 import { lessonSummary } from '../../lib/lesson-build.ts';
+import { positionFromFen } from '../../lib/chess.ts';
+import { acceptedMoves } from '../../../src/app/core/lessons/find-move-rules.ts';
 import { validateLesson } from '../../lib/schema.ts';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
 
@@ -438,5 +440,16 @@ describe('lessons', () => {
     const categories = new Set(loadEndgames().map((e) => e.category.en));
     const tags = new Set(loadPositions().flatMap((p) => p.tags));
     expect(nextErrors(lessons, categories, tags)).toEqual([]);
+  });
+
+  it('castling-en-passant: the castling question agrees with the rule', () => {
+    const lesson = lessons.find((l) => l.id === 'castling-en-passant')!;
+    const step = lesson.steps.find(
+      (s) => s.kind === 'choice' && s.answer.by === 'fact' && s.board,
+    )!;
+    if (step.kind !== 'choice' || step.answer.by !== 'fact') return;
+    const canCastle = acceptedMoves(positionFromFen(step.board!.fen), 'castle').length > 0;
+    // Option 0 is "yes", option 1 is "no" in this question.
+    expect(step.answer.correct).toBe(canCastle ? 0 : 1);
   });
 });

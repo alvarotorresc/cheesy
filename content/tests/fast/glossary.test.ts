@@ -14,6 +14,7 @@ const EXPECTED_IDS = [
   'checkmate',
   'stalemate',
   'castling',
+  'en-passant',
   'promotion',
   'queening-square',
   'piece-value',

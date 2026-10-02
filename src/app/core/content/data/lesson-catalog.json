@@ -133,5 +133,20 @@
     },
     "stepCount": 10,
     "exerciseCount": 6
+  },
+  {
+    "id": "castling-en-passant",
+    "level": "beginner",
+    "order": 10,
+    "title": {
+      "es": "Enroque y captura al paso",
+      "en": "Castling and en passant"
+    },
+    "summary": {
+      "es": "Las dos jugadas especiales: el rey y la torre a la vez, y una captura de peón muy particular.",
+      "en": "The two special moves: king and rook at once, and a very particular pawn capture."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

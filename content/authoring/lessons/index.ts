@@ -9,6 +9,7 @@ import { knightMoves } from './beginner/06-knight-moves.ts';
 import { pawnMoves } from './beginner/07-pawn-moves.ts';
 import { capturesAndValues } from './beginner/08-captures-and-values.ts';
 import { checkMateStalemate } from './beginner/09-check-mate-stalemate.ts';
+import { castlingEnPassant } from './beginner/10-castling-en-passant.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -20,4 +21,5 @@ export const lessons: LessonSpec[] = [
   pawnMoves,
   capturesAndValues,
   checkMateStalemate,
+  castlingEnPassant,
 ];

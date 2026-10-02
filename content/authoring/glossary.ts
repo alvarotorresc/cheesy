@@ -144,7 +144,25 @@ export const glossary: GlossarySpec[] = [
       ],
     },
     level: 'beginner',
+    lesson: 'castling-en-passant',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}enroque-ajedrez`],
+  },
+  {
+    id: 'en-passant',
+    name: { es: 'Captura al paso', en: 'En passant' },
+    definition: {
+      es: 'Captura especial de peón. Si un peón avanza dos casillas desde su casilla de salida y queda justo al lado de un peón rival, este puede capturarlo como si solo hubiera avanzado una, yendo a la casilla que el otro se saltó. Solo se permite en la jugada inmediatamente siguiente.',
+      en: 'A special pawn capture. If a pawn advances two squares from its starting square and lands right beside an enemy pawn, that pawn may capture it as if it had moved only one, going to the square the other one skipped. It is only allowed on the very next move.',
+    },
+    example: {
+      fen: '4k3/8/8/1Pp5/8/8/8/4K3 w - c6 0 1',
+      orientation: 'white',
+      highlights: ['c5'],
+      arrows: [{ from: 'b5', to: 'c6', move: true }],
+    },
+    level: 'beginner',
+    lesson: 'castling-en-passant',
+    sources: [FIDE_LAWS, WIKI_GLOSSARY, `${WIKI}En_passant`],
   },
   {
     id: 'promotion',
