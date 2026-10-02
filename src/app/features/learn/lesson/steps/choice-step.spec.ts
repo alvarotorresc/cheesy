@@ -57,7 +57,7 @@ describe('ChoiceStepView', () => {
     five.click();
     await fixture.whenStable();
     expect(element.textContent).toContain('That is the rook.');
-    expect(five.disabled).toBe(true);
+    expect(five.getAttribute('aria-disabled')).toBe('true');
     expect(done).toEqual([]);
 
     three.click();
@@ -128,5 +128,47 @@ describe('ChoiceStepView', () => {
     fixture.componentRef.setInput('step', factStep);
     await fixture.whenStable();
     expect(element.querySelector('[aria-live="polite"]')).not.toBeNull();
+  });
+
+  it('should keep the focus on a wrong option and ignore it when pressed again', async () => {
+    fixture.componentRef.setInput('step', factStep);
+    await fixture.whenStable();
+    const five = options()[1];
+    five.focus();
+    five.click();
+    await fixture.whenStable();
+    expect(document.activeElement).toBe(five);
+    five.click();
+    await fixture.whenStable();
+    expect(done).toEqual([]);
+  });
+
+  it('should write the feedback again for each wrong option, so it is announced again', async () => {
+    fixture.componentRef.setInput('step', {
+      ...factStep,
+      answer: {
+        by: 'fact',
+        options: [
+          { es: 'a', en: 'A' },
+          { es: 'b', en: 'B' },
+          { es: 'c', en: 'C' },
+        ],
+        correct: 2,
+      },
+      whyWrong: undefined,
+    } satisfies ChoiceStep);
+    await fixture.whenStable();
+    options()[0].click();
+    await fixture.whenStable();
+    const textOf = () =>
+      [...element.querySelector('.feedback')!.childNodes].find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+      );
+    const first = textOf();
+    expect(first).toBeDefined();
+    options()[1].click();
+    await fixture.whenStable();
+    expect(element.querySelector('.feedback')!.textContent).toContain('Not this one. Try again.');
+    expect(textOf()).not.toBe(first);
   });
 });

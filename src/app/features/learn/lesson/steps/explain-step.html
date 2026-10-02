@@ -17,7 +17,7 @@
 <div class="panel play-panel">
   <ng-content select="[lessonHead]" />
   <div class="step-text"><app-rich-text [text]="step().text" /></div>
-  @if (hasMoves()) {
+  @if (hasMoves() && !reduced()) {
     <div class="actions">
       <button type="button" class="button replay" (click)="replay()">{{ t.restart }}</button>
     </div>

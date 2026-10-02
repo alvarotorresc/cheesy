@@ -46,6 +46,8 @@ export class ExplainStepView {
 
   protected readonly i18n = inject(I18nService);
 
+  /** Nothing plays by itself under reduced motion, so there is nothing to see again. */
+  protected readonly reduced = prefersReducedMotion;
   private readonly replays = signal(0);
   private readonly shownIndex = signal(0);
 

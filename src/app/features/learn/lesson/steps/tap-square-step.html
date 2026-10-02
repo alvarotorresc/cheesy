@@ -26,8 +26,11 @@
   }
   <p class="progress">{{ t.tapProgress(s.index(), step().count) }}</p>
   <p class="feedback" aria-live="polite" [class.wrong]="s.last() && !s.last()?.right">
-    @if (s.last(); as last) {
-      {{ last.right ? t.correct : t.tapWrong(last.expected) }}
+    <!-- Keyed by the tap, so the same message twice is announced twice. -->
+    @for (tap of [s.index()]; track tap) {
+      @if (s.last(); as last) {
+        {{ last.right ? t.correct : t.tapWrong(last.expected) }}
+      }
     }
   </p>
   <ng-content select="[lessonNav]" />

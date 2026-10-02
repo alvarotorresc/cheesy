@@ -21,7 +21,7 @@
         type="button"
         class="option"
         [class.correct]="session().solved() && index === session().correct"
-        [disabled]="session().tried().has(index) || session().solved()"
+        [attr.aria-disabled]="session().tried().has(index) || session().solved() || null"
         (click)="session().choose(index)"
       >
         @switch (step().answer.by) {
@@ -50,13 +50,16 @@
     [class.right]="session().solved()"
     [class.wrong]="!session().solved()"
   >
-    @if (session().solved()) {
-      <app-rich-text [text]="step().explanation" />
-    } @else if (session().lastWrong() !== undefined) {
-      @if (whyWrong(); as why) {
-        <app-rich-text [text]="why" />
-      } @else {
-        {{ t.wrongMove }}
+    <!-- Keyed by the attempt, so the same message twice is announced twice. -->
+    @for (attempt of [session().tracker.mistakes()]; track attempt) {
+      @if (session().solved()) {
+        <app-rich-text [text]="step().explanation" />
+      } @else if (session().lastWrong() !== undefined) {
+        @if (whyWrong(); as why) {
+          <app-rich-text [text]="why" />
+        } @else {
+          {{ t.wrongMove }}
+        }
       }
     }
   </div>

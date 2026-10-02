@@ -86,5 +86,6 @@ describe('ExplainStepView', () => {
     } satisfies ExplainStep);
     await fixture.whenStable();
     expect(board().fen()).toContain('4p3');
+    expect(element.querySelector('button.replay')).toBeNull();
   });
 });
