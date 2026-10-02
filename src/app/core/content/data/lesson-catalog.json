@@ -118,5 +118,20 @@
     },
     "stepCount": 7,
     "exerciseCount": 3
+  },
+  {
+    "id": "check-mate-stalemate",
+    "level": "beginner",
+    "order": 9,
+    "title": {
+      "es": "Jaque, mate y ahogado",
+      "en": "Check, checkmate and stalemate"
+    },
+    "summary": {
+      "es": "Atacar al rey, ganar la partida y el final que acaba en tablas.",
+      "en": "Attacking the king, winning the game and the ending that is a draw."
+    },
+    "stepCount": 10,
+    "exerciseCount": 6
   }
 ]

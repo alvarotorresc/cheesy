@@ -90,6 +90,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'e1', to: 'e8', move: false }],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}jaque-ajedrez`],
   },
   {
@@ -106,6 +107,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}jaque-mate-ajedrez`],
   },
   {
@@ -122,6 +124,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     level: 'beginner',
+    lesson: 'check-mate-stalemate',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}ahogado-ajedrez`],
   },
   {

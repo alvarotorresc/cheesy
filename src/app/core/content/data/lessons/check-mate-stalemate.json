@@ -1,0 +1,1508 @@
+{
+  "id": "check-mate-stalemate",
+  "level": "beginner",
+  "order": 9,
+  "title": {
+    "es": "Jaque, mate y ahogado",
+    "en": "Check, checkmate and stalemate"
+  },
+  "summary": {
+    "es": "Atacar al rey, ganar la partida y el final que acaba en tablas.",
+    "en": "Attacking the king, winning the game and the ending that is a draw."
+  },
+  "terms": [
+    "check",
+    "checkmate",
+    "stalemate"
+  ],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando una pieza ataca al rey rival, se dice que le da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey en jaque tiene que salir del jaque en la jugada siguiente, y hay tres formas: mover el rey, tapar el jaque con otra pieza o capturar la pieza que lo da. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " da jaque al rey negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When a piece attacks the rival king, it is giving "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". A king in check must get out of check on the very next move, and there are three ways: move the king, block the check with another piece, or capture the piece giving it. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " gives check to the black king on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/8/8/8/4RK2 b - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "e1",
+            "to": "e8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las negras. ¿Qué le pasa al rey negro?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black to move. What is happening to the black king?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/1B6/8/8/8/4K3 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " ataca al rey por la "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", pero el rey puede apartarse."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the king along the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", but the king can step aside."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No es "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey negro puede apartarse a una casilla que nadie ataca."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is not "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": ": the black king can step aside to a square nobody attacks."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El "
+            },
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "ahogado"
+            },
+            {
+              "kind": "text",
+              "text": " es no tener jugadas sin estar en "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ". Aquí sí hay jaque."
+            }
+          ],
+          "en": [
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "Stalemate"
+            },
+            {
+              "kind": "text",
+              "text": " means having no move without being in "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ". Here there is a check."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Fíjate en el alfil de "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": ": ataca al rey por la "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Look at the bishop on "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": ": it attacks the king along the "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu rey está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ": la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " lo ataca. Sal del jaque. Aquí el rey no puede moverse, pero puedes tapar o capturar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your king is in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ": the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " attacks him. Get out of check. Here the king cannot move, but you can block or capture."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/8/8/8/2NB4/5PPP/1r4K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "escape-check"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien. Tapar con una pieza o capturar la torre te sacan del "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Capturarla, además, te hace ganar una torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done. Blocking with a piece or capturing the rook both get you out of "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". Capturing it also wins you a rook."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una pieza que pueda ponerse entre la torre y tu rey, o una que pueda capturar la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a piece that can stand between the rook and your king, or one that can capture the rook."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si el rey está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y no hay forma de salir, es "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": ", o simplemente mate, y la partida termina: gana quien lo da. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " da jaque, los propios peones negros encierran a su rey, y nada puede tapar ni capturar la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If the king is in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and there is no way out, it is "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ", or just mate, and the game ends: whoever gives it wins. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " gives check, the black king’s own pawns shut him in, and nothing can block or capture the rook."
+          }
+        ]
+      },
+      "board": {
+        "fen": "R5k1/5ppp/8/8/8/8/5PPP/6K1 b - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "a8",
+            "to": "g8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las negras. ¿Y ahora?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black to move. What about now?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "k7/1Q6/1K6/8/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". La dama de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey negro no tiene casillas libres y no puede capturarla, porque la defiende el rey blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". The queen on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", the black king has no free squares and cannot capture her, because the white king on "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": " defends her."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es más que "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey negro no puede apartarse, y tampoco capturar la dama, porque la defiende el rey blanco."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is more than "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ": the black king cannot step aside, and he cannot capture the queen either, because the white king defends her."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No es "
+            },
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "ahogado"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey negro está en "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is not "
+            },
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "stalemate"
+            },
+            {
+              "kind": "text",
+              "text": ": the black king is in "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama de "
+            },
+            {
+              "kind": "square",
+              "square": "b7"
+            },
+            {
+              "kind": "text",
+              "text": " ataca al rey negro, que está justo a su lado."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen on "
+            },
+            {
+              "kind": "square",
+              "square": "b7"
+            },
+            {
+              "kind": "text",
+              "text": " attacks the black king, who is right next to her."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": " en una jugada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " in one move."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/8/8/2n5/8/5PPP/R5K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Ra8#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la torre llega a "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " y da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey no puede escapar, porque sus peones le quitan las casillas, y nadie puede tapar ni capturar la torre: es "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the rook reaches "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " and gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The king cannot escape, because his pawns take away his squares, and nobody can block or capture the rook: it is "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Ra4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Atacas el caballo, pero había algo mucho mejor: "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": " en una."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You attack the knight, but there was something much better: "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": " in one."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey negro está encerrado por sus propios peones. Busca un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " por la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black king is shut in by his own pawns. Look for a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " along the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si le toca jugar a un bando que no tiene ninguna jugada legal, y su rey no está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", es "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ": la partida acaba en tablas y nadie gana. Parece un "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ", pero no lo es. Aquí juegan las negras: el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " no está en jaque, y todas las casillas de su alrededor están atacadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If the side to move has no legal move, and its king is not in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", it is "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ": the game ends in a draw and nobody wins. It looks like "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ", but it is not. Here Black is to move: the king on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " is not in check, and every square around him is attacked."
+          }
+        ]
+      },
+      "board": {
+        "fen": "k7/2Q5/1K6/8/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las negras. ¿Qué pasa?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black to move. What is going on?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "k7/P7/1K6/8/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey negro no está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", pero no tiene ninguna jugada legal: la partida acaba en tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ". The black king is not in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", but he has no legal move: the game ends in a draw."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón de "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " no ataca al rey: los peones atacan en "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", y este ataca "
+            },
+            {
+              "kind": "square",
+              "square": "b8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " does not attack the king: pawns attack "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonally"
+            },
+            {
+              "kind": "text",
+              "text": ", and this one attacks "
+            },
+            {
+              "kind": "square",
+              "square": "b8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Para que haya "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ", el rey tiene que estar en "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", y no lo está."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "For "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": ", the king has to be in "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", and he is not."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Mira bien: las negras no tienen ninguna jugada legal. El rey no puede capturar el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": ", porque lo defiende el rey blanco."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Look closely: Black has no legal move. The king cannot capture the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": ", because the white king defends it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una última. Juegan las negras."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "One last one. Black to move."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/8/8/5Q2/8/8/8/6K1 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: nada. El rey negro no está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y tiene jugadas, así que la partida sigue."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: nothing. The black king is not in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and has moves, so the game goes on."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama de "
+            },
+            {
+              "kind": "square",
+              "square": "f5"
+            },
+            {
+              "kind": "text",
+              "text": " no ataca al rey de "
+            },
+            {
+              "kind": "square",
+              "square": "h8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen on "
+            },
+            {
+              "kind": "square",
+              "square": "f5"
+            },
+            {
+              "kind": "text",
+              "text": " does not attack the king on "
+            },
+            {
+              "kind": "square",
+              "square": "h8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Sin "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": " no hay "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Without "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": " there is no "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey negro sí tiene jugadas: puede ir a "
+            },
+            {
+              "kind": "square",
+              "square": "g8"
+            },
+            {
+              "kind": "text",
+              "text": " o a "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black king does have moves: he can go to "
+            },
+            {
+              "kind": "square",
+              "square": "g8"
+            },
+            {
+              "kind": "text",
+              "text": " or to "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " es atacar al rey, y se sale moviendo el rey, tapando o capturando. "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "Jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": " es un jaque sin salida, y gana la partida. "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "Ahogado"
+          },
+          {
+            "kind": "text",
+            "text": " es no tener jugadas sin estar en jaque, y la partida acaba en tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " means attacking the king, and you get out of it by moving the king, blocking or capturing. "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "Checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " is a check with no way out, and it wins the game. "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "Stalemate"
+          },
+          {
+            "kind": "text",
+            "text": " is having no move without being in check, and the game ends in a draw."
+          }
+        ]
+      },
+      "board": {
+        "fen": "R5k1/5ppp/8/8/8/8/5PPP/6K1 b - - 0 1",
+        "orientation": "white"
+      }
+    }
+  ]
+}
