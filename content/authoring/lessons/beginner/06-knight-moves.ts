@@ -52,7 +52,7 @@ export const knightMoves: LessonSpec = {
       kind: 'explain',
       text: {
         es: 'El caballo es la única pieza que salta por encima de las demás, sean suyas o del rival. Por eso, al empezar la partida, puede salir por encima de sus peones.',
-        en: 'The knight is the only piece that jumps over the others, its own or the rival’s. That is why, at the start of the game, it can come out over its pawns.',
+        en: 'The knight is the only piece that jumps over the others, its own or the opponent’s. That is why, at the start of the game, it can come out over its pawns.',
       },
       board: { fen: START, orientation: 'white', moves: ['Nf3'] },
     },
@@ -82,8 +82,8 @@ export const knightMoves: LessonSpec = {
       enemies: [{ role: 'bishop', square: 'e5' }],
       minMoves: 4,
       hint: {
-        es: 'Por el centro está todo vigilado. Da la vuelta por el lado izquierdo.',
-        en: 'Everything in the centre is watched. Go round by the left side.',
+        es: 'Cuidado con c3, que está vigilada: sal por d2.',
+        en: 'Careful with c3, it is watched: start with d2.',
       },
     },
     {
@@ -104,8 +104,8 @@ export const knightMoves: LessonSpec = {
     {
       kind: 'reach',
       text: {
-        es: 'Un recorrido clásico: lleva el caballo de una esquina a la contraria. Parece cerca, pero el caballo necesita varios saltos.',
-        en: 'A classic journey: take the knight from one corner to the opposite one. It looks close, but the knight needs several jumps.',
+        es: 'Un recorrido clásico: lleva el caballo de una esquina a la contraria. Parece un camino recto, pero el caballo necesita varios saltos.',
+        en: 'A classic journey: take the knight from one corner to the opposite one. It looks like a straight line, but the knight needs several jumps.',
       },
       piece: { role: 'knight', color: 'white', square: 'a1' },
       targets: ['h8'],

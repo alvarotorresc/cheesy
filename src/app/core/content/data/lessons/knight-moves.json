@@ -126,7 +126,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "The knight is the only piece that jumps over the others, its own or the rival’s. That is why, at the start of the game, it can come out over its pawns."
+            "text": "The knight is the only piece that jumps over the others, its own or the opponent’s. That is why, at the start of the game, it can come out over its pawns."
           }
         ]
       },
@@ -242,13 +242,45 @@
         "es": [
           {
             "kind": "text",
-            "text": "Por el centro está todo vigilado. Da la vuelta por el lado izquierdo."
+            "text": "Cuidado con "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ", que está vigilada: sal por "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": "."
           }
         ],
         "en": [
           {
             "kind": "text",
-            "text": "Everything in the centre is watched. Go round by the left side."
+            "text": "Careful with "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ", it is watched: start with "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": "."
           }
         ]
       }
@@ -338,13 +370,13 @@
         "es": [
           {
             "kind": "text",
-            "text": "Un recorrido clásico: lleva el caballo de una esquina a la contraria. Parece cerca, pero el caballo necesita varios saltos."
+            "text": "Un recorrido clásico: lleva el caballo de una esquina a la contraria. Parece un camino recto, pero el caballo necesita varios saltos."
           }
         ],
         "en": [
           {
             "kind": "text",
-            "text": "A classic journey: take the knight from one corner to the opposite one. It looks close, but the knight needs several jumps."
+            "text": "A classic journey: take the knight from one corner to the opposite one. It looks like a straight line, but the knight needs several jumps."
           }
         ]
       },
