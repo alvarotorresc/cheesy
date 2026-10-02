@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { HomeHero } from './hero/home-hero';
@@ -16,7 +17,7 @@ type HomeState =
  */
 @Component({
   selector: 'app-home',
-  imports: [HomeHero, HomeSections],
+  imports: [HomeHero, HomeSections, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

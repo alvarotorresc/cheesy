@@ -1,6 +1,10 @@
 @let current = state();
 @if (current.status === 'ready') {
   <app-home-hero [lines]="current.data.hero" />
+  <section class="learn-band" aria-labelledby="learn-band-title">
+    <h2 id="learn-band-title">{{ i18n.t().learn.homeBand.title }}</h2>
+    <a class="button" routerLink="/learn/beginner">{{ i18n.t().learn.homeBand.cta }}</a>
+  </section>
   <app-home-sections [data]="current.data" />
 } @else if (current.status === 'error') {
   <div class="notice state-message" role="alert">
