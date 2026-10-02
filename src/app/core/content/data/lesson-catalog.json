@@ -148,5 +148,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "basic-mates",
+    "level": "beginner",
+    "order": 11,
+    "title": {
+      "es": "Mates básicos",
+      "en": "Basic mates"
+    },
+    "summary": {
+      "es": "Ganar con dama y rey, o con torre y rey, contra el rey solo.",
+      "en": "Winning with queen and king, or rook and king, against the lone king."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

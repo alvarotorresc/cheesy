@@ -1,0 +1,1075 @@
+{
+  "id": "basic-mates",
+  "level": "beginner",
+  "order": 11,
+  "title": {
+    "es": "Mates básicos",
+    "en": "Basic mates"
+  },
+  "summary": {
+    "es": "Ganar con dama y rey, o con torre y rey, contra el rey solo.",
+    "en": "Winning with queen and king, or rook and king, against the lone king."
+  },
+  "terms": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Checkmate",
+    "https://handbook.fide.com/chapter/E012023"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si al rival solo le queda el rey, una dama o una torre bastan para ganar, pero hay que saber cómo. Este es el objetivo: el rey negro, contra el borde, recibe "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": ". La dama de "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": " la defiende."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If the rival has only the king left, a queen or a rook is enough to win, but you need to know how. This is the goal: the black king, against the edge, is in "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". The queen on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and the white king on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": " defends her."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Primero, encierra al rey rival contra un borde. Aquí la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " vigila toda la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " 7, las casillas marcadas, y el rey negro ya no puede salir de la fila 8. Pero la dama sola no da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ": después hay que acercar el rey propio para que la ayude."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "First, shut the rival king in against an edge. Here the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " watches the whole of "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " 7, the marked squares, and the black king can no longer leave rank 8. But the queen alone cannot give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ": next you must bring your own king to help her."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/2Q5/8/8/8/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a7",
+          "b7",
+          "d7",
+          "e7",
+          "f7",
+          "g7",
+          "h7"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuidado con las prisas. Las blancas acaban de llevar la dama a "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". Juegan las negras: ¿qué pasa?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Beware of rushing. White has just put the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". Black to move: what is going on?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/5Q2/8/6K1/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Es "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ": el rey negro no está en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y no tiene jugadas. Son tablas, y la victoria se ha escapado. Cuando encierres al rey, déjale siempre alguna casilla hasta que puedas dar "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "It is "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ": the black king is not in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and has no moves. It is a draw, and the win has slipped away. When you shut the king in, always leave him a square until you can give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama de "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": " no ataca al rey de "
+            },
+            {
+              "kind": "square",
+              "square": "h8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen on "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": " does not attack the king on "
+            },
+            {
+              "kind": "square",
+              "square": "h8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No hay "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", así que no puede ser "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "There is no "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", so it cannot be "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Mira bien: el rey negro no tiene ninguna casilla libre, y las negras no tienen más piezas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Look closely: the black king has no free square, and Black has no other pieces."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora tú: da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " con la dama y el rey. El rival se defiende lo mejor posible. Encierra al rey negro contra un borde, acerca tu rey y vigila que no quede "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now you: give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " with the queen and king. The rival defends as well as possible. Shut the black king in against an edge, bring your king closer and make sure he is not left in "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "fen": "8/8/3k4/8/8/4K3/8/7Q w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Pon la dama a un salto de caballo del rey negro: así le quitas casillas sin darle "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Cuando esté en el borde, trae tu rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Put the queen a knight’s jump away from the black king: that takes squares from him without giving "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". Once he is on the edge, bring your king."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Con la torre se gana igual, pero el rey tiene que ayudar más. La torre corta el paso al rey rival por una "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " o una "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": ", y tu rey lo va empujando hacia el borde. El "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " llega así: la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " por la última fila, y el rey blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", enfrente del negro, le quita las casillas de la fila 7."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "With the rook you win the same way, but the king has to help more. The rook cuts the rival king off along a "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " or a "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ", and your king pushes him towards the edge. The "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " comes like this: the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " along the last rank, and the white king on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", facing the black one, takes away the squares on rank 7."
+          }
+        ]
+      },
+      "board": {
+        "fen": "R3k3/8/4K3/8/8/8/8/8 b - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "a8",
+            "to": "e8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Aquí el rey blanco se ha quedado una "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " más atrás, en "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Juegan las negras: ¿qué pasa?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Here the white king has stayed one "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " further back, on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Black to move: what is going on?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "R3k3/8/8/4K3/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "status"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Solo es "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Sin el rey blanco enfrente, el rey negro escapa por la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " 7. Por eso, con la torre, tu rey tiene que ayudar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "It is only "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". Without the white king facing him, the black king escapes along "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " 7. That is why, with the rook, your king has to help."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero no "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey negro puede salir a la "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "fila"
+            },
+            {
+              "kind": "text",
+              "text": " 7, porque el rey blanco está demasiado lejos."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but not "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": ": the black king can step out to "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "rank"
+            },
+            {
+              "kind": "text",
+              "text": " 7, because the white king is too far away."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey negro está en "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", así que no es "
+            },
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "ahogado"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black king is in "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", so it is not "
+            },
+            {
+              "kind": "term",
+              "id": "stalemate",
+              "text": "stalemate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " ataca al rey por la "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "fila"
+            },
+            {
+              "kind": "text",
+              "text": " 8."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " attacks the king along "
+            },
+            {
+              "kind": "term",
+              "id": "rank",
+              "text": "rank"
+            },
+            {
+              "kind": "text",
+              "text": " 8."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " con la torre y el rey. Corta el paso al rey negro con la torre, acerca tu rey y empújalo hacia un borde. Tómatelo con calma: hacen falta más jugadas que con la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " with the rook and king. Cut the black king off with the rook, bring your king closer and push him towards an edge. Take your time: it takes more moves than with the queen."
+          }
+        ]
+      },
+      "fen": "8/8/3k4/8/8/4K3/8/7R w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Usa la torre como una pared: que el rey negro no pueda cruzar su "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " o su "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": ". Luego, con tu rey enfrente del suyo, da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " con la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Use the rook as a wall: the black king must not cross its "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " or its "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". Then, with your king facing his, give "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " with the rook."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: contra el rey solo, encierra al rey rival contra un borde, trae tu rey para ayudar y da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". Con la dama es más rápido; con la torre hace falta más paciencia. Y cuidado con el "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ": deja siempre al rey rival alguna jugada hasta el mate. En Finales tienes más posiciones de mates básicos para practicar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: against the lone king, shut the rival king in against an edge, bring your king to help and give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". With the queen it is quicker; with the rook it takes more patience. And beware of "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ": always leave the rival king a move until the mate. In Endgames you will find more basic mate positions to practise."
+          }
+        ]
+      },
+      "board": {
+        "fen": "R3k3/8/4K3/8/8/8/8/8 b - - 0 1",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "Basic mates"
+  }
+}
