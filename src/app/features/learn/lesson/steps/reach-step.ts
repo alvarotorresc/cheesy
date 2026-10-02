@@ -105,8 +105,9 @@ export class ReachStepView {
   protected showHint(): void {
     this.focus.toHeading();
     const session = this.session();
-    // The arrow starts at the start square: begin again if the piece is elsewhere (not a mistake).
-    if (!this.step().hint && (session.moves() > 0 || session.status() !== 'playing'))
+    // After a capture the message would hide the hint: begin again (not a mistake). The arrow
+    // also starts at the start square, so begin again too if the piece is elsewhere.
+    if (session.status() === 'captured' || (!this.step().hint && session.moves() > 0))
       session.restart();
     this.hintShown.set(true);
   }

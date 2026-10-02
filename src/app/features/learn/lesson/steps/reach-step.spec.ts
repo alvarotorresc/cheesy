@@ -112,6 +112,23 @@ describe('ReachStepView', () => {
     expect(element.querySelector('button.solution')).not.toBeNull();
   });
 
+  it('should show the hint text when it is asked for right after a capture', async () => {
+    fixture.componentRef.setInput('step', { ...guardedStep, hint: plainText('Go round it') });
+    await fixture.whenStable();
+    move('g1', 'f3');
+    await fixture.whenStable();
+    element.querySelector<HTMLButtonElement>('button.restart')!.click();
+    await fixture.whenStable();
+    move('g1', 'f3');
+    await fixture.whenStable();
+    // Second capture: the hint is offered while the capture message is still on screen.
+    element.querySelector<HTMLButtonElement>('button.hint')!.click();
+    await fixture.whenStable();
+    expect(element.textContent).toContain('Go round it');
+    expect(element.textContent).toContain('0 of 1 star · 0 moves');
+    expect(board().dests().get('g1')).toBeDefined();
+  });
+
   it('should point an arrow at the first square of the way when there is no hint text', async () => {
     fixture.componentRef.setInput('step', guardedStep);
     await fixture.whenStable();
