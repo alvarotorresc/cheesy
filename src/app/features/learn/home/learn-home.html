@@ -1,0 +1,38 @@
+@let t = i18n.t().learn;
+<header class="page-head">
+  <h1>{{ t.title }}</h1>
+  <p class="lede">{{ t.intro }}</p>
+</header>
+@switch (state().status) {
+  @case ('loading') {
+    <p class="notice" role="status">{{ t.loading }}</p>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ t.loadError }}</p>
+      <button type="button" class="button" (click)="load()">{{ t.retry }}</button>
+    </div>
+  }
+  @case ('ready') {
+    @if (continueWith(); as next) {
+      <a class="continue button" [routerLink]="['/learn', next.level, next.id]">
+        {{ t.continueWith(i18n.localize(next.title)) }}
+      </a>
+    }
+    <ul class="levels">
+      @for (entry of levels(); track entry.level) {
+        <li class="level-card">
+          <h2>{{ t.levels[entry.level].name }}</h2>
+          <p>{{ t.levels[entry.level].description }}</p>
+          @if (entry.lessons.length) {
+            <a class="button" [routerLink]="['/learn', entry.level]">
+              {{ t.lessonCount(entry.lessons.length) }}
+            </a>
+          } @else {
+            <p class="soon">{{ t.soon }}</p>
+          }
+        </li>
+      }
+    </ul>
+  }
+}
