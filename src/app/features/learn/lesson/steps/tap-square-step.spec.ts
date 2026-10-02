@@ -42,10 +42,15 @@ describe('TapSquareStepView', () => {
     expect(done).toEqual([{ firstTry: true }]);
   });
 
-  it('should give every square a name that says to tap it', async () => {
+  it('should name every square by its name only and announce the square asked for', async () => {
     fixture.componentRef.setInput('step', step);
     await fixture.whenStable();
-    expect(square('h8').getAttribute('aria-label')).toBe('Tap h8');
+    expect(square('h8').getAttribute('aria-label')).toBe('h8');
+    const prompt = element.querySelector('.prompt')!;
+    expect(prompt.getAttribute('aria-live')).toBe('polite');
+    square('e4').click();
+    await fixture.whenStable();
+    expect(prompt.textContent?.trim()).toBe('Tap a1');
   });
 
   it('should name the square in Spanish after a wrong tap', async () => {

@@ -9,7 +9,7 @@
         class="square"
         [class.dark]="cell.dark"
         [attr.data-square]="square"
-        [attr.aria-label]="t.tapPrompt(square)"
+        [attr.aria-label]="square"
         [class.right]="stateOf(square) === 'right'"
         [class.wrong]="stateOf(square) === 'wrong'"
         [class.expected]="stateOf(square) === 'expected'"
@@ -21,9 +21,12 @@
 <div class="panel play-panel">
   <ng-content select="[lessonHead]" />
   <div class="step-text"><app-rich-text [text]="step().text" /></div>
-  @if (s.target(); as target) {
-    <p class="prompt">{{ t.tapPrompt(target) }}</p>
-  }
+  <!-- Live, so the next square asked for is heard after each tap: the squares only say their name. -->
+  <p class="prompt" aria-live="polite">
+    @if (s.target(); as target) {
+      {{ t.tapPrompt(target) }}
+    }
+  </p>
   <p class="progress">{{ t.tapProgress(s.index(), step().count) }}</p>
   <p class="feedback" aria-live="polite" [class.wrong]="s.last() && !s.last()?.right">
     <!-- Keyed by the tap, so the same message twice is announced twice. -->
