@@ -85,6 +85,8 @@ export const en = {
       stalemate: 'Stalemate',
       none: 'None of these',
     },
+    optionsLabel: 'Answers',
+    tapBoardLabel: 'Board: tap the square you are asked for',
     tapPrompt: (square: string) => `Tap ${square}`,
     tapWrong: (square: string) => `That was ${square}.`,
     tapProgress: (done: number, total: number) => `${done} of ${total}`,

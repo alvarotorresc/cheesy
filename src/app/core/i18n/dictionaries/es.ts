@@ -85,6 +85,8 @@ export const es: Messages = {
       stalemate: 'Ahogado',
       none: 'Ninguna de estas',
     },
+    optionsLabel: 'Respuestas',
+    tapBoardLabel: 'Tablero: toca la casilla que se pide',
     tapPrompt: (square: string) => `Toca ${square}`,
     tapWrong: (square: string) => `Era ${square}.`,
     tapProgress: (done: number, total: number) => `${done} de ${total}`,
