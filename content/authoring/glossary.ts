@@ -670,7 +670,7 @@ export const glossary: GlossarySpec[] = [
     name: { es: 'Última fila', en: 'Back rank' },
     definition: {
       es: 'La [fila](rank) del borde del tablero en el lado de cada jugador, donde empiezan sus piezas. Si el rey se queda en ella detrás de sus peones sin salida, una torre o la dama rival puede darle [jaque mate](checkmate) a lo largo de esa fila.',
-      en: 'The [row](rank) (rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver [checkmate](checkmate) along that row.',
+      en: 'The [row](rank) along each player’s own edge of the board, where their pieces start. If the king stays there behind its pawns with no way out, an enemy rook or queen can deliver [checkmate](checkmate) along that row.',
     },
     example: {
       fen: '6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1',
