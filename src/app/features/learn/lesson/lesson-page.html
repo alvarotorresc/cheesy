@@ -1,0 +1,142 @@
+@let t = i18n.t().learn;
+@let levelName = t.levels[level()].name;
+
+<ng-template #head>
+  <a class="back" [routerLink]="['/learn', level()]">← {{ t.backToLevel(levelName) }}</a>
+  <h1 data-step-heading tabindex="-1">{{ i18n.localize(lesson()!.title) }}</h1>
+  <p class="step-of">{{ t.stepOf(index() + 1, steps().length) }}</p>
+  <div class="progress-bar" aria-hidden="true">
+    <span [style.width.%]="((index() + 1) / steps().length) * 100"></span>
+  </div>
+</ng-template>
+
+<ng-template #nav>
+  <button type="button" class="button previous" [disabled]="!canGoBack()" (click)="previous()">
+    {{ t.previous }}
+  </button>
+  <button type="button" class="button primary next" [disabled]="!canGoOn()" (click)="next()">
+    {{ isLast() ? t.finish : t.next }}
+  </button>
+</ng-template>
+
+@let current = state();
+@switch (current.status) {
+  @case ('loading') {
+    <p class="notice" role="status">{{ t.loading }}</p>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ t.loadError }}</p>
+      <button type="button" class="button" (click)="retry()">{{ t.retry }}</button>
+    </div>
+  }
+  @case ('notFound') {
+    <div class="notice" role="alert">
+      <p>{{ t.notFound }}</p>
+      <a routerLink="/learn">{{ t.backToLearn }}</a>
+    </div>
+  }
+  @case ('ready') {
+    @if (onSummary()) {
+      <section class="summary">
+        <a class="back" [routerLink]="['/learn', level()]">← {{ t.backToLevel(levelName) }}</a>
+        <p class="lesson-title">{{ i18n.localize(current.lesson.title) }}</p>
+        <h2 data-step-heading tabindex="-1">{{ t.summaryTitle }}</h2>
+        @if (exercises() > 0) {
+          <p class="first-try">{{ t.firstTry(firstTries(), exercises()) }}</p>
+        }
+        @if (current.terms.length > 0) {
+          <section class="terms" aria-labelledby="learned-terms">
+            <h3 id="learned-terms">{{ t.learnedTerms }}</h3>
+            <ul>
+              @for (term of current.terms; track term.id) {
+                <li>
+                  <a routerLink="/learn/glossary" [fragment]="term.id">{{
+                    i18n.localize(term.name)
+                  }}</a>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+        <div class="summary-actions">
+          @if (current.next; as nextLesson) {
+            <a
+              class="button primary next-lesson"
+              [routerLink]="['/learn', nextLesson.level, nextLesson.id]"
+              >{{ t.nextLessonButton }}</a
+            >
+          }
+          @if (practice(); as link) {
+            <a class="button practise" [routerLink]="link">{{ t.practise }}</a>
+          }
+          <a class="button back-to-level" [routerLink]="['/learn', level()]">{{
+            t.backToLevel(levelName)
+          }}</a>
+        </div>
+      </section>
+    } @else {
+      <div class="play-stage">
+        <!-- One fresh view per step: nothing an earlier step scheduled can reach the next one. -->
+        @for (shown of [index()]; track shown) {
+          @if (step(); as step) {
+            @switch (step.kind) {
+              @case ('explain') {
+                <app-explain-step [step]="step">
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-explain-step>
+              }
+              @case ('choice') {
+                <app-choice-step [step]="step" (done)="onDone(shown, $event)">
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-choice-step>
+              }
+              @case ('tap-square') {
+                <app-tap-square-step [step]="step" (done)="onDone(shown, $event)">
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-tap-square-step>
+              }
+              @case ('reach') {
+                <app-reach-step [step]="step" (done)="onDone(shown, $event)">
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-reach-step>
+              }
+              @case ('find-move') {
+                <app-find-move-step [step]="step" (done)="onDone(shown, $event)">
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-find-move-step>
+              }
+              @case ('play-out') {
+                <app-play-out-step
+                  [step]="step"
+                  [title]="i18n.localize(current.lesson.title)"
+                  (done)="onDone(shown, $event)"
+                >
+                  <div lessonHead class="lesson-head play-lead">
+                    <ng-container [ngTemplateOutlet]="head" />
+                  </div>
+                  <div lessonNav class="step-nav"><ng-container [ngTemplateOutlet]="nav" /></div>
+                </app-play-out-step>
+              }
+            }
+          }
+        }
+      </div>
+    }
+  }
+}
