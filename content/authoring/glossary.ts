@@ -157,6 +157,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'e7', to: 'e8', move: false }],
     },
     level: 'beginner',
+    lesson: 'pawn-moves',
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}coronacion-ajedrez`],
   },
   {

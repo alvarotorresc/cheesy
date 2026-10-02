@@ -88,5 +88,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "pawn-moves",
+    "level": "beginner",
+    "order": 7,
+    "title": {
+      "es": "El peón",
+      "en": "The pawn"
+    },
+    "summary": {
+      "es": "El peón avanza recto, captura en diagonal y, al llegar al final, se convierte en otra pieza.",
+      "en": "The pawn moves straight ahead, captures diagonally and, at the far end, turns into another piece."
+    },
+    "stepCount": 9,
+    "exerciseCount": 4
   }
 ]

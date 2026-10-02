@@ -1,0 +1,1085 @@
+{
+  "id": "pawn-moves",
+  "level": "beginner",
+  "order": 7,
+  "title": {
+    "es": "El peón",
+    "en": "The pawn"
+  },
+  "summary": {
+    "es": "El peón avanza recto, captura en diagonal y, al llegar al final, se convierte en otra pieza.",
+    "en": "The pawn moves straight ahead, captures diagonally and, at the far end, turns into another piece."
+  },
+  "terms": [
+    "promotion"
+  ],
+  "sources": [
+    "https://handbook.fide.com/chapter/E012023",
+    "https://en.wikipedia.org/wiki/Rules_of_chess"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón avanza hacia delante, una casilla cada vez. Pero desde su casilla de salida puede avanzar dos de golpe. Mira: el peón blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " avanza dos, hasta "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", y el negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " responde igual, hasta "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The pawn moves forward, one square at a time. But from its starting square it may advance two at once. Watch: the white pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " advances two, to "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", and the black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " does the same, to "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white",
+        "moves": [
+          "e4",
+          "e5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón nunca retrocede, y solo avanza si la casilla de delante está libre. Aquí los peones de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " se tapan el uno al otro: ninguno de los dos puede avanzar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A pawn never moves backwards, and it only advances if the square in front of it is empty. Here the pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " block each other: neither of them can advance."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/4p3/4P3/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4",
+          "e5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " tiene justo delante el peón negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Puede capturarlo?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " has the black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " right in front of it. Can it capture it?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/4p3/4P3/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4",
+          "e5"
+        ]
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "No",
+            "en": "No"
+          },
+          {
+            "es": "Sí, avanzando una casilla",
+            "en": "Yes, by moving one square forward"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: no puede. El peón es la única pieza que no captura como se mueve: avanza recto, pero captura en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ". Lo verás ahora."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: it cannot. The pawn is the only piece that does not capture the way it moves: it advances straight ahead, but it captures "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": ". You will see it now."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón avanza hacia delante, pero no captura hacia delante. Una pieza justo delante lo deja bloqueado."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn moves forward, but it does not capture forward. A piece right in front of it leaves it blocked."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón captura una casilla en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " hacia delante. El peón blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " puede capturar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " o el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", los de las flechas. En cambio, no puede capturar nada que tenga justo delante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The pawn captures one square "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": " forwards. The white pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " can capture the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " or the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", the ones at the arrows. On the other hand, it cannot capture anything right in front of it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/2p1n3/3P4/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "d4",
+            "to": "c5"
+          },
+          {
+            "from": "d4",
+            "to": "e5"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu turno. El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " puede capturar dos piezas negras, pero solo una está sin defender. Captúrala."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your turn. The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " can capture two black pieces, but only one of them is undefended. Capture it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/6p1/3n1p2/4P3/8/8/4K3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "capture-undefended"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " no tenía defensa. El peón lo captura en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " y ocupa su casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " had no defender. The pawn captures it "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": " and takes its square."
+          }
+        ]
+      },
+      "wrong": {
+        "exf5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese peón está defendido: el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": " capturaría el tuyo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That pawn is defended: the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": " would capture yours."
+            }
+          ]
+        },
+        "e5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Eso es avanzar, no capturar. El peón captura en "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That is advancing, not capturing. The pawn captures "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonally"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Mira las dos casillas en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " delante del peón. ¿Cuál de las dos piezas no tiene a nadie que la proteja?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look at the two squares "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": " in front of the pawn. Which of the two pieces has nobody protecting it?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando un peón llega a la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ", se convierte en otra pieza: dama, torre, alfil o caballo, la que quieras, pero nunca en rey. Es la "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronación"
+          },
+          {
+            "kind": "text",
+            "text": ". Casi siempre se elige dama, la más fuerte. Aquí el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y se convierte en dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When a pawn reaches the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ", it turns into another piece: a queen, rook, bishop or knight, whichever you like, but never a king. This is "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotion"
+          },
+          {
+            "kind": "text",
+            "text": ". Almost always you choose a queen, the strongest. Here the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " advances to "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and becomes a queen."
+          }
+        ]
+      },
+      "board": {
+        "fen": "k7/4P3/8/8/8/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "e8=Q+"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu turno: "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": " el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": ". Solo le falta una casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your turn: "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promote"
+          },
+          {
+            "kind": "text",
+            "text": " the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": ". It needs only one more square."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/1P4k1/8/8/8/8/8/4K3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "promote"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón llega a "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": " y se "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": ". Si has elegido dama, ahora tienes la pieza más fuerte del tablero."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn reaches "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": ". If you chose a queen, you now have the strongest piece on the board."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Avanza el peón hasta la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " y elige la pieza: casi siempre, la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Move the pawn up to the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " and choose the piece: almost always, the queen."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Otra más, un poco más difícil: "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": " el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ". Ojo: el alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " le tapa el paso hacia delante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "One more, a little harder: "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promote"
+          },
+          {
+            "kind": "text",
+            "text": " the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ". Careful: the black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " blocks its way forward."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2br3k/2P5/8/8/8/8/8/4K3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "promote"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón captura la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " y se "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": " en la misma jugada. Una captura en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " también sirve para llegar a la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn captures the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": " in the same move. A "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " capture also takes it to the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si no puede avanzar, quizá pueda capturar en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " y llegar a la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " a la vez."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If it cannot advance, maybe it can capture "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": " and reach the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " at the same time."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: el peón avanza una casilla hacia delante, o dos desde su casilla de salida, y nunca retrocede. Captura en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", una casilla hacia delante. Al llegar a la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " se "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": ": se convierte en dama, torre, alfil o caballo. Cada bando empieza con ocho peones, en su segunda fila."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the pawn moves one square forward, or two from its starting square, and it never goes back. It captures "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonally"
+          },
+          {
+            "kind": "text",
+            "text": ", one square forward. On reaching the last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " it "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": ": it becomes a queen, rook, bishop or knight. Each side starts with eight pawns, on its second rank."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "orientation": "white"
+      }
+    }
+  ]
+}

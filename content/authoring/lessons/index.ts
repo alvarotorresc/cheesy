@@ -6,6 +6,7 @@ import { bishopMoves } from './beginner/03-bishop-moves.ts';
 import { queenMoves } from './beginner/04-queen-moves.ts';
 import { kingMoves } from './beginner/05-king-moves.ts';
 import { knightMoves } from './beginner/06-knight-moves.ts';
+import { pawnMoves } from './beginner/07-pawn-moves.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -14,4 +15,5 @@ export const lessons: LessonSpec[] = [
   queenMoves,
   kingMoves,
   knightMoves,
+  pawnMoves,
 ];
