@@ -115,9 +115,16 @@ export class TermHints {
       event.preventDefault();
       this.hide();
     };
-    // Placed for one scroll position and window size: hide it rather than chase them.
-    const onViewChange = () => this.current() && this.hide();
     const view = this.document.defaultView;
+    // The page can move under it (Tab scrolls a link into view just after focusing it): it follows
+    // the word while the word is on screen, and goes when the word leaves.
+    const onViewChange = () => {
+      const link = this.current();
+      if (!link) return;
+      const word = link.getBoundingClientRect();
+      if (word.bottom <= 0 || word.top >= (view?.innerHeight ?? 0)) this.hide();
+      else this.position(link);
+    };
     this.document.addEventListener('pointerdown', onPress, { capture: true, passive: true });
     this.document.addEventListener('keydown', onKey, { capture: true });
     view?.addEventListener('scroll', onViewChange, { passive: true });

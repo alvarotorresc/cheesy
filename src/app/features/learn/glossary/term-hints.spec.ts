@@ -123,6 +123,25 @@ describe('TermHints', () => {
     expect(hint()).toBeNull();
   });
 
+  it('should follow the link while the page scrolls, and hide once the link is off screen', async () => {
+    const at = (top: number) =>
+      vi
+        .spyOn(link(), 'getBoundingClientRect')
+        .mockReturnValue(DOMRect.fromRect({ x: 40, y: top, width: 60, height: 20 }));
+    at(300);
+    // Tab to a link below the fold: the browser scrolls it into view just after the focus.
+    link().focus();
+    await fixture.whenStable();
+    window.dispatchEvent(new Event('scroll'));
+    await fixture.whenStable();
+    expect(hint()).not.toBeNull();
+
+    at(-400);
+    window.dispatchEvent(new Event('scroll'));
+    await fixture.whenStable();
+    expect(hint()).toBeNull();
+  });
+
   it('should not show it when the mouse only passes by', async () => {
     vi.useFakeTimers();
     mouse('pointerover');
