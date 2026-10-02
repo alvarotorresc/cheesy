@@ -137,8 +137,14 @@
     box-shadow 600ms ease;
 }
 
+/* The page focuses the card it takes the reader to: a ring only when the keyboard got them there. */
 .term:focus {
   outline: none;
+}
+
+.term:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .term .card-body {
@@ -272,8 +278,10 @@
     padding: 0 var(--space-1);
   }
 
+  /* Room for a lesson title on two lines (plus the padding and rule), so the rules line up in a row. */
   .lesson {
     align-self: end;
+    min-height: calc(2lh + var(--space-3) + 1px);
     padding-top: var(--space-3);
     border-top: 1px solid var(--color-border);
   }
