@@ -12,8 +12,14 @@ import {
   untracked,
 } from '@angular/core';
 import { Location, ViewportScroller } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import {
   GLOSSARY_GROUPS,
@@ -113,6 +119,16 @@ export class GlossaryPage {
   private readonly frames = new Map<string, readonly MiniFrame[]>();
 
   constructor() {
+    // Back and forward between entries of this page: the filters follow the address again. Other
+    // navigations do not re-read it, because a link to a term drops the query on purpose.
+    let popstate = false;
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
+      if (event instanceof NavigationStart) popstate = event.navigationTrigger === 'popstate';
+      else if (event instanceof NavigationEnd && popstate) {
+        popstate = false;
+        this.filters.set(filtersFromParams(this.route.snapshot.queryParamMap));
+      }
+    });
     // The terms arrive after the router has finished, so its own anchor scrolling finds nothing:
     // once they are drawn (and every later link to a term of this page), the page goes to the card.
     effect(() => {
@@ -188,7 +204,8 @@ export class GlossaryPage {
       queryParams: paramsOf(this.filters()),
       ...(fragment ? { fragment } : {}),
     });
-    this.location.replaceState(this.router.serializeUrl(tree));
+    // Keeps the router's history state, so Back still restores the scroll position.
+    this.location.replaceState(this.router.serializeUrl(tree), '', this.location.getState());
   }
 
   /** Takes the reader to the card of a term, first clearing the filters that hide it. */

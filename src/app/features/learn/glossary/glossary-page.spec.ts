@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { NavigationEnd, provideRouter, Router } from '@angular/router';
+import { filter, firstValueFrom } from 'rxjs';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
 import { bundledGlossaryLoader, bundledLessonLoaders } from '../../../core/content/testing';
@@ -147,6 +148,33 @@ describe('GlossaryPage', () => {
     expect(root.querySelector<HTMLInputElement>('input[type=search]')?.value).toBe('boden');
     expect(chip(root, 'Mates con nombre').getAttribute('aria-pressed')).toBe('true');
     expect(level(root, 'Medio').getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('should keep the router state of the entry when a filter changes the address', async () => {
+    const root = await open();
+    const before = TestBed.inject(Location).getState();
+    chip(root, 'Táctica').click();
+    await settle();
+    expect(path()).toBe('/learn/glossary?group=tactics');
+    expect(TestBed.inject(Location).getState()).toEqual(before);
+  });
+
+  it('should follow the address again on back and forward', async () => {
+    const root = await open('/learn/glossary?group=tactics');
+    await harness.navigateByUrl('/learn/glossary#fork');
+    await settle();
+    chip(root, 'Mates con nombre').click();
+    await settle();
+    expect(path()).toContain('group=mates');
+    const router = TestBed.inject(Router);
+    // The test harness never starts the initial navigation, which is what listens to the history.
+    router.setUpLocationChangeListener();
+    const back = firstValueFrom(router.events.pipe(filter((e) => e instanceof NavigationEnd)));
+    TestBed.inject(Location).back();
+    await back;
+    await settle();
+    expect(path()).toBe('/learn/glossary?group=tactics');
+    expect(chip(root, 'Táctica').getAttribute('aria-pressed')).toBe('true');
   });
 
   it('should say so when nothing matches and clear every filter from there', async () => {

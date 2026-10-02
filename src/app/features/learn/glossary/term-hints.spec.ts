@@ -79,6 +79,17 @@ describe('TermHints', () => {
     expect(hint()?.textContent?.trim()).toBe(FILE_ES);
   });
 
+  it('should hide it when its link leaves the page (a search filtered the card out)', async () => {
+    link().focus();
+    await fixture.whenStable();
+    expect(hint()).not.toBeNull();
+    link().remove();
+    // The page renders again after a search (here, any change does).
+    fixture.componentInstance.terms.update((terms) => [...terms]);
+    await fixture.whenStable();
+    expect(hint()).toBeNull();
+  });
+
   it('should hide it with Escape and when the focus leaves', async () => {
     link().focus();
     await fixture.whenStable();

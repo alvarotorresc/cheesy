@@ -1,4 +1,5 @@
 import {
+  afterEveryRender,
   afterNextRender,
   Component,
   computed,
@@ -107,6 +108,10 @@ export class TermHints {
   private pointing = false;
 
   constructor() {
+    // The link under the hint can disappear without a pointerout (a search filters its card out).
+    afterEveryRender(() => {
+      if (this.current()?.isConnected === false) this.hide();
+    });
     const onPress = () => (this.pointing = true);
     // Escape hides it wherever the focus is (a hint the mouse opened never took it).
     const onKey = (event: KeyboardEvent) => {
