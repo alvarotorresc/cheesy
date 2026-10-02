@@ -83,6 +83,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: var(--tap);
   min-height: var(--tap);
   padding: var(--space-2) var(--space-1);
   color: var(--color-on-ink-muted);
@@ -184,6 +185,14 @@
   max-width: var(--content-width);
   padding-top: var(--space-6);
   padding-bottom: var(--space-16);
+}
+
+/* The narrowest phones (under 360px): five words still fit on one row. */
+@media (max-width: 22.49rem) {
+  .nav-link {
+    padding-inline: 2px;
+    font-size: 0.75rem;
+  }
 }
 
 /* Tablet: the brand and both switches on one row, the navigation on its own row below. */
