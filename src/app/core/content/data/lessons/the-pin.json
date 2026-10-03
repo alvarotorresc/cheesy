@@ -1,0 +1,751 @@
+{
+  "id": "the-pin",
+  "level": "intermediate",
+  "order": 3,
+  "title": {
+    "es": "La clavada",
+    "en": "The pin"
+  },
+  "summary": {
+    "es": "Una pieza que no puede moverse sin dejar algo más valioso al descubierto.",
+    "en": "A piece that cannot move without exposing something worth more."
+  },
+  "terms": [
+    "pin"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Hay una "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "clavada"
+          },
+          {
+            "kind": "text",
+            "text": " cuando una pieza no puede moverse porque detrás de ella, en la misma línea, hay otra más valiosa. Si la de detrás es el rey, la clavada es absoluta: mover la pieza clavada dejaría al rey en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", y eso no está permitido. Aquí el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " no puede moverse: detrás está el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "There is a "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "pin"
+          },
+          {
+            "kind": "text",
+            "text": " when a piece cannot move because behind it, on the same line, stands a more valuable one. If the piece behind is the king, the pin is absolute: moving the pinned piece would leave the king in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", and that is not allowed. Here the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " cannot move: the king on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " is behind it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/2n5/1B6/8/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c6",
+          "e8"
+        ],
+        "arrows": [
+          {
+            "from": "b5",
+            "to": "e8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si detrás no está el rey sino otra pieza valiosa, como la dama, la clavada es relativa: la pieza clavada puede moverse, pero entonces se pierde lo de detrás. Aquí, si el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " se aparta, el alfil captura la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If what stands behind is not the king but another valuable piece, such as the queen, the pin is relative: the pinned piece may move, but then the piece behind is lost. Here, if the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " steps aside, the bishop captures the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3qk3/8/5n2/6B1/8/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f6",
+          "d8"
+        ],
+        "arrows": [
+          {
+            "from": "g5",
+            "to": "d8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Clava la dama negra contra su rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Pin the black queen to her king."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k2r/pp1q1ppp/3bpn2/8/8/2N5/PPQ1BPPP/R4RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bb5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " clava la dama. No puede apartarse, y si captura el alfil, tu caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " la captura a ella. Ganas la dama por un alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " pins the queen. She cannot step aside, and if she takes the bishop, your knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " takes her. You win the queen for a bishop."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama de "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " están en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " and the king on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " stand on the same "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " está clavado contra el rey. Atácalo otra vez, esta vez con un peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " is pinned to the king. Attack it again, this time with a pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r2qk2r/ppp1ppbp/2n2np1/1B6/2PP4/8/PP1NQPPP/R1B2RK1 w k - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "d5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón ataca al caballo, y el caballo no puede huir porque está clavado. Las negras pierden una pieza. Había que darse prisa: si esperas, el rey negro hace el "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "enroque"
+          },
+          {
+            "kind": "text",
+            "text": " y la clavada desaparece."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn attacks the knight, and the knight cannot run because it is pinned. Black loses a piece. You had to hurry: if you wait, the black king plays "
+          },
+          {
+            "kind": "term",
+            "id": "castling",
+            "text": "castling"
+          },
+          {
+            "kind": "text",
+            "text": " and the pin is gone."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un peón que avanza ataca las dos casillas que tiene delante en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A pawn that advances attacks the two squares in front of it on the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " está clavado contra la dama. ¿Qué jugada aprovecha la clavada?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " is pinned to the queen. Which move takes advantage of the pin?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbq1rk1/ppp2ppp/3p1n2/6B1/3PP3/2NB4/PPP1QPPP/R4RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "e5",
+          "Bxf6",
+          "h3"
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón ataca al caballo clavado. Si el caballo se aparta, el alfil captura la dama; si se queda, el peón lo captura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn attacks the pinned knight. If the knight steps aside, the bishop takes the queen; if it stays, the pawn takes it."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Cambias tu alfil por el caballo y la clavada desaparece, pero no ganas nada."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You trade your bishop for the knight and the pin is gone, but you win nothing."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es una jugada tranquila: no ataca nada, y el rival tiene tiempo de deshacer la clavada."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is a quiet move: it attacks nothing, and your opponent has time to undo the pin."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Para deshacer una clavada hay tres caminos: apartar la pieza de detrás, tapar la línea con otra pieza o atacar a la pieza que clava. Aquí el peón negro avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca al alfil que clava el caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "There are three ways to undo a pin: move the piece behind out of the way, block the line with another piece, or attack the piece that pins. Here the black pawn advances to "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the bishop pinning the knight."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3qk3/7p/5n2/6B1/8/8/8/4K3 b - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "h6"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " está clavado y nadie lo defiende. Gánalo antes de que el rival deshaga la clavada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " is pinned and nobody defends it. Win it before your opponent undoes the pin."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2b1k2r/p1p2ppp/2n1p3/1B6/8/8/PP3PPP/RN4K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxc6+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: capturas el caballo con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Si hubieras esperado, el alfil negro habría ido a "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " para tapar la clavada y defender el caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: you capture the knight with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". Had you waited, the black bishop would have gone to "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " to block the pin and defend the knight."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si esperas, el alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " puede ir a "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ": tapa la clavada y defiende el caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If you wait, the black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " can go to "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ": it blocks the pin and defends the knight."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en una "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "clavada"
+          },
+          {
+            "kind": "text",
+            "text": ", la pieza de delante no puede moverse sin dejar al descubierto otra más valiosa. Si detrás está el rey, ni siquiera puede moverse. Aprovéchala atacando otra vez a la pieza clavada, a ser posible con un peón, y date prisa: el rival intentará deshacerla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in a "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "pin"
+          },
+          {
+            "kind": "text",
+            "text": ", the piece in front cannot move without exposing a more valuable one. If the king is behind, it cannot move at all. Take advantage of it by attacking the pinned piece again, with a pawn if you can, and hurry: your opponent will try to undo it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/2n5/1B6/8/8/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c6",
+          "e8"
+        ],
+        "arrows": [
+          {
+            "from": "b5",
+            "to": "e8"
+          }
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "pin"
+  }
+}

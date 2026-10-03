@@ -622,6 +622,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-pin',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/the-pin/9ogFv8Ac',

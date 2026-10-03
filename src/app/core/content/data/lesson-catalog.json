@@ -208,5 +208,20 @@
     },
     "stepCount": 7,
     "exerciseCount": 4
+  },
+  {
+    "id": "the-pin",
+    "level": "intermediate",
+    "order": 3,
+    "title": {
+      "es": "La clavada",
+      "en": "The pin"
+    },
+    "summary": {
+      "es": "Una pieza que no puede moverse sin dejar algo más valioso al descubierto.",
+      "en": "A piece that cannot move without exposing something worth more."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]
