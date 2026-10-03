@@ -101,7 +101,7 @@ export const hangingPieces: LessonSpec = {
         fen: '3r2k1/1p3ppp/pn6/8/8/3B4/PP3PPP/2R3K1 w - - 0 1',
         orientation: 'white',
       },
-      answer: { by: 'engine', options: ['Be2', 'Bxh7+', 'Bb5'], correct: 0 },
+      answer: { by: 'engine', options: ['Be4', 'Bxh7+', 'Bb5'], correct: 0 },
       whyWrong: [
         null, // correct option: no whyWrong
         {
@@ -114,8 +114,8 @@ export const hangingPieces: LessonSpec = {
         },
       ],
       explanation: {
-        es: 'Eso es: en e2 el alfil está a salvo y no deja ninguna otra pieza colgada.',
-        en: 'That is it: on e2 the bishop is safe and leaves no other piece hanging.',
+        es: 'Eso es: en e4 el alfil está a salvo, nadie lo ataca, y no deja ninguna otra pieza colgada.',
+        en: 'That is it: on e4 the bishop is safe, nothing attacks it, and it leaves no other piece hanging.',
       },
     },
     {

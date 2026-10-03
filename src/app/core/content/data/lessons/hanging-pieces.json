@@ -469,7 +469,7 @@
       "answer": {
         "by": "engine",
         "options": [
-          "Be2",
+          "Be4",
           "Bxh7+",
           "Bb5"
         ],
@@ -483,11 +483,11 @@
           },
           {
             "kind": "square",
-            "square": "e2"
+            "square": "e4"
           },
           {
             "kind": "text",
-            "text": " el alfil está a salvo y no deja ninguna otra pieza colgada."
+            "text": " el alfil está a salvo, nadie lo ataca, y no deja ninguna otra pieza colgada."
           }
         ],
         "en": [
@@ -497,11 +497,11 @@
           },
           {
             "kind": "square",
-            "square": "e2"
+            "square": "e4"
           },
           {
             "kind": "text",
-            "text": " the bishop is safe and leaves no other piece hanging."
+            "text": " the bishop is safe, nothing attacks it, and it leaves no other piece hanging."
           }
         ]
       },
