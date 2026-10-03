@@ -25,6 +25,7 @@ import { lessonSummary } from '../../lib/lesson-build.ts';
 import { positionFromFen } from '../../lib/chess.ts';
 import { acceptedMoves } from '../../../src/app/core/lessons/find-move-rules.ts';
 import { validateLesson } from '../../lib/schema.ts';
+import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
 
 const text = (value: string) => ({
@@ -384,6 +385,24 @@ describe('seeded checks', () => {
   });
 });
 
+describe('findMoveValidator', () => {
+  const ENDING = '8/8/8/8/5k2/8/2P2r2/2K1R3 w - - 0 1'; // 5 pieces
+  const EIGHT = '6k1/5ppp/8/8/2n5/8/5PPP/R5K1 w - - 0 1'; // 10 pieces
+
+  it('sends an ending without a mate to the tablebase', () => {
+    expect(findMoveValidator(ENDING, ['Kb2'])).toBe('tablebase');
+    expect(findMoveValidator(ENDING, ['Kb2', 'Rf1', 'Re4+'])).toBe('tablebase');
+  });
+
+  it('sends a mate to Stockfish, however few pieces there are', () => {
+    expect(findMoveValidator('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', ['Ra8#'])).toBe('stockfish');
+  });
+
+  it('sends a position with more than 7 pieces to Stockfish', () => {
+    expect(findMoveValidator(EIGHT, ['Ra4'])).toBe('stockfish');
+  });
+});
+
 describe('lessons', () => {
   const lessons = loadLessons();
 
@@ -440,6 +459,18 @@ describe('lessons', () => {
     const categories = new Set(loadEndgames().map((e) => e.category.en));
     const tags = new Set(loadPositions().flatMap((p) => p.tags));
     expect(nextErrors(lessons, categories, tags)).toEqual([]);
+  });
+
+  it('10/13. every engine find-move goes to Stockfish or to the tablebase, never to neither', () => {
+    const engineFindMoves = lessons.flatMap((l) =>
+      l.steps.flatMap((s) =>
+        s.kind === 'find-move' && s.check.by === 'engine'
+          ? [findMoveValidator(s.board.fen, s.check.solution)]
+          : [],
+      ),
+    );
+    expect(engineFindMoves.length).toBeGreaterThan(0);
+    expect(engineFindMoves.filter((v) => v !== 'stockfish' && v !== 'tablebase')).toEqual([]);
   });
 
   it('castling-en-passant: the castling question agrees with the rule', () => {
