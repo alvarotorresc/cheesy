@@ -1895,20 +1895,20 @@
   {
     "id": "fork",
     "name": {
-      "es": "Ataque doble",
+      "es": "Horquilla",
       "en": "Fork"
     },
     "definition": {
       "es": [
         {
           "kind": "text",
-          "text": "Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada."
+          "text": "Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada. También se llama ataque doble."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move."
+          "text": "A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move. It is also called a double attack."
         }
       ]
     },
@@ -1946,11 +1946,11 @@
         {
           "kind": "term",
           "id": "fork",
-          "text": "Ataque doble"
+          "text": "Horquilla"
         },
         {
           "kind": "text",
-          "text": " hecho por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo."
+          "text": " hecha por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo."
         }
       ],
       "en": [
@@ -1995,7 +1995,7 @@
   {
     "id": "skewer",
     "name": {
-      "es": "Ensartada",
+      "es": "Enfilada",
       "en": "Skewer"
     },
     "definition": {
@@ -2011,7 +2011,7 @@
         },
         {
           "kind": "text",
-          "text": " al revés: la pieza de delante es la que más vale."
+          "text": " al revés: la pieza de delante es la que más vale. También se llama ensartada."
         }
       ],
       "en": [
@@ -2220,12 +2220,12 @@
         },
         {
           "kind": "text",
-          "text": ", porque allí se la puede atacar mejor, por ejemplo con un "
+          "text": ", porque allí se la puede atacar mejor, por ejemplo con una "
         },
         {
           "kind": "term",
           "id": "fork",
-          "text": "ataque doble"
+          "text": "horquilla"
         },
         {
           "kind": "text",

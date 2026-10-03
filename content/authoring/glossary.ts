@@ -608,10 +608,10 @@ export const glossary: GlossarySpec[] = [
   },
   {
     id: 'fork',
-    name: { es: 'Ataque doble', en: 'Fork' },
+    name: { es: 'Horquilla', en: 'Fork' },
     definition: {
-      es: 'Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada.',
-      en: 'A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move.',
+      es: 'Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada. También se llama ataque doble.',
+      en: 'A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move. It is also called a double attack.',
     },
     example: {
       fen: 'r5k1/6pp/8/8/8/8/6PP/3Q2K1 w - - 0 1',
@@ -627,7 +627,7 @@ export const glossary: GlossarySpec[] = [
     id: 'knight-fork',
     name: { es: 'Horquilla de caballo', en: 'Knight fork' },
     definition: {
-      es: '[Ataque doble](fork) hecho por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
+      es: '[Horquilla](fork) hecha por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
       en: 'A [fork](fork) made by a knight. It is especially dangerous because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight.',
     },
     example: {
@@ -642,9 +642,9 @@ export const glossary: GlossarySpec[] = [
   },
   {
     id: 'skewer',
-    name: { es: 'Ensartada', en: 'Skewer' },
+    name: { es: 'Enfilada', en: 'Skewer' },
     definition: {
-      es: 'Se ataca a una pieza valiosa que, al apartarse, deja al descubierto otra que estaba detrás en la misma línea, y esa es la que cae. Es como una [clavada](pin) al revés: la pieza de delante es la que más vale.',
+      es: 'Se ataca a una pieza valiosa que, al apartarse, deja al descubierto otra que estaba detrás en la misma línea, y esa es la que cae. Es como una [clavada](pin) al revés: la pieza de delante es la que más vale. También se llama ensartada.',
       en: 'A valuable piece is attacked and, when it steps aside, it uncovers another piece behind it on the same line, which is then taken. It is like a [pin](pin) turned around: the piece in front is the more valuable one.',
     },
     example: {
@@ -731,7 +731,7 @@ export const glossary: GlossarySpec[] = [
     id: 'attraction',
     name: { es: 'Atracción', en: 'Attraction' },
     definition: {
-      es: 'Obligar a una pieza rival, a menudo el rey, a ir a una casilla concreta mediante un [sacrificio](sacrifice), porque allí se la puede atacar mejor, por ejemplo con un [ataque doble](fork).',
+      es: 'Obligar a una pieza rival, a menudo el rey, a ir a una casilla concreta mediante un [sacrificio](sacrifice), porque allí se la puede atacar mejor, por ejemplo con una [horquilla](fork).',
       en: 'Luring an enemy piece, often the king, onto a particular square by means of a [sacrifice](sacrifice), because there it can be hit harder, for instance with a [fork](fork).',
     },
     example: {
