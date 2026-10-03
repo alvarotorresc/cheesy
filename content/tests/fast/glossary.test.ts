@@ -62,6 +62,7 @@ const EXPECTED_IDS = [
   'philidor-position',
   'building-a-bridge',
   'hanging-piece',
+  'discovered-check',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -87,6 +88,7 @@ const GROUPS: Record<string, string[]> = {
     'skewer',
     'double-check',
     'discovered-attack',
+    'discovered-check',
     'deflection',
     'attraction',
     'intermediate-move',

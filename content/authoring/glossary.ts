@@ -702,6 +702,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'discovered-attacks',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/double-check/RUQASaZm',
@@ -726,9 +727,35 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'discovered-attacks',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/discovered-attacks/MnsJEWnI',
+      `${WIKI}Discovered_attack`,
+    ],
+  },
+  {
+    id: 'discovered-check',
+    name: { es: 'Jaque a la descubierta', en: 'Discovered check' },
+    definition: {
+      es: 'Una pieza se aparta y destapa el [jaque](check) de otra de su mismo bando que estaba detrás. Como el rival tiene que atender a su rey, la pieza que se ha movido queda libre para capturar o atacar lo que quiera.',
+      en: 'A piece moves out of the way and uncovers a [check](check) from another piece of the same side behind it. Since the opponent has to deal with the king, the piece that moved is free to capture or attack whatever it likes.',
+    },
+    example: {
+      fen: '4k3/8/8/8/4B3/8/8/4R1K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e8'],
+      arrows: [
+        { from: 'e4', to: 'h7', move: true },
+        { from: 'e1', to: 'e8', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'discovered-attacks',
+    sources: [
+      `${CHESSCOM_EN}discovered-check-chess`,
+      'https://lichess.org/training/discoveredCheck',
       `${WIKI}Discovered_attack`,
     ],
   },

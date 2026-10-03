@@ -16,6 +16,7 @@ import { hangingPieces } from './intermediate/01-hanging-pieces.ts';
 import { theFork } from './intermediate/02-the-fork.ts';
 import { thePin } from './intermediate/03-the-pin.ts';
 import { theSkewer } from './intermediate/04-the-skewer.ts';
+import { discoveredAttacks } from './intermediate/05-discovered-attacks.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -34,4 +35,5 @@ export const lessons: LessonSpec[] = [
   theFork,
   thePin,
   theSkewer,
+  discoveredAttacks,
 ];

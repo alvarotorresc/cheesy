@@ -238,5 +238,20 @@
     },
     "stepCount": 6,
     "exerciseCount": 3
+  },
+  {
+    "id": "discovered-attacks",
+    "level": "intermediate",
+    "order": 5,
+    "title": {
+      "es": "Ataque a la descubierta y jaque doble",
+      "en": "Discovered attacks and double check"
+    },
+    "summary": {
+      "es": "Una pieza se aparta y destapa el ataque de otra que estaba detrás.",
+      "en": "One piece steps aside and uncovers the attack of another behind it."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]
