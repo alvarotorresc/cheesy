@@ -193,5 +193,20 @@
     },
     "stepCount": 7,
     "exerciseCount": 4
+  },
+  {
+    "id": "the-fork",
+    "level": "intermediate",
+    "order": 2,
+    "title": {
+      "es": "La horquilla",
+      "en": "The fork"
+    },
+    "summary": {
+      "es": "Una pieza ataca a dos a la vez, y el rival solo puede salvar una.",
+      "en": "One piece attacks two at once, and the opponent can only save one."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
   }
 ]

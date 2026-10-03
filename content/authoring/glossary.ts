@@ -643,6 +643,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-fork',
     sources: [WIKI_GLOSSARY, LICHESS_FORK, `${CHESSCOM_ES}ataque-doble`],
   },
   {
@@ -660,6 +661,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-fork',
     sources: [WIKI_GLOSSARY, LICHESS_FORK, `${WIKI}Fork_(chess)`],
   },
   {

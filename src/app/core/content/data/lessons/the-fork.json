@@ -1,0 +1,1005 @@
+{
+  "id": "the-fork",
+  "level": "intermediate",
+  "order": 2,
+  "title": {
+    "es": "La horquilla",
+    "en": "The fork"
+  },
+  "summary": {
+    "es": "Una pieza ataca a dos a la vez, y el rival solo puede salvar una.",
+    "en": "One piece attacks two at once, and the opponent can only save one."
+  },
+  "terms": [
+    "fork",
+    "knight-fork"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": " es un ataque a dos piezas a la vez con una sola pieza. El rival solo puede salvar una, y la otra se pierde. Aquí el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " ataca a la vez al rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y a la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ": el rey tiene que salir del "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", y el caballo se lleva la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": " is an attack on two pieces at once by a single piece. The opponent can only save one, and the other is lost. Here the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the king on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " at the same time: the king has to get out of "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", and the knight takes the rook."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k3/2N5/8/8/8/8/8/4K3 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a8",
+          "e8"
+        ],
+        "arrows": [
+          {
+            "from": "c7",
+            "to": "a8"
+          },
+          {
+            "from": "c7",
+            "to": "e8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una "
+          },
+          {
+            "kind": "term",
+            "id": "knight-fork",
+            "text": "horquilla de caballo"
+          },
+          {
+            "kind": "text",
+            "text": " que ataque a la vez al rey y a la dama negra."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a "
+          },
+          {
+            "kind": "term",
+            "id": "knight-fork",
+            "text": "knight fork"
+          },
+          {
+            "kind": "text",
+            "text": " that attacks the black king and queen at the same time."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r2qr2k/pppb2pp/4p3/6N1/8/8/PPP2PPP/RQ2R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nf7+",
+          "Kg8",
+          "Nxd8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey y ataca a la dama. El rey tiene que moverse, y el caballo se lleva la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king and attacks the queen. The king has to move, and the knight takes the queen."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Desde qué casilla atacaría el caballo a la vez "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "From which square would the knight attack both "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cualquier pieza puede hacer una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": ": el peón, el alfil, la torre, la dama y hasta el rey. Aquí el peón avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca a la vez al caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " y al alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Any piece can make a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": ": the pawn, the bishop, the rook, the queen and even the king. Here the pawn advances to "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " at the same time."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/5ppp/8/1n1b4/8/2P5/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "c4"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Haz una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": " con un peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Make a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": " with a pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/2n1b3/8/3P4/2NB4/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "d5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " ataca a la vez al caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " y al alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ". Y está defendido por tu caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ": si el alfil lo captura, el caballo recaptura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": " at once. And your knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " defends it: if the bishop takes it, the knight takes back."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un peón ataca las dos casillas que tiene delante en "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A pawn attacks the two squares in front of it on the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " de la dama también puede ser una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": ": ataca al rey y, a la vez, a una pieza que nadie defiende. Búscalo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A queen "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " can also be a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": ": it attacks the king and, at the same time, a piece nobody defends. Find it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4bk1/p5pp/1p6/q1p5/8/8/PPP2PPP/2BQ1RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qd5+",
+          "Kh8",
+          "Qxa8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la dama da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey solo puede ir a "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", y la dama se lleva la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". The king can only go to "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", and the queen takes the rook."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " no tiene defensa. ¿Desde qué casilla ve tu dama a la vez "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " has no defence. From which square does your queen see both "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " and the king on "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Qué jugada del caballo hace una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Which knight move makes a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k2r/pp3ppp/4pn2/1N6/8/8/PP3PPP/3R1RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Nc7+",
+          "Nd6+",
+          "Nxa7"
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: desde "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " el caballo da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey y ataca la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey se aparta y el caballo captura la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: from "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " the knight gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king and attacks the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". The king steps aside and the knight captures the rook."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero desde "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " el caballo solo ataca al rey y a dos peones: el rey se aparta y no ganas nada."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but from "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " the knight only attacks the king and two pawns: the king steps aside and you win nothing."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ganas un peón, pero en "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " el caballo no ataca nada más y se queda encerrado."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You win a pawn, but on "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " the knight attacks nothing else and gets trapped."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": " ataca dos piezas a la vez, y el rival solo puede salvar una. Cualquier pieza puede hacerla, pero la del caballo, la "
+          },
+          {
+            "kind": "term",
+            "id": "knight-fork",
+            "text": "horquilla de caballo"
+          },
+          {
+            "kind": "text",
+            "text": ", es la más traicionera. Para defenderte, no dejes dos piezas valiosas, sobre todo el rey y la dama, a un salto de caballo de la misma casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": " attacks two pieces at once, and the opponent can only save one. Any piece can make one, but the knight’s, the "
+          },
+          {
+            "kind": "term",
+            "id": "knight-fork",
+            "text": "knight fork"
+          },
+          {
+            "kind": "text",
+            "text": ", is the trickiest. To defend yourself, do not leave two valuable pieces, above all the king and queen, a knight’s jump away from the same square."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k3/2N5/8/8/8/8/8/4K3 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a8",
+          "e8"
+        ],
+        "arrows": [
+          {
+            "from": "c7",
+            "to": "a8"
+          },
+          {
+            "from": "c7",
+            "to": "e8"
+          }
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "fork"
+  }
+}
