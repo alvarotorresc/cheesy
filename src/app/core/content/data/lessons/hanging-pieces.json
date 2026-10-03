@@ -1,0 +1,756 @@
+{
+  "id": "hanging-pieces",
+  "level": "intermediate",
+  "order": 1,
+  "title": {
+    "es": "Piezas sin defensa",
+    "en": "Hanging pieces"
+  },
+  "summary": {
+    "es": "Ver qué piezas se quedan sin defensa, las tuyas y las del rival.",
+    "en": "Spotting the pieces left without defence, yours and your opponent’s."
+  },
+  "terms": [
+    "hanging-piece"
+  ],
+  "sources": [
+    "https://lichess.org/training/themes",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "pieza colgada"
+          },
+          {
+            "kind": "text",
+            "text": " es una pieza que el rival puede capturar gratis: está atacada y nadie la defiende. Aquí el alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " está colgado: el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " lo ataca y ninguna pieza negra lo protege. Antes de cada jugada, mira dos cosas: qué ha dejado colgado el rival con su última jugada y qué dejarías colgado tú con la tuya."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "hanging piece"
+          },
+          {
+            "kind": "text",
+            "text": " is a piece your opponent can capture for free: it is attacked and nobody defends it. Here the black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " is hanging: the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " attacks it and no black piece protects it. Before every move, look at two things: what your opponent has left hanging with their last move, and what you would leave hanging with yours."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/8/4b3/8/5N2/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e5"
+        ],
+        "arrows": [
+          {
+            "from": "f3",
+            "to": "e5"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu caballo puede capturar dos piezas negras. Una está colgada y la otra no. Captura la que nadie defiende."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your knight can capture two black pieces. One is hanging and the other is not. Capture the one nobody defends."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/p7/1b1n4/8/2N5/5PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "capture-undefended"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: nadie defendía el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", así que lo ganas gratis."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: nobody defended the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", so you win it for free."
+          }
+        ]
+      },
+      "wrong": {
+        "Nxb5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese alfil está defendido: el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " capturaría tu caballo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That bishop is defended: the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " would capture your knight."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Para cada pieza que puedes capturar, mira si alguna pieza negra podría recapturar en su casilla."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "For each piece you can capture, see whether a black piece could take back on its square."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si la pieza está defendida, cuenta: cuántas piezas tuyas la atacan, cuántas del rival la defienden y cuánto vale cada una. Aquí el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " tiene dos atacantes, tu caballo y tu torre, y un defensor, el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ". Empieza el caballo: el peón recaptura y tu torre se lleva el peón. Has ganado un peón. Si empezara la torre, la darías por un caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If the piece is defended, count: how many of your pieces attack it, how many of your opponent’s defend it, and what each one is worth. Here the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " has two attackers, your knight and your rook, and one defender, the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ". Your knight goes first: the pawn takes back and your rook takes the pawn. You have won a pawn. If the rook went first, you would give it for a knight."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/4p3/3n4/8/2N5/5PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Nxd5",
+          "exd5",
+          "Rxd5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tienes tres capturas. ¿Cuál gana material?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You have three captures. Which one wins material?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/pp3ppp/8/4p3/2Bnb3/2N5/PP3PPP/3R2K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Nxe4",
+          "Rxd4",
+          "Bxf7+"
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " está colgado. Nadie lo defiende, así que tu caballo lo captura gratis."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " is hanging. Nobody defends it, so your knight captures it for free."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El caballo de "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " está defendido por el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": ": das una torre, que vale 5, por un caballo, que vale 3."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The knight on "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " is defended by the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": ": you give a rook, worth 5, for a knight, worth 3."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el rey defiende el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": ": das un alfil, que vale 3, por un peón."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the king defends the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": ": you give a bishop, worth 3, for a pawn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora mira tus piezas. La torre negra de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " ataca tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": ", y nada lo defiende. ¿Qué jugada lo salva sin perder nada?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now look at your own pieces. The black rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " attacks your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": ", and nothing defends it. Which move saves it without losing anything?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/1p3ppp/pn6/8/8/3B4/PP3PPP/2R3K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Be2",
+          "Bxh7+",
+          "Bb5"
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: en "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " el alfil está a salvo y no deja ninguna otra pieza colgada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " the bishop is safe and leaves no other piece hanging."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey captura el alfil: lo cambias por un peón."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The king captures the bishop: you trade it for a pawn."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "En "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " el alfil sigue colgado: el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " lo captura."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "On "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " the bishop is still hanging: the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " captures it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo negro de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " tiene dos atacantes, tu caballo y tu dama, y un solo defensor, el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ". Gana material contando bien."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black knight on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " has two attackers, your knight and your queen, and only one defender, the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ". Win material by counting well."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r2q1rk1/ppp2ppp/2n5/4n3/8/5N2/PPP1QPPP/R1B2RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nxe5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: si el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " recaptura, tu dama lo captura a él. Dos atacantes contra un defensor: ganas un caballo. Y como empieza la pieza que menos vale, la dama nunca corre peligro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: if the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " takes back, your queen takes it. Two attackers against one defender: you win a knight. And since the piece worth the least goes first, the queen is never in danger."
+          }
+        ]
+      },
+      "wrong": {
+        "Qxe5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama vale 9: el caballo de "
+            },
+            {
+              "kind": "square",
+              "square": "c6"
+            },
+            {
+              "kind": "text",
+              "text": " la captura y tú solo recuperas un caballo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen is worth 9: the knight on "
+            },
+            {
+              "kind": "square",
+              "square": "c6"
+            },
+            {
+              "kind": "text",
+              "text": " takes her and you only get a knight back."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Empieza a capturar con la pieza que menos vale."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Start capturing with the piece worth the least."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: una "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "pieza colgada"
+          },
+          {
+            "kind": "text",
+            "text": " está atacada y sin defensa, y se puede capturar gratis. Antes de mover, mira qué deja colgado la jugada del rival y qué dejarías colgado tú. Si la pieza está defendida, cuenta atacantes y defensores, y captura primero con la pieza que menos vale."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: a "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "hanging piece"
+          },
+          {
+            "kind": "text",
+            "text": " is attacked and undefended, and can be captured for free. Before moving, look at what your opponent’s move leaves hanging and what you would leave hanging. If the piece is defended, count attackers and defenders, and capture first with the piece worth the least."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/8/4b3/8/5N2/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e5"
+        ],
+        "arrows": [
+          {
+            "from": "f3",
+            "to": "e5"
+          }
+        ]
+      }
+    }
+  ]
+}

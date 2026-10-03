@@ -178,5 +178,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "hanging-pieces",
+    "level": "intermediate",
+    "order": 1,
+    "title": {
+      "es": "Piezas sin defensa",
+      "en": "Hanging pieces"
+    },
+    "summary": {
+      "es": "Ver qué piezas se quedan sin defensa, las tuyas y las del rival.",
+      "en": "Spotting the pieces left without defence, yours and your opponent’s."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
   }
 ]

@@ -586,6 +586,28 @@ export const glossary: GlossarySpec[] = [
     ],
   },
   {
+    id: 'hanging-piece',
+    name: { es: 'Pieza colgada', en: 'Hanging piece' },
+    definition: {
+      es: 'Pieza atacada que nadie defiende: el rival puede capturarla gratis. Antes de mover conviene mirar qué piezas han quedado colgadas, las propias y las del rival.',
+      en: 'An attacked piece that nobody defends: the opponent can capture it for free. Before moving, it pays to look at which pieces have been left hanging, your own and your opponent’s.',
+    },
+    example: {
+      fen: '6k1/5ppp/8/4b3/8/5N2/5PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e5'],
+      arrows: [{ from: 'f3', to: 'e5', move: true }],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'hanging-pieces',
+    sources: [
+      `${CHESSCOM_EN}hanging-piece-chess`,
+      'https://lichess.org/training/hangingPiece',
+      `${WIKI}Chess_tactic`,
+    ],
+  },
+  {
     id: 'pin',
     name: { es: 'Clavada', en: 'Pin' },
     definition: {
