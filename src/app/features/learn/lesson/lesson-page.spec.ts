@@ -286,6 +286,56 @@ describe('LessonPage', () => {
     );
   });
 
+  it('should let a keyboard user solve a board exercise on the board itself', async () => {
+    const lesson = await fixtureLessonLoaders.lesson('the-board');
+    setup({
+      ...fixtureLessonLoaders,
+      lesson: async (id) =>
+        id === 'the-board'
+          ? {
+              ...lesson,
+              steps: [
+                lesson.steps[0],
+                {
+                  kind: 'find-move',
+                  text: plainText('Captura el alfil', 'Take the bishop'),
+                  board: { fen: '6k1/1p6/2p5/5b2/8/8/2Q5/6K1 w - - 0 1', orientation: 'white' },
+                  check: { by: 'engine', solution: ['Qxf5'] },
+                  explanation: plainText('Bien', 'Well done'),
+                },
+                ...lesson.steps.slice(2),
+              ],
+            }
+          : fixtureLessonLoaders.lesson(id),
+    });
+    await render('/learn/beginner/the-board');
+    await clickNext();
+    expect(nextButton()!.disabled).toBe(true);
+    const step = stepOf();
+    const board = root().querySelector<HTMLElement>('[role="application"]')!;
+    const press = async (...keys: string[]) => {
+      for (const key of keys) {
+        board.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+        await settle();
+      }
+    };
+
+    // The cursor starts on the white king, on g1: over to the queen on c2, then up to f5.
+    board.focus();
+    await settle();
+    await press('ArrowLeft', 'ArrowLeft', 'ArrowLeft', 'ArrowLeft', 'ArrowUp', 'Enter');
+    await press('ArrowRight', 'ArrowRight', 'ArrowRight', 'ArrowUp', 'ArrowUp', 'ArrowUp', 'Enter');
+
+    await vi.waitFor(async () => {
+      await settle();
+      expect(root().textContent).toContain('Well done');
+    });
+    expect(nextButton()!.disabled).toBe(false);
+    // On the board the arrows move the cursor, not the lesson to another step.
+    await press('ArrowLeft', 'ArrowRight', 'ArrowRight');
+    expect(stepOf()).toBe(step);
+  });
+
   it('should offer a retry when the lesson cannot be loaded', async () => {
     let fail = true;
     setup({

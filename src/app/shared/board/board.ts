@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   DestroyRef,
+  DOCUMENT,
   effect,
   ElementRef,
   inject,
@@ -29,6 +30,7 @@ import {
   type PendingPromotion,
   type PromotionRole,
 } from './board.types';
+import { isCursorKey, moveCursor, startSquare } from './cursor';
 import { BoardSpotlight, resolveSpot } from './spotlight';
 
 const PROMOTION_GLYPHS: Record<PromotionRole, string> = {
@@ -50,10 +52,20 @@ const BEST_BRUSH = { key: 'best', color: '#15781b', opacity: 0.82, lineWidth: 11
 /** Brush of the arrow of a pointed move. Remapped to a theme token in board.css. */
 const SPOT_BRUSH = { key: 'spot', color: '#2f6fb3', opacity: 0.7, lineWidth: 9 };
 
+/** Something the board says through its live region. `id` lets the same text be said twice. */
+interface Announcement {
+  readonly id: number;
+  readonly text: string;
+}
+
 /**
  * Presentational chess board backed by chessground. It renders whatever its inputs describe and
  * reports user moves through `move`; the parent decides whether to accept them. After every user
  * move the board re-syncs with its inputs, so a rejected move snaps back.
+ *
+ * It can also be played with the keyboard: the board is one tab stop, the arrows move a cursor over
+ * the squares, Enter or Space picks a piece and plays it, and Escape drops it. The moves go through
+ * chessground's own selection, so they reach `move` the same way as with the mouse.
  */
 @Component({
   selector: 'app-board',
@@ -99,6 +111,10 @@ export class BoardComponent {
     computation: () => undefined,
   });
 
+  /** Square under the keyboard cursor. Unset until the board first gets the focus. */
+  private readonly cursor = signal<Key | undefined>(undefined);
+  protected readonly announcement = signal<Announcement>({ id: 0, text: '' });
+
   private readonly boardElement = viewChild.required<ElementRef<HTMLElement>>('board');
   private readonly promotionButtons =
     viewChildren<ElementRef<HTMLButtonElement>>('promotionButton');
@@ -116,14 +132,17 @@ export class BoardComponent {
    */
   private readonly overlay = computed<Config>(() => {
     const spot = this.spot();
+    // The marks of the page go after the pointed squares, so they win on a shared square.
+    const custom = new Map<Key, string>([
+      ...spot.squares.map((square) => [square as Key, 'mark-spot'] as const),
+      ...[...this.marks()].map(([key, mark]) => [key, `mark-${mark}`] as const),
+    ]);
+    // The cursor is a ring added to whatever the square already has; board.css only shows it
+    // while the board has the keyboard focus.
+    const cursor = this.cursor();
+    if (cursor) custom.set(cursor, [custom.get(cursor), 'mark-cursor'].filter(Boolean).join(' '));
     return {
-      highlight: {
-        // The marks of the page go after the pointed squares, so they win on a shared square.
-        custom: new Map<Key, string>([
-          ...spot.squares.map((square) => [square as Key, 'mark-spot'] as const),
-          ...[...this.marks()].map(([key, mark]) => [key, `mark-${mark}`] as const),
-        ]),
-      },
+      highlight: { custom },
       drawable: {
         autoShapes: [
           ...this.arrows().map((arrow) => ({
@@ -162,6 +181,8 @@ export class BoardComponent {
   });
 
   private readonly destroyRef = inject(DestroyRef);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document = inject(DOCUMENT);
   private api: Api | undefined;
 
   constructor() {
@@ -230,14 +251,100 @@ export class BoardComponent {
   protected choosePromotion(role: PromotionRole): void {
     const pending = this.pendingPromotion();
     if (!pending) return;
-    this.pendingPromotion.set(undefined);
+    this.closePromotion();
     this.move.emit({ from: pending.from, to: pending.to, promotion: role });
-    this.requestSync();
   }
 
   protected cancelPromotion(): void {
+    this.closePromotion();
+  }
+
+  /** The first visit puts the cursor on a useful square; later visits find it where it was. */
+  protected onFocus(): void {
+    const api = this.api;
+    if (!api) return;
+    const cursor =
+      this.cursor() ??
+      startSquare(this.lastMove(), api.state.pieces, this.turnColor(), this.orientation());
+    this.cursor.set(cursor);
+    this.readSquare(cursor);
+  }
+
+  protected onKey(event: KeyboardEvent): void {
+    // Alt + arrow is the browser's back and forward, and the picker has keys of its own.
+    if (event.altKey || event.ctrlKey || event.metaKey || this.pendingPromotion()) return;
+    const cursor = this.cursor();
+    if (!this.api || !cursor) return;
+    if (isCursorKey(event.key)) {
+      const next = moveCursor(cursor, event.key, this.orientation());
+      this.cursor.set(next);
+      this.readSquare(next);
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      if (!this.viewOnly()) this.pick(cursor);
+    } else if (event.key === 'Escape' && this.api.state.selected) {
+      this.deselect();
+    } else {
+      return;
+    }
+    // The keys the board uses are not for the page: the arrows also browse the moves there.
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  /**
+   * Enter on a square: play the picked piece there if it can go, else pick the piece on it, else
+   * drop the picked piece. Chessground's `selectSquare` plays the move as a click would.
+   */
+  private pick(square: Key): void {
+    const api = this.api;
+    if (!api) return;
+    const selected = api.state.selected;
+    if (selected && this.destsOf(selected).includes(square)) {
+      api.selectSquare(square);
+      return;
+    }
+    if (selected === square) {
+      this.deselect();
+      return;
+    }
+    const piece = api.state.pieces.get(square);
+    const moves = this.destsOf(square).length;
+    if (piece && piece.color === this.turnColor() && moves > 0) {
+      api.selectSquare(square);
+      const name = this.labels().piece(piece.role, piece.color);
+      this.announce(this.labels().picked(name, square, moves));
+    } else if (selected) {
+      this.deselect();
+    } else {
+      this.announce(piece ? this.labels().cannotPick : this.labels().noPiece);
+    }
+  }
+
+  private deselect(): void {
+    this.api?.selectSquare(null);
+    this.announce(this.labels().deselected);
+  }
+
+  private destsOf(square: Key): readonly Key[] {
+    return this.dests().get(square) ?? [];
+  }
+
+  private readSquare(square: Key): void {
+    const piece = this.api?.state.pieces.get(square);
+    const name = piece ? this.labels().piece(piece.role, piece.color) : undefined;
+    this.announce(this.labels().square(square, name));
+  }
+
+  private announce(text: string): void {
+    this.announcement.update(({ id }) => ({ id: id + 1, text }));
+  }
+
+  /** Closes the picker, and gives the focus back to the board if the picker had it. */
+  private closePromotion(): void {
+    const hadFocus = this.host.nativeElement.contains(this.document.activeElement);
     this.pendingPromotion.set(undefined);
     this.requestSync();
+    if (hadFocus) this.boardElement().nativeElement.focus();
   }
 
   private onUserMove(from: Key, to: Key): void {

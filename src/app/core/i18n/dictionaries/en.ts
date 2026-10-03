@@ -1,3 +1,6 @@
+/** Pieces the board names when it reads a square aloud. */
+type BoardPieceRole = 'pawn' | 'knight' | 'bishop' | 'rook' | 'queen' | 'king';
+
 export const en = {
   app: {
     name: 'Cheesy',
@@ -655,6 +658,18 @@ export const en = {
     bishop: 'Bishop',
     knight: 'Knight',
     cancel: 'Cancel',
+    roleDescription: 'board',
+    instructions: 'Board. Arrow keys to move around, Enter to pick a piece and play.',
+    viewOnlyInstructions: 'Board. Arrow keys to move around the squares.',
+    piece: (role: BoardPieceRole, color: 'white' | 'black'): string => `${color} ${role}`,
+    square: (square: string, piece: string | undefined): string => `${square}, ${piece ?? 'empty'}`,
+    picked: (piece: string, square: string, moves: number): string =>
+      `${piece[0].toUpperCase()}${piece.slice(1)} on ${square} picked, ${
+        moves === 1 ? '1 move' : `${moves} moves`
+      }`,
+    cannotPick: 'You cannot move that piece',
+    noPiece: 'There is no piece here',
+    deselected: 'Selection cleared',
   },
   engine: {
     evaluation: 'Evaluation',
