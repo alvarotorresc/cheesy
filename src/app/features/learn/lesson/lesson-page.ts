@@ -23,6 +23,7 @@ import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { BoardSpotlight } from '../../../shared/board';
+import { lessonAfter } from '../learn-progress';
 import { isFormField } from '../../../shared/keyboard';
 import { ChoiceStepView } from './steps/choice-step';
 import { ExplainStepView } from './steps/explain-step';
@@ -39,7 +40,7 @@ type LessonState =
       readonly status: 'ready';
       readonly lesson: Lesson;
       readonly terms: readonly GlossaryTerm[];
-      /** The lesson after this one in its level, if any. */
+      /** The lesson after this one: in its level or, after its last one, in the next level. */
       readonly next?: LessonSummary;
     };
 
@@ -204,9 +205,7 @@ export class LessonPage {
         status: 'ready',
         lesson,
         terms: terms.filter((term) => term !== undefined),
-        next: catalog
-          .filter((entry) => entry.level === lesson.level && entry.order > lesson.order)
-          .sort((a, b) => a.order - b.order)[0],
+        next: lessonAfter(catalog, lesson),
       });
     } catch {
       if (id === this.params().id) this.state.set({ status: 'error' });

@@ -9,7 +9,7 @@ import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
-import { fixtureLessonLoaders } from '../testing';
+import { FIXTURE_CATALOG, fixtureLessonLoaders } from '../testing';
 import { ChoiceStepView } from './steps/choice-step';
 import { ExplainStepView } from './steps/explain-step';
 import { TapSquareStepView } from './steps/tap-square-step';
@@ -196,7 +196,7 @@ describe('LessonPage', () => {
       );
       // One way back to the level, not two.
       expect(summary.querySelectorAll('a[href="/learn/beginner"]')).toHaveLength(1);
-      // The last lesson of the level has no next one.
+      // The last lesson of the level, and no later level has lessons: there is no next one.
       expect(summary.querySelector('a.next-lesson')).toBeNull();
       expect(document.activeElement).toBe(summary.querySelector('h2'));
     });
@@ -248,6 +248,35 @@ describe('LessonPage', () => {
       await goToFirstExercise();
       expect(nextButton()!.disabled).toBe(true);
     });
+  });
+
+  it('should lead from the last lesson of a level to the first one of the next level', async () => {
+    const hangingPieces = {
+      ...FIXTURE_CATALOG[0],
+      id: 'hanging-pieces',
+      level: 'intermediate' as const,
+      order: 1,
+      title: { es: 'Piezas sin defensa', en: 'Hanging pieces' },
+    };
+    setup({
+      catalog: async () => [...FIXTURE_CATALOG, hangingPieces],
+      lesson: async (id) => {
+        const lesson = await fixtureLessonLoaders.lesson(
+          id === 'hanging-pieces' ? 'the-board' : id,
+        );
+        return id === 'hanging-pieces' ? { ...lesson, ...hangingPieces, terms: [] } : lesson;
+      },
+    });
+    await render('/learn/beginner/knight-moves');
+    await solveEveryStep();
+    const link = root().querySelector<HTMLAnchorElement>('.summary a.next-lesson')!;
+    expect(link.getAttribute('href')).toBe('/learn/intermediate/hanging-pieces');
+    link.click();
+    await vi.waitFor(async () => {
+      await settle();
+      expect(root().querySelector('h1')?.textContent).toContain('Hanging pieces');
+    });
+    expect(stepOf()).toBe('Step 1 of 5');
   });
 
   it('should let a keyboard user skip a board exercise and go on with Next', async () => {
