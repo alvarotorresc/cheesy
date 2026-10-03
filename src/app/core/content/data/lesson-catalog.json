@@ -253,5 +253,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "remove-the-defender",
+    "level": "intermediate",
+    "order": 6,
+    "title": {
+      "es": "Quitar al defensor",
+      "en": "Removing the defender"
+    },
+    "summary": {
+      "es": "Capturar, desviar o sobrecargar a la pieza que defiende a otra.",
+      "en": "Capturing, deflecting or overloading the piece that defends another."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
   }
 ]

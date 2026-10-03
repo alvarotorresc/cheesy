@@ -774,10 +774,61 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'remove-the-defender',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/advanced-tactics/deflection/kdKpaYLW',
       `${WIKI}Deflection_(chess)`,
+    ],
+  },
+  {
+    id: 'removing-the-defender',
+    name: { es: 'Eliminar al defensor', en: 'Removing the defender' },
+    definition: {
+      es: 'Capturar la pieza rival que defiende a otra, para que esa otra se quede sin defensa y se pueda ganar.',
+      en: 'Capturing the enemy piece that defends another, so that the other one is left without defence and can be won.',
+    },
+    example: {
+      fen: '6k1/5ppp/5n2/3b4/8/8/1B3PPP/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['f6', 'd5'],
+      arrows: [
+        { from: 'b2', to: 'f6', move: true },
+        { from: 'd1', to: 'd5', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'remove-the-defender',
+    sources: [
+      `${CHESSCOM_EN}removing-the-defender-chess`,
+      'https://lichess.org/practice/advanced-tactics/undermining/udx042D6',
+      `${WIKI}Undermining_(chess)`,
+    ],
+  },
+  {
+    id: 'overloading',
+    name: { es: 'Sobrecarga', en: 'Overloading' },
+    definition: {
+      es: 'Una pieza tiene dos tareas de defensa a la vez y no puede cumplir las dos: si atiende una, deja sin defensa lo que protegía con la otra.',
+      en: 'A piece has two defensive jobs at once and cannot do both: if it attends to one, it leaves unguarded what it protected with the other.',
+    },
+    example: {
+      fen: '2r3k1/3q1ppp/8/8/3n4/8/5QPP/2R3K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d7'],
+      arrows: [
+        { from: 'c1', to: 'c8', move: true },
+        { from: 'f2', to: 'd4', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'remove-the-defender',
+    sources: [
+      `${CHESSCOM_EN}overloading-chess`,
+      'https://lichess.org/practice/fundamental-tactics/overloaded-pieces/o734CNqp',
+      `${WIKI}Overloading_(chess)`,
     ],
   },
   {
