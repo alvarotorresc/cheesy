@@ -17,9 +17,9 @@ export const LICHESS_THEME_KEYS = [
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
 
-/** Intermediate lesson id → Lichess puzzle themes. */
+/** Intermediate lesson id → Lichess puzzle themes. Each theme belongs to one lesson only. */
 export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
-  'hanging-pieces': ['hangingPiece', 'capturingDefender'],
+  'hanging-pieces': ['hangingPiece'],
   'the-fork': ['fork'],
   'the-pin': ['pin'],
   'the-skewer': ['skewer'],

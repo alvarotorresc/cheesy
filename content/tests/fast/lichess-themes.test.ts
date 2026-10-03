@@ -26,6 +26,11 @@ describe('Lichess puzzle themes of the intermediate lessons', () => {
     expect(repeated).toEqual([]);
   });
 
+  it('gives each theme to one lesson only', () => {
+    const all = Object.values(LICHESS_THEMES).flat();
+    expect(all.filter((theme, i) => all.indexOf(theme) !== i)).toEqual([]);
+  });
+
   it('lists every theme of the closed list once, and uses all of them', () => {
     expect(new Set(LICHESS_THEME_KEYS).size).toBe(LICHESS_THEME_KEYS.length);
     const used = new Set(Object.values(LICHESS_THEMES).flat());
