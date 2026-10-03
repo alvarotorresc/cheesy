@@ -15,6 +15,7 @@ import { openingPrinciples } from './beginner/12-opening-principles.ts';
 import { hangingPieces } from './intermediate/01-hanging-pieces.ts';
 import { theFork } from './intermediate/02-the-fork.ts';
 import { thePin } from './intermediate/03-the-pin.ts';
+import { theSkewer } from './intermediate/04-the-skewer.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -32,4 +33,5 @@ export const lessons: LessonSpec[] = [
   hangingPieces,
   theFork,
   thePin,
+  theSkewer,
 ];

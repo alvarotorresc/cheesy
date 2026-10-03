@@ -223,5 +223,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "the-skewer",
+    "level": "intermediate",
+    "order": 4,
+    "title": {
+      "es": "La enfilada",
+      "en": "The skewer"
+    },
+    "summary": {
+      "es": "Atacar a una pieza valiosa para ganar la que tiene detrás.",
+      "en": "Attacking a valuable piece to win the one behind it."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
   }
 ]

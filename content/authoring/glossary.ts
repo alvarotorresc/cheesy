@@ -680,6 +680,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-skewer',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/the-skewer/tuoBxVE5',
