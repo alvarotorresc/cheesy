@@ -36,7 +36,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const groups = groupTerms(terms, 'es');
     expect(groups.map((g) => g.key)).toEqual([...GLOSSARY_GROUPS]);
-    expect(groups.map((g) => g.terms.length)).toEqual([11, 13, 5, 12, 7, 6]);
+    expect(groups.map((g) => g.terms.length)).toEqual([11, 17, 5, 12, 7, 6]);
     for (const group of groups) {
       const names = group.terms.map((t) => t.name.es);
       expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'es')));
@@ -55,7 +55,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const ids = (filters: Parameters<typeof applyFilters>[1]) =>
       applyFilters(terms, filters, 'es').map((t) => t.id);
-    expect(ids(NO_FILTERS)).toHaveLength(54);
+    expect(ids(NO_FILTERS)).toHaveLength(58);
     expect(ids({ ...NO_FILTERS, group: 'mates' })).toHaveLength(5);
     expect(ids({ ...NO_FILTERS, level: 'advanced' }).sort()).toEqual(
       terms
@@ -81,9 +81,9 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const all = groupCounts(terms, NO_FILTERS, 'es');
     expect(all).toEqual({
-      all: 54,
+      all: 58,
       rules: 11,
-      tactics: 13,
+      tactics: 17,
       mates: 5,
       strategy: 12,
       pawns: 7,
