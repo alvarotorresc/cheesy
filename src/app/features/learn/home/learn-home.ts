@@ -80,10 +80,29 @@ export class LearnHome {
     }
   }
 
+  /** Reads the saved progress again, keeping the catalogue and the page as they are. */
+  private async refresh(): Promise<void> {
+    try {
+      const [rows, puzzles] = await Promise.all([this.progress.lessons(), this.progress.puzzles()]);
+      this.state.update((current) =>
+        current.status === 'ready'
+          ? {
+              ...current,
+              done: new Set(rows.map((row) => row.lessonId)),
+              puzzlesSaved: puzzles.length,
+            }
+          : current,
+      );
+    } catch {
+      // The rows shown stay; the message already says whether the deletion worked.
+    }
+  }
+
   /** Apart from the lessons: without the puzzle catalogue, Learn works as before. */
   private async loadPuzzles(): Promise<void> {
     try {
-      this.puzzleLessons.set((await this.content.puzzleCatalog()).lessons.length);
+      const { lessons } = await this.content.puzzleCatalog();
+      this.puzzleLessons.set(lessons.filter((lesson) => lesson.count > 0).length);
     } catch {
       this.puzzleLessons.set(0);
     }
@@ -112,12 +131,8 @@ export class LearnHome {
       this.progress.clear('puzzles'),
     ]);
     const cleared = lessons && puzzles;
-    if (cleared)
-      this.state.update((current) =>
-        current.status === 'ready'
-          ? { ...current, done: new Set<string>(), puzzlesSaved: 0 }
-          : current,
-      );
+    // One clear can work and the other fail: the page shows what is stored, not what was hoped.
+    await this.refresh();
     this.message.set(cleared ? t.cleared : t.clearFailed);
   }
 }

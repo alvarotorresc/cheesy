@@ -165,6 +165,60 @@ describe('LearnHome', () => {
     }
   });
 
+  it('should keep Practise more beside the glossary when only the lessons fail to load', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        {
+          provide: LESSON_LOADERS,
+          useValue: {
+            ...fixtureLessonLoaders,
+            catalog: () => Promise.reject(new Error('offline')),
+          },
+        },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: GLOSSARY_LOADER, useValue: glossary },
+        { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
+      ],
+    });
+    harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/learn');
+    const root = harness.routeNativeElement as HTMLElement;
+    await vi.waitFor(() => {
+      harness.detectChanges();
+      expect(root.querySelector('.notice[role=alert]')).not.toBeNull();
+      expect(root.querySelector('.levels .puzzles-card')).not.toBeNull();
+    });
+    expect(root.querySelector('.levels .glossary-card')).not.toBeNull();
+  });
+
+  it('should not offer Practise more when its only lesson has no puzzles', async () => {
+    const catalog = await fixturePuzzleLoaders.catalog();
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        {
+          provide: PUZZLE_LOADERS,
+          useValue: {
+            ...fixturePuzzleLoaders,
+            catalog: async () => ({
+              ...catalog,
+              lessons: catalog.lessons.map((entry) => ({ ...entry, count: 0 })),
+            }),
+          },
+        },
+      ],
+    });
+    const root = await render('/learn');
+    await harness.fixture.whenStable();
+    harness.detectChanges();
+    expect(root.querySelector('.puzzles-card')).toBeNull();
+  });
+
   describe('clearing the progress', () => {
     const openDialog = (root: HTMLElement) => {
       const dialog = root.querySelector('dialog') as HTMLDialogElement;
@@ -196,6 +250,28 @@ describe('LearnHome', () => {
       expect(memory.puzzleRows.size).toBe(0);
       expect(memory.endgameRows.size).toBe(1);
       expect(root.querySelector('.continue')).toBeNull();
+    });
+
+    it('should show what is left when one of the two deletions fails', async () => {
+      await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
+      await progress.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-fork', firstTry: true });
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      memory.store.puzzles.clear = () => Promise.reject(new DOMException('Blocked', 'AbortError'));
+      const root = await render('/learn');
+      expect(root.querySelector('.continue')).not.toBeNull();
+
+      openDialog(root);
+      root.querySelector<HTMLButtonElement>('dialog .button.danger')!.click();
+      await vi.waitFor(() => {
+        harness.detectChanges();
+        expect(root.querySelector('.status-msg')?.textContent).toBe(
+          'The progress could not be deleted.',
+        );
+      });
+      // The lessons went, the puzzles stayed: the page says so, and still offers to delete them.
+      expect(memory.lessonRows.size).toBe(0);
+      expect(root.querySelector('.continue')).toBeNull();
+      expect(openDialog(root)).toHaveBeenCalled();
     });
 
     it('should say in the dialog that the puzzles go too', async () => {

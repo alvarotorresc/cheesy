@@ -16,6 +16,7 @@
     <!-- The glossary does not need the lessons: it stays within reach when they fail. -->
     <ul class="levels">
       <ng-container [ngTemplateOutlet]="glossaryCard" />
+      <ng-container [ngTemplateOutlet]="puzzlesCard" />
     </ul>
   }
   @case ('ready') {
@@ -39,13 +40,7 @@
         </li>
       }
       <ng-container [ngTemplateOutlet]="glossaryCard" />
-      @if (puzzleLessons() > 0) {
-        <li class="puzzles-card">
-          <h2>{{ t.puzzles.title }}</h2>
-          <p>{{ t.puzzles.cardDescription }}</p>
-          <a class="button" routerLink="/learn/puzzles">{{ t.puzzles.open }}</a>
-        </li>
-      }
+      <ng-container [ngTemplateOutlet]="puzzlesCard" />
     </ul>
     <section class="privacy" aria-labelledby="progress-title">
       <h2 id="progress-title" class="visually-hidden">{{ t.progressTitle }}</h2>
@@ -62,6 +57,17 @@
     </section>
   }
 }
+
+<!-- Nor does "Practise more" need the lessons: its own catalogue decides whether it shows. -->
+<ng-template #puzzlesCard>
+  @if (puzzleLessons() > 0) {
+    <li class="puzzles-card">
+      <h2>{{ t.puzzles.title }}</h2>
+      <p>{{ t.puzzles.cardDescription }}</p>
+      <a class="button" routerLink="/learn/puzzles">{{ t.puzzles.open }}</a>
+    </li>
+  }
+</ng-template>
 
 <ng-template #glossaryCard>
   <li class="glossary-card">
