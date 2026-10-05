@@ -334,6 +334,9 @@ function checkStep(s: unknown, at: string, errs: Errors) {
       // The solution ends on the player's move: the player, then (reply, player) pairs.
       else if (engineOk && (c.solution as unknown[]).length % 2 === 0)
         errs.push(`${at}.check.solution: odd length, ending on the player's move`);
+      // `check` has no closed keys; the one optional key is spelled out here.
+      if (isObj(c) && 'onlyMove' in c && (!engineOk || c.onlyMove !== true))
+        errs.push(`${at}.check.onlyMove: only true, and only on an engine solution`);
       if (s.wrong !== undefined) {
         if (!isObj(s.wrong)) errs.push(`${at}.wrong: must be an object`);
         else

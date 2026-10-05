@@ -15,6 +15,7 @@ import {
   findMoveErrors,
   glossaryErrors,
   nextErrors,
+  onlyMoveErrors,
   playOutErrors,
   reachErrors,
   setErrors,
@@ -140,6 +141,7 @@ describe('the seeded lesson', () => {
       animationErrors,
       reachErrors,
       findMoveErrors,
+      onlyMoveErrors,
       statusErrors,
       playOutErrors,
       engineOptionErrors,
@@ -171,6 +173,22 @@ describe('validateLesson', () => {
       'l',
     );
     expect(errors.join()).toContain('solution: odd length');
+  });
+
+  it('accepts onlyMove: true on an engine solution and nothing else', () => {
+    const engine = stepOf('find-move', 1);
+    const only = (check: object) => validateLesson(withStep(engine, { check }), 'l').join();
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: true })).toBe('');
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: false })).toContain('check.onlyMove');
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: 'yes' })).toContain('check.onlyMove');
+    expect(
+      validateLesson(
+        withStep(stepOf('find-move'), {
+          check: { by: 'rule', rule: 'escape-check', onlyMove: true },
+        }),
+        'l',
+      ).join(),
+    ).toContain('check.onlyMove');
   });
 
   it('rejects tap-square with a count above its list', () => {
@@ -315,6 +333,24 @@ describe('seeded checks', () => {
     ).toEqual(['sample step 4: Ra8# is accepted']);
   });
 
+  it('5. rejects onlyMove on a mate or in a tablebase ending, and accepts it elsewhere', () => {
+    const at = stepOf('find-move', 1);
+    const only = (fen: string, solution: string[]) =>
+      onlyMoveErrors([
+        withStep(at, {
+          board: { fen, orientation: 'white' },
+          check: { by: 'engine', solution, onlyMove: true },
+        }),
+      ]);
+    expect(only('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', ['Ra8#'])).toEqual([
+      'sample step 4: onlyMove on a mate, which test 10 already finds unique',
+    ]);
+    expect(only('8/8/8/8/5k2/8/2P2r2/2K1R3 w - - 0 1', ['Kb2'])).toEqual([
+      'sample step 4: onlyMove in a tablebase ending, where test 13 already asks for the only move',
+    ]);
+    expect(only('6k1/5ppp/8/8/2n5/8/5PPP/R5K1 w - - 0 1', ['Ra4'])).toEqual([]);
+  });
+
   it('6. rejects a status question with an illegal board or a missing whyWrong', () => {
     const illegal = { fen: '8/8/8/8/8/8/8/8 w - - 0 1', orientation: 'white' };
     expect(statusErrors([withStep(stepOf('choice'), { board: illegal })])).toEqual([
@@ -437,6 +473,10 @@ describe('lessons', () => {
 
   it('5. find-move: rules give a move, and every move in `wrong` is legal and not accepted', () => {
     expect(findMoveErrors(lessons)).toEqual([]);
+  });
+
+  it('5. onlyMove is only on find-moves where it changes the check', () => {
+    expect(onlyMoveErrors(lessons)).toEqual([]);
   });
 
   it('6. status questions: a legal board, a message for each wrong option, no odd endings', () => {

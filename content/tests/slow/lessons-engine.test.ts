@@ -38,12 +38,15 @@ describe.each(
       findMoveValidator(s.board.fen, s.check.solution) === 'stockfish',
   ),
 )('find-move: $at', ({ s }) => {
-  it(`10. solution is best, decisive and unambiguous (depth ${DEPTH})`, async () => {
+  const onlyMove = s.kind === 'find-move' && s.check.by === 'engine' && !!s.check.onlyMove;
+  const what = onlyMove ? 'the only move that holds' : 'decisive';
+  it(`10. solution is best, ${what} and unambiguous (depth ${DEPTH})`, async () => {
     if (s.kind !== 'find-move' || s.check.by !== 'engine') return;
     const report = await checkTactic(
       engine,
       { fen: s.board.fen, solution: s.check.solution },
       DEPTH,
+      { onlyMove },
     );
     expect(tacticProblems(report)).toEqual([]);
   });
@@ -79,6 +82,38 @@ describe('checkTactic on seeded positions', () => {
   it('rejects a mate when another move also mates', async () => {
     const report = await checkTactic(engine, { fen: TWO_ROOKS, solution: ['Re8#'] }, DEPTH);
     expect(tacticProblems(report).join()).toMatch(/ambiguous: Rd8# \(also mates\)/);
+  });
+});
+
+// onlyMove: a king and pawn ending, so that the scores do not move with the depth, and a middlegame.
+const KP_DRAW = '3k4/8/8/4K3/4P3/8/8/8 b - - 0 1'; // only Ke7 holds the draw; the rest lose
+const LONE_MOVE = '6k1/5ppp/8/8/8/8/6P1/r6K w - - 0 1'; // Kh2 is the only legal move, a rook down
+
+describe('checkTactic with onlyMove on seeded positions', () => {
+  it('accepts the only move that holds a level position', async () => {
+    const report = await checkTactic(engine, { fen: KP_DRAW, solution: ['Ke7'] }, DEPTH, {
+      onlyMove: true,
+    });
+    expect(tacticProblems(report)).toEqual([]);
+  });
+
+  it('still rejects a level position without onlyMove: the move is not decisive', async () => {
+    const report = await checkTactic(engine, { fen: KP_DRAW, solution: ['Ke7'] }, DEPTH);
+    expect(tacticProblems(report).join()).toMatch(/not decisive/);
+  });
+
+  it('rejects a move when another one is less than 200cp worse', async () => {
+    const report = await checkTactic(engine, { fen: ITALIAN, solution: ['Bb5'] }, DEPTH, {
+      onlyMove: true,
+    });
+    expect(tacticProblems(report).join()).toMatch(/ambiguous: alternative too close/);
+  });
+
+  it('rejects an only move that leaves the player lost', async () => {
+    const report = await checkTactic(engine, { fen: LONE_MOVE, solution: ['Kh2'] }, DEPTH, {
+      onlyMove: true,
+    });
+    expect(tacticProblems(report).join()).toMatch(/below the floor of an only move/);
   });
 });
 

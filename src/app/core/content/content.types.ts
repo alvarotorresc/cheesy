@@ -198,7 +198,16 @@ export type FindMoveRule =
   'escape-check' | 'capture-undefended' | 'castle' | 'en-passant' | 'promote';
 
 export type FindMoveCheck =
-  { by: 'engine'; solution: string[] } | { by: 'rule'; rule: FindMoveRule };
+  | {
+      by: 'engine';
+      solution: string[];
+      /**
+       * The only move that holds, not a winning one: the slow check drops "decisive" and asks
+       * instead for at least -100cp after it. The app does not read it.
+       */
+      onlyMove?: true;
+    }
+  | { by: 'rule'; rule: FindMoveRule };
 
 export interface FindMoveStep {
   kind: 'find-move';
