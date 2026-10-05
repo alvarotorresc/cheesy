@@ -640,31 +640,63 @@
         "es": [
           {
             "kind": "text",
-            "text": "Con la torre detrás del peón, o en la "
+            "text": "Empieza con un "
           },
           {
             "kind": "term",
-            "id": "file",
-            "text": "columna"
+            "id": "check",
+            "text": "jaque"
           },
           {
             "kind": "text",
-            "text": " e, lo frenas; tu rey vendrá luego a capturarlo."
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ": el rey negro sigue cortado y tu torre ya ataca el peón. También gana ponerla delante del peón, en "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". Luego tu rey vendrá a capturarlo."
           }
         ],
         "en": [
           {
             "kind": "text",
-            "text": "With the rook behind the pawn, or on the e-"
+            "text": "Start with a "
           },
           {
             "kind": "term",
-            "id": "file",
-            "text": "file"
+            "id": "check",
+            "text": "check"
           },
           {
             "kind": "text",
-            "text": ", you hold it back; your king will come later to take it."
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ": the black king stays cut off and your rook already attacks the pawn. Putting it in front of the pawn, on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ", also wins. Then your king will come to take it."
           }
         ]
       }

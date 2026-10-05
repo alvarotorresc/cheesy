@@ -84,8 +84,8 @@ export const rookEndings: LessonSpec = {
       goal: 'win',
       playerSide: 'white',
       hint: {
-        es: 'Con la torre detrás del peón, o en la [columna](file) e, lo frenas; tu rey vendrá luego a capturarlo.',
-        en: 'With the rook behind the pawn, or on the e-[file](file), you hold it back; your king will come later to take it.',
+        es: 'Empieza con un [jaque](check) en d4: el rey negro sigue cortado y tu torre ya ataca el peón. También gana ponerla delante del peón, en e1. Luego tu rey vendrá a capturarlo.',
+        en: 'Start with a [check](check) on d4: the black king stays cut off and your rook already attacks the pawn. Putting it in front of the pawn, on e1, also wins. Then your king will come to take it.',
       },
     },
     {
