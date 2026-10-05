@@ -368,4 +368,43 @@ describe('FindMoveStepView', () => {
       expect(board().fen()).toContain('r3rk2');
     });
   });
+
+  describe('rival reply', () => {
+    const feedback = () => element.querySelector('.feedback')!;
+    const reply = () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', lineStep);
+      fixture.detectChanges();
+      board().move.emit({ from: 'a1' as never, to: 'a7' as never });
+      fixture.detectChanges();
+    };
+
+    it('should say the rival move in the live region once it is played', () => {
+      reply();
+      expect(feedback().getAttribute('aria-live')).toBe('polite');
+      expect(feedback().textContent?.trim()).toBe('');
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      expect(feedback().textContent).toContain('Black replies:');
+      expect(feedback().querySelector('app-move')?.textContent).toContain('king to g8');
+    });
+
+    it('should say it in Spanish too', () => {
+      TestBed.inject(I18nService).setLang('es');
+      reply();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      expect(feedback().textContent).toContain('Las negras responden:');
+    });
+
+    it('should clear it with the next move of the player', () => {
+      reply();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      board().move.emit({ from: 'a7' as never, to: 'a1' as never });
+      fixture.detectChanges();
+      expect(feedback().textContent).not.toContain('Black replies:');
+      expect(feedback().textContent).toContain('Not this one. Try again.');
+    });
+  });
 });

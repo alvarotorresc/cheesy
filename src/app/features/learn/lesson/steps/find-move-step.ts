@@ -9,13 +9,14 @@ import {
   output,
   untracked,
 } from '@angular/core';
-import type { SquareName } from 'chessops';
+import type { Color, SquareName } from 'chessops';
 import { chessgroundMove } from 'chessops/compat';
 import { parseSan } from 'chessops/san';
 import type { FindMoveStep, RichText } from '../../../../core/content';
 import { parsePosition } from '../../../../core/game';
 import { I18nService } from '../../../../core/i18n';
 import { BoardComponent, type BoardMark, type BoardMove } from '../../../../shared/board';
+import { MoveText } from '../../../../shared/move';
 import { RichTextView } from '../../../../shared/rich-text';
 import { FindMoveSession } from '../find-move-session';
 import { prefersReducedMotion } from './reduced-motion';
@@ -30,8 +31,11 @@ const REPLY_MS = 500;
 
 const PROMOTIONS = { queen: 'queen', rook: 'rook', bishop: 'bishop', knight: 'knight' } as const;
 
+/** What the live region says: a mistake, the rival's answer (until the next move) or the end. */
 type Feedback =
-  { readonly kind: 'wrong'; readonly message?: RichText } | { readonly kind: 'solved' };
+  | { readonly kind: 'wrong'; readonly message?: RichText }
+  | { readonly kind: 'reply'; readonly san: string; readonly color: Color }
+  | { readonly kind: 'solved' };
 
 /** The SAN move as the board reports it (a castling is the king moving two squares). */
 const boardMoveOf = (fen: string, san: string): BoardMove | undefined => {
@@ -49,7 +53,7 @@ const boardMoveOf = (fen: string, san: string): BoardMove | undefined => {
  */
 @Component({
   selector: 'app-find-move-step',
-  imports: [BoardComponent, RichTextView],
+  imports: [BoardComponent, MoveText, RichTextView],
   templateUrl: './find-move-step.html',
   styleUrl: './step-layout.css',
 })
@@ -133,8 +137,10 @@ export class FindMoveStepView {
       this.feedback.set(undefined);
       this.waiting.set(true);
       this.later(() => {
+        const color = session.turn();
         session.playReply(outcome.reply);
         this.waiting.set(false);
+        this.feedback.set({ kind: 'reply', san: outcome.reply, color });
       }, REPLY_MS);
       return;
     }
