@@ -89,6 +89,8 @@ const EXPECTED_IDS = [
   'opposite-coloured-bishops',
   'mutual-zugzwang',
   'triangulation',
+  'pawn-storm',
+  'greek-gift',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -129,6 +131,7 @@ const GROUPS: Record<string, string[]> = {
     'opening-trap',
     'perpetual-check',
     'quiet-move',
+    'greek-gift',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [
@@ -151,6 +154,7 @@ const GROUPS: Record<string, string[]> = {
     'half-open-file',
     'doubled-rooks',
     'bad-bishop',
+    'pawn-storm',
   ],
   pawns: [
     'pawn-structure',

@@ -32,6 +32,7 @@ import { openFilesSeventh } from './advanced/05-open-files-seventh.ts';
 import { passedPawns } from './advanced/06-passed-pawns.ts';
 import { minorPieceEndings } from './advanced/07-minor-piece-endings.ts';
 import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
+import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -66,4 +67,5 @@ export const lessons: LessonSpec[] = [
   passedPawns,
   minorPieceEndings,
   zugzwangTempo,
+  kingSafetyAttack,
 ];

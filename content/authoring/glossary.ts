@@ -372,6 +372,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'king-safety-attack',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}fianchetto-ajedrez`],
   },
   {
@@ -808,6 +809,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'minor-piece-endings',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_EN}bad-bishop`],
+  },
+  {
+    id: 'pawn-storm',
+    name: { es: 'Avalancha de peones', en: 'Pawn storm' },
+    definition: {
+      es: 'Varios peones que avanzan juntos contra el rey rival para abrir líneas a las piezas. Se usa sobre todo cuando los reyes se han enrocado en lados distintos: el que avanza esos peones no deja desnudo a su propio rey.',
+      en: 'Several pawns advancing together against the enemy king to open lines for the pieces. It is used above all when the kings have castled on different sides: the side pushing those pawns does not strip its own king.',
+    },
+    example: {
+      fen: 'r4rk1/ppq1ppbp/3p1np1/8/4P1PP/2N1BP2/PPPQ4/2KR3R w - - 0 1',
+      orientation: 'white',
+      highlights: ['g4', 'h4', 'g8'],
+      arrows: [{ from: 'h4', to: 'h5', move: true }],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'king-safety-attack',
+    sources: [`${WIKI}Pawn_storm`, WIKI_GLOSSARY],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
@@ -1268,6 +1287,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'candidate-moves',
     sources: [WIKI_GLOSSARY, 'https://lichess.org/training/quietMove'],
+  },
+  {
+    id: 'greek-gift',
+    name: { es: 'Regalo griego', en: 'Greek gift' },
+    definition: {
+      es: 'Entregar el alfil capturando el peón de h7 con [jaque](check) (h2 si atacan las negras) para sacar al rey enrocado. Después entran el caballo, con jaque desde g5, y la dama por la columna h. Solo funciona si esas piezas llegan a tiempo y el rival no puede defenderse con otra pieza.',
+      en: 'Giving up the bishop by capturing the pawn on h7 with [check](check) (h2 if Black attacks) to drag the castled king out. Then the knight comes in, with check from g5, and the queen along the h-file. It only works if those pieces arrive in time and the opponent cannot defend with another piece.',
+    },
+    example: {
+      fen: 'r1bqk2r/ppp2ppp/2nb1n2/1B1p4/3Pp3/4P3/PPPN1PPP/RNBQ1RK1 b kq - 0 1',
+      orientation: 'black',
+      highlights: ['h2', 'g4'],
+      arrows: [{ from: 'd6', to: 'h2', move: true }],
+    },
+    group: 'tactics',
+    level: 'advanced',
+    lesson: 'king-safety-attack',
+    sources: [`${WIKI}Greek_gift_sacrifice`, WIKI_GLOSSARY, 'https://lichess.org/practice'],
   },
   {
     id: 'smothered-mate',

@@ -478,5 +478,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "king-safety-attack",
+    "level": "advanced",
+    "order": 9,
+    "title": {
+      "es": "Atacar al rey",
+      "en": "Attacking the king"
+    },
+    "summary": {
+      "es": "Cuándo un rey es débil, el regalo griego, el rey sin enrocar y la avalancha de peones.",
+      "en": "When a king is weak, the Greek gift, the uncastled king and the pawn storm."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
   }
 ]

@@ -1214,6 +1214,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "king-safety-attack",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/fianchetto-ajedrez"
@@ -2549,6 +2550,50 @@
     ]
   },
   {
+    "id": "pawn-storm",
+    "name": {
+      "es": "Avalancha de peones",
+      "en": "Pawn storm"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Varios peones que avanzan juntos contra el rey rival para abrir líneas a las piezas. Se usa sobre todo cuando los reyes se han enrocado en lados distintos: el que avanza esos peones no deja desnudo a su propio rey."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Several pawns advancing together against the enemy king to open lines for the pieces. It is used above all when the kings have castled on different sides: the side pushing those pawns does not strip its own king."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r4rk1/ppq1ppbp/3p1np1/8/4P1PP/2N1BP2/PPPQ4/2KR3R w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "g4",
+        "h4",
+        "g8"
+      ],
+      "arrows": [
+        {
+          "from": "h4",
+          "to": "h5",
+          "move": true
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "king-safety-attack",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Pawn_storm",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
     "id": "tempo",
     "name": {
       "es": "Tiempo",
@@ -3800,6 +3845,116 @@
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://lichess.org/training/quietMove"
+    ]
+  },
+  {
+    "id": "greek-gift",
+    "name": {
+      "es": "Regalo griego",
+      "en": "Greek gift"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Entregar el alfil capturando el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " con "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " ("
+        },
+        {
+          "kind": "square",
+          "square": "h2"
+        },
+        {
+          "kind": "text",
+          "text": " si atacan las negras) para sacar al rey enrocado. Después entran el caballo, con jaque desde "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": ", y la dama por la columna h. Solo funciona si esas piezas llegan a tiempo y el rival no puede defenderse con otra pieza."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Giving up the bishop by capturing the pawn on "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " with "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": " ("
+        },
+        {
+          "kind": "square",
+          "square": "h2"
+        },
+        {
+          "kind": "text",
+          "text": " if Black attacks) to drag the castled king out. Then the knight comes in, with check from "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": ", and the queen along the h-file. It only works if those pieces arrive in time and the opponent cannot defend with another piece."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r1bqk2r/ppp2ppp/2nb1n2/1B1p4/3Pp3/4P3/PPPN1PPP/RNBQ1RK1 b kq - 0 1",
+      "orientation": "black",
+      "highlights": [
+        "h2",
+        "g4"
+      ],
+      "arrows": [
+        {
+          "from": "d6",
+          "to": "h2",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "king-safety-attack",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Greek_gift_sacrifice",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://lichess.org/practice"
     ]
   },
   {
