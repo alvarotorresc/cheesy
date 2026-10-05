@@ -36,7 +36,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const groups = groupTerms(terms, 'es');
     expect(groups.map((g) => g.key)).toEqual([...GLOSSARY_GROUPS]);
-    expect(groups.map((g) => g.terms.length)).toEqual([12, 21, 5, 18, 13, 9]);
+    expect(groups.map((g) => g.terms.length)).toEqual([12, 24, 5, 22, 13, 13]);
     for (const group of groups) {
       const names = group.terms.map((t) => t.name.es);
       expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'es')));
@@ -55,7 +55,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const ids = (filters: Parameters<typeof applyFilters>[1]) =>
       applyFilters(terms, filters, 'es').map((t) => t.id);
-    expect(ids(NO_FILTERS)).toHaveLength(78);
+    expect(ids(NO_FILTERS)).toHaveLength(89);
     expect(ids({ ...NO_FILTERS, group: 'mates' })).toHaveLength(5);
     expect(ids({ ...NO_FILTERS, level: 'advanced' }).sort()).toEqual(
       terms
@@ -65,8 +65,12 @@ describe('glossary catalogue', () => {
     );
     expect(ids({ group: 'endgames', level: 'advanced', query: '' }).sort()).toEqual([
       'building-a-bridge',
+      'fortress',
       'lucena-position',
+      'mutual-zugzwang',
+      'opposite-coloured-bishops',
       'philidor-position',
+      'triangulation',
     ]);
     // «Oposición» holds «posicion» too.
     expect(ids({ group: 'endgames', level: 'all', query: 'posicion' }).sort()).toEqual([
@@ -81,18 +85,18 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const all = groupCounts(terms, NO_FILTERS, 'es');
     expect(all).toEqual({
-      all: 78,
+      all: 89,
       rules: 12,
-      tactics: 21,
+      tactics: 24,
       mates: 5,
-      strategy: 18,
+      strategy: 22,
       pawns: 13,
-      endgames: 9,
+      endgames: 13,
     });
     // The family filter itself does not change the counts of the families.
     expect(groupCounts(terms, { ...NO_FILTERS, group: 'mates' }, 'es')).toEqual(all);
     const advanced = groupCounts(terms, { ...NO_FILTERS, level: 'advanced' }, 'es');
-    expect(advanced.endgames).toBe(3);
+    expect(advanced.endgames).toBe(7);
     expect(advanced.mates).toBe(0);
     expect(advanced.all).toBe(terms.filter((t) => t.level === 'advanced').length);
   });

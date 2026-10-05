@@ -448,5 +448,95 @@
     },
     "stepCount": 9,
     "exerciseCount": 2
+  },
+  {
+    "id": "minor-piece-endings",
+    "level": "advanced",
+    "order": 7,
+    "title": {
+      "es": "Alfiles y caballos en el final",
+      "en": "Bishops and knights in the endgame"
+    },
+    "summary": {
+      "es": "El alfil malo, el alfil contra el caballo y los alfiles de distinto color.",
+      "en": "The bad bishop, bishop against knight and opposite-coloured bishops."
+    },
+    "stepCount": 8,
+    "exerciseCount": 2
+  },
+  {
+    "id": "zugzwang-tempo",
+    "level": "advanced",
+    "order": 8,
+    "title": {
+      "es": "Zugzwang y tiempos",
+      "en": "Zugzwang and tempo"
+    },
+    "summary": {
+      "es": "Cuando mover es un problema: el zugzwang recíproco, la jugada de espera y la triangulación.",
+      "en": "When having to move is the problem: mutual zugzwang, the waiting move and triangulation."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-safety-attack",
+    "level": "advanced",
+    "order": 9,
+    "title": {
+      "es": "Atacar al rey",
+      "en": "Attacking the king"
+    },
+    "summary": {
+      "es": "Cuándo un rey es débil, el regalo griego, el rey sin enrocar y la avalancha de peones.",
+      "en": "When a king is weak, the Greek gift, the uncastled king and the pawn storm."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
+  },
+  {
+    "id": "advanced-tactics",
+    "level": "advanced",
+    "order": 10,
+    "title": {
+      "es": "Táctica avanzada",
+      "en": "Advanced tactics"
+    },
+    "summary": {
+      "es": "Cortar las líneas del rival, abrir las tuyas y juntar dos ideas en un golpe.",
+      "en": "Cut your opponent’s lines, open your own and join two ideas in one blow."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "defending",
+    "level": "advanced",
+    "order": 11,
+    "title": {
+      "es": "Defenderse",
+      "en": "Defending"
+    },
+    "summary": {
+      "es": "Ver venir la amenaza, encontrar la jugada que la para y no rendirse cuando vas peor.",
+      "en": "Seeing the threat coming, finding the move that stops it and not giving up when you are worse."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "plans-and-strategy",
+    "level": "advanced",
+    "order": 12,
+    "title": {
+      "es": "Hacer un plan",
+      "en": "Making a plan"
+    },
+    "summary": {
+      "es": "Cuatro preguntas para entender la posición y elegir qué hacer cuando no hay táctica.",
+      "en": "Four questions to understand the position and choose what to do when there is no tactic."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

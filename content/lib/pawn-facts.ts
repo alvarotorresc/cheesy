@@ -67,7 +67,7 @@ export const outposts = (pos: Chess, color: Color): string[] => {
 
 /**
  * The side's bishops that stand on the colour of most of its own pawns, which take their squares
- * (Wikipedia, "Good bishop and bad bishop").
+ * (Wikipedia, "Bad bishop" in the glossary of chess).
  */
 export const badBishops = (pos: Chess, color: Color): string[] => {
   const pawns = pawnsOf(pos, color);

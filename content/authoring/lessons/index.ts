@@ -30,6 +30,12 @@ import { pawnStructure } from './advanced/03-pawn-structure.ts';
 import { outposts } from './advanced/04-outposts.ts';
 import { openFilesSeventh } from './advanced/05-open-files-seventh.ts';
 import { passedPawns } from './advanced/06-passed-pawns.ts';
+import { minorPieceEndings } from './advanced/07-minor-piece-endings.ts';
+import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
+import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
+import { advancedTactics } from './advanced/10-advanced-tactics.ts';
+import { defending } from './advanced/11-defending.ts';
+import { plansAndStrategy } from './advanced/12-plans-and-strategy.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -62,4 +68,10 @@ export const lessons: LessonSpec[] = [
   outposts,
   openFilesSeventh,
   passedPawns,
+  minorPieceEndings,
+  zugzwangTempo,
+  kingSafetyAttack,
+  advancedTactics,
+  defending,
+  plansAndStrategy,
 ];
