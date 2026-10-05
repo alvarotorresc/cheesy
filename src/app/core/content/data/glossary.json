@@ -2605,7 +2605,7 @@
         },
         {
           "kind": "text",
-          "text": ", una captura o una amenaza. Como obliga a contestar, es la más fácil de calcular, y conviene mirarlas antes que las demás."
+          "text": ", una captura o una amenaza. Las jugadas forzantes obligan a contestar, así que son las más fáciles de calcular, y conviene mirarlas antes que las demás."
         }
       ],
       "en": [
@@ -2620,7 +2620,7 @@
         },
         {
           "kind": "text",
-          "text": ", a capture or a threat. Since it must be answered, it is the easiest kind to calculate, and it pays to look at these before any other move."
+          "text": ", a capture or a threat. Forcing moves must be answered, so they are the easiest to calculate, and it pays to look at them before any other move."
         }
       ]
     },
@@ -3007,7 +3007,7 @@
         },
         {
           "kind": "text",
-          "text": " de la que el rey rival no puede escapar. Quien los da no puede ganar, pero el rival tampoco, y la partida acaba en tablas, normalmente por "
+          "text": " de la que el rey rival no puede escapar. Quien los da se asegura al menos las tablas, y si sigue dándolos la partida acaba en tablas, normalmente por "
         },
         {
           "kind": "term",
@@ -3031,7 +3031,7 @@
         },
         {
           "kind": "text",
-          "text": " the enemy king cannot escape. The side giving them cannot win, but neither can the opponent, and the game ends in a draw, usually by "
+          "text": " the enemy king cannot escape. The side giving them secures at least a draw, and if it keeps giving them the game ends in a draw, usually by "
         },
         {
           "kind": "term",

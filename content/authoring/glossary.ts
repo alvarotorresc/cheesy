@@ -893,8 +893,8 @@ export const glossary: GlossarySpec[] = [
     id: 'forcing-move',
     name: { es: 'Jugada forzante', en: 'Forcing move' },
     definition: {
-      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Como obliga a contestar, es la más fácil de calcular, y conviene mirarlas antes que las demás.',
-      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Since it must be answered, it is the easiest kind to calculate, and it pays to look at these before any other move.',
+      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Las jugadas forzantes obligan a contestar, así que son las más fáciles de calcular, y conviene mirarlas antes que las demás.',
+      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Forcing moves must be answered, so they are the easiest to calculate, and it pays to look at them before any other move.',
     },
     example: {
       fen: '6k1/5ppp/8/8/1q6/8/5PPP/2Q3K1 w - - 0 1',
@@ -1008,8 +1008,8 @@ export const glossary: GlossarySpec[] = [
     id: 'perpetual-check',
     name: { es: 'Jaque perpetuo', en: 'Perpetual check' },
     definition: {
-      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da no puede ganar, pero el rival tampoco, y la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
-      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them cannot win, but neither can the opponent, and the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
+      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da se asegura al menos las tablas, y si sigue dándolos la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
+      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them secures at least a draw, and if it keeps giving them the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
     },
     example: {
       fen: '7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1',
