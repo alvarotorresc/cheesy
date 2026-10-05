@@ -670,7 +670,7 @@
             },
             {
               "kind": "text",
-              "text": " la captura y tú solo recuperas un caballo."
+              "text": " la captura y, aunque recuperes con el caballo, das la dama por dos caballos (9 por 6)."
             }
           ],
           "en": [
@@ -684,7 +684,7 @@
             },
             {
               "kind": "text",
-              "text": " takes her and you only get a knight back."
+              "text": " takes her and, even if your knight takes back, you give the queen for two knights (9 for 6)."
             }
           ]
         }
