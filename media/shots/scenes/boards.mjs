@@ -3,6 +3,8 @@
 // The play page of an opening, its practice, and a curated position as it opens. The moves are
 // made the way a person makes them: a click on the origin square and a click on the destination.
 
+import { repaint } from './engine.mjs';
+
 // Buttons of the move lists of the play page (app-opening-moves) and of the practice
 // (app-move-list): one per half move played.
 const MOVE_BUTTONS = 'app-opening-moves .moves-list button, app-move-list button.move';
@@ -28,7 +30,7 @@ cg-board piece, cg-board square { will-change: auto !important; }
 `;
 
 /** Adds the rules that keep a page with a played board identical between runs. */
-async function steadyBoard(page) {
+export async function steadyBoard(page) {
   await page.addStyleTag({ content: STEADY_CSS });
 }
 
@@ -139,11 +141,16 @@ async function showInPanel(page, selector, alsoVisible = []) {
       const box = block.getBoundingClientRect();
       if (box.top < frame.top - 1 || box.bottom > frame.bottom + 1)
         return 'does not fit in the panel';
-      const scrolls = Array.from(block.querySelectorAll('*')).some(
+      // Text for screen readers only (.visually-hidden) is clipped on purpose: it does not count.
+      const scrolls = Array.from(block.querySelectorAll('*')).find(
         (el) =>
-          el.scrollHeight > el.clientHeight + 1 && getComputedStyle(el).overflowY !== 'visible',
+          !el.closest('.visually-hidden') &&
+          el.scrollHeight > el.clientHeight + 1 &&
+          getComputedStyle(el).overflowY !== 'visible',
       );
-      if (scrolls) return 'holds more moves than its box shows';
+      if (scrolls) {
+        return `holds more moves than its box shows (${scrolls.className}: ${scrolls.scrollHeight}/${scrolls.clientHeight})`;
+      }
       const cut = Array.from(panel.children).some((child) => {
         const { top, bottom, height } = child.getBoundingClientRect();
         return height > 0 && top < frame.top - 1 && bottom > frame.top + 1;
@@ -164,11 +171,12 @@ async function showInPanel(page, selector, alsoVisible = []) {
 
 // ----- screen-02: playing the Ruy Lopez against the book -----
 
-// White's moves of the main line up to the Closed Variation: 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4
-// Nf6 5.O-O Be7. The rival answers with the main line only. Five moves is what the window holds
-// with the settings, the theory and the whole move list in view: with a sixth, the panel has to
-// scroll further and cuts the settings box (showInPanel checks all of it).
-const RUY_LOPEZ_WHITE = ['e2e4', 'g1f3', 'f1b5', 'b5a4', 'e1g1'];
+// White's moves of the main line up to the Morphy Defence: 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6. The rival
+// answers with the main line only. Three moves is what the window holds with the settings, the
+// theory and the whole move list in view: in words, the theory panel says more (a sentence and
+// "where you are" with each move written out), and with a fourth move the panel has to scroll
+// further and cuts the settings box (showInPanel checks all of it).
+const RUY_LOPEZ_WHITE = ['e2e4', 'g1f3', 'f1b5'];
 
 async function playRuyLopez(page) {
   await steadyBoard(page);
@@ -289,12 +297,20 @@ async function unsolvedPosition(page) {
 }
 
 export const BOARD_SCENES = [
-  { file: 'screen-02-jugar', path: '/openings/ruy-lopez', theme: 'dark', prep: playRuyLopez },
+  // The panel scrolls: repainted whole, its corners come out the same in every run.
+  {
+    file: 'screen-02-jugar',
+    path: '/openings/ruy-lopez',
+    theme: 'dark',
+    prep: playRuyLopez,
+    after: repaint,
+  },
   {
     file: 'screen-03-practicar',
     path: '/openings/sicilian-najdorf/practice',
     theme: 'light',
     prep: practiseNajdorf,
+    after: repaint,
   },
   { file: 'screen-07-posicion', path: '/positions/1', theme: 'light', prep: unsolvedPosition },
 ];
