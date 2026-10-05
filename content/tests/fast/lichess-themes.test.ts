@@ -1,8 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { LICHESS_THEME_KEYS, LICHESS_THEMES } from '../../authoring/lessons/lichess-themes.ts';
+import {
+  ADVANCED_LICHESS_THEMES,
+  ADVANCED_NO_THEME,
+  LICHESS_THEME_KEYS,
+  LICHESS_THEMES,
+} from '../../authoring/lessons/lichess-themes.ts';
 import { lessons } from '../../authoring/lessons/index.ts';
 
 const intermediate = lessons.filter((l) => l.level === 'intermediate').map((l) => l.id);
+const advanced = lessons.filter((l) => l.level === 'advanced').map((l) => l.id);
 
 describe('Lichess puzzle themes of the intermediate lessons', () => {
   it('maps only intermediate lessons that exist', () => {
@@ -31,9 +37,37 @@ describe('Lichess puzzle themes of the intermediate lessons', () => {
     expect(all.filter((theme, i) => all.indexOf(theme) !== i)).toEqual([]);
   });
 
-  it('lists every theme of the closed list once, and uses all of them', () => {
+  it('lists every theme of the closed list once, and uses all of them in one map or the other', () => {
     expect(new Set(LICHESS_THEME_KEYS).size).toBe(LICHESS_THEME_KEYS.length);
-    const used = new Set(Object.values(LICHESS_THEMES).flat());
+    const used = new Set(
+      [LICHESS_THEMES, ADVANCED_LICHESS_THEMES].flatMap((map) => Object.values(map).flat()),
+    );
     expect(LICHESS_THEME_KEYS.filter((key) => !used.has(key))).toEqual([]);
+  });
+});
+
+describe('Lichess puzzle themes of the advanced lessons', () => {
+  it('maps only advanced lessons that exist, and lists only those without a theme', () => {
+    expect(Object.keys(ADVANCED_LICHESS_THEMES).filter((id) => !advanced.includes(id))).toEqual([]);
+    expect(ADVANCED_NO_THEME.filter((id) => !advanced.includes(id))).toEqual([]);
+  });
+
+  it('gives every advanced lesson themes or a place in the list without them, not both', () => {
+    expect(advanced.length).toBeGreaterThan(0);
+    const themed = advanced.filter((id) => ADVANCED_LICHESS_THEMES[id]?.length);
+    const listed = advanced.filter((id) => ADVANCED_NO_THEME.includes(id));
+    expect(themed.filter((id) => listed.includes(id))).toEqual([]);
+    expect(advanced.filter((id) => !themed.includes(id) && !listed.includes(id))).toEqual([]);
+  });
+
+  it('uses only themes of the closed list, without repeating one in a lesson', () => {
+    const keys: readonly string[] = LICHESS_THEME_KEYS;
+    for (const [lesson, themes] of Object.entries(ADVANCED_LICHESS_THEMES)) {
+      expect(
+        themes.filter((theme) => !keys.includes(theme)),
+        lesson,
+      ).toEqual([]);
+      expect(new Set(themes).size, lesson).toBe(themes.length);
+    }
   });
 });
