@@ -172,13 +172,13 @@ describe('puzzle files', () => {
     expect(exercises.size).toBeGreaterThan(0);
     const seen = new Set<string>();
     const problems = each((p) => {
-      const [start, afterOpening] = replay(p)
+      const boards = replay(p)
         .slice(0, 2)
         .map((pos) => makeBoardFen(pos.board));
       const found: string[] = [];
-      if (exercises.has(start) || exercises.has(afterOpening)) found.push('shows an exercise');
-      if (seen.has(afterOpening)) found.push('same board as another puzzle');
-      seen.add(afterOpening);
+      if (boards.some((board) => exercises.has(board))) found.push('shows an exercise');
+      if (boards.some((board) => seen.has(board))) found.push('same board as another puzzle');
+      for (const board of boards) seen.add(board);
       return found;
     });
     expect(problems).toEqual([]);

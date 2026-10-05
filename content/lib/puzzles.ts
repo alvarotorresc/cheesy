@@ -257,7 +257,7 @@ function roundRobin(
         if (taken.has(c.id) || c.boards.some((board) => blocked.has(board))) continue;
         picked.push(c);
         taken.add(c.id);
-        blocked.add(c.boards[1]);
+        for (const board of c.boards) blocked.add(board);
         progress = true;
         break;
       }
