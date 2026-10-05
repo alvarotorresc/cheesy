@@ -83,12 +83,18 @@ The settings are in `authoring/puzzles-config.ts`:
 
 - **Filter:** rating 900–1700, rating deviation at most 90, popularity at least 90, at least 1000
   plays, 1 to 3 player moves; exceptions per theme and per lesson.
+- **Lessons without practice:** `draws-and-defence` has no themes (`themes: []` in `LESSON_ORDER`,
+  `[]` in the theme map) and so no puzzle file nor entry in the catalogue, hence no "Practise more":
+  the Lichess puzzles of `defensiveMove` and `equality` win material instead of saving a draw (none
+  of those checked ends in perpetual check or stalemate). It still counts in `LESSON_ORDER`, the
+  twelve lessons of the syllabus.
 - **Later ideas:** a puzzle with a tactical theme of a later lesson of `LESSON_ORDER` (the twelve
   lessons of the syllabus) is left out, and each puzzle goes to one lesson only, the first.
 - **Selection:** 50 per lesson, split evenly between its themes; at most a fifth of one move and at
-  least a fifth of three (two fifths in `forcing-moves` and `in-between-move`); in rounds over
-  100-point rating bands, the most popular of each. A puzzle that shows the start of an exercise of
-  the app, or the board of another puzzle, is skipped.
+  least a fifth of three (two fifths in `forcing-moves` and `in-between-move`), with exceptions per
+  theme (`mateIn2` is always two moves, so `attraction` and `sacrifice` take three fifths); in rounds over 100-point rating bands, the most popular of
+  each. A puzzle that shows the start of an exercise of the app, or the board of another puzzle, is
+  skipped.
 - **`EXCLUDED_IDS`:** puzzles left out after looking at them, each with the reason. Before
   publishing new puzzles, look at a few of each theme on `https://lichess.org/training/<id>` and
   exclude any that does not teach the idea of its lesson.

@@ -25,7 +25,9 @@ export const LESSON_ORDER = [
   { lesson: 'in-between-move', themes: ['intermezzo', 'xRayAttack'] },
   { lesson: 'king-pawn-endings', themes: ['pawnEndgame'] },
   { lesson: 'rook-endings', themes: ['rookEndgame'] },
-  { lesson: 'draws-and-defence', themes: ['defensiveMove', 'equality'] },
+  // No puzzles: the Lichess puzzles of `defensiveMove` and `equality` win material instead of
+  // saving a draw (none ends in perpetual check or stalemate), so the lesson is out of "Practise more".
+  { lesson: 'draws-and-defence', themes: [] },
 ] as const satisfies readonly { lesson: string; themes: readonly string[] }[];
 
 /**
@@ -65,7 +67,6 @@ export const LESSON_FILTERS: Record<string, Partial<PuzzleFilter>> = {};
 
 /** Measured on the database of 2026-10-02: these themes have few popular, much played puzzles. */
 export const THEME_FILTERS: Record<string, Partial<PuzzleFilter>> = {
-  equality: { minPopularity: 70, minPlays: 100, maxDeviation: 110 },
   smotheredMate: { minPlays: 500 },
   anastasiaMate: { minPlays: 500 },
 };
@@ -78,6 +79,16 @@ export const LENGTH_QUOTA: LengthQuota = { maxOne: 0.2, minThree: 0.2 };
 export const LENGTH_QUOTA_BY_LESSON: Record<string, Partial<LengthQuota>> = {
   'forcing-moves': { minThree: 0.4 },
   'in-between-move': { minThree: 0.4 },
+};
+
+/**
+ * Over the lesson's quota. A `mateIn2` puzzle is always two player moves, so the three-move share of
+ * `forcing-moves` falls on its other two themes: 11 + 10 of 50, still two fifths of the lesson.
+ */
+export const LENGTH_QUOTA_BY_THEME: Record<string, Partial<LengthQuota>> = {
+  mateIn2: { maxOne: 0, minThree: 0 },
+  attraction: { minThree: 0.6 },
+  sacrifice: { minThree: 0.6 },
 };
 
 /** Puzzle id → why it is left out, after looking at it. */
@@ -99,5 +110,6 @@ export const PUZZLE_CONFIG: PuzzleConfig = {
   perLesson: PUZZLES_PER_LESSON,
   lengthQuota: LENGTH_QUOTA,
   lengthQuotaByLesson: LENGTH_QUOTA_BY_LESSON,
+  lengthQuotaByTheme: LENGTH_QUOTA_BY_THEME,
   excluded: EXCLUDED_IDS,
 };

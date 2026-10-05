@@ -202,8 +202,6 @@ export const en = {
         xRayAttack: 'X-ray attack',
         pawnEndgame: 'Pawn endgame',
         rookEndgame: 'Rook endgame',
-        defensiveMove: 'Defensive move',
-        equality: 'Equality',
       },
     },
   },

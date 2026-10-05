@@ -51,8 +51,8 @@ export const forcingMoves: LessonSpec = {
       check: { by: 'engine', solution: ['Qh3+', 'Kg8', 'Qh7#'] },
       wrong: {
         'Nxf7+': {
-          es: 'Es un [jaque](check), pero la torre de f8 captura el caballo y no ganas nada. Prueba el otro jaque.',
-          en: 'It is a [check](check), but the rook on f8 takes the knight and you win nothing. Try the other check.',
+          es: 'Es un [jaque](check), pero el rival captura el caballo y has dado una pieza por un peón. Prueba el otro jaque.',
+          en: 'It is a [check](check), but the rival takes the knight and you have given a piece for a pawn. Try the other check.',
         },
       },
       hint: {

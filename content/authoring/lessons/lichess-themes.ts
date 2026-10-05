@@ -26,7 +26,6 @@ export const LICHESS_THEME_KEYS = [
   'pawnEndgame',
   'rookEndgame',
   'defensiveMove',
-  'equality',
   'quietMove',
   'advancedPawn',
   'promotion',
@@ -34,7 +33,10 @@ export const LICHESS_THEME_KEYS = [
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
 
-/** Intermediate lesson id → Lichess puzzle themes. Each theme belongs to one lesson only. */
+/**
+ * Intermediate lesson id → Lichess puzzle themes. Each theme belongs to one lesson only; a lesson
+ * with none is not in "Practise more".
+ */
 export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'hanging-pieces': ['hangingPiece'],
   'the-fork': ['fork'],
@@ -47,7 +49,8 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'in-between-move': ['intermezzo', 'xRayAttack'],
   'king-pawn-endings': ['pawnEndgame'],
   'rook-endings': ['rookEndgame'],
-  'draws-and-defence': ['defensiveMove', 'equality'],
+  // No practice: see LESSON_ORDER in puzzles-config.ts.
+  'draws-and-defence': [],
 };
 
 /**
@@ -78,4 +81,16 @@ export const THEME_TERMS: Partial<Record<LichessTheme, string | null>> = {
   discoveredCheck: 'discovered-check',
   capturingDefender: 'removing-the-defender',
   deflection: 'deflection',
+  backRankMate: 'back-rank',
+  smotheredMate: 'smothered-mate',
+  anastasiaMate: 'anastasia-mate',
+  // A length (two moves to mate), not an idea: the solved text names it without a link.
+  mateIn2: null,
+  attraction: 'attraction',
+  sacrifice: 'sacrifice',
+  intermezzo: 'intermediate-move',
+  xRayAttack: 'x-ray',
+  // Kinds of position, not ideas: the glossary has no term for them.
+  pawnEndgame: null,
+  rookEndgame: null,
 };

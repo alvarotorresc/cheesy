@@ -378,15 +378,7 @@
             },
             {
               "kind": "text",
-              "text": ", pero la torre de "
-            },
-            {
-              "kind": "square",
-              "square": "f8"
-            },
-            {
-              "kind": "text",
-              "text": " captura el caballo y no ganas nada. Prueba el otro jaque."
+              "text": ", pero el rival captura el caballo y has dado una pieza por un peón. Prueba el otro jaque."
             }
           ],
           "en": [
@@ -401,15 +393,7 @@
             },
             {
               "kind": "text",
-              "text": ", but the rook on "
-            },
-            {
-              "kind": "square",
-              "square": "f8"
-            },
-            {
-              "kind": "text",
-              "text": " takes the knight and you win nothing. Try the other check."
+              "text": ", but the rival takes the knight and you have given a piece for a pawn. Try the other check."
             }
           ]
         }
