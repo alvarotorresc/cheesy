@@ -36,7 +36,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const groups = groupTerms(terms, 'es');
     expect(groups.map((g) => g.key)).toEqual([...GLOSSARY_GROUPS]);
-    expect(groups.map((g) => g.terms.length)).toEqual([12, 20, 5, 12, 8, 9]);
+    expect(groups.map((g) => g.terms.length)).toEqual([12, 21, 5, 18, 13, 9]);
     for (const group of groups) {
       const names = group.terms.map((t) => t.name.es);
       expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'es')));
@@ -55,7 +55,7 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const ids = (filters: Parameters<typeof applyFilters>[1]) =>
       applyFilters(terms, filters, 'es').map((t) => t.id);
-    expect(ids(NO_FILTERS)).toHaveLength(66);
+    expect(ids(NO_FILTERS)).toHaveLength(78);
     expect(ids({ ...NO_FILTERS, group: 'mates' })).toHaveLength(5);
     expect(ids({ ...NO_FILTERS, level: 'advanced' }).sort()).toEqual(
       terms
@@ -81,12 +81,12 @@ describe('glossary catalogue', () => {
     const terms = await bundledGlossaryLoader();
     const all = groupCounts(terms, NO_FILTERS, 'es');
     expect(all).toEqual({
-      all: 66,
+      all: 78,
       rules: 12,
-      tactics: 20,
+      tactics: 21,
       mates: 5,
-      strategy: 12,
-      pawns: 8,
+      strategy: 18,
+      pawns: 13,
       endgames: 9,
     });
     // The family filter itself does not change the counts of the families.

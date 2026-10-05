@@ -6,6 +6,7 @@ import { STATUS_OPTIONS, positionStatus } from '../../src/app/core/lessons/posit
 import { countPieces, fenError, playSan, positionFromFen } from './chess.ts';
 import { lessonSummary } from './lesson-build.ts';
 import { validateLesson } from './schema.ts';
+import { findMoveValidator } from './tablebase-find-move.ts';
 import type { Chess } from 'chessops/chess';
 import type { GlossaryTerm, Lesson, LessonSummary, Step } from '../types.ts';
 
@@ -122,6 +123,19 @@ export const findMoveErrors = (lessons: Lesson[]): string[] =>
       if (!playSan(pos, san)) out.push(`${at}: wrong move ${san} is illegal`);
       else if (good.includes(san)) out.push(`${at}: ${san} is accepted`);
     return out;
+  });
+
+/** Test 5: `onlyMove` only where it changes something: not on a mate, not in a tablebase ending. */
+export const onlyMoveErrors = (lessons: Lesson[]): string[] =>
+  stepsOf(lessons, 'find-move').flatMap(({ at, s }) => {
+    if (s.check.by !== 'engine' || !s.check.onlyMove || !positionOf(s.board.fen)) return [];
+    if (s.check.solution.at(-1)?.endsWith('#'))
+      return [`${at}: onlyMove on a mate, which test 10 already finds unique`];
+    if (findMoveValidator(s.board.fen, s.check.solution) === 'tablebase')
+      return [
+        `${at}: onlyMove in a tablebase ending, where test 13 already asks for the only move`,
+      ];
+    return [];
   });
 
 /** Test 6: a status question has a legal board, and its wrong options all have a message. */

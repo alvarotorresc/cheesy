@@ -932,7 +932,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Gambit"
@@ -1010,7 +1010,8 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
+    "lesson": "piece-activity",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Fianchetto",
@@ -1135,7 +1136,8 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
+    "lesson": "piece-activity",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Fianchetto"
@@ -1211,7 +1213,7 @@
       "arrows": []
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/fianchetto-ajedrez"
@@ -1249,7 +1251,7 @@
       "arrows": []
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1295,7 +1297,8 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
+    "lesson": "piece-activity",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Initiative_(chess)"
@@ -1356,7 +1359,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1395,6 +1398,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1432,6 +1436,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1491,6 +1496,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1535,15 +1541,16 @@
       ]
     },
     "example": {
-      "fen": "4k3/pp3ppp/4p3/8/3P4/8/PP3PPP/4K3 w - - 0 1",
+      "fen": "4k3/1pp2ppp/3p4/8/4P3/8/PPP3PP/4K3 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "d4"
+        "e4"
       ],
       "arrows": []
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Isolated_pawn"
@@ -1588,16 +1595,17 @@
       ]
     },
     "example": {
-      "fen": "4k3/pp3ppp/8/8/8/2P5/P1P2PPP/4K3 w - - 0 1",
+      "fen": "4k3/pp3p1p/5p2/8/8/8/PP3PPP/4K3 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "c2",
-        "c3"
+        "f6",
+        "f7"
       ],
       "arrows": []
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Doubled_pawns"
@@ -1706,6 +1714,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "outposts",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/el-valor-de-las-piezas-de-ajedrez"
@@ -1869,6 +1878,641 @@
     ]
   },
   {
+    "id": "candidate-move",
+    "name": {
+      "es": "Jugada candidata",
+      "en": "Candidate move"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Jugada que a primera vista parece buena y merece pensarse. Antes de mover se hace una lista corta de candidatas, empezando por las "
+        },
+        {
+          "kind": "term",
+          "id": "forcing-move",
+          "text": "jugadas forzantes"
+        },
+        {
+          "kind": "text",
+          "text": ", y se calcula cada una."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A move that looks good at first sight and deserves a closer look. Before moving you make a short list of candidates, starting with the "
+        },
+        {
+          "kind": "term",
+          "id": "forcing-move",
+          "text": "forcing moves"
+        },
+        {
+          "kind": "text",
+          "text": ", and calculate each one."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "orientation": "white",
+      "highlights": [],
+      "arrows": [
+        {
+          "from": "f3",
+          "to": "g5",
+          "move": true
+        },
+        {
+          "from": "d2",
+          "to": "d4",
+          "move": true
+        },
+        {
+          "from": "d2",
+          "to": "d3",
+          "move": true
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "candidate-moves",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Candidate_move"
+    ]
+  },
+  {
+    "id": "mobility",
+    "name": {
+      "es": "Movilidad",
+      "en": "Mobility"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cuántas casillas útiles puede alcanzar una pieza, o todas las de un bando. Una pieza con mucha movilidad suele valer más que la misma pieza encerrada."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "How many useful squares a piece, or a whole side, can reach. A piece with plenty of mobility is usually worth more than the same piece shut in."
+        }
+      ]
+    },
+    "example": {
+      "fen": "7k/8/8/8/3N4/8/8/N6K w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "b3",
+        "b5",
+        "c2",
+        "c6",
+        "e2",
+        "e6",
+        "f3",
+        "f5"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "piece-activity",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chess_strategy"
+    ]
+  },
+  {
+    "id": "backward-pawn",
+    "name": {
+      "es": "Peón retrasado",
+      "en": "Backward pawn"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Peón que se ha quedado detrás de los peones propios de las "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " vecinas, así que ninguno puede protegerlo, y que no puede avanzar sin perderse. La casilla de delante suele ser buena para una pieza rival."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A pawn left behind the pawns of its own side on the neighbouring "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "files"
+        },
+        {
+          "kind": "text",
+          "text": ", so none can protect it, and which cannot advance without being lost. The square in front of it is usually a good one for a rival piece."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/pp3ppp/3p4/4p3/4P3/8/PPP2PPP/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d6",
+        "d5"
+      ],
+      "arrows": []
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "pawn-structure",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Backward_pawn",
+      "https://en.wikipedia.org/wiki/Pawn_structure"
+    ]
+  },
+  {
+    "id": "outpost",
+    "name": {
+      "es": "Casilla fuerte",
+      "en": "Outpost"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Casilla de la cuarta fila de un bando o más adelante, protegida por un peón propio, que ningún peón del rival puede atacar ya. Es el sitio ideal para un caballo. Para el rival, esa casilla es un agujero en su campo."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A square on one side’s fourth rank or further up, protected by one of its pawns, that no rival pawn can attack any more. It is the ideal spot for a knight. For the rival, that square is a hole in his camp."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/pp4pp/4p3/4N3/3P4/8/PP3PPP/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e5"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "outposts",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Outpost_(chess)"
+    ]
+  },
+  {
+    "id": "open-file",
+    "name": {
+      "es": "Columna abierta",
+      "en": "Open file"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "Columna"
+        },
+        {
+          "kind": "text",
+          "text": " en la que no queda ningún peón de ninguno de los dos bandos. Es el camino natural de las torres hacia el campo rival."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "file"
+        },
+        {
+          "kind": "text",
+          "text": " with no pawns of either side left on it. It is the natural road for the rooks into the rival camp."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/pppp1ppp/8/8/8/8/PPPP1PPP/4R1K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6",
+        "e7",
+        "e8"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "open-files-seventh",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Open_file"
+    ]
+  },
+  {
+    "id": "half-open-file",
+    "name": {
+      "es": "Columna semiabierta",
+      "en": "Half-open file"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "Columna"
+        },
+        {
+          "kind": "text",
+          "text": " en la que solo quedan peones de un bando. Para el otro bando es semiabierta: sus torres pueden atacar por ella esos peones."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "file"
+        },
+        {
+          "kind": "text",
+          "text": " with pawns of only one side left on it. For the other side it is half-open: his rooks can attack those pawns along it."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/ppp2ppp/8/8/8/8/PP3PPP/2R3K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c7"
+      ],
+      "arrows": [
+        {
+          "from": "c1",
+          "to": "c7",
+          "move": false
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "open-files-seventh",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Half-open_file"
+    ]
+  },
+  {
+    "id": "doubled-rooks",
+    "name": {
+      "es": "Torres dobladas",
+      "en": "Doubled rooks"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Las dos torres de un bando, una detrás de la otra en la misma "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columna"
+        },
+        {
+          "kind": "text",
+          "text": " o fila. Juntas dominan esa línea: si una se cambia, la otra sigue en ella."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Both rooks of one side, one behind the other on the same "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "file"
+        },
+        {
+          "kind": "text",
+          "text": " or rank. Together they rule that line: if one is traded, the other stays on it."
+        }
+      ]
+    },
+    "example": {
+      "fen": "2r3k1/pp1r1pp1/7p/8/8/8/PP2RPPP/4R1K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e1",
+        "e2"
+      ],
+      "arrows": [
+        {
+          "from": "e2",
+          "to": "e7",
+          "move": false
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "open-files-seventh",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Battery_(chess)"
+    ]
+  },
+  {
+    "id": "pawn-majority",
+    "name": {
+      "es": "Mayoría de peones",
+      "en": "Pawn majority"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Más peones que el rival en un "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "flanco"
+        },
+        {
+          "kind": "text",
+          "text": ". Bien llevada, la mayoría acaba creando un "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "peón pasado"
+        },
+        {
+          "kind": "text",
+          "text": "; quien tiene mayoría en un flanco suele tener minoría en el otro."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "More pawns than the rival on one "
+        },
+        {
+          "kind": "term",
+          "id": "flank",
+          "text": "flank"
+        },
+        {
+          "kind": "text",
+          "text": ". Played well, the majority ends up making a "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "passed pawn"
+        },
+        {
+          "kind": "text",
+          "text": "; whoever has a majority on one flank usually has a minority on the other."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/pp3ppp/8/8/8/8/PPP2PP1/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "a2",
+        "b2",
+        "c2"
+      ],
+      "arrows": []
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "passed-pawns",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Pawn_majority"
+    ]
+  },
+  {
+    "id": "outside-passed-pawn",
+    "name": {
+      "es": "Peón pasado alejado",
+      "en": "Outside passed pawn"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "Peón pasado"
+        },
+        {
+          "kind": "text",
+          "text": " lejos de los demás peones, cerca del borde. En el final obliga al rey rival a ir a pararlo, y mientras tanto el otro rey se come los peones del otro lado."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "passed pawn"
+        },
+        {
+          "kind": "text",
+          "text": " far from the other pawns, near the edge. In the endgame it forces the rival king to go and stop it, and meanwhile the other king eats the pawns on the other side."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/8/2k5/P6p/2K4P/8/8/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "a5"
+      ],
+      "arrows": [
+        {
+          "from": "c4",
+          "to": "d4",
+          "move": true
+        }
+      ]
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "passed-pawns",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Outside_passed_pawn",
+      "https://en.wikipedia.org/wiki/Passed_pawn"
+    ]
+  },
+  {
+    "id": "connected-passed-pawns",
+    "name": {
+      "es": "Peones pasados unidos",
+      "en": "Connected passed pawns"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Dos o más "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "peones pasados"
+        },
+        {
+          "kind": "text",
+          "text": " en "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " vecinas. Al avanzar se protegen uno a otro, y en la sexta fila suelen valer tanto como una torre."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Two or more "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "passed pawns"
+        },
+        {
+          "kind": "text",
+          "text": " on neighbouring "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "files"
+        },
+        {
+          "kind": "text",
+          "text": ". As they advance they protect each other, and on the sixth rank they are often worth as much as a rook."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/5ppp/4k3/1PP5/8/8/5PPP/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "b5",
+        "c5"
+      ],
+      "arrows": []
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "passed-pawns",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Passed_pawn"
+    ]
+  },
+  {
+    "id": "blockade",
+    "name": {
+      "es": "Bloqueo",
+      "en": "Blockade"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Poner una pieza justo delante de un peón rival, sobre todo de un "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "peón pasado"
+        },
+        {
+          "kind": "text",
+          "text": ", para que no pueda avanzar. El mejor bloqueador es el caballo: el propio peón le hace de escudo y desde ahí sigue atacando casillas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Placing a piece right in front of a rival pawn, above all a "
+        },
+        {
+          "kind": "term",
+          "id": "passed-pawn",
+          "text": "passed pawn"
+        },
+        {
+          "kind": "text",
+          "text": ", so that it cannot advance. The best blockader is the knight: the pawn itself shelters it, and from there it still attacks squares."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/5ppp/3n4/3P4/8/8/5PPP/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d6"
+      ],
+      "arrows": []
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "passed-pawns",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Blockade_(chess)"
+    ]
+  },
+  {
     "id": "tempo",
     "name": {
       "es": "Tiempo",
@@ -1904,7 +2548,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Tempo_(chess)"
@@ -3062,6 +3706,66 @@
     ]
   },
   {
+    "id": "quiet-move",
+    "name": {
+      "es": "Jugada tranquila",
+      "en": "Quiet move"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Jugada que no da "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": ", no captura y no amenaza capturar nada enseguida, pero prepara algo que el rival ya no puede parar. Es la más fácil de pasar por alto."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A move that gives no "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": ", captures nothing and threatens no immediate capture, but prepares something the rival can no longer stop. It is the easiest kind to overlook."
+        }
+      ]
+    },
+    "example": {
+      "fen": "4r1k1/pp3ppp/8/8/8/8/PP3PPP/3R2K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "g1"
+      ],
+      "arrows": [
+        {
+          "from": "g2",
+          "to": "g3",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "candidate-moves",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://lichess.org/training/quietMove"
+    ]
+  },
+  {
     "id": "smothered-mate",
     "name": {
       "es": "Mate de la coz",
@@ -3734,6 +4438,7 @@
     },
     "group": "endgames",
     "level": "advanced",
+    "lesson": "passed-pawns",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Lucena_position",
@@ -3832,6 +4537,7 @@
     },
     "group": "endgames",
     "level": "advanced",
+    "lesson": "passed-pawns",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Philidor_position",
@@ -3930,6 +4636,7 @@
     },
     "group": "endgames",
     "level": "advanced",
+    "lesson": "passed-pawns",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Lucena_position",

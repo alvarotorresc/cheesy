@@ -73,6 +73,18 @@ const EXPECTED_IDS = [
   'cutting-off-the-king',
   'perpetual-check',
   'threefold-repetition',
+  'candidate-move',
+  'quiet-move',
+  'mobility',
+  'backward-pawn',
+  'outpost',
+  'open-file',
+  'half-open-file',
+  'doubled-rooks',
+  'pawn-majority',
+  'outside-passed-pawn',
+  'connected-passed-pawns',
+  'blockade',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -112,6 +124,7 @@ const GROUPS: Record<string, string[]> = {
     'back-rank',
     'opening-trap',
     'perpetual-check',
+    'quiet-move',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [
@@ -127,6 +140,12 @@ const GROUPS: Record<string, string[]> = {
     'tempo',
     'exchange',
     'bishop-pair',
+    'candidate-move',
+    'mobility',
+    'outpost',
+    'open-file',
+    'half-open-file',
+    'doubled-rooks',
   ],
   pawns: [
     'pawn-structure',
@@ -137,6 +156,11 @@ const GROUPS: Record<string, string[]> = {
     'hanging-pawns',
     'minority-attack',
     'passed-pawn',
+    'backward-pawn',
+    'pawn-majority',
+    'outside-passed-pawn',
+    'connected-passed-pawns',
+    'blockade',
   ],
   endgames: [
     'opposition',

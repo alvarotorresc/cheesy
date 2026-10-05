@@ -358,5 +358,95 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "candidate-moves",
+    "level": "advanced",
+    "order": 1,
+    "title": {
+      "es": "Jugadas candidatas",
+      "en": "Candidate moves"
+    },
+    "summary": {
+      "es": "Antes de mover, una lista corta de jugadas y la mejor respuesta del rival a cada una.",
+      "en": "Before you move, a short list of moves and the rival’s best answer to each one."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "piece-activity",
+    "level": "advanced",
+    "order": 2,
+    "title": {
+      "es": "Piezas activas",
+      "en": "Active pieces"
+    },
+    "summary": {
+      "es": "Una pieza vale por lo que hace: cuántas casillas útiles ve y adónde puede ir.",
+      "en": "A piece is worth what it does: how many useful squares it sees and where it can go."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "pawn-structure",
+    "level": "advanced",
+    "order": 3,
+    "title": {
+      "es": "La estructura de peones",
+      "en": "Pawn structure"
+    },
+    "summary": {
+      "es": "Peones aislados, doblados y retrasados, cadenas y rupturas: lo que dura toda la partida.",
+      "en": "Isolated, doubled and backward pawns, chains and breaks: what lasts the whole game."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
+  },
+  {
+    "id": "outposts",
+    "level": "advanced",
+    "order": 4,
+    "title": {
+      "es": "Casillas fuertes",
+      "en": "Outposts"
+    },
+    "summary": {
+      "es": "Casillas de donde ningún peón rival te puede echar, y la pieza que mejor las aprovecha.",
+      "en": "Squares no rival pawn can drive you from, and the piece that uses them best."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "open-files-seventh",
+    "level": "advanced",
+    "order": 5,
+    "title": {
+      "es": "Columnas abiertas y la séptima fila",
+      "en": "Open files and the seventh rank"
+    },
+    "summary": {
+      "es": "Las torres necesitan columnas sin peones para entrar en el campo rival.",
+      "en": "Rooks need files without pawns to get into the rival camp."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "passed-pawns",
+    "level": "advanced",
+    "order": 6,
+    "title": {
+      "es": "El peón pasado",
+      "en": "The passed pawn"
+    },
+    "summary": {
+      "es": "Cómo se crea, cómo se apoya y cómo se frena un peón pasado, con Lucena y Philidor.",
+      "en": "How a passed pawn is made, supported and stopped, with Lucena and Philidor."
+    },
+    "stepCount": 9,
+    "exerciseCount": 2
   }
 ]
