@@ -90,7 +90,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "A veces el zugzwang es de los dos: el que tenga que mover, pierde. Es un "
+            "text": "A veces el zugzwang es de los dos: al que le toque mover, empeora. Es un "
           },
           {
             "kind": "term",
@@ -115,7 +115,7 @@
           },
           {
             "kind": "text",
-            "text": " y el peón corona. Si juegan las blancas, no pueden ganar: o dejan al rey negro "
+            "text": " y el peón corona: pierden. Si juegan las blancas, no pueden ganar: o dejan al rey negro "
           },
           {
             "kind": "term",
@@ -130,7 +130,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "Sometimes the zugzwang is on both sides: whoever has to move loses. That is "
+            "text": "Sometimes the zugzwang is on both sides: whoever has to move makes things worse. That is "
           },
           {
             "kind": "term",
@@ -155,7 +155,7 @@
           },
           {
             "kind": "text",
-            "text": " and the pawn promotes. If White is to move, White cannot win: either the black king is left in "
+            "text": " and the pawn promotes: Black loses. If White is to move, White cannot win: either the black king is left in "
           },
           {
             "kind": "term",
@@ -962,7 +962,7 @@
           },
           {
             "kind": "text",
-            "text": " pierde quien mueve, así que cuenta las jugadas de espera: un "
+            "text": " empeora quien tenga que mover, así que cuenta las jugadas de espera: un "
           },
           {
             "kind": "term",
@@ -1004,7 +1004,7 @@
           },
           {
             "kind": "text",
-            "text": " whoever moves loses, so count the waiting moves: one spare "
+            "text": " whoever has to move makes things worse, so count the waiting moves: one spare "
           },
           {
             "kind": "term",

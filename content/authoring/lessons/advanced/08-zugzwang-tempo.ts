@@ -35,8 +35,8 @@ export const zugzwangTempo: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'A veces el zugzwang es de los dos: el que tenga que mover, pierde. Es un [zugzwang recíproco](mutual-zugzwang). Aquí, si juegan las negras, su rey tiene que ir a d7, el rey blanco pasa a b7 y el peón corona. Si juegan las blancas, no pueden ganar: o dejan al rey negro [ahogado](stalemate) o le dejan capturar el peón. Son tablas.',
-        en: 'Sometimes the zugzwang is on both sides: whoever has to move loses. That is [mutual zugzwang](mutual-zugzwang). Here, if Black is to move, the king has to go to d7, the white king steps to b7 and the pawn promotes. If White is to move, White cannot win: either the black king is left in [stalemate](stalemate) or it is allowed to capture the pawn. It is a draw.',
+        es: 'A veces el zugzwang es de los dos: al que le toque mover, empeora. Es un [zugzwang recíproco](mutual-zugzwang). Aquí, si juegan las negras, su rey tiene que ir a d7, el rey blanco pasa a b7 y el peón corona: pierden. Si juegan las blancas, no pueden ganar: o dejan al rey negro [ahogado](stalemate) o le dejan capturar el peón. Son tablas.',
+        en: 'Sometimes the zugzwang is on both sides: whoever has to move makes things worse. That is [mutual zugzwang](mutual-zugzwang). Here, if Black is to move, the king has to go to d7, the white king steps to b7 and the pawn promotes: Black loses. If White is to move, White cannot win: either the black king is left in [stalemate](stalemate) or it is allowed to capture the pawn. It is a draw.',
       },
       board: {
         fen: '2k5/2P5/1K6/8/8/8/8/8 w - - 0 1',
@@ -139,8 +139,8 @@ export const zugzwangTempo: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Resumen: en el [zugzwang](zugzwang), mover es el problema. En un [zugzwang recíproco](mutual-zugzwang) pierde quien mueve, así que cuenta las jugadas de espera: un [tiempo](tempo) de sobra decide la partida. Si no te quedan jugadas de peón, el rey puede perder el tiempo con la [triangulación](triangulation). En Finales tienes más posiciones de rey y peones para practicar.',
-        en: 'Summary: in [zugzwang](zugzwang), having to move is the problem. In a [mutual zugzwang](mutual-zugzwang) whoever moves loses, so count the waiting moves: one spare [tempo](tempo) decides the game. If you have no pawn moves left, the king can lose the time by [triangulation](triangulation). In Endgames you will find more king and pawn positions to practise.',
+        es: 'Resumen: en el [zugzwang](zugzwang), mover es el problema. En un [zugzwang recíproco](mutual-zugzwang) empeora quien tenga que mover, así que cuenta las jugadas de espera: un [tiempo](tempo) de sobra decide la partida. Si no te quedan jugadas de peón, el rey puede perder el tiempo con la [triangulación](triangulation). En Finales tienes más posiciones de rey y peones para practicar.',
+        en: 'Summary: in [zugzwang](zugzwang), having to move is the problem. In a [mutual zugzwang](mutual-zugzwang) whoever has to move makes things worse, so count the waiting moves: one spare [tempo](tempo) decides the game. If you have no pawn moves left, the king can lose the time by [triangulation](triangulation). In Endgames you will find more king and pawn positions to practise.',
       },
       board: {
         fen: '8/8/8/3pK3/2kP4/8/8/8 b - - 0 1',
