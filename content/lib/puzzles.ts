@@ -5,7 +5,7 @@ import { makeBoardFen } from 'chessops/fen';
 import { makeSan } from 'chessops/san';
 import { parseUci } from 'chessops/util';
 import { fenError, positionFromFen } from './chess.ts';
-import type { Puzzle } from '../types.ts';
+import type { CuratedPosition, EndgamePosition, Lesson, Puzzle } from '../types.ts';
 
 /** The header of `lichess_db_puzzle.csv`. Another one means the format changed: stop and look. */
 export const PUZZLE_HEADER =
@@ -320,4 +320,28 @@ export function selectLessons(
     result.push({ lesson, themes: [...themes], puzzles: chosen.map(toPuzzle) });
   }
   return result;
+}
+
+/**
+ * Piece placement of the start of every exercise of the app: the lesson exercises, the positions
+ * and the endgames. A puzzle must not show one of them.
+ */
+export function exerciseBoards(
+  lessons: readonly Lesson[],
+  positions: readonly CuratedPosition[],
+  endgames: readonly EndgamePosition[],
+): Set<string> {
+  const fens = [
+    ...lessons.flatMap((l) =>
+      l.steps.flatMap((s) => {
+        if (s.kind === 'find-move') return [s.board.fen];
+        if (s.kind === 'choice' && s.board) return [s.board.fen];
+        if (s.kind === 'play-out') return [s.fen];
+        return [];
+      }),
+    ),
+    ...positions.map((p) => p.fen),
+    ...endgames.map((e) => e.fen),
+  ];
+  return new Set(fens.map((fen) => makeBoardFen(positionFromFen(fen).board)));
 }
