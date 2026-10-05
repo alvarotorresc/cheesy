@@ -7,6 +7,7 @@ import {
   input,
   linkedSignal,
   output,
+  untracked,
 } from '@angular/core';
 import type { SquareName } from 'chessops';
 import { chessgroundMove } from 'chessops/compat';
@@ -17,9 +18,13 @@ import { I18nService } from '../../../../core/i18n';
 import { BoardComponent, type BoardMark, type BoardMove } from '../../../../shared/board';
 import { RichTextView } from '../../../../shared/rich-text';
 import { FindMoveSession } from '../find-move-session';
+import { prefersReducedMotion } from './reduced-motion';
 import { stepFocus } from './step-focus';
 
-/** How long a wrong square stays marked, and how long the rival waits before answering. */
+/**
+ * How long a wrong square stays marked, and how long the rival waits before answering (and before
+ * playing the opening move, so the player sees the board before it).
+ */
 const WRONG_MS = 700;
 const REPLY_MS = 500;
 
@@ -38,7 +43,10 @@ const boardMoveOf = (fen: string, san: string): BoardMove | undefined => {
   return { from, to, ...(promotion ? { promotion } : {}) };
 };
 
-/** "Find the move": any legal move is accepted; the wrong ones are shown and handed back. */
+/**
+ * "Find the move": any legal move is accepted; the wrong ones are shown and handed back. With an
+ * opening move (a Lichess puzzle), the rival plays it first, a moment after the board shows up.
+ */
 @Component({
   selector: 'app-find-move-step',
   imports: [BoardComponent, RichTextView],
@@ -47,10 +55,14 @@ const boardMoveOf = (fen: string, san: string): BoardMove | undefined => {
 })
 export class FindMoveStepView {
   readonly step = input.required<FindMoveStep>();
+  /** The rival's move, in SAN, played on the step board before the player's turn. */
+  readonly opening = input<string | undefined>(undefined);
   readonly done = output<{ firstTry: boolean }>();
 
   protected readonly i18n = inject(I18nService);
-  protected readonly session = computed(() => new FindMoveSession(this.step()));
+  protected readonly session = computed(
+    () => new FindMoveSession(this.step(), { opening: this.opening() }),
+  );
   protected readonly feedback = linkedSignal<FindMoveSession, Feedback | undefined>({
     source: this.session,
     computation: () => undefined,
@@ -96,7 +108,8 @@ export class FindMoveStepView {
     inject(DestroyRef).onDestroy(() => this.clearTimers());
     // A new step in place of this one must not be touched by what the old one scheduled.
     effect((onCleanup) => {
-      this.session();
+      const session = this.session();
+      untracked(() => this.playOpening(session));
       onCleanup(() => this.clearTimers());
     });
   }
@@ -152,6 +165,13 @@ export class FindMoveStepView {
     const san = session.solutionMove();
     const move = san ? boardMoveOf(session.fen(), san) : undefined;
     if (move) this.onMove(move);
+  }
+
+  /** At once with less motion; otherwise after a moment, so the player sees the move being made. */
+  private playOpening(session: FindMoveSession): void {
+    if (!session.pendingOpening()) return;
+    if (prefersReducedMotion()) session.playOpening();
+    else this.later(() => session.playOpening(), REPLY_MS);
   }
 
   private later(action: () => void, ms: number): ReturnType<typeof setTimeout> {

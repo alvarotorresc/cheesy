@@ -27,6 +27,15 @@ const lineStep: FindMoveStep = {
   explanation: plainText('Bien'),
 };
 
+/** Lichess puzzle YYFFU: the board before the rival's Kf8, then O-O# (Rf1# mates as well). */
+const puzzleStep: FindMoveStep = {
+  kind: 'find-move',
+  text: plainText('Your move'),
+  board: { fen: 'r3r1k1/p5Rp/1n6/3pB3/8/8/P5PP/4K2R b K - 0 29', orientation: 'white' },
+  check: { by: 'engine', solution: ['O-O#'] },
+  explanation: plainText('Bien'),
+};
+
 describe('FindMoveStepView', () => {
   let fixture: ComponentFixture<FindMoveStepView>;
   let element: HTMLElement;
@@ -48,6 +57,7 @@ describe('FindMoveStepView', () => {
   afterEach(() => {
     localStorage.clear();
     vi.useRealTimers();
+    vi.unstubAllGlobals();
   });
 
   it('should show the message of a typical mistake, then the explanation when right', async () => {
@@ -294,6 +304,68 @@ describe('FindMoveStepView', () => {
       board().move.emit({ from: 'c2' as never, to: 'f5' as never });
       await fixture.whenStable();
       expect(skip()).toBeNull();
+    });
+  });
+
+  describe('opening move', () => {
+    const open = (step: FindMoveStep = puzzleStep) => {
+      fixture.componentRef.setInput('step', step);
+      fixture.componentRef.setInput('opening', 'Kf8');
+      fixture.detectChanges();
+    };
+
+    it('should show the board before the rival move, then play it after a moment', () => {
+      vi.useFakeTimers();
+      open();
+      expect(board().fen()).toContain('r3r1k1');
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(499);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3r1k1');
+      vi.advanceTimersByTime(1);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3rk2');
+      expect(board().lastMove()).toEqual(['g8', 'f8']);
+      expect(board().dests().size).toBeGreaterThan(0);
+      board().move.emit({ from: 'e1' as never, to: 'g1' as never });
+      fixture.detectChanges();
+      expect(done).toEqual([{ firstTry: true }]);
+    });
+
+    it('should play the rival move at once when the user asks for less motion', () => {
+      vi.stubGlobal('matchMedia', (query: string) => ({
+        matches: query.includes('reduce'),
+        addEventListener: () => undefined,
+        removeEventListener: () => undefined,
+      }));
+      open();
+      expect(board().fen()).toContain('r3rk2');
+      expect(board().lastMove()).toEqual(['g8', 'f8']);
+    });
+
+    it('should accept another mate than the written one', () => {
+      vi.useFakeTimers();
+      open();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      board().move.emit({ from: 'h1' as never, to: 'f1' as never });
+      fixture.detectChanges();
+      expect(element.textContent).toContain('Bien');
+      expect(done).toEqual([{ firstTry: true }]);
+    });
+
+    it('should not play the old step opening on the step that takes its place', () => {
+      vi.useFakeTimers();
+      open();
+      vi.advanceTimersByTime(300);
+      open({ ...puzzleStep });
+      // t = 500: the opening of the old step is due now, but it belongs to the old step.
+      vi.advanceTimersByTime(200);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3r1k1');
+      vi.advanceTimersByTime(300);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3rk2');
     });
   });
 });
