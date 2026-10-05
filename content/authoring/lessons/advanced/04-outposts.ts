@@ -60,8 +60,8 @@ export const outposts: LessonSpec = {
         },
       ],
       explanation: {
-        es: 'Eso es: d5 la protegen tus peones de c4 y e4, y ningún peón negro puede atacarla: no hay ninguno en la columna c, y el de e5 ya ha avanzado demasiado. Un caballo en d5 se queda ahí toda la partida.',
-        en: 'That is it: your pawns on c4 and e4 protect d5, and no black pawn can attack it: there is none on the c-file, and the one on e5 has already gone too far. A knight on d5 stays there for the whole game.',
+        es: 'Eso es: d5 la protegen tus peones de c4 y e4, y ningún peón negro puede atacarla: no hay ninguno en la columna c, y el de e5 ya ha avanzado demasiado. Ningún peón echará de ahí a un caballo: para quitarlo, las negras tendrán que cambiarlo por una pieza, por ejemplo con su alfil desde e6.',
+        en: 'That is it: your pawns on c4 and e4 protect d5, and no black pawn can attack it: there is none on the c-file, and the one on e5 has already gone too far. No pawn will drive a knight away from there: to get rid of it, Black will have to trade it for a piece, for instance with his bishop from e6.',
       },
     },
     {
@@ -82,7 +82,7 @@ export const outposts: LessonSpec = {
         es: 'Tu caballo de b1 quiere llegar a d5, la [casilla fuerte](outpost). ¿Con qué jugada empieza el camino más corto?',
         en: 'Your knight on b1 wants to reach d5, the [outpost](outpost). Which move starts the shortest way there?',
       },
-      board: { fen: '6k1/pp2bppp/3p4/4p3/2P1P3/3B4/PP3PPP/1N4K1 w - - 0 1', orientation: 'white' },
+      board: { fen: '6k1/pp1nbppp/3p4/4p3/2P1P3/3B4/PP3PPP/1N4K1 w - - 0 1', orientation: 'white' },
       answer: {
         by: 'fact',
         options: [
@@ -94,8 +94,8 @@ export const outposts: LessonSpec = {
       },
       whyWrong: [
         {
-          es: 'Desde a3 el caballo no llega a d5 en una jugada, y por b5 lo echaría el peón de a7.',
-          en: 'From a3 the knight does not reach d5 in one move, and on b5 the pawn on a7 would chase it away.',
+          es: 'Desde a3 el caballo no llega a d5 en una jugada: tendría que dar un rodeo, por b5 y c7 o por c2 y e3.',
+          en: 'From a3 the knight does not reach d5 in one move: it would have to go the long way round, through b5 and c7 or through c2 and e3.',
         },
         {
           es: 'Desde d2 hacen falta varios saltos más: tus propios peones de c4 y e4 le quitan las casillas.',
@@ -111,11 +111,11 @@ export const outposts: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Caballo o alfil: el caballo es mejor en posiciones cerradas, con los peones bloqueados, porque salta por encima de ellos. El alfil es mejor en posiciones abiertas, donde sus diagonales llegan lejos. Y los dos alfiles juntos, la [pareja de alfiles](bishop-pair), suelen ser una ventaja: entre los dos vigilan casillas de los dos colores.',
-        en: 'Knight or bishop: the knight is better in closed positions, with the pawns locked, because it jumps over them. The bishop is better in open positions, where its diagonals reach far. And the two bishops together, the [bishop pair](bishop-pair), are usually an advantage: between them they watch squares of both colours.',
+        es: 'Caballo o alfil: el caballo es mejor en posiciones cerradas, con los peones bloqueados, porque salta por encima de ellos. El alfil es mejor en posiciones abiertas, donde sus diagonales llegan lejos. Y los dos alfiles juntos, la [pareja de alfiles](bishop-pair), suelen ser una ventaja: entre los dos vigilan casillas de los dos colores. Aquí las blancas tienen los dos alfiles, y las negras, alfil y caballo.',
+        en: 'Knight or bishop: the knight is better in closed positions, with the pawns locked, because it jumps over them. The bishop is better in open positions, where its diagonals reach far. And the two bishops together, the [bishop pair](bishop-pair), are usually an advantage: between them they watch squares of both colours. Here White has both bishops, and Black has bishop and knight.',
       },
       board: {
-        fen: '6k1/pp3ppp/8/8/8/8/PP3PPP/2BB2K1 w - - 0 1',
+        fen: '6k1/pp1n1ppp/4b3/8/8/8/PP3PPP/2BB2K1 w - - 0 1',
         orientation: 'white',
         highlights: ['c1', 'd1'],
       },
@@ -155,8 +155,8 @@ export const outposts: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'También cuenta quitarle casillas al rival. En la partida Tarrasch contra Euwe, de 1922, las blancas parecen ir mejor desarrolladas, pero las negras están mejor: la casilla d4 es un hueco que ningún peón blanco puede defender, y las negras pueden llevar allí una pieza. Las blancas no tienen nada parecido.',
-        en: 'Taking squares away from the rival counts too. In the game Tarrasch against Euwe, from 1922, White seems better developed, but Black stands better: the square d4 is a hole that no white pawn can defend, and Black can bring a piece there. White has nothing like it.',
+        es: 'También cuenta quitarle casillas al rival. En la partida Tarrasch contra Euwe, de 1922, las blancas parecen ir mejor desarrolladas, pero las negras no están peor: la casilla d4 es un hueco que ningún peón blanco puede defender, y las negras pueden llevar allí una pieza. Las blancas no tienen nada parecido.',
+        en: 'Taking squares away from the rival counts too. In the game Tarrasch against Euwe, from 1922, White seems better developed, but Black is no worse off: the square d4 is a hole that no white pawn can defend, and Black can bring a piece there. White has nothing like it.',
       },
       board: {
         fen: 'r1b1r1k1/pp1n1pbp/2pR1np1/4p3/2P1P3/2N1BN1P/PP3PP1/2K2B1R w - - 0 1',

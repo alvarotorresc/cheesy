@@ -7,7 +7,10 @@ import type { CuratedPosition } from '../types.ts';
 export const DECISIVE_CP = 300; // minimum advantage for a non-mating solution
 export const ALT_GAP_CP = 200; // an alternative must be at least this much worse
 export const DEFENCE_TOL_CP = 60; // defender moves must be within this of the best defence (cp scores)
-/** With `onlyMove`, the lowest score for the player after his move: a lost position is not "saved". */
+/**
+ * With `onlyMove`, the lowest score for the player after his move: a lost position is not "saved".
+ * Every other move must stay below it: if another move holds too, the solution is not the only one.
+ */
 export const ONLY_MOVE_FLOOR_CP = -100;
 
 export interface StepReport {
@@ -91,6 +94,8 @@ export async function checkTactic(
             problems.push(`ambiguous: alternative too close (${step.alternative})`);
           else if (!onlyMove && alt.cp >= DECISIVE_CP && !mineIsMate)
             problems.push(`ambiguous: alternative also decisive (${step.alternative})`);
+          else if (onlyMove && alt.cp >= ONLY_MOVE_FLOOR_CP)
+            problems.push(`ambiguous: alternative also holds (${step.alternative})`);
         }
       }
     } else {

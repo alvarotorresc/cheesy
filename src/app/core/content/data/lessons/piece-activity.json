@@ -215,7 +215,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "¿Qué pieza mejoras? Cada opción mueve una pieza distinta: la torre a la columna d, el caballo de "
+            "text": "¿Qué pieza mejoras? Ojo: las torres se miran en la columna c, y la tuya no tiene defensa. Cada opción mueve una pieza distinta: la torre a la columna d, el caballo de "
           },
           {
             "kind": "square",
@@ -245,7 +245,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "Which piece do you improve? Each option moves a different piece: the rook to the d-file, the knight from "
+            "text": "Which piece do you improve? Careful: the rooks face each other on the c-file, and yours is undefended. Each option moves a different piece: the rook to the d-file, the knight from "
           },
           {
             "kind": "square",
@@ -322,7 +322,15 @@
           },
           {
             "kind": "text",
-            "text": ", y vigila el centro. Antes de mover, pregúntate qué pieza hace menos, y llévala adonde haga más."
+            "text": ", y además se pone en medio de la columna c: tu torre ya no está atacada. Cambiar las torres en "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " también mantiene el equilibrio, pero no mejora ninguna pieza. Antes de mover, pregúntate qué pieza hace menos, y llévala adonde haga más."
           }
         ],
         "en": [
@@ -360,7 +368,15 @@
           },
           {
             "kind": "text",
-            "text": ", and watches the centre. Before you move, ask which piece does least, and take it where it does more."
+            "text": ", and it also steps into the c-file: your rook is no longer attacked. Trading rooks on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " keeps the balance too, but it improves no piece. Before you move, ask which piece does least, and take it where it does more."
           }
         ]
       },
@@ -641,7 +657,33 @@
           },
           {
             "kind": "text",
-            "text": " no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ataca los peones negros y el rey blanco está en el centro: son las blancas las que eligen el plan, y las negras van detrás."
+            "text": " no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ya ataca el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey blanco está en el centro: las blancas llevan la "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "iniciativa"
+          },
+          {
+            "kind": "text",
+            "text": ". Las negras aguantan, pero solo si activan su torre a tiempo, por ejemplo con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": " desde atrás."
           }
         ],
         "en": [
@@ -665,7 +707,33 @@
           },
           {
             "kind": "text",
-            "text": " is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh attacks the black pawns and the white king stands in the centre: White chooses the plan, and Black follows."
+            "text": " is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh already attacks the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " and the white king stands in the centre: White holds the "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "initiative"
+          },
+          {
+            "kind": "text",
+            "text": ". Black holds, but only if his rook gets active in time, for instance with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": " from behind."
           }
         ]
       },
