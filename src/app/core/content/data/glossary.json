@@ -284,6 +284,55 @@
     ]
   },
   {
+    "id": "threefold-repetition",
+    "name": {
+      "es": "Triple repetición",
+      "en": "Threefold repetition"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Si la misma posición aparece tres veces en una partida, con el mismo bando a mover y las mismas jugadas posibles, el jugador al que le toca puede reclamar tablas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "If the same position comes up three times in a game, with the same side to move and the same moves available, the player whose turn it is can claim a draw."
+        }
+      ]
+    },
+    "example": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 4 3",
+      "orientation": "white",
+      "highlights": [
+        "g1",
+        "g8"
+      ],
+      "arrows": [
+        {
+          "from": "g1",
+          "to": "f3",
+          "move": true
+        },
+        {
+          "from": "g8",
+          "to": "f6",
+          "move": false
+        }
+      ]
+    },
+    "group": "rules",
+    "level": "intermediate",
+    "lesson": "draws-and-defence",
+    "sources": [
+      "https://handbook.fide.com/chapter/E012023",
+      "https://en.wikipedia.org/wiki/Threefold_repetition",
+      "https://www.chess.com/terms/threefold-repetition-chess"
+    ]
+  },
+  {
     "id": "castling",
     "name": {
       "es": "Enroque",
@@ -2937,6 +2986,79 @@
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/List_of_chess_traps",
       "https://www.chess.com/es/terms/mate-del-pastor"
+    ]
+  },
+  {
+    "id": "perpetual-check",
+    "name": {
+      "es": "Jaque perpetuo",
+      "en": "Perpetual check"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una serie de "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaques"
+        },
+        {
+          "kind": "text",
+          "text": " de la que el rey rival no puede escapar. Quien los da no puede ganar, pero el rival tampoco, y la partida acaba en tablas, normalmente por "
+        },
+        {
+          "kind": "term",
+          "id": "threefold-repetition",
+          "text": "triple repetición"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A series of "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "checks"
+        },
+        {
+          "kind": "text",
+          "text": " the enemy king cannot escape. The side giving them cannot win, but neither can the opponent, and the game ends in a draw, usually by "
+        },
+        {
+          "kind": "term",
+          "id": "threefold-repetition",
+          "text": "threefold repetition"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
+    },
+    "example": {
+      "fen": "7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "h8"
+      ],
+      "arrows": []
+    },
+    "group": "tactics",
+    "level": "intermediate",
+    "lesson": "draws-and-defence",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Perpetual_check",
+      "https://www.chess.com/terms/perpetual-check-chess"
     ]
   },
   {

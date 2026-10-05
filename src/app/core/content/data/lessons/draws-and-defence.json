@@ -1,0 +1,1031 @@
+{
+  "id": "draws-and-defence",
+  "level": "intermediate",
+  "order": 12,
+  "title": {
+    "es": "Cómo salvar tablas",
+    "en": "How to save a draw"
+  },
+  "summary": {
+    "es": "Jaque perpetuo, triple repetición y ahogado: cómo empatar una partida que ibas perdiendo.",
+    "en": "Perpetual check, threefold repetition and stalemate: how to draw a game you were losing."
+  },
+  "terms": [
+    "perpetual-check",
+    "threefold-repetition"
+  ],
+  "sources": [
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://lichess.org/training/themes"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando vas peor, unas tablas valen mucho. Hay tres formas de conseguirlas en el tablero. El "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "jaque perpetuo"
+          },
+          {
+            "kind": "text",
+            "text": ": das "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " una y otra vez y el rival no puede evitarlo. La "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "triple repetición"
+          },
+          {
+            "kind": "text",
+            "text": ": si la misma posición se repite tres veces, con el mismo bando a mover, la partida puede acabar en tablas. Y el "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ": si el rival te deja sin jugadas legales y tu rey no está en jaque, son tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When you are worse, a draw is worth a lot. There are three ways to get one on the board. "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "Perpetual check"
+          },
+          {
+            "kind": "text",
+            "text": ": you give "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " again and again and the rival cannot escape it. "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "Threefold repetition"
+          },
+          {
+            "kind": "text",
+            "text": ": if the same position comes up three times, with the same side to move, the game can end in a draw. And "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ": if the rival leaves you with no legal move and your king is not in check, it is a draw."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1",
+        "orientation": "white"
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las negras están a punto de "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronar"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " y tienen más material. Encuentra el "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " que salva la partida y, tras la respuesta, el siguiente. Tienes dos jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black is about to "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promote"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " and has more material. Find the "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " that saves the game and, after the answer, the next one. You have two moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qc8+",
+          "Qg8",
+          "Qc3+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "jaque perpetuo"
+          },
+          {
+            "kind": "text",
+            "text": ". La dama negra tiene que taparse en "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " y en "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": " una y otra vez, y tu dama vuelve a dar "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " y desde "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ". La posición se repetirá y serán tablas por "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "triple repetición"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "perpetual check"
+          },
+          {
+            "kind": "text",
+            "text": ". The black queen has to block on "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " and on "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": " again and again, and your queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " again from "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " and from "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": ". The position will repeat and it will be a draw by "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "threefold repetition"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey negro está en la esquina. Tu dama puede darle "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " por la "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " 8 y por la gran "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black king is in the corner. Your queen can give him "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " along "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " 8 and along the long "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": " también puede ser un recurso tuyo. Si a tu rey le quedan pocas casillas, a veces puedes entregar tus últimas piezas: si el rival las captura y tú no tienes jugadas legales sin estar en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", la partida acaba en tablas. Aquí las blancas no tienen ninguna jugada: el rey de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " no está en jaque y su peón está bloqueado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "Stalemate"
+          },
+          {
+            "kind": "text",
+            "text": " can also be your own resource. If your king has few squares left, sometimes you can give your last pieces away: if the rival takes them and you have no legal move without being in "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", the game ends in a draw. Here White has no move at all: the king on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " is not in check and his pawn is blocked."
+          }
+        ]
+      },
+      "board": {
+        "fen": "K7/P7/1q6/8/8/8/8/6k1 w - - 0 1",
+        "orientation": "white"
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Vas perdiendo: el rival tiene dama. Busca la jugada que fuerza el "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": " si el rival acepta tu regalo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You are losing: the rival has a queen. Find the move that forces "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": " if the rival accepts your gift."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/1q6/4k3/8/7p/7P/5R1K w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Rf5+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. La torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": ". Si el rey la captura, no te queda ninguna jugada legal y no estás en jaque: "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ". Y si no la captura, tu torre lo sigue persiguiendo con jaques y no lo deja en paz. Una torre así se llama a veces «torre loca»."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. The rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": ". If the king takes it, you have no legal move left and you are not in check: "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ". And if he does not take it, your rook keeps chasing him with checks and gives him no peace. A rook like this is sometimes called a “desperado rook”."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu rey de "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " no tiene jugadas y tu peón está bloqueado. Si tu torre desaparece, ¿qué pasa? Ofrécela con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your king on "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " has no moves and your pawn is blocked. If your rook disappears, what happens? Offer it with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Defenderse bien también es saber hacia dónde ir. No te rindas antes de tiempo: busca "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", piezas activas y "
+          },
+          {
+            "kind": "term",
+            "id": "exchange",
+            "text": "cambios"
+          },
+          {
+            "kind": "text",
+            "text": " que lleven a un final de tablas. Por ejemplo, con rey solo contra rey y peón, a menudo basta con ponerse delante del peón y tomar la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Defending well also means knowing where to head. Do not give up too soon: look for "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", active pieces and "
+          },
+          {
+            "kind": "term",
+            "id": "exchange",
+            "text": "exchanges"
+          },
+          {
+            "kind": "text",
+            "text": " that lead to a drawn ending. For example, with a lone king against king and pawn, it is often enough to get in front of the pawn and take the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/8/5p2/5k2/8/5K2/8 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f2",
+          "f4"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Estás peor: tienes el rey solo contra rey y peón. Juegan las blancas. ¿Qué jugada salva las tablas?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You are worse: you have a lone king against king and pawn. White to move. Which move saves the draw?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/8/5p2/5k2/8/8/4K3 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Ke2",
+          "Kf2",
+          "Kf1"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el rey a "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": ", enfrente del negro con una casilla en medio. Tienes la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": ", y el peón no pasa: tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the king to "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": ", facing the black one with one square between. You have the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": ", and the pawn does not get through: a draw."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey negro se escapa por "
+            },
+            {
+              "kind": "square",
+              "square": "g3"
+            },
+            {
+              "kind": "text",
+              "text": " y tu rey ya no consigue frenar el peón. Ponte enfrente del rey negro."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black king slips out through "
+            },
+            {
+              "kind": "square",
+              "square": "g3"
+            },
+            {
+              "kind": "text",
+              "text": " and your king can no longer stop the pawn. Stand facing the black king."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Demasiado atrás: el rey negro toma la "
+            },
+            {
+              "kind": "term",
+              "id": "opposition",
+              "text": "oposición"
+            },
+            {
+              "kind": "text",
+              "text": " en "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": " y su peón avanza con ayuda."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Too far back: the black king takes the "
+            },
+            {
+              "kind": "term",
+              "id": "opposition",
+              "text": "opposition"
+            },
+            {
+              "kind": "text",
+              "text": " on "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": " and his pawn moves up with help."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Último reto: tienes rey y peón contra dama. Parece perdido, pero es tablas si sabes usar el "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": ". Aguanta: no te separes del peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Last challenge: you have king and pawn against a queen. It looks lost, but it is a draw if you know how to use "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": ". Hold on: do not leave your pawn."
+          }
+        ]
+      },
+      "fen": "8/1KP5/8/8/8/8/6q1/4k3 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Quédate junto al peón. Cuando te den "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", a veces lo mejor es meter el rey en la esquina: si la dama captura el peón, puede quedar "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Stay next to the pawn. When you get a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", sometimes the best thing is to put the king in the corner: if the queen takes the pawn, it may be "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: estar peor no es haber perdido. Busca un "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "jaque perpetuo"
+          },
+          {
+            "kind": "text",
+            "text": ", una "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "triple repetición"
+          },
+          {
+            "kind": "text",
+            "text": " o un "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": "; mantén tus piezas activas y cambia hacia finales de tablas. En Finales tienes posiciones de dama contra peón en las que el ahogado salva la partida."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: being worse is not the same as having lost. Look for a "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "perpetual check"
+          },
+          {
+            "kind": "text",
+            "text": ", a "
+          },
+          {
+            "kind": "term",
+            "id": "threefold-repetition",
+            "text": "threefold repetition"
+          },
+          {
+            "kind": "text",
+            "text": " or a "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": "; keep your pieces active and exchange into drawn endings. In Endgames you will find queen against pawn positions where stalemate saves the game."
+          }
+        ]
+      },
+      "board": {
+        "fen": "K7/P7/1q6/8/8/8/8/6k1 w - - 0 1",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "Queen against pawn"
+  }
+}

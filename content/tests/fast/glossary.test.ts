@@ -71,6 +71,8 @@ const EXPECTED_IDS = [
   'zugzwang',
   'seventh-rank',
   'cutting-off-the-king',
+  'perpetual-check',
+  'threefold-repetition',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -79,6 +81,7 @@ const GROUPS: Record<string, string[]> = {
     'check',
     'checkmate',
     'stalemate',
+    'threefold-repetition',
     'castling',
     'promotion',
     'en-passant',
@@ -108,6 +111,7 @@ const GROUPS: Record<string, string[]> = {
     'queen-sacrifice',
     'back-rank',
     'opening-trap',
+    'perpetual-check',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [

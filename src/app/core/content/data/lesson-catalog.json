@@ -343,5 +343,20 @@
     },
     "stepCount": 7,
     "exerciseCount": 3
+  },
+  {
+    "id": "draws-and-defence",
+    "level": "intermediate",
+    "order": 12,
+    "title": {
+      "es": "Cómo salvar tablas",
+      "en": "How to save a draw"
+    },
+    "summary": {
+      "es": "Jaque perpetuo, triple repetición y ahogado: cómo empatar una partida que ibas perdiendo.",
+      "en": "Perpetual check, threefold repetition and stalemate: how to draw a game you were losing."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

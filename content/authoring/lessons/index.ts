@@ -23,6 +23,7 @@ import { forcingMoves } from './intermediate/08-forcing-moves.ts';
 import { inBetweenMove } from './intermediate/09-in-between-move.ts';
 import { kingPawnEndings } from './intermediate/10-king-pawn-endings.ts';
 import { rookEndings } from './intermediate/11-rook-endings.ts';
+import { drawsAndDefence } from './intermediate/12-draws-and-defence.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -48,4 +49,5 @@ export const lessons: LessonSpec[] = [
   inBetweenMove,
   kingPawnEndings,
   rookEndings,
+  drawsAndDefence,
 ];

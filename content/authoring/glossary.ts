@@ -134,6 +134,27 @@ export const glossary: GlossarySpec[] = [
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}ahogado-ajedrez`],
   },
   {
+    id: 'threefold-repetition',
+    name: { es: 'Triple repetición', en: 'Threefold repetition' },
+    definition: {
+      es: 'Si la misma posición aparece tres veces en una partida, con el mismo bando a mover y las mismas jugadas posibles, el jugador al que le toca puede reclamar tablas.',
+      en: 'If the same position comes up three times in a game, with the same side to move and the same moves available, the player whose turn it is can claim a draw.',
+    },
+    example: {
+      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 4 3',
+      orientation: 'white',
+      highlights: ['g1', 'g8'],
+      arrows: [
+        { from: 'g1', to: 'f3', move: true },
+        { from: 'g8', to: 'f6', move: false },
+      ],
+    },
+    group: 'rules',
+    level: 'intermediate',
+    lesson: 'draws-and-defence',
+    sources: [FIDE_LAWS, `${WIKI}Threefold_repetition`, `${CHESSCOM_EN}threefold-repetition-chess`],
+  },
+  {
     id: 'castling',
     name: { es: 'Enroque', en: 'Castling' },
     definition: {
@@ -982,6 +1003,24 @@ export const glossary: GlossarySpec[] = [
     group: 'tactics',
     level: 'intermediate',
     sources: [WIKI_GLOSSARY, `${WIKI}List_of_chess_traps`, `${CHESSCOM_ES}mate-del-pastor`],
+  },
+  {
+    id: 'perpetual-check',
+    name: { es: 'Jaque perpetuo', en: 'Perpetual check' },
+    definition: {
+      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da no puede ganar, pero el rival tampoco, y la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
+      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them cannot win, but neither can the opponent, and the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
+    },
+    example: {
+      fen: '7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1',
+      orientation: 'white',
+      highlights: ['h8'],
+      arrows: [],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'draws-and-defence',
+    sources: [WIKI_GLOSSARY, `${WIKI}Perpetual_check`, `${CHESSCOM_EN}perpetual-check-chess`],
   },
   {
     id: 'smothered-mate',
