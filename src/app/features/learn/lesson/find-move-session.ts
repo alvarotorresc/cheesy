@@ -19,8 +19,9 @@ const ROLE = { queen: 'queen', rook: 'rook', bishop: 'bishop', knight: 'knight' 
 
 /**
  * "Find the move". With a rule, any move the rule accepts is right (computed, never written);
- * with an engine solution, the player finds each of their moves and the rival answers.
- * A wrong move is not played: the page shows it and the piece goes back.
+ * with an engine solution, the player finds each of their moves and the rival answers, and any
+ * mate is right too and ends the exercise, as on Lichess. A wrong move is not played: the page
+ * shows it and the piece goes back.
  */
 export class FindMoveSession {
   readonly tracker = new ExerciseTracker();
@@ -63,16 +64,18 @@ export class FindMoveSession {
     const san = this.sanOf(move);
     if (!san) return undefined;
     const check = this.step.check;
+    // `makeSan` marks a mate with '#', whatever the written line says.
+    const mate = check.by === 'engine' && san.endsWith('#');
     const right =
       check.by === 'rule'
         ? acceptedMoves(this.position(), check.rule).includes(san)
-        : check.solution[this.ply()] === san;
+        : mate || check.solution[this.ply()] === san;
     if (!right) {
       this.tracker.miss();
       return { kind: 'wrong', san, message: this.step.wrong?.[san] };
     }
     this.apply(san);
-    if (check.by === 'engine' && this.ply() < check.solution.length) {
+    if (check.by === 'engine' && !mate && this.ply() < check.solution.length) {
       return { kind: 'continue', reply: check.solution[this.ply()] };
     }
     this.done.set(true);

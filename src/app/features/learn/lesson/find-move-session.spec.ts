@@ -79,4 +79,43 @@ describe('FindMoveSession', () => {
     expect(session.turn()).toBe('white');
     expect(session.play({ from: 'h7', to: 'h8' })).toEqual({ kind: 'solved' });
   });
+
+  describe('any mate', () => {
+    /** Lichess puzzle YYFFU after the rival's Kf8: the solution is O-O#, and Rf1# mates as well. */
+    const afterKf8 = 'r3rk2/p5Rp/1n6/3pB3/8/8/P5PP/4K2R w K - 1 30';
+
+    it('should accept a mate that is not the written one and end the exercise', () => {
+      const session = new FindMoveSession(step(afterKf8, { by: 'engine', solution: ['O-O#'] }));
+      expect(session.play({ from: 'h1', to: 'f1' })).toEqual({ kind: 'solved' });
+      expect(session.solved()).toBe(true);
+      expect(session.tracker.firstTry()).toBe(true);
+    });
+
+    it('should take the castling mate made by dropping the king on its rook', () => {
+      const session = new FindMoveSession(step(afterKf8, { by: 'engine', solution: ['O-O#'] }));
+      expect(session.play({ from: 'e1', to: 'h1' })).toEqual({ kind: 'solved' });
+    });
+
+    it('should end the exercise on a mate even when the written line goes on', () => {
+      const session = new FindMoveSession(
+        step('k7/8/1K6/8/8/8/8/7R w - - 0 1', { by: 'engine', solution: ['Rh7', 'Kb8', 'Rh8#'] }),
+      );
+      expect(session.play({ from: 'h1', to: 'h8' })).toEqual({ kind: 'solved' });
+      expect(session.dests().size).toBe(0);
+    });
+
+    it('should still take a move that is neither written nor mate as a mistake', () => {
+      const session = new FindMoveSession(step(afterKf8, { by: 'engine', solution: ['O-O#'] }));
+      expect(session.play({ from: 'g7', to: 'f7' })).toEqual({ kind: 'wrong', san: 'Rf7+' });
+      expect(session.tracker.mistakes()).toBe(1);
+      expect(session.solved()).toBe(false);
+    });
+
+    it('should not accept a mate a rule does not', () => {
+      const session = new FindMoveSession(
+        step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'rule', rule: 'castle' }),
+      );
+      expect(session.play({ from: 'a1', to: 'a8' })?.kind).toBe('wrong');
+    });
+  });
 });
