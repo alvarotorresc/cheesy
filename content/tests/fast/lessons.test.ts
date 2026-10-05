@@ -23,11 +23,18 @@ import {
 } from '../../lib/lesson-checks.ts';
 import { lessons as authored } from '../../authoring/lessons/index.ts';
 import { lessonSummary } from '../../lib/lesson-build.ts';
-import { positionFromFen } from '../../lib/chess.ts';
+import { playSan, positionFromFen } from '../../lib/chess.ts';
 import { acceptedMoves } from '../../../src/app/core/lessons/find-move-rules.ts';
 import { validateLesson } from '../../lib/schema.ts';
 import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
-import { doubledPawns, isolatedPawns } from '../../lib/pawn-facts.ts';
+import {
+  badBishops,
+  doubledPawns,
+  isolatedPawns,
+  knightJumps,
+  outposts,
+} from '../../lib/pawn-facts.ts';
+import { parseSquare } from 'chessops/util';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
 
 const text = (value: string) => ({
@@ -548,6 +555,27 @@ const FACT_ANSWERS: Record<string, (fen: string) => number[]> = {
       doubled.includes(a) && doubled.includes(b) && a[0] === b[0] ? [i] : [],
     );
   },
+  // Which square is an outpost for White: b5, d5 or f5.
+  'outposts step 2': (fen) => {
+    const squares = outposts(positionFromFen(fen), 'white');
+    return ['b5', 'd5', 'f5'].flatMap((sq, i) => (squares.includes(sq) ? [i] : []));
+  },
+  // Which first jump of the knight on b1 starts the shortest way to d5: a3, d2 or c3.
+  'outposts step 4': (fen) => {
+    const pos = positionFromFen(fen);
+    const d5 = parseSquare('d5')!;
+    const shortest = knightJumps(pos, parseSquare('b1')!, d5);
+    return ['Na3', 'Nd2', 'Nc3'].flatMap((san, i) => {
+      const after = playSan(pos, san)!;
+      return 1 + (knightJumps(after, parseSquare(san.slice(1))!, d5) ?? Infinity) === shortest
+        ? [i]
+        : [];
+    });
+  },
+  // Knight, bishop or the same, with the centre locked: the knight, because the black bishop on
+  // f6 is bad, as the explanation says (its own pawns stand on its colour).
+  'outposts step 6': (fen) =>
+    badBishops(positionFromFen(fen), 'black').includes('f6') ? [0] : [2],
 };
 
 describe('fact questions of the advanced lessons', () => {

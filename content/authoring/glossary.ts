@@ -551,6 +551,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'outposts',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}el-valor-de-las-piezas-de-ajedrez`],
   },
   {
@@ -645,6 +646,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, `${WIKI}Backward_pawn`, WIKI_PAWN_STRUCTURE],
+  },
+  {
+    id: 'outpost',
+    name: { es: 'Casilla fuerte', en: 'Outpost' },
+    definition: {
+      es: 'Casilla de la cuarta fila de un bando o más adelante, protegida por un peón propio, que ningún peón del rival puede atacar ya. Es el sitio ideal para un caballo. Para el rival, esa casilla es un agujero en su campo.',
+      en: 'A square on one side’s fourth rank or further up, protected by one of its pawns, that no rival pawn can attack any more. It is the ideal spot for a knight. For the rival, that square is a hole in his camp.',
+    },
+    example: {
+      fen: '6k1/pp4pp/4p3/4N3/3P4/8/PP3PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e5'],
+      arrows: [],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'outposts',
+    sources: [WIKI_GLOSSARY, `${WIKI}Outpost_(chess)`],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {

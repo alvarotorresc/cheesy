@@ -403,5 +403,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 3
+  },
+  {
+    "id": "outposts",
+    "level": "advanced",
+    "order": 4,
+    "title": {
+      "es": "Casillas fuertes",
+      "en": "Outposts"
+    },
+    "summary": {
+      "es": "Casillas de donde ningún peón rival te puede echar, y la pieza que mejor las aprovecha.",
+      "en": "Squares no rival pawn can drive you from, and the piece that uses them best."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
   }
 ]
