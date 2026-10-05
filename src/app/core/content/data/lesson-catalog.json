@@ -268,5 +268,20 @@
     },
     "stepCount": 7,
     "exerciseCount": 3
+  },
+  {
+    "id": "mate-patterns",
+    "level": "intermediate",
+    "order": 7,
+    "title": {
+      "es": "Mates típicos",
+      "en": "Mate patterns"
+    },
+    "summary": {
+      "es": "El mate del pasillo, el de la coz y el de Anastasia: tres dibujos que se repiten.",
+      "en": "The back-rank mate, the smothered mate and Anastasia’s mate: three pictures that keep coming back."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
   }
 ]

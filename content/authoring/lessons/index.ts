@@ -18,6 +18,7 @@ import { thePin } from './intermediate/03-the-pin.ts';
 import { theSkewer } from './intermediate/04-the-skewer.ts';
 import { discoveredAttacks } from './intermediate/05-discovered-attacks.ts';
 import { removeTheDefender } from './intermediate/06-remove-the-defender.ts';
+import { matePatterns } from './intermediate/07-mate-patterns.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -38,4 +39,5 @@ export const lessons: LessonSpec[] = [
   theSkewer,
   discoveredAttacks,
   removeTheDefender,
+  matePatterns,
 ];

@@ -2568,6 +2568,7 @@
     },
     "group": "tactics",
     "level": "intermediate",
+    "lesson": "mate-patterns",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Back-rank_checkmate",
@@ -2802,6 +2803,7 @@
     },
     "group": "mates",
     "level": "intermediate",
+    "lesson": "mate-patterns",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Smothered_mate",
@@ -3039,6 +3041,7 @@
     },
     "group": "mates",
     "level": "intermediate",
+    "lesson": "mate-patterns",
     "sources": [
       "https://en.wikipedia.org/wiki/Checkmate_pattern",
       "https://lichess.org/practice/checkmates/checkmate-patterns-i/fE4k21MW",

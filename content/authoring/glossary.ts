@@ -867,6 +867,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Back-rank_checkmate`,
@@ -940,6 +941,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'mates',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Smothered_mate`,
@@ -996,6 +998,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'mates',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [WIKI_MATES, LICHESS_MATES_I, `${CHESSCOM_EN}anastasias-mate-chess`],
   },
   {
