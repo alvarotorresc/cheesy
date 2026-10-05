@@ -2510,6 +2510,45 @@
     ]
   },
   {
+    "id": "bad-bishop",
+    "name": {
+      "es": "Alfil malo",
+      "en": "Bad bishop"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Un alfil que tiene la mayoría de sus propios peones en casillas de su color. Esos peones le tapan el camino y además tiene que defenderlos, así que hace poco. El alfil bueno es el contrario: sus peones están en casillas del otro color y le dejan las diagonales libres."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A bishop with most of its own pawns on squares of its colour. Those pawns block its way and it also has to defend them, so it does little. The good bishop is the opposite: its pawns stand on squares of the other colour and leave its diagonals free."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/4n3/4p3/3pPp2/3P1P2/2B5/8/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c3",
+        "d4",
+        "e5",
+        "f4"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "minor-piece-endings",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://www.chess.com/terms/bad-bishop"
+    ]
+  },
+  {
     "id": "tempo",
     "name": {
       "es": "Tiempo",
@@ -4795,6 +4834,43 @@
     "lesson": "rook-endings",
     "sources": [
       "https://en.wikipedia.org/wiki/Rook_and_pawn_versus_rook_endgame"
+    ]
+  },
+  {
+    "id": "opposite-coloured-bishops",
+    "name": {
+      "es": "Alfiles de distinto color",
+      "en": "Opposite-coloured bishops"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cada bando tiene un solo alfil y van por casillas de distinto color, así que nunca se pueden capturar ni tapar el uno al otro. En el final dan muchas tablas, incluso con uno o dos peones de menos: el defensor bloquea los peones en las casillas que el alfil rival no toca."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Each side has a single bishop and they move on squares of different colours, so they can never capture or block each other. In the endgame they give many draws, even one or two pawns down: the defender blocks the pawns on the squares the enemy bishop cannot touch."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/5k2/8/4bP2/6P1/3B4/5K2/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d3",
+        "e5"
+      ],
+      "arrows": []
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "minor-piece-endings",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Opposite-colored_bishops_endgame",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
     ]
   }
 ]

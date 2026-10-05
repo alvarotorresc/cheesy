@@ -85,6 +85,8 @@ const EXPECTED_IDS = [
   'outside-passed-pawn',
   'connected-passed-pawns',
   'blockade',
+  'bad-bishop',
+  'opposite-coloured-bishops',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -146,6 +148,7 @@ const GROUPS: Record<string, string[]> = {
     'open-file',
     'half-open-file',
     'doubled-rooks',
+    'bad-bishop',
   ],
   pawns: [
     'pawn-structure',
@@ -172,6 +175,7 @@ const GROUPS: Record<string, string[]> = {
     'building-a-bridge',
     'seventh-rank',
     'cutting-off-the-king',
+    'opposite-coloured-bishops',
   ],
 };
 

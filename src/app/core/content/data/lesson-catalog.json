@@ -448,5 +448,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 2
+  },
+  {
+    "id": "minor-piece-endings",
+    "level": "advanced",
+    "order": 7,
+    "title": {
+      "es": "Alfiles y caballos en el final",
+      "en": "Bishops and knights in the endgame"
+    },
+    "summary": {
+      "es": "El alfil malo, el alfil contra el caballo y los alfiles de distinto color.",
+      "en": "The bad bishop, bishop against knight and opposite-coloured bishops."
+    },
+    "stepCount": 8,
+    "exerciseCount": 2
   }
 ]
