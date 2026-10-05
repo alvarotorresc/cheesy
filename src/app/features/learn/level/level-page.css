@@ -176,6 +176,11 @@
   transition: border-color var(--duration-fast) var(--ease-out);
 }
 
+/* Two lines at the foot: the second sits close under the first. */
+.glossary-link + .glossary-link {
+  margin-top: var(--space-3);
+}
+
 .glossary-link:hover {
   border-color: var(--color-accent);
 }

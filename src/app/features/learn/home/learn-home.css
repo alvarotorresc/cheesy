@@ -36,7 +36,8 @@
 }
 
 .level-card,
-.glossary-card {
+.glossary-card,
+.puzzles-card {
   display: grid;
   align-content: start;
   gap: var(--space-3);
@@ -47,13 +48,15 @@
 }
 
 .level-card h2,
-.glossary-card h2 {
+.glossary-card h2,
+.puzzles-card h2 {
   font-size: var(--text-xl, 1.25rem);
   font-weight: 700;
 }
 
 .level-card p,
-.glossary-card p {
+.glossary-card p,
+.puzzles-card p {
   color: var(--color-text-muted);
 }
 

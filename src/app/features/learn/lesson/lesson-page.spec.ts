@@ -2,14 +2,26 @@ import type { DebugElement } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { GLOSSARY_LOADER, LESSON_LOADERS, type LessonLoaders } from '../../../core/content';
+import {
+  GLOSSARY_LOADER,
+  LESSON_LOADERS,
+  PUZZLE_LOADERS,
+  type LessonLoaders,
+  type PuzzleLoaders,
+} from '../../../core/content';
 import { bundledGlossaryLoader, plainText } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
-import { FIXTURE_CATALOG, fixtureLessonLoaders } from '../testing';
+import {
+  emptyPuzzleLoaders,
+  FIXTURE_CATALOG,
+  fixtureLessonLoaders,
+  fixturePuzzleLoaders,
+  lessonLoadersWithPuzzles,
+} from '../testing';
 import { ChoiceStepView } from './steps/choice-step';
 import { ExplainStepView } from './steps/explain-step';
 import { TapSquareStepView } from './steps/tap-square-step';
@@ -20,7 +32,10 @@ describe('LessonPage', () => {
   let harness: RouterTestingHarness;
   let progress: ProgressService;
 
-  const setup = (loaders: LessonLoaders = fixtureLessonLoaders) => {
+  const setup = (
+    loaders: LessonLoaders = fixtureLessonLoaders,
+    puzzles: PuzzleLoaders = emptyPuzzleLoaders,
+  ) => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
@@ -28,6 +43,7 @@ describe('LessonPage', () => {
         { provide: LESSON_LOADERS, useValue: loaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: PUZZLE_LOADERS, useValue: puzzles },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -277,6 +293,48 @@ describe('LessonPage', () => {
       expect(root().querySelector('h1')?.textContent).toContain('Hanging pieces');
     });
     expect(stepOf()).toBe('Step 1 of 5');
+  });
+
+  describe('Practise more on the summary', () => {
+    it('should take the place of Practise when that leads to Positions', async () => {
+      setup(lessonLoadersWithPuzzles, fixturePuzzleLoaders);
+      await render('/learn/intermediate/the-fork');
+      await solveEveryStep();
+      const summary = root().querySelector('.summary')!;
+      const link = summary.querySelector('a.puzzles');
+      expect(link?.textContent).toContain('Practise more');
+      expect(link?.getAttribute('href')).toBe('/learn/puzzles/the-fork');
+      expect(summary.querySelector('a.practise')).toBeNull();
+    });
+
+    it('should sit next to a practice of endgames', async () => {
+      const catalog = await fixturePuzzleLoaders.catalog();
+      setup(fixtureLessonLoaders, {
+        ...fixturePuzzleLoaders,
+        catalog: async () => ({
+          ...catalog,
+          lessons: [{ lesson: 'knight-moves', count: 30, themes: ['fork'] }],
+        }),
+      });
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      const summary = root().querySelector('.summary')!;
+      expect(summary.querySelector('a.puzzles')?.getAttribute('href')).toBe(
+        '/learn/puzzles/knight-moves',
+      );
+      expect(summary.querySelector('a.practise')).not.toBeNull();
+    });
+
+    it('should not show for a lesson without puzzles, nor when the catalogue fails', async () => {
+      setup(fixtureLessonLoaders, {
+        ...fixturePuzzleLoaders,
+        catalog: () => Promise.reject(new Error('offline')),
+      });
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      expect(root().querySelector('.summary a.puzzles')).toBeNull();
+      expect(root().querySelector('.summary a.practise')).not.toBeNull();
+    });
   });
 
   it('should let a keyboard user skip a board exercise and go on with Next', async () => {
