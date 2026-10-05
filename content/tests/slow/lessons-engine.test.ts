@@ -109,6 +109,14 @@ describe('checkTactic with onlyMove on seeded positions', () => {
     expect(tacticProblems(report).join()).toMatch(/ambiguous: alternative too close/);
   });
 
+  it('rejects an only move when another move also holds', async () => {
+    // Re8# mates, but every other move keeps the level game: it is not the only move that holds.
+    const report = await checkTactic(engine, { fen: BACK_RANK, solution: ['Re8#'] }, DEPTH, {
+      onlyMove: true,
+    });
+    expect(tacticProblems(report).join()).toMatch(/ambiguous: alternative also holds/);
+  });
+
   it('rejects an only move that leaves the player lost', async () => {
     const report = await checkTactic(engine, { fen: LONE_MOVE, solution: ['Kh2'] }, DEPTH, {
       onlyMove: true,
