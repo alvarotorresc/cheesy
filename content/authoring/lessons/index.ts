@@ -12,6 +12,30 @@ import { checkMateStalemate } from './beginner/09-check-mate-stalemate.ts';
 import { castlingEnPassant } from './beginner/10-castling-en-passant.ts';
 import { basicMates } from './beginner/11-basic-mates.ts';
 import { openingPrinciples } from './beginner/12-opening-principles.ts';
+import { hangingPieces } from './intermediate/01-hanging-pieces.ts';
+import { theFork } from './intermediate/02-the-fork.ts';
+import { thePin } from './intermediate/03-the-pin.ts';
+import { theSkewer } from './intermediate/04-the-skewer.ts';
+import { discoveredAttacks } from './intermediate/05-discovered-attacks.ts';
+import { removeTheDefender } from './intermediate/06-remove-the-defender.ts';
+import { matePatterns } from './intermediate/07-mate-patterns.ts';
+import { forcingMoves } from './intermediate/08-forcing-moves.ts';
+import { inBetweenMove } from './intermediate/09-in-between-move.ts';
+import { kingPawnEndings } from './intermediate/10-king-pawn-endings.ts';
+import { rookEndings } from './intermediate/11-rook-endings.ts';
+import { drawsAndDefence } from './intermediate/12-draws-and-defence.ts';
+import { candidateMoves } from './advanced/01-candidate-moves.ts';
+import { pieceActivity } from './advanced/02-piece-activity.ts';
+import { pawnStructure } from './advanced/03-pawn-structure.ts';
+import { outposts } from './advanced/04-outposts.ts';
+import { openFilesSeventh } from './advanced/05-open-files-seventh.ts';
+import { passedPawns } from './advanced/06-passed-pawns.ts';
+import { minorPieceEndings } from './advanced/07-minor-piece-endings.ts';
+import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
+import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
+import { advancedTactics } from './advanced/10-advanced-tactics.ts';
+import { defending } from './advanced/11-defending.ts';
+import { plansAndStrategy } from './advanced/12-plans-and-strategy.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -26,4 +50,28 @@ export const lessons: LessonSpec[] = [
   castlingEnPassant,
   basicMates,
   openingPrinciples,
+  hangingPieces,
+  theFork,
+  thePin,
+  theSkewer,
+  discoveredAttacks,
+  removeTheDefender,
+  matePatterns,
+  forcingMoves,
+  inBetweenMove,
+  kingPawnEndings,
+  rookEndings,
+  drawsAndDefence,
+  candidateMoves,
+  pieceActivity,
+  pawnStructure,
+  outposts,
+  openFilesSeventh,
+  passedPawns,
+  minorPieceEndings,
+  zugzwangTempo,
+  kingSafetyAttack,
+  advancedTactics,
+  defending,
+  plansAndStrategy,
 ];

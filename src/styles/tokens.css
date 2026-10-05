@@ -108,6 +108,8 @@
   --board-arrow: #15781b;
   --board-spot: rgb(47 111 179 / 35%);
   --board-spot-arrow: rgb(47 111 179 / 85%);
+  /* Keyboard cursor: the ink of the page, dark on every square and on the yellow ones too. */
+  --board-cursor: var(--color-ink);
   --pip-progress: rgb(244 197 66 / 45%);
 
   --color-promotion-bg: #e3e9ed;

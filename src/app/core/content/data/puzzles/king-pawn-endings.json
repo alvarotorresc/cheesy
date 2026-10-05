@@ -1,0 +1,720 @@
+{
+  "lesson": "king-pawn-endings",
+  "themes": {
+    "pawnEndgame": null
+  },
+  "puzzles": [
+    {
+      "id": "0XcDb",
+      "fen": "8/7p/5kp1/4p3/4P2P/5PK1/8/8 w - - 1 40",
+      "moves": [
+        "Kg4",
+        "h5+",
+        "Kg3",
+        "g5"
+      ],
+      "rating": 910,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "8LqqO",
+      "fen": "8/1p6/p7/4k1P1/1P1p4/5K2/P7/8 b - - 0 43",
+      "moves": [
+        "d3",
+        "Ke3",
+        "d2",
+        "Kxd2"
+      ],
+      "rating": 952,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "iLXDI",
+      "fen": "8/7p/p2p4/1p3pP1/1P3k1P/1P4P1/3K4/8 b - - 0 41",
+      "moves": [
+        "Kxg3",
+        "h5",
+        "Kf4",
+        "g6"
+      ],
+      "rating": 971,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "zKgGi",
+      "fen": "8/4kp2/1p4pp/p1pPK3/P3P1P1/1P3P1P/8/8 w - - 2 38",
+      "moves": [
+        "f4",
+        "f6#"
+      ],
+      "rating": 973,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "4hIh4",
+      "fen": "8/5pp1/8/3kPK1P/8/8/8/8 b - - 2 60",
+      "moves": [
+        "Kd4",
+        "e6",
+        "fxe6+",
+        "Kxe6",
+        "Ke4",
+        "Kf7"
+      ],
+      "rating": 990,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "nfMQf",
+      "fen": "8/8/4pk2/p1p5/2P2K2/P7/8/8 b - - 2 45",
+      "moves": [
+        "Kg6",
+        "Ke5",
+        "Kf7",
+        "Kd6",
+        "Kf6",
+        "Kxc5"
+      ],
+      "rating": 991,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "E4mWS",
+      "fen": "8/8/8/8/6p1/8/5KPk/8 b - - 7 55",
+      "moves": [
+        "g3+",
+        "Kf3",
+        "Kg1",
+        "Kxg3"
+      ],
+      "rating": 999,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "sQQ4F",
+      "fen": "8/1K5p/8/8/8/5kP1/7P/8 w - - 3 48",
+      "moves": [
+        "Kc7",
+        "Kg2",
+        "h4",
+        "Kxg3"
+      ],
+      "rating": 1050,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "or3ui",
+      "fen": "8/6pp/8/k7/2PP4/2p1K2P/8/8 w - - 1 36",
+      "moves": [
+        "Kd3",
+        "Kb4",
+        "Kc2",
+        "Kxc4"
+      ],
+      "rating": 1070,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "icezV",
+      "fen": "8/8/4p3/8/5K1p/3kP2P/8/8 w - - 6 52",
+      "moves": [
+        "e4",
+        "Kd4",
+        "e5",
+        "Kd5"
+      ],
+      "rating": 1091,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "t7SU9",
+      "fen": "8/8/6Kp/8/5k1P/8/8/8 b - - 0 42",
+      "moves": [
+        "Kg4",
+        "h5",
+        "Kf4",
+        "Kxh6",
+        "Kf5",
+        "Kg7"
+      ],
+      "rating": 1094,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "sqXGI",
+      "fen": "8/5k2/p7/Pp1pPp1p/1Pp4P/2P1PK2/8/8 w - - 2 53",
+      "moves": [
+        "Kf4",
+        "Ke6",
+        "Kg3",
+        "Kxe5"
+      ],
+      "rating": 1096,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "RNV8z",
+      "fen": "8/8/6k1/5p1p/5K2/5PP1/8/8 w - - 1 59",
+      "moves": [
+        "Ke5",
+        "Kg5",
+        "f4+",
+        "Kg4",
+        "Kf6",
+        "Kxg3"
+      ],
+      "rating": 1114,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "WXHx1",
+      "fen": "8/8/6p1/5p1p/5P2/6P1/5KP1/3k4 w - - 6 66",
+      "moves": [
+        "Kf3",
+        "Ke1",
+        "Ke3",
+        "Kf1"
+      ],
+      "rating": 1114,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "lvLos",
+      "fen": "8/8/8/7p/5Kpk/7P/6P1/8 b - - 1 55",
+      "moves": [
+        "gxh3",
+        "g3#"
+      ],
+      "rating": 1125,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "d49wh",
+      "fen": "8/8/8/5kp1/7p/5PKP/8/8 w - - 0 59",
+      "moves": [
+        "Kf2",
+        "Kf4",
+        "Ke2",
+        "Kg3"
+      ],
+      "rating": 1136,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "SmLQP",
+      "fen": "8/5k2/4pP2/3p2K1/2pP4/p1P5/P7/8 b - - 0 53",
+      "moves": [
+        "Kf8",
+        "Kg6",
+        "e5",
+        "dxe5"
+      ],
+      "rating": 1151,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "dybiq",
+      "fen": "8/5p2/4kp1p/p1p5/2P2PK1/PP5P/8/8 b - - 2 36",
+      "moves": [
+        "f5+",
+        "Kh5",
+        "a4",
+        "bxa4"
+      ],
+      "rating": 1165,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "DpVkN",
+      "fen": "8/6p1/p7/4k2p/8/6K1/PPP5/8 w - - 1 35",
+      "moves": [
+        "c4",
+        "Kd4",
+        "c5",
+        "Kxc5"
+      ],
+      "rating": 1236,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "POv6D",
+      "fen": "8/1p4p1/4k2p/4Pp2/P1K4P/6P1/8/8 w - - 1 47",
+      "moves": [
+        "Kd4",
+        "g5",
+        "hxg5",
+        "hxg5"
+      ],
+      "rating": 1252,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "icYBZ",
+      "fen": "8/8/4p3/p4pp1/PPP1k2p/7P/3K2P1/8 b - - 0 37",
+      "moves": [
+        "axb4",
+        "a5",
+        "Kd4",
+        "a6"
+      ],
+      "rating": 1270,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "t3hDZ",
+      "fen": "8/6p1/7p/5kPK/7P/8/8/8 w - - 0 57",
+      "moves": [
+        "gxh6",
+        "g6#"
+      ],
+      "rating": 1275,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "Dq6yV",
+      "fen": "8/8/5pp1/7p/3kPK1P/6P1/8/8 b - - 6 50",
+      "moves": [
+        "Kd3",
+        "e5",
+        "fxe5+",
+        "Kxe5",
+        "g5",
+        "hxg5"
+      ],
+      "rating": 1284,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "Xb8Z1",
+      "fen": "8/8/5kp1/7p/5P1P/6K1/8/8 w - - 3 63",
+      "moves": [
+        "Kf3",
+        "Kf5",
+        "Kg3",
+        "Ke4"
+      ],
+      "rating": 1296,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "XwK8x",
+      "fen": "8/5p2/6p1/5k1p/5P2/4PK1P/8/8 b - - 2 52",
+      "moves": [
+        "h4",
+        "e4+",
+        "Ke6",
+        "Kg4",
+        "f6",
+        "Kxh4"
+      ],
+      "rating": 1304,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "MDK0k",
+      "fen": "3k4/5p2/1p3P2/1Pp1P3/4K3/8/8/8 w - - 3 49",
+      "moves": [
+        "Kd5",
+        "Kd7",
+        "Kc4",
+        "Ke6"
+      ],
+      "rating": 1324,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "QTdgb",
+      "fen": "8/5p2/6p1/3pP1Pp/1kpK1P1P/4P3/8/8 w - - 5 44",
+      "moves": [
+        "Kxd5",
+        "c3",
+        "e6",
+        "fxe6+"
+      ],
+      "rating": 1340,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "WsL9j",
+      "fen": "8/7p/1k6/1P1p1p2/P2Pp3/5pP1/2K2P1P/8 w - - 0 36",
+      "moves": [
+        "h3",
+        "e3",
+        "fxe3",
+        "f2"
+      ],
+      "rating": 1341,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "dFcqJ",
+      "fen": "8/5p2/4k1p1/6K1/6PP/8/8/8 b - - 0 49",
+      "moves": [
+        "Ke5",
+        "h5",
+        "gxh5",
+        "gxh5"
+      ],
+      "rating": 1384,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "2jWh5",
+      "fen": "8/p6p/3p2p1/k1pP2P1/P3Pp2/3P4/3K4/8 b - - 3 44",
+      "moves": [
+        "Kxa4",
+        "e5",
+        "dxe5",
+        "d6"
+      ],
+      "rating": 1406,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "LuhSv",
+      "fen": "8/6p1/7p/5kPK/5P1P/8/8/8 w - - 1 43",
+      "moves": [
+        "gxh6",
+        "g6#"
+      ],
+      "rating": 1416,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "cdJz1",
+      "fen": "8/3k2p1/2p2p1p/2pp1PP1/p4P1P/P3K3/1PP5/8 b - - 0 30",
+      "moves": [
+        "hxg5",
+        "fxg5",
+        "fxg5",
+        "hxg5"
+      ],
+      "rating": 1426,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "xrExi",
+      "fen": "8/5pp1/7p/4P1P1/1p2kP1P/1K6/8/8 b - - 0 53",
+      "moves": [
+        "Kxf4",
+        "g6",
+        "Kxe5",
+        "gxf7"
+      ],
+      "rating": 1428,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "2EBqD",
+      "fen": "8/8/P7/7p/6p1/6P1/5k2/7K w - - 1 57",
+      "moves": [
+        "Kh2",
+        "h4",
+        "gxh4",
+        "g3+",
+        "Kh3",
+        "g2"
+      ],
+      "rating": 1430,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "MtUo1",
+      "fen": "8/2k2pp1/p3p2p/1pK1P3/5PPP/P7/8/8 b - - 0 44",
+      "moves": [
+        "f6",
+        "exf6",
+        "gxf6",
+        "g5"
+      ],
+      "rating": 1436,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "HFCXR",
+      "fen": "8/5kP1/1p6/p3P2p/P2K4/1P6/8/8 w - - 1 50",
+      "moves": [
+        "e6+",
+        "Kxg7",
+        "Kd5",
+        "Kf8"
+      ],
+      "rating": 1511,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "ogHzq",
+      "fen": "8/8/1p1k4/1P2pK2/P1p2p2/2P2P2/8/8 w - - 16 47",
+      "moves": [
+        "Ke4",
+        "Ke6",
+        "a5",
+        "bxa5"
+      ],
+      "rating": 1524,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "HIEi8",
+      "fen": "8/1kpK4/3p4/4p3/1PP5/3P4/8/8 w - - 1 48",
+      "moves": [
+        "c5",
+        "d5",
+        "Ke6",
+        "e4"
+      ],
+      "rating": 1539,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "kUro9",
+      "fen": "8/4k3/1KP5/p7/P6p/8/8/8 b - - 2 54",
+      "moves": [
+        "Kd8",
+        "Kb7",
+        "Ke7",
+        "c7"
+      ],
+      "rating": 1541,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "3hXdQ",
+      "fen": "8/8/8/4p3/8/3k1KP1/8/8 w - - 4 53",
+      "moves": [
+        "g4",
+        "e4+",
+        "Kf2",
+        "Kd2",
+        "g5",
+        "e3+"
+      ],
+      "rating": 1550,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "U70p8",
+      "fen": "8/6k1/1p4p1/pP1p4/P2P2KP/8/8/8 b - - 5 47",
+      "moves": [
+        "Kh6",
+        "Kf4",
+        "Kh5",
+        "Ke5",
+        "Kxh4",
+        "Kxd5"
+      ],
+      "rating": 1607,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "deYhs",
+      "fen": "8/pp6/8/4k1p1/5p2/3K2PP/PP6/8 w - - 0 39",
+      "moves": [
+        "gxf4+",
+        "Kxf4",
+        "Ke2",
+        "Kg3"
+      ],
+      "rating": 1611,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "m4Rgk",
+      "fen": "8/1pp5/p7/1P1Pp1k1/P3P3/8/6Kp/8 b - - 1 52",
+      "moves": [
+        "Kf4",
+        "b6",
+        "cxb6",
+        "d6"
+      ],
+      "rating": 1631,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "DKXd9",
+      "fen": "8/1p6/p1p3k1/3p2P1/P2P3K/2P5/8/8 b - - 0 44",
+      "moves": [
+        "b5",
+        "a5",
+        "b4",
+        "cxb4"
+      ],
+      "rating": 1653,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "pnt0q",
+      "fen": "8/4kppp/p3p3/2Pp4/4PPP1/P4K1P/8/8 b - - 0 32",
+      "moves": [
+        "Kd7",
+        "exd5",
+        "exd5",
+        "Ke3"
+      ],
+      "rating": 1672,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "1Mq3j",
+      "fen": "8/p7/1p3k2/7p/1PP5/6K1/P7/8 w - - 1 47",
+      "moves": [
+        "Kh4",
+        "Ke5",
+        "a4",
+        "Kd4",
+        "c5",
+        "bxc5"
+      ],
+      "rating": 1700,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "EGNX5",
+      "fen": "8/8/1p1p1k2/p1p5/P1P1KP1p/1P5P/8/8 b - - 3 43",
+      "moves": [
+        "Ke6",
+        "f5+",
+        "Kf6",
+        "Kf4"
+      ],
+      "rating": 1700,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "IcUMO",
+      "fen": "K7/2k3p1/4pp1p/1P6/5P1P/P5P1/8/8 w - - 5 51",
+      "moves": [
+        "a4",
+        "Kb6",
+        "Kb8",
+        "e5"
+      ],
+      "rating": 1700,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "ZUX43",
+      "fen": "8/8/4k1pp/p1p1p3/P1P1K1PP/5P2/8/8 b - - 0 41",
+      "moves": [
+        "g5",
+        "h5",
+        "Kd6",
+        "Kf5"
+      ],
+      "rating": 1700,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "id": "ndAuE",
+      "fen": "6k1/7p/p6P/5p1p/PP6/3K4/8/8 b - - 0 40",
+      "moves": [
+        "Kf7",
+        "b5",
+        "axb5",
+        "a5"
+      ],
+      "rating": 1700,
+      "themes": [
+        "pawnEndgame"
+      ]
+    }
+  ]
+}

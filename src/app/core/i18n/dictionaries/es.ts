@@ -1,5 +1,14 @@
 import type { Messages } from './en';
 
+const PIECE_NAMES = {
+  pawn: 'peón',
+  knight: 'caballo',
+  bishop: 'alfil',
+  rook: 'torre',
+  queen: 'dama',
+  king: 'rey',
+} as const;
+
 export const es: Messages = {
   app: {
     name: 'Cheesy',
@@ -100,6 +109,7 @@ export const es: Messages = {
     replay: 'Ver otra vez',
     correct: '¡Eso es!',
     wrongMove: 'Esa no. Prueba otra vez.',
+    rivalReplies: { white: 'Las blancas responden:', black: 'Las negras responden:' },
     captured: 'Han capturado tu pieza en una casilla atacada. Empieza de nuevo.',
     stars: (got: number, total: number, moves: number, min: number) =>
       `${got} de ${total} ${total === 1 ? 'estrella' : 'estrellas'} · ${moves} ${moves === 1 ? 'jugada' : 'jugadas'} (mínimo ${min})`,
@@ -126,18 +136,78 @@ export const es: Messages = {
     homeBand: { title: '¿Empiezas desde cero?', cta: 'Aprende a jugar' },
     progressTitle: 'Tu progreso',
     privacy:
-      'Las lecciones completadas se guardan solo en este navegador. Sin cuentas ni cookies: si borras los datos del navegador, se pierden.',
+      'Las lecciones completadas y los problemas se guardan solo en este navegador. Sin cuentas ni cookies: si borras los datos del navegador, se pierden.',
     progressUnavailable:
       'Este navegador no deja guardar el progreso. Puedes seguir aprendiendo sin él.',
     clearProgress: 'Borrar el progreso',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todas las lecciones completadas guardadas en este navegador. No se puede deshacer.',
+      'Se borran todas las lecciones completadas y los problemas de Practica más guardados en este navegador. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     nothingSaved: 'No hay progreso guardado.',
     cleared: 'Progreso borrado.',
     clearFailed: 'No se ha podido borrar el progreso.',
+    puzzles: {
+      title: 'Practica más',
+      intro:
+        'Problemas reales de partidas de Lichess, por tema: de diez en diez, del más fácil al más difícil.',
+      loading: 'Cargando los problemas…',
+      loadError: 'No se han podido cargar los problemas.',
+      retry: 'Reintentar',
+      empty: 'Aún no hay problemas.',
+      backToLearn: 'Aprender',
+      backToList: 'Practica más',
+      firstTry: (n: number, total: number) => `${n} de ${total} a la primera`,
+      start: 'Practicar',
+      keepGoing: 'Seguir',
+      attribution: {
+        before: 'Problemas de la ',
+        link: 'base abierta de Lichess',
+        after: ' (CC0).',
+      },
+      cardDescription: 'Problemas reales de Lichess, por tema.',
+      open: 'Ver los problemas',
+      levelPrompt: '¿Quieres más ejercicios?',
+      levelLink: 'Practica más',
+      lessonButton: 'Practica más',
+      puzzleOf: (n: number, total: number) => `Problema ${n} de ${total}`,
+      nextPuzzle: 'Siguiente problema',
+      finish: 'Terminar',
+      playAs: { white: 'Juegas con las blancas. ', black: 'Juegas con las negras. ' },
+      justMoved: { white: 'Las blancas acaban de mover: ', black: 'Las negras acaban de mover: ' },
+      findBest: '. Busca la mejor jugada.',
+      solved: '¡Resuelto! La idea: ',
+      summaryTitle: 'Tanda terminada',
+      batchFirstTry: (n: number, total: number) => `${n} de ${total} a la primera`,
+      lessonFirstTry: (n: number, total: number) =>
+        `Llevas ${n} de los ${total} problemas de este tema a la primera.`,
+      allSolved:
+        'Has resuelto a la primera todos los problemas de este tema. Otra tanda repasa los más antiguos.',
+      anotherBatch: 'Otra tanda',
+      backToLesson: 'Volver a la lección',
+      themes: {
+        hangingPiece: 'Pieza sin defensa',
+        fork: 'Horquilla',
+        pin: 'Clavada',
+        skewer: 'Enfilada',
+        discoveredAttack: 'Ataque a la descubierta',
+        doubleCheck: 'Jaque doble',
+        discoveredCheck: 'Jaque a la descubierta',
+        capturingDefender: 'Captura del defensor',
+        deflection: 'Desviación',
+        backRankMate: 'Mate del pasillo',
+        smotheredMate: 'Mate de la coz',
+        anastasiaMate: 'Mate de Anastasia',
+        mateIn2: 'Mate en dos',
+        attraction: 'Atracción',
+        sacrifice: 'Sacrificio',
+        intermezzo: 'Jugada intermedia',
+        xRayAttack: 'Ataque en rayos X',
+        pawnEndgame: 'Final de peones',
+        rookEndgame: 'Final de torres',
+      },
+    },
   },
   about: {
     title: 'Acerca de Cheesy',
@@ -161,6 +231,10 @@ export const es: Messages = {
       {
         title: 'Las lecciones completadas',
         text: 'Qué lecciones de Aprender has terminado y cuántos ejercicios te salieron a la primera.',
+      },
+      {
+        title: 'Los problemas de Practica más',
+        text: 'Qué problemas de Lichess has jugado, cuántas veces y si la última vez te salieron a la primera.',
       },
       {
         title: 'Finales superados y posiciones resueltas',
@@ -223,6 +297,11 @@ export const es: Messages = {
         name: 'Tablebase de Lichess',
         license: 'Servicio gratuito',
         text: 'Resultados exactos de finales de hasta siete piezas. Con ella juega el rival de Finales.',
+      },
+      puzzles: {
+        name: 'Problemas de Lichess',
+        license: 'CC0',
+        text: 'Los problemas de Practica más salen de la base abierta de problemas de Lichess.',
       },
       openings: {
         name: 'Aperturas de Lichess',
@@ -660,6 +739,22 @@ export const es: Messages = {
     bishop: 'Alfil',
     knight: 'Caballo',
     cancel: 'Cancelar',
+    roleDescription: 'tablero',
+    instructions: 'Tablero. Flechas para moverte, Intro para elegir una pieza y jugar.',
+    viewOnlyInstructions: 'Tablero. Flechas para moverte por las casillas.',
+    piece: (role, color) => {
+      // Rook and queen are feminine in Spanish: "torre blanca", "dama negra".
+      const feminine = role === 'rook' || role === 'queen';
+      const white = feminine ? 'blanca' : 'blanco';
+      const black = feminine ? 'negra' : 'negro';
+      return `${PIECE_NAMES[role]} ${color === 'white' ? white : black}`;
+    },
+    square: (square, piece) => `${square}, ${piece ?? 'vacía'}`,
+    picked: (piece, square, moves) =>
+      `Has elegido ${piece} en ${square}, ${moves === 1 ? '1 jugada' : `${moves} jugadas`}`,
+    cannotPick: 'No puedes mover esa pieza',
+    noPiece: 'Aquí no hay ninguna pieza',
+    deselected: 'Selección anulada',
   },
   engine: {
     evaluation: 'Evaluación',
@@ -830,14 +925,14 @@ export const es: Messages = {
       deflection: 'Desviación',
       'discovered-attack': 'Ataque a la descubierta',
       'double-check': 'Jaque doble',
-      fork: 'Ataque doble',
+      fork: 'Horquilla',
       'knight-fork': 'Horquilla de caballo',
       'legal-mate': 'Mate de Légal',
       'opening-trap': 'Trampa de apertura',
       pin: 'Clavada',
       'queen-sacrifice': 'Sacrificio de dama',
       sacrifice: 'Sacrificio',
-      skewer: 'Ensartada',
+      skewer: 'Enfilada',
       'smothered-mate': 'Mate de la coz',
     },
   },

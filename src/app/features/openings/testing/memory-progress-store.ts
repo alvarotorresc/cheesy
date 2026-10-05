@@ -4,6 +4,7 @@ import type {
   PositionProgress,
   ProgressStore,
   ProgressStoreLoader,
+  PuzzleProgress,
   StoredLineProgress,
   TableStore,
 } from '../../../core/progress';
@@ -31,11 +32,17 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
   const endgames = table<EndgameProgress>((row) => row.endgameId);
   const positions = table<PositionProgress>((row) => row.positionId);
   const lessons = table<LessonProgress>((row) => row.lessonId);
+  const puzzles = table<PuzzleProgress>((row) => row.puzzleId);
   const store: ProgressStore = {
     lines: lines.store,
     endgames: endgames.store,
     positions: positions.store,
     lessons: lessons.store,
+    puzzles: {
+      ...puzzles.store,
+      ofLesson: async (lessonId) =>
+        [...puzzles.rows.values()].filter((row) => row.lessonId === lessonId),
+    },
   };
   const loader: ProgressStoreLoader = async () => store;
   return {
@@ -43,6 +50,7 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
     endgameRows: endgames.rows,
     positionRows: positions.rows,
     lessonRows: lessons.rows,
+    puzzleRows: puzzles.rows,
     store,
     loader,
   };

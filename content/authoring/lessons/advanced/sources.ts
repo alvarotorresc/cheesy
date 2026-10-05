@@ -1,0 +1,29 @@
+// The sources of the advanced lessons. Each lesson lists only the ones that cover its topic.
+const WIKI = 'https://en.wikipedia.org/wiki/';
+
+export const LICHESS_PRACTICE = 'https://lichess.org/practice';
+export const LICHESS_THEMES = 'https://lichess.org/training/themes';
+export const CHESSCOM_ADVANCED = 'https://www.chess.com/lessons/skill-level/advanced';
+export const CHESSKID = 'https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics';
+export const WIKI_STRATEGY = `${WIKI}Chess_strategy`;
+export const WIKI_PAWN_STRUCTURE = `${WIKI}Pawn_structure`;
+export const WIKI_OUTPOST = `${WIKI}Outpost_(chess)`;
+export const WIKI_BAD_BISHOP = `${WIKI}Bad_bishop`;
+export const WIKI_ROOK = `${WIKI}Rook_(chess)`;
+export const WIKI_PASSED_PAWN = `${WIKI}Passed_pawn`;
+export const WIKI_TARRASCH_RULE = `${WIKI}Tarrasch_rule`;
+export const WIKI_BLOCKADE = `${WIKI}Blockade_(chess)`;
+export const STEPS_5 = 'https://www.stappenmethode.nl/en/step5.php';
+export const WIKI_ZUGZWANG = `${WIKI}Zugzwang`;
+export const WIKI_IMMORTAL_ZUGZWANG = `${WIKI}Immortal_Zugzwang_Game`;
+export const WIKI_TRIANGULATION = `${WIKI}Triangulation_(chess)`;
+export const WIKI_CHESS_ENDGAME = `${WIKI}Chess_endgame`;
+export const WIKI_OPPOSITE_BISHOPS = `${WIKI}Opposite-colored_bishops_endgame`;
+export const WIKI_GREEK_GIFT = `${WIKI}Greek_gift_sacrifice`;
+export const WIKI_LASKER_BAUER = `${WIKI}Lasker_versus_Bauer,_Amsterdam,_1889`;
+export const WIKI_PAWN_STORM = `${WIKI}Pawn_storm`;
+export const WIKI_DEFLECTION = `${WIKI}Deflection_(chess)`;
+export const WIKI_INTERFERENCE = `${WIKI}Interference_(chess)`;
+export const WIKI_CLEARANCE = `${WIKI}Clearance_sacrifice`;
+export const WIKI_PROPHYLAXIS = `${WIKI}Prophylaxis_(chess)`;
+export const WIKI_FORTRESS = `${WIKI}Fortress_(chess)`;

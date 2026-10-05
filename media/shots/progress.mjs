@@ -8,6 +8,8 @@
 // reads and silently drops the ones that do not fit, so a row here that drifts from the content
 // simply stops showing. The scenes count what is on screen to catch that.
 
+import { readFileSync } from 'node:fs';
+
 // Runs in a row without mistakes after which a line counts as mastered (MASTERY_STREAK).
 export const MASTERY_STREAK = 3;
 
@@ -90,6 +92,55 @@ const position = (positionId, solves, firstTry, lastSolvedAt) => ({
   lastSolvedAt: at(lastSolvedAt),
 });
 
+// ----- Learn: lessons and the puzzles of "Practise more" -----
+//
+// Read from the content itself, so the rows always name lessons and puzzles that exist and the
+// scenes count what they expect from the same data. Nothing here depends on how many lessons the
+// advanced level has.
+
+const DATA = new URL('../../src/app/core/content/data/', import.meta.url);
+const readData = (path) => JSON.parse(readFileSync(new URL(path, DATA), 'utf8'));
+
+const LESSON_CATALOG = readData('lesson-catalog.json');
+
+const lessonsOf = (level) =>
+  LESSON_CATALOG.filter((lesson) => lesson.level === level).sort((a, b) => a.order - b.order);
+
+// Completed lessons: the whole beginner level and the first three of the intermediate one, so the
+// next lesson is the fourth of the intermediate level.
+const DONE_INTERMEDIATE = 3;
+const doneLessons = [
+  ...lessonsOf('beginner'),
+  ...lessonsOf('intermediate').slice(0, DONE_INTERMEDIATE),
+];
+export const NEXT_LESSON = lessonsOf('intermediate')[DONE_INTERMEDIATE];
+
+// One a day from 10 September, at 19:00 Madrid time; all but every fourth one clean.
+const lessonRows = doneLessons.map((lesson, i) => ({
+  lessonId: lesson.id,
+  completedAt: at(`2026-09-${String(10 + i).padStart(2, '0')}T17:00:00Z`),
+  exercises: lesson.exerciseCount,
+  firstTry: i % 4 === 3 ? Math.max(0, lesson.exerciseCount - 1) : lesson.exerciseCount,
+}));
+
+// Puzzles played per lesson: the batches of ten that "Practise more" would have served, that is
+// the easiest first. One in five was not solved on the first try.
+export const PUZZLES_PLAYED = { 'hanging-pieces': 20, 'the-fork': 10, 'the-pin': 10 };
+
+const puzzleRows = Object.entries(PUZZLES_PLAYED).flatMap(([lessonId, played], l) =>
+  readData(`puzzles/${lessonId}.json`)
+    .puzzles.slice()
+    .sort((a, b) => a.rating - b.rating || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+    .slice(0, played)
+    .map((puzzle, i) => ({
+      puzzleId: puzzle.id,
+      lessonId,
+      tries: 1,
+      lastFirstTry: i % 5 !== 4,
+      lastPlayedAt: at(`2026-09-${String(20 + l * 2).padStart(2, '0')}T18:00:00Z`) + i * 60_000,
+    })),
+);
+
 export const DEMO_PROGRESS = {
   lines: [
     // Ruy Lopez with White: 2 of its 5 lines mastered, 1 in progress.
@@ -129,4 +180,8 @@ export const DEMO_PROGRESS = {
     position('legal-mate', 2, true, '2026-09-26T22:01:00Z'),
     position('smothered-mate', 1, false, '2026-09-26T22:09:00Z'),
   ],
+  // The beginner level and three intermediate lessons completed.
+  lessons: lessonRows,
+  // 40 puzzles of "Practise more" played, in three lessons.
+  puzzles: puzzleRows,
 };

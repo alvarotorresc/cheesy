@@ -1,0 +1,1170 @@
+{
+  "id": "king-safety-attack",
+  "level": "advanced",
+  "order": 9,
+  "title": {
+    "es": "Atacar al rey",
+    "en": "Attacking the king"
+  },
+  "summary": {
+    "es": "Cuándo un rey es débil, el regalo griego, el rey sin enrocar y la avalancha de peones.",
+    "en": "When a king is weak, the Greek gift, the uncastled king and the pawn storm."
+  },
+  "terms": [
+    "greek-gift",
+    "pawn-storm",
+    "flank"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Greek_gift_sacrifice",
+    "https://en.wikipedia.org/wiki/Lasker_versus_Bauer,_Amsterdam,_1889",
+    "https://en.wikipedia.org/wiki/Pawn_storm",
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://www.chess.com/lessons/skill-level/advanced"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Atacar al rey es llevar cerca de él más piezas tuyas que las que lo defienden. Señales de un rey débil: pocos defensores a su lado, peones que se han movido o han desaparecido delante de él, y líneas abiertas que llegan hasta él. Aquí, en Lasker contra Bauer, Ámsterdam 1889, los dos alfiles blancos apuntan al enroque negro, la dama blanca puede llegar a la columna h y el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " es casi el único defensor."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Attacking the king means bringing more of your pieces near it than there are pieces defending it. Signs of a weak king: few defenders beside it, pawns in front of it that have moved or disappeared, and open lines that reach it. Here, in Lasker against Bauer, Amsterdam 1889, both white bishops point at the black castled king, the white queen can reach the h-file and the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " is almost the only defender."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/1b2bppp/ppq1pn2/2ppB3/5P2/1P1BP1N1/P1PPQ1PP/R4RK1 w - - 0 14",
+        "orientation": "white",
+        "highlights": [
+          "d3",
+          "e5",
+          "e2",
+          "f6"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El "
+          },
+          {
+            "kind": "term",
+            "id": "greek-gift",
+            "text": "regalo griego"
+          },
+          {
+            "kind": "text",
+            "text": " es un ataque clásico: el alfil captura el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", el caballo da jaque desde "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " y la dama entra por la columna h. Funciona si se cumplen cinco condiciones: controlas la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " más que el rival; tu caballo puede saltar a "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque; tu dama puede unirse al ataque, casi siempre por la columna h; el rival no puede llevar otra pieza a defender "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": "; y no tiene tiempo de reorganizar su defensa."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The "
+          },
+          {
+            "kind": "term",
+            "id": "greek-gift",
+            "text": "Greek gift"
+          },
+          {
+            "kind": "text",
+            "text": " is a classic attack: the bishop captures the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", the knight gives check from "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " and the queen comes in along the h-file. It works if five conditions hold: you control the "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " square more than your opponent; your knight can jump to "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " with check; your queen can join the attack, almost always along the h-file; the opponent cannot bring another piece to defend "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": "; and there is no time to reorganise the defence."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/4p3/4P3/8/3B1N2/8/3Q2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "h7",
+          "g5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Esta posición sale del artículo de Wikipedia sobre el regalo griego: las negras acaban de enrocarse. ¿Qué jugada empieza el ataque?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "This position comes from the Wikipedia article on the Greek gift: Black has just castled. Which move starts the attack?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbq1rk1/pppn1ppp/4p3/3pP3/1b1P4/2NB1N2/PPP2PPP/R1BQK2R w KQ - 0 7",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Bxh7+",
+          "O-O",
+          "Qe2"
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el alfil captura en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque. Si el rey lo captura, el caballo da jaque desde "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " y la dama llega a "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ": las negras tienen que entregar la dama para no recibir "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the bishop captures on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " with check. If the king takes it, the knight gives check from "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " and the queen reaches "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ": Black has to give up the queen to avoid "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Enrocarte pone tu rey a salvo, pero dejas pasar la ocasión: ahora mismo se cumplen las condiciones del regalo griego."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Castling puts your king in safety, but you let the chance go: right now the conditions of the Greek gift are met."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama se acerca, pero el rival gana tiempo para defenderse. El ataque ya funciona ahora."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen comes closer, but your opponent gains time to defend. The attack already works now."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Volvemos a Lasker contra Bauer. El caballo blanco saltó a "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": " y el negro lo capturó. Tienes dos alfiles apuntando al rey negro: empieza el ataque."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Back to Lasker against Bauer. The white knight jumped to "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": " and Black captured it. You have two bishops aimed at the black king: start the attack."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/1b2bppp/ppq1p3/2ppB2n/5P2/1P1BP3/P1PPQ1PP/R4RK1 w - - 0 15",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxh7+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el alfil se entrega en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque. Si el rey lo captura, la dama recupera el caballo en "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", también con jaque, y el rey negro se queda sin peones delante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the bishop gives itself up on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " with check. If the king captures it, the queen wins the knight back on "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", also with check, and the black king is left with no pawns in front of it."
+          }
+        ]
+      },
+      "wrong": {
+        "Qxh5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Recuperas la pieza, pero el rey negro sigue protegido por su peón de "
+            },
+            {
+              "kind": "square",
+              "square": "h7"
+            },
+            {
+              "kind": "text",
+              "text": ". Hay algo más fuerte antes."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You win the piece back, but the black king is still shielded by its pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "h7"
+            },
+            {
+              "kind": "text",
+              "text": ". There is something stronger first."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Como en el regalo griego: empieza por "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "As in the Greek gift: start with "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "En la partida, el rey capturó el alfil, la dama recuperó el caballo con jaque y el rey volvió a "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ". Y ahora el segundo alfil: se entrega en "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ". Si el rey lo captura, la dama da jaque desde "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre sube por la tercera fila hasta "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " y las negras tienen que dar su dama para no recibir mate. Al final, la dama blanca ataca los dos alfiles negros a la vez y gana uno. Es una de las partidas más famosas por esa entrega de los dos alfiles."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "In the game the king took the bishop, the queen won the knight back with check and the king went back to "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ". And now the second bishop: it gives itself up on "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ". If the king captures it, the queen gives check from "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": ", the rook climbs along the third rank to "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " and Black has to give up the queen to avoid mate. In the end, the white queen attacks both black bishops at once and wins one of them. It is one of the most famous games because of that sacrifice of both bishops."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/1b2bpp1/ppq1p3/2ppB2Q/5P2/1P2P3/P1PP2PP/R4RK1 w - - 1 17",
+        "orientation": "white",
+        "moves": [
+          "Bxg7",
+          "Kxg7",
+          "Qg4+",
+          "Kh7",
+          "Rf3",
+          "e5",
+          "Rh3+",
+          "Qh6",
+          "Rxh6+",
+          "Kxh6",
+          "Qd7"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un rey que no se ha enrocado está en peligro en cuanto se abre el centro. Si vas por delante en el desarrollo, abre líneas: cambia peones del centro o entrega uno, como en un "
+          },
+          {
+            "kind": "term",
+            "id": "gambit",
+            "text": "gambito"
+          },
+          {
+            "kind": "text",
+            "text": ", para que tus torres y tu dama lleguen antes que sus defensores. Aquí, en el gambito danés, las blancas han entregado dos peones a cambio de desarrollo: sus alfiles de "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " ya apuntan a "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", al lado del rey negro, y las negras todavía no han sacado ninguna pieza."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A king that has not castled is in danger as soon as the centre opens. If you are ahead in development, open lines: exchange central pawns or give one up, as in a "
+          },
+          {
+            "kind": "term",
+            "id": "gambit",
+            "text": "gambit"
+          },
+          {
+            "kind": "text",
+            "text": ", so that your rooks and queen arrive before its defenders. Here, in the Danish Gambit, White has given up two pawns for development: the bishops on "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " already aim at "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", next to the black king, and Black has not brought out a single piece yet."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkbnr/pppp1ppp/8/8/2B1P3/8/PB3PPP/RN1QK1NR b KQkq - 0 5",
+        "orientation": "white",
+        "highlights": [
+          "c4",
+          "b2",
+          "e8"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey negro sigue en el centro, sin enrocar, y la columna d está abierta. Vas un caballo por debajo, pero tu torre y tu dama están en esa columna. Las negras amenazan tu dama. Busca cómo llegar al rey: es "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en tres jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black king is still in the centre, not castled, and the d-file is open. You are a knight down, but your rook and your queen stand on that file. Black is attacking your queen. Find a way to reach the king: it is "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " in three moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnb1kbnr/pp3ppp/2p5/5q2/8/3Q1N2/PPPB1PPP/2KR1B1R w kq - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qd8+",
+          "Kxd8",
+          "Bg5+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: tras entregar la dama, el alfil va a "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " y da jaque a la vez que la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ": un "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que moverse. Si va a "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ", el alfil da mate en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "; si vuelve a "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre da mate en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". La columna abierta llevó tus piezas hasta el rey que no se enrocó."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: after giving up the queen, the bishop goes to "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " and gives check together with the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ": a "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to move. If it goes to "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ", the bishop mates on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "; if it goes back to "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": ", the rook mates on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". The open file took your pieces all the way to the king that never castled."
+          }
+        ]
+      },
+      "wrong": {
+        "Qxf5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Cambiar las damas es tranquilo y el rey negro respira. Con el rey en el centro había algo mucho mejor."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Exchanging queens is calm and the black king breathes again. With the king in the centre there was something much better."
+            }
+          ]
+        },
+        "Qb3": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama se salva, pero dejas pasar la ocasión: el rey negro sigue sin protección y puedes llegar a él ya."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen is safe, but you miss the chance: the black king is still unprotected and you can reach it right now."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Entrega la dama con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en la casilla de al lado del rey. Cuando el rey la capture, tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " se aparta de la columna con jaque y deja que también dé jaque la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Give up the queen with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on the square next to the king. When the king captures it, your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " moves off the file with check and lets the rook give check too."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando los reyes se enrocan en lados distintos, la partida es una carrera. Cada bando lanza sus peones del "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flanco"
+          },
+          {
+            "kind": "text",
+            "text": " donde está el rey rival: es una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-storm",
+            "text": "avalancha de peones"
+          },
+          {
+            "kind": "text",
+            "text": ". Esos peones abren líneas para tus piezas, y empujarlos no deja desnudo a tu rey, que está en el otro lado. Aquí las blancas, enrocadas en el lado de la dama, avanzan los peones de "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " contra el rey negro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When the kings castle on different sides, the game becomes a race. Each side throws forward the pawns on the "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flank"
+          },
+          {
+            "kind": "text",
+            "text": " where the enemy king is: that is a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-storm",
+            "text": "pawn storm"
+          },
+          {
+            "kind": "text",
+            "text": ". Those pawns open lines for your pieces, and pushing them does not strip your own king, which is on the other side. Here White, castled on the queenside, advances the pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " against the black king."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/ppq1ppbp/3p1np1/8/4P1PP/2N1BP2/PPPQ4/2KR3R w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "g4",
+          "h4",
+          "g8",
+          "c1"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: ataca al rey cuando tengas cerca de él más piezas que sus defensores. El "
+          },
+          {
+            "kind": "term",
+            "id": "greek-gift",
+            "text": "regalo griego"
+          },
+          {
+            "kind": "text",
+            "text": " funciona si tu caballo llega a "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ", tu dama llega a la columna h y nadie puede defender "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ". A veces hay que entregar más de una pieza, como Lasker. Contra un rey sin enrocar, abre el centro; con los reyes en lados distintos, lanza una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-storm",
+            "text": "avalancha de peones"
+          },
+          {
+            "kind": "text",
+            "text": ". En Posiciones tienes más ataques con "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": " para practicar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: attack the king when you have more pieces near it than it has defenders. The "
+          },
+          {
+            "kind": "term",
+            "id": "greek-gift",
+            "text": "Greek gift"
+          },
+          {
+            "kind": "text",
+            "text": " works if your knight reaches "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ", your queen reaches the h-file and nothing can defend "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ". Sometimes you have to give up more than one piece, like Lasker. Against an uncastled king, open the centre; with the kings on different sides, launch a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-storm",
+            "text": "pawn storm"
+          },
+          {
+            "kind": "text",
+            "text": ". In Positions you will find more attacks with a "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": " to practise."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/1b2bppp/ppq1p3/2ppB2n/5P2/1P1BP3/P1PPQ1PP/R4RK1 w - - 0 15",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "sacrifice"
+  }
+}

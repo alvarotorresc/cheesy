@@ -1,0 +1,1121 @@
+{
+  "id": "outposts",
+  "level": "advanced",
+  "order": 4,
+  "title": {
+    "es": "Casillas fuertes",
+    "en": "Outposts"
+  },
+  "summary": {
+    "es": "Casillas de donde ningún peón rival te puede echar, y la pieza que mejor las aprovecha.",
+    "en": "Squares no rival pawn can drive you from, and the piece that uses them best."
+  },
+  "terms": [
+    "outpost",
+    "bishop-pair"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Outpost_(chess)",
+    "https://en.wikipedia.org/wiki/Chess_strategy",
+    "https://en.wikipedia.org/wiki/Pawn_structure",
+    "https://en.wikipedia.org/wiki/Bad_bishop",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": " está en tu cuarta fila o más adelante, la protege un peón tuyo y ningún peón rival podrá atacarla nunca, porque al rival no le quedan peones por delante en las columnas de al lado. Una pieza colocada ahí no se puede echar con peones. Aquí "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " es una "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": " para las blancas: la protege el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", y las negras no tienen peones en las columnas d ni f."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "An "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": " is a square on your fourth rank or further up, protected by one of your pawns, that no rival pawn can ever attack, because the rival has no pawns left ahead of it on the files next to it. A piece placed there cannot be chased away by pawns. Here "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " is an "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": " for White: the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " protects it, and Black has no pawns on the d-file or the f-file."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp4pp/4p3/8/3P4/8/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Cuál de estas casillas es una "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": " para tu caballo?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Which of these squares is an "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": " for your knight?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "2b3k1/pp3ppp/3p4/4p3/2P1P3/5N2/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "b5",
+            "en": "b5"
+          },
+          {
+            "es": "d5",
+            "en": "d5"
+          },
+          {
+            "es": "f5",
+            "en": "f5"
+          }
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " la protegen tus peones de "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", y ningún peón negro puede atacarla: no hay ninguno en la columna c, y el de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " ya ha avanzado demasiado. Ningún peón echará de ahí a un caballo: para quitarlo, las negras tendrán que cambiarlo por una pieza, por ejemplo con su alfil desde "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: your pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " protect "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", and no black pawn can attack it: there is none on the c-file, and the one on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " has already gone too far. No pawn will drive a knight away from there: to get rid of it, Black will have to trade it for a piece, for instance with his bishop from "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La protege el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el peón negro de "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " puede avanzar a "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " y echar de ahí a tu caballo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": " protects it, but the black pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " can move to "
+            },
+            {
+              "kind": "square",
+              "square": "a6"
+            },
+            {
+              "kind": "text",
+              "text": " and drive your knight away."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La protege el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el peón negro de "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " puede avanzar a "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": " y echar a tu caballo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " protects it, but the black pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " can move to "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": " and drive your knight away."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo es la pieza que más gana con una "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": ": de cerca ataca muchas casillas y no lo pueden echar. En la partida Anand contra Ivanchuk, de 2001, el caballo blanco en "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " defiende el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": ", y ningún peón negro puede tocarlo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight is the piece that gains most from an "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": ": close up it attacks many squares and cannot be chased away. In the game Anand against Ivanchuk, from 2001, the white knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " defends the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the square "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": ", and no black pawn can touch it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3Rn3/R7/p3rpkp/Prp1p1p1/1pN5/1P3P1P/2P2KP1/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c4"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " quiere llegar a "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", la "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Con qué jugada empieza el camino más corto?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your knight on "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " wants to reach "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", the "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": ". Which move starts the shortest way there?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp1nbppp/3p4/4p3/2P1P3/3B4/PP3PPP/1N4K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "El caballo a a3",
+            "en": "The knight to a3"
+          },
+          {
+            "es": "El caballo a d2",
+            "en": "The knight to d2"
+          },
+          {
+            "es": "El caballo a c3",
+            "en": "The knight to c3"
+          }
+        ],
+        "correct": 2
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: de "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " y de "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", dos saltos. Antes de mover un caballo, cuenta los saltos hasta su casilla buena."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: from "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " and from "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", two jumps. Before you move a knight, count the jumps to its good square."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Desde "
+            },
+            {
+              "kind": "square",
+              "square": "a3"
+            },
+            {
+              "kind": "text",
+              "text": " el caballo no llega a "
+            },
+            {
+              "kind": "square",
+              "square": "d5"
+            },
+            {
+              "kind": "text",
+              "text": " en una jugada: tendría que dar un rodeo, por "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "c7"
+            },
+            {
+              "kind": "text",
+              "text": " o por "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "From "
+            },
+            {
+              "kind": "square",
+              "square": "a3"
+            },
+            {
+              "kind": "text",
+              "text": " the knight does not reach "
+            },
+            {
+              "kind": "square",
+              "square": "d5"
+            },
+            {
+              "kind": "text",
+              "text": " in one move: it would have to go the long way round, through "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "c7"
+            },
+            {
+              "kind": "text",
+              "text": " or through "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Desde "
+            },
+            {
+              "kind": "square",
+              "square": "d2"
+            },
+            {
+              "kind": "text",
+              "text": " hacen falta varios saltos más: tus propios peones de "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " le quitan las casillas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "From "
+            },
+            {
+              "kind": "square",
+              "square": "d2"
+            },
+            {
+              "kind": "text",
+              "text": " it needs several more jumps: your own pawns on "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " take its squares."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Caballo o alfil: el caballo es mejor en posiciones cerradas, con los peones bloqueados, porque salta por encima de ellos. El alfil es mejor en posiciones abiertas, donde sus diagonales llegan lejos. Y los dos alfiles juntos, la "
+          },
+          {
+            "kind": "term",
+            "id": "bishop-pair",
+            "text": "pareja de alfiles"
+          },
+          {
+            "kind": "text",
+            "text": ", suelen ser una ventaja: entre los dos vigilan casillas de los dos colores. Aquí las blancas tienen los dos alfiles, y las negras, alfil y caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Knight or bishop: the knight is better in closed positions, with the pawns locked, because it jumps over them. The bishop is better in open positions, where its diagonals reach far. And the two bishops together, the "
+          },
+          {
+            "kind": "term",
+            "id": "bishop-pair",
+            "text": "bishop pair"
+          },
+          {
+            "kind": "text",
+            "text": ", are usually an advantage: between them they watch squares of both colours. Here White has both bishops, and Black has bishop and knight."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp1n1ppp/4b3/8/8/8/PP3PPP/2BB2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c1",
+          "d1"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Los peones del centro están bloqueados y no se van a mover. Aquí, ¿qué pieza prefieres tener?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The centre pawns are locked and will not move. Here, which piece would you rather have?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/3p1b2/2pPp3/2P1P3/3N4/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "El caballo",
+            "en": "The knight"
+          },
+          {
+            "es": "El alfil",
+            "en": "The bishop"
+          },
+          {
+            "es": "Da igual: valen lo mismo",
+            "en": "It makes no difference: they are worth the same"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: con los peones bloqueados, el caballo salta por encima de ellos y puede ir a cualquier lado del tablero. El alfil negro, en cambio, está encerrado detrás de sus propios peones."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: with the pawns locked, the knight jumps over them and can go to either side of the board. The black bishop, on the other hand, is shut in behind its own pawns."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El alfil negro va por casillas oscuras, las mismas en las que están bloqueados sus peones de "
+            },
+            {
+              "kind": "square",
+              "square": "c5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": ": le tapan el camino."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black bishop runs on dark squares, the same ones its blocked pawns on "
+            },
+            {
+              "kind": "square",
+              "square": "c5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": " stand on: they block its way."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Valen lo mismo en el "
+            },
+            {
+              "kind": "term",
+              "id": "piece-value",
+              "text": "valor de las piezas"
+            },
+            {
+              "kind": "text",
+              "text": ", pero en una posición cerrada el caballo es mejor."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "They are worth the same in the "
+            },
+            {
+              "kind": "term",
+              "id": "piece-value",
+              "text": "piece values"
+            },
+            {
+              "kind": "text",
+              "text": ", but in a closed position the knight is better."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "También cuenta quitarle casillas al rival. En la partida Tarrasch contra Euwe, de 1922, las blancas parecen ir mejor desarrolladas, pero las negras no están peor: la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " es un hueco que ningún peón blanco puede defender, y las negras pueden llevar allí una pieza. Las blancas no tienen nada parecido."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Taking squares away from the rival counts too. In the game Tarrasch against Euwe, from 1922, White seems better developed, but Black is no worse off: the square "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " is a hole that no white pawn can defend, and Black can bring a piece there. White has nothing like it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1b1r1k1/pp1n1pbp/2pR1np1/4p3/2P1P3/2N1BN1P/PP3PP1/2K2B1R w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: una "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "casilla fuerte"
+          },
+          {
+            "kind": "text",
+            "text": ", de tu cuarta fila en adelante, la protege un peón tuyo y ningún peón rival la puede atacar. El caballo es quien más la aprovecha. En posiciones cerradas suele ser mejor el caballo; en las abiertas, el alfil, y la "
+          },
+          {
+            "kind": "term",
+            "id": "bishop-pair",
+            "text": "pareja de alfiles"
+          },
+          {
+            "kind": "text",
+            "text": " es una ventaja. Y no dejes huecos en tu campo: el rival los usará igual."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: an "
+          },
+          {
+            "kind": "term",
+            "id": "outpost",
+            "text": "outpost"
+          },
+          {
+            "kind": "text",
+            "text": ", on your fourth rank or further up, is protected by one of your pawns and no rival pawn can attack it. The knight is the piece that uses it best. In closed positions the knight is usually better; in open ones, the bishop, and the "
+          },
+          {
+            "kind": "term",
+            "id": "bishop-pair",
+            "text": "bishop pair"
+          },
+          {
+            "kind": "text",
+            "text": " is an advantage. And do not leave holes in your camp: the rival will use them just the same."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/3p4/3Np3/2P1P3/8/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5"
+        ]
+      }
+    }
+  ]
+}

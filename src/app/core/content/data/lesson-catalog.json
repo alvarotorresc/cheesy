@@ -178,5 +178,365 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "hanging-pieces",
+    "level": "intermediate",
+    "order": 1,
+    "title": {
+      "es": "Piezas sin defensa",
+      "en": "Hanging pieces"
+    },
+    "summary": {
+      "es": "Ver qué piezas se quedan sin defensa, las tuyas y las del rival.",
+      "en": "Spotting the pieces left without defence, yours and your opponent’s."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-fork",
+    "level": "intermediate",
+    "order": 2,
+    "title": {
+      "es": "La horquilla",
+      "en": "The fork"
+    },
+    "summary": {
+      "es": "Una pieza ataca a dos a la vez, y el rival solo puede salvar una.",
+      "en": "One piece attacks two at once, and the opponent can only save one."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-pin",
+    "level": "intermediate",
+    "order": 3,
+    "title": {
+      "es": "La clavada",
+      "en": "The pin"
+    },
+    "summary": {
+      "es": "Una pieza que no puede moverse sin dejar algo más valioso al descubierto.",
+      "en": "A piece that cannot move without exposing something worth more."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-skewer",
+    "level": "intermediate",
+    "order": 4,
+    "title": {
+      "es": "La enfilada",
+      "en": "The skewer"
+    },
+    "summary": {
+      "es": "Atacar a una pieza valiosa para ganar la que tiene detrás.",
+      "en": "Attacking a valuable piece to win the one behind it."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "discovered-attacks",
+    "level": "intermediate",
+    "order": 5,
+    "title": {
+      "es": "Ataque a la descubierta y jaque doble",
+      "en": "Discovered attacks and double check"
+    },
+    "summary": {
+      "es": "Una pieza se aparta y destapa el ataque de otra que estaba detrás.",
+      "en": "One piece steps aside and uncovers the attack of another behind it."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "remove-the-defender",
+    "level": "intermediate",
+    "order": 6,
+    "title": {
+      "es": "Quitar al defensor",
+      "en": "Removing the defender"
+    },
+    "summary": {
+      "es": "Capturar, desviar o sobrecargar a la pieza que defiende a otra.",
+      "en": "Capturing, deflecting or overloading the piece that defends another."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "mate-patterns",
+    "level": "intermediate",
+    "order": 7,
+    "title": {
+      "es": "Mates típicos",
+      "en": "Mate patterns"
+    },
+    "summary": {
+      "es": "El mate del pasillo, el de la coz y el de Anastasia: tres dibujos que se repiten.",
+      "en": "The back-rank mate, the smothered mate and Anastasia’s mate: three pictures that keep coming back."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "forcing-moves",
+    "level": "intermediate",
+    "order": 8,
+    "title": {
+      "es": "Jaques, capturas y amenazas",
+      "en": "Checks, captures and threats"
+    },
+    "summary": {
+      "es": "Las jugadas que obligan al rival, cómo calcularlas y cuándo merece la pena entregar material.",
+      "en": "The moves that force the rival, how to calculate them and when giving up material pays off."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "in-between-move",
+    "level": "intermediate",
+    "order": 9,
+    "title": {
+      "es": "La jugada intermedia",
+      "en": "The in-between move"
+    },
+    "summary": {
+      "es": "Antes de recapturar, mira si hay algo mejor; y las piezas que atacan a través de otras.",
+      "en": "Before taking back, check whether there is something better; and the pieces that attack through others."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-pawn-endings",
+    "level": "intermediate",
+    "order": 10,
+    "title": {
+      "es": "Finales de peones",
+      "en": "King and pawn endings"
+    },
+    "summary": {
+      "es": "La regla del cuadrado, la oposición y las casillas clave: cuándo corona un peón y cuándo no.",
+      "en": "The rule of the square, the opposition and the key squares: when a pawn promotes and when it does not."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "rook-endings",
+    "level": "intermediate",
+    "order": 11,
+    "title": {
+      "es": "Finales de torre",
+      "en": "Rook endings"
+    },
+    "summary": {
+      "es": "Torre activa, torre detrás del peón, la séptima fila y cómo cortar al rey.",
+      "en": "An active rook, the rook behind the pawn, the seventh rank and how to cut the king off."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "draws-and-defence",
+    "level": "intermediate",
+    "order": 12,
+    "title": {
+      "es": "Cómo salvar tablas",
+      "en": "How to save a draw"
+    },
+    "summary": {
+      "es": "Jaque perpetuo, triple repetición y ahogado: cómo empatar una partida que ibas perdiendo.",
+      "en": "Perpetual check, threefold repetition and stalemate: how to draw a game you were losing."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "candidate-moves",
+    "level": "advanced",
+    "order": 1,
+    "title": {
+      "es": "Jugadas candidatas",
+      "en": "Candidate moves"
+    },
+    "summary": {
+      "es": "Antes de mover, una lista corta de jugadas y la mejor respuesta del rival a cada una.",
+      "en": "Before you move, a short list of moves and the rival’s best answer to each one."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "piece-activity",
+    "level": "advanced",
+    "order": 2,
+    "title": {
+      "es": "Piezas activas",
+      "en": "Active pieces"
+    },
+    "summary": {
+      "es": "Una pieza vale por lo que hace: cuántas casillas útiles ve y adónde puede ir.",
+      "en": "A piece is worth what it does: how many useful squares it sees and where it can go."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "pawn-structure",
+    "level": "advanced",
+    "order": 3,
+    "title": {
+      "es": "La estructura de peones",
+      "en": "Pawn structure"
+    },
+    "summary": {
+      "es": "Peones aislados, doblados y retrasados, cadenas y rupturas: lo que dura toda la partida.",
+      "en": "Isolated, doubled and backward pawns, chains and breaks: what lasts the whole game."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
+  },
+  {
+    "id": "outposts",
+    "level": "advanced",
+    "order": 4,
+    "title": {
+      "es": "Casillas fuertes",
+      "en": "Outposts"
+    },
+    "summary": {
+      "es": "Casillas de donde ningún peón rival te puede echar, y la pieza que mejor las aprovecha.",
+      "en": "Squares no rival pawn can drive you from, and the piece that uses them best."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "open-files-seventh",
+    "level": "advanced",
+    "order": 5,
+    "title": {
+      "es": "Columnas abiertas y la séptima fila",
+      "en": "Open files and the seventh rank"
+    },
+    "summary": {
+      "es": "Las torres necesitan columnas sin peones para entrar en el campo rival.",
+      "en": "Rooks need files without pawns to get into the rival camp."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "passed-pawns",
+    "level": "advanced",
+    "order": 6,
+    "title": {
+      "es": "El peón pasado",
+      "en": "The passed pawn"
+    },
+    "summary": {
+      "es": "Cómo se crea, cómo se apoya y cómo se frena un peón pasado, con Lucena y Philidor.",
+      "en": "How a passed pawn is made, supported and stopped, with Lucena and Philidor."
+    },
+    "stepCount": 9,
+    "exerciseCount": 2
+  },
+  {
+    "id": "minor-piece-endings",
+    "level": "advanced",
+    "order": 7,
+    "title": {
+      "es": "Alfiles y caballos en el final",
+      "en": "Bishops and knights in the endgame"
+    },
+    "summary": {
+      "es": "El alfil malo, el alfil contra el caballo y los alfiles de distinto color.",
+      "en": "The bad bishop, bishop against knight and opposite-coloured bishops."
+    },
+    "stepCount": 8,
+    "exerciseCount": 2
+  },
+  {
+    "id": "zugzwang-tempo",
+    "level": "advanced",
+    "order": 8,
+    "title": {
+      "es": "Zugzwang y tiempos",
+      "en": "Zugzwang and tempo"
+    },
+    "summary": {
+      "es": "Cuando mover es un problema: el zugzwang recíproco, la jugada de espera y la triangulación.",
+      "en": "When having to move is the problem: mutual zugzwang, the waiting move and triangulation."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-safety-attack",
+    "level": "advanced",
+    "order": 9,
+    "title": {
+      "es": "Atacar al rey",
+      "en": "Attacking the king"
+    },
+    "summary": {
+      "es": "Cuándo un rey es débil, el regalo griego, el rey sin enrocar y la avalancha de peones.",
+      "en": "When a king is weak, the Greek gift, the uncastled king and the pawn storm."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
+  },
+  {
+    "id": "advanced-tactics",
+    "level": "advanced",
+    "order": 10,
+    "title": {
+      "es": "Táctica avanzada",
+      "en": "Advanced tactics"
+    },
+    "summary": {
+      "es": "Cortar las líneas del rival, abrir las tuyas y juntar dos ideas en un golpe.",
+      "en": "Cut your opponent’s lines, open your own and join two ideas in one blow."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "defending",
+    "level": "advanced",
+    "order": 11,
+    "title": {
+      "es": "Defenderse",
+      "en": "Defending"
+    },
+    "summary": {
+      "es": "Ver venir la amenaza, encontrar la jugada que la para y no rendirse cuando vas peor.",
+      "en": "Seeing the threat coming, finding the move that stops it and not giving up when you are worse."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "plans-and-strategy",
+    "level": "advanced",
+    "order": 12,
+    "title": {
+      "es": "Hacer un plan",
+      "en": "Making a plan"
+    },
+    "summary": {
+      "es": "Cuatro preguntas para entender la posición y elegir qué hacer cuando no hay táctica.",
+      "en": "Four questions to understand the position and choose what to do when there is no tactic."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

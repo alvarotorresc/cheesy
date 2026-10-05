@@ -1,0 +1,1337 @@
+{
+  "id": "king-pawn-endings",
+  "level": "intermediate",
+  "order": 10,
+  "title": {
+    "es": "Finales de peones",
+    "en": "King and pawn endings"
+  },
+  "summary": {
+    "es": "La regla del cuadrado, la oposición y las casillas clave: cuándo corona un peón y cuándo no.",
+    "en": "The rule of the square, the opposition and the key squares: when a pawn promotes and when it does not."
+  },
+  "terms": [
+    "passed-pawn",
+    "rule-of-the-square",
+    "opposition",
+    "zugzwang",
+    "key-squares"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando solo quedan reyes y peones, todo gira en torno a la "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronación"
+          },
+          {
+            "kind": "text",
+            "text": ". Un "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": " es el que ya no tiene peones rivales delante ni en las "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": " de al lado: nada lo frena salvo las piezas. Para saber si tu rey alcanza un peón pasado rival, usa la "
+          },
+          {
+            "kind": "term",
+            "id": "rule-of-the-square",
+            "text": "regla del cuadrado"
+          },
+          {
+            "kind": "text",
+            "text": ": imagina el cuadrado que va del peón a su "
+          },
+          {
+            "kind": "term",
+            "id": "queening-square",
+            "text": "casilla de coronación"
+          },
+          {
+            "kind": "text",
+            "text": ", aquí el marcado. Si tu rey puede entrar en él en su turno, alcanza al peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When only kings and pawns are left, everything turns on "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotion"
+          },
+          {
+            "kind": "text",
+            "text": ". A "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": " is one with no rival pawns in front of it or on the "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": " next to it: nothing stops it except the pieces. To tell whether your king catches a rival passed pawn, use the "
+          },
+          {
+            "kind": "term",
+            "id": "rule-of-the-square",
+            "text": "rule of the square"
+          },
+          {
+            "kind": "text",
+            "text": ": picture the square running from the pawn to its "
+          },
+          {
+            "kind": "term",
+            "id": "queening-square",
+            "text": "queening square"
+          },
+          {
+            "kind": "text",
+            "text": ", the marked one here. If your king can step into it on its turn, it catches the pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/8/8/p7/5K2/8/8/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a5",
+          "e5",
+          "e1",
+          "a1"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegas con el rey blanco. Entra en el cuadrado del peón de "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": " y no lo dejes "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronar"
+          },
+          {
+            "kind": "text",
+            "text": ": con eso son tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You play the white king. Step into the square of the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": " and do not let it "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promote"
+          },
+          {
+            "kind": "text",
+            "text": ": that is a draw."
+          }
+        ]
+      },
+      "fen": "7k/8/8/p7/5K2/8/8/8 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El cuadrado llega hasta la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " e. Una sola jugada hacia la izquierda te mete dentro; luego persigue al peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The square reaches the e-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". A single move to the left gets you inside; then chase the pawn."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando hay un peón y los dos reyes cerca, manda la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": ": los reyes en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " con una casilla entre ellos. Ninguno puede avanzar, y el que tiene que mover debe ceder el paso. Eso es un "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ": estar obligado a mover cuando cualquier jugada empeora tu posición. Aquí juegan las negras y las blancas tienen la oposición: el rey negro tiene que apartarse."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When there is one pawn and both kings are close, the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " rules: the kings on the same "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " with one square between them. Neither can come forward, and the one who has to move must give way. That is "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ": being forced to move when every move makes your position worse. Here Black is to move and White has the opposition: the black king has to step aside."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/5k2/8/5K2/5P2/8/8 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f4",
+          "f6"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora defiendes tú. El rey negro y su peón avanzan. Toma la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": " para que no pasen."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now you defend. The black king and his pawn are coming. Take the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " so that they cannot get through."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/8/3p4/3k4/8/8/2K5 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Kd2"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: con tu rey en "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " tienes la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": ". Le toca al rey negro, y por cualquier lado que vaya, tu rey se pone otra vez enfrente. El peón no pasa: tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: with your king on "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " you have the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": ". It is the black king’s turn, and whichever way he goes, your king faces him again. The pawn does not get through: a draw."
+          }
+        ]
+      },
+      "wrong": {
+        "Kc2": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey negro avanza a "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
+            },
+            {
+              "kind": "text",
+              "text": " y tu rey ya no consigue frenarlo: el peón "
+            },
+            {
+              "kind": "term",
+              "id": "promotion",
+              "text": "corona"
+            },
+            {
+              "kind": "text",
+              "text": ". Ponte enfrente del rey negro, con una casilla en medio."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black king moves up to "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
+            },
+            {
+              "kind": "text",
+              "text": " and your king can no longer hold him back: the pawn "
+            },
+            {
+              "kind": "term",
+              "id": "promotion",
+              "text": "promotes"
+            },
+            {
+              "kind": "text",
+              "text": ". Stand facing the black king, with one square between."
+            }
+          ]
+        },
+        "Kd1": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Demasiado atrás: el rey negro se pone en "
+            },
+            {
+              "kind": "square",
+              "square": "d3"
+            },
+            {
+              "kind": "text",
+              "text": ", enfrente del tuyo, y la "
+            },
+            {
+              "kind": "term",
+              "id": "opposition",
+              "text": "oposición"
+            },
+            {
+              "kind": "text",
+              "text": " es suya. Ponte enfrente de él, con una casilla en medio."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Too far back: the black king steps to "
+            },
+            {
+              "kind": "square",
+              "square": "d3"
+            },
+            {
+              "kind": "text",
+              "text": ", facing yours, and the "
+            },
+            {
+              "kind": "term",
+              "id": "opposition",
+              "text": "opposition"
+            },
+            {
+              "kind": "text",
+              "text": " is his. Stand facing him, with one square between."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Pon tu rey en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " que el rey negro, con una sola casilla entre los dos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Put your king on the same "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " as the black king, with just one square between the two."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Para ganar con rey y peón, piensa en las "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casillas clave"
+          },
+          {
+            "kind": "text",
+            "text": " del peón: si tu rey llega a una, el peón "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": " haga lo que haga el rival. Para un peón que no ha pasado de la mitad del tablero, son las tres casillas que están dos "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "filas"
+          },
+          {
+            "kind": "text",
+            "text": " por delante de él. Aquí, para el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e3"
+          },
+          {
+            "kind": "text",
+            "text": ", son "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "To win with king and pawn, think of the pawn’s "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key squares"
+          },
+          {
+            "kind": "text",
+            "text": ": if your king reaches one, the pawn "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": " whatever the rival does. For a pawn that has not crossed the middle of the board, they are the three squares two "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "ranks"
+          },
+          {
+            "kind": "text",
+            "text": " in front of it. Here, for the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e3"
+          },
+          {
+            "kind": "text",
+            "text": ", they are "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/8/4P3/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "e5",
+          "f5"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas. Lleva el rey a una "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casilla clave"
+          },
+          {
+            "kind": "text",
+            "text": " del peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e3"
+          },
+          {
+            "kind": "text",
+            "text": ". Solo una jugada gana."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move. Take your king to a "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key square"
+          },
+          {
+            "kind": "text",
+            "text": " of the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e3"
+          },
+          {
+            "kind": "text",
+            "text": ". Only one move wins."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/4k3/8/8/2K5/4P3/8/8 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Kd5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: tu rey está en "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", una "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casilla clave"
+          },
+          {
+            "kind": "text",
+            "text": ". Ahora el peón "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": " aunque el rey negro intente frenarlo: tu rey le gana la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": " o se cuela por un lado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: your king stands on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", a "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key square"
+          },
+          {
+            "kind": "text",
+            "text": ". Now the pawn "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": " however the black king tries to stop it: your king wins the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " or slips past on one side."
+          }
+        ]
+      },
+      "wrong": {
+        "Kc5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No es una "
+            },
+            {
+              "kind": "term",
+              "id": "key-squares",
+              "text": "casilla clave"
+            },
+            {
+              "kind": "text",
+              "text": ", y el rey negro llega a tiempo de ponerse delante del peón. Busca "
+            },
+            {
+              "kind": "square",
+              "square": "d5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": " o "
+            },
+            {
+              "kind": "square",
+              "square": "f5"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is not a "
+            },
+            {
+              "kind": "term",
+              "id": "key-squares",
+              "text": "key square"
+            },
+            {
+              "kind": "text",
+              "text": ", and the black king gets in front of the pawn in time. Look for "
+            },
+            {
+              "kind": "square",
+              "square": "d5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": " or "
+            },
+            {
+              "kind": "square",
+              "square": "f5"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        "e4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Si el peón avanza, sus "
+            },
+            {
+              "kind": "term",
+              "id": "key-squares",
+              "text": "casillas clave"
+            },
+            {
+              "kind": "text",
+              "text": " se alejan y el rey negro llega a tiempo. Primero el rey."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "If the pawn moves up, its "
+            },
+            {
+              "kind": "term",
+              "id": "key-squares",
+              "text": "key squares"
+            },
+            {
+              "kind": "text",
+              "text": " move further away and the black king gets there in time. King first."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Desde "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", tu rey solo alcanza una de las tres casillas clave: "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " o "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "From "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", your king can only reach one of the three key squares: "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Gana la partida con rey y peón. El rival se defiende lo mejor posible. Lleva primero el rey delante del peón, a una "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casilla clave"
+          },
+          {
+            "kind": "text",
+            "text": ", y usa la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Win the game with king and pawn. The rival defends as well as possible. First take your king in front of the pawn, to a "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key square"
+          },
+          {
+            "kind": "text",
+            "text": ", and use the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "fen": "8/2k5/8/8/8/2K5/2P5/8 w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "No empujes el peón todavía. Las casillas clave del peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": " son "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ": llega a una con el rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Do not push the pawn yet. The key squares of the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": " are "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ": reach one with your king."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora al revés: juegas con el rey solo contra rey y peón. Aguanta las tablas: no dejes que el rey negro llegue a una "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casilla clave"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now the other way round: you play the lone king against king and pawn. Hold the draw: do not let the black king reach a "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key square"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "fen": "8/8/8/8/4k3/3p4/8/2K5 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ponte delante del peón y, cuando puedas, toma la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": " frente al rey negro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Get in front of the pawn and, when you can, take the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " against the black king."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: un "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": " solo puede frenarlo el rey, y la "
+          },
+          {
+            "kind": "term",
+            "id": "rule-of-the-square",
+            "text": "regla del cuadrado"
+          },
+          {
+            "kind": "text",
+            "text": " te dice si llega. Con los reyes cerca, la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": " decide quién cede el paso, gracias al "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ". Para ganar, lleva tu rey a una "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "casilla clave"
+          },
+          {
+            "kind": "text",
+            "text": " antes de empujar el peón; para defender, ponte delante del peón y toma la oposición. En Finales tienes más posiciones de rey y peón para practicar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: only the king can stop a "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": ", and the "
+          },
+          {
+            "kind": "term",
+            "id": "rule-of-the-square",
+            "text": "rule of the square"
+          },
+          {
+            "kind": "text",
+            "text": " tells you whether it gets there. With the kings close, the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " decides who gives way, thanks to "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ". To win, take your king to a "
+          },
+          {
+            "kind": "term",
+            "id": "key-squares",
+            "text": "key square"
+          },
+          {
+            "kind": "text",
+            "text": " before pushing the pawn; to defend, get in front of the pawn and take the opposition. In Endgames you will find more king and pawn positions to practise."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/8/3K4/8/4P3/8/4k3 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "e5",
+          "f5"
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "King and pawn"
+  }
+}

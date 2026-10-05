@@ -75,15 +75,15 @@ describe('GlossaryPage', () => {
     expect(
       [...root.querySelectorAll('.group-head .count')].map((c) => c.textContent?.trim()),
     ).toEqual([
-      '11 términos',
-      '13 términos',
-      '5 términos',
       '12 términos',
-      '7 términos',
-      '6 términos',
+      '24 términos',
+      '5 términos',
+      '22 términos',
+      '13 términos',
+      '13 términos',
     ]);
-    expect(cards(root)).toHaveLength(54);
-    expect(count(root)).toBe('54 términos');
+    expect(cards(root)).toHaveLength(89);
+    expect(count(root)).toBe('89 términos');
   });
 
   it('should give each card the id of its term, a board with a label and its level', async () => {
@@ -105,7 +105,7 @@ describe('GlossaryPage', () => {
     await type(root, 'OPOSICION');
     expect(root.querySelector('.result-count')).toBe(live);
     expect(cards(root)).toEqual(['opposition']);
-    expect(count(root)).toBe('1 de 54 términos');
+    expect(count(root)).toBe('1 de 89 términos');
     expect(path()).toBe('/learn/glossary?q=OPOSICION');
   });
 
@@ -114,14 +114,14 @@ describe('GlossaryPage', () => {
     const all = chip(root, 'Todas');
     const tactics = chip(root, 'Táctica');
     expect(all.getAttribute('aria-pressed')).toBe('true');
-    expect(all.textContent?.replace(/\s+/g, ' ').trim()).toBe('Todas 54');
-    expect(tactics.textContent?.replace(/\s+/g, ' ').trim()).toBe('Táctica 13');
+    expect(all.textContent?.replace(/\s+/g, ' ').trim()).toBe('Todas 89');
+    expect(tactics.textContent?.replace(/\s+/g, ' ').trim()).toBe('Táctica 24');
     tactics.click();
     await settle();
     expect(tactics.getAttribute('aria-pressed')).toBe('true');
     expect(all.getAttribute('aria-pressed')).toBe('false');
     expect(headings(root)).toEqual(['Táctica']);
-    expect(cards(root)).toHaveLength(13);
+    expect(cards(root)).toHaveLength(24);
     expect(path()).toBe('/learn/glossary?group=tactics');
   });
 
@@ -131,13 +131,17 @@ describe('GlossaryPage', () => {
     await settle();
     expect(level(root, 'Avanzado').getAttribute('aria-pressed')).toBe('true');
     expect(level(root, 'Todos').getAttribute('aria-pressed')).toBe('false');
-    expect(chip(root, 'Finales').textContent?.replace(/\s+/g, ' ').trim()).toBe('Finales 3');
+    expect(chip(root, 'Finales').textContent?.replace(/\s+/g, ' ').trim()).toBe('Finales 7');
     chip(root, 'Finales').click();
     await settle();
     expect(cards(root).sort()).toEqual([
       'building-a-bridge',
+      'fortress',
       'lucena-position',
+      'mutual-zugzwang',
+      'opposite-coloured-bishops',
       'philidor-position',
+      'triangulation',
     ]);
     expect(path()).toBe('/learn/glossary?group=endgames&level=advanced');
   });
@@ -185,7 +189,7 @@ describe('GlossaryPage', () => {
     expect(notice?.textContent).toContain('Ningún término cumple estos filtros.');
     notice!.querySelector('button')!.click();
     await settle();
-    expect(cards(root)).toHaveLength(54);
+    expect(cards(root)).toHaveLength(89);
     expect(root.querySelector<HTMLInputElement>('input[type=search]')?.value).toBe('');
     expect(path()).toBe('/learn/glossary');
   });
@@ -195,7 +199,7 @@ describe('GlossaryPage', () => {
     const lesson = root.querySelector('article#rank .lesson');
     expect(lesson?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Se aprende en: El tablero');
     expect(lesson?.querySelector('a')?.getAttribute('href')).toBe('/learn/beginner/the-board');
-    expect(root.querySelector('article#pin .lesson')).toBeNull();
+    expect(root.querySelector('article#gambit .lesson')).toBeNull();
   });
 
   it('should take the reader to the term of the address and mark it for a moment', async () => {
@@ -243,7 +247,7 @@ describe('GlossaryPage', () => {
       'Pawn structure',
       'Endgames',
     ]);
-    expect(count(root)).toBe('54 terms');
+    expect(count(root)).toBe('89 terms');
     expect(
       root.querySelector('article#rank .lesson')?.textContent?.replace(/\s+/g, ' ').trim(),
     ).toBe('Taught in: The board');

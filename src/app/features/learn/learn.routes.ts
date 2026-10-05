@@ -1,7 +1,7 @@
 import type { Routes } from '@angular/router';
 import type { PageSection } from '../../core/page-title';
 import type { MainKind } from '../../layout/main-kind';
-import { lessonGuard, levelGuard, oldGlossaryLinkGuard } from './learn-guards';
+import { lessonGuard, levelGuard, oldGlossaryLinkGuard, puzzleGuard } from './learn-guards';
 
 export const LEARN_ROUTES: Routes = [
   {
@@ -11,11 +11,23 @@ export const LEARN_ROUTES: Routes = [
     canActivate: [oldGlossaryLinkGuard],
     loadComponent: () => import('./home/learn-home').then((m) => m.LearnHome),
   },
-  // Before ':level', so "glossary" is never read as a level.
+  // Before ':level', so "glossary" and "puzzles" are never read as levels.
   {
     path: 'glossary',
     title: 'glossary' satisfies PageSection,
     loadComponent: () => import('./glossary/glossary-page').then((m) => m.GlossaryPage),
+  },
+  {
+    path: 'puzzles',
+    title: 'puzzles' satisfies PageSection,
+    loadComponent: () => import('./puzzles/puzzle-list').then((m) => m.PuzzleList),
+  },
+  {
+    path: 'puzzles/:lesson',
+    title: 'puzzles' satisfies PageSection,
+    canActivate: [puzzleGuard],
+    data: { main: 'play' } satisfies { main: MainKind },
+    loadComponent: () => import('./puzzles/puzzle-page').then((m) => m.PuzzlePage),
   },
   {
     path: ':level',

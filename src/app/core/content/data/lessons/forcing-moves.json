@@ -1,0 +1,1820 @@
+{
+  "id": "forcing-moves",
+  "level": "intermediate",
+  "order": 8,
+  "title": {
+    "es": "Jaques, capturas y amenazas",
+    "en": "Checks, captures and threats"
+  },
+  "summary": {
+    "es": "Las jugadas que obligan al rival, cómo calcularlas y cuándo merece la pena entregar material.",
+    "en": "The moves that force the rival, how to calculate them and when giving up material pays off."
+  },
+  "terms": [
+    "forcing-move",
+    "sacrifice",
+    "attraction"
+  ],
+  "sources": [
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugada forzante"
+          },
+          {
+            "kind": "text",
+            "text": " deja al rival pocas respuestas. Hay tres clases: los "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", las capturas y las amenazas. Un jaque obliga a salir del jaque; una captura casi obliga a recapturar; una amenaza obliga a defenderse. Antes de elegir jugada, mira primero las tuyas, en ese orden: jaques, capturas y amenazas. Aquí las blancas tienen dos jaques, los de las flechas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing move"
+          },
+          {
+            "kind": "text",
+            "text": " leaves the rival few answers. There are three kinds: "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", captures and threats. A check must be answered by getting out of check; a capture almost forces a recapture; a threat forces a defence. Before choosing a move, look at yours first, in that order: checks, captures and threats. Here White has two checks, the ones on the arrows."
+          }
+        ]
+      },
+      "board": {
+        "fen": "5r1k/ppq2pp1/8/6N1/8/4Q3/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "e3",
+            "to": "h3"
+          },
+          {
+            "from": "g5",
+            "to": "f7"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Calcular es imaginar la partida unas jugadas por delante sin mover las piezas: «yo juego esto, él contesta aquello, y entonces yo…». Con las "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": " es más fácil, porque el rival tiene pocas respuestas y puedes mirarlas todas. En la posición anterior, si la dama da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", al rey negro solo le queda una casilla. ¿Y después?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Calculating means picturing the game a few moves ahead without moving the pieces: “I play this, he answers that, and then I…”. With "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": " it is easier, because the rival has few answers and you can look at all of them. In the last position, if the queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", the black king has only one square left. And then?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "5r1k/ppq2pp1/8/6N1/8/4Q3/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "e3",
+            "to": "h3"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Termina el cálculo: da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en dos jugadas, empezando por un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Finish the calculation: give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " in two moves, starting with a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "5r1k/ppq2pp1/8/6N1/8/4Q3/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qh3+",
+          "Kg8",
+          "Qh7#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. Tras el "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey va a "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", y la dama entra en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ", defendida por el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ": "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". Dos "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": " y el rival no tuvo elección."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. After the "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", the king goes to "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", and the queen comes in on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ", defended by the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ": "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". Two "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": " and the rival had no choice."
+          }
+        ]
+      },
+      "wrong": {
+        "Nxf7+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es un "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el rival captura el caballo y has dado una pieza por un peón. Prueba el otro jaque."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is a "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the rival takes the knight and you have given a piece for a pawn. Try the other check."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Después del "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey solo puede ir a "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Qué casilla junto a él vigila tu caballo?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "After the "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", the king can only go to "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ". Which square next to him does your knight guard?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " tapa la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " entre tu torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " y la dama negra de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Aparta el alfil con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y luego captura. Tienes dos jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " blocks the "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " between your rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " and the black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Move the bishop away with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", then capture. You have two moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3q2k1/ppr2ppp/8/8/8/3B3P/PP3PP1/3R1RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxh7+",
+          "Kxh7",
+          "Rxd8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien. El alfil captura en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El rival tiene que atender al rey y no puede salvar la dama, que cae con la torre. Das un alfil y ganas una dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done. The bishop takes on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The rival has to look after the king and cannot save the queen, who falls to the rook. You give a bishop and win a queen."
+          }
+        ]
+      },
+      "wrong": {
+        "Bc4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Destapas la torre, pero sin "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": " el rival tiene tiempo: aparta su dama y no ganas nada. Busca un jaque."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You uncover the rook, but without "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": " the rival has time: he moves his queen away and you win nothing. Look for a check."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Hay un solo "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " con el alfil, y además captura un peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "There is only one "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " with the bishop, and it takes a pawn too."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "A veces la "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugada forzante"
+          },
+          {
+            "kind": "text",
+            "text": " buena entrega material: es un "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": ". Merece la pena cuando lo que viene después vale más, como un "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". Un sacrificio muy útil es la "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "atracción"
+          },
+          {
+            "kind": "text",
+            "text": ": obligar al rey, o a otra pieza, a ir a la casilla donde le espera el golpe. Aquí la dama blanca captura la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ": el rey tiene que capturarla y queda en "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": ", y entonces la torre da jaque en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", defendida por el alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Sometimes the right "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing move"
+          },
+          {
+            "kind": "text",
+            "text": " gives material away: it is a "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": ". It pays off when what comes next is worth more, such as a "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". A very useful sacrifice is "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "attraction"
+          },
+          {
+            "kind": "text",
+            "text": ": forcing the king, or another piece, onto the square where the blow is waiting. Here the white queen takes the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ": the king has to take her and ends up on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": ", and then the rook checks on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", defended by the bishop."
+          }
+        ]
+      },
+      "board": {
+        "fen": "1kr5/ppp3pp/4Q3/6Bq/8/8/PPP3PP/1K1R4 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Qxc8+",
+          "Kxc8",
+          "Rd8#"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La misma idea, ahora en el otro lado del tablero. Da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en dos jugadas: entrega la dama para llevar al rey negro a la casilla que te conviene."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The same idea, now on the other side of the board. Give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " in two moves: give up the queen to lure the black king onto the square you want."
+          }
+        ]
+      },
+      "board": {
+        "fen": "5rk1/pp3ppp/3Q4/qB6/8/8/PP3PPP/4R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qxf8+",
+          "Kxf8",
+          "Re8#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "atracción"
+          },
+          {
+            "kind": "text",
+            "text": ". Tras el "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey queda en "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": "; la torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " con el alfil detrás, y el rey no tiene casillas: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". En una partida nadie te avisa de que está ahí: hay que buscarlo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "attraction"
+          },
+          {
+            "kind": "text",
+            "text": ". After the "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": ", the king stands on "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": "; the rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " with the bishop behind it, and the king has no squares: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". In a game nobody tells you it is there: you have to look for it."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Captura la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " con la dama. Si el rey la recupera, ¿qué torre le da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Take the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " with the queen. If the king takes back, which rook gives him "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas, y tienen tres "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ": dos "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": " de caballo y uno de torre. Mira lo que contesta el rival a cada uno: ¿cuál funciona?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move, with three "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": ": two knight "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": " and one rook check. Look at what the rival answers to each: which one works?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/pp3ppp/2q5/3N4/8/8/PP3PPP/3QR1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Nf6+",
+          "Ne7+",
+          "Re8+"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. El caballo da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " y a la vez ataca la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ": es una "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "horquilla"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que apartarse y la dama cae. Los tres eran jaques, pero solo uno ganaba: por eso se mira la respuesta del rival a cada "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugada forzante"
+          },
+          {
+            "kind": "text",
+            "text": ", y no solo la primera que aparece."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. The knight gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " and at the same time attacks the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": ": it is a "
+          },
+          {
+            "kind": "term",
+            "id": "fork",
+            "text": "fork"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to step aside and the queen falls. All three were checks, but only one won: that is why you look at the rival’s answer to every "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing move"
+          },
+          {
+            "kind": "text",
+            "text": ", not just the first one you see."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón de "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " captura el caballo y no ganas nada."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " takes the knight and you win nothing."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " captura la tuya en "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": ": has regalado una torre."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " takes yours on "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": ": you have given a rook away."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una combinación de tres jugadas. "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "Sacrifica"
+          },
+          {
+            "kind": "text",
+            "text": " la torre para atraer al rey a la esquina, y luego trae la dama por la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " h. Da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en tres."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A combination of three moves. "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "Sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": " the rook to lure the king into the corner, then bring the queen along the h-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". Give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " in three."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1q2rk1/pp3pp1/8/6N1/8/7R/PP3PP1/3Q2K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Rh8+",
+          "Kxh8",
+          "Qh5+",
+          "Kg8",
+          "Qh7#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Muy bien. La torre se entrega en "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey tiene que capturarla. La dama da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey vuelve a "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", y la dama entra en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " defendida por el caballo: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". Tres "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": " seguidas: un "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": " de "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "atracción"
+          },
+          {
+            "kind": "text",
+            "text": ", un jaque y el mate."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Very good. The rook gives itself up on "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " and the king has to take it. The queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", the king goes back to "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", and the queen comes in on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " defended by the knight: "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ". Three "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": " in a row: an "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "attraction"
+          },
+          {
+            "kind": "text",
+            "text": " "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": ", a check and the mate."
+          }
+        ]
+      },
+      "wrong": {
+        "Qh5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Amenazas "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ", pero no es "
+            },
+            {
+              "kind": "term",
+              "id": "forcing-move",
+              "text": "forzante"
+            },
+            {
+              "kind": "text",
+              "text": ": el rival tiene tiempo de defenderse. Empieza con un "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You threaten "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": ", but it is not "
+            },
+            {
+              "kind": "term",
+              "id": "forcing-move",
+              "text": "forcing"
+            },
+            {
+              "kind": "text",
+              "text": ": the rival has time to defend. Start with a "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ". Si el rey la captura, ¿cómo llega tu dama a la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " h dando jaque?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ". If the king takes it, how does your queen reach the h-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " with check?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: antes de cada jugada, busca tus "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ": primero los "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", luego las capturas y luego las amenazas. Para cada una, imagina la respuesta del rival y sigue hasta que la cosa se calme. Si al final ganas, un "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": " puede ser la mejor jugada; la "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "atracción"
+          },
+          {
+            "kind": "text",
+            "text": " lleva al rey a la casilla donde le espera el "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": ". Y mira también las jugadas forzantes del rival, antes de que las juegue."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: before every move, look for your "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": ": first "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", then captures, then threats. For each one, picture the rival’s answer and keep going until things calm down. If you win in the end, a "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": " can be the best move; "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "attraction"
+          },
+          {
+            "kind": "text",
+            "text": " brings the king onto the square where the "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " is waiting. And look at the rival’s forcing moves too, before he plays them."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1q2rk1/pp3ppQ/8/6N1/8/8/PP3PP1/6K1 b - - 0 3",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "queen-sacrifice"
+  }
+}

@@ -1,0 +1,1153 @@
+{
+  "id": "defending",
+  "level": "advanced",
+  "order": 11,
+  "title": {
+    "es": "Defenderse",
+    "en": "Defending"
+  },
+  "summary": {
+    "es": "Ver venir la amenaza, encontrar la jugada que la para y no rendirse cuando vas peor.",
+    "en": "Seeing the threat coming, finding the move that stops it and not giving up when you are worse."
+  },
+  "terms": [
+    "prophylaxis",
+    "counterplay",
+    "fortress"
+  ],
+  "sources": [
+    "https://www.stappenmethode.nl/en/step5.php",
+    "https://www.chess.com/lessons/skill-level/advanced",
+    "https://lichess.org/training/themes",
+    "https://en.wikipedia.org/wiki/Prophylaxis_(chess)",
+    "https://en.wikipedia.org/wiki/Fortress_(chess)"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Defenderse empieza con una pregunta: ¿qué quiere hacer el rival? Aquí la torre negra amenaza bajar a "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " y dar "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": " en la "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "última fila"
+          },
+          {
+            "kind": "text",
+            "text": ", porque los peones de "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " encierran a su propio rey. Las blancas se adelantan: el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " avanza una casilla y deja al rey un hueco. Evitar a tiempo la idea del rival se llama "
+          },
+          {
+            "kind": "term",
+            "id": "prophylaxis",
+            "text": "profilaxis"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Defending starts with a question: what does the opponent want to do? Here the black rook threatens to drop to "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " and give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " on the "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "back rank"
+          },
+          {
+            "kind": "text",
+            "text": ", because the pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " shut their own king in. White gets in first: the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " steps forward one square and leaves the king a gap. Stopping the opponent’s idea in time is called "
+          },
+          {
+            "kind": "term",
+            "id": "prophylaxis",
+            "text": "prophylaxis"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/5ppp/8/8/2R5/8/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d1"
+        ],
+        "moves": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas. La dama negra de "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": " y el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " apuntan a "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ": amenazan dar mate en esa casilla. Solo una jugada lo para. Encuéntrala."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move. The black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "g4"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " both aim at "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ": they threaten mate on that square. Only one move stops it. Find it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/pb3ppp/1p6/1Np5/6q1/1QP5/PP3PPP/5RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "f3"
+        ],
+        "onlyMove": true
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " tapa la diagonal del alfil y ataca a la dama. La torre de "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": " lo protege. La amenaza desaparece y la partida sigue igualada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " blocks the bishop’s diagonal and attacks the queen. The rook on "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": " protects it. The threat is gone and the game is level again."
+          }
+        ]
+      },
+      "wrong": {
+        "Qxf7+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese jaque no ayuda: el rey captura tu dama y la amenaza sigue en pie."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That check does not help: the king captures your queen and the threat is still there."
+            }
+          ]
+        },
+        "Qd5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Tu dama tapa la "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el alfil la captura y vuelve a apuntar a "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Your queen blocks the "
+            },
+            {
+              "kind": "term",
+              "id": "diagonal",
+              "text": "diagonal"
+            },
+            {
+              "kind": "text",
+              "text": ", but the bishop captures it and aims at "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " again."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca un peón que se ponga en medio de la "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " del alfil y, de paso, ataque a la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a pawn that steps into the bishop’s "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the queen at the same time."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "No siempre hay que esperar al rival. A veces lo mejor es amenazar tú algo en otro sitio, a menudo en el otro "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flanco"
+          },
+          {
+            "kind": "text",
+            "text": ": el rival tiene que contestar y su ataque pierde fuerza. Eso es el "
+          },
+          {
+            "kind": "term",
+            "id": "counterplay",
+            "text": "contrajuego"
+          },
+          {
+            "kind": "text",
+            "text": ". Aquí las blancas atacan al rey negro con sus peones, y las negras no se quedan quietas: su torre va a la columna c, que lleva al rey blanco. Ojo: el contrajuego solo vale si tu amenaza llega antes que la suya."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You do not always have to wait for the opponent. Sometimes the best thing is to threaten something yourself somewhere else, often on the other "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flank"
+          },
+          {
+            "kind": "text",
+            "text": ": the opponent has to answer and the attack loses steam. That is "
+          },
+          {
+            "kind": "term",
+            "id": "counterplay",
+            "text": "counterplay"
+          },
+          {
+            "kind": "text",
+            "text": ". Here White attacks the black king with pawns, and Black does not sit still: the rook goes to the c-file, which leads to the white king. Careful: counterplay only works if your threat arrives before theirs."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1",
+        "orientation": "black",
+        "highlights": [
+          "c1"
+        ],
+        "moves": [
+          "Rac8"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las negras amenazan mate en "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " con la dama y el caballo, y además tienen una pieza más. Puedes defender "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " o atacar tú. ¿Qué jugada eliges?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black threatens mate on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " with the queen and the knight, and is a piece up as well. You can defend "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " or attack yourself. Which move do you choose?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "2r3k1/pp3ppp/6q1/8/5n2/8/PP1R1PPP/3Q2K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "g3",
+          "Rd8+",
+          "Qf1"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la torre da jaque en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Si la torre negra la captura, tu dama captura en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " y es mate en la "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "última fila"
+          },
+          {
+            "kind": "text",
+            "text": ". Tu amenaza llegaba antes que la suya."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the rook gives check on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". If the black rook captures it, your queen captures on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " and it is mate on the "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "back rank"
+          },
+          {
+            "kind": "text",
+            "text": ". Your threat came before theirs."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Paras el mate, pero sigues con una pieza menos y las negras mandan. Había algo más rápido."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You stop the mate, but you are still a piece down and Black is in charge. There was something faster."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama defiende "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": ", pero se queda pasiva: el caballo negro captura en "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " de todos modos, tu rey sigue en apuros y sigues con una pieza menos. Había algo más rápido."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The queen defends "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": ", but it becomes passive: the black knight takes on "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " anyway, your king is still in trouble and you are still a piece down. There was something faster."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las negras amenazan mate en "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ": su dama de "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " y su alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " atacan esa casilla a la vez. Tu rey no tiene ayuda. Quítale al rival la pieza que ataca: ofrece un cambio que no pueda rechazar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Black threatens mate on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ": the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " attack that square at once. Your king has no help. Take away the attacking piece: offer an exchange the opponent cannot turn down."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/pp1Q2pp/8/6q1/4P3/5b2/2P2PPP/1NR3K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qd5+",
+          "Qxd5",
+          "exd5"
+        ],
+        "onlyMove": true
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: tu dama da jaque desde "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " y se ofrece. Lo mejor para las negras es capturarla. Tras el cambio, tu peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " recupera la dama y las negras se quedan sin ataque. La partida sigue igualada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: your queen gives check from "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " and offers itself. Black’s best is to capture it. After the exchange, your pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " takes back the queen and Black has no attack left. The game is level again."
+          }
+        ]
+      },
+      "wrong": {
+        "Qe6+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es jaque, pero el rey se aparta a una esquina y el mate en "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " sigue en pie."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is check, but the king steps into the corner and the mate on "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " is still there."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una casilla desde la que tu dama dé "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y a la vez se ponga al alcance de la dama negra."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a square from which your queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and at the same time stands within reach of the black queen."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si vas perdiendo, no te rindas. Puedes buscar un "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "jaque perpetuo"
+          },
+          {
+            "kind": "text",
+            "text": " o una "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortaleza"
+          },
+          {
+            "kind": "text",
+            "text": ": una posición en la que el rival, aunque tenga más material, no consigue entrar. Aquí las blancas solo tienen torre y peón contra una dama, y aun así son tablas. El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " protege a la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre no deja pasar al rey negro de su "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " y el rey blanco se queda junto al peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If you are losing, do not give up. You can look for a "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "perpetual check"
+          },
+          {
+            "kind": "text",
+            "text": " or a "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortress"
+          },
+          {
+            "kind": "text",
+            "text": ": a position the opponent cannot break into, even with more material. Here White has only a rook and a pawn against a queen, and it is still a draw. The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " protects the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ", the rook keeps the black king from crossing its "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " and the white king stays next to the pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/3k4/8/8/5R2/6PK/q7 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f3",
+          "g2"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Defiende tú esta "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortaleza"
+          },
+          {
+            "kind": "text",
+            "text": " contra la dama. El rival juega lo mejor posible. Si aguantas, son tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now you defend this "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortress"
+          },
+          {
+            "kind": "text",
+            "text": " against the queen. The opponent plays as well as possible. If you hold, it is a draw."
+          }
+        ]
+      },
+      "fen": "8/8/8/4k3/8/5R2/6PK/3q4 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Deja la torre en la tercera fila, en "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " o en "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", donde la protege el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ", y el rey al lado del peón. Una torre suelta la gana la dama con un ataque doble."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Keep the rook on the third rank, on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": ", where the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": " protects it, and the king next to the pawn. A loose rook falls to a double attack by the queen."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: antes de mover, pregúntate qué quiere el rival y, si puedes, adelántate: eso es la "
+          },
+          {
+            "kind": "term",
+            "id": "prophylaxis",
+            "text": "profilaxis"
+          },
+          {
+            "kind": "text",
+            "text": ". Ante una amenaza, busca la jugada que la para; a veces es cambiar la pieza que ataca. Si tu amenaza llega antes, el "
+          },
+          {
+            "kind": "term",
+            "id": "counterplay",
+            "text": "contrajuego"
+          },
+          {
+            "kind": "text",
+            "text": " vale más que defenderse. Y si vas perdiendo, busca un "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "jaque perpetuo"
+          },
+          {
+            "kind": "text",
+            "text": " o una "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortaleza"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: before you move, ask yourself what the opponent wants and, if you can, get in first: that is "
+          },
+          {
+            "kind": "term",
+            "id": "prophylaxis",
+            "text": "prophylaxis"
+          },
+          {
+            "kind": "text",
+            "text": ". Against a threat, look for the move that stops it; sometimes it is exchanging the attacking piece. If your threat comes first, "
+          },
+          {
+            "kind": "term",
+            "id": "counterplay",
+            "text": "counterplay"
+          },
+          {
+            "kind": "text",
+            "text": " is worth more than defending. And if you are losing, look for a "
+          },
+          {
+            "kind": "term",
+            "id": "perpetual-check",
+            "text": "perpetual check"
+          },
+          {
+            "kind": "text",
+            "text": " or a "
+          },
+          {
+            "kind": "term",
+            "id": "fortress",
+            "text": "fortress"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/5ppp/8/8/2R5/7P/5PP1/6K1 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "h2"
+        ]
+      }
+    }
+  ]
+}

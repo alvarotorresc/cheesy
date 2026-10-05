@@ -16,6 +16,7 @@
 import { LIST_SCENES } from './scenes/lists.mjs';
 import { BOARD_SCENES } from './scenes/boards.mjs';
 import { ENGINE_SCENES } from './scenes/engine.mjs';
+import { LEARN_SCENES } from './scenes/learn.mjs';
 
 // aria-labels of the transport buttons of the home board, from the i18n dictionaries
 // (home.previousMove, home.nextMove, home.playMoves).
@@ -77,7 +78,7 @@ function heroAt(ply) {
 export const SCENES = [
   { file: 'cover', path: '/', theme: 'light', prep: heroAt(HERO_PLY) },
   { file: 'cover-mobile', path: '/', theme: 'light', mobile: true, prep: heroAt(HERO_PLY) },
-  ...[...LIST_SCENES, ...BOARD_SCENES, ...ENGINE_SCENES].sort((a, b) =>
+  ...[...LEARN_SCENES, ...LIST_SCENES, ...BOARD_SCENES, ...ENGINE_SCENES].sort((a, b) =>
     a.file.localeCompare(b.file),
   ),
 ];

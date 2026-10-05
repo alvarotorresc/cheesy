@@ -1,24 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
+import { GLOSSARY_LOADER, LESSON_LOADERS, PUZZLE_LOADERS } from '../../../core/content';
 import { bundledGlossaryLoader } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
-import { fixtureLessonLoaders } from '../testing';
+import { fixturePuzzleLoaders, lessonLoadersWithPuzzles } from '../testing';
 
 describe('LevelPage', () => {
   let progress: ProgressService;
+  let harness: RouterTestingHarness;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
         { provide: TitleStrategy, useExisting: PageTitle },
-        { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
+        { provide: LESSON_LOADERS, useValue: lessonLoadersWithPuzzles },
+        { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
       ],
@@ -30,7 +32,7 @@ describe('LevelPage', () => {
   afterEach(() => localStorage.clear());
 
   const render = async (url: string): Promise<HTMLElement> => {
-    const harness = await RouterTestingHarness.create();
+    harness = await RouterTestingHarness.create();
     await harness.navigateByUrl(url);
     const root = harness.routeNativeElement as HTMLElement;
     await vi.waitFor(() => {
@@ -93,5 +95,25 @@ describe('LevelPage', () => {
   it('should still open the glossary at /learn/glossary', async () => {
     const root = await render('/learn/glossary');
     expect(root.tagName).toBe('APP-GLOSSARY-PAGE');
+  });
+
+  it('should offer Practise more at the foot of a level whose lessons have puzzles', async () => {
+    const intermediate = await render('/learn/intermediate');
+    await vi.waitFor(() => {
+      harness.detectChanges();
+      expect(intermediate.querySelector('.puzzles-link')).not.toBeNull();
+    });
+    const link = intermediate.querySelector('.puzzles-link');
+    expect(link?.getAttribute('href')).toBe('/learn/puzzles');
+    expect(link?.textContent).toContain('Want more exercises?');
+    expect(link?.textContent).toContain('Practise more');
+  });
+
+  it('should not offer Practise more in a level without puzzles', async () => {
+    const beginner = await render('/learn/beginner');
+    await harness.fixture.whenStable();
+    harness.detectChanges();
+    expect(beginner.querySelector('.glossary-link')).not.toBeNull();
+    expect(beginner.querySelector('.puzzles-link')).toBeNull();
   });
 });

@@ -1,0 +1,708 @@
+{
+  "lesson": "rook-endings",
+  "themes": {
+    "rookEndgame": null
+  },
+  "puzzles": [
+    {
+      "id": "Cal8F",
+      "fen": "8/5p2/4p1pk/8/5P2/5KP1/2rp4/3R4 b - - 1 40",
+      "moves": [
+        "Kh5",
+        "Rh1#"
+      ],
+      "rating": 913,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "4qaqq",
+      "fen": "8/6p1/4k2p/5R2/4PKP1/r4PP1/8/8 w - - 1 46",
+      "moves": [
+        "Rf8",
+        "g5#"
+      ],
+      "rating": 935,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "3pw2D",
+      "fen": "8/kpR5/2p5/5P2/8/8/pr4P1/3R2K1 w - - 0 39",
+      "moves": [
+        "Ra1",
+        "Rb1+",
+        "Rxb1",
+        "axb1=Q+"
+      ],
+      "rating": 940,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "GWegh",
+      "fen": "8/p7/1p3R2/1Pp3P1/2k3PK/8/8/2r5 b - - 2 56",
+      "moves": [
+        "Kxb5",
+        "g6",
+        "Rh1+",
+        "Kg5"
+      ],
+      "rating": 975,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "ViM5N",
+      "fen": "8/1p6/p1p1k1p1/4r1Pp/1PR2K1P/P4P2/8/8 b - - 1 32",
+      "moves": [
+        "Kd5",
+        "Rc5+",
+        "Kd6",
+        "Rxe5"
+      ],
+      "rating": 975,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "w5wkb",
+      "fen": "8/8/1p6/4K1k1/pPR3P1/2P4P/r7/8 w - - 1 42",
+      "moves": [
+        "Rf4",
+        "Re2+",
+        "Re4",
+        "Rxe4+",
+        "Kxe4",
+        "a3"
+      ],
+      "rating": 975,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "aZxZ3",
+      "fen": "8/8/1k6/2R2p2/pP3K2/1r3P2/8/8 w - - 1 54",
+      "moves": [
+        "Rxf5",
+        "Rxb4+",
+        "Kg3",
+        "a3"
+      ],
+      "rating": 989,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "GUg7K",
+      "fen": "8/8/3p1r2/1k1P3p/p2PK2P/P6R/8/8 w - - 9 46",
+      "moves": [
+        "Rf3",
+        "Rxf3",
+        "Kxf3",
+        "Kc4",
+        "Ke4",
+        "Kb3"
+      ],
+      "rating": 997,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "EsJrn",
+      "fen": "8/7p/r4ppP/pkr5/5RP1/R3PK2/5P2/8 b - - 1 39",
+      "moves": [
+        "g5",
+        "Rb3+",
+        "Kc6",
+        "Rxf6+"
+      ],
+      "rating": 1000,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "WgIrz",
+      "fen": "4r3/8/5R2/ppkpp3/8/1PPP4/4K3/8 b - - 0 34",
+      "moves": [
+        "e4",
+        "d4#"
+      ],
+      "rating": 1007,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "yV01Z",
+      "fen": "4R3/8/8/6p1/6k1/2r1p1P1/4K3/8 w - - 4 69",
+      "moves": [
+        "Rxe3",
+        "Rxe3+",
+        "Kxe3",
+        "Kxg3"
+      ],
+      "rating": 1025,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "rlIGM",
+      "fen": "8/2K5/5k2/6p1/1R6/7p/8/8 w - - 0 61",
+      "moves": [
+        "Kd6",
+        "h2",
+        "Rb1",
+        "g4",
+        "Rh1",
+        "g3"
+      ],
+      "rating": 1051,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "987UC",
+      "fen": "8/p7/1p6/3Rp3/r4p2/P1P2P2/1k1K4/8 b - - 1 50",
+      "moves": [
+        "Ra5",
+        "Rxa5",
+        "bxa5",
+        "c4"
+      ],
+      "rating": 1059,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "p2ErX",
+      "fen": "8/2R4P/5k1r/4pp2/8/6K1/8/8 b - - 2 49",
+      "moves": [
+        "e4",
+        "Rc6+",
+        "Kg5",
+        "Rxh6"
+      ],
+      "rating": 1099,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "baIaG",
+      "fen": "8/8/2r2pp1/4p2p/p1PkP3/K4P1P/6P1/2R5 w - - 12 49",
+      "moves": [
+        "Kxa4",
+        "Rxc4+",
+        "Rxc4+",
+        "Kxc4"
+      ],
+      "rating": 1149,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "XTJuF",
+      "fen": "5r2/R4P2/p2k2P1/1r1p4/5K2/4P3/8/8 b - - 2 53",
+      "moves": [
+        "Ra5",
+        "g7",
+        "Rxf7+",
+        "Rxf7"
+      ],
+      "rating": 1150,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "eqUaf",
+      "fen": "2k3r1/2r3pp/R4p2/4p3/2p5/5P2/6PP/2R1K3 b - - 2 30",
+      "moves": [
+        "Rd8",
+        "Ra8+",
+        "Kd7",
+        "Rd1+"
+      ],
+      "rating": 1156,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "yScif",
+      "fen": "8/K7/8/P4k2/5p1p/5RP1/1r3P2/8 b - - 0 53",
+      "moves": [
+        "hxg3",
+        "fxg3",
+        "Kg4",
+        "Rxf4+"
+      ],
+      "rating": 1165,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "WlwUS",
+      "fen": "8/1R6/5P2/4K1k1/8/p2P4/8/4r3 w - - 1 44",
+      "moves": [
+        "Kd4",
+        "a2",
+        "Ra7",
+        "a1=Q+",
+        "Rxa1",
+        "Rxa1"
+      ],
+      "rating": 1169,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "szqwz",
+      "fen": "5k2/2R2p2/5K2/4p3/8/5P2/2p1r3/8 b - - 5 45",
+      "moves": [
+        "e4",
+        "Rc8#"
+      ],
+      "rating": 1195,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "ALGsV",
+      "fen": "8/8/6p1/8/4k2P/1prp2P1/1R3P2/4K3 w - - 0 46",
+      "moves": [
+        "Kd2",
+        "Rc2+",
+        "Rxc2",
+        "bxc2"
+      ],
+      "rating": 1224,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "N4nkr",
+      "fen": "8/2P5/1K6/1R6/3k4/4p3/8/2r5 w - - 1 64",
+      "moves": [
+        "Rb3",
+        "e2",
+        "c8=Q",
+        "Rxc8"
+      ],
+      "rating": 1239,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "9Lke7",
+      "fen": "8/3r1k2/2p2p2/1p3K2/1P1P2P1/2P5/8/4R3 w - - 10 50",
+      "moves": [
+        "Re6",
+        "Rd5+",
+        "Re5",
+        "fxe5"
+      ],
+      "rating": 1241,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "V5vPO",
+      "fen": "3R4/8/7P/5K2/k4P2/6r1/1p6/8 w - - 0 50",
+      "moves": [
+        "Rb8",
+        "Rb3",
+        "Rxb3",
+        "Kxb3",
+        "Kg6",
+        "b1=Q+"
+      ],
+      "rating": 1284,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "gK1Po",
+      "fen": "8/8/5Rk1/8/5Rp1/6Pp/5P1K/2rr4 b - - 6 58",
+      "moves": [
+        "Kg5",
+        "R4f5#"
+      ],
+      "rating": 1288,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "SXdPn",
+      "fen": "5k2/8/7K/5p1P/4r3/6R1/8/8 w - - 0 53",
+      "moves": [
+        "Kg6",
+        "Rg4+",
+        "Kxf5",
+        "Rxg3"
+      ],
+      "rating": 1301,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "KG3YU",
+      "fen": "5k2/1pR5/8/5PK1/6P1/P7/1rp5/8 w - - 0 43",
+      "moves": [
+        "Kg6",
+        "Rb6+",
+        "f6",
+        "Rc6"
+      ],
+      "rating": 1306,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "5LdQt",
+      "fen": "8/8/8/R7/1r2p1PP/1k6/p3KP2/8 w - - 0 55",
+      "moves": [
+        "h5",
+        "Ra4",
+        "Rxa4",
+        "Kxa4"
+      ],
+      "rating": 1353,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "L3GIc",
+      "fen": "8/p3r2p/6k1/5p2/PR5K/6PP/8/8 b - - 0 42",
+      "moves": [
+        "Re4+",
+        "Rxe4",
+        "fxe4",
+        "Kg4",
+        "Kf6",
+        "Kf4"
+      ],
+      "rating": 1362,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "D8ZLM",
+      "fen": "6r1/8/P7/5p2/8/R6K/5k2/8 w - - 3 55",
+      "moves": [
+        "a7",
+        "Rh8#"
+      ],
+      "rating": 1392,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "uci1s",
+      "fen": "8/1p2r1kp/p6R/8/P2Kpp2/2P5/1P3PPP/8 w - - 2 42",
+      "moves": [
+        "Rh4",
+        "e3",
+        "Rxf4",
+        "e2"
+      ],
+      "rating": 1418,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "0Y9P3",
+      "fen": "7k/4R3/3p4/5Kp1/4P2p/6r1/8/8 b - - 1 42",
+      "moves": [
+        "h3",
+        "Kg6",
+        "Rf3",
+        "Re8+",
+        "Rf8",
+        "Rxf8#"
+      ],
+      "rating": 1421,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "udngX",
+      "fen": "8/5p2/4k2P/6R1/6K1/4r3/8/8 b - - 1 52",
+      "moves": [
+        "Kf6",
+        "h7",
+        "Re8",
+        "Rg8"
+      ],
+      "rating": 1466,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "X7byR",
+      "fen": "5k2/R7/1P6/P6p/4pp1P/1r6/8/4K3 b - - 2 55",
+      "moves": [
+        "f3",
+        "b7",
+        "Rb1+",
+        "Kf2"
+      ],
+      "rating": 1485,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "TTa0m",
+      "fen": "5r2/pp3rp1/7p/1k2R3/1P5R/8/P4P1P/7K b - - 3 28",
+      "moves": [
+        "Ka4",
+        "Ra5#"
+      ],
+      "rating": 1491,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "zPz3Z",
+      "fen": "3r4/8/4R2p/2KP2pk/8/7P/8/8 b - - 0 44",
+      "moves": [
+        "g4",
+        "hxg4+",
+        "Kxg4",
+        "Rxh6"
+      ],
+      "rating": 1501,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "LE1Qv",
+      "fen": "6k1/pR4p1/7p/8/8/1PP4P/1r5r/4RK2 w - - 5 33",
+      "moves": [
+        "c4",
+        "Rh1#"
+      ],
+      "rating": 1513,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "vTp8l",
+      "fen": "8/8/8/1R3KP1/7P/r1k5/1p3P2/8 w - - 5 49",
+      "moves": [
+        "g6",
+        "Rb3",
+        "Rxb3+",
+        "Kxb3",
+        "Kf6",
+        "b1=Q"
+      ],
+      "rating": 1516,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "0nXKW",
+      "fen": "8/8/8/2k3p1/1p2R1P1/1P1r1K2/8/8 w - - 2 64",
+      "moves": [
+        "Re3",
+        "Kd4",
+        "Rxd3+",
+        "Kxd3"
+      ],
+      "rating": 1558,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "zpSQ8",
+      "fen": "8/2R4P/4pk1r/2p5/2P2pK1/8/8/8 b - - 3 45",
+      "moves": [
+        "Ke5",
+        "Rxc5+",
+        "Kd4",
+        "Rh5"
+      ],
+      "rating": 1568,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "s49pZ",
+      "fen": "7R/8/8/7P/6k1/5p2/3r1P1K/8 w - - 2 62",
+      "moves": [
+        "Kg1",
+        "Kh3",
+        "Re8",
+        "Rd1+",
+        "Re1",
+        "Rxe1#"
+      ],
+      "rating": 1626,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "sKnrq",
+      "fen": "8/1p5R/1P1k2p1/P1p1r3/8/3K4/8/8 b - - 4 44",
+      "moves": [
+        "Re7",
+        "Rxe7",
+        "Kxe7",
+        "a6"
+      ],
+      "rating": 1629,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "PqQcL",
+      "fen": "8/8/7p/1p3rk1/1P3R2/5KP1/8/8 w - - 2 47",
+      "moves": [
+        "Ke4",
+        "Rxf4+",
+        "gxf4+",
+        "Kf6"
+      ],
+      "rating": 1638,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "TIRyk",
+      "fen": "8/8/3r2p1/7p/kpKp1P1P/8/8/1R6 b - - 7 55",
+      "moves": [
+        "d3",
+        "Ra1#"
+      ],
+      "rating": 1641,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "7gih2",
+      "fen": "4k3/8/3R3p/7p/5K2/5PP1/6r1/8 b - - 6 46",
+      "moves": [
+        "Kf7",
+        "Rxh6",
+        "Rh2",
+        "g4"
+      ],
+      "rating": 1661,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "ESq6N",
+      "fen": "1k6/2p3R1/2K5/8/2PP4/p7/r7/8 w - - 4 39",
+      "moves": [
+        "Rxc7",
+        "Rb2",
+        "Rg7",
+        "a2",
+        "Rg1",
+        "Rb1"
+      ],
+      "rating": 1700,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "MWk99",
+      "fen": "5k2/1R6/6p1/p5P1/5PK1/rp5P/8/8 w - - 0 40",
+      "moves": [
+        "f5",
+        "Ra4+",
+        "Kg3",
+        "Rb4"
+      ],
+      "rating": 1700,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "Xmnrx",
+      "fen": "3r4/7p/1R6/2P3k1/pP2p3/P2r1RK1/6PP/8 w - - 4 40",
+      "moves": [
+        "Rxd3",
+        "exd3",
+        "c6",
+        "d2"
+      ],
+      "rating": 1700,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "tkx3Z",
+      "fen": "R7/P4K2/r7/6pp/8/6P1/5k2/8 w - - 0 52",
+      "moves": [
+        "Kg7",
+        "Kxg3",
+        "Rc8",
+        "Rxa7+"
+      ],
+      "rating": 1700,
+      "themes": [
+        "rookEndgame"
+      ]
+    },
+    {
+      "id": "x8T3r",
+      "fen": "7k/1R4R1/4p1p1/4P2p/5P1K/3r4/6rP/8 w - - 3 36",
+      "moves": [
+        "Rge7",
+        "Rg4#"
+      ],
+      "rating": 1700,
+      "themes": [
+        "rookEndgame"
+      ]
+    }
+  ]
+}

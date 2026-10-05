@@ -7,6 +7,11 @@ import type { CuratedPosition } from '../types.ts';
 export const DECISIVE_CP = 300; // minimum advantage for a non-mating solution
 export const ALT_GAP_CP = 200; // an alternative must be at least this much worse
 export const DEFENCE_TOL_CP = 60; // defender moves must be within this of the best defence (cp scores)
+/**
+ * With `onlyMove`, the lowest score for the player after his move: a lost position is not "saved".
+ * Every other move must stay below it: if another move holds too, the solution is not the only one.
+ */
+export const ONLY_MOVE_FLOOR_CP = -100;
 
 export interface StepReport {
   ply: number;
@@ -26,6 +31,8 @@ export async function checkTactic(
   engine: Engine,
   p: Pick<CuratedPosition, 'fen' | 'solution'>,
   depth: number,
+  /** The only move that holds: no "decisive" rule, a floor of ONLY_MOVE_FLOOR_CP instead. */
+  { onlyMove = false }: { onlyMove?: boolean } = {},
 ): Promise<StepReport[]> {
   const steps: StepReport[] = [];
   let pos: Chess = positionFromFen(p.fen);
@@ -55,7 +62,10 @@ export async function checkTactic(
       const mineCp = matesNow ? Infinity : mine.cp;
       if (!matesNow && mineCp < best.cp - (isMateScore(best.cp) ? 0 : 50))
         problems.push(`not the best move (${fmt(mine)} vs best ${fmt(best)})`);
-      if (!matesNow && !(mine.mate !== undefined && mine.mate > 0) && mine.cp < DECISIVE_CP)
+      if (onlyMove) {
+        if (!matesNow && mine.cp < ONLY_MOVE_FLOOR_CP)
+          problems.push(`below the floor of an only move (${fmt(mine)})`);
+      } else if (!matesNow && !(mine.mate !== undefined && mine.mate > 0) && mine.cp < DECISIVE_CP)
         problems.push(`not decisive (${fmt(mine)})`);
       // Uniqueness: best score among all other legal moves.
       const others = [...legalUcis(pos)].filter((u) => u !== uci);
@@ -82,8 +92,10 @@ export async function checkTactic(
             problems.push(`ambiguous: alternative also mates (${step.alternative})`);
           else if (!mineIsMate && alt.cp > mineScore - ALT_GAP_CP)
             problems.push(`ambiguous: alternative too close (${step.alternative})`);
-          else if (alt.cp >= DECISIVE_CP && !mineIsMate)
+          else if (!onlyMove && alt.cp >= DECISIVE_CP && !mineIsMate)
             problems.push(`ambiguous: alternative also decisive (${step.alternative})`);
+          else if (onlyMove && alt.cp >= ONLY_MOVE_FLOOR_CP)
+            problems.push(`ambiguous: alternative also holds (${step.alternative})`);
         }
       }
     } else {

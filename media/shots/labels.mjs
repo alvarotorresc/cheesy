@@ -27,29 +27,99 @@ const TEXTS = {
   cover: {
     es: t(
       'Inicio',
-      'La página de inicio de Cheesy: el titular «Aperturas, finales y táctica, en tu navegador.», un tablero grande con la Apertura Española tras 6.Te1, un panel con sus jugadas y el botón «Jugar esta apertura», y debajo el comienzo de las cuatro secciones.',
+      'La página de inicio de Cheesy: el menú con Aprender, Aperturas, Finales, Posiciones y Análisis, el titular «Aperturas, finales y táctica, en tu navegador.», un tablero grande con la Apertura Española tras la sexta jugada de las blancas, un panel con sus jugadas y el botón «Jugar esta apertura», la franja «¿Empiezas desde cero?» con el botón «Aprende a jugar» y debajo el comienzo de las secciones.',
       'El inicio, con una apertura',
-      'Enseña una apertura jugada paso a paso y da acceso a las cuatro secciones: aperturas, finales, posiciones y análisis.',
+      'Enseña una apertura jugada paso a paso, invita a aprender desde cero y da acceso a las secciones: aprender, aperturas, finales, posiciones y análisis.',
     ),
     en: t(
       'Home',
-      'The Cheesy home page: the headline “Openings, endgames and tactics, in your browser.”, a large board with the Ruy Lopez after 6.Re1, a panel with its moves and the “Play this opening” button, and below the top of the four sections.',
+      'The Cheesy home page: the menu with Learn, Openings, Endgames, Positions and Analysis, the headline “Openings, endgames and tactics, in your browser.”, a large board with the Ruy Lopez after White’s sixth move, a panel with its moves and the “Play this opening” button, the band “Starting from scratch?” with the “Learn to play” button and below the top of the sections.',
       'Home, with an opening',
-      'Shows an opening played move by move and leads to the four sections: openings, endgames, positions and analysis.',
+      'Shows an opening played move by move, invites you to learn from scratch and leads to the sections: learn, openings, endgames, positions and analysis.',
     ),
   },
   'cover-mobile': {
     es: t(
       'Inicio en el móvil',
-      'La página de inicio de Cheesy en un móvil: la cabecera, el titular «Aperturas, finales y táctica, en tu navegador.», el texto de entrada y un tablero con la Apertura Española.',
+      'La página de inicio de Cheesy en un móvil: la cabecera con el idioma, el conmutador «Palabras» / «Notación» y el menú, el titular «Aperturas, finales y táctica, en tu navegador.», el texto de entrada y un tablero con la Apertura Española.',
       'El inicio en el móvil',
       'La misma página de inicio en la pantalla de un móvil, con el tablero bajo el titular.',
     ),
     en: t(
       'Home on a phone',
-      'The Cheesy home page on a phone: the header, the headline “Openings, endgames and tactics, in your browser.”, the intro and a board with the Ruy Lopez.',
+      'The Cheesy home page on a phone: the header with the language, the “Words” / “Notation” switch and the menu, the headline “Openings, endgames and tactics, in your browser.”, the intro and a board with the Ruy Lopez.',
       'Home on a phone',
       'The same home page on a phone screen, with the board under the headline.',
+    ),
+  },
+  'screen-learn': {
+    es: t(
+      'Aprender',
+      'La página Aprender: el botón «Continuar: La enfilada» y cinco tarjetas, los niveles Principiante, Medio y Avanzado con su número de lecciones, el Glosario y Practica más, y debajo la nota de que el progreso se guarda solo en el navegador.',
+      'Lecciones de principiante a avanzado',
+      'Enseña ajedrez desde cero en lecciones cortas por niveles, con un glosario y problemas para practicar, y te lleva a la siguiente lección.',
+    ),
+    en: t(
+      'Learn',
+      'The Learn page: the “Continue: The skewer” button and five cards, the Beginner, Intermediate and Advanced levels with their number of lessons, the Glossary and Practise more, and below the note that progress is kept only in the browser.',
+      'Lessons from beginner to advanced',
+      'Teaches chess from scratch in short lessons by level, with a glossary and puzzles to practise, and takes you to your next lesson.',
+    ),
+  },
+  'screen-lesson': {
+    es: t(
+      'Una lección',
+      'El primer paso de la lección «La horquilla»: un tablero con un caballo blanco y dos flechas hacia el rey y la torre negros, el texto que lo explica en palabras, el avance «Paso 1 de 7» y abierta la burbuja del término «Jaque», con su definición, un minitablero y el enlace «Ver en el glosario».',
+      'Una lección, paso a paso',
+      'Cada lección avanza por pasos con un tablero y texto en lenguaje llano; las palabras de ajedrez se abren en una burbuja con su definición.',
+    ),
+    en: t(
+      'A lesson',
+      'The first step of the lesson “The fork”: a board with a white knight and two arrows to the black king and rook, the text that explains it in words, the progress “Step 1 of 7” and the bubble of the term “Check” open, with its definition, a mini board and the “See in the glossary” link.',
+      'A lesson, step by step',
+      'Each lesson goes step by step with a board and plain-language text; chess words open in a bubble with their definition.',
+    ),
+  },
+  'screen-glossary': {
+    es: t(
+      'Glosario',
+      'El glosario en el tema oscuro, filtrado por la familia Táctica: el buscador, los filtros por nivel y por familia, el recuento «21 de 78 términos» y la primera fila de tarjetas, cada una con su tablero de ejemplo, su nivel, su definición y la lección donde se aprende.',
+      'Las palabras del ajedrez, con tablero',
+      'Explica en llano cada palabra del ajedrez con un tablero de ejemplo, por familias y niveles, y lleva a la lección que la enseña.',
+    ),
+    en: t(
+      'Glossary',
+      'The glossary in the dark theme, filtered by the Tactics family: the search box, the filters by level and by family, the count “21 of 78 terms” and the first row of cards, each with its example board, its level, its definition and the lesson where it is learnt.',
+      'Chess words, with a board',
+      'Explains every chess word in plain language with an example board, by family and level, and leads to the lesson that teaches it.',
+    ),
+  },
+  'screen-puzzles': {
+    es: t(
+      'Practica más',
+      'La lista de Practica más en el tema oscuro: problemas reales de Lichess agrupados por lección, con tres lecciones empezadas, «16 de 50 a la primera» en Piezas sin defensa y 8 de 50 en La horquilla y en La clavada, y el resto por empezar.',
+      'Problemas de Lichess por tema',
+      'Problemas reales de partidas de Lichess para cada lección de táctica y finales, de diez en diez y del más fácil al más difícil.',
+    ),
+    en: t(
+      'Practise more',
+      'The Practise more list in the dark theme: real Lichess puzzles grouped by lesson, with three lessons started, “16 of 50 on the first try” in Hanging pieces and 8 of 50 in The fork and The pin, and the rest still to start.',
+      'Lichess puzzles by theme',
+      'Real puzzles from Lichess games for each tactics and endgame lesson, ten at a time, from easiest to hardest.',
+    ),
+  },
+  'screen-puzzle': {
+    es: t(
+      'Un problema',
+      'Un problema de La horquilla sin resolver: el tablero, el avance «Problema 1 de 10», la indicación «Juegas con las blancas. Las negras acaban de mover: peón a c5. Busca la mejor jugada.» y el botón «Siguiente problema» desactivado.',
+      'Un problema por resolver',
+      'Buscas la mejor jugada en el tablero; la última jugada del rival se dice en palabras, y la tanda sigue cuando lo resuelves.',
+    ),
+    en: t(
+      'A puzzle',
+      'An unsolved puzzle of The fork: the board, the progress “Puzzle 1 of 10”, the prompt “You play White. Black just moved: pawn to c5. Find the best move.” and the “Next puzzle” button disabled.',
+      'A puzzle to solve',
+      'You look for the best move on the board; the rival’s last move is given in words, and the batch goes on once you solve it.',
     ),
   },
   'screen-01-aperturas': {
@@ -69,13 +139,13 @@ const TEXTS = {
   'screen-02-jugar': {
     es: t(
       'Jugar una apertura',
-      'Una partida de la Apertura Española con blancas, en el tema oscuro: el tablero tras 5…Ae7, el aviso «Te toca mover», el panel de teoría con la Variante Cerrada y la nota «Estás dentro de nuestras líneas», y la lista de jugadas.',
+      'Una partida de la Apertura Española con blancas, en el tema oscuro: el tablero tras la tercera jugada de las negras, el aviso «Te toca mover», el panel de teoría con la Defensa Morphy explicada en palabras y la nota «Estás dentro de nuestras líneas», y la lista de jugadas.',
       'Una apertura, con su teoría',
       'Juegas una apertura contra un rival que responde con las líneas que cubrimos, o contra Stockfish en cinco niveles, con la teoría junto al tablero.',
     ),
     en: t(
       'Play an opening',
-      'A game of the Ruy Lopez as White, in the dark theme: the board after 5…Be7, the notice “Your move”, the theory panel with the Closed Variation and the note “You are in our lines”, and the move list.',
+      'A game of the Ruy Lopez as White, in the dark theme: the board after Black’s third move, the notice “Your move”, the theory panel with the Morphy Defence explained in words and the note “You are in our lines”, and the move list.',
       'An opening, with its theory',
       'You play an opening against a rival that answers with the lines we cover, or against Stockfish at five levels, with the theory next to the board.',
     ),
@@ -83,13 +153,13 @@ const TEXTS = {
   'screen-03-practicar': {
     es: t(
       'Practicar una línea',
-      'La práctica de la línea principal de la Siciliana Najdorf con negras: el tablero visto desde las negras tras 6.Ag5, el avance «Jugada 6 de 13», el contador de fallos en esta jugada a 0 de 3 y la lista de jugadas.',
+      'La práctica de la línea principal de la Siciliana Najdorf con negras: el tablero visto desde las negras tras la sexta jugada de las blancas, el avance «Jugada 6 de 13», el contador de fallos en esta jugada a 0 de 3 y la lista de jugadas.',
       'Una línea, jugada de memoria',
       'Modo estricto: solo vale la jugada de la línea; una línea queda dominada tras 3 pasadas seguidas sin fallos.',
     ),
     en: t(
       'Practise a line',
-      'Practice of the main line of the Sicilian Najdorf as Black: the board seen from Black’s side after 6.Bg5, the progress “Move 6 of 13”, the count of mistakes on this move at 0 of 3 and the move list.',
+      'Practice of the main line of the Sicilian Najdorf as Black: the board seen from Black’s side after White’s sixth move, the progress “Move 6 of 13”, the count of mistakes on this move at 0 of 3 and the move list.',
       'A line, played from memory',
       'Strict mode: only the move of the line counts, and a line is mastered after 3 clean runs in a row.',
     ),

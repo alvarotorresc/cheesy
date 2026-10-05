@@ -61,6 +61,41 @@ const EXPECTED_IDS = [
   'lucena-position',
   'philidor-position',
   'building-a-bridge',
+  'hanging-piece',
+  'discovered-check',
+  'removing-the-defender',
+  'overloading',
+  'forcing-move',
+  'x-ray',
+  'passed-pawn',
+  'zugzwang',
+  'seventh-rank',
+  'cutting-off-the-king',
+  'perpetual-check',
+  'threefold-repetition',
+  'candidate-move',
+  'quiet-move',
+  'mobility',
+  'backward-pawn',
+  'outpost',
+  'open-file',
+  'half-open-file',
+  'doubled-rooks',
+  'pawn-majority',
+  'outside-passed-pawn',
+  'connected-passed-pawns',
+  'blockade',
+  'bad-bishop',
+  'opposite-coloured-bishops',
+  'mutual-zugzwang',
+  'triangulation',
+  'pawn-storm',
+  'greek-gift',
+  'interference',
+  'clearance',
+  'prophylaxis',
+  'fortress',
+  'imbalance',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -69,6 +104,7 @@ const GROUPS: Record<string, string[]> = {
     'check',
     'checkmate',
     'stalemate',
+    'threefold-repetition',
     'castling',
     'promotion',
     'en-passant',
@@ -79,19 +115,30 @@ const GROUPS: Record<string, string[]> = {
     'piece-value',
   ],
   tactics: [
+    'hanging-piece',
     'pin',
     'fork',
     'knight-fork',
     'skewer',
     'double-check',
     'discovered-attack',
+    'discovered-check',
     'deflection',
+    'removing-the-defender',
+    'overloading',
+    'forcing-move',
     'attraction',
     'intermediate-move',
+    'x-ray',
     'sacrifice',
     'queen-sacrifice',
     'back-rank',
     'opening-trap',
+    'perpetual-check',
+    'quiet-move',
+    'greek-gift',
+    'interference',
+    'clearance',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [
@@ -107,6 +154,16 @@ const GROUPS: Record<string, string[]> = {
     'tempo',
     'exchange',
     'bishop-pair',
+    'candidate-move',
+    'mobility',
+    'outpost',
+    'open-file',
+    'half-open-file',
+    'doubled-rooks',
+    'bad-bishop',
+    'pawn-storm',
+    'prophylaxis',
+    'imbalance',
   ],
   pawns: [
     'pawn-structure',
@@ -116,14 +173,27 @@ const GROUPS: Record<string, string[]> = {
     'doubled-pawns',
     'hanging-pawns',
     'minority-attack',
+    'passed-pawn',
+    'backward-pawn',
+    'pawn-majority',
+    'outside-passed-pawn',
+    'connected-passed-pawns',
+    'blockade',
   ],
   endgames: [
     'opposition',
+    'zugzwang',
     'key-squares',
     'rule-of-the-square',
     'lucena-position',
     'philidor-position',
     'building-a-bridge',
+    'seventh-rank',
+    'cutting-off-the-king',
+    'opposite-coloured-bishops',
+    'mutual-zugzwang',
+    'triangulation',
+    'fortress',
   ],
 };
 
@@ -217,11 +287,11 @@ describe('glossary', () => {
       const illegal = term.example.arrows
         .filter((a) => a.move)
         .filter((a) => {
-          const move = normalizeMove(position, {
-            from: parseSquare(a.from)!,
-            to: parseSquare(a.to)!,
-          });
-          return !position.isLegal(move);
+          const plain = { from: parseSquare(a.from)!, to: parseSquare(a.to)! };
+          // A pawn reaching the last rank is drawn as one arrow: its promotion counts as the move.
+          return [plain, { ...plain, promotion: 'queen' as const }].every(
+            (m) => !position.isLegal(normalizeMove(position, m)),
+          );
         })
         .map((a) => `${a.from}-${a.to}`);
       expect(illegal).toEqual([]);

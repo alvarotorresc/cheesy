@@ -1,5 +1,5 @@
 import type { LessonSummary } from '../../core/content';
-import { nextLesson } from './learn-progress';
+import { lessonAfter, nextLesson } from './learn-progress';
 
 const lesson = (
   id: string,
@@ -26,5 +26,32 @@ describe('nextLesson', () => {
 
   it('should keep to a level when asked', () => {
     expect(nextLesson(catalog, new Set(), 'intermediate')).toBeUndefined();
+  });
+});
+
+describe('lessonAfter', () => {
+  const catalog = [
+    lesson('pin', 2, 'intermediate'),
+    lesson('knight-moves', 2),
+    lesson('hanging-pieces', 1, 'intermediate'),
+    lesson('the-board', 1),
+  ];
+
+  it('should give the next lesson of the same level', () => {
+    expect(lessonAfter(catalog, lesson('the-board', 1))?.id).toBe('knight-moves');
+    expect(lessonAfter(catalog, lesson('hanging-pieces', 1, 'intermediate'))?.id).toBe('pin');
+  });
+
+  it('should go on to the first lesson of the next level after the last one of a level', () => {
+    expect(lessonAfter(catalog, lesson('knight-moves', 2))?.id).toBe('hanging-pieces');
+  });
+
+  it('should give nothing after the last lesson of the catalogue', () => {
+    expect(lessonAfter(catalog, lesson('pin', 2, 'intermediate'))).toBeUndefined();
+  });
+
+  it('should skip a level without lessons', () => {
+    const advanced = [lesson('the-board', 1), lesson('strategy', 1, 'advanced')];
+    expect(lessonAfter(advanced, lesson('the-board', 1))?.id).toBe('strategy');
   });
 });

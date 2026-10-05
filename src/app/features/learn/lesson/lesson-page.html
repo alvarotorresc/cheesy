@@ -73,6 +73,11 @@
               >{{ t.nextLessonButton }}</a
             >
           }
+          @if (hasPuzzles()) {
+            <a class="button puzzles" [routerLink]="['/learn/puzzles', current.lesson.id]">{{
+              t.puzzles.lessonButton
+            }}</a>
+          }
           @if (practice(); as link) {
             <a class="button practise" [routerLink]="link.path" [queryParams]="link.queryParams">{{
               t.practise

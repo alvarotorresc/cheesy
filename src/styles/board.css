@@ -133,6 +133,13 @@ cg-board square.mark-spot {
   background: var(--board-spot);
 }
 
+/* Keyboard cursor: a ring inside the square, so the fill of any other mark still shows. Only
+   while the board has the focus from the keyboard; a click on the board shows nothing. */
+.cg-wrap:focus-visible cg-board square.mark-cursor {
+  outline: 3px solid var(--board-cursor);
+  outline-offset: -3px;
+}
+
 /* A star to collect in a "reach" exercise of a lesson. */
 cg-board square.mark-star {
   background: center / 55% no-repeat

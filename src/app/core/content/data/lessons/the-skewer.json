@@ -1,0 +1,1050 @@
+{
+  "id": "the-skewer",
+  "level": "intermediate",
+  "order": 4,
+  "title": {
+    "es": "La enfilada",
+    "en": "The skewer"
+  },
+  "summary": {
+    "es": "Atacar a una pieza valiosa para ganar la que tiene detrás.",
+    "en": "Attacking a valuable piece to win the one behind it."
+  },
+  "terms": [
+    "skewer"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "enfilada"
+          },
+          {
+            "kind": "text",
+            "text": " es como una "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "clavada"
+          },
+          {
+            "kind": "text",
+            "text": " al revés: delante está la pieza más valiosa. Cuando se aparta, deja al descubierto la de detrás, y esa es la que cae. Aquí el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", y detrás, en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", está la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "skewer"
+          },
+          {
+            "kind": "text",
+            "text": " is like a "
+          },
+          {
+            "kind": "term",
+            "id": "pin",
+            "text": "pin"
+          },
+          {
+            "kind": "text",
+            "text": " turned around: the more valuable piece is in front. When it steps aside, it exposes the one behind, and that is the one that falls. Here the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", and behind him, on the same "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", stands the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6q1/8/8/3k4/8/1B6/8/K7 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "g8"
+        ],
+        "arrows": [
+          {
+            "from": "b3",
+            "to": "g8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Haz una "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "enfilada"
+          },
+          {
+            "kind": "text",
+            "text": " con el alfil: da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey y gana lo que tiene detrás."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Make a "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "skewer"
+          },
+          {
+            "kind": "text",
+            "text": " with the bishop: give "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king and win what stands behind him."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6q1/pp4pp/4kp2/8/8/8/PP3P1P/5BK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bc4+",
+          "Kf5",
+          "Bxg8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el alfil da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que salir de la "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", y el alfil captura la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the bishop gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to leave the "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", and the bishop captures the queen."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": " y la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " están en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The king on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": " and the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " stand on the same "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora con la torre, por la última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now with the rook, along the back "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k2q/3p1pp1/1p2p3/2p5/8/2PB4/1P3PPP/R5K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Ra8+",
+          "Ke7",
+          "Rxh8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: la torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey solo puede ir a "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ", y la torre captura la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". The king can only go to "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ", and the rook captures the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " están en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ", y la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " de tu torre está libre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The king on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": " stand on the same "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ", and your rook’s "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " is open."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "enfilada"
+          },
+          {
+            "kind": "text",
+            "text": " aparece mucho en los finales, justo cuando un peón "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "corona"
+          },
+          {
+            "kind": "text",
+            "text": ". Aquí el peón negro corona en "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", pero la nueva dama y su rey quedan en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": ". La torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey se aparta y la torre captura la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "skewer"
+          },
+          {
+            "kind": "text",
+            "text": " turns up a lot in endings, just as a pawn "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotes"
+          },
+          {
+            "kind": "text",
+            "text": ". Here the black pawn promotes on "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", but the new queen and her king end up on the same "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". The rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ", the king steps aside and the rook captures the queen."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7R/8/8/5K2/k7/8/p7/8 b - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "a1=Q",
+          "Ra8+",
+          "Kb3",
+          "Rxa1"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora tú. La dama negra acaba de "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronar"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ", y su rey está en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ". Gánala con una "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "enfilada"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your turn. The black queen has just "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promoted"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ", and her king is on the same "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ". Win her with a "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "skewer"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/R7/8/1K6/8/8/8/3k3q w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Ra1+",
+          "Kd2",
+          "Rxh1"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey tiene que salir de la primera "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre captura la dama. Con torre contra nada, la partida está ganada."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", the king has to leave the first "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook captures the queen. With a rook against nothing, the game is won."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre puede bajar por la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " hasta la primera "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook can go down the "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " to the first "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en una "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "enfilada"
+          },
+          {
+            "kind": "text",
+            "text": " atacas a una pieza valiosa, casi siempre con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", y cuando se aparta ganas la que tenía detrás en la misma línea. Búscala cuando el rey y la dama rivales estén en la misma "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " o "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in a "
+          },
+          {
+            "kind": "term",
+            "id": "skewer",
+            "text": "skewer"
+          },
+          {
+            "kind": "text",
+            "text": " you attack a valuable piece, almost always with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", and when it steps aside you win the one behind it on the same line. Look for it when the enemy king and queen stand on the same "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "term",
+            "id": "diagonal",
+            "text": "diagonal"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6q1/8/8/3k4/8/1B6/8/K7 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "g8"
+        ],
+        "arrows": [
+          {
+            "from": "b3",
+            "to": "g8"
+          }
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "skewer"
+  }
+}

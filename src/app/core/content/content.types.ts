@@ -198,7 +198,16 @@ export type FindMoveRule =
   'escape-check' | 'capture-undefended' | 'castle' | 'en-passant' | 'promote';
 
 export type FindMoveCheck =
-  { by: 'engine'; solution: string[] } | { by: 'rule'; rule: FindMoveRule };
+  | {
+      by: 'engine';
+      solution: string[];
+      /**
+       * The only move that holds, not a winning one: the slow check drops "decisive" and asks
+       * instead for at least -100cp after it. The app does not read it.
+       */
+      onlyMove?: true;
+    }
+  | { by: 'rule'; rule: FindMoveRule };
 
 export interface FindMoveStep {
   kind: 'find-move';
@@ -287,3 +296,47 @@ export type LessonSummary = Pick<Lesson, 'id' | 'level' | 'order' | 'title' | 's
   stepCount: number;
   exerciseCount: number;
 };
+
+/**
+ * A Lichess puzzle for "Practise more": the FEN before the rival's move, as Lichess gives it, then
+ * every move in SAN, the rival's first. The player is the side not to move in the FEN.
+ */
+export interface Puzzle {
+  /** The Lichess id: five letters and digits, upper and lower case ("KEPe0"). */
+  id: string;
+  fen: string;
+  moves: string[];
+  /** Kept to order the puzzles; never shown. */
+  rating: number;
+  /** The Lichess themes of its lesson that the puzzle has. */
+  themes: string[];
+}
+
+/** One file per lesson: its themes, each with its glossary term (or null), and its puzzles. */
+export interface PuzzleFile {
+  lesson: string;
+  themes: Record<string, string | null>;
+  puzzles: Puzzle[];
+}
+
+/** The Lichess database a set of puzzle files comes from. */
+export interface PuzzleSource {
+  url: string;
+  lastModified: string;
+  sha256: string;
+  bytes: number;
+  rows: number;
+  scriptVersion: number;
+}
+
+export interface PuzzleCatalogEntry {
+  lesson: string;
+  count: number;
+  themes: string[];
+}
+
+/** The lessons with puzzles, in no particular order, and where the puzzles come from. */
+export interface PuzzleCatalog {
+  source: PuzzleSource;
+  lessons: PuzzleCatalogEntry[];
+}

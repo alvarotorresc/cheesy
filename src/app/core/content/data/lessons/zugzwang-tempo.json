@@ -1,0 +1,1043 @@
+{
+  "id": "zugzwang-tempo",
+  "level": "advanced",
+  "order": 8,
+  "title": {
+    "es": "Zugzwang y tiempos",
+    "en": "Zugzwang and tempo"
+  },
+  "summary": {
+    "es": "Cuando mover es un problema: el zugzwang recíproco, la jugada de espera y la triangulación.",
+    "en": "When having to move is the problem: mutual zugzwang, the waiting move and triangulation."
+  },
+  "terms": [
+    "tempo",
+    "mutual-zugzwang",
+    "triangulation"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Zugzwang",
+    "https://en.wikipedia.org/wiki/Immortal_Zugzwang_Game",
+    "https://en.wikipedia.org/wiki/Triangulation_(chess)",
+    "https://lichess.org/practice",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Repaso: el "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": " es estar obligado a mover cuando cualquier jugada empeora tu posición. Fischer contra Taimanov, segunda partida de su match de 1971. Juegan las negras: si mueven el rey, pierden el caballo, y si mueven el caballo, el peón de la columna h avanza. Tras dos jugadas de cada bando, el rey blanco llega a "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": " y las negras vuelven a estar en zugzwang. Las blancas ganaron."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Recap: "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": " means being forced to move when every move makes your position worse. Fischer against Taimanov, second game of their 1971 match. Black is to move: if the king moves, the knight is lost, and if the knight moves, the h-pawn walks forward. After two moves each, the white king reaches "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": " and Black is in zugzwang again. White won."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/5K2/5BnP/5k2/8/8/8 b - - 0 85",
+        "orientation": "white",
+        "moves": [
+          "Nf3",
+          "h6",
+          "Ng5",
+          "Kg6"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "A veces el zugzwang es de los dos: al que le toque mover, empeora. Es un "
+          },
+          {
+            "kind": "term",
+            "id": "mutual-zugzwang",
+            "text": "zugzwang recíproco"
+          },
+          {
+            "kind": "text",
+            "text": ". Aquí, si juegan las negras, su rey tiene que ir a "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey blanco pasa a "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " y el peón corona: pierden. Si juegan las blancas, no pueden ganar: o dejan al rey negro "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "ahogado"
+          },
+          {
+            "kind": "text",
+            "text": " o le dejan capturar el peón. Son tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Sometimes the zugzwang is on both sides: whoever has to move makes things worse. That is "
+          },
+          {
+            "kind": "term",
+            "id": "mutual-zugzwang",
+            "text": "mutual zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ". Here, if Black is to move, the king has to go to "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ", the white king steps to "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " and the pawn promotes: Black loses. If White is to move, White cannot win: either the black king is left in "
+          },
+          {
+            "kind": "term",
+            "id": "stalemate",
+            "text": "stalemate"
+          },
+          {
+            "kind": "text",
+            "text": " or it is allowed to capture the pawn. It is a draw."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2k5/2P5/1K6/8/8/8/8/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c7",
+          "b7",
+          "d7"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Los reyes y los peones del centro forman un zugzwang recíproco: el rey que se mueva deja de defender su peón y lo pierde. Así que gana quien tenga una jugada de peón de sobra, un "
+          },
+          {
+            "kind": "term",
+            "id": "tempo",
+            "text": "tiempo"
+          },
+          {
+            "kind": "text",
+            "text": " más. Juegan las blancas: ¿con qué jugada le pasas el turno al rival y te quedas tú con la última?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The kings and the central pawns form a mutual zugzwang: the king that moves stops guarding its pawn and loses it. So whoever has a spare pawn move, one more "
+          },
+          {
+            "kind": "term",
+            "id": "tempo",
+            "text": "tempo"
+          },
+          {
+            "kind": "text",
+            "text": ", wins. White to play: with which move do you hand the turn to your opponent and keep the last one for yourself?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/7p/3pK3/2kP4/8/7P/8 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "h3"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: avanzas una sola casilla. Si el negro avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", tú juegas a "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " y ya no le quedan jugadas de peón. Tenga que mover el rey ahora o una jugada después, deja el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " y lo pierde."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: you move just one square. If Black pushes to "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", you play to "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " and Black has no pawn moves left. Whether the king has to move now or one move later, it leaves the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " behind and loses it."
+          }
+        ]
+      },
+      "wrong": {
+        "h4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ahora el peón negro de "
+            },
+            {
+              "kind": "square",
+              "square": "h6"
+            },
+            {
+              "kind": "text",
+              "text": " avanza a "
+            },
+            {
+              "kind": "square",
+              "square": "h5"
+            },
+            {
+              "kind": "text",
+              "text": " y se queda él con la última jugada: tu rey tiene que moverse, pierdes el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " y la partida."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Now the black pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "h6"
+            },
+            {
+              "kind": "text",
+              "text": " moves to "
+            },
+            {
+              "kind": "square",
+              "square": "h5"
+            },
+            {
+              "kind": "text",
+              "text": " and keeps the last move for itself: your king has to move, and you lose the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " and the game."
+            }
+          ]
+        },
+        "Kf4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Tu rey deja de defender el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": ": el rey negro lo captura y las que ganan son las negras."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Your king stops guarding the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": ": the black king captures it and Black is the one who wins."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuenta las jugadas de peón que le quedan a cada bando. El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " puede avanzar una casilla o dos."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Count the pawn moves each side has left. The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " can move one square or two."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si no te queda una jugada de peón útil, el rey puede perder el tiempo él solo. Una forma es la "
+          },
+          {
+            "kind": "term",
+            "id": "triangulation",
+            "text": "triangulación"
+          },
+          {
+            "kind": "text",
+            "text": ": en lugar de ir directo, da un rodeo por tres casillas que forman un triángulo y vuelve al mismo sitio. Aquí el rey blanco quiere estar en "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " con el rey negro en "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ", pero con el turno de las negras. Una manera de conseguirlo: va de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", luego a "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " y vuelve a "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey negro se aparta y vuelve, y ahora le toca mover a él: tiene que ceder el paso. Aquí hay otros caminos que también ganan, pero a veces el rodeo es el único."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If you have no useful pawn move left, the king can lose the time on its own. One way is "
+          },
+          {
+            "kind": "term",
+            "id": "triangulation",
+            "text": "triangulation"
+          },
+          {
+            "kind": "text",
+            "text": ": instead of going straight, it takes a detour round three squares that form a triangle and comes back to the same spot. Here the white king wants to be on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " with the black king on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ", but with Black to move. One way to get there: it goes from "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", then to "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " and back to "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". The black king goes away and comes back, and now it is its turn: it has to give way. Other paths win here too, but sometimes the detour is the only one."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/4k1p1/6P1/4KP2/8/8/8/8 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Kd5",
+          "Kf6",
+          "Ke4",
+          "Ke7",
+          "Ke5"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu rey quiere estar en "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " cuando el rey negro esté en "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " y les toque mover a las negras: entonces tendrá que apartarse. Si vas directo, el rey negro llega a tiempo. Encuentra el rodeo: tu jugada, la respuesta negra y otra jugada tuya."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your king wants to be on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " when the black king is on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " and it is Black’s turn: then it will have to step aside. If you go straight there, the black king arrives in time. Find the detour: your move, Black’s reply and another move of yours."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2k5/8/1p6/1P6/3K4/8/8/8 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Ke5",
+          "Kd7",
+          "Kd5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: has llegado a "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " en dos jugadas en vez de en una, por "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Ahora es el rey negro quien tiene que mover y ceder el paso, y tu rey se abre paso hacia el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: you reached "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " in two moves instead of one, through "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Now it is the black king that has to move and give way, and your king makes its way towards the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Kd5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey negro responde yendo a "
+            },
+            {
+              "kind": "square",
+              "square": "d7"
+            },
+            {
+              "kind": "text",
+              "text": ", y ahora el que tiene que mover eres tú: son tablas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black king answers by going to "
+            },
+            {
+              "kind": "square",
+              "square": "d7"
+            },
+            {
+              "kind": "text",
+              "text": ", and now you are the one who has to move: it is a draw."
+            }
+          ]
+        },
+        "Kc4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Desde "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": " no amenazas nada: el rey negro se queda cerca del peón de "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": " y no ganas."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "From "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": " you threaten nothing: the black king stays close to the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": " and you do not win."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las casillas "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " forman un triángulo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The squares "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " form a triangle."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El zugzwang también aparece en el medio juego, aunque es raro. Sämisch contra Nimzowitsch, Copenhague 1923, la llamada partida inmortal del zugzwang. Las negras acaban de mover un peón a "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": ", una simple jugada de espera. Las piezas blancas están atadas: cualquier jugada de pieza pierde material, y las pocas jugadas de peón se acaban pronto. Las negras, en cambio, pueden esperar moviendo el rey. Las blancas abandonaron aquí."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Zugzwang also shows up in the middlegame, although it is rare. Sämisch against Nimzowitsch, Copenhagen 1923, the so-called immortal zugzwang game. Black has just moved a pawn to "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": ", a simple waiting move. The white pieces are tied up: any piece move loses material, and the few pawn moves soon run out. Black, on the other hand, can wait by moving the king. White resigned here."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/3q2p1/p2bp2p/3p1r2/1p1Pp3/3bQ1PP/PP1B1rB1/1N2R1RK w - - 0 26",
+        "orientation": "white",
+        "highlights": [
+          "h6"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora juega tú la partida entera y gana con rey y peón contra rey y peón. Usa la "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "oposición"
+          },
+          {
+            "kind": "text",
+            "text": " y, si hace falta, el rodeo en triángulo para que le toque mover al rival. El rival se defiende lo mejor posible."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now play the whole game yourself and win with king and pawn against king and pawn. Use the "
+          },
+          {
+            "kind": "term",
+            "id": "opposition",
+            "text": "opposition"
+          },
+          {
+            "kind": "text",
+            "text": " and, if needed, the triangle detour so that it is your opponent’s turn. The opponent defends as well as possible."
+          }
+        ]
+      },
+      "fen": "8/4k3/1p6/1P6/4K3/8/8/8 w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Al principio, la única jugada que gana es poner tu rey en "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", frente al negro. Tu objetivo es el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "At the start, the only winning move is to put your king on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", facing the black one. Your target is the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en el "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ", mover es el problema. En un "
+          },
+          {
+            "kind": "term",
+            "id": "mutual-zugzwang",
+            "text": "zugzwang recíproco"
+          },
+          {
+            "kind": "text",
+            "text": " empeora quien tenga que mover, así que cuenta las jugadas de espera: un "
+          },
+          {
+            "kind": "term",
+            "id": "tempo",
+            "text": "tiempo"
+          },
+          {
+            "kind": "text",
+            "text": " de sobra decide la partida. Si no te quedan jugadas de peón, el rey puede perder el tiempo con la "
+          },
+          {
+            "kind": "term",
+            "id": "triangulation",
+            "text": "triangulación"
+          },
+          {
+            "kind": "text",
+            "text": ". En Finales tienes más posiciones de rey y peones para practicar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ", having to move is the problem. In a "
+          },
+          {
+            "kind": "term",
+            "id": "mutual-zugzwang",
+            "text": "mutual zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": " whoever has to move makes things worse, so count the waiting moves: one spare "
+          },
+          {
+            "kind": "term",
+            "id": "tempo",
+            "text": "tempo"
+          },
+          {
+            "kind": "text",
+            "text": " decides the game. If you have no pawn moves left, the king can lose the time by "
+          },
+          {
+            "kind": "term",
+            "id": "triangulation",
+            "text": "triangulation"
+          },
+          {
+            "kind": "text",
+            "text": ". In Endgames you will find more king and pawn positions to practise."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/8/3pK3/2kP4/8/8/8 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4",
+          "d5"
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "King and pawn"
+  }
+}

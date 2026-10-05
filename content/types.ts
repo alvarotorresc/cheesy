@@ -95,3 +95,12 @@ export type StepSpec =
   | ChoiceStepSpec
   | TapSquareStepSpec;
 export type LessonSpec = Omit<Lesson, 'steps'> & { steps: StepSpec[] };
+
+// Lichess puzzles for "Practise more", written by `pnpm content:puzzles` and read by the app.
+export type {
+  Puzzle,
+  PuzzleCatalog,
+  PuzzleCatalogEntry,
+  PuzzleFile,
+  PuzzleSource,
+} from '../src/app/core/content/content.types.ts';

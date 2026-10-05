@@ -15,6 +15,7 @@ import {
   findMoveErrors,
   glossaryErrors,
   nextErrors,
+  onlyMoveErrors,
   playOutErrors,
   reachErrors,
   setErrors,
@@ -22,9 +23,19 @@ import {
 } from '../../lib/lesson-checks.ts';
 import { lessons as authored } from '../../authoring/lessons/index.ts';
 import { lessonSummary } from '../../lib/lesson-build.ts';
-import { positionFromFen } from '../../lib/chess.ts';
+import { playSan, positionFromFen } from '../../lib/chess.ts';
 import { acceptedMoves } from '../../../src/app/core/lessons/find-move-rules.ts';
 import { validateLesson } from '../../lib/schema.ts';
+import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
+import {
+  badBishops,
+  doubledPawns,
+  isolatedPawns,
+  knightJumps,
+  openFiles,
+  outposts,
+} from '../../lib/pawn-facts.ts';
+import { parseSquare } from 'chessops/util';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
 
 const text = (value: string) => ({
@@ -139,6 +150,7 @@ describe('the seeded lesson', () => {
       animationErrors,
       reachErrors,
       findMoveErrors,
+      onlyMoveErrors,
       statusErrors,
       playOutErrors,
       engineOptionErrors,
@@ -170,6 +182,22 @@ describe('validateLesson', () => {
       'l',
     );
     expect(errors.join()).toContain('solution: odd length');
+  });
+
+  it('accepts onlyMove: true on an engine solution and nothing else', () => {
+    const engine = stepOf('find-move', 1);
+    const only = (check: object) => validateLesson(withStep(engine, { check }), 'l').join();
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: true })).toBe('');
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: false })).toContain('check.onlyMove');
+    expect(only({ by: 'engine', solution: ['Ra8#'], onlyMove: 'yes' })).toContain('check.onlyMove');
+    expect(
+      validateLesson(
+        withStep(stepOf('find-move'), {
+          check: { by: 'rule', rule: 'escape-check', onlyMove: true },
+        }),
+        'l',
+      ).join(),
+    ).toContain('check.onlyMove');
   });
 
   it('rejects tap-square with a count above its list', () => {
@@ -314,6 +342,24 @@ describe('seeded checks', () => {
     ).toEqual(['sample step 4: Ra8# is accepted']);
   });
 
+  it('5. rejects onlyMove on a mate or in a tablebase ending, and accepts it elsewhere', () => {
+    const at = stepOf('find-move', 1);
+    const only = (fen: string, solution: string[]) =>
+      onlyMoveErrors([
+        withStep(at, {
+          board: { fen, orientation: 'white' },
+          check: { by: 'engine', solution, onlyMove: true },
+        }),
+      ]);
+    expect(only('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', ['Ra8#'])).toEqual([
+      'sample step 4: onlyMove on a mate, which test 10 already finds unique',
+    ]);
+    expect(only('8/8/8/8/5k2/8/2P2r2/2K1R3 w - - 0 1', ['Kb2'])).toEqual([
+      'sample step 4: onlyMove in a tablebase ending, where test 13 already asks for the only move',
+    ]);
+    expect(only('6k1/5ppp/8/8/2n5/8/5PPP/R5K1 w - - 0 1', ['Ra4'])).toEqual([]);
+  });
+
   it('6. rejects a status question with an illegal board or a missing whyWrong', () => {
     const illegal = { fen: '8/8/8/8/8/8/8/8 w - - 0 1', orientation: 'white' };
     expect(statusErrors([withStep(stepOf('choice'), { board: illegal })])).toEqual([
@@ -384,6 +430,24 @@ describe('seeded checks', () => {
   });
 });
 
+describe('findMoveValidator', () => {
+  const ENDING = '8/8/8/8/5k2/8/2P2r2/2K1R3 w - - 0 1'; // 5 pieces
+  const EIGHT = '6k1/5ppp/8/8/2n5/8/5PPP/R5K1 w - - 0 1'; // 10 pieces
+
+  it('sends an ending without a mate to the tablebase', () => {
+    expect(findMoveValidator(ENDING, ['Kb2'])).toBe('tablebase');
+    expect(findMoveValidator(ENDING, ['Kb2', 'Rf1', 'Re4+'])).toBe('tablebase');
+  });
+
+  it('sends a mate to Stockfish, however few pieces there are', () => {
+    expect(findMoveValidator('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', ['Ra8#'])).toBe('stockfish');
+  });
+
+  it('sends a position with more than 7 pieces to Stockfish', () => {
+    expect(findMoveValidator(EIGHT, ['Ra4'])).toBe('stockfish');
+  });
+});
+
 describe('lessons', () => {
   const lessons = loadLessons();
 
@@ -420,6 +484,10 @@ describe('lessons', () => {
     expect(findMoveErrors(lessons)).toEqual([]);
   });
 
+  it('5. onlyMove is only on find-moves where it changes the check', () => {
+    expect(onlyMoveErrors(lessons)).toEqual([]);
+  });
+
   it('6. status questions: a legal board, a message for each wrong option, no odd endings', () => {
     expect(statusErrors(lessons)).toEqual([]);
   });
@@ -442,6 +510,18 @@ describe('lessons', () => {
     expect(nextErrors(lessons, categories, tags)).toEqual([]);
   });
 
+  it('10/13. every engine find-move goes to Stockfish or to the tablebase, never to neither', () => {
+    const engineFindMoves = lessons.flatMap((l) =>
+      l.steps.flatMap((s) =>
+        s.kind === 'find-move' && s.check.by === 'engine'
+          ? [findMoveValidator(s.board.fen, s.check.solution)]
+          : [],
+      ),
+    );
+    expect(engineFindMoves.length).toBeGreaterThan(0);
+    expect(engineFindMoves.filter((v) => v !== 'stockfish' && v !== 'tablebase')).toEqual([]);
+  });
+
   it('castling-en-passant: the castling question agrees with the rule', () => {
     const lesson = lessons.find((l) => l.id === 'castling-en-passant')!;
     const step = lesson.steps.find(
@@ -452,4 +532,83 @@ describe('lessons', () => {
     // Option 0 is "yes", option 1 is "no" in this question.
     expect(step.answer.correct).toBe(canCastle ? 0 : 1);
   });
+});
+
+/**
+ * The fact questions of the advanced lessons that ask about a board, each with the answer computed
+ * from that board: the indices of the options that are right. Written out by hand, option by option,
+ * so that a test never reads the texts.
+ */
+const FACT_ANSWERS: Record<string, (fen: string) => number[]> = {
+  // Which white pawn is isolated: b2, d4 or f2.
+  'pawn-structure step 3': (fen) => {
+    const isolated = isolatedPawns(positionFromFen(fen), 'white');
+    return ['b2', 'd4', 'f2'].flatMap((sq, i) => (isolated.includes(sq) ? [i] : []));
+  },
+  // Which white pawns are doubled: a2 and c2, f2 and g2, or c2 and c3.
+  'pawn-structure step 5': (fen) => {
+    const doubled = doubledPawns(positionFromFen(fen), 'white');
+    return [
+      ['a2', 'c2'],
+      ['f2', 'g2'],
+      ['c2', 'c3'],
+    ].flatMap(([a, b], i) =>
+      doubled.includes(a) && doubled.includes(b) && a[0] === b[0] ? [i] : [],
+    );
+  },
+  // Which square is an outpost for White: b5, d5 or f5.
+  'outposts step 2': (fen) => {
+    const squares = outposts(positionFromFen(fen), 'white');
+    return ['b5', 'd5', 'f5'].flatMap((sq, i) => (squares.includes(sq) ? [i] : []));
+  },
+  // Which first jump of the knight on b1 starts the shortest way to d5: a3, d2 or c3.
+  'outposts step 4': (fen) => {
+    const pos = positionFromFen(fen);
+    const d5 = parseSquare('d5')!;
+    const shortest = knightJumps(pos, parseSquare('b1')!, d5);
+    return ['Na3', 'Nd2', 'Nc3'].flatMap((san, i) => {
+      const after = playSan(pos, san)!;
+      return 1 + (knightJumps(after, parseSquare(san.slice(1))!, d5) ?? Infinity) === shortest
+        ? [i]
+        : [];
+    });
+  },
+  // Knight, bishop or the same, with the centre locked: the knight, because the black bishop on
+  // f6 is bad, as the explanation says (its own pawns stand on its colour).
+  'outposts step 6': (fen) =>
+    badBishops(positionFromFen(fen), 'black').includes('f6') ? [0] : [2],
+  // Which file is open: b, c or d.
+  'open-files-seventh step 2': (fen) => {
+    const open = openFiles(positionFromFen(fen));
+    return ['b', 'c', 'd'].flatMap((file, i) => (open.includes(file) ? [i] : []));
+  },
+  // Which bishop is bad: the white one on e2, the black one on d7, or neither.
+  'minor-piece-endings step 2': (fen) => {
+    const pos = positionFromFen(fen);
+    const bad = [badBishops(pos, 'white').includes('e2'), badBishops(pos, 'black').includes('d7')];
+    return bad.some(Boolean) ? bad.flatMap((isBad, i) => (isBad ? [i] : [])) : [2];
+  },
+};
+
+describe('fact questions of the advanced lessons', () => {
+  const steps = loadLessons().flatMap((l) =>
+    l.level === 'advanced' ? l.steps.map((s, i) => ({ at: `${l.id} step ${i + 1}`, s })) : [],
+  );
+
+  it('have a computed answer whenever they ask about a board', () => {
+    const withBoard = steps.filter(
+      ({ s }) => s.kind === 'choice' && s.answer.by === 'fact' && s.board,
+    );
+    expect(withBoard.map(({ at }) => at).sort()).toEqual(Object.keys(FACT_ANSWERS).sort());
+  });
+
+  it.each(Object.entries(FACT_ANSWERS))(
+    '%s: the marked option is the only right one',
+    (at, answer) => {
+      const step = steps.find((x) => x.at === at)?.s;
+      if (step?.kind !== 'choice' || step.answer.by !== 'fact' || !step.board)
+        throw new Error(`${at} is not a fact question with a board`);
+      expect(answer(step.board.fen)).toEqual([step.answer.correct]);
+    },
+  );
 });

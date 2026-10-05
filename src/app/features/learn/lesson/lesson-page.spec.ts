@@ -2,14 +2,26 @@ import type { DebugElement } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, TitleStrategy } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { GLOSSARY_LOADER, LESSON_LOADERS, type LessonLoaders } from '../../../core/content';
+import {
+  GLOSSARY_LOADER,
+  LESSON_LOADERS,
+  PUZZLE_LOADERS,
+  type LessonLoaders,
+  type PuzzleLoaders,
+} from '../../../core/content';
 import { bundledGlossaryLoader, plainText } from '../../../core/content/testing';
 import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
-import { fixtureLessonLoaders } from '../testing';
+import {
+  emptyPuzzleLoaders,
+  FIXTURE_CATALOG,
+  fixtureLessonLoaders,
+  fixturePuzzleLoaders,
+  lessonLoadersWithPuzzles,
+} from '../testing';
 import { ChoiceStepView } from './steps/choice-step';
 import { ExplainStepView } from './steps/explain-step';
 import { TapSquareStepView } from './steps/tap-square-step';
@@ -20,7 +32,10 @@ describe('LessonPage', () => {
   let harness: RouterTestingHarness;
   let progress: ProgressService;
 
-  const setup = (loaders: LessonLoaders = fixtureLessonLoaders) => {
+  const setup = (
+    loaders: LessonLoaders = fixtureLessonLoaders,
+    puzzles: PuzzleLoaders = emptyPuzzleLoaders,
+  ) => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
@@ -28,6 +43,7 @@ describe('LessonPage', () => {
         { provide: LESSON_LOADERS, useValue: loaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: PUZZLE_LOADERS, useValue: puzzles },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -196,7 +212,7 @@ describe('LessonPage', () => {
       );
       // One way back to the level, not two.
       expect(summary.querySelectorAll('a[href="/learn/beginner"]')).toHaveLength(1);
-      // The last lesson of the level has no next one.
+      // The last lesson of the level, and no later level has lessons: there is no next one.
       expect(summary.querySelector('a.next-lesson')).toBeNull();
       expect(document.activeElement).toBe(summary.querySelector('h2'));
     });
@@ -250,6 +266,77 @@ describe('LessonPage', () => {
     });
   });
 
+  it('should lead from the last lesson of a level to the first one of the next level', async () => {
+    const hangingPieces = {
+      ...FIXTURE_CATALOG[0],
+      id: 'hanging-pieces',
+      level: 'intermediate' as const,
+      order: 1,
+      title: { es: 'Piezas sin defensa', en: 'Hanging pieces' },
+    };
+    setup({
+      catalog: async () => [...FIXTURE_CATALOG, hangingPieces],
+      lesson: async (id) => {
+        const lesson = await fixtureLessonLoaders.lesson(
+          id === 'hanging-pieces' ? 'the-board' : id,
+        );
+        return id === 'hanging-pieces' ? { ...lesson, ...hangingPieces, terms: [] } : lesson;
+      },
+    });
+    await render('/learn/beginner/knight-moves');
+    await solveEveryStep();
+    const link = root().querySelector<HTMLAnchorElement>('.summary a.next-lesson')!;
+    expect(link.getAttribute('href')).toBe('/learn/intermediate/hanging-pieces');
+    link.click();
+    await vi.waitFor(async () => {
+      await settle();
+      expect(root().querySelector('h1')?.textContent).toContain('Hanging pieces');
+    });
+    expect(stepOf()).toBe('Step 1 of 5');
+  });
+
+  describe('Practise more on the summary', () => {
+    it('should take the place of Practise when that leads to Positions', async () => {
+      setup(lessonLoadersWithPuzzles, fixturePuzzleLoaders);
+      await render('/learn/intermediate/the-fork');
+      await solveEveryStep();
+      const summary = root().querySelector('.summary')!;
+      const link = summary.querySelector('a.puzzles');
+      expect(link?.textContent).toContain('Practise more');
+      expect(link?.getAttribute('href')).toBe('/learn/puzzles/the-fork');
+      expect(summary.querySelector('a.practise')).toBeNull();
+    });
+
+    it('should sit next to a practice of endgames', async () => {
+      const catalog = await fixturePuzzleLoaders.catalog();
+      setup(fixtureLessonLoaders, {
+        ...fixturePuzzleLoaders,
+        catalog: async () => ({
+          ...catalog,
+          lessons: [{ lesson: 'knight-moves', count: 30, themes: ['fork'] }],
+        }),
+      });
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      const summary = root().querySelector('.summary')!;
+      expect(summary.querySelector('a.puzzles')?.getAttribute('href')).toBe(
+        '/learn/puzzles/knight-moves',
+      );
+      expect(summary.querySelector('a.practise')).not.toBeNull();
+    });
+
+    it('should not show for a lesson without puzzles, nor when the catalogue fails', async () => {
+      setup(fixtureLessonLoaders, {
+        ...fixturePuzzleLoaders,
+        catalog: () => Promise.reject(new Error('offline')),
+      });
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      expect(root().querySelector('.summary a.puzzles')).toBeNull();
+      expect(root().querySelector('.summary a.practise')).not.toBeNull();
+    });
+  });
+
   it('should let a keyboard user skip a board exercise and go on with Next', async () => {
     const lesson = await fixtureLessonLoaders.lesson('the-board');
     setup({
@@ -284,6 +371,56 @@ describe('LessonPage', () => {
     expect(root().querySelector('.summary')?.textContent).toContain(
       '2 of 4 exercises on the first try',
     );
+  });
+
+  it('should let a keyboard user solve a board exercise on the board itself', async () => {
+    const lesson = await fixtureLessonLoaders.lesson('the-board');
+    setup({
+      ...fixtureLessonLoaders,
+      lesson: async (id) =>
+        id === 'the-board'
+          ? {
+              ...lesson,
+              steps: [
+                lesson.steps[0],
+                {
+                  kind: 'find-move',
+                  text: plainText('Captura el alfil', 'Take the bishop'),
+                  board: { fen: '6k1/1p6/2p5/5b2/8/8/2Q5/6K1 w - - 0 1', orientation: 'white' },
+                  check: { by: 'engine', solution: ['Qxf5'] },
+                  explanation: plainText('Bien', 'Well done'),
+                },
+                ...lesson.steps.slice(2),
+              ],
+            }
+          : fixtureLessonLoaders.lesson(id),
+    });
+    await render('/learn/beginner/the-board');
+    await clickNext();
+    expect(nextButton()!.disabled).toBe(true);
+    const step = stepOf();
+    const board = root().querySelector<HTMLElement>('[role="application"]')!;
+    const press = async (...keys: string[]) => {
+      for (const key of keys) {
+        board.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+        await settle();
+      }
+    };
+
+    // The cursor starts on the white king, on g1: over to the queen on c2, then up to f5.
+    board.focus();
+    await settle();
+    await press('ArrowLeft', 'ArrowLeft', 'ArrowLeft', 'ArrowLeft', 'ArrowUp', 'Enter');
+    await press('ArrowRight', 'ArrowRight', 'ArrowRight', 'ArrowUp', 'ArrowUp', 'ArrowUp', 'Enter');
+
+    await vi.waitFor(async () => {
+      await settle();
+      expect(root().textContent).toContain('Well done');
+    });
+    expect(nextButton()!.disabled).toBe(false);
+    // On the board the arrows move the cursor, not the lesson to another step.
+    await press('ArrowLeft', 'ArrowRight', 'ArrowRight');
+    expect(stepOf()).toBe(step);
   });
 
   it('should offer a retry when the lesson cannot be loaded', async () => {

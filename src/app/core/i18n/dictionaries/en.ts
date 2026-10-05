@@ -1,3 +1,6 @@
+/** Pieces the board names when it reads a square aloud. */
+type BoardPieceRole = 'pawn' | 'knight' | 'bishop' | 'rook' | 'queen' | 'king';
+
 export const en = {
   app: {
     name: 'Cheesy',
@@ -100,6 +103,8 @@ export const en = {
     replay: 'Play again',
     correct: 'That’s it!',
     wrongMove: 'Not this one. Try again.',
+    /** Said in the live region when the rival answers a move of the line; the move follows. */
+    rivalReplies: { white: 'White replies:', black: 'Black replies:' },
     captured: 'Your piece was captured on an attacked square. Start again.',
     stars: (got: number, total: number, moves: number, min: number) =>
       `${got} of ${total} ${total === 1 ? 'star' : 'stars'} · ${moves} ${moves === 1 ? 'move' : 'moves'} (fewest ${min})`,
@@ -126,17 +131,79 @@ export const en = {
     homeBand: { title: 'Starting from scratch?', cta: 'Learn to play' },
     progressTitle: 'Your progress',
     privacy:
-      'Completed lessons are saved only in this browser. No accounts, no cookies: if you clear the browser data, they are lost.',
+      'Completed lessons and puzzles are saved only in this browser. No accounts, no cookies: if you clear the browser data, they are lost.',
     progressUnavailable:
       'This browser does not let progress be saved. You can keep learning without it.',
     clearProgress: 'Delete progress',
     confirmTitle: 'Delete progress?',
-    confirmBody: 'This deletes every completed lesson saved in this browser. It cannot be undone.',
+    confirmBody:
+      'This deletes every completed lesson and every puzzle of Practise more saved in this browser. It cannot be undone.',
     cancel: 'Cancel',
     confirmClear: 'Delete',
     nothingSaved: 'There is no saved progress.',
     cleared: 'Progress deleted.',
     clearFailed: 'The progress could not be deleted.',
+    /** "Practise more": Lichess puzzles by theme, for the intermediate lessons. */
+    puzzles: {
+      title: 'Practise more',
+      intro: 'Real puzzles from Lichess games, by theme: ten at a time, from easiest to hardest.',
+      loading: 'Loading the puzzles…',
+      loadError: 'The puzzles could not be loaded.',
+      retry: 'Try again',
+      empty: 'There are no puzzles yet.',
+      backToLearn: 'Learn',
+      backToList: 'Practise more',
+      firstTry: (n: number, total: number) => `${n} of ${total} on the first try`,
+      start: 'Practise',
+      keepGoing: 'Continue',
+      attribution: {
+        before: 'Puzzles from the ',
+        link: 'Lichess open database',
+        after: ' (CC0).',
+      },
+      cardDescription: 'Real puzzles from Lichess, by theme.',
+      open: 'See the puzzles',
+      levelPrompt: 'Want more exercises?',
+      levelLink: 'Practise more',
+      lessonButton: 'Practise more',
+      puzzleOf: (n: number, total: number) => `Puzzle ${n} of ${total}`,
+      nextPuzzle: 'Next puzzle',
+      finish: 'Finish',
+      playAs: { white: 'You play White. ', black: 'You play Black. ' },
+      justMoved: { white: 'White just moved: ', black: 'Black just moved: ' },
+      findBest: '. Find the best move.',
+      solved: 'Solved! The idea: ',
+      summaryTitle: 'Batch complete',
+      batchFirstTry: (n: number, total: number) => `${n} of ${total} on the first try`,
+      lessonFirstTry: (n: number, total: number) =>
+        `So far, ${n} of the ${total} puzzles of this theme on the first try.`,
+      allSolved:
+        'You have solved every puzzle of this theme on the first try. Another batch goes over the oldest ones again.',
+      anotherBatch: 'Another batch',
+      backToLesson: 'Back to the lesson',
+      /** Lichess theme → its name, for every theme of the intermediate lessons. */
+      themes: {
+        hangingPiece: 'Hanging piece',
+        fork: 'Fork',
+        pin: 'Pin',
+        skewer: 'Skewer',
+        discoveredAttack: 'Discovered attack',
+        doubleCheck: 'Double check',
+        discoveredCheck: 'Discovered check',
+        capturingDefender: 'Capturing the defender',
+        deflection: 'Deflection',
+        backRankMate: 'Back-rank mate',
+        smotheredMate: 'Smothered mate',
+        anastasiaMate: 'Anastasia’s mate',
+        mateIn2: 'Mate in two',
+        attraction: 'Attraction',
+        sacrifice: 'Sacrifice',
+        intermezzo: 'In-between move',
+        xRayAttack: 'X-ray attack',
+        pawnEndgame: 'Pawn endgame',
+        rookEndgame: 'Rook endgame',
+      },
+    },
   },
   about: {
     title: 'About Cheesy',
@@ -163,6 +230,10 @@ export const en = {
       {
         title: 'Lessons completed',
         text: 'Which lessons of Learn you finished and how many exercises you got on the first try.',
+      },
+      {
+        title: 'Puzzles of Practise more',
+        text: 'Which Lichess puzzles you played, how many times and whether you solved them on the first try the last time.',
       },
       {
         title: 'Endgames passed and positions solved',
@@ -229,6 +300,11 @@ export const en = {
         name: 'Lichess tablebase',
         license: 'Free service',
         text: 'Exact results for endgames of up to seven pieces. The Endgames opponent plays with it.',
+      },
+      puzzles: {
+        name: 'Lichess puzzles',
+        license: 'CC0',
+        text: 'The puzzles of Practise more come from the open database of Lichess puzzles.',
       },
       openings: {
         name: 'Lichess openings',
@@ -655,6 +731,18 @@ export const en = {
     bishop: 'Bishop',
     knight: 'Knight',
     cancel: 'Cancel',
+    roleDescription: 'board',
+    instructions: 'Board. Arrow keys to move around, Enter to pick a piece and play.',
+    viewOnlyInstructions: 'Board. Arrow keys to move around the squares.',
+    piece: (role: BoardPieceRole, color: 'white' | 'black'): string => `${color} ${role}`,
+    square: (square: string, piece: string | undefined): string => `${square}, ${piece ?? 'empty'}`,
+    picked: (piece: string, square: string, moves: number): string =>
+      `${piece[0].toUpperCase()}${piece.slice(1)} on ${square} picked, ${
+        moves === 1 ? '1 move' : `${moves} moves`
+      }`,
+    cannotPick: 'You cannot move that piece',
+    noPiece: 'There is no piece here',
+    deselected: 'Selection cleared',
   },
   engine: {
     evaluation: 'Evaluation',
