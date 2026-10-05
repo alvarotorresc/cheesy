@@ -6,8 +6,14 @@ export type PuzzleTexts = Record<Lang, Messages['learn']['puzzles']>;
 
 const text = (value: string): Segment => ({ kind: 'text', text: value });
 
+/** Names of people that open a theme name ("Anastasia’s mate"): they keep their capital letter. */
+const PROPER_NAMES: ReadonlySet<string> = new Set(['Anastasia']);
+
 /** "Fork" → "fork": the name of a theme in the middle of a sentence. */
-const inSentence = (name: string): string => name.charAt(0).toLocaleLowerCase() + name.slice(1);
+const inSentence = (name: string): string =>
+  PROPER_NAMES.has(name.split(/[\s’']/)[0])
+    ? name
+    : name.charAt(0).toLocaleLowerCase() + name.slice(1);
 
 /** The side to move in a FEN. */
 const turnOf = (fen: string): Side => (fen.split(' ')[1] === 'b' ? 'black' : 'white');
@@ -44,7 +50,7 @@ export const puzzleStep = (
   const solved = (lang: Lang): Segment[] => {
     const t = texts[lang];
     const names: Readonly<Record<string, string | undefined>> = t.themes;
-    const name = inSentence(theme === undefined ? '' : (names[theme] ?? theme));
+    const name = theme === undefined ? '' : inSentence(names[theme] ?? theme);
     return [text(t.solved), term ? { kind: 'term', id: term, text: name } : text(name), text('.')];
   };
   const rich = (build: (lang: Lang) => Segment[]): RichText => ({

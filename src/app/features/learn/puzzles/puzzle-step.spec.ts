@@ -66,6 +66,15 @@ describe('puzzleStep', () => {
     expect(plain(step.explanation.en)).toBe('Solved! The idea: fork.');
   });
 
+  it('should keep the capital of a theme named after a person', () => {
+    const anastasia = { ...KEPE0, themes: ['anastasiaMate'] };
+
+    const { step } = puzzleStep(anastasia, { anastasiaMate: 'anastasias-mate' }, TEXTS);
+
+    expect(plain(step.explanation.en)).toBe('Solved! The idea: Anastasia’s mate.');
+    expect(plain(step.explanation.es)).toBe('¡Resuelto! La idea: mate de Anastasia.');
+  });
+
   it('should play White when Black moves first', () => {
     const black = { ...KEPE0, fen: KEPE0.fen.replace(' w ', ' b ') };
 

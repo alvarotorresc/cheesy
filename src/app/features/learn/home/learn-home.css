@@ -28,7 +28,8 @@
 
 .levels {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  /* 14rem: the three levels, the glossary and Practise more fit in one row at 1440px. */
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: var(--space-4);
   margin: 0;
   padding: 0;
