@@ -373,5 +373,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "piece-activity",
+    "level": "advanced",
+    "order": 2,
+    "title": {
+      "es": "Piezas activas",
+      "en": "Active pieces"
+    },
+    "summary": {
+      "es": "Una pieza vale por lo que hace: cuántas casillas útiles ve y adónde puede ir.",
+      "en": "A piece is worth what it does: how many useful squares it sees and where it can go."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
   }
 ]

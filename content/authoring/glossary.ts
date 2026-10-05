@@ -336,6 +336,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'piece-activity',
     sources: [WIKI_GLOSSARY, `${WIKI}Fianchetto`, `${CHESSCOM_ES}fianchetto-ajedrez`],
   },
   {
@@ -353,6 +354,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'piece-activity',
     sources: [WIKI_GLOSSARY, `${WIKI}Fianchetto`],
   },
   {
@@ -407,6 +409,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'piece-activity',
     sources: [WIKI_GLOSSARY, `${WIKI}Initiative_(chess)`],
   },
   {
@@ -601,6 +604,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'candidate-moves',
     sources: [WIKI_GLOSSARY, `${WIKI}Candidate_move`],
+  },
+  {
+    id: 'mobility',
+    name: { es: 'Movilidad', en: 'Mobility' },
+    definition: {
+      es: 'Cuántas casillas útiles puede alcanzar una pieza, o todas las de un bando. Una pieza con mucha movilidad suele valer más que la misma pieza encerrada.',
+      en: 'How many useful squares a piece, or a whole side, can reach. A piece with plenty of mobility is usually worth more than the same piece shut in.',
+    },
+    example: {
+      fen: '7k/8/8/8/3N4/8/8/N6K w - - 0 1',
+      orientation: 'white',
+      highlights: ['b3', 'b5', 'c2', 'c6', 'e2', 'e6', 'f3', 'f5'],
+      arrows: [],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'piece-activity',
+    sources: [WIKI_GLOSSARY, `${WIKI}Chess_strategy`],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {

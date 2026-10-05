@@ -1,0 +1,1022 @@
+{
+  "id": "piece-activity",
+  "level": "advanced",
+  "order": 2,
+  "title": {
+    "es": "Piezas activas",
+    "en": "Active pieces"
+  },
+  "summary": {
+    "es": "Una pieza vale por lo que hace: cuántas casillas útiles ve y adónde puede ir.",
+    "en": "A piece is worth what it does: how many useful squares it sees and where it can go."
+  },
+  "terms": [
+    "mobility",
+    "initiative",
+    "fianchetto",
+    "long-diagonal"
+  ],
+  "sources": [
+    "https://www.chess.com/lessons/skill-level/advanced",
+    "https://en.wikipedia.org/wiki/Chess_strategy"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El "
+          },
+          {
+            "kind": "term",
+            "id": "piece-value",
+            "text": "valor de las piezas"
+          },
+          {
+            "kind": "text",
+            "text": " es una guía, pero una pieza vale por lo que hace. Cuenta cuántas casillas útiles ve: eso es su "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "movilidad"
+          },
+          {
+            "kind": "text",
+            "text": ". El caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " llega a ocho casillas; el de "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", en la esquina, solo a dos. Son la misma pieza y no valen lo mismo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The "
+          },
+          {
+            "kind": "term",
+            "id": "piece-value",
+            "text": "piece values"
+          },
+          {
+            "kind": "text",
+            "text": " are a guide, but a piece is worth what it does. Count how many useful squares it sees: that is its "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "mobility"
+          },
+          {
+            "kind": "text",
+            "text": ". The knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " reaches eight squares; the one on "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", in the corner, only two. They are the same piece and they are not worth the same."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/8/8/8/3N4/8/8/N6K w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4",
+          "a1"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una pieza activa ataca, defiende y vigila casillas importantes; una pasiva está encerrada detrás de sus propios peones. El alfil en "
+          },
+          {
+            "kind": "term",
+            "id": "fianchetto",
+            "text": "fianchetto"
+          },
+          {
+            "kind": "text",
+            "text": ", en "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ", mira toda la "
+          },
+          {
+            "kind": "term",
+            "id": "long-diagonal",
+            "text": "gran diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " hasta "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " sin que nada lo tape. Si los peones propios se ponen en esa diagonal, el mismo alfil se queda sin trabajo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "An active piece attacks, defends and watches important squares; a passive one is shut in behind its own pawns. The bishop in "
+          },
+          {
+            "kind": "term",
+            "id": "fianchetto",
+            "text": "fianchetto"
+          },
+          {
+            "kind": "text",
+            "text": ", on "
+          },
+          {
+            "kind": "square",
+            "square": "g2"
+          },
+          {
+            "kind": "text",
+            "text": ", sees the whole "
+          },
+          {
+            "kind": "term",
+            "id": "long-diagonal",
+            "text": "long diagonal"
+          },
+          {
+            "kind": "text",
+            "text": " up to "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " with nothing in the way. If your own pawns stand on that diagonal, the same bishop is left with nothing to do."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/8/8/8/8/6P1/5PBP/6K1 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "g2",
+            "to": "a8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Qué pieza mejoras? Cada opción mueve una pieza distinta: la torre a la columna d, el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " o el rey a "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Which piece do you improve? Each option moves a different piece: the rook to the d-file, the knight from "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " or the king to "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2r3k1/pp3ppp/4b3/8/N7/1P6/P4PPP/2R3K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Rd1",
+          "Nc5",
+          "Kf1"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": ", en el borde, era tu peor pieza. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " ataca el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " y el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", y vigila el centro. Antes de mover, pregúntate qué pieza hace menos, y llévala adonde haga más."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": ", on the edge, was your worst piece. From "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " it attacks the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", and watches the centre. Before you move, ask which piece does least, and take it where it does more."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La torre ya estaba bien: en la columna c frena a la torre negra. Si se va, la columna c es de la torre negra: entra en "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " y ataca tus peones, y tu caballo sigue en el borde."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The rook was already well placed: on the c-file it holds back the black rook. If it leaves, the c-file belongs to the black rook: it gets in to "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " and attacks your pawns, and your knight is still on the edge."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Acercar el rey al centro es buena idea en el final, pero ahora deja sola tu torre de "
+            },
+            {
+              "kind": "square",
+              "square": "c1"
+            },
+            {
+              "kind": "text",
+              "text": ": la torre negra la captura con "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Bringing the king towards the centre is a good idea in the endgame, but right now it leaves your rook on "
+            },
+            {
+              "kind": "square",
+              "square": "c1"
+            },
+            {
+              "kind": "text",
+              "text": " alone: the black rook takes it with "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cada pieza tiene su sitio. La torre busca "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columnas"
+          },
+          {
+            "kind": "text",
+            "text": " sin peones, por donde puede entrar en el campo rival. Y en el final, cuando quedan pocas piezas, el rey deja de esconderse: sale al centro y pelea como una pieza más. Aquí la torre blanca entra por la columna d hasta la séptima fila, y el rey blanco en "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " está mucho mejor que el negro en "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Each piece has its place. The rook looks for "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "files"
+          },
+          {
+            "kind": "text",
+            "text": " without pawns, through which it can get into the rival camp. And in the endgame, when few pieces are left, the king stops hiding: he comes out to the centre and fights like any other piece. Here the white rook gets in along the d-file to the seventh rank, and the white king on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " is much better placed than the black one on "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "1r6/5pk1/6p1/8/4K3/8/5P2/3R4 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4"
+        ],
+        "arrows": [
+          {
+            "from": "d1",
+            "to": "d7"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Final de peones. El rey negro ya está en el centro. ¿Llevas tu rey al centro o avanzas un peón?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Pawn endgame. The black king is already in the centre. Do you bring your king to the centre or push a pawn?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/pp6/8/8/3k4/8/PP6/5K2 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "a4",
+          "Ke2",
+          "b4"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: en el final el rey es una pieza más. Desde "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " llega a tiempo de defender sus peones y la partida queda en tablas. Si avanzas un peón, el rey negro entra antes."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: in the endgame the king is one more piece. From "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " he arrives in time to defend his pawns and the game is a draw. If you push a pawn, the black king gets in first."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón avanza, pero tu rey se queda lejos. El rey negro llega primero a tus peones y se los come."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn moves on, but your king stays far away. The black king reaches your pawns first and eats them."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón avanza solo y sin apoyo, y tu rey sigue lejos. El rey negro gana la carrera y se come tus peones."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn moves on alone and without support, and your king is still far away. The black king wins the race and eats your pawns."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Quien tiene las piezas más activas suele llevar la "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "iniciativa"
+          },
+          {
+            "kind": "text",
+            "text": ": hace amenazas, y el rival tiene que contestarlas en lugar de seguir su plan. La "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "iniciativa"
+          },
+          {
+            "kind": "text",
+            "text": " no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ataca los peones negros y el rey blanco está en el centro: son las negras las que tienen que defenderse."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Whoever has the more active pieces usually holds the "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "initiative"
+          },
+          {
+            "kind": "text",
+            "text": ": he makes threats, and the rival has to answer them instead of following his own plan. The "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "initiative"
+          },
+          {
+            "kind": "text",
+            "text": " is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh attacks the black pawns and the white king stands in the centre: it is Black who has to defend."
+          }
+        ]
+      },
+      "board": {
+        "fen": "1r4k1/3R1ppp/8/8/4K3/8/5PPP/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d7",
+          "e4"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El peón negro de "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": " ataca tu caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". Casi todas sus casillas están vigiladas. Encuentra la única jugada que no te deja sin caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": " attacks your knight on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". Nearly all of its squares are watched. Find the only move that does not leave you without your knight."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1q2rk1/1p2ppbp/p3bnp1/1N6/8/P1P2N2/1PQ1BPPP/R4RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nbd4"
+        ],
+        "onlyMove": true
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: en "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " el caballo está defendido por el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " y por el otro caballo, y desde el centro tiene buena "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "movilidad"
+          },
+          {
+            "kind": "text",
+            "text": ". Las demás casillas estaban vigiladas: cualquier otra jugada pierde el caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " the knight is defended by the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c3"
+          },
+          {
+            "kind": "text",
+            "text": " and by the other knight, and from the centre it has good "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "mobility"
+          },
+          {
+            "kind": "text",
+            "text": ". The other squares were watched: any other move loses the knight."
+          }
+        ]
+      },
+      "wrong": {
+        "Nd6": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "En "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " lo captura el peón de "
+            },
+            {
+              "kind": "square",
+              "square": "e7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "On "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "e7"
+            },
+            {
+              "kind": "text",
+              "text": " takes it."
+            }
+          ]
+        },
+        "Nc7": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "En "
+            },
+            {
+              "kind": "square",
+              "square": "c7"
+            },
+            {
+              "kind": "text",
+              "text": " lo captura la dama negra."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "On "
+            },
+            {
+              "kind": "square",
+              "square": "c7"
+            },
+            {
+              "kind": "text",
+              "text": " the black queen takes it."
+            }
+          ]
+        },
+        "Na7": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "En "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " lo captura la torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "On "
+            },
+            {
+              "kind": "square",
+              "square": "a7"
+            },
+            {
+              "kind": "text",
+              "text": " the rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " takes it."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Repasa las casillas del caballo una a una. Solo una está defendida por un peón tuyo y no la ataca ningún peón negro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Go through the knight’s squares one by one. Only one is defended by a pawn of yours and attacked by no black pawn."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: una pieza vale por su "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "movilidad"
+          },
+          {
+            "kind": "text",
+            "text": ", por las casillas útiles que ve. Lleva tu peor pieza adonde haga más: el caballo al centro, el alfil a una diagonal abierta como la "
+          },
+          {
+            "kind": "term",
+            "id": "long-diagonal",
+            "text": "gran diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre a una columna sin peones y, en el final, el rey al centro. Quien tiene las piezas activas suele tener la "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "iniciativa"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: a piece is worth its "
+          },
+          {
+            "kind": "term",
+            "id": "mobility",
+            "text": "mobility"
+          },
+          {
+            "kind": "text",
+            "text": ", the useful squares it sees. Take your worst piece where it does more: the knight to the centre, the bishop to an open diagonal such as the "
+          },
+          {
+            "kind": "term",
+            "id": "long-diagonal",
+            "text": "long diagonal"
+          },
+          {
+            "kind": "text",
+            "text": ", the rook to a file without pawns and, in the endgame, the king to the centre. Whoever has the active pieces usually has the "
+          },
+          {
+            "kind": "term",
+            "id": "initiative",
+            "text": "initiative"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "7k/8/8/8/3N4/8/8/N6K w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4"
+        ]
+      }
+    }
+  ]
+}
