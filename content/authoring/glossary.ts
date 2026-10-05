@@ -544,7 +544,7 @@ export const glossary: GlossarySpec[] = [
       en: 'Keeping both bishops when the opponent has already lost one of theirs. Together they reach squares of both colours and, in open positions with few pawns in the way, they are usually worth a little more than bishop and knight or two knights.',
     },
     example: {
-      fen: '4k3/pp3ppp/2n1b3/8/8/2B5/PP2BPPP/4K3 w - - 0 1',
+      fen: '4k3/pp3p1p/2n1b1p1/8/8/2B5/PP2BPPP/4K3 w - - 0 1',
       orientation: 'white',
       highlights: ['c3', 'e2'],
       arrows: [],
