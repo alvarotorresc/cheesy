@@ -241,11 +241,11 @@ describe('glossary', () => {
       const illegal = term.example.arrows
         .filter((a) => a.move)
         .filter((a) => {
-          const move = normalizeMove(position, {
-            from: parseSquare(a.from)!,
-            to: parseSquare(a.to)!,
-          });
-          return !position.isLegal(move);
+          const plain = { from: parseSquare(a.from)!, to: parseSquare(a.to)! };
+          // A pawn reaching the last rank is drawn as one arrow: its promotion counts as the move.
+          return [plain, { ...plain, promotion: 'queen' as const }].every(
+            (m) => !position.isLegal(normalizeMove(position, m)),
+          );
         })
         .map((a) => `${a.from}-${a.to}`);
       expect(illegal).toEqual([]);

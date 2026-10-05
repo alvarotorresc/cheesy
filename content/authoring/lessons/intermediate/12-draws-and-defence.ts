@@ -65,8 +65,8 @@ export const drawsAndDefence: LessonSpec = {
         en: 'Your king on h1 has no moves and your pawn is blocked. If your rook disappears, what happens? Offer it with [check](check).',
       },
       explanation: {
-        es: 'Eso es. La torre da [jaque](check) en f5. Si el rey la captura, no te queda ninguna jugada legal y no estás en jaque: [ahogado](stalemate). Y si no la captura, tu torre lo sigue persiguiendo con jaques y no lo deja en paz. Una torre así se llama a veces «torre loca».',
-        en: 'That is it. The rook gives [check](check) on f5. If the king takes it, you have no legal move left and you are not in check: [stalemate](stalemate). And if he does not take it, your rook keeps chasing him with checks and gives him no peace. A rook like this is sometimes called a “desperado rook”.',
+        es: 'Eso es. La torre da [jaque](check) en f5. Si el rey la captura, no te queda ninguna jugada legal y no estás en jaque: [ahogado](stalemate). Y si no la captura, tu torre lo sigue persiguiendo con jaques y no lo deja en paz.',
+        en: 'That is it. The rook gives [check](check) on f5. If the king takes it, you have no legal move left and you are not in check: [stalemate](stalemate). And if he does not take it, your rook keeps chasing him with checks and gives him no peace.',
       },
     },
     {
@@ -108,15 +108,15 @@ export const drawsAndDefence: LessonSpec = {
     {
       kind: 'play-out',
       text: {
-        es: 'Último reto: tienes rey y peón contra dama. Parece perdido, pero es tablas si sabes usar el [ahogado](stalemate). Aguanta: no te separes del peón.',
-        en: 'Last challenge: you have king and pawn against a queen. It looks lost, but it is a draw if you know how to use [stalemate](stalemate). Hold on: do not leave your pawn.',
+        es: 'Último reto: tienes rey y peón contra dama. Parece perdido, pero con un peón de c es tablas si sabes usar el [ahogado](stalemate). Aguanta: cada vez que te den [jaque](check), lleva el rey hacia la esquina o delante del peón.',
+        en: 'Last challenge: you have king and pawn against a queen. It looks lost, but with a c-pawn it is a draw if you know how to use [stalemate](stalemate). Hold on: every time you get a [check](check), take the king towards the corner or in front of the pawn.',
       },
       fen: '8/1KP5/8/8/8/8/6q1/4k3 w - - 0 1',
       goal: 'draw',
       playerSide: 'white',
       hint: {
-        es: 'Quédate junto al peón. Cuando te den [jaque](check), a veces lo mejor es meter el rey en la esquina: si la dama captura el peón, puede quedar [ahogado](stalemate).',
-        en: 'Stay next to the pawn. When you get a [check](check), sometimes the best thing is to put the king in the corner: if the queen takes the pawn, it may be [stalemate](stalemate).',
+        es: 'Sal del [jaque](check) a a7, b8 o c8; si te vas a b6 o a a6, pierdes. Con tu rey en a8, si la dama captura el peón de c7, es [ahogado](stalemate).',
+        en: 'Get out of [check](check) to a7, b8 or c8; if you go to b6 or a6, you lose. With your king on a8, if the queen takes the pawn on c7, it is [stalemate](stalemate).',
       },
     },
     {

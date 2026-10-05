@@ -607,12 +607,12 @@ export const glossary: GlossarySpec[] = [
       en: 'Instead of making the move that seems forced, such as taking back a piece, you first play another one the opponent has to answer, often a [check](check), and only then make the expected move.',
     },
     example: {
-      fen: '5rk1/pp2bppp/8/3N4/8/8/PP3PPP/3q1RK1 w - - 0 1',
+      fen: 'r5k1/1P3pp1/7p/8/8/7P/5NPK/3q4 w - - 0 1',
       orientation: 'white',
-      highlights: ['d1', 'e7'],
+      highlights: ['d1', 'a8'],
       arrows: [
-        { from: 'd5', to: 'e7', move: true },
-        { from: 'f1', to: 'd1', move: false },
+        { from: 'b7', to: 'a8', move: true },
+        { from: 'f2', to: 'd1', move: false },
       ],
     },
     group: 'tactics',
@@ -629,14 +629,14 @@ export const glossary: GlossarySpec[] = [
     id: 'x-ray',
     name: { es: 'Rayos X', en: 'X-ray' },
     definition: {
-      es: 'Una dama, una torre o un alfil ataca o defiende una casilla a través de otra pieza que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego.',
-      en: 'A queen, rook or bishop attacks or defends a square through another piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play.',
+      es: 'Una dama, una torre o un alfil ataca o defiende una casilla a través de una pieza rival que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego. Si la pieza de delante es propia, no son rayos X sino una batería.',
+      en: 'A queen, rook or bishop attacks or defends a square through an enemy piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play. If the piece in front is your own, it is not an x-ray but a battery.',
     },
     example: {
-      fen: '3r2k1/5ppp/8/8/8/8/3Q1PPP/3R2K1 w - - 0 1',
+      fen: '6k1/pp3ppp/3Npn2/3r4/8/8/PP2KPPP/3R4 b - - 0 1',
       orientation: 'white',
-      highlights: ['d8'],
-      arrows: [{ from: 'd1', to: 'd8', move: false }],
+      highlights: ['d6'],
+      arrows: [{ from: 'd1', to: 'd6', move: false }],
     },
     group: 'tactics',
     level: 'intermediate',
@@ -893,8 +893,8 @@ export const glossary: GlossarySpec[] = [
     id: 'forcing-move',
     name: { es: 'Jugada forzante', en: 'Forcing move' },
     definition: {
-      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Como obliga a contestar, es la más fácil de calcular, y conviene mirarlas antes que las demás.',
-      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Since it must be answered, it is the easiest kind to calculate, and it pays to look at these before any other move.',
+      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Las jugadas forzantes obligan a contestar, así que son las más fáciles de calcular, y conviene mirarlas antes que las demás.',
+      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Forcing moves must be answered, so they are the easiest to calculate, and it pays to look at them before any other move.',
     },
     example: {
       fen: '6k1/5ppp/8/8/1q6/8/5PPP/2Q3K1 w - - 0 1',
@@ -1008,8 +1008,8 @@ export const glossary: GlossarySpec[] = [
     id: 'perpetual-check',
     name: { es: 'Jaque perpetuo', en: 'Perpetual check' },
     definition: {
-      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da no puede ganar, pero el rival tampoco, y la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
-      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them cannot win, but neither can the opponent, and the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
+      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da se asegura al menos las tablas, y si sigue dándolos la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
+      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them secures at least a draw, and if it keeps giving them the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
     },
     example: {
       fen: '7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1',
