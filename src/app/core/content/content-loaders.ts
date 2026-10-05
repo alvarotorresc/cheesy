@@ -8,6 +8,8 @@ import type {
   LessonSummary,
   OpeningSummary,
   OpeningTree,
+  PuzzleCatalog,
+  PuzzleFile,
 } from './content.types';
 
 /** How the content files are fetched. */
@@ -104,4 +106,35 @@ export const createFetchLessonLoaders = (baseUrl: string): LessonLoaders => {
 export const LESSON_LOADERS = new InjectionToken<LessonLoaders>('LESSON_LOADERS', {
   providedIn: 'root',
   factory: () => createFetchLessonLoaders(inject(DOCUMENT).baseURI),
+});
+
+/** How the Lichess puzzles of "Practise more" are fetched: a token of its own, like the lessons. */
+export interface PuzzleLoaders {
+  catalog(): Promise<PuzzleCatalog>;
+  /** Only called with lesson ids taken from the catalogue. */
+  puzzles(lessonId: string): Promise<PuzzleFile>;
+}
+
+export const createFetchPuzzleLoaders = (baseUrl: string): PuzzleLoaders => {
+  const file = (path: string) => new URL(`${CONTENT_PATH}${path}`, baseUrl);
+  return {
+    catalog: () =>
+      download(
+        file('puzzle-catalog.json'),
+        (data) => isRecord(data) && isRecord(data['source']) && isListOf(data['lessons'], 'lesson'),
+      ),
+    puzzles: async (lessonId) => {
+      if (!isContentId(lessonId)) throw new Error(`Invalid lesson id: ${lessonId}`);
+      return download(
+        file(`puzzles/${lessonId}.json`),
+        (data) =>
+          isRecord(data) && data['lesson'] === lessonId && isListOf(data['puzzles'], 'id', 'fen'),
+      );
+    },
+  };
+};
+
+export const PUZZLE_LOADERS = new InjectionToken<PuzzleLoaders>('PUZZLE_LOADERS', {
+  providedIn: 'root',
+  factory: () => createFetchPuzzleLoaders(inject(DOCUMENT).baseURI),
 });

@@ -3,6 +3,7 @@ import {
   CONTENT_LOADERS,
   GLOSSARY_LOADER,
   LESSON_LOADERS,
+  PUZZLE_LOADERS,
   type ContentLoaders,
 } from './content-loaders';
 import { bundledContentLoaders } from './testing';
@@ -13,6 +14,8 @@ import type {
   LessonSummary,
   OpeningSummary,
   OpeningTree,
+  PuzzleCatalog,
+  PuzzleFile,
 } from './content.types';
 import { OpeningBook } from './opening-book';
 
@@ -324,5 +327,66 @@ describe('ContentService lessons', () => {
 
     expect(loaders.catalog).toHaveBeenCalledTimes(1);
     expect(loaders.lesson).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('ContentService puzzles', () => {
+  const CATALOG: PuzzleCatalog = {
+    source: {
+      url: 'https://database.lichess.org/lichess_db_puzzle.csv.zst',
+      lastModified: '2026-10-02T08:51:45.000Z',
+      sha256: 'a'.repeat(64),
+      bytes: 1,
+      rows: 1,
+      scriptVersion: 1,
+    },
+    lessons: [{ lesson: 'the-fork', count: 1, themes: ['fork'] }],
+  };
+  const fileOf = (lesson: string): PuzzleFile => ({
+    lesson,
+    themes: { fork: 'fork' },
+    puzzles: [
+      { id: 'KEPe0', fen: '8/8/8/8/8/8/8/8 w - - 0 1', moves: [], rating: 915, themes: [] },
+    ],
+  });
+
+  const setupPuzzles = () => {
+    const loaders = {
+      catalog: vi.fn(async () => CATALOG),
+      puzzles: vi.fn(async (id: string) => fileOf(id)),
+    };
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: CONTENT_LOADERS, useValue: bundledContentLoaders },
+        { provide: PUZZLE_LOADERS, useValue: loaders },
+      ],
+    });
+    return { content: TestBed.inject(ContentService), loaders };
+  };
+
+  it('should read the catalogue and the puzzles of a lesson in it', async () => {
+    const { content } = setupPuzzles();
+
+    expect(await content.puzzleCatalog()).toEqual(CATALOG);
+    expect((await content.puzzles('the-fork'))?.puzzles.map((p) => p.id)).toEqual(['KEPe0']);
+  });
+
+  it('should resolve a lesson without puzzles to undefined without downloading it', async () => {
+    const { content, loaders } = setupPuzzles();
+
+    expect(await content.puzzles('the-pin')).toBeUndefined();
+    expect(loaders.puzzles).not.toHaveBeenCalled();
+  });
+
+  it('should download the catalogue and each file once, and again after a failure', async () => {
+    const { content, loaders } = setupPuzzles();
+    loaders.puzzles.mockRejectedValueOnce(new Error('offline'));
+
+    await expect(content.puzzles('the-fork')).rejects.toThrow('offline');
+    await content.puzzles('the-fork');
+    await content.puzzles('the-fork');
+
+    expect(loaders.catalog).toHaveBeenCalledTimes(1);
+    expect(loaders.puzzles).toHaveBeenCalledTimes(2);
   });
 });

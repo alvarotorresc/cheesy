@@ -1,11 +1,13 @@
-export { isContentId } from './content-id';
+export { isContentId, isPuzzleId } from './content-id';
 export { ContentService } from './content.service';
 export {
   CONTENT_LOADERS,
   GLOSSARY_LOADER,
   LESSON_LOADERS,
+  PUZZLE_LOADERS,
   type ContentLoaders,
   type LessonLoaders,
+  type PuzzleLoaders,
 } from './content-loaders';
 export { OpeningBook, type BookLookup, type BookNode } from './opening-book';
 export type {
@@ -27,6 +29,10 @@ export type {
   OpeningSummary,
   OpeningTree,
   PlayOutStep,
+  Puzzle,
+  PuzzleCatalog,
+  PuzzleCatalogEntry,
+  PuzzleFile,
   ReachEnemy,
   ReachPiece,
   ReachRole,

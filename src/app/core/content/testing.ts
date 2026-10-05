@@ -1,4 +1,4 @@
-import type { ContentLoaders, LessonLoaders } from './content-loaders';
+import type { ContentLoaders, LessonLoaders, PuzzleLoaders } from './content-loaders';
 import type {
   CuratedPosition,
   EndgamePosition,
@@ -7,6 +7,8 @@ import type {
   LessonSummary,
   OpeningSummary,
   OpeningTree,
+  PuzzleCatalog,
+  PuzzleFile,
   RichText,
 } from './content.types';
 
@@ -34,6 +36,12 @@ const dataFile = async (path: string): Promise<unknown> =>
 export const bundledLessonLoaders: LessonLoaders = {
   catalog: async () => (await dataFile('lesson-catalog')) as LessonSummary[],
   lesson: async (id) => (await dataFile(`lessons/${id}`)) as Lesson,
+};
+
+/** The Lichess puzzles imported straight from the source tree, like `bundledLessonLoaders`. */
+export const bundledPuzzleLoaders: PuzzleLoaders = {
+  catalog: async () => (await dataFile('puzzle-catalog')) as PuzzleCatalog,
+  puzzles: async (lessonId) => (await dataFile(`puzzles/${lessonId}`)) as PuzzleFile,
 };
 
 /** The glossary imported straight from the source tree, like `bundledContentLoaders`. */

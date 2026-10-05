@@ -1,5 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { CONTENT_LOADERS, GLOSSARY_LOADER, LESSON_LOADERS } from './content-loaders';
+import {
+  CONTENT_LOADERS,
+  GLOSSARY_LOADER,
+  LESSON_LOADERS,
+  PUZZLE_LOADERS,
+} from './content-loaders';
 import type {
   CuratedPosition,
   EndgamePosition,
@@ -8,12 +13,14 @@ import type {
   LessonSummary,
   OpeningSummary,
   OpeningTree,
+  PuzzleCatalog,
+  PuzzleFile,
 } from './content.types';
 import { OpeningBook } from './opening-book';
 
 /**
- * Loads the fixed content of the app (openings, endgames, curated positions and the glossary) on
- * demand.
+ * Loads the fixed content of the app (openings, endgames, curated positions, the glossary, the
+ * lessons and the Lichess puzzles) on demand.
  *
  * Every file is downloaded once and kept in memory; a failed download is forgotten, so the next
  * call tries again. Ids usually come from the URL, so an unknown id resolves to undefined instead
@@ -24,6 +31,7 @@ export class ContentService {
   private readonly loaders = inject(CONTENT_LOADERS);
   private readonly glossaryLoader = inject(GLOSSARY_LOADER);
   private readonly lessonLoaders = inject(LESSON_LOADERS);
+  private readonly puzzleLoaders = inject(PUZZLE_LOADERS);
   private readonly cache = new Map<string, Promise<unknown>>();
 
   /** Every opening, in display order, without its move tree. */
@@ -77,6 +85,18 @@ export class ContentService {
   async lesson(id: string): Promise<Lesson | undefined> {
     if (!(await this.lessonCatalog()).some((lesson) => lesson.id === id)) return undefined;
     return this.cached(`lesson:${id}`, () => this.lessonLoaders.lesson(id));
+  }
+
+  /** The lessons that have Lichess puzzles, and where the puzzles come from. */
+  puzzleCatalog(): Promise<PuzzleCatalog> {
+    return this.cached('puzzle-catalog', () => this.puzzleLoaders.catalog());
+  }
+
+  /** The puzzles of one lesson; undefined when the lesson has none. */
+  async puzzles(lessonId: string): Promise<PuzzleFile | undefined> {
+    const { lessons } = await this.puzzleCatalog();
+    if (!lessons.some((entry) => entry.lesson === lessonId)) return undefined;
+    return this.cached(`puzzles:${lessonId}`, () => this.puzzleLoaders.puzzles(lessonId));
   }
 
   /** Shared by `opening` and `openingBook`, so the file is downloaded once. */
