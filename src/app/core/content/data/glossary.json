@@ -1949,20 +1949,20 @@
       ]
     },
     "example": {
-      "fen": "5rk1/pp2bppp/8/3N4/8/8/PP3PPP/3q1RK1 w - - 0 1",
+      "fen": "r5k1/1P3pp1/7p/8/8/7P/5NPK/3q4 w - - 0 1",
       "orientation": "white",
       "highlights": [
         "d1",
-        "e7"
+        "a8"
       ],
       "arrows": [
         {
-          "from": "d5",
-          "to": "e7",
+          "from": "b7",
+          "to": "a8",
           "move": true
         },
         {
-          "from": "f1",
+          "from": "f2",
           "to": "d1",
           "move": false
         }
