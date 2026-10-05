@@ -99,5 +99,6 @@ export const PUZZLE_CONFIG: PuzzleConfig = {
   perLesson: PUZZLES_PER_LESSON,
   lengthQuota: LENGTH_QUOTA,
   lengthQuotaByLesson: LENGTH_QUOTA_BY_LESSON,
+  lengthQuotaByTheme: {},
   excluded: EXCLUDED_IDS,
 };

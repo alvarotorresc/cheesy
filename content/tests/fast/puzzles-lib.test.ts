@@ -56,6 +56,7 @@ const config: PuzzleConfig = {
   perLesson: 50,
   lengthQuota: { maxOne: 0.2, minThree: 0.2 },
   lengthQuotaByLesson: { 'forcing-moves': { minThree: 0.4 } },
+  lengthQuotaByTheme: {},
   excluded: {},
 };
 
@@ -250,6 +251,16 @@ describe('selection', () => {
     expect(keys).toEqual(
       [...keys].sort((x, y) => +x[0] - +y[0] || String(x[1]).localeCompare(String(y[1]))),
     );
+  });
+
+  it('lets a theme quota win over the lesson quota', () => {
+    const lesson: PuzzleConfig = {
+      ...forkOnly,
+      lengthQuotaByLesson: { 'the-fork': { minThree: 0.4, maxOne: 0.1 } },
+      lengthQuotaByTheme: { fork: { minThree: 0, maxOne: 0 } },
+    };
+    const [chosen] = selectFrom(pool(), lesson);
+    expect(chosen.puzzles.every((p) => p.moves.length === 4)).toBe(true);
   });
 
   it('spreads the picks over the rating bands', () => {
