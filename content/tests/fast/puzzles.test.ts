@@ -125,13 +125,16 @@ describe('puzzle files', () => {
       if (p.moves.length < 2 || p.moves.length > 6 || p.moves.length % 2 !== 0)
         return [`${p.moves.length} moves`];
       let pos: Chess = positionFromFen(p.fen);
+      const opponent = pos.turn;
       for (const [i, san] of p.moves.entries()) {
+        // The FEN is before the opponent's move (moves[0]): the student plays the other side.
+        if ((pos.turn === opponent) !== (i % 2 === 0))
+          return [`${san} is played by the wrong side`];
         if (pos.isEnd()) return [`the game is over before ${san}`];
         const move = parseSan(pos, san);
         if (!move) return [`illegal move ${san}`];
         if (makeSan(pos, move) !== san) return [`${san} is not canonical SAN`];
         pos = playSan(pos, san)!;
-        if (i === 0 && pos.turn === positionFromFen(p.fen).turn) return ['turn did not change'];
       }
       return [];
     });
@@ -169,13 +172,13 @@ describe('puzzle files', () => {
     expect(exercises.size).toBeGreaterThan(0);
     const seen = new Set<string>();
     const problems = each((p) => {
-      const [start, afterOpening] = replay(p)
+      const boards = replay(p)
         .slice(0, 2)
         .map((pos) => makeBoardFen(pos.board));
       const found: string[] = [];
-      if (exercises.has(start) || exercises.has(afterOpening)) found.push('shows an exercise');
-      if (seen.has(afterOpening)) found.push('same board as another puzzle');
-      seen.add(afterOpening);
+      if (boards.some((board) => exercises.has(board))) found.push('shows an exercise');
+      if (boards.some((board) => seen.has(board))) found.push('same board as another puzzle');
+      for (const board of boards) seen.add(board);
       return found;
     });
     expect(problems).toEqual([]);

@@ -289,7 +289,8 @@ describe('selection', () => {
     const ids = chosen.puzzles.map((p) => p.id);
     expect(ids).not.toContain('f0000');
     expect(ids).not.toContain('f0001');
-    expect(blocked.size).toBe(2 + 50);
+    expect(blocked.size).toBe(2 + 2 * chosen.puzzles.length);
+    expect(blocked.has(`start-${ids[0]}`)).toBe(true);
   });
 
   it('shares a lesson between its themes without repeating a puzzle', () => {

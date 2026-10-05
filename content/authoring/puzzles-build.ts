@@ -8,6 +8,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { createInterface } from 'node:readline';
+import { pipeline } from 'node:stream/promises';
 import { createZstdDecompress } from 'node:zlib';
 import { LICHESS_THEMES, THEME_TERMS } from './lessons/lichess-themes.ts';
 import {
@@ -43,6 +44,13 @@ if (!file) {
   console.error('usage: pnpm content:puzzles <lichess_db_puzzle.csv.zst> [--last-modified=<date>]');
   process.exit(1);
 }
+if (lastModifiedArg !== undefined && Number.isNaN(Date.parse(lastModifiedArg))) {
+  console.error(`--last-modified: "${lastModifiedArg}" is not a date`);
+  process.exit(1);
+}
+
+// The database has over five million puzzles: fewer rows mean a cut or damaged file.
+const MIN_ROWS = 5_000_000;
 
 // Keep the best candidates of each bucket: far more than a lesson can take, so that skipping the
 // puzzles whose board is already in use never leaves a bucket short.
@@ -68,6 +76,11 @@ const sha256 = async (f: string): Promise<string> => {
 
 const started = Date.now();
 const { size, mtime } = statSync(file);
+if (lastModifiedArg === undefined)
+  console.warn(
+    `warning: no --last-modified, using the modified time of the file (${mtime.toISOString()})`,
+  );
+const lastModified = new Date(lastModifiedArg ?? mtime).toISOString();
 const digest = await sha256(file);
 console.log(`sha256 ${digest}, ${size} bytes`);
 
@@ -75,26 +88,33 @@ const pool = new PuzzlePool(POOL_CAP);
 let rows = 0;
 let header = true;
 let illegal = 0;
-const input = createReadStream(file).pipe(createZstdDecompress());
-for await (const line of createInterface({ input, crlfDelay: Infinity })) {
-  if (header) {
-    if (!checkHeader(line)) throw new Error(`unknown header: ${line}`);
-    header = false;
-    continue;
+const input = createZstdDecompress();
+// A cut or damaged file makes the pipeline fail, which must stop the script, not end the loop early.
+const reading = pipeline(createReadStream(file), input);
+const lines = async (): Promise<void> => {
+  for await (const line of createInterface({ input, crlfDelay: Infinity })) {
+    if (header) {
+      if (!checkHeader(line)) throw new Error(`unknown header: ${line}`);
+      header = false;
+      continue;
+    }
+    if (line === '') continue;
+    rows++;
+    const row = parsePuzzleRow(line);
+    if (!row) throw new Error(`row ${rows}: cannot read ${line}`);
+    const match = lessonOf(row, PUZZLE_CONFIG);
+    if (!match || !lessons.includes(match.lesson)) continue;
+    const candidate = candidateOf(row, match.themes);
+    if (!candidate) {
+      illegal++;
+      continue;
+    }
+    pool.add(match.lesson, candidate);
   }
-  if (line === '') continue;
-  rows++;
-  const row = parsePuzzleRow(line);
-  if (!row) throw new Error(`row ${rows}: cannot read ${line}`);
-  const match = lessonOf(row, PUZZLE_CONFIG);
-  if (!match || !lessons.includes(match.lesson)) continue;
-  const candidate = candidateOf(row, match.themes);
-  if (!candidate) {
-    illegal++;
-    continue;
-  }
-  pool.add(match.lesson, candidate);
-}
+};
+await Promise.all([reading, lines()]);
+if (rows < MIN_ROWS)
+  throw new Error(`only ${rows} rows read, at least ${MIN_ROWS} expected: is the file cut?`);
 console.log(`${rows} rows read, ${illegal} candidates with an illegal line skipped`);
 
 const blocked = exerciseBoards(loadLessons(), loadPositions(), loadEndgames());
@@ -127,7 +147,7 @@ for (const { lesson, themes, puzzles } of picked) {
 const catalog: PuzzleCatalog = {
   source: {
     url: PUZZLE_SOURCE_URL,
-    lastModified: new Date(lastModifiedArg ?? mtime).toISOString(),
+    lastModified,
     sha256: digest,
     bytes: size,
     rows,
