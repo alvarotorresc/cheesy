@@ -263,6 +263,35 @@ describe('selection', () => {
     expect(chosen.puzzles.every((p) => p.moves.length === 4)).toBe(true);
   });
 
+  it('fails with a clear message when a theme has too few puzzles for its quota', () => {
+    const threeFifths: PuzzleConfig = {
+      ...forkOnly,
+      lengthQuotaByTheme: { fork: { minThree: 0.6 } },
+    };
+    // 30 three-move puzzles are needed; the pool only has 8 of them in each of 8 bands, but after
+    // dropping most of them there are too few.
+    const fewThree = pool().filter((c) => c.moves.length !== 6 || +c.id.slice(1) % 4 === 0);
+    expect(() => selectFrom(fewThree, threeFifths)).toThrow(
+      /the-fork \/ fork: only \d+ of 50 puzzles \(\d+ of three moves, 30 needed\)/,
+    );
+  });
+
+  it('picks the same puzzles with a quota by theme whatever the order of the rows', () => {
+    const quota: PuzzleConfig = {
+      ...forkOnly,
+      lengthQuotaByTheme: { fork: { minThree: 0.6, maxOne: 0 } },
+    };
+    const rows = pool();
+    const shuffled = [...rows].reverse();
+    shuffled.push(...shuffled.splice(0, 53));
+    const first = selectFrom(rows, quota);
+    expect(selectFrom(rows, quota)).toEqual(first);
+    expect(selectFrom(shuffled, quota)).toEqual(first);
+    const byMoves = (m: number) => first[0].puzzles.filter((p) => p.moves.length === m * 2).length;
+    expect(byMoves(1)).toBe(0);
+    expect(byMoves(3)).toBeGreaterThanOrEqual(30);
+  });
+
   it('spreads the picks over the rating bands', () => {
     const [chosen] = selectFrom(pool());
     const bands = new Set(chosen.puzzles.map((p) => Math.floor(p.rating / 100)));
