@@ -140,8 +140,8 @@ export const advancedTactics: LessonSpec = {
         },
       ],
       explanation: {
-        es: 'Eso es: el peón ataca la torre. Si la torre captura tu dama, deja la última fila: tu torre da jaque en d8 y el peón llega a e8 y se convierte en dama. Si hace otra cosa, le va todavía peor. La torre no puede hacer las dos cosas.',
-        en: 'That is it: the pawn attacks the rook. If the rook takes your queen, it leaves the back rank: your rook checks on d8 and the pawn reaches e8 and becomes a queen. Anything else is even worse for Black. The rook cannot do both jobs.',
+        es: 'Eso es: el peón ataca la torre. Si la torre captura tu dama, deja la última fila: tu torre da jaque en d8 y el peón se convierte en dama. Si la dama negra captura tu torre, el peón la captura en d8 y corona con jaque; si el rey se aparta, corona en e8. Si hace otra cosa, le va todavía peor. La torre no puede hacer las dos cosas.',
+        en: 'That is it: the pawn attacks the rook. If the rook takes your queen, it leaves the back rank: your rook checks on d8 and the pawn becomes a queen. If the black queen takes your rook, the pawn takes her on d8 and promotes with check; if the king steps aside, it promotes on e8. Anything else is even worse for Black. The rook cannot do both jobs.',
       },
     },
     {

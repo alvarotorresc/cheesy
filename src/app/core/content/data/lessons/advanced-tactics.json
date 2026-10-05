@@ -1063,7 +1063,15 @@
           },
           {
             "kind": "text",
-            "text": " y el peón llega a "
+            "text": " y el peón se convierte en dama. Si la dama negra captura tu torre, el peón la captura en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " y corona con jaque; si el rey se aparta, corona en "
           },
           {
             "kind": "square",
@@ -1071,7 +1079,7 @@
           },
           {
             "kind": "text",
-            "text": " y se convierte en dama. Si hace otra cosa, le va todavía peor. La torre no puede hacer las dos cosas."
+            "text": ". Si hace otra cosa, le va todavía peor. La torre no puede hacer las dos cosas."
           }
         ],
         "en": [
@@ -1085,7 +1093,15 @@
           },
           {
             "kind": "text",
-            "text": " and the pawn reaches "
+            "text": " and the pawn becomes a queen. If the black queen takes your rook, the pawn takes her on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " and promotes with check; if the king steps aside, it promotes on "
           },
           {
             "kind": "square",
@@ -1093,7 +1109,7 @@
           },
           {
             "kind": "text",
-            "text": " and becomes a queen. Anything else is even worse for Black. The rook cannot do both jobs."
+            "text": ". Anything else is even worse for Black. The rook cannot do both jobs."
           }
         ]
       },
