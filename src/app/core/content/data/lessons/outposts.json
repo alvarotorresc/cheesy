@@ -206,15 +206,15 @@
           },
           {
             "kind": "text",
-            "text": " ya ha avanzado demasiado. Un caballo en "
+            "text": " ya ha avanzado demasiado. Ningún peón echará de ahí a un caballo: para quitarlo, las negras tendrán que cambiarlo por una pieza, por ejemplo con su alfil desde "
           },
           {
             "kind": "square",
-            "square": "d5"
+            "square": "e6"
           },
           {
             "kind": "text",
-            "text": " se queda ahí toda la partida."
+            "text": "."
           }
         ],
         "en": [
@@ -252,15 +252,15 @@
           },
           {
             "kind": "text",
-            "text": " has already gone too far. A knight on "
+            "text": " has already gone too far. No pawn will drive a knight away from there: to get rid of it, Black will have to trade it for a piece, for instance with his bishop from "
           },
           {
             "kind": "square",
-            "square": "d5"
+            "square": "e6"
           },
           {
             "kind": "text",
-            "text": " stays there for the whole game."
+            "text": "."
           }
         ]
       },
@@ -549,7 +549,7 @@
         ]
       },
       "board": {
-        "fen": "6k1/pp2bppp/3p4/4p3/2P1P3/3B4/PP3PPP/1N4K1 w - - 0 1",
+        "fen": "6k1/pp1nbppp/3p4/4p3/2P1P3/3B4/PP3PPP/1N4K1 w - - 0 1",
         "orientation": "white"
       },
       "answer": {
@@ -669,7 +669,7 @@
             },
             {
               "kind": "text",
-              "text": " en una jugada, y por "
+              "text": " en una jugada: tendría que dar un rodeo, por "
             },
             {
               "kind": "square",
@@ -677,11 +677,27 @@
             },
             {
               "kind": "text",
-              "text": " lo echaría el peón de "
+              "text": " y "
             },
             {
               "kind": "square",
-              "square": "a7"
+              "square": "c7"
+            },
+            {
+              "kind": "text",
+              "text": " o por "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
             },
             {
               "kind": "text",
@@ -707,7 +723,7 @@
             },
             {
               "kind": "text",
-              "text": " in one move, and on "
+              "text": " in one move: it would have to go the long way round, through "
             },
             {
               "kind": "square",
@@ -715,15 +731,31 @@
             },
             {
               "kind": "text",
-              "text": " the pawn on "
+              "text": " and "
             },
             {
               "kind": "square",
-              "square": "a7"
+              "square": "c7"
             },
             {
               "kind": "text",
-              "text": " would chase it away."
+              "text": " or through "
+            },
+            {
+              "kind": "square",
+              "square": "c2"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "e3"
+            },
+            {
+              "kind": "text",
+              "text": "."
             }
           ]
         },
@@ -807,7 +839,7 @@
           },
           {
             "kind": "text",
-            "text": ", suelen ser una ventaja: entre los dos vigilan casillas de los dos colores."
+            "text": ", suelen ser una ventaja: entre los dos vigilan casillas de los dos colores. Aquí las blancas tienen los dos alfiles, y las negras, alfil y caballo."
           }
         ],
         "en": [
@@ -822,12 +854,12 @@
           },
           {
             "kind": "text",
-            "text": ", are usually an advantage: between them they watch squares of both colours."
+            "text": ", are usually an advantage: between them they watch squares of both colours. Here White has both bishops, and Black has bishop and knight."
           }
         ]
       },
       "board": {
-        "fen": "6k1/pp3ppp/8/8/8/8/PP3PPP/2BB2K1 w - - 0 1",
+        "fen": "6k1/pp1n1ppp/4b3/8/8/8/PP3PPP/2BB2K1 w - - 0 1",
         "orientation": "white",
         "highlights": [
           "c1",
@@ -991,7 +1023,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "También cuenta quitarle casillas al rival. En la partida Tarrasch contra Euwe, de 1922, las blancas parecen ir mejor desarrolladas, pero las negras están mejor: la casilla "
+            "text": "También cuenta quitarle casillas al rival. En la partida Tarrasch contra Euwe, de 1922, las blancas parecen ir mejor desarrolladas, pero las negras no están peor: la casilla "
           },
           {
             "kind": "square",
@@ -1005,7 +1037,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "Taking squares away from the rival counts too. In the game Tarrasch against Euwe, from 1922, White seems better developed, but Black stands better: the square "
+            "text": "Taking squares away from the rival counts too. In the game Tarrasch against Euwe, from 1922, White seems better developed, but Black is no worse off: the square "
           },
           {
             "kind": "square",
