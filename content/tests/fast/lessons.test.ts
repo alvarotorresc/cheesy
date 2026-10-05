@@ -27,6 +27,7 @@ import { positionFromFen } from '../../lib/chess.ts';
 import { acceptedMoves } from '../../../src/app/core/lessons/find-move-rules.ts';
 import { validateLesson } from '../../lib/schema.ts';
 import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
+import { doubledPawns, isolatedPawns } from '../../lib/pawn-facts.ts';
 import type { GlossaryTerm, Lesson, Step } from '../../types.ts';
 
 const text = (value: string) => ({
@@ -523,4 +524,51 @@ describe('lessons', () => {
     // Option 0 is "yes", option 1 is "no" in this question.
     expect(step.answer.correct).toBe(canCastle ? 0 : 1);
   });
+});
+
+/**
+ * The fact questions of the advanced lessons that ask about a board, each with the answer computed
+ * from that board: the indices of the options that are right. Written out by hand, option by option,
+ * so that a test never reads the texts.
+ */
+const FACT_ANSWERS: Record<string, (fen: string) => number[]> = {
+  // Which white pawn is isolated: b2, d4 or f2.
+  'pawn-structure step 3': (fen) => {
+    const isolated = isolatedPawns(positionFromFen(fen), 'white');
+    return ['b2', 'd4', 'f2'].flatMap((sq, i) => (isolated.includes(sq) ? [i] : []));
+  },
+  // Which white pawns are doubled: a2 and c2, f2 and g2, or c2 and c3.
+  'pawn-structure step 5': (fen) => {
+    const doubled = doubledPawns(positionFromFen(fen), 'white');
+    return [
+      ['a2', 'c2'],
+      ['f2', 'g2'],
+      ['c2', 'c3'],
+    ].flatMap(([a, b], i) =>
+      doubled.includes(a) && doubled.includes(b) && a[0] === b[0] ? [i] : [],
+    );
+  },
+};
+
+describe('fact questions of the advanced lessons', () => {
+  const steps = loadLessons().flatMap((l) =>
+    l.level === 'advanced' ? l.steps.map((s, i) => ({ at: `${l.id} step ${i + 1}`, s })) : [],
+  );
+
+  it('have a computed answer whenever they ask about a board', () => {
+    const withBoard = steps.filter(
+      ({ s }) => s.kind === 'choice' && s.answer.by === 'fact' && s.board,
+    );
+    expect(withBoard.map(({ at }) => at).sort()).toEqual(Object.keys(FACT_ANSWERS).sort());
+  });
+
+  it.each(Object.entries(FACT_ANSWERS))(
+    '%s: the marked option is the only right one',
+    (at, answer) => {
+      const step = steps.find((x) => x.at === at)?.s;
+      if (step?.kind !== 'choice' || step.answer.by !== 'fact' || !step.board)
+        throw new Error(`${at} is not a fact question with a board`);
+      expect(answer(step.board.fen)).toEqual([step.answer.correct]);
+    },
+  );
 });

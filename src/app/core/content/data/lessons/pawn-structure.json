@@ -1,0 +1,1292 @@
+{
+  "id": "pawn-structure",
+  "level": "advanced",
+  "order": 3,
+  "title": {
+    "es": "La estructura de peones",
+    "en": "Pawn structure"
+  },
+  "summary": {
+    "es": "Peones aislados, doblados y retrasados, cadenas y rupturas: lo que dura toda la partida.",
+    "en": "Isolated, doubled and backward pawns, chains and breaks: what lasts the whole game."
+  },
+  "terms": [
+    "pawn-structure",
+    "isolated-pawn",
+    "doubled-pawns",
+    "backward-pawn",
+    "pawn-chain",
+    "pawn-break"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Pawn_structure",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://www.chess.com/lessons/skill-level/advanced"
+  ],
+  "next": {
+    "kind": "openings"
+  },
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Las piezas van y vienen, pero un peón nunca vuelve atrás. Por eso la "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-structure",
+            "text": "estructura de peones"
+          },
+          {
+            "kind": "text",
+            "text": ", cómo están colocados los peones de cada bando, cambia poco y decide los planes. Una debilidad de peones suele durar toda la partida."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Pieces come and go, but a pawn never moves back. That is why the "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-structure",
+            "text": "pawn structure"
+          },
+          {
+            "kind": "text",
+            "text": ", how each side’s pawns are placed, changes little and decides the plans. A pawn weakness usually lasts the whole game."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/4p3/8/3P4/8/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "peón aislado"
+          },
+          {
+            "kind": "text",
+            "text": " no tiene peones propios en las columnas de al lado, así que ningún peón puede defenderlo. Los "
+          },
+          {
+            "kind": "term",
+            "id": "doubled-pawns",
+            "text": "peones doblados"
+          },
+          {
+            "kind": "text",
+            "text": " están en la misma columna y se estorban. En la partida Bogoliúbov contra Rosenthal, de 1914, las negras tienen dos peones en la columna d: doblados y, además, aislados. El caballo blanco salta a "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", que ningún peón negro puede defender. Con esa jugada las blancas consiguieron bloquear los peones negros: una pieza blanca se planta delante y ya no avanzan."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "An "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "isolated pawn"
+          },
+          {
+            "kind": "text",
+            "text": " has no pawns of its own on the files next to it, so no pawn can defend it. "
+          },
+          {
+            "kind": "term",
+            "id": "doubled-pawns",
+            "text": "Doubled pawns"
+          },
+          {
+            "kind": "text",
+            "text": " stand on the same file and get in each other’s way. In the game Bogoljubov against Rosenthal, from 1914, Black has two pawns on the d-file: doubled and isolated as well. The white knight jumps to "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", which no black pawn can defend. With that move White managed to blockade the black pawns: a white piece settles in front of them and they advance no more."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2rqkb1r/pp3pp1/2n1bn1p/3p4/3p4/1PN2NP1/PB2PPBP/R2Q1RK1 w - - 0 11",
+        "orientation": "white",
+        "highlights": [
+          "d5",
+          "d4"
+        ],
+        "moves": [
+          "Nb5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Cuál de estos peones blancos está aislado?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Which of these white pawns is isolated?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/4p3/8/3P4/8/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "El de b2",
+            "en": "The one on b2"
+          },
+          {
+            "es": "El de d4",
+            "en": "The one on d4"
+          },
+          {
+            "es": "El de f2",
+            "en": "The one on f2"
+          }
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: no hay peones blancos en las columnas c ni e, así que el de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " está aislado. Ningún peón podrá defenderlo, y la casilla de delante, "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", es un buen sitio para una pieza negra."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: there are no white pawns on the c-file or the e-file, so the one on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " is isolated. No pawn will ever defend it, and the square in front of it, "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", is a good spot for a black piece."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón de "
+            },
+            {
+              "kind": "square",
+              "square": "b2"
+            },
+            {
+              "kind": "text",
+              "text": " tiene un peón blanco en la columna de al lado, el de "
+            },
+            {
+              "kind": "square",
+              "square": "a2"
+            },
+            {
+              "kind": "text",
+              "text": ": no está aislado."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "b2"
+            },
+            {
+              "kind": "text",
+              "text": " has a white pawn on the file next to it, the one on "
+            },
+            {
+              "kind": "square",
+              "square": "a2"
+            },
+            {
+              "kind": "text",
+              "text": ": it is not isolated."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El peón de "
+            },
+            {
+              "kind": "square",
+              "square": "f2"
+            },
+            {
+              "kind": "text",
+              "text": " tiene en la columna de al lado el de "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "f2"
+            },
+            {
+              "kind": "text",
+              "text": " has the one on "
+            },
+            {
+              "kind": "square",
+              "square": "g2"
+            },
+            {
+              "kind": "text",
+              "text": " on the file next to it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "backward-pawn",
+            "text": "peón retrasado"
+          },
+          {
+            "kind": "text",
+            "text": " se ha quedado detrás de los peones de las columnas de al lado y no puede avanzar sin perderse. Aquí el peón negro de "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " no puede avanzar: en "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " está el caballo blanco, protegido por el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", y ningún peón negro puede echarlo. Además, la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " d queda semiabierta para las blancas: en cuanto el caballo se aparte, su torre atacará ese peón por ella."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "backward-pawn",
+            "text": "backward pawn"
+          },
+          {
+            "kind": "text",
+            "text": " has been left behind the pawns on the files next to it and cannot advance without being lost. Here the black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " cannot advance: the white knight stands on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", protected by the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", and no black pawn can chase it away. And the d-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " is half-open for White: as soon as the knight steps aside, his rook will attack that pawn along it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/3p4/3Np3/4P3/8/PPP2PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d6"
+        ],
+        "arrows": [
+          {
+            "from": "d1",
+            "to": "d5"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "¿Qué peones blancos están doblados?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Which white pawns are doubled?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/4p3/8/8/2P5/P1P2PPP/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "Los de a2 y c2",
+            "en": "The ones on a2 and c2"
+          },
+          {
+            "es": "Los de f2 y g2",
+            "en": "The ones on f2 and g2"
+          },
+          {
+            "es": "Los de c2 y c3",
+            "en": "The ones on c2 and c3"
+          }
+        ],
+        "correct": 2
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: los dos están en la columna c. El de delante tapa al de detrás, y ninguno de los dos puede defender al otro. Suelen aparecer tras una captura con peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: both are on the c-file. The front one blocks the back one, and neither can defend the other. They usually appear after a capture with a pawn."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Están en columnas distintas, la a y la c. Doblados son dos peones en la misma columna."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "They are on different files, a and c. Doubled means two pawns on the same file."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Están en columnas distintas, la f y la g: no están doblados."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "They are on different files, f and g: they are not doubled."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-chain",
+            "text": "cadena de peones"
+          },
+          {
+            "kind": "text",
+            "text": " es una fila diagonal de peones que se protegen unos a otros. Su punto débil es la base, el peón de atrás, que nadie protege. Se ataca con una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "ruptura"
+          },
+          {
+            "kind": "text",
+            "text": ": avanzar un peón contra ella. Aquí la cadena blanca es "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", con la base en "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", y las negras la atacan avanzando el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-chain",
+            "text": "pawn chain"
+          },
+          {
+            "kind": "text",
+            "text": " is a diagonal line of pawns that protect one another. Its weak point is the base, the rear pawn, which nothing protects. You attack it with a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "pawn break"
+          },
+          {
+            "kind": "text",
+            "text": ": pushing a pawn against it. Here the white chain is "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", with its base on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": ", and Black attacks it by pushing the pawn from "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/ppp2ppp/3p4/3Pp3/4P3/8/PPP2PPP/6K1 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "e4"
+        ],
+        "moves": [
+          "f5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La cadena blanca es "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". Juegas con negras. Tres rupturas candidatas: avanzar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": ", el de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " o el de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Cuál ataca la base de la cadena?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The white chain is "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ". You play Black. Three candidate pawn breaks: push the pawn from "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": ", the one from "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " or the one from "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": ". Which one attacks the base of the chain?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bq1rk1/1pp2ppp/4p3/3pP3/3Pn3/3B1N2/PP3PPP/R2Q1RK1 b - - 0 1",
+        "orientation": "black"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "f6",
+          "c5",
+          "b5"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la base es el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", el que ningún peón protege, y el peón en "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " lo ataca. Si cae la base, el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " se queda sin apoyo. Además, tu caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " ya presiona desde el centro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the base is the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ", the one no pawn protects, and the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " attacks it. If the base falls, the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": " is left without support. And your knight on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " is already pressing from the centre."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ese peón ataca el de "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": ", la cabeza de la cadena, no la base: el de "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " lo sigue protegiendo. Y además tu peón de "
+            },
+            {
+              "kind": "square",
+              "square": "e6"
+            },
+            {
+              "kind": "text",
+              "text": " se queda sin el apoyo del de "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "That pawn attacks the one on "
+            },
+            {
+              "kind": "square",
+              "square": "e5"
+            },
+            {
+              "kind": "text",
+              "text": ", the head of the chain, not its base: the one on "
+            },
+            {
+              "kind": "square",
+              "square": "d4"
+            },
+            {
+              "kind": "text",
+              "text": " still protects it. And your pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "e6"
+            },
+            {
+              "kind": "text",
+              "text": " loses the support of the one on "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "En "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " el peón no ataca ningún peón de la cadena, y además nadie lo defiende: el alfil blanco de "
+            },
+            {
+              "kind": "square",
+              "square": "d3"
+            },
+            {
+              "kind": "text",
+              "text": " se lo come."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "On "
+            },
+            {
+              "kind": "square",
+              "square": "b5"
+            },
+            {
+              "kind": "text",
+              "text": " the pawn attacks no pawn of the chain, and nothing defends it: the white bishop on "
+            },
+            {
+              "kind": "square",
+              "square": "d3"
+            },
+            {
+              "kind": "text",
+              "text": " takes it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "ruptura"
+          },
+          {
+            "kind": "text",
+            "text": " también sirve para abrir el juego cuando tus piezas están mejor. En la partida Magerramov contra Kaspárov, de 1977, Kaspárov avanza su "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "peón aislado"
+          },
+          {
+            "kind": "text",
+            "text": " de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " aunque pueda perderlo: abre líneas para sus piezas y consigue un ataque demoledor."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "pawn break"
+          },
+          {
+            "kind": "text",
+            "text": " also serves to open the game when your pieces are better placed. In the game Magerramov against Kasparov, from 1977, Kasparov pushes his "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "isolated pawn"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " even though he may lose it: he opens lines for his pieces and gets a crushing attack."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r2q1rk1/p4pp1/1pb1n2p/3p4/8/2N1P3/PP1R1PPP/3QKB1R b - - 0 17",
+        "orientation": "black",
+        "moves": [
+          "d4"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: la "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-structure",
+            "text": "estructura de peones"
+          },
+          {
+            "kind": "text",
+            "text": " dura toda la partida. Vigila los "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "peones aislados"
+          },
+          {
+            "kind": "text",
+            "text": ", los "
+          },
+          {
+            "kind": "term",
+            "id": "doubled-pawns",
+            "text": "doblados"
+          },
+          {
+            "kind": "text",
+            "text": " y los "
+          },
+          {
+            "kind": "term",
+            "id": "backward-pawn",
+            "text": "retrasados"
+          },
+          {
+            "kind": "text",
+            "text": ": son blancos fáciles. Una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-chain",
+            "text": "cadena de peones"
+          },
+          {
+            "kind": "text",
+            "text": " se ataca por la base con una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "ruptura"
+          },
+          {
+            "kind": "text",
+            "text": ", y una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "ruptura"
+          },
+          {
+            "kind": "text",
+            "text": " también abre el juego cuando tus piezas están mejor."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-structure",
+            "text": "pawn structure"
+          },
+          {
+            "kind": "text",
+            "text": " lasts the whole game. Watch out for "
+          },
+          {
+            "kind": "term",
+            "id": "isolated-pawn",
+            "text": "isolated"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "term",
+            "id": "doubled-pawns",
+            "text": "doubled"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "backward-pawn",
+            "text": "backward pawns"
+          },
+          {
+            "kind": "text",
+            "text": ": they are easy targets. A "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-chain",
+            "text": "pawn chain"
+          },
+          {
+            "kind": "text",
+            "text": " is attacked at its base with a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "pawn break"
+          },
+          {
+            "kind": "text",
+            "text": ", and a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-break",
+            "text": "break"
+          },
+          {
+            "kind": "text",
+            "text": " also opens the game when your pieces are better."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/ppp2ppp/4p3/3pP3/3P4/8/PP3PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4"
+        ]
+      }
+    }
+  ]
+}

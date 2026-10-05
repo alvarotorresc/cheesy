@@ -26,6 +26,7 @@ import { rookEndings } from './intermediate/11-rook-endings.ts';
 import { drawsAndDefence } from './intermediate/12-draws-and-defence.ts';
 import { candidateMoves } from './advanced/01-candidate-moves.ts';
 import { pieceActivity } from './advanced/02-piece-activity.ts';
+import { pawnStructure } from './advanced/03-pawn-structure.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -54,4 +55,5 @@ export const lessons: LessonSpec[] = [
   drawsAndDefence,
   candidateMoves,
   pieceActivity,
+  pawnStructure,
 ];

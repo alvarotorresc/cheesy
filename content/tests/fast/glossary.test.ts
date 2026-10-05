@@ -76,6 +76,7 @@ const EXPECTED_IDS = [
   'candidate-move',
   'quiet-move',
   'mobility',
+  'backward-pawn',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -143,6 +144,7 @@ const GROUPS: Record<string, string[]> = {
     'hanging-pawns',
     'minority-attack',
     'passed-pawn',
+    'backward-pawn',
   ],
   endgames: [
     'opposition',

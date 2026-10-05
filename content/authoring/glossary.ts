@@ -444,6 +444,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'pawns',
     level: 'advanced',
+    lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, WIKI_PAWN_STRUCTURE],
   },
   {
@@ -461,6 +462,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'pawns',
     level: 'advanced',
+    lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, WIKI_PAWN_STRUCTURE],
   },
   {
@@ -478,6 +480,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'pawns',
     level: 'advanced',
+    lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, WIKI_PAWN_STRUCTURE],
   },
   {
@@ -495,6 +498,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'pawns',
     level: 'advanced',
+    lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, `${WIKI}Isolated_pawn`],
   },
   {
@@ -512,6 +516,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'pawns',
     level: 'advanced',
+    lesson: 'pawn-structure',
     sources: [WIKI_GLOSSARY, `${WIKI}Doubled_pawns`],
   },
   {
@@ -622,6 +627,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'piece-activity',
     sources: [WIKI_GLOSSARY, `${WIKI}Chess_strategy`],
+  },
+  {
+    id: 'backward-pawn',
+    name: { es: 'Peón retrasado', en: 'Backward pawn' },
+    definition: {
+      es: 'Peón que se ha quedado detrás de los peones propios de las [columnas](file) vecinas, así que ninguno puede protegerlo, y que no puede avanzar sin perderse. La casilla de delante suele ser buena para una pieza rival.',
+      en: 'A pawn left behind the pawns of its own side on the neighbouring [files](file), so none can protect it, and which cannot advance without being lost. The square in front of it is usually a good one for a rival piece.',
+    },
+    example: {
+      fen: '6k1/pp3ppp/3p4/4p3/4P3/8/PPP2PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d6', 'd5'],
+      arrows: [],
+    },
+    group: 'pawns',
+    level: 'advanced',
+    lesson: 'pawn-structure',
+    sources: [WIKI_GLOSSARY, `${WIKI}Backward_pawn`, WIKI_PAWN_STRUCTURE],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {

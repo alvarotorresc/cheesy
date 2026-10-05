@@ -1398,6 +1398,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1435,6 +1436,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1494,6 +1496,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Pawn_structure"
@@ -1547,6 +1550,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Isolated_pawn"
@@ -1601,6 +1605,7 @@
     },
     "group": "pawns",
     "level": "advanced",
+    "lesson": "pawn-structure",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Doubled_pawns"
@@ -1977,6 +1982,62 @@
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Chess_strategy"
+    ]
+  },
+  {
+    "id": "backward-pawn",
+    "name": {
+      "es": "Peón retrasado",
+      "en": "Backward pawn"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Peón que se ha quedado detrás de los peones propios de las "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "columnas"
+        },
+        {
+          "kind": "text",
+          "text": " vecinas, así que ninguno puede protegerlo, y que no puede avanzar sin perderse. La casilla de delante suele ser buena para una pieza rival."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A pawn left behind the pawns of its own side on the neighbouring "
+        },
+        {
+          "kind": "term",
+          "id": "file",
+          "text": "files"
+        },
+        {
+          "kind": "text",
+          "text": ", so none can protect it, and which cannot advance without being lost. The square in front of it is usually a good one for a rival piece."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/pp3ppp/3p4/4p3/4P3/8/PPP2PPP/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d6",
+        "d5"
+      ],
+      "arrows": []
+    },
+    "group": "pawns",
+    "level": "advanced",
+    "lesson": "pawn-structure",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Backward_pawn",
+      "https://en.wikipedia.org/wiki/Pawn_structure"
     ]
   },
   {

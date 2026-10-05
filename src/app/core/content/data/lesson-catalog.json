@@ -388,5 +388,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "pawn-structure",
+    "level": "advanced",
+    "order": 3,
+    "title": {
+      "es": "La estructura de peones",
+      "en": "Pawn structure"
+    },
+    "summary": {
+      "es": "Peones aislados, doblados y retrasados, cadenas y rupturas: lo que dura toda la partida.",
+      "en": "Isolated, doubled and backward pawns, chains and breaks: what lasts the whole game."
+    },
+    "stepCount": 9,
+    "exerciseCount": 3
   }
 ]
