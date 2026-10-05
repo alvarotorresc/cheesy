@@ -37,17 +37,18 @@ export const openFilesSeventh: LessonSpec = {
         es: 'Tu torre de a1 quiere una columna. ¿Cuál de estas es una [columna abierta](open-file)?',
         en: 'Your rook on a1 wants a file. Which of these is an [open file](open-file)?',
       },
-      board: { fen: 'r5k1/pp3ppp/2p5/3p4/3P4/2P5/PP3PPP/R5K1 w - - 0 1', orientation: 'white' },
+      board: { fen: 'r5k1/p4ppp/2p1p3/3p4/3P4/2P1P3/P4PPP/R5K1 w - - 0 1', orientation: 'white' },
       answer: {
         by: 'fact',
         options: [
+          { es: 'La columna b', en: 'The b-file' },
           { es: 'La columna c', en: 'The c-file' },
           { es: 'La columna d', en: 'The d-file' },
-          { es: 'La columna e', en: 'The e-file' },
         ],
-        correct: 2,
+        correct: 0,
       },
       whyWrong: [
+        null,
         {
           es: 'En la columna c hay un peón de cada bando, en c3 y c6: está cerrada.',
           en: 'The c-file has a pawn of each side, on c3 and c6: it is closed.',
@@ -56,11 +57,10 @@ export const openFilesSeventh: LessonSpec = {
           es: 'En la columna d están los peones de d4 y d5: la torre no pasaría.',
           en: 'The d-file has the pawns on d4 and d5: the rook would not get through.',
         },
-        null,
       ],
       explanation: {
-        es: 'Eso es: en la columna e no hay ningún peón. La torre en e1 llega hasta e8, y la torre negra todavía no la vigila.',
-        en: 'That is it: there are no pawns at all on the e-file. The rook on e1 reaches all the way to e8, and the black rook does not watch it yet.',
+        es: 'Eso es: en la columna b no hay ningún peón. Desde b1 la torre recorre toda la columna y puede entrar hasta la séptima fila.',
+        en: 'That is it: there are no pawns at all on the b-file. From b1 the rook runs along the whole file and can get in as far as the seventh rank.',
       },
     },
     {

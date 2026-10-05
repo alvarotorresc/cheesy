@@ -148,12 +148,16 @@
         ]
       },
       "board": {
-        "fen": "r5k1/pp3ppp/2p5/3p4/3P4/2P5/PP3PPP/R5K1 w - - 0 1",
+        "fen": "r5k1/p4ppp/2p1p3/3p4/3P4/2P1P3/P4PPP/R5K1 w - - 0 1",
         "orientation": "white"
       },
       "answer": {
         "by": "fact",
         "options": [
+          {
+            "es": "La columna b",
+            "en": "The b-file"
+          },
           {
             "es": "La columna c",
             "en": "The c-file"
@@ -161,61 +165,42 @@
           {
             "es": "La columna d",
             "en": "The d-file"
-          },
-          {
-            "es": "La columna e",
-            "en": "The e-file"
           }
         ],
-        "correct": 2
+        "correct": 0
       },
       "explanation": {
         "es": [
           {
             "kind": "text",
-            "text": "Eso es: en la columna e no hay ningún peón. La torre en "
+            "text": "Eso es: en la columna b no hay ningún peón. Desde "
           },
           {
             "kind": "square",
-            "square": "e1"
+            "square": "b1"
           },
           {
             "kind": "text",
-            "text": " llega hasta "
-          },
-          {
-            "kind": "square",
-            "square": "e8"
-          },
-          {
-            "kind": "text",
-            "text": ", y la torre negra todavía no la vigila."
+            "text": " la torre recorre toda la columna y puede entrar hasta la séptima fila."
           }
         ],
         "en": [
           {
             "kind": "text",
-            "text": "That is it: there are no pawns at all on the e-file. The rook on "
+            "text": "That is it: there are no pawns at all on the b-file. From "
           },
           {
             "kind": "square",
-            "square": "e1"
+            "square": "b1"
           },
           {
             "kind": "text",
-            "text": " reaches all the way to "
-          },
-          {
-            "kind": "square",
-            "square": "e8"
-          },
-          {
-            "kind": "text",
-            "text": ", and the black rook does not watch it yet."
+            "text": " the rook runs along the whole file and can get in as far as the seventh rank."
           }
         ]
       },
       "whyWrong": [
+        null,
         {
           "es": [
             {
@@ -307,8 +292,7 @@
               "text": ": the rook would not get through."
             }
           ]
-        },
-        null
+        }
       ]
     },
     {
