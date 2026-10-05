@@ -46,7 +46,8 @@ export const passedPawns = (pos: Chess, color: Color): string[] => {
 /**
  * Squares on the side's fourth to seventh rank, protected by one of its pawns, that no rival pawn
  * can attack now or later: none is left on a neighbouring file further up the board (Wikipedia,
- * "Outpost (chess)").
+ * "Outpost (chess)"). A square held by one of the side's own pawns does not count: an outpost is a
+ * square for a piece.
  */
 export const outposts = (pos: Chess, color: Color): string[] => {
   const own = pawnsOf(pos, color);
@@ -54,7 +55,7 @@ export const outposts = (pos: Chess, color: Color): string[] => {
   const out: Square[] = [];
   for (let square = 0; square < 64; square++) {
     const rank = relativeRank(color, square);
-    if (rank < 3 || rank > 6) continue;
+    if (rank < 3 || rank > 6 || own.includes(square)) continue;
     const guarded = own.some((p) => pawnAttacks(color, p).has(square));
     const attackable = them.some(
       (p) => Math.abs(squareFile(p) - squareFile(square)) === 1 && ahead(color, p, square),

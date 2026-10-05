@@ -43,6 +43,8 @@ describe('pawn facts', () => {
     expect(outposts(at('4k3/8/8/8/8/3p4/2P5/4K3'), 'white')).toEqual([]);
     // A black outpost on d4 (its fifth rank), guarded by e5.
     expect(outposts(at('4k3/8/8/4p3/8/8/8/4K3'), 'black')).toEqual(['d4', 'f4']);
+    // A square held by one of the side's own pawns is not a square for a piece: d5 has the pawn.
+    expect(outposts(at('4k3/8/8/3P4/2P5/8/8/4K3'), 'white')).toEqual(['b5', 'c6', 'e6']);
   });
 
   it('badBishops: a bishop on the colour of most of its own pawns', () => {
