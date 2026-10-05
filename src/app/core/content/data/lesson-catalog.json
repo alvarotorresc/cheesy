@@ -283,5 +283,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 5
+  },
+  {
+    "id": "forcing-moves",
+    "level": "intermediate",
+    "order": 8,
+    "title": {
+      "es": "Jaques, capturas y amenazas",
+      "en": "Checks, captures and threats"
+    },
+    "summary": {
+      "es": "Las jugadas que obligan al rival, cómo calcularlas y cuándo merece la pena entregar material.",
+      "en": "The moves that force the rival, how to calculate them and when giving up material pays off."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
   }
 ]

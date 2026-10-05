@@ -16,6 +16,9 @@ export const LICHESS_THEME_KEYS = [
   'backRankMate',
   'smotheredMate',
   'anastasiaMate',
+  'mateIn2',
+  'attraction',
+  'sacrifice',
 ] as const;
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
@@ -29,4 +32,5 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'discovered-attacks': ['discoveredAttack', 'doubleCheck', 'discoveredCheck'],
   'remove-the-defender': ['capturingDefender', 'deflection'],
   'mate-patterns': ['backRankMate', 'smotheredMate', 'anastasiaMate'],
+  'forcing-moves': ['mateIn2', 'attraction', 'sacrifice'],
 };

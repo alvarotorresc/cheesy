@@ -832,6 +832,24 @@ export const glossary: GlossarySpec[] = [
     ],
   },
   {
+    id: 'forcing-move',
+    name: { es: 'Jugada forzante', en: 'Forcing move' },
+    definition: {
+      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Como obliga a contestar, es la más fácil de calcular, y conviene mirarlas antes que las demás.',
+      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Since it must be answered, it is the easiest kind to calculate, and it pays to look at these before any other move.',
+    },
+    example: {
+      fen: '6k1/5ppp/8/8/1q6/8/5PPP/2Q3K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['g8'],
+      arrows: [{ from: 'c1', to: 'c8', move: true }],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'forcing-moves',
+    sources: [WIKI_GLOSSARY, `${WIKI}Chess_tactic`],
+  },
+  {
     id: 'attraction',
     name: { es: 'Atracción', en: 'Attraction' },
     definition: {
@@ -846,6 +864,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'forcing-moves',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/advanced-tactics/attraction/jOZejFWk',
@@ -890,6 +909,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'forcing-moves',
     sources: [WIKI_GLOSSARY, `${WIKI}Sacrifice_(chess)`, `${CHESSCOM_ES}sacrificio`],
   },
   {

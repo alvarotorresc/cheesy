@@ -19,6 +19,7 @@ import { theSkewer } from './intermediate/04-the-skewer.ts';
 import { discoveredAttacks } from './intermediate/05-discovered-attacks.ts';
 import { removeTheDefender } from './intermediate/06-remove-the-defender.ts';
 import { matePatterns } from './intermediate/07-mate-patterns.ts';
+import { forcingMoves } from './intermediate/08-forcing-moves.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -40,4 +41,5 @@ export const lessons: LessonSpec[] = [
   discoveredAttacks,
   removeTheDefender,
   matePatterns,
+  forcingMoves,
 ];
