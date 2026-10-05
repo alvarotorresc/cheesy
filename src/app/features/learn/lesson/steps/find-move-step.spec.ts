@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import type { FindMoveStep } from '../../../../core/content';
 import { plainText } from '../../../../core/content/testing';
 import { I18nService } from '../../../../core/i18n';
-import { BoardComponent } from '../../../../shared/board';
+import { BoardComponent, BoardSpotlight } from '../../../../shared/board';
 import { addStepFrame, pressFocused } from '../../testing';
 import { FindMoveStepView } from './find-move-step';
 
@@ -46,7 +46,7 @@ describe('FindMoveStepView', () => {
   const wrong = () => board().move.emit({ from: 'c2' as never, to: 'c6' as never });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.configureTestingModule({ providers: [provideRouter([]), BoardSpotlight] });
     TestBed.inject(I18nService).setLang('en');
     fixture = TestBed.createComponent(FindMoveStepView);
     element = fixture.nativeElement as HTMLElement;
@@ -387,6 +387,8 @@ describe('FindMoveStepView', () => {
       fixture.detectChanges();
       expect(feedback().textContent).toContain('Black replies:');
       expect(feedback().querySelector('app-move')?.textContent).toContain('king to g8');
+      // A move inside the live region is not a tab stop.
+      expect(feedback().querySelector('[tabindex]')).toBeNull();
     });
 
     it('should say it in Spanish too', () => {
