@@ -493,5 +493,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 3
+  },
+  {
+    "id": "advanced-tactics",
+    "level": "advanced",
+    "order": 10,
+    "title": {
+      "es": "Táctica avanzada",
+      "en": "Advanced tactics"
+    },
+    "summary": {
+      "es": "Cortar las líneas del rival, abrir las tuyas y juntar dos ideas en un golpe.",
+      "en": "Cut your opponent’s lines, open your own and join two ideas in one blow."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

@@ -1307,6 +1307,51 @@ export const glossary: GlossarySpec[] = [
     sources: [`${WIKI}Greek_gift_sacrifice`, WIKI_GLOSSARY, 'https://lichess.org/practice'],
   },
   {
+    id: 'interference',
+    name: { es: 'Interferencia', en: 'Interference' },
+    definition: {
+      es: 'Poner una pieza en medio de la línea por la que una pieza rival defiende algo. La defensa queda cortada; si el rival captura la pieza que estorba, suele perder material.',
+      en: 'Putting a piece in the middle of the line along which an enemy piece defends something. The defence is cut; if the opponent captures the piece in the way, they usually lose material.',
+    },
+    example: {
+      fen: '2kr1b2/ppp4p/6p1/4PN2/8/7P/P2qQPP1/4R1K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d8', 'd2'],
+      arrows: [{ from: 'f5', to: 'd6', move: true }],
+    },
+    group: 'tactics',
+    level: 'advanced',
+    lesson: 'advanced-tactics',
+    sources: [
+      WIKI_GLOSSARY,
+      `${WIKI}Interference_(chess)`,
+      'https://lichess.org/practice/advanced-tactics/interference/g1fxVZu9',
+      'https://www.chess.com/terms/interference-chess',
+    ],
+  },
+  {
+    id: 'clearance',
+    name: { es: 'Despeje', en: 'Clearance' },
+    definition: {
+      es: 'Quitar de en medio una pieza propia que tapa una casilla, una fila, una columna o una diagonal, para que otra pieza la use. Funciona mejor si la pieza que se aparta da [jaque](check) o amenaza algo, y a menudo se entrega.',
+      en: 'Moving one of your own pieces out of the way of a square, rank, file or diagonal so that another piece can use it. It works best when the piece that moves gives [check](check) or threatens something, and it is often given up.',
+    },
+    example: {
+      fen: 'r1r4k/2n2Rbp/4Q1p1/p5N1/PpB5/1P6/6PP/3R3K w - - 0 1',
+      orientation: 'white',
+      highlights: ['f7'],
+      arrows: [{ from: 'f7', to: 'f8', move: true }],
+    },
+    group: 'tactics',
+    level: 'advanced',
+    lesson: 'advanced-tactics',
+    sources: [
+      WIKI_GLOSSARY,
+      `${WIKI}Clearance_sacrifice`,
+      'https://lichess.org/practice/advanced-tactics/clearance/Grmtwuft',
+    ],
+  },
+  {
     id: 'smothered-mate',
     name: { es: 'Mate de la coz', en: 'Smothered mate' },
     definition: {

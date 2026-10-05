@@ -33,6 +33,7 @@ import { passedPawns } from './advanced/06-passed-pawns.ts';
 import { minorPieceEndings } from './advanced/07-minor-piece-endings.ts';
 import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
 import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
+import { advancedTactics } from './advanced/10-advanced-tactics.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -68,4 +69,5 @@ export const lessons: LessonSpec[] = [
   minorPieceEndings,
   zugzwangTempo,
   kingSafetyAttack,
+  advancedTactics,
 ];

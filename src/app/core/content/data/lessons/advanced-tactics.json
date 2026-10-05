@@ -1,0 +1,1502 @@
+{
+  "id": "advanced-tactics",
+  "level": "advanced",
+  "order": 10,
+  "title": {
+    "es": "Táctica avanzada",
+    "en": "Advanced tactics"
+  },
+  "summary": {
+    "es": "Cortar las líneas del rival, abrir las tuyas y juntar dos ideas en un golpe.",
+    "en": "Cut your opponent’s lines, open your own and join two ideas in one blow."
+  },
+  "terms": [
+    "interference",
+    "clearance"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://en.wikipedia.org/wiki/Deflection_(chess)",
+    "https://en.wikipedia.org/wiki/Interference_(chess)",
+    "https://en.wikipedia.org/wiki/Clearance_sacrifice",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://www.chess.com/lessons/skill-level/advanced"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Repaso del nivel medio. Muchas combinaciones atacan a una pieza que defiende algo importante. Con la "
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "desviación"
+          },
+          {
+            "kind": "text",
+            "text": " la obligas a irse de su sitio. Con la "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "atracción"
+          },
+          {
+            "kind": "text",
+            "text": " traes una pieza rival a una casilla donde estorba. Aquí la dama negra de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " es la única que defiende la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": ". Hoy verás dos ideas más: cortar una línea del rival y abrir una línea tuya."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A recap from the intermediate level. Many combinations hit a piece that defends something important. With "
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "deflection"
+          },
+          {
+            "kind": "text",
+            "text": " you force it away from its post. With "
+          },
+          {
+            "kind": "term",
+            "id": "attraction",
+            "text": "attraction"
+          },
+          {
+            "kind": "text",
+            "text": " you lure an enemy piece onto a square where it gets in the way. Here the black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " is the only defender of the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": ". Today you will see two more ideas: cutting one of your opponent’s lines and opening one of your own."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3qr1k1/5ppp/8/8/8/8/1Q3PPP/4R1K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d8",
+          "e8"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "interference",
+            "text": "interferencia"
+          },
+          {
+            "kind": "text",
+            "text": " es poner una pieza tuya en medio de la línea por la que el rival defiende. Aquí la torre negra de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " defiende a su dama de "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " por la columna, y tu dama de "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " ataca a esa dama. El caballo salta a "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque y corta la columna. Si el peón o el alfil lo capturan, la columna sigue cortada y pierden la dama. Lo mejor es capturar con la torre, pero tras el cambio de damas las negras han dado una torre por un caballo y un peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "interference",
+            "text": "Interference"
+          },
+          {
+            "kind": "text",
+            "text": " means putting one of your pieces in the middle of the line your opponent defends along. Here the black rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " defends its queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": " along the file, and your queen on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " attacks that queen. The knight jumps to "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " with check and cuts the file. If the pawn or the bishop takes it, the file stays cut and the queen is lost. Taking with the rook is best, but after the queens come off Black has given a rook for a knight and a pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2kr1b2/ppp4p/6p1/4PN2/8/7P/P2qQPP1/4R1K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Nd6+",
+          "Rxd6",
+          "exd6",
+          "Qxe2",
+          "Rxe2",
+          "Bxd6"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu dama de "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": " quiere dar "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", donde la apoya el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": ". Solo lo impide la dama negra de "
+          },
+          {
+            "kind": "square",
+            "square": "a7"
+          },
+          {
+            "kind": "text",
+            "text": ", que vigila "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": " por la séptima fila. Corta esa fila."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your queen on "
+          },
+          {
+            "kind": "square",
+            "square": "h6"
+          },
+          {
+            "kind": "text",
+            "text": " wants to "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", where the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " supports it. Only the black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "a7"
+          },
+          {
+            "kind": "text",
+            "text": " stops it, guarding "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": " along the seventh rank. Cut that rank."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2r3k1/q6p/p4PpQ/1pp5/8/8/PP4PP/4R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Re7",
+          "Qxe7",
+          "fxe7"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: la torre en "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " corta la séptima fila. Si la dama negra no la captura, das mate en "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ". Si la captura, el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " captura la dama. Has dado una torre por una dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " cuts the seventh rank. If the black queen does not take it, you mate on "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ". If she takes it, the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " takes the queen. You gave a rook for a queen."
+          }
+        ]
+      },
+      "wrong": {
+        "Qg7+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama negra captura en "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": ", porque la séptima fila sigue abierta. Cambias las damas y el ataque se acaba."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black queen captures on "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": ", because the seventh rank is still open. The queens come off and the attack is over."
+            }
+          ]
+        },
+        "f7+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La dama negra captura el peón en "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": ", y "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " se queda sin apoyo."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The black queen takes the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": ", and "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " loses its support."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una casilla de la séptima fila que defienda tu peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a square on the seventh rank that your pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " defends."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El "
+          },
+          {
+            "kind": "term",
+            "id": "clearance",
+            "text": "despeje"
+          },
+          {
+            "kind": "text",
+            "text": " es lo contrario: a veces la pieza que estorba es tuya. La quitas de en medio, mejor con una amenaza, para que entre otra. Aquí tu torre de "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " ocupa la casilla que necesita el caballo. La torre se entrega con jaque en "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " y deja libre "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". Tras la captura, la dama da jaque en "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre negra tiene que capturarla y el caballo da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "clearance",
+            "text": "Clearance"
+          },
+          {
+            "kind": "text",
+            "text": " is the opposite: sometimes the piece in the way is your own. You move it out of the way, ideally with a threat, so that another piece can come in. Here your rook on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " stands on the square the knight needs. The rook gives itself up with check on "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " and frees "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": ". After the capture the queen checks on "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": ", the black rook has to take it and the knight gives "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1r4k/2n2Rbp/4Q1p1/p5N1/PpB5/1P6/6PP/3R3K w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Rf8+",
+          "Rxf8",
+          "Qg8+",
+          "Rxg8",
+          "Nf7#"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu dama de "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": " mira hacia "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ", pero tu propio caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " le tapa el camino. Quítalo de en medio de forma que el rival no tenga tiempo de defenderse."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your queen on "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": " looks towards "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ", but your own knight on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " blocks the way. Move it out of the way so that your opponent has no time to defend."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1b2rk1/pp3ppp/1qp5/6N1/4N3/8/PPQ2PPP/5RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nf6+",
+          "gxf6",
+          "Qxh7#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el caballo salta a "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque y abre la diagonal. Si el peón lo captura, la dama da mate en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con el apoyo del caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ". Si el rey va a "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", el mate en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " es el mismo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the knight jumps to "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " with check and opens the diagonal. If the pawn takes it, the queen mates on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": ", supported by the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "g5"
+          },
+          {
+            "kind": "text",
+            "text": ". If the king goes to "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", the mate on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " is the same."
+          }
+        ]
+      },
+      "wrong": {
+        "Nxh7": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Capturas un peón, pero tu caballo de "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " sigue tapando la dama y el rival tiene tiempo de reorganizarse: la ventaja pasa a ser suya."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You win a pawn, but your knight on "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " still blocks the queen and your opponent has time to regroup: the advantage passes to them."
+            }
+          ]
+        },
+        "Nd6": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La diagonal se abre, pero sin "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ": el rival tiene tiempo de tapar la diagonal: su peón de "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " avanza a "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The diagonal opens, but without "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ": your opponent has time to block it: the pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " moves to "
+            },
+            {
+              "kind": "square",
+              "square": "g6"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo puede saltar dando jaque. Así el rival tiene que contestar al jaque y no a tu dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight can jump with check. Then your opponent has to answer the check and not your queen."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre negra de "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " es la única que defiende la última fila. Tres ideas: sacrificar la dama en "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " para atraer al rey, avanzar el peón a "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " para desviar la torre, o llevar la torre a "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " de golpe. ¿Cuál funciona?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black rook on "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " is the only defender of the back rank. Three ideas: sacrifice the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "f8"
+          },
+          {
+            "kind": "text",
+            "text": " to lure the king, push the pawn to "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " to deflect the rook, or take the rook straight to "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Which one works?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "5rk1/pp4pp/1q2P3/8/5Q2/8/PP3PPP/3R2K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Qxf8+",
+          "e7",
+          "Rd8"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón ataca la torre. Si la torre captura tu dama, deja la última fila: tu torre da jaque en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " y el peón llega a "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y se convierte en dama. Si hace otra cosa, le va todavía peor. La torre no puede hacer las dos cosas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn attacks the rook. If the rook takes your queen, it leaves the back rank: your rook checks on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " and the pawn reaches "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and becomes a queen. Anything else is even worse for Black. The rook cannot do both jobs."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El rey captura la dama y no hay mate: si tu torre da jaque en "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": ", el rey sale por "
+            },
+            {
+              "kind": "square",
+              "square": "e7"
+            },
+            {
+              "kind": "text",
+              "text": ". Has perdido la dama."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The king takes the queen and there is no mate: if your rook checks on "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": ", the king escapes via "
+            },
+            {
+              "kind": "square",
+              "square": "e7"
+            },
+            {
+              "kind": "text",
+              "text": ". You have lost the queen."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Te olvidas de la dama negra: desde "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": " captura tu torre en "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You forgot the black queen: from "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": " she takes your rook on "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora dos ideas seguidas. El rey negro tiene poca defensa, y tu torre de "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " está detrás de tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": ". Da mate en tres jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now two ideas in a row. The black king has few defenders, and your rook on "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": " stands behind your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": ". Mate in three moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1qr2k1/pb3p1p/1p6/5P1Q/7B/8/PPP2PP1/1K5R w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qxh7+",
+          "Kxh7",
+          "Bf6+",
+          "Kg8",
+          "Rh8#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: la dama se entrega en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " y atrae al rey a la columna h. El alfil se aparta a "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque de la torre: es un despeje. El rey vuelve a "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre da mate en "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", apoyada por el alfil. El peón de "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": " le quitaba al rey la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the queen gives herself up on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " and lures the king onto the h-file. The bishop steps aside to "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook gives check: that is a clearance. The king goes back to "
+          },
+          {
+            "kind": "square",
+            "square": "g8"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook mates on "
+          },
+          {
+            "kind": "square",
+            "square": "h8"
+          },
+          {
+            "kind": "text",
+            "text": ", supported by the bishop. The pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "f5"
+          },
+          {
+            "kind": "text",
+            "text": " took the "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": " square away from the king."
+          }
+        ]
+      },
+      "wrong": {
+        "Bf6": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Amenaza mucho, pero no es mate a la fuerza: el rival tiene tiempo de defenderse. Empieza con algo que obligue más."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It threatens a lot, but it is not a forced mate: your opponent has time to defend. Start with something more forcing."
+            }
+          ]
+        },
+        "Bxd8": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ganas una torre, pero había mate."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You win a rook, but there was a mate."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Primero atrae al rey a la columna h con un "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrificio"
+          },
+          {
+            "kind": "text",
+            "text": ". Después aparta el alfil para que hable la torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "First lure the king onto the h-file with a "
+          },
+          {
+            "kind": "term",
+            "id": "sacrifice",
+            "text": "sacrifice"
+          },
+          {
+            "kind": "text",
+            "text": ". Then move the bishop away so that the rook can speak."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: con la "
+          },
+          {
+            "kind": "term",
+            "id": "interference",
+            "text": "interferencia"
+          },
+          {
+            "kind": "text",
+            "text": " pones una pieza en medio de una línea del rival y su defensa se corta. Con el "
+          },
+          {
+            "kind": "term",
+            "id": "clearance",
+            "text": "despeje"
+          },
+          {
+            "kind": "text",
+            "text": " quitas de en medio una pieza tuya, mejor con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " o con amenaza, para que entre otra. Las combinaciones fuertes suelen juntar dos ideas: aquí, atraer al rey y despejar la columna. En Posiciones tienes más ejercicios de atracción."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: with "
+          },
+          {
+            "kind": "term",
+            "id": "interference",
+            "text": "interference"
+          },
+          {
+            "kind": "text",
+            "text": " you put a piece in the middle of an enemy line and cut its defence. With "
+          },
+          {
+            "kind": "term",
+            "id": "clearance",
+            "text": "clearance"
+          },
+          {
+            "kind": "text",
+            "text": " you move one of your own pieces out of the way, ideally with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " or a threat, so another can come in. Strong combinations often join two ideas: here, luring the king and clearing the file. In Positions you will find more attraction exercises."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1qr2k1/pb3p1p/1p6/5P1Q/7B/8/PPP2PP1/1K5R w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Qxh7+",
+          "Kxh7",
+          "Bf6+",
+          "Kg8",
+          "Rh8#"
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "attraction"
+  }
+}
