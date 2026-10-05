@@ -150,6 +150,7 @@
 
 .action {
   grid-area: action;
+  justify-self: end;
   font-weight: 700;
   text-decoration: underline;
   text-decoration-color: var(--color-accent);
@@ -179,7 +180,8 @@
 
 @media (min-width: 40rem) {
   .lesson-card {
-    grid-template-columns: auto minmax(0, 1fr) 11rem auto;
+    /* Fixed widths for the tally and the action, so the bars line up from row to row. */
+    grid-template-columns: auto minmax(0, 1fr) 11rem 5.5rem;
     grid-template-areas: 'order body tally action';
     gap: var(--space-4);
   }

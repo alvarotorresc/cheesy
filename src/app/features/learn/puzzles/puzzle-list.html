@@ -24,7 +24,10 @@
               <span class="order" aria-hidden="true">{{ row.lesson.order }}</span>
               <span class="body">
                 <span class="title">{{ i18n.localize(row.lesson.title) }}</span>
-                <span class="themes">{{ themeNames(row.themes) }}</span>
+                <!-- One theme is the lesson itself; several say what the lesson brings together. -->
+                @if (row.themes.length > 1) {
+                  <span class="themes">{{ themeNames(row.themes) }}</span>
+                }
               </span>
               <span class="tally">
                 <span class="meter" aria-hidden="true">

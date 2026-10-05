@@ -51,7 +51,7 @@ describe('PuzzleList', () => {
     lastPlayedAt: 1,
   });
 
-  it('should list each lesson with puzzles, with its themes and a way in', async () => {
+  it('should list each lesson with puzzles and a way in', async () => {
     setup();
     const root = await render();
     expect(root.querySelector('h1')?.textContent).toContain('Practise more');
@@ -59,7 +59,8 @@ describe('PuzzleList', () => {
     expect(cards).toHaveLength(1);
     expect(cards[0].getAttribute('href')).toBe('/learn/puzzles/the-fork');
     expect(cards[0].querySelector('.title')?.textContent).toContain('The fork');
-    expect(cards[0].querySelector('.themes')?.textContent).toContain('Fork');
+    // A single theme is the lesson itself: it is not repeated under the title.
+    expect(cards[0].querySelector('.themes')).toBeNull();
     expect(cards[0].querySelector('.count')?.textContent).toContain(
       `0 of ${FIXTURE_PUZZLE_COUNT} on the first try`,
     );
@@ -92,7 +93,7 @@ describe('PuzzleList', () => {
         lessons: [
           ...catalog.lessons,
           { lesson: 'nowhere', count: 30, themes: ['pin'] },
-          { lesson: 'knight-moves', count: 30, themes: ['pin'] },
+          { lesson: 'knight-moves', count: 30, themes: ['pin', 'skewer'] },
         ],
       }),
     });
@@ -101,6 +102,7 @@ describe('PuzzleList', () => {
       t.textContent?.trim(),
     );
     expect(titles).toEqual(['Knight moves', 'The fork']);
+    expect(root.querySelector('.lesson-card .themes')?.textContent).toContain('Pin, Skewer');
   });
 
   it('should credit the Lichess open database under the list', async () => {
