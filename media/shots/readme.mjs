@@ -17,6 +17,9 @@ const H = 800;
 // name in .github/readme  <-  scene prefix in media/out
 const PICKS = [
   ['home', 'cover'],
+  ['learn', 'screen-learn'],
+  ['lesson', 'screen-lesson'],
+  ['puzzles', 'screen-puzzles'],
   ['openings', 'screen-01-aperturas'],
   ['play', 'screen-02-jugar'],
   ['endgame', 'screen-05-final'],
