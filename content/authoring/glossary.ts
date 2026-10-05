@@ -581,6 +581,27 @@ export const glossary: GlossarySpec[] = [
     lesson: 'king-pawn-endings',
     sources: [WIKI_GLOSSARY, `${WIKI}Passed_pawn`, `${CHESSCOM_EN}passed-pawn`],
   },
+  {
+    id: 'candidate-move',
+    name: { es: 'Jugada candidata', en: 'Candidate move' },
+    definition: {
+      es: 'Jugada que a primera vista parece buena y merece pensarse. Antes de mover se hace una lista corta de candidatas, empezando por las [jugadas forzantes](forcing-move), y se calcula cada una.',
+      en: 'A move that looks good at first sight and deserves a closer look. Before moving you make a short list of candidates, starting with the [forcing moves](forcing-move), and calculate each one.',
+    },
+    example: {
+      fen: '6k1/5ppp/8/8/8/8/1q3PPP/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d1'],
+      arrows: [
+        { from: 'd1', to: 'd8', move: true },
+        { from: 'd1', to: 'b1', move: true },
+      ],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'candidate-moves',
+    sources: [WIKI_GLOSSARY, `${WIKI}Candidate_move`],
+  },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
     id: 'tempo',
@@ -1021,6 +1042,24 @@ export const glossary: GlossarySpec[] = [
     level: 'intermediate',
     lesson: 'draws-and-defence',
     sources: [WIKI_GLOSSARY, `${WIKI}Perpetual_check`, `${CHESSCOM_EN}perpetual-check-chess`],
+  },
+  {
+    id: 'quiet-move',
+    name: { es: 'Jugada tranquila', en: 'Quiet move' },
+    definition: {
+      es: 'Jugada que no da [jaque](check), no captura y no amenaza capturar nada enseguida, pero prepara algo que el rival ya no puede parar. Es la más fácil de pasar por alto.',
+      en: 'A move that gives no [check](check), captures nothing and threatens no immediate capture, but prepares something the rival can no longer stop. It is the easiest kind to overlook.',
+    },
+    example: {
+      fen: '3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['g1'],
+      arrows: [{ from: 'h2', to: 'h3', move: true }],
+    },
+    group: 'tactics',
+    level: 'advanced',
+    lesson: 'candidate-moves',
+    sources: [WIKI_GLOSSARY, 'https://lichess.org/training/quietMove'],
   },
   {
     id: 'smothered-mate',

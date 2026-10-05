@@ -73,6 +73,8 @@ const EXPECTED_IDS = [
   'cutting-off-the-king',
   'perpetual-check',
   'threefold-repetition',
+  'candidate-move',
+  'quiet-move',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -112,6 +114,7 @@ const GROUPS: Record<string, string[]> = {
     'back-rank',
     'opening-trap',
     'perpetual-check',
+    'quiet-move',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [
@@ -127,6 +130,7 @@ const GROUPS: Record<string, string[]> = {
     'tempo',
     'exchange',
     'bishop-pair',
+    'candidate-move',
   ],
   pawns: [
     'pawn-structure',

@@ -358,5 +358,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "candidate-moves",
+    "level": "advanced",
+    "order": 1,
+    "title": {
+      "es": "Jugadas candidatas",
+      "en": "Candidate moves"
+    },
+    "summary": {
+      "es": "Antes de mover, una lista corta de jugadas y la mejor respuesta del rival a cada una.",
+      "en": "Before you move, a short list of moves and the rival’s best answer to each one."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

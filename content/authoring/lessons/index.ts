@@ -24,6 +24,7 @@ import { inBetweenMove } from './intermediate/09-in-between-move.ts';
 import { kingPawnEndings } from './intermediate/10-king-pawn-endings.ts';
 import { rookEndings } from './intermediate/11-rook-endings.ts';
 import { drawsAndDefence } from './intermediate/12-draws-and-defence.ts';
+import { candidateMoves } from './advanced/01-candidate-moves.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -50,4 +51,5 @@ export const lessons: LessonSpec[] = [
   kingPawnEndings,
   rookEndings,
   drawsAndDefence,
+  candidateMoves,
 ];

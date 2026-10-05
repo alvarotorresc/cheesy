@@ -1,0 +1,1562 @@
+{
+  "id": "candidate-moves",
+  "level": "advanced",
+  "order": 1,
+  "title": {
+    "es": "Jugadas candidatas",
+    "en": "Candidate moves"
+  },
+  "summary": {
+    "es": "Antes de mover, una lista corta de jugadas y la mejor respuesta del rival a cada una.",
+    "en": "Before you move, a short list of moves and the rival’s best answer to each one."
+  },
+  "terms": [
+    "candidate-move",
+    "quiet-move"
+  ],
+  "sources": [
+    "https://www.chess.com/lessons/skill-level/advanced",
+    "https://lichess.org/training/themes",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un jugador fuerte no mira todas las jugadas: hace una lista corta de "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "jugadas candidatas"
+          },
+          {
+            "kind": "text",
+            "text": ", las que merecen pensarse. Primero las "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ": los "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", las capturas y las amenazas, porque dejan al rival pocas respuestas. Después, las que mejoran una pieza. Aquí la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": " tiene una captura en "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " que además es "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": ": por eso se mira primero lo forzante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A strong player does not look at every move: he makes a short list of "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "candidate moves"
+          },
+          {
+            "kind": "text",
+            "text": ", the ones worth thinking about. First the "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": ": "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", captures and threats, because they leave the rival few answers. Then the ones that improve a piece. Here the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": " has a capture on "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " that is also "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": ": that is why you look at forcing moves first."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+        "orientation": "white",
+        "highlights": [
+          "f7"
+        ],
+        "arrows": [
+          {
+            "from": "h5",
+            "to": "f7"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Para cada candidata, pregúntate cuál es la mejor respuesta del rival, no la que te gustaría. Y termina una rama antes de empezar otra, para no mezclarlas. Aquí el caballo blanco captura el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", pero el caballo negro de "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " lo captura a él. El peón que avanza a "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " ataca a ese caballo, pero el caballo se retira y no recuperas nada: has dado un caballo por un peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "For each candidate, ask what the rival’s best answer is, not the one you would like. And finish one branch before you start another, so you do not mix them up. Here the white knight takes the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e5"
+          },
+          {
+            "kind": "text",
+            "text": ", but the black knight on "
+          },
+          {
+            "kind": "square",
+            "square": "c6"
+          },
+          {
+            "kind": "text",
+            "text": " takes it. The pawn that goes to "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " attacks that knight, but the knight steps away and you win nothing back: you have given a knight for a pawn."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+        "orientation": "white",
+        "moves": [
+          "Nxe5",
+          "Nxe5",
+          "d4"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Vas un peón por detrás y el peón negro de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " está suelto. Tres candidatas: capturarlo con la dama, avanzar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " o llevar la torre a "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Cuál juegas?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You are a pawn down and the black pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " is loose. Three candidates: take it with the queen, push the pawn from "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " or bring the rook to "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ". Which one do you play?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "4r1k1/pp2qppp/8/3Q4/8/8/P4PPP/2R3K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Qxb7",
+          "h4",
+          "Rc7"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. Las dos jugadas «activas» pierden por la misma respuesta: la dama negra entra en "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". Avanzar el peón de h abre una salida a tu rey, y solo entonces podrás pensar en el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. Both «active» moves lose to the same answer: the black queen comes in on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". Pushing the h-pawn opens an exit for your king, and only then can you think about the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es la captura obvia, pero mira la respuesta: la dama negra baja a "
+            },
+            {
+              "kind": "square",
+              "square": "e1"
+            },
+            {
+              "kind": "text",
+              "text": " con "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ". Tu torre la captura y la torre negra de "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": " recaptura: es "
+            },
+            {
+              "kind": "term",
+              "id": "back-rank",
+              "text": "mate en la última fila"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is the obvious capture, but look at the answer: the black queen comes down to "
+            },
+            {
+              "kind": "square",
+              "square": "e1"
+            },
+            {
+              "kind": "text",
+              "text": " with "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ". Your rook takes her and the black rook on "
+            },
+            {
+              "kind": "square",
+              "square": "e8"
+            },
+            {
+              "kind": "text",
+              "text": " takes back: it is "
+            },
+            {
+              "kind": "term",
+              "id": "back-rank",
+              "text": "mate on the back rank"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La torre en la séptima parece activa, pero deja sola tu primera fila: la dama negra llega a "
+            },
+            {
+              "kind": "square",
+              "square": "e1"
+            },
+            {
+              "kind": "text",
+              "text": " y es "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "jaque mate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The rook on the seventh looks active, but it leaves your first rank alone: the black queen reaches "
+            },
+            {
+              "kind": "square",
+              "square": "e1"
+            },
+            {
+              "kind": "text",
+              "text": " and it is "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tienes varias "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ": dos "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": " en la última fila y uno en diagonal. Solo uno gana algo. Encuéntralo: tienes dos jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You have several "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": ": two "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": " on the back rank and one on a diagonal. Only one wins something. Find it: you have two moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r5k1/p1p4p/1p4p1/8/7q/8/P2Q1PPP/4R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qd5+",
+          "Kg7",
+          "Qxa8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: desde "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " la dama da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " por la diagonal y ataca la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " por la otra. El rey tiene que moverse y la torre cae. De las tres "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "jugadas forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ", solo esta deja al rival sin buena respuesta."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: from "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " the queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " along one diagonal and attacks the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " along the other. The king has to move and the rook falls. Of the three "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing moves"
+          },
+          {
+            "kind": "text",
+            "text": ", only this one leaves the rival without a good answer."
+          }
+        ]
+      },
+      "wrong": {
+        "Re8+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero la torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " la captura y te quedas sin torre."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " takes it and you are a rook down."
+            }
+          ]
+        },
+        "Qd8+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero la torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " captura tu dama."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " takes your queen."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una casilla desde la que la dama dé "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " y a la vez mire la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a square from which the queen gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and at the same time looks at the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "A veces la mejor jugada no da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", no captura y no amenaza nada a la vista: es una "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "jugada tranquila"
+          },
+          {
+            "kind": "text",
+            "text": ". Prepara una amenaza que llega después y que el rival ya no puede parar. Aquí avanzar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " no ataca nada, pero le da al rey una casilla de escape y quita para siempre el peligro de la última fila."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Sometimes the best move gives no "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", captures nothing and threatens nothing you can see: it is a "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "quiet move"
+          },
+          {
+            "kind": "text",
+            "text": ". It prepares a threat that comes later and that the rival can no longer stop. Here pushing the pawn from "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " attacks nothing, but it gives the king an escape square and removes the danger on the back rank for good."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "arrows": [
+          {
+            "from": "h2",
+            "to": "h3"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El alfil negro está en "
+          },
+          {
+            "kind": "square",
+            "square": "a2"
+          },
+          {
+            "kind": "text",
+            "text": ", metido entre tus peones. No hay "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": " ni capturas que sirvan. Encuentra la "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "jugada tranquila"
+          },
+          {
+            "kind": "text",
+            "text": " que lo deja sin salida."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black bishop is on "
+          },
+          {
+            "kind": "square",
+            "square": "a2"
+          },
+          {
+            "kind": "text",
+            "text": ", stuck among your pawns. There are no useful "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": " or captures. Find the "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "quiet move"
+          },
+          {
+            "kind": "text",
+            "text": " that leaves it no way out."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/pp3ppp/8/8/8/5N2/bPP2PPP/2K1R3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "b3"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el peón en "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " cierra la diagonal y está defendido por el de "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": ". La otra salida, "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": ", la vigila tu rey. El alfil ya no tiene casillas: tu rey irá a "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " a por él, y lo más que pueden sacar las negras es un peón a cambio. No hubo "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " ni captura: fue una "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "jugada tranquila"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": " closes the diagonal and is defended by the one on "
+          },
+          {
+            "kind": "square",
+            "square": "c2"
+          },
+          {
+            "kind": "text",
+            "text": ". The other way out, "
+          },
+          {
+            "kind": "square",
+            "square": "b1"
+          },
+          {
+            "kind": "text",
+            "text": ", is watched by your king. The bishop has no squares left: your king will go to "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " for it, and the most Black can get for it is a pawn. There was no "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " and no capture: it was a "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "quiet move"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Re8+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es un "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", pero la torre de "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " captura tu torre. Aquí lo forzante no sirve: busca una jugada tranquila."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is a "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the rook on "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " takes your rook. Forcing moves do not work here: look for a quiet one."
+            }
+          ]
+        },
+        "Nd4": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "El caballo vigila la salida de "
+            },
+            {
+              "kind": "square",
+              "square": "b3"
+            },
+            {
+              "kind": "text",
+              "text": ", pero queda sin defensa: la torre negra de "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " lo captura."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The knight watches the way out on "
+            },
+            {
+              "kind": "square",
+              "square": "b3"
+            },
+            {
+              "kind": "text",
+              "text": ", but it is undefended: the black rook on "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " takes it."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Mira por dónde puede escapar el alfil. Tiene dos salidas, y una de ellas ya la vigila tu rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look where the bishop can escape. It has two ways out, and your king already watches one of them."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu idea es capturar la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " con la dama. Pero el rival también amenaza algo: su dama y su alfil apuntan a "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": ". Tres "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "jugadas candidatas"
+          },
+          {
+            "kind": "text",
+            "text": ": capturar la torre, avanzar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " o llevar el caballo a "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Cuál atiende la amenaza sin abandonar tu idea?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your idea is to take the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " with the queen. But the rival threatens something too: his queen and bishop aim at "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": ". Three "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "candidate moves"
+          },
+          {
+            "kind": "text",
+            "text": ": take the rook, push the pawn from "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "h3"
+          },
+          {
+            "kind": "text",
+            "text": " or bring the knight to "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ". Which one meets the threat without giving up your idea?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4nk1/p1p2ppp/3b4/3Q4/7q/8/PPPN1PPP/2B2RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Qxa8",
+          "h3",
+          "Nf3"
+        ],
+        "correct": 2
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el caballo en "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " defiende "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " y además ataca la dama negra. El rival tiene que salvar su dama, y entonces tu dama captura la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". Una candidata que hace dos cosas a la vez suele ser la buena."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": " defends "
+          },
+          {
+            "kind": "square",
+            "square": "h2"
+          },
+          {
+            "kind": "text",
+            "text": " and also attacks the black queen. The rival has to save his queen, and then your queen takes the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ". A candidate that does two things at once is usually the right one."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Ganas la torre, pero la dama negra captura en "
+            },
+            {
+              "kind": "square",
+              "square": "h2"
+            },
+            {
+              "kind": "text",
+              "text": " con el apoyo del alfil: es "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "jaque mate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You win the rook, but the black queen takes on "
+            },
+            {
+              "kind": "square",
+              "square": "h2"
+            },
+            {
+              "kind": "text",
+              "text": " with the bishop’s support: it is "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "checkmate"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Para el "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ", pero no amenaza nada. El rival tiene tiempo de salvar su torre y tu idea se pierde."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It stops the "
+            },
+            {
+              "kind": "term",
+              "id": "checkmate",
+              "text": "mate"
+            },
+            {
+              "kind": "text",
+              "text": ", but it threatens nothing. The rival has time to save his rook and your idea is gone."
+            }
+          ]
+        },
+        null
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: antes de mover, haz una lista corta de "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "jugadas candidatas"
+          },
+          {
+            "kind": "text",
+            "text": ". Empieza por las "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forzantes"
+          },
+          {
+            "kind": "text",
+            "text": ": "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", capturas y amenazas. Para cada una, busca la mejor respuesta del rival y termina esa rama antes de pasar a otra. Y no olvides las "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "jugadas tranquilas"
+          },
+          {
+            "kind": "text",
+            "text": ": a veces la mejor no amenaza nada a la vista."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: before you move, make a short list of "
+          },
+          {
+            "kind": "term",
+            "id": "candidate-move",
+            "text": "candidate moves"
+          },
+          {
+            "kind": "text",
+            "text": ". Start with the "
+          },
+          {
+            "kind": "term",
+            "id": "forcing-move",
+            "text": "forcing ones"
+          },
+          {
+            "kind": "text",
+            "text": ": "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", captures and threats. For each one, look for the rival’s best answer and finish that branch before you move on. And do not forget "
+          },
+          {
+            "kind": "term",
+            "id": "quiet-move",
+            "text": "quiet moves"
+          },
+          {
+            "kind": "text",
+            "text": ": sometimes the best one threatens nothing you can see."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+        "orientation": "white"
+      }
+    }
+  ]
+}

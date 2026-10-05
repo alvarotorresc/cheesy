@@ -1869,6 +1869,71 @@
     ]
   },
   {
+    "id": "candidate-move",
+    "name": {
+      "es": "Jugada candidata",
+      "en": "Candidate move"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Jugada que a primera vista parece buena y merece pensarse. Antes de mover se hace una lista corta de candidatas, empezando por las "
+        },
+        {
+          "kind": "term",
+          "id": "forcing-move",
+          "text": "jugadas forzantes"
+        },
+        {
+          "kind": "text",
+          "text": ", y se calcula cada una."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A move that looks good at first sight and deserves a closer look. Before moving you make a short list of candidates, starting with the "
+        },
+        {
+          "kind": "term",
+          "id": "forcing-move",
+          "text": "forcing moves"
+        },
+        {
+          "kind": "text",
+          "text": ", and calculate each one."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/5ppp/8/8/8/8/1q3PPP/3R2K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d1"
+      ],
+      "arrows": [
+        {
+          "from": "d1",
+          "to": "d8",
+          "move": true
+        },
+        {
+          "from": "d1",
+          "to": "b1",
+          "move": true
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "candidate-moves",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Candidate_move"
+    ]
+  },
+  {
     "id": "tempo",
     "name": {
       "es": "Tiempo",
@@ -3059,6 +3124,66 @@
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Perpetual_check",
       "https://www.chess.com/terms/perpetual-check-chess"
+    ]
+  },
+  {
+    "id": "quiet-move",
+    "name": {
+      "es": "Jugada tranquila",
+      "en": "Quiet move"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Jugada que no da "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": ", no captura y no amenaza capturar nada enseguida, pero prepara algo que el rival ya no puede parar. Es la más fácil de pasar por alto."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A move that gives no "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": ", captures nothing and threatens no immediate capture, but prepares something the rival can no longer stop. It is the easiest kind to overlook."
+        }
+      ]
+    },
+    "example": {
+      "fen": "3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "g1"
+      ],
+      "arrows": [
+        {
+          "from": "h2",
+          "to": "h3",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "candidate-moves",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://lichess.org/training/quietMove"
     ]
   },
   {
