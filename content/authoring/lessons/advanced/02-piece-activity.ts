@@ -41,8 +41,8 @@ export const pieceActivity: LessonSpec = {
     {
       kind: 'choice',
       text: {
-        es: '¿Qué pieza mejoras? Cada opción mueve una pieza distinta: la torre a la columna d, el caballo de a4 a c5 o el rey a f1.',
-        en: 'Which piece do you improve? Each option moves a different piece: the rook to the d-file, the knight from a4 to c5 or the king to f1.',
+        es: '¿Qué pieza mejoras? Ojo: las torres se miran en la columna c, y la tuya no tiene defensa. Cada opción mueve una pieza distinta: la torre a la columna d, el caballo de a4 a c5 o el rey a f1.',
+        en: 'Which piece do you improve? Careful: the rooks face each other on the c-file, and yours is undefended. Each option moves a different piece: the rook to the d-file, the knight from a4 to c5 or the king to f1.',
       },
       board: { fen: '2r3k1/pp3ppp/4b3/8/N7/1P6/P4PPP/2R3K1 w - - 0 1', orientation: 'white' },
       answer: { by: 'engine', options: ['Rd1', 'Nc5', 'Kf1'], correct: 1 },
@@ -58,8 +58,8 @@ export const pieceActivity: LessonSpec = {
         },
       ],
       explanation: {
-        es: 'Eso es: el caballo de a4, en el borde, era tu peor pieza. Desde c5 ataca el peón de b7 y el alfil de e6, y vigila el centro. Antes de mover, pregúntate qué pieza hace menos, y llévala adonde haga más.',
-        en: 'That is it: the knight on a4, on the edge, was your worst piece. From c5 it attacks the pawn on b7 and the bishop on e6, and watches the centre. Before you move, ask which piece does least, and take it where it does more.',
+        es: 'Eso es: el caballo de a4, en el borde, era tu peor pieza. Desde c5 ataca el peón de b7 y el alfil de e6, y además se pone en medio de la columna c: tu torre ya no está atacada. Cambiar las torres en c8 también mantiene el equilibrio, pero no mejora ninguna pieza. Antes de mover, pregúntate qué pieza hace menos, y llévala adonde haga más.',
+        en: 'That is it: the knight on a4, on the edge, was your worst piece. From c5 it attacks the pawn on b7 and the bishop on e6, and it also steps into the c-file: your rook is no longer attacked. Trading rooks on c8 keeps the balance too, but it improves no piece. Before you move, ask which piece does least, and take it where it does more.',
       },
     },
     {
@@ -102,8 +102,8 @@ export const pieceActivity: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Quien tiene las piezas más activas suele llevar la [iniciativa](initiative): hace amenazas, y el rival tiene que contestarlas en lugar de seguir su plan. La [iniciativa](initiative) no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ataca los peones negros y el rey blanco está en el centro: son las blancas las que eligen el plan, y las negras van detrás.',
-        en: 'Whoever has the more active pieces usually holds the [initiative](initiative): he makes threats, and the rival has to answer them instead of following his own plan. The [initiative](initiative) is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh attacks the black pawns and the white king stands in the centre: White chooses the plan, and Black follows.',
+        es: 'Quien tiene las piezas más activas suele llevar la [iniciativa](initiative): hace amenazas, y el rival tiene que contestarlas en lugar de seguir su plan. La [iniciativa](initiative) no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ya ataca el peón de f7 y el rey blanco está en el centro: las blancas llevan la [iniciativa](initiative). Las negras aguantan, pero solo si activan su torre a tiempo, por ejemplo con [jaques](check) desde atrás.',
+        en: 'Whoever has the more active pieces usually holds the [initiative](initiative): he makes threats, and the rival has to answer them instead of following his own plan. The [initiative](initiative) is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh already attacks the pawn on f7 and the white king stands in the centre: White holds the [initiative](initiative). Black holds, but only if his rook gets active in time, for instance with [checks](check) from behind.',
       },
       board: {
         fen: '1r4k1/3R1ppp/8/8/4K3/8/5PPP/8 w - - 0 1',
