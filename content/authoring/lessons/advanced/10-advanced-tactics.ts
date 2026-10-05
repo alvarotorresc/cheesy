@@ -64,8 +64,8 @@ export const advancedTactics: LessonSpec = {
       check: { by: 'engine', solution: ['Re7', 'Qxe7', 'fxe7'] },
       wrong: {
         'Qg7+': {
-          es: 'La dama negra captura en g7, porque la séptima fila sigue abierta. Cambias las damas y el ataque se acaba.',
-          en: 'The black queen captures on g7, because the seventh rank is still open. The queens come off and the attack is over.',
+          es: 'La dama negra captura en g7, porque la séptima fila sigue abierta. Cambias las damas, el ataque se termina y el rey negro acaba comiéndose tu peón de g7: te quedas con un peón menos.',
+          en: 'The black queen captures on g7, because the seventh rank is still open. The queens come off, the attack is over and the black king ends up taking your pawn on g7: you are a pawn down.',
         },
         'f7+': {
           es: 'La dama negra captura el peón en f7, y g7 se queda sin apoyo.',

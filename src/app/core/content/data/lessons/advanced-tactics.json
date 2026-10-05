@@ -425,7 +425,15 @@
             },
             {
               "kind": "text",
-              "text": ", porque la séptima fila sigue abierta. Cambias las damas y el ataque se acaba."
+              "text": ", porque la séptima fila sigue abierta. Cambias las damas, el ataque se termina y el rey negro acaba comiéndose tu peón de "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": ": te quedas con un peón menos."
             }
           ],
           "en": [
@@ -439,7 +447,15 @@
             },
             {
               "kind": "text",
-              "text": ", because the seventh rank is still open. The queens come off and the attack is over."
+              "text": ", because the seventh rank is still open. The queens come off, the attack is over and the black king ends up taking your pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": ": you are a pawn down."
             }
           ]
         },
