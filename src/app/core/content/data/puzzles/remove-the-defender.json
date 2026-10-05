@@ -1,0 +1,729 @@
+{
+  "lesson": "remove-the-defender",
+  "themes": {
+    "capturingDefender": "removing-the-defender",
+    "deflection": "deflection"
+  },
+  "puzzles": [
+    {
+      "id": "LUPt9",
+      "fen": "6k1/5pr1/p7/1p1qp3/P7/2Pp1N1R/3Q1P2/5K2 w - - 0 41",
+      "moves": [
+        "Rg3",
+        "Rxg3",
+        "fxg3",
+        "Qxf3+"
+      ],
+      "rating": 942,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "SHvls",
+      "fen": "8/8/7p/2pK1kp1/8/7P/3B1nP1/8 b - - 9 44",
+      "moves": [
+        "Ne4",
+        "g4+",
+        "Kg6",
+        "Kxe4"
+      ],
+      "rating": 944,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "IVrt4",
+      "fen": "8/4KR1p/4p1pk/8/5PP1/8/3r3P/8 b - - 0 44",
+      "moves": [
+        "Rxh2",
+        "g5+",
+        "Kh5",
+        "Rxh7+",
+        "Kg4",
+        "Rxh2"
+      ],
+      "rating": 949,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "CmXlD",
+      "fen": "8/5ppk/p6p/1p1pP3/5Q2/P1PbBPPP/1P2q3/6K1 w - - 3 38",
+      "moves": [
+        "Bf2",
+        "Qf1+",
+        "Kh2",
+        "Qxf2+"
+      ],
+      "rating": 951,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "Feajv",
+      "fen": "4rrk1/2p3p1/1p1p1nqp/p2P4/2P1pBb1/2P4P/P3BPPK/R2Q1R2 w - - 0 23",
+      "moves": [
+        "Bxg4",
+        "Nxg4+",
+        "Qxg4",
+        "Qxg4",
+        "hxg4",
+        "Rxf4"
+      ],
+      "rating": 969,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "Ppvk0",
+      "fen": "1R6/8/3p1k2/5rp1/8/3PR3/1P4K1/7r b - - 10 45",
+      "moves": [
+        "Rb1",
+        "Rf8+",
+        "Kg7",
+        "Rxf5"
+      ],
+      "rating": 971,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "6AIJg",
+      "fen": "r4rk1/pp1qbppp/5n2/2pP4/8/1PN1Q3/P1P2PPP/R1B2RK1 b - - 0 12",
+      "moves": [
+        "Nxd5",
+        "Nxd5",
+        "Qxd5",
+        "Qxe7"
+      ],
+      "rating": 993,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "tRgI9",
+      "fen": "r2q1rk1/pp2bppp/4pn2/1Q1p2B1/8/7P/PPPN1PP1/R3R1K1 b - - 0 13",
+      "moves": [
+        "Qd7",
+        "Qxd7",
+        "Nxd7",
+        "Bxe7"
+      ],
+      "rating": 993,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "pcha8",
+      "fen": "3r1r2/pp2b2k/3q3p/2pR3Q/8/P5R1/1P4PP/6K1 b - - 0 27",
+      "moves": [
+        "Qxd5",
+        "Qg6+",
+        "Kh8",
+        "Qxh6#"
+      ],
+      "rating": 1009,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "bAvZM",
+      "fen": "r1b2rk1/1p1p1pp1/p1n4p/4p3/3P2Pq/2PB1R2/P1Q4N/5R1K b - - 3 19",
+      "moves": [
+        "exd4",
+        "Bh7+",
+        "Kh8",
+        "Rxf7",
+        "Rxf7",
+        "Rxf7"
+      ],
+      "rating": 1028,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "XgfR9",
+      "fen": "8/1B6/P1RB4/6pk/3n2np/6Pb/4PP1P/R5K1 w - - 0 36",
+      "moves": [
+        "a7",
+        "Nxe2+",
+        "Kh1",
+        "Nxf2#"
+      ],
+      "rating": 1049,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "mbsP3",
+      "fen": "5k2/6pp/1R3p2/P7/6PK/5r1P/8/8 w - - 1 40",
+      "moves": [
+        "a6",
+        "g5+",
+        "Kh5",
+        "Rxh3#"
+      ],
+      "rating": 1056,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "VPry2",
+      "fen": "3q4/5p2/p4k2/7R/2rp1n2/P4R2/1B3PP1/5K2 b - - 4 36",
+      "moves": [
+        "Qd6",
+        "Rh6+",
+        "Ke7",
+        "Rxd6",
+        "Kxd6",
+        "Rxf4"
+      ],
+      "rating": 1061,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "rm7XI",
+      "fen": "rq3rk1/3bbppp/3p1n2/pN1P4/Pp1BPN2/6PP/4Q1B1/R1R3K1 w - - 4 25",
+      "moves": [
+        "Rc7",
+        "Bxb5",
+        "axb5",
+        "Qxc7"
+      ],
+      "rating": 1063,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "ZPQu2",
+      "fen": "r4r1k/1b3p1p/5p2/p4N2/Pb5R/1P1B1qPP/4RP2/3Q2K1 w - - 5 33",
+      "moves": [
+        "Be4",
+        "Bxe4",
+        "Rhxe4",
+        "Qxf5"
+      ],
+      "rating": 1072,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "fE4iR",
+      "fen": "rnbqk2r/pp4pp/5pn1/3Bp2Q/1b6/2N5/PPP2PPP/R1B1K1NR w KQkq - 5 10",
+      "moves": [
+        "Bd2",
+        "Bxc3",
+        "Bxc3",
+        "Qxd5"
+      ],
+      "rating": 1093,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "YXsfe",
+      "fen": "r1b1r1k1/pppn1pP1/5q2/2bP2N1/2P1p3/2N4P/PPP2P2/R1BQK2R w KQ - 3 14",
+      "moves": [
+        "Be3",
+        "Bxe3",
+        "fxe3",
+        "Qxg5"
+      ],
+      "rating": 1101,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "i41kJ",
+      "fen": "5rk1/pp3pp1/3br1qp/3R4/3P4/2P1PR2/PP3QPP/6K1 b - - 0 29",
+      "moves": [
+        "Rf6",
+        "Rxf6",
+        "gxf6",
+        "Rxd6",
+        "Qb1+",
+        "Qf1"
+      ],
+      "rating": 1105,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "PGsky",
+      "fen": "r3kb1r/ppp2ppp/2n1pn2/7q/6b1/2NP1N1P/PPPBBPP1/R2QK2R w KQkq - 0 9",
+      "moves": [
+        "Bg5",
+        "Bxf3",
+        "Bxf3",
+        "Qxg5"
+      ],
+      "rating": 1153,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "QlhHO",
+      "fen": "2kr3r/1ppb1ppp/p1p5/2qnPN2/5P2/2P1B3/P1PQ2PP/1R3RK1 b - - 6 15",
+      "moves": [
+        "Qxc3",
+        "Ne7+",
+        "Nxe7",
+        "Qxc3"
+      ],
+      "rating": 1157,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "e104b",
+      "fen": "8/8/5r2/8/7K/6R1/5k2/8 w - - 17 107",
+      "moves": [
+        "Kh3",
+        "Rh6+",
+        "Kg4",
+        "Rg6+",
+        "Kf5",
+        "Rxg3"
+      ],
+      "rating": 1162,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "p2eAy",
+      "fen": "8/2p4p/3kb1p1/p4p2/P1P1p3/1B6/1rP2PPP/R4K2 w - - 1 24",
+      "moves": [
+        "Ke2",
+        "Bxc4+",
+        "Bxc4",
+        "Rxc2+"
+      ],
+      "rating": 1173,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "L5VS8",
+      "fen": "r4rk1/ppp2pbp/4p1p1/1q2Pn2/3P4/1PP1BB1P/P5P1/R2Q1RK1 w - - 1 16",
+      "moves": [
+        "Qe2",
+        "Qxe2",
+        "Bxe2",
+        "Nxe3"
+      ],
+      "rating": 1190,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "cRlNW",
+      "fen": "r4r2/1bq2pk1/p1pp4/1p2p2Q/2P1P3/P1NP4/1P3P2/1R2K2R b K - 0 21",
+      "moves": [
+        "Rh8",
+        "Qg5+",
+        "Kf8",
+        "Rxh8#"
+      ],
+      "rating": 1227,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "roLWI",
+      "fen": "2r3k1/2r2pp1/7p/3p1q2/8/PP1RP1Q1/2P3PP/1KR5 w - - 5 23",
+      "moves": [
+        "Qe1",
+        "Rxc2",
+        "Rxc2",
+        "Qxd3"
+      ],
+      "rating": 1255,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "XIdpN",
+      "fen": "8/8/8/2pnBkp1/4n3/3K1N1P/6P1/8 b - - 4 42",
+      "moves": [
+        "Nb6",
+        "g4+",
+        "Kg6",
+        "Kxe4"
+      ],
+      "rating": 1257,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "i4b1y",
+      "fen": "r6r/pbq3pN/1p2Rnk1/2b2p2/2P4Q/1P6/PB3PPP/R5K1 b - - 4 20",
+      "moves": [
+        "Rxh7",
+        "Rxf6+",
+        "gxf6",
+        "Qxf6+",
+        "Kh5",
+        "Qxf5+"
+      ],
+      "rating": 1262,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "XR4xl",
+      "fen": "4r1k1/p2Q1pp1/1pp3qp/3n4/8/2B3P1/PP3P1P/3R2K1 b - - 5 30",
+      "moves": [
+        "Re7",
+        "Qd8+",
+        "Kh7",
+        "Rxd5",
+        "cxd5",
+        "Qxe7"
+      ],
+      "rating": 1279,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "gCdbV",
+      "fen": "2kr3r/1pp1nppp/p5b1/1B6/1b1qP3/2N4P/PPPBQPP1/2KR3R w - - 0 15",
+      "moves": [
+        "Ba4",
+        "Bxc3",
+        "Bxc3",
+        "Qxa4"
+      ],
+      "rating": 1283,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "9bTqm",
+      "fen": "1q2kb1r/2p2pp1/4pn2/6r1/2N2P2/1P2P3/PB1P2bP/R2QK1R1 b Qk - 0 18",
+      "moves": [
+        "Rg4",
+        "Bxf6",
+        "gxf6",
+        "Qxg4"
+      ],
+      "rating": 1317,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "ISOAr",
+      "fen": "8/4k1pp/8/4K3/1R6/4P3/rp3PP1/8 w - - 0 40",
+      "moves": [
+        "f4",
+        "Ra5+",
+        "Kd4",
+        "Ra4",
+        "Rxa4",
+        "b1=Q"
+      ],
+      "rating": 1322,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "34ejW",
+      "fen": "3rr1k1/ppp1bppp/8/3n4/1n6/1P2N3/PBPPBPPP/R3K2R w KQ - 6 16",
+      "moves": [
+        "a3",
+        "Nxe3",
+        "fxe3",
+        "Nxc2+"
+      ],
+      "rating": 1360,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "Jcv7e",
+      "fen": "2r4k/2qR2p1/p3Qp1p/1pp5/4P3/5P1P/1P4P1/6K1 b - - 4 32",
+      "moves": [
+        "Qc6",
+        "Rd8+",
+        "Rxd8",
+        "Qxc6"
+      ],
+      "rating": 1386,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "pFmS2",
+      "fen": "4r2k/2R3b1/p4ppp/1p6/1P1Pn1q1/P4N2/4QP1B/4R1K1 w - - 0 33",
+      "moves": [
+        "Kh1",
+        "Ng3+",
+        "fxg3",
+        "Rxe2",
+        "Rxe2",
+        "Qxf3+"
+      ],
+      "rating": 1386,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "HIYZl",
+      "fen": "1Q3bk1/5pp1/b3p2P/4P3/4B3/8/p4PK1/3r4 b - - 2 37",
+      "moves": [
+        "a1=Q",
+        "h7+",
+        "Kh8",
+        "Qxf8#"
+      ],
+      "rating": 1397,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "dNcyj",
+      "fen": "6rk/1p4b1/p1nN2Qn/P1p4p/3p1p1q/3P1P2/1PPB3N/6RK b - - 0 32",
+      "moves": [
+        "Bf8",
+        "Nf7+",
+        "Nxf7",
+        "Qxg8#"
+      ],
+      "rating": 1410,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "fRMdy",
+      "fen": "r1bq3k/1p2nQp1/1b4np/1p6/P2P4/B4N1P/5PP1/3R1RK1 b - - 0 20",
+      "moves": [
+        "Rxa4",
+        "Bxe7",
+        "Qxe7",
+        "Qxg6"
+      ],
+      "rating": 1431,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "nszuI",
+      "fen": "5r2/1kpn4/1p6/1P5p/3Pp1p1/1N2P1K1/R5PP/8 w - - 5 29",
+      "moves": [
+        "Rf2",
+        "h4+",
+        "Kxg4",
+        "Rxf2"
+      ],
+      "rating": 1463,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "ZovHO",
+      "fen": "r1bq1rk1/ppp2ppp/2n5/8/1b6/5B2/PP1B1PPP/RN1Q1RK1 b - - 4 12",
+      "moves": [
+        "Re8",
+        "Bxc6",
+        "bxc6",
+        "Bxb4"
+      ],
+      "rating": 1475,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "EjxzU",
+      "fen": "r1b2rk1/1p1p1ppp/p1n5/b3N3/2NPPB2/2P3P1/P2K2B1/1R6 b - - 1 18",
+      "moves": [
+        "b5",
+        "Nxc6",
+        "dxc6",
+        "Nxa5"
+      ],
+      "rating": 1504,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "QPT4v",
+      "fen": "2rr1k2/pp2n1pp/5p2/4Nb2/2BP4/4P3/P4PPP/2R2RK1 w - - 2 19",
+      "moves": [
+        "Nd3",
+        "Rxc4",
+        "Rxc4",
+        "Bxd3"
+      ],
+      "rating": 1515,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "vPomE",
+      "fen": "8/8/8/2kn3R/P7/4rP2/5K2/8 b - - 18 58",
+      "moves": [
+        "Kd4",
+        "Rxd5+",
+        "Kxd5",
+        "Kxe3"
+      ],
+      "rating": 1532,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "lrBO8",
+      "fen": "2k4r/ppp2r2/4p1q1/P1PpP3/3n3p/1Q1B2pP/6P1/R1B2RK1 w - - 0 25",
+      "moves": [
+        "Bxg6",
+        "Ne2+",
+        "Kh1",
+        "Rxf1#"
+      ],
+      "rating": 1566,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "J2tDg",
+      "fen": "7r/p1kr1p1P/1pp1p1p1/4R2n/2PP1P2/1PB5/P1K5/6R1 w - - 1 39",
+      "moves": [
+        "Rxh5",
+        "gxh5",
+        "d5",
+        "Rxh7"
+      ],
+      "rating": 1600,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "F7Xq5",
+      "fen": "8/8/1bp2n2/3k4/1P3Kp1/4P3/5P2/2R5 b - - 1 38",
+      "moves": [
+        "Ne4",
+        "Rd1+",
+        "Kc4",
+        "Kxe4"
+      ],
+      "rating": 1619,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "FAFlE",
+      "fen": "8/7p/6p1/3k1pP1/1pp5/4KN1P/1P6/8 w - - 2 45",
+      "moves": [
+        "Nd4",
+        "f4+",
+        "Kxf4",
+        "Kxd4"
+      ],
+      "rating": 1634,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "0vXTW",
+      "fen": "3rrn1k/pR4p1/1p3p1p/3Q4/4P3/5PBP/Pq6/1B1R2K1 w - - 3 28",
+      "moves": [
+        "Qb3",
+        "Qxb3",
+        "axb3",
+        "Rxd1+"
+      ],
+      "rating": 1645,
+      "themes": [
+        "capturingDefender"
+      ]
+    },
+    {
+      "id": "EL4bz",
+      "fen": "R7/6r1/p1Pkp3/1p1p1p2/P2P1P2/2P5/6P1/7K b - - 2 50",
+      "moves": [
+        "Kxc6",
+        "Rxa6+",
+        "Kb7",
+        "axb5"
+      ],
+      "rating": 1700,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "XEZcZ",
+      "fen": "6k1/p1r2pq1/1p2p2R/3r2pQ/1P6/7P/6P1/5RK1 b - - 4 41",
+      "moves": [
+        "Rc4",
+        "Rh8+",
+        "Qxh8",
+        "Qxf7#"
+      ],
+      "rating": 1700,
+      "themes": [
+        "deflection"
+      ]
+    },
+    {
+      "id": "pX23m",
+      "fen": "6k1/1pp2p1p/p1p1q1p1/4Pr2/1P1Q1n2/P2P1R1P/2P4K/6R1 b - - 0 26",
+      "moves": [
+        "Qxe5",
+        "Qxe5",
+        "Rxe5",
+        "Rxf4"
+      ],
+      "rating": 1700,
+      "themes": [
+        "capturingDefender"
+      ]
+    }
+  ]
+}

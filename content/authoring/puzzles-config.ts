@@ -81,7 +81,12 @@ export const LENGTH_QUOTA_BY_LESSON: Record<string, Partial<LengthQuota>> = {
 };
 
 /** Puzzle id → why it is left out, after looking at it. */
-export const EXCLUDED_IDS: Record<string, string> = {};
+export const EXCLUDED_IDS: Record<string, string> = {
+  // Eye review of 2026-10-05 (5 per theme, see content/README.md).
+  crPYf: 'deflection: a queen capture with check and mate on f8; no defender is drawn away',
+  '44kyS': 'pin: a knight fork of king and queen; nothing is pinned when the player moves',
+  GwlY6: 'pin: the pinned g7 pawn plays no part; it is won with a check on the back rank',
+};
 
 export const PUZZLE_CONFIG: PuzzleConfig = {
   order: LESSON_ORDER,
