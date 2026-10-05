@@ -98,7 +98,7 @@
           },
           {
             "kind": "text",
-            "text": " y ataca el peón de "
+            "text": ": ataca el peón de "
           },
           {
             "kind": "square",
@@ -106,7 +106,39 @@
           },
           {
             "kind": "text",
-            "text": ", que ningún peón negro puede defender. Con esa jugada las blancas consiguieron bloquear los peones negros: una pieza blanca se planta delante y ya no avanzan."
+            "text": ", que ningún peón negro puede defender, y destapa el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": ", que también apunta a "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ". Con esa jugada las blancas consiguieron bloquear los peones negros: ganan el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " y plantan una pieza en esa casilla, delante del de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", que ya no avanza."
           }
         ],
         "en": [
@@ -138,7 +170,7 @@
           },
           {
             "kind": "text",
-            "text": " and attacks the pawn on "
+            "text": ": it attacks the pawn on "
           },
           {
             "kind": "square",
@@ -146,7 +178,39 @@
           },
           {
             "kind": "text",
-            "text": ", which no black pawn can defend. With that move White managed to blockade the black pawns: a white piece settles in front of them and they advance no more."
+            "text": ", which no black pawn can defend, and uncovers the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": ", which also aims at "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ". With that move White managed to blockade the black pawns: he wins the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " and settles a piece on that square, in front of the one on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ", which advances no more."
           }
         ]
       },
