@@ -38,6 +38,7 @@ export type {
   ReachRole,
   ReachStep,
   RichText,
+  Segment,
   Side,
   Step,
   StepKind,
