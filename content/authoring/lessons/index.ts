@@ -21,6 +21,7 @@ import { removeTheDefender } from './intermediate/06-remove-the-defender.ts';
 import { matePatterns } from './intermediate/07-mate-patterns.ts';
 import { forcingMoves } from './intermediate/08-forcing-moves.ts';
 import { inBetweenMove } from './intermediate/09-in-between-move.ts';
+import { kingPawnEndings } from './intermediate/10-king-pawn-endings.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -44,4 +45,5 @@ export const lessons: LessonSpec[] = [
   matePatterns,
   forcingMoves,
   inBetweenMove,
+  kingPawnEndings,
 ];

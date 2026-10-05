@@ -67,6 +67,8 @@ const EXPECTED_IDS = [
   'overloading',
   'forcing-move',
   'x-ray',
+  'passed-pawn',
+  'zugzwang',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -128,9 +130,11 @@ const GROUPS: Record<string, string[]> = {
     'doubled-pawns',
     'hanging-pawns',
     'minority-attack',
+    'passed-pawn',
   ],
   endgames: [
     'opposition',
+    'zugzwang',
     'key-squares',
     'rule-of-the-square',
     'lucena-position',

@@ -313,5 +313,20 @@
     },
     "stepCount": 6,
     "exerciseCount": 3
+  },
+  {
+    "id": "king-pawn-endings",
+    "level": "intermediate",
+    "order": 10,
+    "title": {
+      "es": "Finales de peones",
+      "en": "King and pawn endings"
+    },
+    "summary": {
+      "es": "La regla del cuadrado, la oposición y las casillas clave: cuándo corona un peón y cuándo no.",
+      "en": "The rule of the square, the opposition and the key squares: when a pawn promotes and when it does not."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
   }
 ]

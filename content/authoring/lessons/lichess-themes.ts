@@ -21,6 +21,7 @@ export const LICHESS_THEME_KEYS = [
   'sacrifice',
   'intermezzo',
   'xRayAttack',
+  'pawnEndgame',
 ] as const;
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
@@ -36,4 +37,5 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'mate-patterns': ['backRankMate', 'smotheredMate', 'anastasiaMate'],
   'forcing-moves': ['mateIn2', 'attraction', 'sacrifice'],
   'in-between-move': ['intermezzo', 'xRayAttack'],
+  'king-pawn-endings': ['pawnEndgame'],
 };

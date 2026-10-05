@@ -542,6 +542,24 @@ export const glossary: GlossarySpec[] = [
     sources: [WIKI_GLOSSARY, `${WIKI}Minority_attack`],
   },
 
+  {
+    id: 'passed-pawn',
+    name: { es: 'Peón pasado', en: 'Passed pawn' },
+    definition: {
+      es: 'Peón que no tiene peones rivales delante, ni en su [columna](file) ni en las de al lado. Ningún peón puede frenarlo, así que amenaza con [coronar](promotion) y obliga al rival a vigilarlo con sus piezas.',
+      en: 'A pawn with no enemy pawns ahead of it, either on its own [file](file) or on the ones next to it. No pawn can stop it, so it threatens to [promote](promotion) and forces the opponent to watch it with pieces.',
+    },
+    example: {
+      fen: '8/5k2/8/1P3p2/5P2/8/5K2/8 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b5'],
+      arrows: [{ from: 'b5', to: 'b6', move: true }],
+    },
+    group: 'pawns',
+    level: 'intermediate',
+    lesson: 'king-pawn-endings',
+    sources: [WIKI_GLOSSARY, `${WIKI}Passed_pawn`, `${CHESSCOM_EN}passed-pawn`],
+  },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
     id: 'tempo',
@@ -1079,10 +1097,34 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Opposition_(chess)`,
       'https://lichess.org/practice/pawn-endgames/opposition/A4ujYOer',
+    ],
+  },
+  {
+    id: 'zugzwang',
+    name: { es: 'Zugzwang', en: 'Zugzwang' },
+    definition: {
+      es: 'Situación en la que estar obligado a mover perjudica: cualquier jugada empeora la posición, y si se pudiera pasar el turno, no pasaría nada. Es una palabra alemana. Decide muchos finales de reyes y peones.',
+      en: 'A position where having to move does harm: every move makes things worse, and if one could pass, nothing would happen. The word is German. It decides many endings with only kings and pawns.',
+    },
+    example: {
+      fen: '8/8/3k4/8/3K4/3P4/8/8 b - - 0 1',
+      orientation: 'white',
+      highlights: ['d4', 'd6'],
+      arrows: [],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'king-pawn-endings',
+    sources: [
+      WIKI_GLOSSARY,
+      `${WIKI}Zugzwang`,
+      `${CHESSCOM_EN}zugzwang-chess`,
+      'https://lichess.org/training/zugzwang',
     ],
   },
   {
@@ -1100,6 +1142,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Key_square`,
@@ -1121,6 +1164,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_KP_ENDGAME,
       'https://es.wikipedia.org/wiki/Regla_del_cuadrado_(ajedrez)',
