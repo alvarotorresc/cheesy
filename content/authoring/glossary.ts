@@ -491,9 +491,9 @@ export const glossary: GlossarySpec[] = [
       en: 'A pawn with no pawns of its own colour on the [columns](file) next to it. As long as that lasts, no pawn can guard it, so pieces have to do that job.',
     },
     example: {
-      fen: '4k3/pp3ppp/8/3p4/8/4P3/PP3PPP/4K3 w - - 0 1',
+      fen: '4k3/1pp2ppp/3p4/8/4P3/8/PPP3PP/4K3 w - - 0 1',
       orientation: 'white',
-      highlights: ['d5'],
+      highlights: ['e4'],
       arrows: [],
     },
     group: 'pawns',
