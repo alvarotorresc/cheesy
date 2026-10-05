@@ -80,12 +80,32 @@ export const LENGTH_QUOTA_BY_LESSON: Record<string, Partial<LengthQuota>> = {
   'in-between-move': { minThree: 0.4 },
 };
 
+/**
+ * Over the lesson's quota. A `mateIn2` puzzle is always two player moves, so the three-move share of
+ * `forcing-moves` falls on its other two themes: 11 + 10 of 50, still two fifths of the lesson.
+ */
+export const LENGTH_QUOTA_BY_THEME: Record<string, Partial<LengthQuota>> = {
+  mateIn2: { maxOne: 0, minThree: 0 },
+  attraction: { minThree: 0.6 },
+  sacrifice: { minThree: 0.6 },
+  // Eye review of 2026-10-05: a one-move equality puzzle is a recapture of what the rival left
+  // hanging, not a worse position saved.
+  equality: { maxOne: 0 },
+};
+
 /** Puzzle id → why it is left out, after looking at it. */
 export const EXCLUDED_IDS: Record<string, string> = {
   // Eye review of 2026-10-05 (5 per theme, see content/README.md).
   crPYf: 'deflection: a queen capture with check and mate on f8; no defender is drawn away',
   '44kyS': 'pin: a knight fork of king and queen; nothing is pinned when the player moves',
   GwlY6: 'pin: the pinned g7 pawn plays no part; it is won with a check on the back rank',
+  // Eye review of lessons 7–12, 2026-10-05.
+  '8UR9y': 'equality: a knight fork of king and rook that wins, not a worse position saved',
+  HgekJ: 'equality: a knight fork of king and bishop that wins, not a worse position saved',
+  '8Binz': 'equality: a knight fork of queen and rook that wins, not a worse position saved',
+  '2LD8i': 'equality: a recapture that ends a rook up, not a worse position saved',
+  BsKND: 'equality: a knight fork of queen and rook that wins, not a worse position saved',
+  SQrQk: 'defensiveMove: the king takes a rook left hanging; nothing to defend',
 };
 
 export const PUZZLE_CONFIG: PuzzleConfig = {
@@ -99,6 +119,6 @@ export const PUZZLE_CONFIG: PuzzleConfig = {
   perLesson: PUZZLES_PER_LESSON,
   lengthQuota: LENGTH_QUOTA,
   lengthQuotaByLesson: LENGTH_QUOTA_BY_LESSON,
-  lengthQuotaByTheme: {},
+  lengthQuotaByTheme: LENGTH_QUOTA_BY_THEME,
   excluded: EXCLUDED_IDS,
 };

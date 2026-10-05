@@ -56,4 +56,18 @@ export const THEME_TERMS: Partial<Record<LichessTheme, string | null>> = {
   discoveredCheck: 'discovered-check',
   capturingDefender: 'removing-the-defender',
   deflection: 'deflection',
+  backRankMate: 'back-rank',
+  smotheredMate: 'smothered-mate',
+  anastasiaMate: 'anastasia-mate',
+  // A length (two moves to mate), not an idea: the solved text names it without a link.
+  mateIn2: null,
+  attraction: 'attraction',
+  sacrifice: 'sacrifice',
+  intermezzo: 'intermediate-move',
+  xRayAttack: 'x-ray',
+  // Kinds of position, not ideas: the glossary has no term for them.
+  pawnEndgame: null,
+  rookEndgame: null,
+  defensiveMove: null,
+  equality: null,
 };
