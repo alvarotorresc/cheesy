@@ -1,0 +1,12 @@
+/* One way on, "Next puzzle", across the panel: there is no going back inside a batch. */
+.step-nav {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tally {
+  color: var(--color-text-muted);
+}
+
+.all-solved {
+  max-width: 34rem;
+}

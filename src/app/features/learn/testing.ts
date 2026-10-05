@@ -1,5 +1,12 @@
-import type { ChoiceStep, Lesson, LessonLoaders, LessonSummary } from '../../core/content';
-import { plainText } from '../../core/content/testing';
+import type {
+  ChoiceStep,
+  Lesson,
+  LessonLoaders,
+  LessonSummary,
+  PuzzleCatalog,
+  PuzzleLoaders,
+} from '../../core/content';
+import { bundledPuzzleLoaders, plainText } from '../../core/content/testing';
 
 const summary = (id: string, order: number, title: string): LessonSummary => ({
   id,
@@ -69,6 +76,52 @@ export const fixtureLessonLoaders: LessonLoaders = {
     if (!found) throw new Error(`No fixture lesson ${id}`);
     return found;
   },
+};
+
+/** An intermediate lesson with puzzles, for the specs of "Practise more". */
+export const PUZZLE_LESSON: LessonSummary = {
+  ...summary('the-fork', 1, 'The fork'),
+  level: 'intermediate',
+};
+
+/** The fixture lessons plus `PUZZLE_LESSON`, whose steps are those of the first fixture lesson. */
+export const lessonLoadersWithPuzzles: LessonLoaders = {
+  catalog: async () => [...FIXTURE_CATALOG, PUZZLE_LESSON],
+  lesson: async (id) =>
+    id === PUZZLE_LESSON.id
+      ? {
+          ...FIXTURE_LESSONS['the-board'],
+          ...PUZZLE_LESSON,
+          next: { kind: 'positions', tag: 'fork' },
+        }
+      : fixtureLessonLoaders.lesson(id),
+};
+
+/** Puzzles in the fixture lesson: more than a batch, so a second batch can be told apart. */
+export const FIXTURE_PUZZLE_COUNT = 12;
+
+/**
+ * The first real Lichess puzzles (CC0) of the fork, easiest first: KEPe0 opens the first batch.
+ * The catalogue has only that lesson.
+ */
+export const fixturePuzzleLoaders: PuzzleLoaders = {
+  catalog: async (): Promise<PuzzleCatalog> => {
+    const { source } = await bundledPuzzleLoaders.catalog();
+    return {
+      source,
+      lessons: [{ lesson: PUZZLE_LESSON.id, count: FIXTURE_PUZZLE_COUNT, themes: ['fork'] }],
+    };
+  },
+  puzzles: async (lessonId) => {
+    const file = await bundledPuzzleLoaders.puzzles(lessonId);
+    return { ...file, puzzles: file.puzzles.slice(0, FIXTURE_PUZZLE_COUNT) };
+  },
+};
+
+/** A puzzle catalogue with no lessons, as before the puzzles of a level are generated. */
+export const emptyPuzzleLoaders: PuzzleLoaders = {
+  catalog: async () => ({ ...(await fixturePuzzleLoaders.catalog()), lessons: [] }),
+  puzzles: () => Promise.reject(new Error('No puzzles')),
 };
 
 /**

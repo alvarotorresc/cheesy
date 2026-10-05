@@ -9,3 +9,13 @@ const MAX_CONTENT_ID_LENGTH = 64;
  */
 export const isContentId = (value: unknown): value is string =>
   typeof value === 'string' && value.length <= MAX_CONTENT_ID_LENGTH && CONTENT_ID.test(value);
+
+/** A Lichess puzzle id: five letters and digits, upper and lower case ("KEPe0"). */
+const PUZZLE_ID = /^[A-Za-z0-9]{5}$/;
+
+/**
+ * Whether a value can be the id of a Lichess puzzle. Puzzle ids reach the app from browser
+ * storage, where they can be edited, so they are checked like content ids.
+ */
+export const isPuzzleId = (value: unknown): value is string =>
+  typeof value === 'string' && PUZZLE_ID.test(value);

@@ -42,6 +42,12 @@
         </li>
       }
     </ol>
+    @if (hasPuzzles()) {
+      <a class="glossary-link puzzles-link" routerLink="/learn/puzzles">
+        {{ t.puzzles.levelPrompt }}
+        <span class="glossary-action">{{ t.puzzles.levelLink }}</span>
+      </a>
+    }
     <a class="glossary-link" routerLink="/learn/glossary">
       {{ t.levelGlossaryPrompt }}
       <span class="glossary-action">{{ t.levelGlossaryLink }}</span>

@@ -97,6 +97,86 @@ describe('ProgressService', () => {
     });
   });
 
+  describe('puzzles', () => {
+    beforeEach(() => setupWithDatabase());
+
+    const fork = (puzzleId: string, firstTry: boolean) => ({
+      puzzleId,
+      lessonId: 'the-fork',
+      firstTry,
+    });
+
+    it('should record a puzzle, adding the tries and keeping only the last result', async () => {
+      const first = await service.recordPuzzle(fork('KEPe0', false), 10);
+      const again = await service.recordPuzzle(fork('KEPe0', true), 20);
+
+      expect(first).toEqual({
+        puzzleId: 'KEPe0',
+        lessonId: 'the-fork',
+        tries: 1,
+        lastFirstTry: false,
+        lastPlayedAt: 10,
+      });
+      expect(again).toEqual({ ...first, tries: 2, lastFirstTry: true, lastPlayedAt: 20 });
+      expect(await service.puzzles()).toEqual([again]);
+    });
+
+    it('should read the puzzles of one lesson only', async () => {
+      await service.recordPuzzle(fork('KEPe0', true), 10);
+      await service.recordPuzzle({ puzzleId: '73Wh4', lessonId: 'the-pin', firstTry: true }, 10);
+
+      expect((await service.puzzles('the-fork')).map((row) => row.puzzleId)).toEqual(['KEPe0']);
+      expect(await service.puzzles()).toHaveLength(2);
+      expect(await service.puzzles('Not An Id')).toEqual([]);
+    });
+
+    it('should ignore puzzle rows that were tampered with', async () => {
+      const good = await service.recordPuzzle(fork('KEPe0', true), 10);
+      await store.puzzles.put({
+        puzzleId: 'toolong',
+        lessonId: 'the-fork',
+        tries: 1,
+        lastFirstTry: true,
+        lastPlayedAt: 1,
+      });
+      await store.puzzles.put({
+        puzzleId: 'Zm7Ng',
+        lessonId: 'the-fork',
+        tries: 0,
+        lastFirstTry: true,
+        lastPlayedAt: 1,
+      });
+
+      expect(await service.puzzles('the-fork')).toEqual([good]);
+    });
+
+    it('should refuse a result with a bad id and start again from a tampered row', async () => {
+      expect(await service.recordPuzzle(fork('../ab', true))).toBeUndefined();
+      expect(
+        await service.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'Bad', firstTry: true }),
+      ).toBeUndefined();
+      await store.puzzles.put({
+        puzzleId: 'KEPe0',
+        lessonId: 'the-fork',
+        tries: -3,
+        lastFirstTry: true,
+        lastPlayedAt: 1,
+      });
+
+      expect((await service.recordPuzzle(fork('KEPe0', true), 5))?.tries).toBe(1);
+    });
+
+    it('should delete the puzzles apart from the lessons', async () => {
+      await service.recordPuzzle(fork('KEPe0', true), 10);
+      await service.recordLesson({ lessonId: 'the-fork', exercises: 1, firstTry: 1 }, 10);
+
+      expect(await service.clear('puzzles')).toBe(true);
+
+      expect(await service.puzzles()).toEqual([]);
+      expect(await service.lessons()).toHaveLength(1);
+    });
+  });
+
   describe('with a working store', () => {
     beforeEach(() => setupWithDatabase());
 

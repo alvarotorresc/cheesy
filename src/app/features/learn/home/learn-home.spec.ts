@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { GLOSSARY_LOADER, LESSON_LOADERS } from '../../../core/content';
+import { GLOSSARY_LOADER, LESSON_LOADERS, PUZZLE_LOADERS } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { LEARN_ROUTES } from '../learn.routes';
-import { fixtureLessonLoaders } from '../testing';
+import { emptyPuzzleLoaders, fixtureLessonLoaders, fixturePuzzleLoaders } from '../testing';
 
 describe('LearnHome', () => {
   let progress: ProgressService;
@@ -23,6 +23,7 @@ describe('LearnHome', () => {
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
         { provide: GLOSSARY_LOADER, useValue: glossary },
+        { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -94,6 +95,7 @@ describe('LearnHome', () => {
           useValue: { ...fixtureLessonLoaders, catalog: async () => [knight, board] },
         },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: PUZZLE_LOADERS, useValue: emptyPuzzleLoaders },
       ],
     });
     TestBed.inject(I18nService).setLang('en');
@@ -129,6 +131,94 @@ describe('LearnHome', () => {
     );
   });
 
+  it('should offer Practise more next to the glossary when there are puzzles', async () => {
+    const root = await render('/learn');
+    await vi.waitFor(() => {
+      harness.detectChanges();
+      expect(root.querySelector('.levels .puzzles-card')).not.toBeNull();
+    });
+    const card = root.querySelector('.puzzles-card')!;
+    expect(card.querySelector('h2')?.textContent?.trim()).toBe('Practise more');
+    expect(card.textContent).toContain('Real puzzles from Lichess, by theme.');
+    expect(card.querySelector('a')?.getAttribute('href')).toBe('/learn/puzzles');
+  });
+
+  it('should leave Practise more out when the catalogue has no lessons or fails', async () => {
+    for (const loaders of [
+      emptyPuzzleLoaders,
+      { ...fixturePuzzleLoaders, catalog: () => Promise.reject(new Error('offline')) },
+    ]) {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+          { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
+          { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+          { provide: PUZZLE_LOADERS, useValue: loaders },
+        ],
+      });
+      const root = await render('/learn');
+      await harness.fixture.whenStable();
+      harness.detectChanges();
+      expect(root.querySelector('.puzzles-card')).toBeNull();
+      expect(root.querySelector('.glossary-card')).not.toBeNull();
+    }
+  });
+
+  it('should keep Practise more beside the glossary when only the lessons fail to load', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        {
+          provide: LESSON_LOADERS,
+          useValue: {
+            ...fixtureLessonLoaders,
+            catalog: () => Promise.reject(new Error('offline')),
+          },
+        },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        { provide: GLOSSARY_LOADER, useValue: glossary },
+        { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
+      ],
+    });
+    harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/learn');
+    const root = harness.routeNativeElement as HTMLElement;
+    await vi.waitFor(() => {
+      harness.detectChanges();
+      expect(root.querySelector('.notice[role=alert]')).not.toBeNull();
+      expect(root.querySelector('.levels .puzzles-card')).not.toBeNull();
+    });
+    expect(root.querySelector('.levels .glossary-card')).not.toBeNull();
+  });
+
+  it('should not offer Practise more when its only lesson has no puzzles', async () => {
+    const catalog = await fixturePuzzleLoaders.catalog();
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
+        { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
+        {
+          provide: PUZZLE_LOADERS,
+          useValue: {
+            ...fixturePuzzleLoaders,
+            catalog: async () => ({
+              ...catalog,
+              lessons: catalog.lessons.map((entry) => ({ ...entry, count: 0 })),
+            }),
+          },
+        },
+      ],
+    });
+    const root = await render('/learn');
+    await harness.fixture.whenStable();
+    harness.detectChanges();
+    expect(root.querySelector('.puzzles-card')).toBeNull();
+  });
+
   describe('clearing the progress', () => {
     const openDialog = (root: HTMLElement) => {
       const dialog = root.querySelector('dialog') as HTMLDialogElement;
@@ -140,8 +230,9 @@ describe('LearnHome', () => {
       return showModal;
     };
 
-    it('should ask first and then delete only the lessons', async () => {
+    it('should ask first and then delete only the lessons and the puzzles', async () => {
       await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
+      await progress.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-fork', firstTry: true });
       await progress.recordEndgame('lucena');
       const root = await render('/learn');
       expect(root.querySelector('.continue')).not.toBeNull();
@@ -156,8 +247,44 @@ describe('LearnHome', () => {
         expect(root.querySelector('.status-msg')?.textContent).toBe('Progress deleted.');
       });
       expect(memory.lessonRows.size).toBe(0);
+      expect(memory.puzzleRows.size).toBe(0);
       expect(memory.endgameRows.size).toBe(1);
       expect(root.querySelector('.continue')).toBeNull();
+    });
+
+    it('should show what is left when one of the two deletions fails', async () => {
+      await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
+      await progress.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-fork', firstTry: true });
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      memory.store.puzzles.clear = () => Promise.reject(new DOMException('Blocked', 'AbortError'));
+      const root = await render('/learn');
+      expect(root.querySelector('.continue')).not.toBeNull();
+
+      openDialog(root);
+      root.querySelector<HTMLButtonElement>('dialog .button.danger')!.click();
+      await vi.waitFor(() => {
+        harness.detectChanges();
+        expect(root.querySelector('.status-msg')?.textContent).toBe(
+          'The progress could not be deleted.',
+        );
+      });
+      // The lessons went, the puzzles stayed: the page says so, and still offers to delete them.
+      expect(memory.lessonRows.size).toBe(0);
+      expect(root.querySelector('.continue')).toBeNull();
+      expect(openDialog(root)).toHaveBeenCalled();
+    });
+
+    it('should say in the dialog that the puzzles go too', async () => {
+      const root = await render('/learn');
+      expect(root.querySelector('dialog p')?.textContent).toContain(
+        'every completed lesson and every puzzle of Practise more',
+      );
+    });
+
+    it('should offer to delete the puzzles when only puzzles are saved', async () => {
+      await progress.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-fork', firstTry: false });
+      const root = await render('/learn');
+      expect(openDialog(root)).toHaveBeenCalled();
     });
 
     it('should keep the lessons when the dialog is cancelled', async () => {

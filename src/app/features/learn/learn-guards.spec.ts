@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { LESSON_LOADERS } from '../../core/content';
+import { LESSON_LOADERS, PUZZLE_LOADERS } from '../../core/content';
 import { mainKindOf } from '../../layout/main-kind';
 import { LEARN_ROUTES } from './learn.routes';
-import { fixtureLessonLoaders } from './testing';
+import { fixtureLessonLoaders, fixturePuzzleLoaders, lessonLoadersWithPuzzles } from './testing';
 
 describe('learn guards', () => {
   beforeEach(() => {
@@ -12,6 +12,7 @@ describe('learn guards', () => {
       providers: [
         provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
+        { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
       ],
     });
   });
@@ -64,5 +65,52 @@ describe('learn guards', () => {
   it('should lay the glossary out as a list, in the same container as the other catalogues', async () => {
     expect(await open('/learn/glossary')).toBe('/learn/glossary');
     expect(mainKindOf(TestBed.inject(Router).routerState.snapshot.root)).toBeUndefined();
+  });
+
+  describe('puzzles', () => {
+    const withPuzzles = async (puzzles = fixturePuzzleLoaders) => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+          { provide: LESSON_LOADERS, useValue: lessonLoadersWithPuzzles },
+          { provide: PUZZLE_LOADERS, useValue: puzzles },
+        ],
+      });
+      harness = await RouterTestingHarness.create();
+    };
+
+    it('should open the list, and a lesson with puzzles on the play layout', async () => {
+      await withPuzzles();
+      expect(await open('/learn/puzzles')).toBe('/learn/puzzles');
+      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles/the-fork');
+      expect(mainKindOf(TestBed.inject(Router).routerState.snapshot.root)).toBe('play');
+    });
+
+    it('should send a lesson without puzzles to the list', async () => {
+      await withPuzzles();
+      expect(await open('/learn/puzzles/the-pin')).toBe('/learn/puzzles');
+      expect(await open('/learn/puzzles/Not-An-Id')).toBe('/learn/puzzles');
+    });
+
+    it('should send a lesson the catalogue gives no puzzles to the list', async () => {
+      const catalog = await fixturePuzzleLoaders.catalog();
+      await withPuzzles({
+        ...fixturePuzzleLoaders,
+        catalog: async () => ({
+          ...catalog,
+          lessons: catalog.lessons.map((entry) => ({ ...entry, count: 0 })),
+        }),
+      });
+      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles');
+    });
+
+    it('should let the page open when the catalogue cannot be loaded', async () => {
+      await withPuzzles({
+        ...fixturePuzzleLoaders,
+        catalog: () => Promise.reject(new Error('offline')),
+      });
+      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles/the-fork');
+    });
   });
 });

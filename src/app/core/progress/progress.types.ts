@@ -75,3 +75,27 @@ export interface LessonResult {
   readonly exercises: number;
   readonly firstTry: number;
 }
+
+/**
+ * What is kept about one Lichess puzzle of "Practise more", saved when it ends (solved or
+ * skipped). Doing it again adds a try and replaces the last result.
+ */
+export interface PuzzleProgress {
+  /** The Lichess id ("KEPe0"). */
+  readonly puzzleId: string;
+  /** The lesson it practises, to read only the puzzles of the lesson that is opened. */
+  readonly lessonId: string;
+  /** Times it was finished (at least 1). */
+  readonly tries: number;
+  /** The last time, it was solved with no mistake, hint or solution. */
+  readonly lastFirstTry: boolean;
+  /** When it was last finished, in milliseconds since the epoch. */
+  readonly lastPlayedAt: number;
+}
+
+/** Outcome of one finished puzzle. */
+export interface PuzzleResult {
+  readonly puzzleId: string;
+  readonly lessonId: string;
+  readonly firstTry: boolean;
+}

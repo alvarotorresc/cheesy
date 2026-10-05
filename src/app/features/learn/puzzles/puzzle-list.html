@@ -1,0 +1,57 @@
+@let t = i18n.t().learn;
+@let p = t.puzzles;
+<a class="back" routerLink="/learn">← {{ p.backToLearn }}</a>
+<header class="page-head">
+  <h1>{{ p.title }}</h1>
+  <p class="lede">{{ p.intro }}</p>
+</header>
+@switch (state().status) {
+  @case ('loading') {
+    <p class="notice" role="status">{{ p.loading }}</p>
+  }
+  @case ('error') {
+    <div class="notice" role="alert">
+      <p>{{ p.loadError }}</p>
+      <button type="button" class="button" (click)="load()">{{ p.retry }}</button>
+    </div>
+  }
+  @case ('ready') {
+    @if (rows().length) {
+      <ol class="lessons">
+        @for (row of rows(); track row.lesson.id) {
+          <li class="lesson-item" [class.started]="row.started">
+            <a class="lesson-card" [routerLink]="['/learn/puzzles', row.lesson.id]">
+              <span class="order" aria-hidden="true">{{ row.lesson.order }}</span>
+              <span class="body">
+                <span class="title">{{ i18n.localize(row.lesson.title) }}</span>
+                <!-- One theme is the lesson itself; several say what the lesson brings together. -->
+                @if (row.themes.length > 1) {
+                  <span class="themes">{{ themeNames(row.themes) }}</span>
+                }
+              </span>
+              <span class="tally">
+                <span class="meter" aria-hidden="true">
+                  @for (part of row.parts; track $index) {
+                    <span class="part"><span [style.width.%]="part * 100"></span></span>
+                  }
+                </span>
+                <span class="count">{{ p.firstTry(row.firstTry, row.count) }}</span>
+              </span>
+              <span class="action">{{ row.started ? p.keepGoing : p.start }}</span>
+            </a>
+          </li>
+        }
+      </ol>
+    } @else {
+      <p class="notice">{{ p.empty }}</p>
+    }
+    @if (progress.status() === 'unavailable') {
+      <p class="unavailable">{{ t.progressUnavailable }}</p>
+    }
+    <p class="attribution">
+      {{ p.attribution.before
+      }}<a href="https://database.lichess.org" rel="noopener">{{ p.attribution.link }}</a
+      >{{ p.attribution.after }}
+    </p>
+  }
+}
