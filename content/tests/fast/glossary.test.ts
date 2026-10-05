@@ -65,6 +65,14 @@ const EXPECTED_IDS = [
   'discovered-check',
   'removing-the-defender',
   'overloading',
+  'forcing-move',
+  'x-ray',
+  'passed-pawn',
+  'zugzwang',
+  'seventh-rank',
+  'cutting-off-the-king',
+  'perpetual-check',
+  'threefold-repetition',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -73,6 +81,7 @@ const GROUPS: Record<string, string[]> = {
     'check',
     'checkmate',
     'stalemate',
+    'threefold-repetition',
     'castling',
     'promotion',
     'en-passant',
@@ -94,12 +103,15 @@ const GROUPS: Record<string, string[]> = {
     'deflection',
     'removing-the-defender',
     'overloading',
+    'forcing-move',
     'attraction',
     'intermediate-move',
+    'x-ray',
     'sacrifice',
     'queen-sacrifice',
     'back-rank',
     'opening-trap',
+    'perpetual-check',
   ],
   mates: ['smothered-mate', 'legal-mate', 'boden-mate', 'anastasia-mate', 'arabian-mate'],
   strategy: [
@@ -124,14 +136,18 @@ const GROUPS: Record<string, string[]> = {
     'doubled-pawns',
     'hanging-pawns',
     'minority-attack',
+    'passed-pawn',
   ],
   endgames: [
     'opposition',
+    'zugzwang',
     'key-squares',
     'rule-of-the-square',
     'lucena-position',
     'philidor-position',
     'building-a-bridge',
+    'seventh-rank',
+    'cutting-off-the-king',
   ],
 };
 
@@ -225,11 +241,11 @@ describe('glossary', () => {
       const illegal = term.example.arrows
         .filter((a) => a.move)
         .filter((a) => {
-          const move = normalizeMove(position, {
-            from: parseSquare(a.from)!,
-            to: parseSquare(a.to)!,
-          });
-          return !position.isLegal(move);
+          const plain = { from: parseSquare(a.from)!, to: parseSquare(a.to)! };
+          // A pawn reaching the last rank is drawn as one arrow: its promotion counts as the move.
+          return [plain, { ...plain, promotion: 'queen' as const }].every(
+            (m) => !position.isLegal(normalizeMove(position, m)),
+          );
         })
         .map((a) => `${a.from}-${a.to}`);
       expect(illegal).toEqual([]);

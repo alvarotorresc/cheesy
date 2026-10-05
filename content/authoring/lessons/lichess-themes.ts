@@ -13,6 +13,18 @@ export const LICHESS_THEME_KEYS = [
   'doubleCheck',
   'discoveredCheck',
   'deflection',
+  'backRankMate',
+  'smotheredMate',
+  'anastasiaMate',
+  'mateIn2',
+  'attraction',
+  'sacrifice',
+  'intermezzo',
+  'xRayAttack',
+  'pawnEndgame',
+  'rookEndgame',
+  'defensiveMove',
+  'equality',
 ] as const;
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
@@ -25,6 +37,12 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'the-skewer': ['skewer'],
   'discovered-attacks': ['discoveredAttack', 'doubleCheck', 'discoveredCheck'],
   'remove-the-defender': ['capturingDefender', 'deflection'],
+  'mate-patterns': ['backRankMate', 'smotheredMate', 'anastasiaMate'],
+  'forcing-moves': ['mateIn2', 'attraction', 'sacrifice'],
+  'in-between-move': ['intermezzo', 'xRayAttack'],
+  'king-pawn-endings': ['pawnEndgame'],
+  'rook-endings': ['rookEndgame'],
+  'draws-and-defence': ['defensiveMove', 'equality'],
 };
 
 /** Theme → glossary term that names its idea, for "Practise more"; null when there is none. */

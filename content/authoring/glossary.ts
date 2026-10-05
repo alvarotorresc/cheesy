@@ -134,6 +134,27 @@ export const glossary: GlossarySpec[] = [
     sources: [FIDE_LAWS, WIKI_GLOSSARY, `${CHESSCOM_ES}ahogado-ajedrez`],
   },
   {
+    id: 'threefold-repetition',
+    name: { es: 'Triple repetición', en: 'Threefold repetition' },
+    definition: {
+      es: 'Si la misma posición aparece tres veces en una partida, con el mismo bando a mover y las mismas jugadas posibles, el jugador al que le toca puede reclamar tablas.',
+      en: 'If the same position comes up three times in a game, with the same side to move and the same moves available, the player whose turn it is can claim a draw.',
+    },
+    example: {
+      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 4 3',
+      orientation: 'white',
+      highlights: ['g1', 'g8'],
+      arrows: [
+        { from: 'g1', to: 'f3', move: true },
+        { from: 'g8', to: 'f6', move: false },
+      ],
+    },
+    group: 'rules',
+    level: 'intermediate',
+    lesson: 'draws-and-defence',
+    sources: [FIDE_LAWS, `${WIKI}Threefold_repetition`, `${CHESSCOM_EN}threefold-repetition-chess`],
+  },
+  {
     id: 'castling',
     name: { es: 'Enroque', en: 'Castling' },
     definition: {
@@ -542,6 +563,24 @@ export const glossary: GlossarySpec[] = [
     sources: [WIKI_GLOSSARY, `${WIKI}Minority_attack`],
   },
 
+  {
+    id: 'passed-pawn',
+    name: { es: 'Peón pasado', en: 'Passed pawn' },
+    definition: {
+      es: 'Peón que no tiene peones rivales delante, ni en su [columna](file) ni en las de al lado. Ningún peón puede frenarlo, así que amenaza con [coronar](promotion) y obliga al rival a vigilarlo con sus piezas.',
+      en: 'A pawn with no enemy pawns ahead of it, either on its own [file](file) or on the ones next to it. No pawn can stop it, so it threatens to [promote](promotion) and forces the opponent to watch it with pieces.',
+    },
+    example: {
+      fen: '8/5k2/8/1P3p2/5P2/8/5K2/8 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b5'],
+      arrows: [{ from: 'b5', to: 'b6', move: true }],
+    },
+    group: 'pawns',
+    level: 'intermediate',
+    lesson: 'king-pawn-endings',
+    sources: [WIKI_GLOSSARY, `${WIKI}Passed_pawn`, `${CHESSCOM_EN}passed-pawn`],
+  },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
     id: 'tempo',
@@ -568,22 +607,41 @@ export const glossary: GlossarySpec[] = [
       en: 'Instead of making the move that seems forced, such as taking back a piece, you first play another one the opponent has to answer, often a [check](check), and only then make the expected move.',
     },
     example: {
-      fen: '5rk1/pp2bppp/8/3N4/8/8/PP3PPP/3q1RK1 w - - 0 1',
+      fen: 'r5k1/1P3pp1/7p/8/8/7P/5NPK/3q4 w - - 0 1',
       orientation: 'white',
-      highlights: ['d1', 'e7'],
+      highlights: ['d1', 'a8'],
       arrows: [
-        { from: 'd5', to: 'e7', move: true },
-        { from: 'f1', to: 'd1', move: false },
+        { from: 'b7', to: 'a8', move: true },
+        { from: 'f2', to: 'd1', move: false },
       ],
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'in-between-move',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Zwischenzug`,
       'https://lichess.org/practice/fundamental-tactics/zwischenzug/ITWY4GN2',
       `${CHESSCOM_ES}jugada-intermedia-ajedrez`,
     ],
+  },
+  {
+    id: 'x-ray',
+    name: { es: 'Rayos X', en: 'X-ray' },
+    definition: {
+      es: 'Una dama, una torre o un alfil ataca o defiende una casilla a través de una pieza rival que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego. Si la pieza de delante es propia, no son rayos X sino una batería.',
+      en: 'A queen, rook or bishop attacks or defends a square through an enemy piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play. If the piece in front is your own, it is not an x-ray but a battery.',
+    },
+    example: {
+      fen: '6k1/pp3ppp/3Npn2/3r4/8/8/PP2KPPP/3R4 b - - 0 1',
+      orientation: 'white',
+      highlights: ['d6'],
+      arrows: [{ from: 'd1', to: 'd6', move: false }],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'in-between-move',
+    sources: [WIKI_GLOSSARY, `${WIKI}X-ray_(chess)`, 'https://lichess.org/training/xRayAttack'],
   },
   {
     id: 'hanging-piece',
@@ -832,6 +890,24 @@ export const glossary: GlossarySpec[] = [
     ],
   },
   {
+    id: 'forcing-move',
+    name: { es: 'Jugada forzante', en: 'Forcing move' },
+    definition: {
+      es: 'Jugada que deja al rival muy pocas respuestas: un [jaque](check), una captura o una amenaza. Las jugadas forzantes obligan a contestar, así que son las más fáciles de calcular, y conviene mirarlas antes que las demás.',
+      en: 'A move that leaves the opponent very few answers: a [check](check), a capture or a threat. Forcing moves must be answered, so they are the easiest to calculate, and it pays to look at them before any other move.',
+    },
+    example: {
+      fen: '6k1/5ppp/8/8/1q6/8/5PPP/2Q3K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['g8'],
+      arrows: [{ from: 'c1', to: 'c8', move: true }],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'forcing-moves',
+    sources: [WIKI_GLOSSARY, `${WIKI}Chess_tactic`],
+  },
+  {
     id: 'attraction',
     name: { es: 'Atracción', en: 'Attraction' },
     definition: {
@@ -846,6 +922,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'forcing-moves',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/advanced-tactics/attraction/jOZejFWk',
@@ -867,6 +944,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Back-rank_checkmate`,
@@ -889,6 +967,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'forcing-moves',
     sources: [WIKI_GLOSSARY, `${WIKI}Sacrifice_(chess)`, `${CHESSCOM_ES}sacrificio`],
   },
   {
@@ -926,6 +1005,24 @@ export const glossary: GlossarySpec[] = [
     sources: [WIKI_GLOSSARY, `${WIKI}List_of_chess_traps`, `${CHESSCOM_ES}mate-del-pastor`],
   },
   {
+    id: 'perpetual-check',
+    name: { es: 'Jaque perpetuo', en: 'Perpetual check' },
+    definition: {
+      es: 'Una serie de [jaques](check) de la que el rey rival no puede escapar. Quien los da se asegura al menos las tablas, y si sigue dándolos la partida acaba en tablas, normalmente por [triple repetición](threefold-repetition).',
+      en: 'A series of [checks](check) the enemy king cannot escape. The side giving them secures at least a draw, and if it keeps giving them the game ends in a draw, usually by [threefold repetition](threefold-repetition).',
+    },
+    example: {
+      fen: '7k/6qp/8/2Q5/8/8/p7/2K5 w - - 0 1',
+      orientation: 'white',
+      highlights: ['h8'],
+      arrows: [],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'draws-and-defence',
+    sources: [WIKI_GLOSSARY, `${WIKI}Perpetual_check`, `${CHESSCOM_EN}perpetual-check-chess`],
+  },
+  {
     id: 'smothered-mate',
     name: { es: 'Mate de la coz', en: 'Smothered mate' },
     definition: {
@@ -940,6 +1037,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'mates',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Smothered_mate`,
@@ -996,6 +1094,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'mates',
     level: 'intermediate',
+    lesson: 'mate-patterns',
     sources: [WIKI_MATES, LICHESS_MATES_I, `${CHESSCOM_EN}anastasias-mate-chess`],
   },
   {
@@ -1037,10 +1136,34 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Opposition_(chess)`,
       'https://lichess.org/practice/pawn-endgames/opposition/A4ujYOer',
+    ],
+  },
+  {
+    id: 'zugzwang',
+    name: { es: 'Zugzwang', en: 'Zugzwang' },
+    definition: {
+      es: 'Situación en la que estar obligado a mover perjudica: cualquier jugada empeora la posición, y si se pudiera pasar el turno, no pasaría nada. Es una palabra alemana. Decide muchos finales de reyes y peones.',
+      en: 'A position where having to move does harm: every move makes things worse, and if one could pass, nothing would happen. The word is German. It decides many endings with only kings and pawns.',
+    },
+    example: {
+      fen: '8/8/3k4/8/3K4/3P4/8/8 b - - 0 1',
+      orientation: 'white',
+      highlights: ['d4', 'd6'],
+      arrows: [],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'king-pawn-endings',
+    sources: [
+      WIKI_GLOSSARY,
+      `${WIKI}Zugzwang`,
+      `${CHESSCOM_EN}zugzwang-chess`,
+      'https://lichess.org/training/zugzwang',
     ],
   },
   {
@@ -1058,6 +1181,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_GLOSSARY,
       `${WIKI}Key_square`,
@@ -1079,6 +1203,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'intermediate',
+    lesson: 'king-pawn-endings',
     sources: [
       WIKI_KP_ENDGAME,
       'https://es.wikipedia.org/wiki/Regla_del_cuadrado_(ajedrez)',
@@ -1135,5 +1260,41 @@ export const glossary: GlossarySpec[] = [
     group: 'endgames',
     level: 'advanced',
     sources: [WIKI_GLOSSARY, WIKI_LUCENA, LICHESS_ROOK_ENDGAMES],
+  },
+  {
+    id: 'seventh-rank',
+    name: { es: 'Séptima fila', en: 'Seventh rank' },
+    definition: {
+      es: 'La segunda [fila](rank) contando desde el lado del rival: la 7 para las blancas y la 2 para las negras. Una torre allí ataca los peones que aún no se han movido y encierra al rey rival en su última fila.',
+      en: 'The second [rank](rank) counting from the opponent’s side: rank 7 for White and rank 2 for Black. A rook there attacks the pawns that have not moved yet and shuts the enemy king in on its last rank.',
+    },
+    example: {
+      fen: '6k1/1p3pp1/7p/8/8/7P/1r3PP1/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b7', 'f7'],
+      arrows: [{ from: 'd1', to: 'd7', move: true }],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'rook-endings',
+    sources: [WIKI_GLOSSARY, WIKI_ROOK_ENDGAME],
+  },
+  {
+    id: 'cutting-off-the-king',
+    name: { es: 'Cortar al rey', en: 'Cutting off the king' },
+    definition: {
+      es: 'Usar una torre como pared: se coloca en una [fila](rank) o una [columna](file) que el rey rival no puede cruzar sin ponerse en [jaque](check). Así ese rey no llega a tiempo a defender ni a ayudar a sus peones.',
+      en: 'Using a rook as a wall: it stands on a [rank](rank) or [file](file) the enemy king cannot cross without walking into [check](check). That way the king does not get there in time to defend or to help its pawns.',
+    },
+    example: {
+      fen: '8/8/1K6/8/1k2p3/8/8/3R4 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b4', 'e4'],
+      arrows: [{ from: 'd1', to: 'd8', move: false }],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'rook-endings',
+    sources: [WIKI_ROOK_ENDGAME],
   },
 ];

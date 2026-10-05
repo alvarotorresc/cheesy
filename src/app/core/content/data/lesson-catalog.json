@@ -268,5 +268,95 @@
     },
     "stepCount": 7,
     "exerciseCount": 3
+  },
+  {
+    "id": "mate-patterns",
+    "level": "intermediate",
+    "order": 7,
+    "title": {
+      "es": "Mates típicos",
+      "en": "Mate patterns"
+    },
+    "summary": {
+      "es": "El mate del pasillo, el de la coz y el de Anastasia: tres dibujos que se repiten.",
+      "en": "The back-rank mate, the smothered mate and Anastasia’s mate: three pictures that keep coming back."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "forcing-moves",
+    "level": "intermediate",
+    "order": 8,
+    "title": {
+      "es": "Jaques, capturas y amenazas",
+      "en": "Checks, captures and threats"
+    },
+    "summary": {
+      "es": "Las jugadas que obligan al rival, cómo calcularlas y cuándo merece la pena entregar material.",
+      "en": "The moves that force the rival, how to calculate them and when giving up material pays off."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "in-between-move",
+    "level": "intermediate",
+    "order": 9,
+    "title": {
+      "es": "La jugada intermedia",
+      "en": "The in-between move"
+    },
+    "summary": {
+      "es": "Antes de recapturar, mira si hay algo mejor; y las piezas que atacan a través de otras.",
+      "en": "Before taking back, check whether there is something better; and the pieces that attack through others."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "king-pawn-endings",
+    "level": "intermediate",
+    "order": 10,
+    "title": {
+      "es": "Finales de peones",
+      "en": "King and pawn endings"
+    },
+    "summary": {
+      "es": "La regla del cuadrado, la oposición y las casillas clave: cuándo corona un peón y cuándo no.",
+      "en": "The rule of the square, the opposition and the key squares: when a pawn promotes and when it does not."
+    },
+    "stepCount": 9,
+    "exerciseCount": 5
+  },
+  {
+    "id": "rook-endings",
+    "level": "intermediate",
+    "order": 11,
+    "title": {
+      "es": "Finales de torre",
+      "en": "Rook endings"
+    },
+    "summary": {
+      "es": "Torre activa, torre detrás del peón, la séptima fila y cómo cortar al rey.",
+      "en": "An active rook, the rook behind the pawn, the seventh rank and how to cut the king off."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
+  },
+  {
+    "id": "draws-and-defence",
+    "level": "intermediate",
+    "order": 12,
+    "title": {
+      "es": "Cómo salvar tablas",
+      "en": "How to save a draw"
+    },
+    "summary": {
+      "es": "Jaque perpetuo, triple repetición y ahogado: cómo empatar una partida que ibas perdiendo.",
+      "en": "Perpetual check, threefold repetition and stalemate: how to draw a game you were losing."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]
