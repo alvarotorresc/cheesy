@@ -104,13 +104,14 @@ export class FindMoveSession {
 
   /**
    * Plays the rival's opening move, once the page has shown the board before it. It is not a move
-   * of the solution, and only the first call plays it.
+   * of the solution, and only the first call plays it. One that is not legal on the board is
+   * dropped, and the exercise starts from the position as it is.
    */
   playOpening(): void {
     const san = this.opening();
     if (san === undefined) return;
-    this.apply(san, false);
     this.opening.set(undefined);
+    if (parseSan(this.position(), san)) this.apply(san, false);
   }
 
   /** Square of the piece to move: shown after the second mistake. */

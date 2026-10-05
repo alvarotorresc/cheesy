@@ -159,6 +159,19 @@ describe('FindMoveSession', () => {
       expect(session.fen()).toContain('r3rk2');
     });
 
+    it('an illegal opening does not lock the board', () => {
+      const session = new FindMoveSession(
+        step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'engine', solution: ['Ra8#'] }),
+        { opening: 'Kf8' },
+      );
+      expect(session.pendingOpening()).toBe(true);
+      expect(() => session.playOpening()).not.toThrow();
+      expect(session.pendingOpening()).toBe(false);
+      expect(session.lastMove()).toBeUndefined();
+      expect(session.turn()).toBe('white');
+      expect(session.play({ from: 'a1', to: 'a8' })).toEqual({ kind: 'solved' });
+    });
+
     it('should have nothing to play without an opening move', () => {
       const session = new FindMoveSession(
         step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'engine', solution: ['Ra8#'] }),
