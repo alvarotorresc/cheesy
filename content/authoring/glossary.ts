@@ -1708,8 +1708,8 @@ export const glossary: GlossarySpec[] = [
     id: 'triangulation',
     name: { es: 'Triangulación', en: 'Triangulation' },
     definition: {
-      es: 'Una maniobra del rey para perder un [tiempo](tempo): en lugar de ir directo a una casilla, da un rodeo por tres casillas en triángulo y vuelve a la misma posición con el turno del rival. Sirve cuando el rey rival solo puede ir y volver entre dos casillas.',
-      en: 'A king manoeuvre to lose a [tempo](tempo): instead of going straight to a square, it takes a detour round three squares in a triangle and comes back to the same position with the opponent to move. It works when the enemy king can only shuttle between two squares.',
+      es: 'Una maniobra del rey para perder un [tiempo](tempo): en lugar de ir directo a una casilla, da un rodeo por tres casillas en triángulo y vuelve a la misma posición con el turno del rival. Sirve en finales de peones en los que el rey rival está atado a unas pocas casillas, aunque a veces hay otros caminos que también ganan.',
+      en: 'A king manoeuvre to lose a [tempo](tempo): instead of going straight to a square, it takes a detour round three squares in a triangle and comes back to the same position with the opponent to move. It works in pawn endings where the enemy king is tied to a few squares, although sometimes other paths win as well.',
     },
     example: {
       fen: '8/4k1p1/6P1/4KP2/8/8/8/8 w - - 0 1',
