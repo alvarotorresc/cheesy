@@ -1541,10 +1541,10 @@
       ]
     },
     "example": {
-      "fen": "4k3/pp3ppp/4p3/8/3P4/8/PP3PPP/4K3 w - - 0 1",
+      "fen": "4k3/pp3ppp/8/3p4/8/4P3/PP3PPP/4K3 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "d4"
+        "d5"
       ],
       "arrows": []
     },
@@ -1595,11 +1595,11 @@
       ]
     },
     "example": {
-      "fen": "4k3/pp3ppp/8/8/8/2P5/P1P2PPP/4K3 w - - 0 1",
+      "fen": "4k3/pp3p1p/5p2/8/8/8/PP3PPP/4K3 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "c2",
-        "c3"
+        "f6",
+        "f7"
       ],
       "arrows": []
     },
@@ -1916,20 +1916,23 @@
       ]
     },
     "example": {
-      "fen": "6k1/5ppp/8/8/8/8/1q3PPP/3R2K1 w - - 0 1",
+      "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
       "orientation": "white",
-      "highlights": [
-        "d1"
-      ],
+      "highlights": [],
       "arrows": [
         {
-          "from": "d1",
-          "to": "d8",
+          "from": "f3",
+          "to": "g5",
           "move": true
         },
         {
-          "from": "d1",
-          "to": "b1",
+          "from": "d2",
+          "to": "d4",
+          "move": true
+        },
+        {
+          "from": "d2",
+          "to": "d3",
           "move": true
         }
       ]
@@ -2229,16 +2232,16 @@
       ]
     },
     "example": {
-      "fen": "6k1/pp3ppp/8/8/8/8/PP1R1PPP/3R2K1 w - - 0 1",
+      "fen": "2r3k1/pp1r1pp1/7p/8/8/8/PP2RPPP/4R1K1 w - - 0 1",
       "orientation": "white",
       "highlights": [
-        "d1",
-        "d2"
+        "e1",
+        "e2"
       ],
       "arrows": [
         {
-          "from": "d2",
-          "to": "d8",
+          "from": "e2",
+          "to": "e7",
           "move": false
         }
       ]
@@ -2474,7 +2477,7 @@
         },
         {
           "kind": "text",
-          "text": ", para que no pueda avanzar. El mejor bloqueador es el caballo: el propio peón lo protege y desde ahí sigue atacando casillas."
+          "text": ", para que no pueda avanzar. El mejor bloqueador es el caballo: el propio peón le hace de escudo y desde ahí sigue atacando casillas."
         }
       ],
       "en": [
@@ -3741,15 +3744,15 @@
       ]
     },
     "example": {
-      "fen": "3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+      "fen": "4r1k1/pp3ppp/8/8/8/8/PP3PPP/3R2K1 w - - 0 1",
       "orientation": "white",
       "highlights": [
         "g1"
       ],
       "arrows": [
         {
-          "from": "h2",
-          "to": "h3",
+          "from": "g2",
+          "to": "g3",
           "move": true
         }
       ]
