@@ -148,7 +148,7 @@
         ]
       },
       "board": {
-        "fen": "r5k1/pp3ppp/2p5/4p3/4P3/2P5/PP3PPP/R5K1 w - - 0 1",
+        "fen": "r5k1/pp3ppp/2p5/3p4/3P4/2P5/PP3PPP/R5K1 w - - 0 1",
         "orientation": "white"
       },
       "answer": {
@@ -167,17 +167,17 @@
             "en": "The e-file"
           }
         ],
-        "correct": 1
+        "correct": 2
       },
       "explanation": {
         "es": [
           {
             "kind": "text",
-            "text": "Eso es: en la columna d no hay ningún peón. La torre en "
+            "text": "Eso es: en la columna e no hay ningún peón. La torre en "
           },
           {
             "kind": "square",
-            "square": "d1"
+            "square": "e1"
           },
           {
             "kind": "text",
@@ -185,7 +185,7 @@
           },
           {
             "kind": "square",
-            "square": "d8"
+            "square": "e8"
           },
           {
             "kind": "text",
@@ -195,11 +195,11 @@
         "en": [
           {
             "kind": "text",
-            "text": "That is it: there are no pawns at all on the d-file. The rook on "
+            "text": "That is it: there are no pawns at all on the e-file. The rook on "
           },
           {
             "kind": "square",
-            "square": "d1"
+            "square": "e1"
           },
           {
             "kind": "text",
@@ -207,7 +207,7 @@
           },
           {
             "kind": "square",
-            "square": "d8"
+            "square": "e8"
           },
           {
             "kind": "text",
@@ -262,16 +262,15 @@
             }
           ]
         },
-        null,
         {
           "es": [
             {
               "kind": "text",
-              "text": "En la columna e están los peones de "
+              "text": "En la columna d están los peones de "
             },
             {
               "kind": "square",
-              "square": "e4"
+              "square": "d4"
             },
             {
               "kind": "text",
@@ -279,7 +278,7 @@
             },
             {
               "kind": "square",
-              "square": "e5"
+              "square": "d5"
             },
             {
               "kind": "text",
@@ -289,11 +288,11 @@
           "en": [
             {
               "kind": "text",
-              "text": "The e-file has the pawns on "
+              "text": "The d-file has the pawns on "
             },
             {
               "kind": "square",
-              "square": "e4"
+              "square": "d4"
             },
             {
               "kind": "text",
@@ -301,14 +300,15 @@
             },
             {
               "kind": "square",
-              "square": "e5"
+              "square": "d5"
             },
             {
               "kind": "text",
               "text": ": the rook would not get through."
             }
           ]
-        }
+        },
+        null
       ]
     },
     {
@@ -346,7 +346,7 @@
         ]
       },
       "board": {
-        "fen": "6k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1",
+        "fen": "r3r1k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1",
         "orientation": "white",
         "moves": [
           "Rd2",
@@ -945,7 +945,7 @@
           },
           {
             "kind": "text",
-            "text": ", donde la torre ataca peones y encierra al rey: allí vale tanto como un peón."
+            "text": ", donde la torre ataca peones y encierra al rey: allí compensa un peón."
           }
         ],
         "en": [
@@ -987,12 +987,12 @@
           },
           {
             "kind": "text",
-            "text": ", where the rook attacks pawns and shuts in the king: there it is worth as much as a pawn."
+            "text": ", where the rook attacks pawns and shuts in the king: there it makes up for a pawn."
           }
         ]
       },
       "board": {
-        "fen": "6k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1",
+        "fen": "r3r1k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1",
         "orientation": "white",
         "arrows": [
           {

@@ -37,7 +37,7 @@ export const openFilesSeventh: LessonSpec = {
         es: 'Tu torre de a1 quiere una columna. ¿Cuál de estas es una [columna abierta](open-file)?',
         en: 'Your rook on a1 wants a file. Which of these is an [open file](open-file)?',
       },
-      board: { fen: 'r5k1/pp3ppp/2p5/4p3/4P3/2P5/PP3PPP/R5K1 w - - 0 1', orientation: 'white' },
+      board: { fen: 'r5k1/pp3ppp/2p5/3p4/3P4/2P5/PP3PPP/R5K1 w - - 0 1', orientation: 'white' },
       answer: {
         by: 'fact',
         options: [
@@ -45,22 +45,22 @@ export const openFilesSeventh: LessonSpec = {
           { es: 'La columna d', en: 'The d-file' },
           { es: 'La columna e', en: 'The e-file' },
         ],
-        correct: 1,
+        correct: 2,
       },
       whyWrong: [
         {
           es: 'En la columna c hay un peón de cada bando, en c3 y c6: está cerrada.',
           en: 'The c-file has a pawn of each side, on c3 and c6: it is closed.',
         },
-        null,
         {
-          es: 'En la columna e están los peones de e4 y e5: la torre no pasaría.',
-          en: 'The e-file has the pawns on e4 and e5: the rook would not get through.',
+          es: 'En la columna d están los peones de d4 y d5: la torre no pasaría.',
+          en: 'The d-file has the pawns on d4 and d5: the rook would not get through.',
         },
+        null,
       ],
       explanation: {
-        es: 'Eso es: en la columna d no hay ningún peón. La torre en d1 llega hasta d8, y la torre negra todavía no la vigila.',
-        en: 'That is it: there are no pawns at all on the d-file. The rook on d1 reaches all the way to d8, and the black rook does not watch it yet.',
+        es: 'Eso es: en la columna e no hay ningún peón. La torre en e1 llega hasta e8, y la torre negra todavía no la vigila.',
+        en: 'That is it: there are no pawns at all on the e-file. The rook on e1 reaches all the way to e8, and the black rook does not watch it yet.',
       },
     },
     {
@@ -70,7 +70,7 @@ export const openFilesSeventh: LessonSpec = {
         en: 'A rook on an open file can be traded for the rival rook. To keep the file, put both rooks one behind the other: they are [doubled rooks](doubled-rooks). If the rival puts his rook on the file, your front rook can take it and the one behind takes back.',
       },
       board: {
-        fen: '6k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1',
+        fen: 'r3r1k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1',
         orientation: 'white',
         moves: ['Rd2', 'Kf8', 'Rcd1'],
       },
@@ -153,11 +153,11 @@ export const openFilesSeventh: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Resumen: las torres necesitan [columnas abiertas](open-file) o [semiabiertas](half-open-file). Para quedarte con una columna, usa [torres dobladas](doubled-rooks). Por la columna se llega a la [séptima fila](seventh-rank), donde la torre ataca peones y encierra al rey: allí vale tanto como un peón.',
-        en: 'Summary: rooks need [open](open-file) or [half-open files](half-open-file). To keep a file, use [doubled rooks](doubled-rooks). The file leads to the [seventh rank](seventh-rank), where the rook attacks pawns and shuts in the king: there it is worth as much as a pawn.',
+        es: 'Resumen: las torres necesitan [columnas abiertas](open-file) o [semiabiertas](half-open-file). Para quedarte con una columna, usa [torres dobladas](doubled-rooks). Por la columna se llega a la [séptima fila](seventh-rank), donde la torre ataca peones y encierra al rey: allí compensa un peón.',
+        en: 'Summary: rooks need [open](open-file) or [half-open files](half-open-file). To keep a file, use [doubled rooks](doubled-rooks). The file leads to the [seventh rank](seventh-rank), where the rook attacks pawns and shuts in the king: there it makes up for a pawn.',
       },
       board: {
-        fen: '6k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1',
+        fen: 'r3r1k1/pp3ppp/8/8/8/8/PP3PPP/2RR2K1 w - - 0 1',
         orientation: 'white',
         arrows: [{ from: 'd1', to: 'd7' }],
       },
