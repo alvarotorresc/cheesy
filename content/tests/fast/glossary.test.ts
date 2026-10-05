@@ -66,6 +66,7 @@ const EXPECTED_IDS = [
   'removing-the-defender',
   'overloading',
   'forcing-move',
+  'x-ray',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -98,6 +99,7 @@ const GROUPS: Record<string, string[]> = {
     'forcing-move',
     'attraction',
     'intermediate-move',
+    'x-ray',
     'sacrifice',
     'queen-sacrifice',
     'back-rank',

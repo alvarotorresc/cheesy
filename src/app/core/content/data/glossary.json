@@ -1842,11 +1842,55 @@
     },
     "group": "tactics",
     "level": "intermediate",
+    "lesson": "in-between-move",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Zwischenzug",
       "https://lichess.org/practice/fundamental-tactics/zwischenzug/ITWY4GN2",
       "https://www.chess.com/es/terms/jugada-intermedia-ajedrez"
+    ]
+  },
+  {
+    "id": "x-ray",
+    "name": {
+      "es": "Rayos X",
+      "en": "X-ray"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una dama, una torre o un alfil ataca o defiende una casilla a través de otra pieza que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A queen, rook or bishop attacks or defends a square through another piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play."
+        }
+      ]
+    },
+    "example": {
+      "fen": "3r2k1/5ppp/8/8/8/8/3Q1PPP/3R2K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d8"
+      ],
+      "arrows": [
+        {
+          "from": "d1",
+          "to": "d8",
+          "move": false
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "intermediate",
+    "lesson": "in-between-move",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/X-ray_(chess)",
+      "https://lichess.org/training/xRayAttack"
     ]
   },
   {

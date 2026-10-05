@@ -298,5 +298,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 5
+  },
+  {
+    "id": "in-between-move",
+    "level": "intermediate",
+    "order": 9,
+    "title": {
+      "es": "La jugada intermedia",
+      "en": "The in-between move"
+    },
+    "summary": {
+      "es": "Antes de recapturar, mira si hay algo mejor; y las piezas que atacan a través de otras.",
+      "en": "Before taking back, check whether there is something better; and the pieces that attack through others."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
   }
 ]

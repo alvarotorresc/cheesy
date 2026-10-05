@@ -1,0 +1,907 @@
+{
+  "id": "in-between-move",
+  "level": "intermediate",
+  "order": 9,
+  "title": {
+    "es": "La jugada intermedia",
+    "en": "The in-between move"
+  },
+  "summary": {
+    "es": "Antes de recapturar, mira si hay algo mejor; y las piezas que atacan a través de otras.",
+    "en": "Before taking back, check whether there is something better; and the pieces that attack through others."
+  },
+  "terms": [
+    "intermediate-move",
+    "x-ray"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando el rival captura una pieza, lo natural es recuperarla enseguida. Pero a veces hay algo mejor antes: una "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "jugada intermedia"
+          },
+          {
+            "kind": "text",
+            "text": ", casi siempre un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " o una amenaza, que el rival tiene que atender. Aquí la dama negra acaba de capturar en "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": ". En lugar de recuperarla ya, la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " captura en "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " con jaque; el rey se aparta, y solo entonces la otra torre recupera la dama. Las blancas ganan una torre entera."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When the rival takes a piece, the natural thing is to take it back at once. But sometimes there is something better first: an "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "in-between move"
+          },
+          {
+            "kind": "text",
+            "text": ", almost always a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " or a threat, that the rival has to answer. Here the black queen has just taken on "
+          },
+          {
+            "kind": "square",
+            "square": "d2"
+          },
+          {
+            "kind": "text",
+            "text": ". Instead of taking her back now, the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " takes on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " with check; the king steps aside, and only then does the other rook take the queen back. White wins a whole rook."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4r1k1/pp3pp1/1b5p/8/8/8/PP1q1PPP/3RR1K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Rxe8+",
+          "Kh7",
+          "Rxd2"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama negra acaba de capturar tu dama en "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". Puedes recuperarla con la torre, pero espera: ¿hay algo antes? Juega la "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "jugada intermedia"
+          },
+          {
+            "kind": "text",
+            "text": " y luego recupera. Tienes dos jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black queen has just taken your queen on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". You can take her back with the rook, but wait: is there something first? Play the "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "in-between move"
+          },
+          {
+            "kind": "text",
+            "text": " and then take back. You have two moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "1kr5/pppb2pp/8/4N3/8/8/PPP3PP/1KR1q3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nxd7+",
+          "Ka8",
+          "Rxe1"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. El caballo captura el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que apartarse, y la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " sigue a tiro de tu torre: la recuperas en la jugada siguiente. Has ganado un alfil con una "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "jugada intermedia"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. The knight takes the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to step aside, and the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " is still in reach of your rook: you take her back on the next move. You have won a bishop with an "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "in-between move"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Rxe1": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Recuperar está bien, pero te dejas algo: antes podías capturar una pieza con "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": ", y la dama seguiría ahí."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "Taking back is fine, but you miss something: first you could take a piece with "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": ", and the queen would still be there."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu caballo puede capturar una pieza dando "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " al rey de "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your knight can take a piece while giving "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " to the king on "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama negra acaba de capturar en "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ". Juegan las blancas: ¿recuperar ya, o hay algo mejor antes?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black queen has just taken on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ". White to move: take back now, or is there something better first?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "5rk1/ppp1bppp/8/3N4/8/8/PPP2PPP/3q1RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Rxd1",
+          "Nxe7+",
+          "Nxc7"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. El caballo captura el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", el rey se aparta y después la torre recupera la dama en "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ". Una pieza de más gracias a la "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "jugada intermedia"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. The knight takes the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", the king steps aside and then the rook takes the queen back on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": ". A piece up thanks to the "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "in-between move"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Recuperas la dama y quedáis igual. Antes de recapturar había un "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": " que ganaba una pieza."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You get the queen back and things are level. Before taking back there was a "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": " that won a piece."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Capturas un peón, pero no es "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "jaque"
+            },
+            {
+              "kind": "text",
+              "text": " y te olvidas de la dama: el rival la pone a salvo y te quedas sin la tuya."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "You take a pawn, but it is not "
+            },
+            {
+              "kind": "term",
+              "id": "check",
+              "text": "check"
+            },
+            {
+              "kind": "text",
+              "text": " and you forget the queen: the rival takes her to safety and you are left without yours."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un apunte más: los "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "rayos X"
+          },
+          {
+            "kind": "text",
+            "text": ". Una dama, una torre o un alfil puede atacar o defender una casilla a través de otra pieza que está en la misma línea, porque en cuanto esa pieza se va o captura, la de detrás entra en juego. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " también mira a "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", a través de su propia dama: si la dama captura allí y alguien la recupera, la torre captura detrás."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "One more note: "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "x-ray"
+          },
+          {
+            "kind": "text",
+            "text": ". A queen, a rook or a bishop can attack or defend a square through another piece standing on the same line, because as soon as that piece leaves or captures, the one behind it comes into play. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " also looks at "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ", through its own queen: if the queen captures there and someone takes back, the rook captures from behind."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/5ppp/8/8/8/8/3Q1PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d8"
+        ],
+        "arrows": [
+          {
+            "from": "d1",
+            "to": "d8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Usa los "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "rayos X"
+          },
+          {
+            "kind": "text",
+            "text": " de tu torre y da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": " en dos jugadas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Use your rook’s "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "x-ray"
+          },
+          {
+            "kind": "text",
+            "text": " and give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " in two moves."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r2q2k1/pp3ppp/8/8/8/8/PP1Q1PPP/3R2K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Qxd8+",
+          "Rxd8",
+          "Rxd8#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es. Tu dama captura en "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", la torre negra la recupera y tu torre, que defendía "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " a través de la dama, captura a su vez: "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "mate del pasillo"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it. Your queen takes on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", the black rook takes back and your rook, which defended "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " through the queen, captures in turn: "
+          },
+          {
+            "kind": "term",
+            "id": "back-rank",
+            "text": "back-rank mate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Captura la dama negra con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". La torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " la recupera… y detrás está tu torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Take the black queen with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " takes back… and your rook is behind."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: recapturar no siempre es lo primero. Antes, pregúntate si tienes un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " o una amenaza que el rival tenga que atender: esa "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "jugada intermedia"
+          },
+          {
+            "kind": "text",
+            "text": " puede ganar material, y la recaptura seguirá ahí. Y recuerda los "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "rayos X"
+          },
+          {
+            "kind": "text",
+            "text": ": una pieza de largo alcance sigue contando aunque tenga otra delante en su línea."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: taking back is not always the first thing. Before you do, ask yourself whether you have a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " or a threat the rival must answer: that "
+          },
+          {
+            "kind": "term",
+            "id": "intermediate-move",
+            "text": "in-between move"
+          },
+          {
+            "kind": "text",
+            "text": " can win material, and the recapture will still be there. And remember "
+          },
+          {
+            "kind": "term",
+            "id": "x-ray",
+            "text": "x-ray"
+          },
+          {
+            "kind": "text",
+            "text": ": a long-range piece still counts even with another piece in front of it on its line."
+          }
+        ]
+      },
+      "board": {
+        "fen": "1kr5/pppN2pp/8/8/8/8/PPP3PP/1KR1q3 b - - 0 1",
+        "orientation": "white"
+      }
+    }
+  ]
+}
