@@ -93,6 +93,8 @@ const EXPECTED_IDS = [
   'greek-gift',
   'interference',
   'clearance',
+  'prophylaxis',
+  'fortress',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -159,6 +161,7 @@ const GROUPS: Record<string, string[]> = {
     'doubled-rooks',
     'bad-bishop',
     'pawn-storm',
+    'prophylaxis',
   ],
   pawns: [
     'pawn-structure',
@@ -188,6 +191,7 @@ const GROUPS: Record<string, string[]> = {
     'opposite-coloured-bishops',
     'mutual-zugzwang',
     'triangulation',
+    'fortress',
   ],
 };
 

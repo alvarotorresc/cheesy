@@ -508,5 +508,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "defending",
+    "level": "advanced",
+    "order": 11,
+    "title": {
+      "es": "Defenderse",
+      "en": "Defending"
+    },
+    "summary": {
+      "es": "Ver venir la amenaza, encontrar la jugada que la para y no rendirse cuando vas peor.",
+      "en": "Seeing the threat coming, finding the move that stops it and not giving up when you are worse."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

@@ -423,11 +423,12 @@ export const glossary: GlossarySpec[] = [
     example: {
       fen: 'r4rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1',
       orientation: 'black',
-      highlights: ['a5', 'b4', 'c1'],
-      arrows: [{ from: 'b4', to: 'b3', move: true }],
+      highlights: ['c1'],
+      arrows: [{ from: 'a8', to: 'c8', move: true }],
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'defending',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}estrategia`],
   },
   {
@@ -827,6 +828,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'king-safety-attack',
     sources: [`${WIKI}Pawn_storm`, WIKI_GLOSSARY],
+  },
+  {
+    id: 'prophylaxis',
+    name: { es: 'Profilaxis', en: 'Prophylaxis' },
+    definition: {
+      es: 'Jugada que se adelanta a una idea del rival y la impide antes de que llegue a ser una amenaza. Un ejemplo típico es mover un peón delante del rey enrocado para dejarle un hueco y evitar un mate en la [última fila](back-rank).',
+      en: 'A move that gets ahead of an idea of the opponent and prevents it before it becomes a threat. A typical example is moving a pawn in front of the castled king to leave it a gap and avoid a mate on the [back rank](back-rank).',
+    },
+    example: {
+      fen: '6k1/5ppp/8/2r5/8/8/5PPP/3R2K1 b - - 0 1',
+      orientation: 'black',
+      highlights: ['d8'],
+      arrows: [{ from: 'h7', to: 'h6', move: true }],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'defending',
+    sources: [`${WIKI}Prophylaxis_(chess)`, `${CHESSCOM_EN}prophylaxis-chess`],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
@@ -1682,5 +1701,23 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'zugzwang-tempo',
     sources: [`${WIKI}Triangulation_(chess)`, WIKI_GLOSSARY],
+  },
+  {
+    id: 'fortress',
+    name: { es: 'Fortaleza', en: 'Fortress' },
+    definition: {
+      es: 'Posición en la que el bando con menos material no puede perder, porque el rival no consigue entrar con sus piezas. Por ejemplo, torre y peón contra dama: el peón protege a la torre y la torre no deja pasar al rey rival. Es una forma de salvar unas tablas.',
+      en: 'A position in which the side with less material cannot lose, because the opponent cannot break in with the pieces. For example, rook and pawn against queen: the pawn protects the rook and the rook keeps the enemy king out. It is a way to save a draw.',
+    },
+    example: {
+      fen: '8/8/3k4/8/8/5R2/6PK/q7 w - - 0 1',
+      orientation: 'white',
+      highlights: ['f3', 'g2'],
+      arrows: [],
+    },
+    group: 'endgames',
+    level: 'advanced',
+    lesson: 'defending',
+    sources: [`${WIKI}Fortress_(chess)`],
   },
 ];

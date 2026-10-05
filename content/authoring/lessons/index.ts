@@ -34,6 +34,7 @@ import { minorPieceEndings } from './advanced/07-minor-piece-endings.ts';
 import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
 import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
 import { advancedTactics } from './advanced/10-advanced-tactics.ts';
+import { defending } from './advanced/11-defending.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -70,4 +71,5 @@ export const lessons: LessonSpec[] = [
   zugzwangTempo,
   kingSafetyAttack,
   advancedTactics,
+  defending,
 ];
