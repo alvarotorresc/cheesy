@@ -33,6 +33,14 @@ const hasText = (value: unknown, ...keys: string[]): boolean =>
 const isListOf = (value: unknown, ...keys: string[]): boolean =>
   Array.isArray(value) && value.every((entry) => hasText(entry, ...keys));
 
+/** A Lichess puzzle the page can play: a position and at least the rival's move and one answer. */
+const isPuzzle = (value: unknown): boolean =>
+  hasText(value, 'id', 'fen') &&
+  Array.isArray((value as Record<string, unknown>)['moves']) &&
+  ((value as Record<string, unknown>)['moves'] as unknown[]).length >= 2 &&
+  ((value as Record<string, unknown>)['moves'] as unknown[]).every((m) => typeof m === 'string') &&
+  Array.isArray((value as Record<string, unknown>)['themes']);
+
 /**
  * Downloads a content file from the same origin as the page. The files are validated in CI, so
  * only their shape is checked here: enough to reject an error page or a file of another kind.
@@ -128,7 +136,11 @@ export const createFetchPuzzleLoaders = (baseUrl: string): PuzzleLoaders => {
       return download(
         file(`puzzles/${lessonId}.json`),
         (data) =>
-          isRecord(data) && data['lesson'] === lessonId && isListOf(data['puzzles'], 'id', 'fen'),
+          isRecord(data) &&
+          data['lesson'] === lessonId &&
+          isRecord(data['themes']) &&
+          Array.isArray(data['puzzles']) &&
+          data['puzzles'].every(isPuzzle),
       );
     },
   };

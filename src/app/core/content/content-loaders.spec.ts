@@ -230,7 +230,13 @@ describe('createFetchPuzzleLoaders', () => {
 
   it('should request the catalogue and the puzzles of a lesson from the content folder', async () => {
     const catalog = { source: { url: 'https://database.lichess.org' }, lessons: [] };
-    const file = { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [] };
+    const puzzle = {
+      id: 'KEPe0',
+      fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+      moves: ['Rf7', 'Nxf7'],
+      themes: [],
+    };
+    const file = { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [puzzle] };
     fetchMock.mockImplementation(async (url) =>
       reply(new URL(url).pathname.endsWith('puzzle-catalog.json') ? catalog : file),
     );
@@ -251,6 +257,28 @@ describe('createFetchPuzzleLoaders', () => {
     await expect(loaders.puzzles('../secret')).rejects.toThrowError(/Invalid lesson id/);
     await expect(loaders.puzzles('the-fork')).rejects.toThrowError(/Unexpected content/);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reject a file whose puzzles or themes the page could not play', async () => {
+    const puzzle = {
+      id: 'KEPe0',
+      fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+      moves: ['Rf7', 'Nxf7'],
+      themes: [],
+    };
+    const loaders = createFetchPuzzleLoaders(BASE);
+    const broken = [
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: ['Rf7'] }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: ['Rf7', 4] }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: 'Rf7 Nxf7' }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, themes: undefined }] },
+      { lesson: 'the-fork', themes: ['fork'], puzzles: [puzzle] },
+      { lesson: 'the-fork', puzzles: [puzzle] },
+    ];
+    for (const file of broken) {
+      fetchMock.mockImplementationOnce(async () => reply(file));
+      await expect(loaders.puzzles('the-fork')).rejects.toThrowError(/Unexpected content/);
+    }
   });
 
   it('should reject a catalogue without its lessons or its source', async () => {
