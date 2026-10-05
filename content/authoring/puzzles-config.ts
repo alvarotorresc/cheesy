@@ -25,7 +25,9 @@ export const LESSON_ORDER = [
   { lesson: 'in-between-move', themes: ['intermezzo', 'xRayAttack'] },
   { lesson: 'king-pawn-endings', themes: ['pawnEndgame'] },
   { lesson: 'rook-endings', themes: ['rookEndgame'] },
-  { lesson: 'draws-and-defence', themes: ['defensiveMove', 'equality'] },
+  // No puzzles: the Lichess puzzles of `defensiveMove` and `equality` win material instead of
+  // saving a draw (none ends in perpetual check or stalemate), so the lesson is out of "Practise more".
+  { lesson: 'draws-and-defence', themes: [] },
 ] as const satisfies readonly { lesson: string; themes: readonly string[] }[];
 
 /**
@@ -65,7 +67,6 @@ export const LESSON_FILTERS: Record<string, Partial<PuzzleFilter>> = {};
 
 /** Measured on the database of 2026-10-02: these themes have few popular, much played puzzles. */
 export const THEME_FILTERS: Record<string, Partial<PuzzleFilter>> = {
-  equality: { minPopularity: 70, minPlays: 100, maxDeviation: 110 },
   smotheredMate: { minPlays: 500 },
   anastasiaMate: { minPlays: 500 },
 };
@@ -88,9 +89,6 @@ export const LENGTH_QUOTA_BY_THEME: Record<string, Partial<LengthQuota>> = {
   mateIn2: { maxOne: 0, minThree: 0 },
   attraction: { minThree: 0.6 },
   sacrifice: { minThree: 0.6 },
-  // Eye review of 2026-10-05: a one-move equality puzzle is a recapture of what the rival left
-  // hanging, not a worse position saved.
-  equality: { maxOne: 0 },
 };
 
 /** Puzzle id → why it is left out, after looking at it. */
@@ -99,13 +97,6 @@ export const EXCLUDED_IDS: Record<string, string> = {
   crPYf: 'deflection: a queen capture with check and mate on f8; no defender is drawn away',
   '44kyS': 'pin: a knight fork of king and queen; nothing is pinned when the player moves',
   GwlY6: 'pin: the pinned g7 pawn plays no part; it is won with a check on the back rank',
-  // Eye review of lessons 7–12, 2026-10-05.
-  '8UR9y': 'equality: a knight fork of king and rook that wins, not a worse position saved',
-  HgekJ: 'equality: a knight fork of king and bishop that wins, not a worse position saved',
-  '8Binz': 'equality: a knight fork of queen and rook that wins, not a worse position saved',
-  '2LD8i': 'equality: a recapture that ends a rook up, not a worse position saved',
-  BsKND: 'equality: a knight fork of queen and rook that wins, not a worse position saved',
-  SQrQk: 'defensiveMove: the king takes a rook left hanging; nothing to defend',
 };
 
 export const PUZZLE_CONFIG: PuzzleConfig = {

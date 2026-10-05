@@ -23,13 +23,14 @@ export const LICHESS_THEME_KEYS = [
   'xRayAttack',
   'pawnEndgame',
   'rookEndgame',
-  'defensiveMove',
-  'equality',
 ] as const;
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
 
-/** Intermediate lesson id → Lichess puzzle themes. Each theme belongs to one lesson only. */
+/**
+ * Intermediate lesson id → Lichess puzzle themes. Each theme belongs to one lesson only; a lesson
+ * with none is not in "Practise more".
+ */
 export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'hanging-pieces': ['hangingPiece'],
   'the-fork': ['fork'],
@@ -42,7 +43,8 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'in-between-move': ['intermezzo', 'xRayAttack'],
   'king-pawn-endings': ['pawnEndgame'],
   'rook-endings': ['rookEndgame'],
-  'draws-and-defence': ['defensiveMove', 'equality'],
+  // No practice: see LESSON_ORDER in puzzles-config.ts.
+  'draws-and-defence': [],
 };
 
 /** Theme → glossary term that names its idea, for "Practise more"; null when there is none. */
@@ -68,6 +70,4 @@ export const THEME_TERMS: Partial<Record<LichessTheme, string | null>> = {
   // Kinds of position, not ideas: the glossary has no term for them.
   pawnEndgame: null,
   rookEndgame: null,
-  defensiveMove: null,
-  equality: null,
 };
