@@ -153,6 +153,7 @@ export class FindMoveStepView {
    * keyboard yet, so this is the way on for keyboard and screen reader users.
    */
   protected skip(): void {
+    this.clearTimers();
     this.skipped.set(true);
     this.done.emit({ firstTry: false });
     this.focus.toNext();

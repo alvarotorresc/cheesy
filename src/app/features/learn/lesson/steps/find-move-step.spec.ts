@@ -343,6 +343,23 @@ describe('FindMoveStepView', () => {
       expect(board().lastMove()).toEqual(['g8', 'f8']);
     });
 
+    it('should leave no timer when the step is skipped before the rival move', () => {
+      vi.useFakeTimers();
+      open();
+      expect(vi.getTimerCount()).toBe(1);
+      element.querySelector<HTMLButtonElement>('button.skip')!.click();
+      fixture.detectChanges();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('should leave no timer when the step is destroyed before the rival move', () => {
+      vi.useFakeTimers();
+      open();
+      expect(vi.getTimerCount()).toBe(1);
+      fixture.destroy();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
     it('should accept another mate than the written one', () => {
       vi.useFakeTimers();
       open();
