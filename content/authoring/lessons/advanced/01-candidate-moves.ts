@@ -66,11 +66,11 @@ export const candidateMoves: LessonSpec = {
     {
       kind: 'find-move',
       text: {
-        es: 'Tienes varias [jugadas forzantes](forcing-move): dos [jaques](check) en la última fila y uno en diagonal. Solo uno gana algo. Encuéntralo: tienes dos jugadas.',
-        en: 'You have several [forcing moves](forcing-move): two [checks](check) on the back rank and one on a diagonal. Only one wins something. Find it: you have two moves.',
+        es: 'Tienes varias [jugadas forzantes](forcing-move): dos [jaques](check) en la última fila y uno en diagonal. Solo uno gana algo. Encuéntralo.',
+        en: 'You have several [forcing moves](forcing-move): two [checks](check) on the back rank and one on a diagonal. Only one wins something. Find it.',
       },
       board: { fen: 'r5k1/p1p4p/1p4p1/8/7q/8/P2Q1PPP/4R1K1 w - - 0 1', orientation: 'white' },
-      check: { by: 'engine', solution: ['Qd5+', 'Kg7', 'Qxa8'] },
+      check: { by: 'engine', solution: ['Qd5+'] },
       wrong: {
         'Re8+': {
           es: 'Es [jaque](check), pero la torre de a8 la captura y te quedas sin torre.',
@@ -86,18 +86,18 @@ export const candidateMoves: LessonSpec = {
         en: 'Look for a square from which the queen gives [check](check) and at the same time looks at the rook on a8.',
       },
       explanation: {
-        es: 'Bien: desde d5 la dama da [jaque](check) por la diagonal y ataca la torre de a8 por la otra. El rey tiene que moverse y la torre cae. De las tres [jugadas forzantes](forcing-move), solo esta deja al rival sin buena respuesta.',
-        en: 'Well done: from d5 the queen gives [check](check) along one diagonal and attacks the rook on a8 along the other. The king has to move and the rook falls. Of the three [forcing moves](forcing-move), only this one leaves the rival without a good answer.',
+        es: 'Bien: desde d5 la dama da [jaque](check) por una diagonal y ataca la torre de a8 por la otra. El rey tiene que moverse, y después tu dama captura la torre. De las tres [jugadas forzantes](forcing-move), solo esta deja al rival sin buena respuesta.',
+        en: 'Well done: from d5 the queen gives [check](check) along one diagonal and attacks the rook on a8 along the other. The king has to move, and then your queen takes the rook. Of the three [forcing moves](forcing-move), only this one leaves the rival without a good answer.',
       },
     },
     {
       kind: 'explain',
       text: {
-        es: 'A veces la mejor jugada no da [jaque](check), no captura y no amenaza nada a la vista: es una [jugada tranquila](quiet-move). Prepara una amenaza que llega después y que el rival ya no puede parar. Aquí avanzar el peón de h2 a h3 no ataca nada, pero le da al rey una casilla de escape y quita para siempre el peligro de la última fila.',
-        en: 'Sometimes the best move gives no [check](check), captures nothing and threatens nothing you can see: it is a [quiet move](quiet-move). It prepares a threat that comes later and that the rival can no longer stop. Here pushing the pawn from h2 to h3 attacks nothing, but it gives the king an escape square and removes the danger on the back rank for good.',
+        es: 'A veces la mejor jugada no da [jaque](check), no captura y no amenaza nada a la vista: es una [jugada tranquila](quiet-move). Prepara algo que llega después. Aquí la jugada activa, la torre a e7, pierde: la torre negra baja a d1 con [jaque](check) y es [mate en la última fila](back-rank). Avanzar el peón de h2 a h3 no ataca nada, pero le da al rey una casilla de escape: después tu torre podrá salir de la primera fila sin miedo al mate.',
+        en: 'Sometimes the best move gives no [check](check), captures nothing and threatens nothing you can see: it is a [quiet move](quiet-move). It prepares something that comes later. Here the active move, the rook to e7, loses: the black rook comes down to d1 with [check](check) and it is [mate on the back rank](back-rank). Pushing the pawn from h2 to h3 attacks nothing, but it gives the king an escape square: afterwards your rook can leave the first rank with no fear of mate.',
       },
       board: {
-        fen: '3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1',
+        fen: '3r2k1/pp3ppp/8/8/8/8/PP3PPP/4R1K1 w - - 0 1',
         orientation: 'white',
         arrows: [{ from: 'h2', to: 'h3' }],
       },
@@ -116,8 +116,8 @@ export const candidateMoves: LessonSpec = {
           en: 'It is a [check](check), but the rook on d8 takes your rook. Forcing moves do not work here: look for a quiet one.',
         },
         Nd4: {
-          es: 'El caballo vigila la salida de b3, pero queda sin defensa: la torre negra de d8 lo captura.',
-          en: 'The knight watches the way out on b3, but it is undefended: the black rook on d8 takes it.',
+          es: 'El caballo vigila b3, pero no cierra la diagonal: el alfil sale por c4 o por d5. Eso sí, el caballo no se pierde: si la torre negra lo captura, tu torre baja a e8 y es [jaque mate](checkmate).',
+          en: 'The knight watches b3, but it does not close the diagonal: the bishop gets out through c4 or d5. The knight is not lost, though: if the black rook takes it, your rook comes down to e8 and it is [checkmate](checkmate).',
         },
       },
       hint: {
@@ -135,7 +135,7 @@ export const candidateMoves: LessonSpec = {
         es: 'Tu idea es capturar la torre de a8 con la dama. Pero el rival también amenaza algo: su dama y su alfil apuntan a h2. Tres [jugadas candidatas](candidate-move): capturar la torre, avanzar el peón de h2 a h3 o llevar el caballo a f3. ¿Cuál atiende la amenaza sin abandonar tu idea?',
         en: 'Your idea is to take the rook on a8 with the queen. But the rival threatens something too: his queen and bishop aim at h2. Three [candidate moves](candidate-move): take the rook, push the pawn from h2 to h3 or bring the knight to f3. Which one meets the threat without giving up your idea?',
       },
-      board: { fen: 'r4nk1/p1p2ppp/3b4/3Q4/7q/8/PPPN1PPP/2B2RK1 w - - 0 1', orientation: 'white' },
+      board: { fen: 'r4nk1/p1p1pppp/3b4/3Q4/7q/8/PPPN1PPP/2B2RK1 w - - 0 1', orientation: 'white' },
       answer: { by: 'engine', options: ['Qxa8', 'h3', 'Nf3'], correct: 2 },
       whyWrong: [
         {
@@ -149,8 +149,8 @@ export const candidateMoves: LessonSpec = {
         null,
       ],
       explanation: {
-        es: 'Bien: el caballo en f3 defiende h2 y además ataca la dama negra. El rival tiene que salvar su dama, y entonces tu dama captura la torre de a8. Una candidata que hace dos cosas a la vez suele ser la buena.',
-        en: 'Well done: the knight on f3 defends h2 and also attacks the black queen. The rival has to save his queen, and then your queen takes the rook on a8. A candidate that does two things at once is usually the right one.',
+        es: 'Bien: el caballo en f3 defiende h2 y además ataca la dama negra. La dama no puede volver a defender la torre de a8, porque el peón de e7 le cierra el camino a d8. Las negras no pueden salvar a la vez la dama y la torre, y pierden material. Una candidata que hace dos cosas a la vez suele ser la buena.',
+        en: 'Well done: the knight on f3 defends h2 and also attacks the black queen. The queen cannot come back to defend the rook on a8, because the pawn on e7 blocks her way to d8. Black cannot save both the queen and the rook, and loses material. A candidate that does two things at once is usually the right one.',
       },
     },
     {
