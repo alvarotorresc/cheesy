@@ -22,18 +22,14 @@ your device.
 
 ## What you can do
 
-<!-- TODO(v0.2.0): figures of Learn once the advanced PR is merged. Today there are 30 lessons
-(12 beginner, 12 intermediate and 6 advanced), 78 glossary terms and 550 puzzles (50 for each of
-11 lessons). With 12 advanced lessons that is 36 lessons; the glossary and the puzzles may grow
-with it. -->
-
 - **Learn chess from scratch, by level.** Beginner, intermediate and advanced:
   from how each piece moves to tactics, the endgames you must know and strategy.
   Each lesson goes step by step with a board and plain-language text, and mixes
   explanations with exercises: find the move, pick between options or play the
   position out. Chess words open in a bubble with their definition, and the
   glossary gathers them all by family, each with its example board. The lessons
-  you complete are remembered, and the page takes you to the next one.
+  you complete are remembered, and the page takes you to the next one. There are
+  36 lessons (12 per level), 89 glossary terms and 550 puzzles.
 
   ![The Learn page: the “Continue: The skewer” button and five cards, the Beginner, Intermediate and Advanced levels with their number of lessons, the Glossary and Practise more](.github/readme/learn-en.png)
 

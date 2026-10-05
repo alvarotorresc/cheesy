@@ -21,11 +21,6 @@ crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 
 ## Qué puedes hacer
 
-<!-- TODO(v0.2.0): cifras de Aprender cuando se fusione la PR del avanzado. Hoy hay 30 lecciones
-(12 de principiante, 12 de medio y 6 de avanzado), 78 términos en el glosario y 550 problemas
-(50 por cada una de 11 lecciones). Con 12 lecciones de avanzado serían 36 lecciones; el glosario
-y los problemas pueden crecer con ella. -->
-
 - **Aprender ajedrez desde cero, por niveles.** Principiante, medio y avanzado:
   desde cómo se mueve cada pieza hasta la táctica, los finales que hay que saber
   y la estrategia. Cada lección avanza por pasos con un tablero y texto en
@@ -33,7 +28,8 @@ y los problemas pueden crecer con ella. -->
   elegir entre opciones o jugar la posición hasta el final. Las palabras de
   ajedrez se abren en una burbuja con su definición, y el glosario las reúne
   todas por familias, cada una con su tablero de ejemplo. Se recuerdan las
-  lecciones que completas, y la página te lleva a la siguiente.
+  lecciones que completas, y la página te lleva a la siguiente. Hay 36
+  lecciones (12 por nivel), 89 términos en el glosario y 550 problemas.
 
   ![La página Aprender: el botón «Continuar: La enfilada» y cinco tarjetas, los niveles Principiante, Medio y Avanzado con su número de lecciones, el Glosario y Practica más](.github/readme/learn-es.png)
 
