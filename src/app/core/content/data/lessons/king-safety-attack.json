@@ -614,15 +614,39 @@
           },
           {
             "kind": "text",
-            "text": ", para que tus torres y tu dama lleguen antes que sus defensores. Aquí la columna d ya está abierta, la torre y la dama blancas están en ella y el rey negro sigue en "
+            "text": ", para que tus torres y tu dama lleguen antes que sus defensores. Aquí, en el gambito danés, las blancas han entregado dos peones a cambio de desarrollo: sus alfiles de "
           },
           {
             "kind": "square",
-            "square": "e8"
+            "square": "c4"
           },
           {
             "kind": "text",
-            "text": "."
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " ya apuntan a "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", al lado del rey negro, y las negras todavía no han sacado ninguna pieza."
           }
         ],
         "en": [
@@ -637,25 +661,49 @@
           },
           {
             "kind": "text",
-            "text": ", so that your rooks and queen arrive before its defenders. Here the d-file is already open, the white rook and queen stand on it and the black king is still on "
+            "text": ", so that your rooks and queen arrive before its defenders. Here, in the Danish Gambit, White has given up two pawns for development: the bishops on "
           },
           {
             "kind": "square",
-            "square": "e8"
+            "square": "c4"
           },
           {
             "kind": "text",
-            "text": "."
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " already aim at "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "g7"
+          },
+          {
+            "kind": "text",
+            "text": ", next to the black king, and Black has not brought out a single piece yet."
           }
         ]
       },
       "board": {
-        "fen": "rnb1kbnr/pp3ppp/2p5/5q2/8/3Q1N2/PPPB1PPP/2KR1B1R w kq - 0 1",
+        "fen": "rnbqkbnr/pppp1ppp/8/8/2B1P3/8/PB3PPP/RN1QK1NR b KQkq - 0 5",
         "orientation": "white",
         "highlights": [
-          "e8",
-          "d1",
-          "d3"
+          "c4",
+          "b2",
+          "e8"
         ]
       }
     },
@@ -665,7 +713,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "El rey negro sigue en el centro, sin enrocar, y la columna d está abierta. Tu torre y tu dama están en ella. Las negras amenazan tu dama. Busca cómo llegar al rey: es "
+            "text": "El rey negro sigue en el centro, sin enrocar, y la columna d está abierta. Vas un caballo por debajo, pero tu torre y tu dama están en esa columna. Las negras amenazan tu dama. Busca cómo llegar al rey: es "
           },
           {
             "kind": "term",
@@ -680,7 +728,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "The black king is still in the centre, not castled, and the d-file is open. Your rook and your queen stand on it. Black is attacking your queen. Find a way to reach the king: it is "
+            "text": "The black king is still in the centre, not castled, and the d-file is open. You are a knight down, but your rook and your queen stand on that file. Black is attacking your queen. Find a way to reach the king: it is "
           },
           {
             "kind": "term",

@@ -124,20 +124,20 @@ export const kingSafetyAttack: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Un rey que no se ha enrocado está en peligro en cuanto se abre el centro. Si vas por delante en el desarrollo, abre líneas: cambia peones del centro o entrega uno, como en un [gambito](gambit), para que tus torres y tu dama lleguen antes que sus defensores. Aquí la columna d ya está abierta, la torre y la dama blancas están en ella y el rey negro sigue en e8.',
-        en: 'A king that has not castled is in danger as soon as the centre opens. If you are ahead in development, open lines: exchange central pawns or give one up, as in a [gambit](gambit), so that your rooks and queen arrive before its defenders. Here the d-file is already open, the white rook and queen stand on it and the black king is still on e8.',
+        es: 'Un rey que no se ha enrocado está en peligro en cuanto se abre el centro. Si vas por delante en el desarrollo, abre líneas: cambia peones del centro o entrega uno, como en un [gambito](gambit), para que tus torres y tu dama lleguen antes que sus defensores. Aquí, en el gambito danés, las blancas han entregado dos peones a cambio de desarrollo: sus alfiles de c4 y b2 ya apuntan a f7 y g7, al lado del rey negro, y las negras todavía no han sacado ninguna pieza.',
+        en: 'A king that has not castled is in danger as soon as the centre opens. If you are ahead in development, open lines: exchange central pawns or give one up, as in a [gambit](gambit), so that your rooks and queen arrive before its defenders. Here, in the Danish Gambit, White has given up two pawns for development: the bishops on c4 and b2 already aim at f7 and g7, next to the black king, and Black has not brought out a single piece yet.',
       },
       board: {
-        fen: 'rnb1kbnr/pp3ppp/2p5/5q2/8/3Q1N2/PPPB1PPP/2KR1B1R w kq - 0 1',
+        fen: 'rnbqkbnr/pppp1ppp/8/8/2B1P3/8/PB3PPP/RN1QK1NR b KQkq - 0 5',
         orientation: 'white',
-        highlights: ['e8', 'd1', 'd3'],
+        highlights: ['c4', 'b2', 'e8'],
       },
     },
     {
       kind: 'find-move',
       text: {
-        es: 'El rey negro sigue en el centro, sin enrocar, y la columna d está abierta. Tu torre y tu dama están en ella. Las negras amenazan tu dama. Busca cómo llegar al rey: es [mate](checkmate) en tres jugadas.',
-        en: 'The black king is still in the centre, not castled, and the d-file is open. Your rook and your queen stand on it. Black is attacking your queen. Find a way to reach the king: it is [mate](checkmate) in three moves.',
+        es: 'El rey negro sigue en el centro, sin enrocar, y la columna d está abierta. Vas un caballo por debajo, pero tu torre y tu dama están en esa columna. Las negras amenazan tu dama. Busca cómo llegar al rey: es [mate](checkmate) en tres jugadas.',
+        en: 'The black king is still in the centre, not castled, and the d-file is open. You are a knight down, but your rook and your queen stand on that file. Black is attacking your queen. Find a way to reach the king: it is [mate](checkmate) in three moves.',
       },
       board: {
         fen: 'rnb1kbnr/pp3ppp/2p5/5q2/8/3Q1N2/PPPB1PPP/2KR1B1R w kq - 0 1',
