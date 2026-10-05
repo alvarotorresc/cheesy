@@ -2,9 +2,11 @@ _**Español** · [English](README.en.md)_
 
 # Cheesy
 
-**Aperturas, finales y táctica, en tu navegador.** Juega aperturas y finales
-contra el ordenador, encuentra la jugada en posiciones tácticas y analiza con
-motor. Es para quien quiere practicar ajedrez a su ritmo: no hay cuenta que
+**Aperturas, finales y táctica, en tu navegador.** Aprende a jugar desde cero
+con lecciones cortas, juega aperturas y finales contra el ordenador, encuentra la
+jugada en posiciones tácticas y analiza con motor. Todo en lenguaje llano: las
+jugadas se leen en palabras («caballo a f3») y, si lo prefieres, en notación.
+Es para quien quiere aprender y practicar ajedrez a su ritmo: no hay cuenta que
 crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 
 [![Abrir Cheesy](https://img.shields.io/badge/Abrir%20Cheesy-cheesy.alvarotc.com-f4c542?style=for-the-badge&labelColor=13222d)](https://cheesy.alvarotc.com)
@@ -15,9 +17,31 @@ crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 ![Licencia GPL-3.0](https://img.shields.io/badge/licencia-GPL--3.0-f4c542?style=flat-square&labelColor=13222d)
 [![CI](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml)
 
-![La página de inicio de Cheesy: el titular, un tablero grande con la Apertura Española tras 6.Te1, un panel con sus jugadas y el botón «Jugar esta apertura», y debajo el comienzo de las cuatro secciones](.github/readme/home-es.png)
+![La página de inicio de Cheesy: el menú con Aprender, el titular, un tablero grande con la Apertura Española tras la sexta jugada de las blancas, un panel con sus jugadas y el botón «Jugar esta apertura», la franja «¿Empiezas desde cero?» y debajo el comienzo de las secciones](.github/readme/home-es.png)
 
 ## Qué puedes hacer
+
+- **Aprender ajedrez desde cero, por niveles.** Principiante, medio y avanzado:
+  desde cómo se mueve cada pieza hasta la táctica, los finales que hay que saber
+  y la estrategia. Cada lección avanza por pasos con un tablero y texto en
+  lenguaje llano, y mezcla explicaciones con ejercicios: encontrar la jugada,
+  elegir entre opciones o jugar la posición hasta el final. Las palabras de
+  ajedrez se abren en una burbuja con su definición, y el glosario las reúne
+  todas por familias, cada una con su tablero de ejemplo. Se recuerdan las
+  lecciones que completas, y la página te lleva a la siguiente. Hay 36
+  lecciones (12 por nivel), 89 términos en el glosario y 550 problemas.
+
+  ![La página Aprender: el botón «Continuar: La enfilada» y cinco tarjetas, los niveles Principiante, Medio y Avanzado con su número de lecciones, el Glosario y Practica más](.github/readme/learn-es.png)
+
+  ![El primer paso de la lección «La horquilla»: un tablero con un caballo blanco y dos flechas hacia el rey y la torre negros, el texto que lo explica en palabras y abierta la burbuja del término «Jaque», con su definición y un minitablero](.github/readme/lesson-es.png)
+
+- **Practicar más con problemas reales de Lichess.** Cada lección de táctica y
+  de finales tiene sus problemas, sacados de la
+  [base abierta de problemas de Lichess](https://database.lichess.org) (CC0), de
+  diez en diez y del más fácil al más difícil. Se recuerda cuántos resuelves a la
+  primera.
+
+  ![La lista de Practica más en el tema oscuro: problemas de Lichess agrupados por lección, con tres lecciones empezadas y su recuento de problemas resueltos a la primera](.github/readme/puzzles-es.png)
 
 - **Aprender aperturas jugándolas y practicándolas.** En Jugar, el rival
   responde con las líneas que cubrimos, más a menudo la principal, o es
@@ -27,7 +51,7 @@ crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 
   ![El catálogo de aperturas: los filtros por primera jugada, familia, bando y progreso, y la fila «1.e4 e5: juegos abiertos» con cuatro aperturas, cada una con su minitablero, su progreso y los botones «Jugar» y «Practicar»](.github/readme/openings-es.png)
 
-  ![Una partida de la Apertura Española con blancas, en el tema oscuro: el tablero tras 5…Ae7, el aviso «Te toca mover», el panel de teoría con la Variante Cerrada y la nota «Estás dentro de nuestras líneas», y la lista de jugadas](.github/readme/play-es.png)
+  ![Una partida de la Apertura Española con blancas, en el tema oscuro: el tablero tras la tercera jugada de las negras, el aviso «Te toca mover», el panel de teoría con la Defensa Morphy explicada en palabras y la nota «Estás dentro de nuestras líneas», y la lista de jugadas](.github/readme/play-es.png)
 
 - **Convertir y aguantar finales contra un rival perfecto.** El rival juega
   con la tablebase de Lichess, y un panel te dice el veredicto de la posición.
@@ -45,6 +69,11 @@ crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
   llevan una posición, sus jugadas o el árbol entero con sus variaciones.
 
   ![El tablero de análisis en el tema oscuro con una partida de la Apertura Española: el motor encendido a profundidad 20, la barra de evaluación, las tres mejores líneas, una flecha verde con la mejor jugada y la lista de jugadas con una variación plegada](.github/readme/analysis-es.png)
+
+- **Leer las jugadas como prefieras y jugar con el teclado.** Un conmutador en
+  la cabecera cambia entre palabras y notación en toda la app. El tablero se
+  maneja sin ratón: las flechas mueven un cursor por las casillas e Intro elige
+  la pieza y la juega.
 
 ## Privacidad
 
@@ -121,11 +150,19 @@ formateo por los archivos preparados.
 | `/positions`             | La galería de posiciones tácticas, con filtros y las que has resuelto      |
 | `/positions/:id`         | Encuentra la mejor jugada en una posición                                  |
 | `/analysis`              | Un tablero libre para explorar cualquier idea                              |
+| `/learn`                 | Aprender: los niveles, el glosario, «Practica más» y tu siguiente lección  |
+| `/learn/:level`          | Las lecciones de un nivel, con las completadas marcadas                    |
+| `/learn/:level/:lesson`  | Una lección, paso a paso                                                   |
+| `/learn/glossary`        | El glosario, con buscador y filtros por nivel y familia                    |
+| `/learn/puzzles`         | «Practica más»: los problemas de Lichess de cada lección                   |
+| `/learn/puzzles/:lesson` | Una tanda de diez problemas de esa lección                                 |
 | `/acerca`                | Acerca de: qué se guarda, qué sale del navegador, créditos y código fuente |
 
 Detalles que no se ven en la tabla:
 
-- La dirección antigua `/openings/:id/drill` redirige a la práctica.
+- La dirección antigua `/openings/:id/drill` redirige a la práctica, y
+  `/glossary` lleva al glosario dentro de Aprender.
+- Los filtros del glosario van en la dirección (`?group=tactics&level=advanced&q=…`).
 - En Finales, el rival recurre a Stockfish cuando la tablebase no responde.
 - Cada posición lleva un número en su dirección (`/positions/1`), de menos a más
   jugadas.
@@ -146,7 +183,8 @@ src/app/
   shared/     componentes de presentación: tablero, minitablero, lista de jugadas,
               iconos, aviso
   features/   una carpeta por sección, cargadas de forma diferida
-content/      fuentes y comprobaciones de las aperturas, los finales y las posiciones
+content/      fuentes y comprobaciones de las aperturas, los finales, las posiciones,
+              las lecciones, el glosario y los problemas
 ```
 
 El contenido es fijo y se valida antes de llegar a la app: mira

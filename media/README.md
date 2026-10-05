@@ -27,8 +27,11 @@ pnpm media:readme                                       # refresh .github/readme
   September 2026, 10:30 in Madrid), seeded `Math.random`.
 - **Network:** every request outside localhost is aborted. The Lichess tablebase is answered from
   `shots/fixtures/tablebase.json`.
-- **Progress:** demo progress (lines, endgames, positions) is seeded into IndexedDB from
-  `shots/progress.mjs`.
+- **Progress:** demo progress (lines, endgames, positions, lessons and puzzles) is seeded into
+  IndexedDB from `shots/progress.mjs`. The lesson and puzzle rows are read from the content
+  (`src/app/core/content/data/`), so they never name a lesson or puzzle that does not exist and
+  no scene depends on how many lessons a level has.
+- **Reading mode:** moves are shown in words, the default of the app (`cheesy.notation` unset).
 - **Engine:** the analysis scene waits for Stockfish to finish at its depth cap (20).
 
 Guards of each capture. If one fails, nothing is written:
@@ -43,14 +46,29 @@ Guards of each capture. If one fails, nothing is written:
 
 | File                                            | Dimensions | Weight (KB)                                             |
 | ----------------------------------------------- | ---------- | ------------------------------------------------------- |
-| `cover-{es,en}.png`                             | 1600x1000  | ~190                                                    |
-| `cover-mobile-{es,en}.png`                      | 1080x2340  | ~200                                                    |
+| `cover-{es,en}.png`                             | 1600x1000  | ~170-185                                                |
+| `cover-mobile-{es,en}.png`                      | 1080x2340  | ~180-185                                                |
 | `screen-01...08-*-{es,en}.png`                  | 1600x1000  | 110-170                                                 |
-| `promo-{es,en}.png`, `promo-mobile-{es,en}.png` | 1920x1080  | 205-255                                                 |
-| `og.png`                                        | 1200x630   | 43 (copy it to `public/og.png` when it changes)         |
-| `icon.png`                                      | 1024x1024  | 27                                                      |
+| `screen-learn-{es,en}.png`                      | 1600x1000  | ~90                                                     |
+| `screen-lesson-{es,en}.png`                     | 1600x1000  | ~105                                                    |
+| `screen-glossary-{es,en}.png`                   | 1600x1000  | ~140                                                    |
+| `screen-puzzles-{es,en}.png`                    | 1600x1000  | 115-125                                                 |
+| `screen-puzzle-{es,en}.png`                     | 1600x1000  | ~80                                                     |
+| `promo-{es,en}.png`, `promo-mobile-{es,en}.png` | 1920x1080  | 195-240                                                 |
+| `og.png`                                        | 1200x630   | 41 (copy it to `public/og.png` when it changes)         |
+| `icon.png`                                      | 1024x1024  | 26                                                      |
 | `labels.json`                                   | -          | name, alt, caption and text per screenshot and language |
+
+What the Learn screenshots show: `screen-learn`, Learn with the demo progress ("continue" with
+the next lesson); `screen-lesson`, the first step of the fork lesson with the bubble of a term
+open; `screen-glossary`, the glossary filtered by the tactics family; `screen-puzzles`, "Practise
+more" with three lessons started; `screen-puzzle`, a puzzle of the fork as it opens.
+
+The names of the Learn screenshots (`screen-learn`, `screen-lesson`, `screen-glossary`,
+`screen-puzzles`, `screen-puzzle`) and of the older ones are the ones the project page of
+alvarotc.com expects: do not rename them.
 
 ## Rule
 
-No image shows the solution of a position or an endgame.
+No image shows the solution of a position, an endgame, an exercise of a lesson or a puzzle. The
+scenes check it: no feedback, hint or solution on screen, and "next" still disabled.

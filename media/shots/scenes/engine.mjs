@@ -197,7 +197,7 @@ async function engineFinished(page, lang) {
 // corners, a shade or two) depends on which of those steps got painted, and that is timing.
 // Hiding the page for a frame makes the browser paint it whole, from the final state only.
 // Nothing of what the page shows changes.
-async function repaint(page) {
+export async function repaint(page) {
   await page.evaluate(async () => {
     const frames = () =>
       new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(() => done())));

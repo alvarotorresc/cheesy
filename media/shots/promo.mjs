@@ -19,6 +19,18 @@ async function ready(page) {
   await page.waitForFunction(() =>
     Array.from(document.querySelectorAll('img')).every((i) => i.complete && i.naturalWidth > 0),
   );
+  // The screenshot inside the frame is painted in tiles while it decodes, and a tile could come
+  // out a few levels apart from one run to the next. Decoded first, then the page hidden for two
+  // frames: the browser paints it whole, from the final state only.
+  await page.evaluate(async () => {
+    await Promise.all(Array.from(document.querySelectorAll('img')).map((img) => img.decode()));
+    const frames = () =>
+      new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(() => done())));
+    document.body.style.visibility = 'hidden';
+    await frames();
+    document.body.style.visibility = '';
+    await frames();
+  });
 }
 
 async function requireFile(name) {
