@@ -1,0 +1,749 @@
+{
+  "lesson": "in-between-move",
+  "themes": {
+    "intermezzo": "intermediate-move",
+    "xRayAttack": "x-ray"
+  },
+  "puzzles": [
+    {
+      "id": "yRwrT",
+      "fen": "3r2k1/pp2bpp1/2p2N1p/5P2/7B/1B6/Pn3PPP/3R2K1 b - - 0 23",
+      "moves": [
+        "Bxf6",
+        "Rxd8+",
+        "Bxd8",
+        "Bxd8"
+      ],
+      "rating": 944,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "icIR8",
+      "fen": "r2qkb1r/1p3ppp/p1n1pn2/8/3P4/P1N2B1P/1P3PP1/R1BQK2R b KQkq - 0 11",
+      "moves": [
+        "Qxd4",
+        "Bxc6+",
+        "bxc6",
+        "Qxd4"
+      ],
+      "rating": 958,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "g9Spe",
+      "fen": "3rr2k/4nQp1/n1pR3B/4p3/p3P1q1/2P2N2/B1P2PPP/6K1 w - - 1 23",
+      "moves": [
+        "Ng5",
+        "Qd1+",
+        "Rxd1",
+        "Rxd1#"
+      ],
+      "rating": 960,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "SNB3V",
+      "fen": "4r1k1/pp3ppp/2p5/5P2/3r4/P3n2P/4R1P1/R1B4K w - - 0 32",
+      "moves": [
+        "Rxe3",
+        "Rd1+",
+        "Kh2",
+        "Rxe3",
+        "Bxe3",
+        "Rxa1"
+      ],
+      "rating": 973,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "hOBoG",
+      "fen": "r1bqkb1r/pp3ppp/2n1p3/4P3/3N2n1/6P1/PP3PBP/RNBQ1RK1 b kq - 0 10",
+      "moves": [
+        "Qxd4",
+        "Bxc6+",
+        "bxc6",
+        "Qxd4"
+      ],
+      "rating": 973,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "p3UY1",
+      "fen": "3r3k/pp1r1pp1/q4R1p/3N3P/2b1P3/P3Q3/1PP3P1/2K4R b - - 0 24",
+      "moves": [
+        "gxf6",
+        "Qxh6+",
+        "Kg8",
+        "Nxf6+",
+        "Qxf6",
+        "Qxf6"
+      ],
+      "rating": 989,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "znY2d",
+      "fen": "3qr1k1/6p1/p1p1np1p/1p6/2p3Q1/2P2N1P/PP3PPB/4R1K1 w - - 0 29",
+      "moves": [
+        "Rxe6",
+        "Qd1+",
+        "Ne1",
+        "Qxe1+",
+        "Rxe1",
+        "Rxe1#"
+      ],
+      "rating": 990,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "9EsHQ",
+      "fen": "4r1k1/1p3ppb/p4n2/3p3P/3q4/P3BP1B/7Q/4R2K b - - 0 31",
+      "moves": [
+        "Rxe3",
+        "Qb8+",
+        "Ne8",
+        "Qxe8+",
+        "Rxe8",
+        "Rxe8#"
+      ],
+      "rating": 993,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "fQK1c",
+      "fen": "2r5/p4pkp/4pbp1/Q1R5/P2P4/B3P3/5PPP/1q4K1 w - - 1 30",
+      "moves": [
+        "Bc1",
+        "Qxc1+",
+        "Rxc1",
+        "Rxc1+",
+        "Qe1",
+        "Rxe1#"
+      ],
+      "rating": 1029,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "MSxcY",
+      "fen": "3Rr2k/2P3pp/pp6/4b3/1P3R2/P4B2/5KPP/4r3 b - - 4 33",
+      "moves": [
+        "Bxc7",
+        "Rf8+",
+        "Rxf8",
+        "Rxf8#"
+      ],
+      "rating": 1048,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "3RKYF",
+      "fen": "r5k1/5pp1/Pq4p1/R1Q3P1/2p1P2P/1p2P3/1K6/8 b - - 2 38",
+      "moves": [
+        "Rxa6",
+        "Qc8+",
+        "Kh7",
+        "Rxa6"
+      ],
+      "rating": 1051,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "ImR21",
+      "fen": "5r1k/p3Q1pp/8/8/8/6P1/Pqr2P1P/R4RK1 b - - 8 24",
+      "moves": [
+        "Rcxf2",
+        "Qxf8+",
+        "Rxf8",
+        "Rxf8#"
+      ],
+      "rating": 1054,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "jf3Ab",
+      "fen": "r2q1rk1/1p3pp1/5n1p/p3n3/P1Pb2bB/5N2/1P2BPPP/R2Q1RK1 w - - 0 17",
+      "moves": [
+        "Qxd4",
+        "Nxf3+",
+        "gxf3",
+        "Qxd4"
+      ],
+      "rating": 1054,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "LhPer",
+      "fen": "r1bqrnk1/pp4bN/2p2np1/8/3PB1P1/2P1P2Q/PP3P1B/R3K2R b KQ - 0 19",
+      "moves": [
+        "Bxg4",
+        "Nxf6+",
+        "Qxf6",
+        "Qxg4",
+        "Rxe4",
+        "Qxe4"
+      ],
+      "rating": 1066,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "ke9Fs",
+      "fen": "2r3k1/1Q3ppp/p1r1p3/3qP3/1P6/P1Rp4/5PPP/2R3K1 b - - 0 27",
+      "moves": [
+        "Rxc3",
+        "Qxc8+",
+        "Rxc8",
+        "Rxc8+",
+        "Qd8",
+        "Rxd8#"
+      ],
+      "rating": 1149,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "2Jq3S",
+      "fen": "3k4/R6p/2p1R3/3n4/5p2/6P1/Pr3P1P/6K1 w - - 0 29",
+      "moves": [
+        "gxf4",
+        "Rb1+",
+        "Kg2",
+        "Nxf4+",
+        "Kg3",
+        "Nxe6"
+      ],
+      "rating": 1156,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "9d6S5",
+      "fen": "r1bnk1r1/1pp2p2/p2p4/1P2n2p/P1B1P3/1QP2q2/1B2RbP1/R4N1K w q - 0 20",
+      "moves": [
+        "gxf3",
+        "Rg1+",
+        "Kh2",
+        "Nxf3#"
+      ],
+      "rating": 1163,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "yBVkJ",
+      "fen": "3r2k1/1p3ppp/1B1Q4/p7/P3b1q1/1B6/1PPR1P1P/3R2K1 w - - 1 26",
+      "moves": [
+        "Qg3",
+        "Qxd1+",
+        "Rxd1",
+        "Rxd1#"
+      ],
+      "rating": 1167,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "B1pcA",
+      "fen": "1R1r3k/p5pp/6b1/2p5/1n3Q2/7P/7K/3r4 b - - 6 42",
+      "moves": [
+        "a5",
+        "Qf8+",
+        "Rxf8",
+        "Rxf8#"
+      ],
+      "rating": 1175,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "tgAAi",
+      "fen": "1R4rk/r2p1p2/2p2p2/4p2p/4P3/2PP2Pq/P2Q1P2/1R4K1 b - - 1 24",
+      "moves": [
+        "Rxb8",
+        "Qh6+",
+        "Kg8",
+        "Rxb8#"
+      ],
+      "rating": 1190,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "hbrlp",
+      "fen": "3r2k1/R4ppp/4p3/1N6/8/1P2Q2P/PB3PP1/1q3K2 w - - 1 28",
+      "moves": [
+        "Qc1",
+        "Rd1+",
+        "Qxd1",
+        "Qxd1#"
+      ],
+      "rating": 1216,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "rxVn4",
+      "fen": "3Rnr1k/p4rpp/4Q3/1p6/1Pp1P3/5P1P/4q1P1/3R3K w - - 1 33",
+      "moves": [
+        "Qxf7",
+        "Qxd1+",
+        "Rxd1",
+        "Rxf7"
+      ],
+      "rating": 1268,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "LY3wx",
+      "fen": "2k3r1/1pp5/p1n4p/2bNp2r/4R3/P2P2Bq/1PPQ1PP1/5RK1 w - - 7 23",
+      "moves": [
+        "gxh3",
+        "Rxg3+",
+        "Kh2",
+        "Rhxh3#"
+      ],
+      "rating": 1278,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "StT6m",
+      "fen": "5kr1/6p1/2r1pqQ1/pp3p2/2pP4/P1P1R3/5PPP/4R1K1 w - - 3 40",
+      "moves": [
+        "Rxe6",
+        "Qxg6",
+        "Rxg6",
+        "Rxg6"
+      ],
+      "rating": 1288,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "V0Nnv",
+      "fen": "r2qr1k1/ppp2ppp/8/2b5/3n4/2N5/PP2BPPP/R1BQK2R w KQ - 3 13",
+      "moves": [
+        "O-O",
+        "Nxe2+",
+        "Nxe2",
+        "Qxd1",
+        "Rxd1",
+        "Rxe2"
+      ],
+      "rating": 1288,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "G4KzQ",
+      "fen": "4r2k/p5p1/1p4p1/8/1q6/8/P1R1p1QP/4R2K w - - 2 33",
+      "moves": [
+        "Rcxe2",
+        "Qxe1+",
+        "Rxe1",
+        "Rxe1+",
+        "Qg1",
+        "Rxg1+"
+      ],
+      "rating": 1299,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "QXDI1",
+      "fen": "4kb1r/p2n1pp1/np1qp3/3p2Pp/2rQ3P/P3PPB1/1PP5/2KR2NR w k - 0 17",
+      "moves": [
+        "Bxd6",
+        "Rxd4",
+        "Rxd4",
+        "Bxd6"
+      ],
+      "rating": 1306,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "Z2Da9",
+      "fen": "r5k1/1pq1bpp1/p1p2n1p/4p2P/4P1bB/2N3Q1/PPP1BPP1/2KR4 b - - 0 17",
+      "moves": [
+        "Bxh5",
+        "Bxf6",
+        "Bxf6",
+        "Bxh5"
+      ],
+      "rating": 1313,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "Dr8dh",
+      "fen": "6k1/pp3pp1/4p2p/3pQN2/3r4/1PR2P1K/5q2/8 b - - 0 38",
+      "moves": [
+        "exf5",
+        "Rc8+",
+        "Kh7",
+        "Qxf5+",
+        "g6",
+        "Qxf7#"
+      ],
+      "rating": 1317,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "Q6ckh",
+      "fen": "R6k/5Qpp/1p6/2p5/2Pq4/1P5P/5PPK/3qr3 b - - 3 32",
+      "moves": [
+        "Qd8",
+        "Qf8+",
+        "Qxf8",
+        "Rxf8#"
+      ],
+      "rating": 1338,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "BFx0h",
+      "fen": "R2r2k1/5ppp/2Q5/6q1/3P4/P3n2P/r4P2/5R1K b - - 5 26",
+      "moves": [
+        "Nxf1",
+        "Qe8+",
+        "Rxe8",
+        "Rxe8#"
+      ],
+      "rating": 1355,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "RkmVk",
+      "fen": "1r4k1/5qpp/3Qp3/p2p4/2pPp3/1rR1P2P/1P3PP1/1R4K1 b - - 1 30",
+      "moves": [
+        "Rxb2",
+        "Qxb8+",
+        "Rxb8",
+        "Rxb8+",
+        "Qf8",
+        "Rxf8+"
+      ],
+      "rating": 1378,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "4eIfy",
+      "fen": "rnb2rk1/ppq1b1pp/3p4/2p2P2/2P5/5N1B/PP3P1P/RN1QK2R b KQ - 0 12",
+      "moves": [
+        "Bxf5",
+        "Qd5+",
+        "Kh8",
+        "Bxf5"
+      ],
+      "rating": 1402,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "xd5Iz",
+      "fen": "5r2/ppk3pp/2pr4/3n4/6Q1/4b3/PP3PPP/RN3RK1 w - - 0 21",
+      "moves": [
+        "fxe3",
+        "Rxf1+",
+        "Kxf1",
+        "Nxe3+",
+        "Kg1",
+        "Nxg4"
+      ],
+      "rating": 1410,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "vwHr6",
+      "fen": "r4rk1/pp3pp1/2pp4/3N2qQ/4P3/8/PPP3P1/1K5R b - - 1 20",
+      "moves": [
+        "Qxh5",
+        "Ne7+",
+        "Kh7",
+        "Rxh5#"
+      ],
+      "rating": 1417,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "Y7uR4",
+      "fen": "2r3k1/pp3p1p/6p1/3p3P/2rP4/q1PR4/PQ3PP1/1K5R b - - 2 23",
+      "moves": [
+        "Rxc3",
+        "Qxa3",
+        "Rxa3",
+        "Rxa3"
+      ],
+      "rating": 1422,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "hG8vc",
+      "fen": "3r2k1/2R1rpbp/1p1P2p1/p5N1/6q1/8/PP1Q1PPP/6K1 w - - 0 24",
+      "moves": [
+        "dxe7",
+        "Qd1+",
+        "Qxd1",
+        "Rxd1#"
+      ],
+      "rating": 1424,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "80BjT",
+      "fen": "3rr1k1/p4ppp/5qb1/2p3B1/2Bp4/2P5/P2Q1PPP/3R2K1 b - - 3 22",
+      "moves": [
+        "dxc3",
+        "Qxd8",
+        "Rxd8",
+        "Rxd8+",
+        "Qxd8",
+        "Bxd8"
+      ],
+      "rating": 1437,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "PR2lb",
+      "fen": "8/8/2p2pk1/2P3pp/1P4Q1/6K1/4R2P/5q2 w - - 0 39",
+      "moves": [
+        "Qf3",
+        "h4+",
+        "Kg4",
+        "f5+",
+        "Qxf5+",
+        "Qxf5#"
+      ],
+      "rating": 1518,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "Az2NM",
+      "fen": "N4rk1/4qppp/1p1p4/p2P4/1P2Pn2/P2P3b/1B3PP1/R2Q1RK1 w - - 0 19",
+      "moves": [
+        "gxh3",
+        "Qg5+",
+        "Qg4",
+        "Nxh3+",
+        "Kh1",
+        "Qxg4"
+      ],
+      "rating": 1537,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "lcQfz",
+      "fen": "6k1/r2Rqpp1/2P4p/5Q2/4p3/4P1P1/1p3PP1/6K1 w - - 0 36",
+      "moves": [
+        "Rxe7",
+        "b1=Q+",
+        "Kh2",
+        "Rxe7"
+      ],
+      "rating": 1566,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "7kGPt",
+      "fen": "5rk1/pp4bp/4Rp2/1q6/6Q1/2P4N/P5PP/1r2R2K w - - 5 24",
+      "moves": [
+        "Nf4",
+        "Qf1+",
+        "Rxf1",
+        "Rxf1#"
+      ],
+      "rating": 1569,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "vWkCk",
+      "fen": "6k1/5pp1/4pbp1/8/pq2Q3/6N1/PP1r1PPP/1R4K1 b - - 3 36",
+      "moves": [
+        "Rxb2",
+        "Qxb4",
+        "Rxb4",
+        "Rxb4"
+      ],
+      "rating": 1612,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "RPIVR",
+      "fen": "r5k1/5pp1/6np/1PQ4B/2P5/1q1bP1BP/5PP1/3R2K1 w - - 1 27",
+      "moves": [
+        "Bxg6",
+        "Qxd1+",
+        "Kh2",
+        "Bxg6"
+      ],
+      "rating": 1616,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "dZ6fb",
+      "fen": "5r1k/1p1n2pp/4Q1p1/3pP3/5B2/3P4/r3NRKP/q7 b - - 0 30",
+      "moves": [
+        "Rxf4",
+        "Qe8+",
+        "Nf8",
+        "Qxf8+",
+        "Rxf8",
+        "Rxf8#"
+      ],
+      "rating": 1647,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "ibDER",
+      "fen": "2r4k/p3qp1P/3n3Q/1p6/1Pr3P1/P4P2/1P6/1K1R3R w - - 0 29",
+      "moves": [
+        "Qxd6",
+        "Rc1+",
+        "Ka2",
+        "Qxd6",
+        "Rxd6",
+        "Rxh1"
+      ],
+      "rating": 1650,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "CFdtp",
+      "fen": "4rr1k/1p5p/p2pP3/5RQ1/8/PBP1n1Pq/1P2R2P/7K w - - 1 34",
+      "moves": [
+        "Rff2",
+        "Qf1+",
+        "Rxf1",
+        "Rxf1#"
+      ],
+      "rating": 1700,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "Stltw",
+      "fen": "2k4r/pp1n1pb1/2p5/3p1Np1/3P2P1/2PNrP2/PP6/2KR3R b - - 2 21",
+      "moves": [
+        "Rxd3",
+        "Rxh8+",
+        "Bxh8",
+        "Rxd3"
+      ],
+      "rating": 1700,
+      "themes": [
+        "intermezzo"
+      ]
+    },
+    {
+      "id": "XNMN8",
+      "fen": "5r1k/5Pp1/7p/p1pB1q1P/Pp6/5NP1/1P2QP1K/8 w - - 2 36",
+      "moves": [
+        "Qe8",
+        "Qxh5+",
+        "Nh4",
+        "Rxe8",
+        "fxe8=Q+",
+        "Qxe8"
+      ],
+      "rating": 1700,
+      "themes": [
+        "xRayAttack"
+      ]
+    },
+    {
+      "id": "Yi62H",
+      "fen": "1r5Q/2q1k1p1/3bprB1/p2p4/2pP1P2/2P1P2P/P7/1R3RK1 w - - 4 29",
+      "moves": [
+        "Rxb8",
+        "Rxg6+",
+        "Kf2",
+        "Qxb8",
+        "Qxb8",
+        "Bxb8"
+      ],
+      "rating": 1700,
+      "themes": [
+        "intermezzo"
+      ]
+    }
+  ]
+}

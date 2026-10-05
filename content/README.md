@@ -86,9 +86,11 @@ The settings are in `authoring/puzzles-config.ts`:
 - **Later ideas:** a puzzle with a tactical theme of a later lesson of `LESSON_ORDER` (the twelve
   lessons of the syllabus) is left out, and each puzzle goes to one lesson only, the first.
 - **Selection:** 50 per lesson, split evenly between its themes; at most a fifth of one move and at
-  least a fifth of three (two fifths in `forcing-moves` and `in-between-move`); in rounds over
-  100-point rating bands, the most popular of each. A puzzle that shows the start of an exercise of
-  the app, or the board of another puzzle, is skipped.
+  least a fifth of three (two fifths in `forcing-moves` and `in-between-move`), with exceptions per
+  theme (`mateIn2` is always two moves, so `attraction` and `sacrifice` take three fifths; no one-move
+  `equality`, which is only a recapture); in rounds over 100-point rating bands, the most popular of
+  each. A puzzle that shows the start of an exercise of the app, or the board of another puzzle, is
+  skipped.
 - **`EXCLUDED_IDS`:** puzzles left out after looking at them, each with the reason. Before
   publishing new puzzles, look at a few of each theme on `https://lichess.org/training/<id>` and
   exclude any that does not teach the idea of its lesson.
