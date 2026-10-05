@@ -32,6 +32,7 @@ import {
   doubledPawns,
   isolatedPawns,
   knightJumps,
+  openFiles,
   outposts,
 } from '../../lib/pawn-facts.ts';
 import { parseSquare } from 'chessops/util';
@@ -576,6 +577,11 @@ const FACT_ANSWERS: Record<string, (fen: string) => number[]> = {
   // f6 is bad, as the explanation says (its own pawns stand on its colour).
   'outposts step 6': (fen) =>
     badBishops(positionFromFen(fen), 'black').includes('f6') ? [0] : [2],
+  // Which file is open: c, d or e.
+  'open-files-seventh step 2': (fen) => {
+    const open = openFiles(positionFromFen(fen));
+    return ['c', 'd', 'e'].flatMap((file, i) => (open.includes(file) ? [i] : []));
+  },
 };
 
 describe('fact questions of the advanced lessons', () => {

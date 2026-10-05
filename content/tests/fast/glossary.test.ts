@@ -78,6 +78,9 @@ const EXPECTED_IDS = [
   'mobility',
   'backward-pawn',
   'outpost',
+  'open-file',
+  'half-open-file',
+  'doubled-rooks',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -136,6 +139,9 @@ const GROUPS: Record<string, string[]> = {
     'candidate-move',
     'mobility',
     'outpost',
+    'open-file',
+    'half-open-file',
+    'doubled-rooks',
   ],
   pawns: [
     'pawn-structure',

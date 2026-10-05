@@ -28,6 +28,7 @@ import { candidateMoves } from './advanced/01-candidate-moves.ts';
 import { pieceActivity } from './advanced/02-piece-activity.ts';
 import { pawnStructure } from './advanced/03-pawn-structure.ts';
 import { outposts } from './advanced/04-outposts.ts';
+import { openFilesSeventh } from './advanced/05-open-files-seventh.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -58,4 +59,5 @@ export const lessons: LessonSpec[] = [
   pieceActivity,
   pawnStructure,
   outposts,
+  openFilesSeventh,
 ];

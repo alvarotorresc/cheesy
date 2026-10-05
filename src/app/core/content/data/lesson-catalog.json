@@ -418,5 +418,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "open-files-seventh",
+    "level": "advanced",
+    "order": 5,
+    "title": {
+      "es": "Columnas abiertas y la séptima fila",
+      "en": "Open files and the seventh rank"
+    },
+    "summary": {
+      "es": "Las torres necesitan columnas sin peones para entrar en el campo rival.",
+      "en": "Rooks need files without pawns to get into the rival camp."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]
