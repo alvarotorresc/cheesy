@@ -60,11 +60,11 @@ export const theFork: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Cualquier pieza puede hacer una [horquilla](fork): el peón, el alfil, la torre, la dama y hasta el rey. Aquí el peón avanza a c4 y ataca a la vez al caballo de b5 y al alfil de d5.',
-        en: 'Any piece can make a [fork](fork): the pawn, the bishop, the rook, the queen and even the king. Here the pawn advances to c4 and attacks the knight on b5 and the bishop on d5 at the same time.',
+        es: 'Cualquier pieza puede hacer una [horquilla](fork): el peón, el alfil, la torre, la dama y hasta el rey. Aquí el peón avanza a c4 y ataca a la vez al caballo de b5 y a la torre de d5.',
+        en: 'Any piece can make a [fork](fork): the pawn, the bishop, the rook, the queen and even the king. Here the pawn advances to c4 and attacks the knight on b5 and the rook on d5 at the same time.',
       },
       board: {
-        fen: 'r5k1/5ppp/8/1n1b4/8/2P5/5PPP/6K1 w - - 0 1',
+        fen: 'r5k1/5ppp/8/1n1r4/8/2P5/5PPP/6K1 w - - 0 1',
         orientation: 'white',
         moves: ['c4'],
       },
@@ -118,8 +118,8 @@ export const theFork: LessonSpec = {
           en: 'It is [check](check), but from d6 the knight only attacks the king and two pawns: the king steps aside and you win nothing.',
         },
         {
-          es: 'Ganas un peón, pero en a7 el caballo no ataca nada más y se queda encerrado.',
-          en: 'You win a pawn, but on a7 the knight attacks nothing else and gets trapped.',
+          es: 'Capturas un peón, pero la torre de a8 captura tu caballo en a7: das un caballo por un peón.',
+          en: 'You take a pawn, but the rook on a8 takes your knight on a7: you give a knight for a pawn.',
         },
       ],
       explanation: {
