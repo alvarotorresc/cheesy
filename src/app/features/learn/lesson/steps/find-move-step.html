@@ -27,6 +27,15 @@
       @let current = feedback();
       @if (current?.kind === 'solved') {
         <app-rich-text [text]="step().explanation" />
+      } @else if (current?.kind === 'reply') {
+        {{ t.rivalReplies[current.color] }}
+        <app-move
+          [san]="current.san"
+          [color]="current.color"
+          format="full"
+          [start]="false"
+          [focusable]="false"
+        />
       } @else if (current?.kind === 'wrong') {
         @if (current.message; as message) {
           <app-rich-text [text]="message" />

@@ -103,6 +103,8 @@ export const en = {
     replay: 'Play again',
     correct: 'That’s it!',
     wrongMove: 'Not this one. Try again.',
+    /** Said in the live region when the rival answers a move of the line; the move follows. */
+    rivalReplies: { white: 'White replies:', black: 'Black replies:' },
     captured: 'Your piece was captured on an attacked square. Start again.',
     stars: (got: number, total: number, moves: number, min: number) =>
       `${got} of ${total} ${total === 1 ? 'star' : 'stars'} · ${moves} ${moves === 1 ? 'move' : 'moves'} (fewest ${min})`,
