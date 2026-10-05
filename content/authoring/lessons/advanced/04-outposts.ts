@@ -2,7 +2,7 @@
 import type { LessonSpec } from '../../../types.ts';
 import {
   CHESSKID,
-  WIKI_GOOD_BAD_BISHOP,
+  WIKI_BAD_BISHOP,
   WIKI_OUTPOST,
   WIKI_PAWN_STRUCTURE,
   WIKI_STRATEGY,
@@ -18,7 +18,7 @@ export const outposts: LessonSpec = {
     en: 'Squares no rival pawn can drive you from, and the piece that uses them best.',
   },
   terms: ['outpost', 'bishop-pair'],
-  sources: [WIKI_OUTPOST, WIKI_STRATEGY, WIKI_PAWN_STRUCTURE, WIKI_GOOD_BAD_BISHOP, CHESSKID],
+  sources: [WIKI_OUTPOST, WIKI_STRATEGY, WIKI_PAWN_STRUCTURE, WIKI_BAD_BISHOP, CHESSKID],
   steps: [
     {
       kind: 'explain',

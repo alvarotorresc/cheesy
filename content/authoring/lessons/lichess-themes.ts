@@ -2,7 +2,7 @@
 // (`pnpm content:puzzles`); the advanced one is ready for it and nothing reads it yet. Kept out of
 // the lesson JSON on purpose: the Lesson schema has closed keys. Themes checked on
 // https://lichess.org/training/themes (2026-10-03; quietMove, advancedPawn and promotion on
-// 2026-10-05).
+// 2026-10-05; the themes of advanced lessons 7 to 12 on 2026-10-05).
 
 /** The themes in use. Lichess has no overloading theme: it counts it as deflection. */
 export const LICHESS_THEME_KEYS = [
@@ -29,6 +29,15 @@ export const LICHESS_THEME_KEYS = [
   'quietMove',
   'advancedPawn',
   'promotion',
+  'bishopEndgame',
+  'knightEndgame',
+  'zugzwang',
+  'kingsideAttack',
+  'queensideAttack',
+  'exposedKing',
+  'interference',
+  'clearance',
+  'equality',
 ] as const;
 
 export type LichessTheme = (typeof LICHESS_THEME_KEYS)[number];
@@ -62,13 +71,23 @@ export const ADVANCED_LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'candidate-moves': ['quietMove', 'defensiveMove'],
   'open-files-seventh': ['rookEndgame'],
   'passed-pawns': ['advancedPawn', 'promotion', 'rookEndgame'],
+  'minor-piece-endings': ['bishopEndgame', 'knightEndgame'],
+  'zugzwang-tempo': ['zugzwang', 'pawnEndgame'],
+  'king-safety-attack': ['kingsideAttack', 'queensideAttack', 'exposedKing', 'sacrifice'],
+  'advanced-tactics': ['interference', 'clearance', 'attraction', 'deflection'],
+  defending: ['defensiveMove', 'equality'],
 };
 
 /**
  * Advanced lessons with no Lichess theme: puzzles are tactical, and no theme practises structure,
  * outposts, piece activity or plans. Listed so that forgetting a lesson does not pass in silence.
  */
-export const ADVANCED_NO_THEME = ['piece-activity', 'pawn-structure', 'outposts'];
+export const ADVANCED_NO_THEME = [
+  'piece-activity',
+  'pawn-structure',
+  'outposts',
+  'plans-and-strategy',
+];
 
 /** Theme → glossary term that names its idea, for "Practise more"; null when there is none. */
 export const THEME_TERMS: Partial<Record<LichessTheme, string | null>> = {

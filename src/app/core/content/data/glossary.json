@@ -1214,6 +1214,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "king-safety-attack",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/fianchetto-ajedrez"
@@ -1252,6 +1253,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "plans-and-strategy",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1346,20 +1348,19 @@
       "fen": "r4rk1/5ppp/8/p7/1p4PP/8/PPP5/2KR3R b - - 0 1",
       "orientation": "black",
       "highlights": [
-        "a5",
-        "b4",
         "c1"
       ],
       "arrows": [
         {
-          "from": "b4",
-          "to": "b3",
+          "from": "a8",
+          "to": "c8",
           "move": true
         }
       ]
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "defending",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1704,7 +1705,7 @@
       ]
     },
     "example": {
-      "fen": "4k3/pp3ppp/2n1b3/8/8/2B5/PP2BPPP/4K3 w - - 0 1",
+      "fen": "4k3/pp3p1p/2n1b1p1/8/8/2B5/PP2BPPP/4K3 w - - 0 1",
       "orientation": "white",
       "highlights": [
         "c3",
@@ -2513,6 +2514,225 @@
     ]
   },
   {
+    "id": "bad-bishop",
+    "name": {
+      "es": "Alfil malo",
+      "en": "Bad bishop"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Un alfil que tiene la mayoría de sus propios peones en casillas de su color. Esos peones le tapan el camino y además tiene que defenderlos, así que hace poco. El alfil bueno es el contrario: sus peones están en casillas del otro color y le dejan las diagonales libres."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A bishop with most of its own pawns on squares of its colour. Those pawns block its way and it also has to defend them, so it does little. The good bishop is the opposite: its pawns stand on squares of the other colour and leave its diagonals free."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/4n3/4p3/3pPp2/3P1P2/2B5/8/6K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c3",
+        "d4",
+        "e5",
+        "f4"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "minor-piece-endings",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://www.chess.com/terms/bad-bishop"
+    ]
+  },
+  {
+    "id": "pawn-storm",
+    "name": {
+      "es": "Avalancha de peones",
+      "en": "Pawn storm"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Varios peones que avanzan juntos contra el rey rival para abrir líneas a las piezas. Se usa sobre todo cuando los reyes se han enrocado en lados distintos: el que avanza esos peones no deja desnudo a su propio rey."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Several pawns advancing together against the enemy king to open lines for the pieces. It is used above all when the kings have castled on different sides: the side pushing those pawns does not strip its own king."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r4rk1/ppq1ppbp/3p1np1/8/4P1PP/2N1BP2/PPPQ4/2KR3R w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "g4",
+        "h4",
+        "g8"
+      ],
+      "arrows": [
+        {
+          "from": "h4",
+          "to": "h5",
+          "move": true
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "king-safety-attack",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Pawn_storm",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "prophylaxis",
+    "name": {
+      "es": "Profilaxis",
+      "en": "Prophylaxis"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Jugada que se adelanta a una idea del rival y la impide antes de que llegue a ser una amenaza. Un ejemplo típico es mover un peón delante del rey enrocado para dejarle un hueco y evitar un mate en la "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "última fila"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A move that gets ahead of an idea of the opponent and prevents it before it becomes a threat. A typical example is moving a pawn in front of the castled king to leave it a gap and avoid a mate on the "
+        },
+        {
+          "kind": "term",
+          "id": "back-rank",
+          "text": "back rank"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ]
+    },
+    "example": {
+      "fen": "6k1/5ppp/8/2r5/8/8/5PPP/3R2K1 b - - 0 1",
+      "orientation": "black",
+      "highlights": [
+        "d8"
+      ],
+      "arrows": [
+        {
+          "from": "h7",
+          "to": "h6",
+          "move": true
+        }
+      ]
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "defending",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Prophylaxis_(chess)",
+      "https://www.chess.com/terms/prophylaxis-chess"
+    ]
+  },
+  {
+    "id": "imbalance",
+    "name": {
+      "es": "Desequilibrio",
+      "en": "Imbalance"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cualquier diferencia entre la posición de las blancas y la de las negras: alfiles contra caballos, un peón débil, más "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "espacio"
+        },
+        {
+          "kind": "text",
+          "text": ", un rey menos seguro. Algunas duran mucho, como la estructura de peones; otras se pierden pronto, como ir por delante en el "
+        },
+        {
+          "kind": "term",
+          "id": "development",
+          "text": "desarrollo"
+        },
+        {
+          "kind": "text",
+          "text": ". Los desequilibrios dicen qué plan seguir."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Any difference between White’s position and Black’s: bishops against knights, a weak pawn, more "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "space"
+        },
+        {
+          "kind": "text",
+          "text": ", a less safe king. Some last a long time, like the pawn structure; others soon disappear, like a lead in "
+        },
+        {
+          "kind": "term",
+          "id": "development",
+          "text": "development"
+        },
+        {
+          "kind": "text",
+          "text": ". The imbalances tell you which plan to follow."
+        }
+      ]
+    },
+    "example": {
+      "fen": "4k3/pp3ppp/2n1pn2/8/3P4/2B2B2/PP3PPP/4K3 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c3",
+        "f3",
+        "c6",
+        "f6",
+        "d4"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "plans-and-strategy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chess_strategy"
+    ]
+  },
+  {
     "id": "tempo",
     "name": {
       "es": "Tiempo",
@@ -2549,6 +2769,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "zugzwang-tempo",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Tempo_(chess)"
@@ -3766,6 +3987,222 @@
     ]
   },
   {
+    "id": "greek-gift",
+    "name": {
+      "es": "Regalo griego",
+      "en": "Greek gift"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Entregar el alfil capturando el peón de "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " con "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " ("
+        },
+        {
+          "kind": "square",
+          "square": "h2"
+        },
+        {
+          "kind": "text",
+          "text": " si atacan las negras) para sacar al rey enrocado. Después entran el caballo, con jaque desde "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": ", y la dama por la columna h. Solo funciona si esas piezas llegan a tiempo y el rival no puede defenderse con otra pieza."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Giving up the bishop by capturing the pawn on "
+        },
+        {
+          "kind": "square",
+          "square": "h7"
+        },
+        {
+          "kind": "text",
+          "text": " with "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": " ("
+        },
+        {
+          "kind": "square",
+          "square": "h2"
+        },
+        {
+          "kind": "text",
+          "text": " if Black attacks) to drag the castled king out. Then the knight comes in, with check from "
+        },
+        {
+          "kind": "square",
+          "square": "g5"
+        },
+        {
+          "kind": "text",
+          "text": ", and the queen along the h-file. It only works if those pieces arrive in time and the opponent cannot defend with another piece."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r1bqk2r/ppp2ppp/2nb1n2/1B1p4/3Pp3/4P3/PPPN1PPP/RNBQ1RK1 b kq - 0 1",
+      "orientation": "black",
+      "highlights": [
+        "h2",
+        "g4"
+      ],
+      "arrows": [
+        {
+          "from": "d6",
+          "to": "h2",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "king-safety-attack",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Greek_gift_sacrifice",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://lichess.org/practice"
+    ]
+  },
+  {
+    "id": "interference",
+    "name": {
+      "es": "Interferencia",
+      "en": "Interference"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Poner una pieza en medio de la línea por la que una pieza rival defiende algo. La defensa queda cortada; si el rival captura la pieza que estorba, suele perder material."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Putting a piece in the middle of the line along which an enemy piece defends something. The defence is cut; if the opponent captures the piece in the way, they usually lose material."
+        }
+      ]
+    },
+    "example": {
+      "fen": "2kr1b2/ppp4p/6p1/4PN2/8/7P/P2qQPP1/4R1K1 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d8",
+        "d2"
+      ],
+      "arrows": [
+        {
+          "from": "f5",
+          "to": "d6",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "advanced-tactics",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Interference_(chess)",
+      "https://lichess.org/practice/advanced-tactics/interference/g1fxVZu9",
+      "https://www.chess.com/terms/interference-chess"
+    ]
+  },
+  {
+    "id": "clearance",
+    "name": {
+      "es": "Despeje",
+      "en": "Clearance"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Quitar de en medio una pieza propia que tapa una casilla, una fila, una columna o una diagonal, para que otra pieza la use. Funciona mejor si la pieza que se aparta da "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "jaque"
+        },
+        {
+          "kind": "text",
+          "text": " o amenaza algo, y a menudo se entrega."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Moving one of your own pieces out of the way of a square, rank, file or diagonal so that another piece can use it. It works best when the piece that moves gives "
+        },
+        {
+          "kind": "term",
+          "id": "check",
+          "text": "check"
+        },
+        {
+          "kind": "text",
+          "text": " or threatens something, and it is often given up."
+        }
+      ]
+    },
+    "example": {
+      "fen": "r1r4k/2n2Rbp/4Q1p1/p5N1/PpB5/1P6/6PP/3R3K w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "f7"
+      ],
+      "arrows": [
+        {
+          "from": "f7",
+          "to": "f8",
+          "move": true
+        }
+      ]
+    },
+    "group": "tactics",
+    "level": "advanced",
+    "lesson": "advanced-tactics",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Clearance_sacrifice",
+      "https://lichess.org/practice/advanced-tactics/clearance/Grmtwuft"
+    ]
+  },
+  {
     "id": "smothered-mate",
     "name": {
       "es": "Mate de la coz",
@@ -4798,6 +5235,196 @@
     "lesson": "rook-endings",
     "sources": [
       "https://en.wikipedia.org/wiki/Rook_and_pawn_versus_rook_endgame"
+    ]
+  },
+  {
+    "id": "opposite-coloured-bishops",
+    "name": {
+      "es": "Alfiles de distinto color",
+      "en": "Opposite-coloured bishops"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cada bando tiene un solo alfil y van por casillas de distinto color, así que nunca se pueden capturar ni tapar el uno al otro. En el final dan muchas tablas, incluso con uno o dos peones de menos: el defensor bloquea los peones en las casillas que el alfil rival no toca."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Each side has a single bishop and they move on squares of different colours, so they can never capture or block each other. In the endgame they give many draws, even one or two pawns down: the defender blocks the pawns on the squares the enemy bishop cannot touch."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/5k2/8/4bP2/6P1/3B4/5K2/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d3",
+        "e5"
+      ],
+      "arrows": []
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "minor-piece-endings",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Opposite-colored_bishops_endgame",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "mutual-zugzwang",
+    "name": {
+      "es": "Zugzwang recíproco",
+      "en": "Mutual zugzwang"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una posición en la que los dos bandos están en "
+        },
+        {
+          "kind": "term",
+          "id": "zugzwang",
+          "text": "zugzwang"
+        },
+        {
+          "kind": "text",
+          "text": ": el que tenga que mover empeora, sea quien sea. Aquí, el rey que mueva tiene que dejar de defender su peón y lo pierde. Por eso, en estos finales, tener una jugada de espera de sobra decide la partida."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A position in which both sides are in "
+        },
+        {
+          "kind": "term",
+          "id": "zugzwang",
+          "text": "zugzwang"
+        },
+        {
+          "kind": "text",
+          "text": ": whoever has to move makes things worse, whoever it is. Here, the king that moves has to stop guarding its pawn and loses it. That is why, in these endings, having a spare waiting move decides the game."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/8/8/3pK3/2kP4/8/8/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d4",
+        "d5"
+      ],
+      "arrows": []
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "zugzwang-tempo",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Zugzwang",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "triangulation",
+    "name": {
+      "es": "Triangulación",
+      "en": "Triangulation"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una maniobra del rey para perder un "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tiempo"
+        },
+        {
+          "kind": "text",
+          "text": ": en lugar de ir directo a una casilla, da un rodeo por tres casillas en triángulo y vuelve a la misma posición con el turno del rival. Sirve en finales de peones en los que el rey rival está atado a unas pocas casillas, aunque a veces hay otros caminos que también ganan."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A king manoeuvre to lose a "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tempo"
+        },
+        {
+          "kind": "text",
+          "text": ": instead of going straight to a square, it takes a detour round three squares in a triangle and comes back to the same position with the opponent to move. It works in pawn endings where the enemy king is tied to a few squares, although sometimes other paths win as well."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/4k1p1/6P1/4KP2/8/8/8/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e5",
+        "d5",
+        "e4"
+      ],
+      "arrows": [
+        {
+          "from": "e5",
+          "to": "d5",
+          "move": true
+        }
+      ]
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "zugzwang-tempo",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Triangulation_(chess)",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "fortress",
+    "name": {
+      "es": "Fortaleza",
+      "en": "Fortress"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Posición en la que el bando con menos material no puede perder, porque el rival no consigue entrar con sus piezas. Por ejemplo, torre y peón contra dama: el peón protege a la torre y la torre no deja pasar al rey rival. Es una forma de salvar unas tablas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A position in which the side with less material cannot lose, because the opponent cannot break in with the pieces. For example, rook and pawn against queen: the pawn protects the rook and the rook keeps the enemy king out. It is a way to save a draw."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/8/3k4/8/8/5R2/6PK/q7 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "f3",
+        "g2"
+      ],
+      "arrows": []
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "defending",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Fortress_(chess)"
     ]
   }
 ]

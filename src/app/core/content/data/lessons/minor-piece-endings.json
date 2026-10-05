@@ -1,0 +1,985 @@
+{
+  "id": "minor-piece-endings",
+  "level": "advanced",
+  "order": 7,
+  "title": {
+    "es": "Alfiles y caballos en el final",
+    "en": "Bishops and knights in the endgame"
+  },
+  "summary": {
+    "es": "El alfil malo, el alfil contra el caballo y los alfiles de distinto color.",
+    "en": "The bad bishop, bishop against knight and opposite-coloured bishops."
+  },
+  "terms": [
+    "bad-bishop",
+    "opposite-coloured-bishops"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Zugzwang",
+    "https://en.wikipedia.org/wiki/Chess_endgame",
+    "https://en.wikipedia.org/wiki/Opposite-colored_bishops_endgame",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://www.chess.com/lessons/skill-level/advanced"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "En el final, un alfil y un caballo valen más o menos lo mismo, pero no siempre rinden igual. Un "
+          },
+          {
+            "kind": "term",
+            "id": "bad-bishop",
+            "text": "alfil malo"
+          },
+          {
+            "kind": "text",
+            "text": " tiene sus propios peones en casillas de su color: le tapan el camino y además tiene que defenderlos. Aquí el alfil blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " va por casillas claras, y los peones blancos de "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " también están en casillas claras. Al alfil solo le quedan casillas hacia atrás."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "In the endgame a bishop and a knight are worth about the same, but they do not always do the same job. A "
+          },
+          {
+            "kind": "term",
+            "id": "bad-bishop",
+            "text": "bad bishop"
+          },
+          {
+            "kind": "text",
+            "text": " has its own pawns on squares of its colour: they block its way and it also has to defend them. Here the white bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " moves on light squares, and the white pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " stand on light squares too. The bishop only has squares behind it left."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/2pPp3/2P1P3/3B4/8/4K3 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d3",
+          "c4",
+          "d5",
+          "e4"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Aquí cada bando tiene un alfil. ¿Cuál es el alfil malo?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Here each side has one bishop. Which one is the bad bishop?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/3b1pp1/1p2p2p/p1p5/2P1P3/1P3PP1/P3B2P/6K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "fact",
+        "options": [
+          {
+            "es": "El alfil blanco de e2",
+            "en": "The white bishop on e2"
+          },
+          {
+            "es": "El alfil negro de d7",
+            "en": "The black bishop on d7"
+          },
+          {
+            "es": "Ninguno de los dos",
+            "en": "Neither of them"
+          }
+        ],
+        "correct": 0
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el alfil blanco de "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " va por casillas claras, como los peones de "
+          },
+          {
+            "kind": "square",
+            "square": "a2"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ". Tiene poco sitio y debe cuidar de ellos. El alfil negro, en cambio, tiene casi todos sus peones en casillas oscuras, que no le estorban."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the white bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e2"
+          },
+          {
+            "kind": "text",
+            "text": " moves on light squares, like the pawns on "
+          },
+          {
+            "kind": "square",
+            "square": "a2"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "b3"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "c4"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "f3"
+          },
+          {
+            "kind": "text",
+            "text": ". It has little room and must look after them. The black bishop, on the other hand, has nearly all its pawns on dark squares, where they do not get in its way."
+          }
+        ]
+      },
+      "whyWrong": [
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "No: el alfil negro va por casillas claras y casi todos los peones negros están en casillas oscuras, en "
+            },
+            {
+              "kind": "square",
+              "square": "a5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "c5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "h6"
+            },
+            {
+              "kind": "text",
+              "text": ". Sus propios peones casi no le estorban: es un alfil bueno."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "No: the black bishop moves on light squares and nearly all the black pawns stand on dark squares, on "
+            },
+            {
+              "kind": "square",
+              "square": "a5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "b6"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "c5"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "g7"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "h6"
+            },
+            {
+              "kind": "text",
+              "text": ". Its own pawns hardly get in its way: it is a good bishop."
+            }
+          ]
+        },
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Uno de los dos sí lo es: el alfil blanco va por casillas claras, y cinco peones blancos están en casillas claras, en "
+            },
+            {
+              "kind": "square",
+              "square": "a2"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "b3"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " y "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "One of them is: the white bishop moves on light squares, and five white pawns stand on light squares, on "
+            },
+            {
+              "kind": "square",
+              "square": "a2"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "b3"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "c4"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "square",
+              "square": "e4"
+            },
+            {
+              "kind": "text",
+              "text": " and "
+            },
+            {
+              "kind": "square",
+              "square": "f3"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Con peones en los dos lados del tablero, el alfil suele ganarle al caballo: cruza el tablero en una sola jugada. Fischer contra Taimanov, cuarta partida de su match de 1971. El rey blanco ya está en "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": " atacando el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": ", y el rey negro tiene que quedarse cerca para defenderlo. El alfil blanco da un rodeo hasta "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " para atacar el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": ", y el caballo negro tiene que defenderlo desde "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ". Ahora las negras están en "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ": si mueve el caballo, el alfil se come los peones de ese lado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "With pawns on both sides of the board, the bishop usually beats the knight: it crosses the board in a single move. Fischer against Taimanov, fourth game of their 1971 match. The white king is already on "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": " attacking the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": ", and the black king has to stay close to defend it. The white bishop takes a detour to "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " to attack the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": ", and the black knight has to defend it from "
+          },
+          {
+            "kind": "square",
+            "square": "e7"
+          },
+          {
+            "kind": "text",
+            "text": ". Now Black is in "
+          },
+          {
+            "kind": "term",
+            "id": "zugzwang",
+            "text": "zugzwang"
+          },
+          {
+            "kind": "text",
+            "text": ": if the knight moves, the bishop eats the pawns on that side."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/2k1n3/Kp4p1/p1p2p1p/P4P1P/2P2BP1/1P6/8 b - - 0 57",
+        "orientation": "white",
+        "moves": [
+          "Nc8",
+          "Bd5",
+          "Ne7",
+          "Bc4",
+          "Nc6",
+          "Bf7",
+          "Ne7",
+          "Be8"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El rey negro tuvo que apartarse a "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Entonces el alfil se entrega en "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": ": el caballo lo captura, pero el rey blanco entra en "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": " y luego en "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": ", y se come los peones del otro lado. Ahora uno de los peones blancos de ese lado coronará, o el rey irá a por los peones negros que quedan. Taimanov abandonó siete jugadas después."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black king had to step aside to "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Then the bishop gives itself up on "
+          },
+          {
+            "kind": "square",
+            "square": "g6"
+          },
+          {
+            "kind": "text",
+            "text": ": the knight captures it, but the white king walks into "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": " and then "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": ", eating the pawns on the other side. Now one of the white pawns on that side will promote, or the king will go after the remaining black pawns. Taimanov resigned seven moves later."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3kB3/4n3/Kp4p1/p1p2p1p/P4P1P/2P3P1/1P6/8 w - - 9 62",
+        "orientation": "white",
+        "moves": [
+          "Bxg6",
+          "Nxg6",
+          "Kxb6",
+          "Kd7",
+          "Kxc5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Contra un alfil malo, el caballo es muy fuerte. Aquí el alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " va por casillas claras, igual que todos los peones negros: solo puede moverse a "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ". El caballo blanco puede saltar a casillas oscuras, que ese alfil no podrá atacar nunca. Y fíjate en el rey blanco: ya está en el centro, listo para entrar. En el final, el rey es una pieza más; sácalo, tengas alfil o caballo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Against a bad bishop, the knight is very strong. Here the black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " moves on light squares, like all the black pawns: it can only move to "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": ". The white knight can jump to dark squares, which that bishop will never be able to attack. And look at the white king: it is already in the centre, ready to walk in. In the endgame the king is one more piece; bring it out, whether you have a bishop or a knight."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2b5/1p3pk1/p3p1p1/3pP3/3P1P2/2N1K3/PP4PP/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c8",
+          "c3",
+          "e3"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegas con el rey blanco solo, contra alfil y peón de la columna h. Ese peón coronaría en "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ", una casilla clara, y el alfil negro va por casillas oscuras: nunca podrá echar a tu rey de esa esquina. Llega a la esquina y aguanta las tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "You play the lone white king, against bishop and pawn on the h-file. That pawn would promote on "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ", a light square, and the black bishop moves on dark squares: it will never be able to drive your king out of that corner. Reach the corner and hold the draw."
+          }
+        ]
+      },
+      "fen": "8/8/3b4/8/5k1p/8/8/4K3 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ve por "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": " o "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": " hacia "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ". Si te alejas hacia el otro lado, el rey negro te cierra el paso."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Go through "
+          },
+          {
+            "kind": "square",
+            "square": "f1"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "f2"
+          },
+          {
+            "kind": "text",
+            "text": " towards "
+          },
+          {
+            "kind": "square",
+            "square": "g1"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "h1"
+          },
+          {
+            "kind": "text",
+            "text": ". If you drift to the other side, the black king cuts you off."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Cuando a cada bando le queda un alfil y van por casillas de distinto color, son "
+          },
+          {
+            "kind": "term",
+            "id": "opposite-coloured-bishops",
+            "text": "alfiles de distinto color"
+          },
+          {
+            "kind": "text",
+            "text": ". Nunca se pueden cambiar el uno por el otro, y así es más fácil defenderse: aquí las blancas tienen dos peones más y aun así son tablas. El rey negro se planta delante de los peones, en "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", y su alfil vigila las casillas oscuras por las que tendrían que pasar."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "When each side has one bishop left and they move on squares of different colours, they are "
+          },
+          {
+            "kind": "term",
+            "id": "opposite-coloured-bishops",
+            "text": "opposite-coloured bishops"
+          },
+          {
+            "kind": "text",
+            "text": ". They can never be exchanged for each other, and that makes defending easier: here White has two extra pawns and it is still a draw. The black king plants itself in front of the pawns, on "
+          },
+          {
+            "kind": "square",
+            "square": "e6"
+          },
+          {
+            "kind": "text",
+            "text": ", and its bishop watches the dark squares the pawns would have to cross."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/6b1/4k3/8/3PP3/3B4/4K3/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d3",
+          "g7",
+          "e6"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: un "
+          },
+          {
+            "kind": "term",
+            "id": "bad-bishop",
+            "text": "alfil malo"
+          },
+          {
+            "kind": "text",
+            "text": " tiene sus peones en casillas de su color; si puedes, pon tus peones en el color contrario al de tu alfil. Con peones en los dos lados del tablero manda el alfil, y contra un alfil malo el caballo busca casillas del otro color. En el final, saca el rey. Si solo te queda el rey contra alfil y peón de la columna a o h, corre a la esquina si el alfil no controla la casilla donde coronaría el peón. Y con "
+          },
+          {
+            "kind": "term",
+            "id": "opposite-coloured-bishops",
+            "text": "alfiles de distinto color"
+          },
+          {
+            "kind": "text",
+            "text": ", quien defiende suele hacer tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: a "
+          },
+          {
+            "kind": "term",
+            "id": "bad-bishop",
+            "text": "bad bishop"
+          },
+          {
+            "kind": "text",
+            "text": " has its pawns on squares of its colour; if you can, put your pawns on the opposite colour to your bishop. With pawns on both sides of the board the bishop rules, and against a bad bishop the knight looks for squares of the other colour. In the endgame, bring your king out. If you only have your king left against bishop and a pawn on the a- or h-file, run to the corner if the bishop does not control the square where the pawn would promote. And with "
+          },
+          {
+            "kind": "term",
+            "id": "opposite-coloured-bishops",
+            "text": "opposite-coloured bishops"
+          },
+          {
+            "kind": "text",
+            "text": ", the defender usually draws."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/2k1n3/Kp4p1/p1p2p1p/P4P1P/2P2BP1/1P6/8 b - - 0 57",
+        "orientation": "white"
+      }
+    }
+  ]
+}

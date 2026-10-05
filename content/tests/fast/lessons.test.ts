@@ -582,6 +582,12 @@ const FACT_ANSWERS: Record<string, (fen: string) => number[]> = {
     const open = openFiles(positionFromFen(fen));
     return ['b', 'c', 'd'].flatMap((file, i) => (open.includes(file) ? [i] : []));
   },
+  // Which bishop is bad: the white one on e2, the black one on d7, or neither.
+  'minor-piece-endings step 2': (fen) => {
+    const pos = positionFromFen(fen);
+    const bad = [badBishops(pos, 'white').includes('e2'), badBishops(pos, 'black').includes('d7')];
+    return bad.some(Boolean) ? bad.flatMap((isBad, i) => (isBad ? [i] : [])) : [2];
+  },
 };
 
 describe('fact questions of the advanced lessons', () => {
