@@ -1,5 +1,14 @@
 import type { Messages } from './en';
 
+const PIECE_NAMES = {
+  pawn: 'peón',
+  knight: 'caballo',
+  bishop: 'alfil',
+  rook: 'torre',
+  queen: 'dama',
+  king: 'rey',
+} as const;
+
 export const es: Messages = {
   app: {
     name: 'Cheesy',
@@ -660,6 +669,22 @@ export const es: Messages = {
     bishop: 'Alfil',
     knight: 'Caballo',
     cancel: 'Cancelar',
+    roleDescription: 'tablero',
+    instructions: 'Tablero. Flechas para moverte, Intro para elegir una pieza y jugar.',
+    viewOnlyInstructions: 'Tablero. Flechas para moverte por las casillas.',
+    piece: (role, color) => {
+      // Rook and queen are feminine in Spanish: "torre blanca", "dama negra".
+      const feminine = role === 'rook' || role === 'queen';
+      const white = feminine ? 'blanca' : 'blanco';
+      const black = feminine ? 'negra' : 'negro';
+      return `${PIECE_NAMES[role]} ${color === 'white' ? white : black}`;
+    },
+    square: (square, piece) => `${square}, ${piece ?? 'vacía'}`,
+    picked: (piece, square, moves) =>
+      `Has elegido ${piece} en ${square}, ${moves === 1 ? '1 jugada' : `${moves} jugadas`}`,
+    cannotPick: 'No puedes mover esa pieza',
+    noPiece: 'Aquí no hay ninguna pieza',
+    deselected: 'Selección anulada',
   },
   engine: {
     evaluation: 'Evaluación',

@@ -1,4 +1,20 @@
-<div #board class="board"></div>
+<!-- Chessground fills this element, so the live region has to sit next to it, not inside. -->
+<div
+  #board
+  class="board"
+  tabindex="0"
+  role="application"
+  [attr.aria-roledescription]="labels().roleDescription"
+  [attr.aria-label]="viewOnly() ? labels().viewOnlyInstructions : labels().instructions"
+  (focus)="onFocus()"
+  (keydown)="onKey($event)"
+></div>
+<p class="visually-hidden" aria-live="polite">
+  <!-- Keyed by the announcement, so the same text twice is said twice. -->
+  @for (said of [announcement()]; track said.id) {
+    {{ said.text }}
+  }
+</p>
 
 @if (pendingPromotion(); as pending) {
   <div

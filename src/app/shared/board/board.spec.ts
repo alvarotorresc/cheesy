@@ -1,19 +1,15 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import type { Api } from '@lichess-org/chessground/api';
+import type { Key } from '@lichess-org/chessground/types';
+import { en } from '../../core/i18n/dictionaries/en';
+import { es } from '../../core/i18n/dictionaries/es';
 import { BoardComponent } from './board';
 import type { BoardLabels, BoardMove } from './board.types';
 import { BoardSpotlight } from './spotlight';
 
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const KINGS_ONLY_FEN = '4k3/8/8/8/8/8/8/4K3 w - - 0 1';
-const LABELS: BoardLabels = {
-  promotion: 'Choose promotion piece',
-  queen: 'Queen',
-  rook: 'Rook',
-  bishop: 'Bishop',
-  knight: 'Knight',
-  cancel: 'Cancel',
-};
+const LABELS: BoardLabels = en.board;
 
 const nextFrame = (): Promise<void> =>
   new Promise((resolve) => requestAnimationFrame(() => resolve()));
@@ -257,5 +253,288 @@ describe('BoardComponent with a spotlight', () => {
     expect(element.querySelector('[role="dialog"]')).not.toBeNull();
     expect(api.state.pieces.get('a8')?.role).toBe('pawn');
     expect(api.state.pieces.get('a7')).toBeUndefined();
+  });
+});
+
+describe('BoardComponent with the keyboard', () => {
+  const AFTER_E4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
+  const KNIGHT_DESTS = new Map<Key, Key[]>([['g1', ['f3', 'h3']]]);
+
+  let fixture: ComponentFixture<BoardComponent>;
+  let element: HTMLElement;
+  let moves: BoardMove[];
+
+  const create = async (inputs: Record<string, unknown> = {}): Promise<void> => {
+    fixture = TestBed.createComponent(BoardComponent);
+    fixture.componentRef.setInput('fen', INITIAL_FEN);
+    fixture.componentRef.setInput('labels', LABELS);
+    for (const [name, value] of Object.entries(inputs)) fixture.componentRef.setInput(name, value);
+    element = fixture.nativeElement as HTMLElement;
+    moves = [];
+    fixture.componentInstance.move.subscribe((move) => moves.push(move));
+    await fixture.whenStable();
+  };
+
+  const board = (): HTMLElement => element.querySelector<HTMLElement>('[role="application"]')!;
+  const api = (): Api => (fixture.componentInstance as unknown as { api: Api }).api;
+  const said = (): string => element.querySelector('[aria-live]')?.textContent?.trim() ?? '';
+  /** The square painted with the cursor mark. */
+  const cursor = (): Key | undefined =>
+    [...(api().state.highlight.custom ?? [])].find(([, value]) =>
+      value.split(' ').includes('mark-cursor'),
+    )?.[0];
+
+  const focus = async (): Promise<void> => {
+    board().focus();
+    await fixture.whenStable();
+  };
+
+  const press = async (...keys: string[]): Promise<void> => {
+    for (const key of keys) {
+      board().dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+      await fixture.whenStable();
+    }
+  };
+
+  /** Chessground reports a move a moment later; long enough for one that is not coming. */
+  const settleMove = (): Promise<void> => new Promise((resolve) => setTimeout(resolve, 5));
+
+  it('should be one tab stop that tells what it is and how to use it', async () => {
+    await create();
+
+    expect(board().tabIndex).toBe(0);
+    expect(board().getAttribute('aria-roledescription')).toBe('board');
+    expect(board().getAttribute('aria-label')).toBe(en.board.instructions);
+    // The live region is outside the board, so chessground never rewrites it.
+    expect(board().querySelector('[aria-live]')).toBeNull();
+    expect(element.querySelector('[aria-live="polite"]')).not.toBeNull();
+  });
+
+  it('should leave out the keys to play on a board that only shows', async () => {
+    await create({ viewOnly: true });
+
+    expect(board().getAttribute('aria-label')).toBe(en.board.viewOnlyInstructions);
+  });
+
+  describe('where the cursor starts', () => {
+    it('should start on the square of the last move and read it', async () => {
+      await create({ fen: AFTER_E4, turnColor: 'black', lastMove: ['e2', 'e4'] });
+      await focus();
+
+      expect(cursor()).toBe('e4');
+      expect(said()).toBe('e4, white pawn');
+    });
+
+    it('should start on the king of the side to move when there is no last move', async () => {
+      await create({ turnColor: 'black' });
+      await focus();
+
+      expect(cursor()).toBe('e8');
+    });
+
+    it('should start on the bottom left corner when there is no king', async () => {
+      await create({ fen: '8/8/8/8/8/8/8/8 w - - 0 1', orientation: 'black' });
+      await focus();
+
+      expect(cursor()).toBe('h8');
+      expect(said()).toBe('h8, empty');
+    });
+
+    it('should keep the cursor where it was on the next visit', async () => {
+      await create();
+      await focus();
+      await press('ArrowUp');
+      board().blur();
+      await focus();
+
+      expect(cursor()).toBe('e2');
+    });
+  });
+
+  describe('moving the cursor', () => {
+    it('should move one square per arrow, as seen by white, and stop at the edge', async () => {
+      await create();
+      await focus();
+
+      await press('ArrowUp');
+      expect(cursor()).toBe('e2');
+      await press('ArrowRight');
+      expect(cursor()).toBe('f2');
+      await press('ArrowDown');
+      expect(cursor()).toBe('f1');
+      await press('ArrowLeft');
+      expect(cursor()).toBe('e1');
+      await press('ArrowDown');
+      expect(cursor()).toBe('e1');
+      expect(said()).toBe('e1, white king');
+    });
+
+    it('should keep up towards the rival when the board is seen by black', async () => {
+      await create({ orientation: 'black', turnColor: 'black' });
+      await focus();
+      expect(cursor()).toBe('e8');
+
+      await press('ArrowUp');
+      expect(cursor()).toBe('e7');
+      await press('ArrowRight');
+      expect(cursor()).toBe('d7');
+      await press('ArrowLeft', 'ArrowLeft');
+      expect(cursor()).toBe('f7');
+      await press('ArrowDown', 'ArrowDown');
+      expect(cursor()).toBe('f8');
+    });
+
+    it('should go to the ends of the row with Home and End', async () => {
+      await create();
+      await focus();
+
+      await press('Home');
+      expect(cursor()).toBe('a1');
+      await press('End');
+      expect(cursor()).toBe('h1');
+      expect(said()).toBe('h1, white rook');
+    });
+
+    it('should go to the ends of the row as seen by black', async () => {
+      await create({ orientation: 'black', turnColor: 'black' });
+      await focus();
+
+      await press('Home');
+      expect(cursor()).toBe('h8');
+      await press('End');
+      expect(cursor()).toBe('a8');
+    });
+
+    it('should keep the marks of the page on the square under the cursor', async () => {
+      await create({ marks: new Map([['e1', 'hint']]) });
+      await focus();
+
+      expect(api().state.highlight.custom?.get('e1')).toBe('mark-hint mark-cursor');
+    });
+
+    it('should not move the cursor when the position changes from outside', async () => {
+      await create();
+      await focus();
+      await press('ArrowUp');
+      fixture.componentRef.setInput('fen', AFTER_E4);
+      fixture.componentRef.setInput('lastMove', ['e2', 'e4']);
+      await fixture.whenStable();
+
+      expect(cursor()).toBe('e2');
+    });
+
+    it('should keep the keys it uses from the page and let the rest through', async () => {
+      await create();
+      await focus();
+      const reached: string[] = [];
+      const listener = (event: KeyboardEvent) => reached.push(event.key);
+      document.addEventListener('keydown', listener);
+
+      await press('ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' ', 'Escape', 'Tab');
+      board().dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowLeft', altKey: true, bubbles: true }),
+      );
+      document.removeEventListener('keydown', listener);
+
+      // Escape with nothing picked and Alt + arrow (back in the browser) belong to the page.
+      expect(reached).toEqual(['Escape', 'Tab', 'ArrowLeft']);
+    });
+  });
+
+  describe('playing', () => {
+    it('should pick a piece and play it to the square under the cursor', async () => {
+      await create({ dests: KNIGHT_DESTS });
+      await focus();
+
+      await press('ArrowRight', 'ArrowRight', 'Enter');
+      expect(api().state.selected).toBe('g1');
+      expect(said()).toBe('White knight on g1 picked, 2 moves');
+
+      await press('ArrowUp', 'ArrowUp', 'ArrowLeft', 'Enter');
+      await vi.waitFor(() => expect(moves).toEqual([{ from: 'g1', to: 'f3' }]));
+      expect(cursor()).toBe('f3');
+    });
+
+    it('should not play to a square the piece cannot reach, and drop the piece', async () => {
+      await create({ dests: KNIGHT_DESTS });
+      await focus();
+      await press('ArrowRight', 'ArrowRight', 'Enter', 'ArrowUp', 'ArrowUp', 'Enter');
+      await settleMove();
+
+      expect(moves).toEqual([]);
+      expect(api().state.selected).toBeUndefined();
+      expect(said()).toBe('Selection cleared');
+    });
+
+    it('should drop the piece with Escape, and when it is picked again', async () => {
+      await create({ dests: KNIGHT_DESTS });
+      await focus();
+      await press('ArrowRight', 'ArrowRight', 'Enter', 'Escape');
+      expect(api().state.selected).toBeUndefined();
+      expect(said()).toBe('Selection cleared');
+
+      await press('Enter', 'Enter');
+      expect(api().state.selected).toBeUndefined();
+    });
+
+    it('should say when the piece cannot move or there is no piece', async () => {
+      await create({ dests: KNIGHT_DESTS });
+      await focus();
+      await press('Enter');
+      expect(said()).toBe('You cannot move that piece');
+
+      await press('ArrowUp', 'ArrowUp', 'Enter');
+      expect(said()).toBe('There is no piece here');
+    });
+
+    it('should open the promotion picker and come back to the board after it', async () => {
+      await create({
+        fen: '4k3/P7/8/8/8/8/8/4K3 w - - 0 1',
+        dests: new Map([['a7', ['a8']]]),
+      });
+      await focus();
+      await press('Home', ...Array<string>(6).fill('ArrowUp'), 'Enter', 'ArrowUp', 'Enter');
+      await vi.waitFor(() => expect(element.querySelector('[role="dialog"]')).not.toBeNull());
+      await fixture.whenStable();
+
+      element
+        .querySelector<HTMLButtonElement>('[role="dialog"] button[aria-label="Knight"]')!
+        .click();
+      await fixture.whenStable();
+
+      expect(moves).toEqual([{ from: 'a7', to: 'a8', promotion: 'knight' }]);
+      expect(document.activeElement).toBe(board());
+      expect(cursor()).toBe('a8');
+    });
+
+    it('should let a board that only shows be read but not played', async () => {
+      await create({ dests: KNIGHT_DESTS, viewOnly: true });
+      await focus();
+      await press('ArrowRight', 'ArrowRight', 'Enter');
+      expect(said()).toBe('g1, white knight');
+      expect(api().state.selected).toBeUndefined();
+      await press('ArrowUp', 'ArrowUp', 'ArrowLeft', 'Enter');
+      await settleMove();
+
+      expect(moves).toEqual([]);
+    });
+  });
+
+  it('should speak Spanish with the Spanish texts', async () => {
+    await create({ labels: es.board, dests: KNIGHT_DESTS });
+    await focus();
+    expect(said()).toBe('e1, rey blanco');
+    await press('Home');
+    expect(said()).toBe('a1, torre blanca');
+    await press('ArrowUp', 'ArrowUp');
+    expect(said()).toBe('a3, vacía');
+    await press('Enter');
+    expect(said()).toBe('Aquí no hay ninguna pieza');
+    await press('End', 'ArrowDown', 'ArrowDown', 'Enter');
+    expect(said()).toBe('No puedes mover esa pieza');
+    await press('ArrowLeft', 'Enter');
+    expect(said()).toBe('Has elegido caballo blanco en g1, 2 jugadas');
+    await press('ArrowUp', 'Enter');
+    expect(said()).toBe('Selección anulada');
   });
 });
