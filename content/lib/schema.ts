@@ -408,3 +408,75 @@ export function validateLesson(l: unknown, at: string): Errors {
   }
   return errs;
 }
+
+const PUZZLE_ID = /^[A-Za-z0-9]{5}$/;
+const isTheme = (v: unknown): v is string => typeof v === 'string' && /^[a-z][A-Za-z0-9]*$/.test(v);
+
+/** A lesson file of Lichess puzzles (`pnpm content:puzzles`). */
+export function validatePuzzleFile(f: unknown, at: string): Errors {
+  const errs: Errors = [];
+  if (!isObj(f)) return [`${at}: must be an object`];
+  checkKeys(f, ['lesson', 'themes', 'puzzles'], [], at, errs);
+  checkId(f.lesson, `${at}.lesson`, errs);
+  if (!isObj(f.themes) || Object.keys(f.themes).length === 0)
+    errs.push(`${at}.themes: must be a non-empty object`);
+  else
+    for (const [theme, term] of Object.entries(f.themes)) {
+      if (!isTheme(theme)) errs.push(`${at}.themes: bad theme ${JSON.stringify(theme)}`);
+      if (term !== null) checkId(term, `${at}.themes.${theme}`, errs);
+    }
+  if (!Array.isArray(f.puzzles) || f.puzzles.length === 0)
+    return [...errs, `${at}.puzzles: must be a non-empty array`];
+  f.puzzles.forEach((p, i) => {
+    const where = `${at}.puzzles[${i}]`;
+    if (!isObj(p)) return void errs.push(`${where}: must be an object`);
+    checkKeys(p, ['id', 'fen', 'moves', 'rating', 'themes'], [], where, errs);
+    if (typeof p.id !== 'string' || !PUZZLE_ID.test(p.id))
+      errs.push(`${where}.id: five letters or digits, got ${JSON.stringify(p.id)}`);
+    if (!nonEmpty(p.fen)) errs.push(`${where}.fen: must be a non-empty string`);
+    if (!Array.isArray(p.moves) || p.moves.length === 0 || !p.moves.every(nonEmpty))
+      errs.push(`${where}.moves: must be a non-empty array of SAN strings`);
+    if (!Number.isInteger(p.rating)) errs.push(`${where}.rating: must be an integer`);
+    if (!Array.isArray(p.themes) || p.themes.length === 0 || !p.themes.every(isTheme))
+      errs.push(`${where}.themes: must be a non-empty array of themes`);
+  });
+  return errs;
+}
+
+/** The catalogue of the puzzle files, with the database they come from. */
+export function validatePuzzleCatalog(c: unknown): Errors {
+  const errs: Errors = [];
+  if (!isObj(c)) return ['catalog: must be an object'];
+  checkKeys(c, ['source', 'lessons'], [], 'catalog', errs);
+  const s = c.source;
+  if (!isObj(s)) errs.push('catalog.source: must be an object');
+  else {
+    checkKeys(
+      s,
+      ['url', 'lastModified', 'sha256', 'bytes', 'rows', 'scriptVersion'],
+      [],
+      'catalog.source',
+      errs,
+    );
+    if (!isHttpsUrl(s.url)) errs.push('catalog.source.url: https URL');
+    if (typeof s.lastModified !== 'string' || Number.isNaN(Date.parse(s.lastModified)))
+      errs.push('catalog.source.lastModified: a date');
+    if (typeof s.sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(s.sha256))
+      errs.push('catalog.source.sha256: 64 hex digits');
+    for (const k of ['bytes', 'rows', 'scriptVersion'] as const)
+      if (!Number.isInteger(s[k]) || (s[k] as number) < 1)
+        errs.push(`catalog.source.${k}: positive integer`);
+  }
+  if (!Array.isArray(c.lessons) || c.lessons.length === 0)
+    return [...errs, 'catalog.lessons: must be a non-empty array'];
+  c.lessons.forEach((l, i) => {
+    const where = `catalog.lessons[${i}]`;
+    if (!isObj(l)) return void errs.push(`${where}: must be an object`);
+    checkKeys(l, ['lesson', 'count', 'themes'], [], where, errs);
+    checkId(l.lesson, `${where}.lesson`, errs);
+    if (!Number.isInteger(l.count)) errs.push(`${where}.count: must be an integer`);
+    if (!Array.isArray(l.themes) || l.themes.length === 0 || !l.themes.every(isTheme))
+      errs.push(`${where}.themes: must be a non-empty array of themes`);
+  });
+  return errs;
+}

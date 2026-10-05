@@ -1,17 +1,24 @@
 import { makeBoardFen } from 'chessops/fen';
 import { describe, expect, it } from 'vitest';
-import { loadEndgames, loadOpeningCatalogRaw, loadPositions } from '../../lib/content.ts';
+import {
+  loadEndgames,
+  loadOpeningCatalogRaw,
+  loadPositions,
+  loadPuzzles,
+} from '../../lib/content.ts';
 import { playSan, positionFromFen } from '../../lib/chess.ts';
 import type { Chess } from 'chessops/chess';
 import type { OpeningSummary } from '../../types.ts';
 
 // The small boards of the opening lists replay the start of each main line. An exercise (a position
 // or an endgame) must never be given away by them: no frame may be the starting board of an
-// exercise, nor any board of the solution of a position.
+// exercise, nor any board of the solution of a position. The Lichess puzzles count as exercises:
+// those with opening tags start from early moves, so a preview could show one.
 
 const catalog = loadOpeningCatalogRaw() as OpeningSummary[];
 const positions = loadPositions();
 const endgames = loadEndgames();
+const puzzles = loadPuzzles().flatMap((f) => f.puzzles);
 
 const INITIAL = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -31,6 +38,8 @@ const boardsOfLine = (startFen: string, sans: readonly string[], label: string):
 const exerciseStarts = new Set<string>([
   ...positions.map((p) => makeBoardFen(positionFromFen(p.fen).board)),
   ...endgames.map((e) => makeBoardFen(positionFromFen(e.fen).board)),
+  // A puzzle starts once the opponent has played the first move.
+  ...puzzles.map((p) => boardsOfLine(p.fen, p.moves.slice(0, 1), p.id)[1]),
 ]);
 const solutionBoards = new Set<string>(
   positions.flatMap((p) => boardsOfLine(p.fen, p.solution, p.id).slice(1)),
@@ -66,6 +75,13 @@ describe('opening previews do not give exercises away', () => {
     const start = makeBoardFen(positionFromFen(endgame.fen).board);
 
     expect(spoilersIn('probe', [start])).not.toEqual([]);
+  });
+
+  it('would notice a preview that shows the board of a puzzle', () => {
+    const [puzzle] = puzzles;
+    const board = boardsOfLine(puzzle.fen, puzzle.moves.slice(0, 1), puzzle.id)[1];
+
+    expect(spoilersIn('probe', [board])).not.toEqual([]);
   });
 
   it('has exercises to guard against', () => {
