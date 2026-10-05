@@ -932,7 +932,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Gambit"
@@ -1010,7 +1010,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Fianchetto",
@@ -1135,7 +1135,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Fianchetto"
@@ -1211,7 +1211,7 @@
       "arrows": []
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/fianchetto-ajedrez"
@@ -1249,7 +1249,7 @@
       "arrows": []
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1295,7 +1295,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Initiative_(chess)"
@@ -1356,7 +1356,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -1904,7 +1904,7 @@
       ]
     },
     "group": "strategy",
-    "level": "intermediate",
+    "level": "advanced",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Tempo_(chess)"

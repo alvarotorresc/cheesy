@@ -318,7 +318,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'd5', to: 'c4', move: true }],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${WIKI}Gambit`],
   },
   {
@@ -335,7 +335,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'g2', to: 'd5', move: false }],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${WIKI}Fianchetto`, `${CHESSCOM_ES}fianchetto-ajedrez`],
   },
   {
@@ -352,7 +352,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'b2', to: 'h8', move: false }],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${WIKI}Fianchetto`],
   },
   {
@@ -369,7 +369,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}fianchetto-ajedrez`],
   },
   {
@@ -386,7 +386,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}estrategia`],
   },
   {
@@ -406,7 +406,7 @@ export const glossary: GlossarySpec[] = [
       ],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${WIKI}Initiative_(chess)`],
   },
   {
@@ -423,7 +423,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'b4', to: 'b3', move: true }],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}estrategia`],
   },
   {
@@ -596,7 +596,7 @@ export const glossary: GlossarySpec[] = [
       arrows: [{ from: 'c3', to: 'd5', move: false }],
     },
     group: 'strategy',
-    level: 'intermediate',
+    level: 'advanced',
     sources: [WIKI_GLOSSARY, `${WIKI}Tempo_(chess)`],
   },
   {
