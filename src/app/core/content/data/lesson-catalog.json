@@ -328,5 +328,20 @@
     },
     "stepCount": 9,
     "exerciseCount": 5
+  },
+  {
+    "id": "rook-endings",
+    "level": "intermediate",
+    "order": 11,
+    "title": {
+      "es": "Finales de torre",
+      "en": "Rook endings"
+    },
+    "summary": {
+      "es": "Torre activa, torre detrás del peón, la séptima fila y cómo cortar al rey.",
+      "en": "An active rook, the rook behind the pawn, the seventh rank and how to cut the king off."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
   }
 ]

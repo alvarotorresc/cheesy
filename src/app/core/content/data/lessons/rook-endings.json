@@ -1,0 +1,858 @@
+{
+  "id": "rook-endings",
+  "level": "intermediate",
+  "order": 11,
+  "title": {
+    "es": "Finales de torre",
+    "en": "Rook endings"
+  },
+  "summary": {
+    "es": "Torre activa, torre detrás del peón, la séptima fila y cómo cortar al rey.",
+    "en": "An active rook, the rook behind the pawn, the seventh rank and how to cut the king off."
+  },
+  "terms": [
+    "seventh-rank",
+    "cutting-off-the-king"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Los finales de torre son los más frecuentes. Dos ideas sirven casi siempre. La primera: una torre activa, que ataca y se mueve con libertad, vale más que una torre pasiva, que solo defiende. La segunda: la torre va detrás del "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": ", sea tuyo o del rival. Detrás de tu peón, la torre lo empuja y gana espacio a cada paso; delante, se queda encerrada. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " está detrás del peón de "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Rook endings are the most common ones. Two ideas almost always help. The first: an active rook, which attacks and moves freely, is worth more than a passive rook, which only defends. The second: the rook belongs behind the "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": ", yours or the rival’s. Behind your pawn, the rook pushes it and gains room with every step; in front of it, the rook gets shut in. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": " stands behind the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/r4pk1/6pp/P7/8/6PP/5PK1/R7 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a1",
+          "a5"
+        ]
+      }
+    },
+    {
+      "kind": "choice",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Juegan las blancas. La torre negra de "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " ataca tu "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " 2 y mira hacia tu "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": ". ¿Dónde pones tu torre?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "White to move. The black rook on "
+          },
+          {
+            "kind": "square",
+            "square": "b2"
+          },
+          {
+            "kind": "text",
+            "text": " attacks your "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " 2 and eyes your "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": ". Where do you put your rook?"
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/5pk1/6pp/P7/8/6PP/1r3PK1/3R4 w - - 0 1",
+        "orientation": "white"
+      },
+      "answer": {
+        "by": "engine",
+        "options": [
+          "Rd7",
+          "Ra1",
+          "Rd6"
+        ],
+        "correct": 1
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la torre a "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", detrás del "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": ". Lo protege, lo empuja hacia la "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronación"
+          },
+          {
+            "kind": "text",
+            "text": " y deja a la torre negra delante, haciendo de tapón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the rook to "
+          },
+          {
+            "kind": "square",
+            "square": "a1"
+          },
+          {
+            "kind": "text",
+            "text": ", behind the "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": ". It protects the pawn, pushes it towards "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotion"
+          },
+          {
+            "kind": "text",
+            "text": " and leaves the black rook in front, acting as a plug."
+          }
+        ]
+      },
+      "whyWrong": [
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La "
+            },
+            {
+              "kind": "term",
+              "id": "seventh-rank",
+              "text": "séptima fila"
+            },
+            {
+              "kind": "text",
+              "text": " tienta, pero la torre negra se va a por tu peón de "
+            },
+            {
+              "kind": "square",
+              "square": "a5"
+            },
+            {
+              "kind": "text",
+              "text": ". Primero hay que cuidar el "
+            },
+            {
+              "kind": "term",
+              "id": "passed-pawn",
+              "text": "peón pasado"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The "
+            },
+            {
+              "kind": "term",
+              "id": "seventh-rank",
+              "text": "seventh rank"
+            },
+            {
+              "kind": "text",
+              "text": " is tempting, but the black rook goes after your pawn on "
+            },
+            {
+              "kind": "square",
+              "square": "a5"
+            },
+            {
+              "kind": "text",
+              "text": ". First you have to look after the "
+            },
+            {
+              "kind": "term",
+              "id": "passed-pawn",
+              "text": "passed pawn"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        },
+        null,
+        {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Desde "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " la torre ataca un peón, pero es peor: tu "
+            },
+            {
+              "kind": "term",
+              "id": "passed-pawn",
+              "text": "peón pasado"
+            },
+            {
+              "kind": "text",
+              "text": " se queda sin apoyo. Tu torre tiene que ir detrás de él."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "From "
+            },
+            {
+              "kind": "square",
+              "square": "d6"
+            },
+            {
+              "kind": "text",
+              "text": " the rook attacks a pawn, but it is worse: your "
+            },
+            {
+              "kind": "term",
+              "id": "passed-pawn",
+              "text": "passed pawn"
+            },
+            {
+              "kind": "text",
+              "text": " is left without support. Your rook has to go behind it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Otra casilla de oro para la torre es la "
+          },
+          {
+            "kind": "term",
+            "id": "seventh-rank",
+            "text": "séptima fila"
+          },
+          {
+            "kind": "text",
+            "text": ", la segunda del rival. Desde allí ataca los peones que todavía no se han movido y encierra al rey rival en su última "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": ". Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " ataca el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": ", y el rey negro no puede salir de la fila 8."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Another golden square for the rook is the "
+          },
+          {
+            "kind": "term",
+            "id": "seventh-rank",
+            "text": "seventh rank"
+          },
+          {
+            "kind": "text",
+            "text": ", the rival’s second rank. From there it attacks the pawns that have not moved yet and shuts the rival king in on his last "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": ". Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": ", and the black king cannot leave rank 8."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp1R4/8/8/8/8/1r3PPP/6K1 b - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "b7",
+          "e7",
+          "f7",
+          "g7",
+          "h7"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "term",
+            "id": "cutting-off-the-king",
+            "text": "Cortar al rey"
+          },
+          {
+            "kind": "text",
+            "text": " es usar la torre como una pared: se pone en una "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "fila"
+          },
+          {
+            "kind": "text",
+            "text": " o una "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " que el rey rival no puede cruzar sin quedar en "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Así el rey no llega a tiempo a donde importa, sea para defender o para ayudar a su peón. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " corta al rey de "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": ": no puede cruzar la columna d para ayudar a su peón de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "cutting-off-the-king",
+            "text": "Cutting off the king"
+          },
+          {
+            "kind": "text",
+            "text": " means using the rook as a wall: it stands on a "
+          },
+          {
+            "kind": "term",
+            "id": "rank",
+            "text": "rank"
+          },
+          {
+            "kind": "text",
+            "text": " or a "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": " the rival king cannot cross without walking into "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". That way the king does not arrive in time where it matters, to defend or to help his pawn. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " cuts off the king on "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": ": he cannot cross the d-file to help his pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/1K6/8/1k2p3/8/8/3R4 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d1",
+          "d2",
+          "d3",
+          "d4",
+          "d5",
+          "d6",
+          "d7",
+          "d8"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Gana con la torre contra el peón. El rey negro está cortado por la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " d: no lo dejes cruzar mientras vas a por el peón con la torre o con el rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Win with the rook against the pawn. The black king is cut off along the d-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ": do not let him cross while you go after the pawn with the rook or the king."
+          }
+        ]
+      },
+      "fen": "8/8/1K6/8/1k2p3/8/8/3R4 w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Con la torre detrás del peón, o en la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " e, lo frenas; tu rey vendrá luego a capturarlo."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "With the rook behind the pawn, or on the e-"
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ", you hold it back; your king will come later to take it."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora defiendes tú, con rey y un peón a punto de "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronar"
+          },
+          {
+            "kind": "text",
+            "text": " contra una torre. El rey negro está lejos: aguanta las tablas sin separar tu rey del peón."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now you defend, with king and a pawn about to "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promote"
+          },
+          {
+            "kind": "text",
+            "text": " against a rook. The black king is far away: hold the draw without leaving your pawn."
+          }
+        ]
+      },
+      "fen": "8/1KP5/8/8/8/8/8/2r3k1 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Mantén el rey pegado al peón. Si te dan "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", vuelve junto a él."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Keep your king next to the pawn. If you get a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", go back beside it."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en los finales de torre, la torre activa manda. Ponla detrás del "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": ", llévala a la "
+          },
+          {
+            "kind": "term",
+            "id": "seventh-rank",
+            "text": "séptima fila"
+          },
+          {
+            "kind": "text",
+            "text": " cuando puedas, y úsala para "
+          },
+          {
+            "kind": "term",
+            "id": "cutting-off-the-king",
+            "text": "cortar al rey"
+          },
+          {
+            "kind": "text",
+            "text": " rival. Dos posiciones famosas de torre y peón, la "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "posición de Lucena"
+          },
+          {
+            "kind": "text",
+            "text": " y la "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "posición de Philidor"
+          },
+          {
+            "kind": "text",
+            "text": ", están en Finales: son el siguiente paso."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in rook endings, the active rook rules. Put it behind the "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": ", take it to the "
+          },
+          {
+            "kind": "term",
+            "id": "seventh-rank",
+            "text": "seventh rank"
+          },
+          {
+            "kind": "text",
+            "text": " when you can, and use it for "
+          },
+          {
+            "kind": "term",
+            "id": "cutting-off-the-king",
+            "text": "cutting off"
+          },
+          {
+            "kind": "text",
+            "text": " the rival king. Two famous rook and pawn positions, the "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "Lucena position"
+          },
+          {
+            "kind": "text",
+            "text": " and the "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "Philidor position"
+          },
+          {
+            "kind": "text",
+            "text": ", are in Endgames: they are the next step."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp1R4/8/8/8/8/1r3PPP/6K1 b - - 0 1",
+        "orientation": "white"
+      }
+    }
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "Rook and pawn"
+  }
+}

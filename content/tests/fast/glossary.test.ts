@@ -69,6 +69,8 @@ const EXPECTED_IDS = [
   'x-ray',
   'passed-pawn',
   'zugzwang',
+  'seventh-rank',
+  'cutting-off-the-king',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -140,6 +142,8 @@ const GROUPS: Record<string, string[]> = {
     'lucena-position',
     'philidor-position',
     'building-a-bridge',
+    'seventh-rank',
+    'cutting-off-the-king',
   ],
 };
 

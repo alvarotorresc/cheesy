@@ -1222,4 +1222,40 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     sources: [WIKI_GLOSSARY, WIKI_LUCENA, LICHESS_ROOK_ENDGAMES],
   },
+  {
+    id: 'seventh-rank',
+    name: { es: 'Séptima fila', en: 'Seventh rank' },
+    definition: {
+      es: 'La segunda [fila](rank) contando desde el lado del rival: la 7 para las blancas y la 2 para las negras. Una torre allí ataca los peones que aún no se han movido y encierra al rey rival en su última fila.',
+      en: 'The second [rank](rank) counting from the opponent’s side: rank 7 for White and rank 2 for Black. A rook there attacks the pawns that have not moved yet and shuts the enemy king in on its last rank.',
+    },
+    example: {
+      fen: '6k1/1p3pp1/7p/8/8/7P/1r3PP1/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b7', 'f7'],
+      arrows: [{ from: 'd1', to: 'd7', move: true }],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'rook-endings',
+    sources: [WIKI_GLOSSARY, WIKI_ROOK_ENDGAME],
+  },
+  {
+    id: 'cutting-off-the-king',
+    name: { es: 'Cortar al rey', en: 'Cutting off the king' },
+    definition: {
+      es: 'Usar una torre como pared: se coloca en una [fila](rank) o una [columna](file) que el rey rival no puede cruzar sin ponerse en [jaque](check). Así ese rey no llega a tiempo a defender ni a ayudar a sus peones.',
+      en: 'Using a rook as a wall: it stands on a [rank](rank) or [file](file) the enemy king cannot cross without walking into [check](check). That way the king does not get there in time to defend or to help its pawns.',
+    },
+    example: {
+      fen: '8/8/1K6/8/1k2p3/8/8/3R4 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b4', 'e4'],
+      arrows: [{ from: 'd1', to: 'd8', move: false }],
+    },
+    group: 'endgames',
+    level: 'intermediate',
+    lesson: 'rook-endings',
+    sources: [WIKI_ROOK_ENDGAME],
+  },
 ];
