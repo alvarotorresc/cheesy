@@ -118,4 +118,55 @@ describe('FindMoveSession', () => {
       expect(session.play({ from: 'a1', to: 'a8' })?.kind).toBe('wrong');
     });
   });
+
+  describe('opening move', () => {
+    /** Lichess puzzle YYFFU as the database writes it: the board before the rival's Kf8. */
+    const yyffu = () =>
+      new FindMoveSession(
+        step('r3r1k1/p5Rp/1n6/3pB3/8/8/P5PP/4K2R b K - 0 29', {
+          by: 'engine',
+          solution: ['O-O#'],
+        }),
+        { opening: 'Kf8' },
+      );
+
+    it('should hold the board until the opening move is played', () => {
+      const session = yyffu();
+      expect(session.pendingOpening()).toBe(true);
+      expect(session.turn()).toBe('black');
+      expect(session.dests().size).toBe(0);
+      expect(session.play({ from: 'g8', to: 'f8' })).toBeUndefined();
+      expect(session.tracker.mistakes()).toBe(0);
+    });
+
+    it('should play the opening move, mark it, and not count it in the solution', () => {
+      const session = yyffu();
+      session.playOpening();
+      expect(session.pendingOpening()).toBe(false);
+      expect(session.lastMove()).toEqual(['g8', 'f8']);
+      expect(session.turn()).toBe('white');
+      expect(session.dests().size).toBeGreaterThan(0);
+      expect(session.solutionMove()).toBe('O-O#');
+      expect(session.hintSquare()).toBe('e1');
+      expect(session.play({ from: 'e1', to: 'g1' })).toEqual({ kind: 'solved' });
+    });
+
+    it('should play the opening move only once', () => {
+      const session = yyffu();
+      session.playOpening();
+      session.playOpening();
+      expect(session.turn()).toBe('white');
+      expect(session.fen()).toContain('r3rk2');
+    });
+
+    it('should have nothing to play without an opening move', () => {
+      const session = new FindMoveSession(
+        step('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1', { by: 'engine', solution: ['Ra8#'] }),
+      );
+      expect(session.pendingOpening()).toBe(false);
+      session.playOpening();
+      expect(session.lastMove()).toBeUndefined();
+      expect(session.turn()).toBe('white');
+    });
+  });
 });

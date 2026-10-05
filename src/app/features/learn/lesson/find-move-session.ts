@@ -15,13 +15,21 @@ export type FindMoveOutcome =
   | { kind: 'continue'; reply: string }
   | { kind: 'wrong'; san: string; message?: RichText };
 
+export interface FindMoveOptions {
+  /**
+   * The rival's move that comes before the exercise, in SAN, played on `step.board.fen` (a Lichess
+   * puzzle starts one move before the player's turn). It is not part of the solution.
+   */
+  readonly opening?: string;
+}
+
 const ROLE = { queen: 'queen', rook: 'rook', bishop: 'bishop', knight: 'knight' } as const;
 
 /**
  * "Find the move". With a rule, any move the rule accepts is right (computed, never written);
  * with an engine solution, the player finds each of their moves and the rival answers, and any
  * mate is right too and ends the exercise, as on Lichess. A wrong move is not played: the page
- * shows it and the piece goes back.
+ * shows it and the piece goes back. With an opening move, the board is held until the page plays it.
  */
 export class FindMoveSession {
   readonly tracker = new ExerciseTracker();
@@ -29,21 +37,28 @@ export class FindMoveSession {
   private readonly ply = signal(0);
   private readonly done = signal(false);
   private readonly last = signal<[SquareName, SquareName] | undefined>(undefined);
+  private readonly opening: WritableSignal<string | undefined>;
 
   readonly fen = computed(() => makeFen(this.position().toSetup()));
   readonly turn = computed<Color>(() => this.position().turn);
   readonly solved = this.done.asReadonly();
   readonly lastMove = this.last.asReadonly();
+  /** True until `playOpening`: the board shows the position before the rival's first move. */
+  readonly pendingOpening = computed(() => this.opening() !== undefined);
   readonly dests = computed(
     () =>
-      (this.done() ? new Map() : chessgroundDests(this.position())) as Map<
+      (this.done() || this.pendingOpening() ? new Map() : chessgroundDests(this.position())) as Map<
         SquareName,
         SquareName[]
       >,
   );
 
-  constructor(private readonly step: FindMoveStep) {
+  constructor(
+    private readonly step: FindMoveStep,
+    options: FindMoveOptions = {},
+  ) {
     this.position = signal<Chess>(parsePosition(step.board.fen)!);
+    this.opening = signal(options.opening);
   }
 
   sanOf(move: BoardMove): string | undefined {
@@ -60,7 +75,7 @@ export class FindMoveSession {
   }
 
   play(move: BoardMove): FindMoveOutcome | undefined {
-    if (this.done()) return undefined;
+    if (this.done() || this.pendingOpening()) return undefined;
     const san = this.sanOf(move);
     if (!san) return undefined;
     const check = this.step.check;
@@ -87,6 +102,17 @@ export class FindMoveSession {
     this.apply(san);
   }
 
+  /**
+   * Plays the rival's opening move, once the page has shown the board before it. It is not a move
+   * of the solution, and only the first call plays it.
+   */
+  playOpening(): void {
+    const san = this.opening();
+    if (san === undefined) return;
+    this.apply(san, false);
+    this.opening.set(undefined);
+  }
+
   /** Square of the piece to move: shown after the second mistake. */
   hintSquare(): SquareName | undefined {
     const san = this.solutionMove();
@@ -107,12 +133,13 @@ export class FindMoveSession {
     this.tracker.reveal();
   }
 
-  private apply(san: string): void {
+  /** Plays a move; `counted` is false for the opening move, which is not part of the solution. */
+  private apply(san: string, counted = true): void {
     const pos = this.position().clone();
     const move = parseSan(pos, san)!;
     pos.play(move);
     if ('from' in move) this.last.set([makeSquare(move.from), makeSquare(move.to)]);
     this.position.set(pos);
-    this.ply.update((ply) => ply + 1);
+    if (counted) this.ply.update((ply) => ply + 1);
   }
 }
