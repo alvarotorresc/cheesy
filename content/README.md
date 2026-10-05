@@ -18,6 +18,9 @@ content/
   tablebase-cache.json   cached answers of the Lichess tablebase for the endgames
 ```
 
+The Lichess puzzles of "Practise more" are not written by hand: `pnpm content:puzzles` picks
+them from the Lichess puzzle database (below).
+
 The content types live with the app, in `src/app/core/content/content.types.ts`.
 
 ## Workflow
@@ -55,3 +58,40 @@ To run a single file: `pnpm content:verify tests/slow/endgames-tablebase.test.ts
 
 Stockfish with several threads is not deterministic, so a new run can report slightly different
 scores.
+
+## Lichess puzzles
+
+Each intermediate lesson with Lichess themes (`authoring/lessons/lichess-themes.ts`) gets 50
+puzzles of the [Lichess puzzle database](https://database.lichess.org/#puzzles) (CC0), in
+`src/app/core/content/data/puzzles/<lesson>.json`, plus `puzzle-catalog.json`. They are generated
+on purpose, never by `content:build` nor in CI:
+
+```sh
+mkdir -p .cache && curl -L -R -o .cache/lichess_db_puzzle.csv.zst \
+  https://database.lichess.org/lichess_db_puzzle.csv.zst
+pnpm content:puzzles .cache/lichess_db_puzzle.csv.zst
+```
+
+`.cache/` is ignored by git. The script needs Node 26 (`.nvmrc`), which reads the Zstandard file
+itself; it takes about two minutes. `-R` keeps the server date on the file, which the catalogue
+records as `lastModified`; pass `--last-modified="<HTTP date>"` if the file lost it. The catalogue
+also records the sha256, size and rows of the file: the same file always gives the same JSON, so
+to add lessons without changing the puzzles of the others, download again and check that the sha256
+matches the catalogue before running the script (Lichess replaces the file every month).
+
+The settings are in `authoring/puzzles-config.ts`:
+
+- **Filter:** rating 900–1700, rating deviation at most 90, popularity at least 90, at least 1000
+  plays, 1 to 3 player moves; exceptions per theme and per lesson.
+- **Later ideas:** a puzzle with a tactical theme of a later lesson of `LESSON_ORDER` (the twelve
+  lessons of the syllabus) is left out, and each puzzle goes to one lesson only, the first.
+- **Selection:** 50 per lesson, split evenly between its themes; at most a fifth of one move and at
+  least a fifth of three (two fifths in `forcing-moves` and `in-between-move`); in rounds over
+  100-point rating bands, the most popular of each. A puzzle that shows the start of an exercise of
+  the app, or the board of another puzzle, is skipped.
+- **`EXCLUDED_IDS`:** puzzles left out after looking at them, each with the reason. Before
+  publishing new puzzles, look at a few of each theme on `https://lichess.org/training/<id>` and
+  exclude any that does not teach the idea of its lesson.
+
+`pnpm content:test` checks the generated files: schema, legal moves in canonical SAN, mates,
+ratings, themes and glossary terms, and that no puzzle shows an exercise of the app.

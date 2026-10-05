@@ -7,6 +7,7 @@ import type {
   GlossaryTerm,
   Lesson,
   OpeningTree,
+  PuzzleFile,
 } from '../types.ts';
 
 /** The `content/` folder: authoring sources, validation and verification tooling. */
@@ -21,6 +22,8 @@ export const POSITIONS_FILE = path.join(DATA_DIR, 'positions.json');
 export const GLOSSARY_FILE = path.join(DATA_DIR, 'glossary.json');
 export const LESSONS_DIR = path.join(DATA_DIR, 'lessons');
 export const LESSON_CATALOG_FILE = path.join(DATA_DIR, 'lesson-catalog.json');
+export const PUZZLES_DIR = path.join(DATA_DIR, 'puzzles');
+export const PUZZLE_CATALOG_FILE = path.join(DATA_DIR, 'puzzle-catalog.json');
 
 const readJson = (file: string): unknown => JSON.parse(readFileSync(file, 'utf8'));
 
@@ -58,3 +61,15 @@ export function loadLessonFiles(): { file: string; data: unknown }[] {
 export const loadLessons = () => loadLessonFiles().map((f) => f.data as Lesson);
 export const loadLessonCatalogRaw = () =>
   existsSync(LESSON_CATALOG_FILE) ? readJson(LESSON_CATALOG_FILE) : [];
+
+export function loadPuzzleFiles(): { file: string; data: unknown }[] {
+  if (!existsSync(PUZZLES_DIR)) return [];
+  return readdirSync(PUZZLES_DIR)
+    .filter((f) => f.endsWith('.json'))
+    .sort()
+    .map((f) => ({ file: f, data: readJson(path.join(PUZZLES_DIR, f)) }));
+}
+
+export const loadPuzzles = () => loadPuzzleFiles().map((f) => f.data as PuzzleFile);
+export const loadPuzzleCatalogRaw = (): unknown =>
+  existsSync(PUZZLE_CATALOG_FILE) ? readJson(PUZZLE_CATALOG_FILE) : undefined;

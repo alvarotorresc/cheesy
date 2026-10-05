@@ -95,3 +95,38 @@ export type StepSpec =
   | ChoiceStepSpec
   | TapSquareStepSpec;
 export type LessonSpec = Omit<Lesson, 'steps'> & { steps: StepSpec[] };
+
+// Lichess puzzles for "Practise more", written by `pnpm content:puzzles`. Kept here until the app
+// reads them; then they move to content.types.ts like the rest.
+
+/** A Lichess puzzle: the FEN before the opponent's move, then every move in SAN, the opponent's first. */
+export interface Puzzle {
+  id: string;
+  fen: string;
+  moves: string[];
+  rating: number;
+  /** The themes of its lesson that the puzzle has. */
+  themes: string[];
+}
+
+/** One file per lesson: its themes, each with its glossary term (or null), and its puzzles. */
+export interface PuzzleFile {
+  lesson: string;
+  themes: Record<string, string | null>;
+  puzzles: Puzzle[];
+}
+
+/** The Lichess database a set of puzzle files comes from. */
+export interface PuzzleSource {
+  url: string;
+  lastModified: string;
+  sha256: string;
+  bytes: number;
+  rows: number;
+  scriptVersion: number;
+}
+
+export interface PuzzleCatalog {
+  source: PuzzleSource;
+  lessons: { lesson: string; count: number; themes: string[] }[];
+}
