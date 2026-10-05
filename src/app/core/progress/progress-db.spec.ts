@@ -81,12 +81,14 @@ describe('openProgressStore', () => {
     expect(await store.endgames.all()).toHaveLength(1);
   });
 
-  it('should create version 3 of the schema', async () => {
+  it('should create version 4 of the schema', async () => {
     await open();
     const db = new Dexie('test-progress', { indexedDB, IDBKeyRange });
     await db.open();
 
-    expect(db.verno).toBe(3);
+    expect(db.verno).toBe(4);
+    expect(db.table('puzzles').schema.primKey.name).toBe('puzzleId');
+    expect(db.table('puzzles').schema.indexes.map((index) => index.name)).toEqual(['lessonId']);
     expect(db.table('lessons').schema.primKey.name).toBe('lessonId');
     expect(db.table('lines').schema.primKey.name).toBe('key');
     expect(db.table('lines').schema.indexes.map((index) => index.name)).toEqual(['openingId']);
@@ -111,6 +113,65 @@ describe('openProgressStore', () => {
       firstTry: 3,
     });
     expect(await store.lines.all()).toEqual([]);
+  });
+
+  describe('the puzzles', () => {
+    const puzzle = (puzzleId: string, lessonId: string) => ({
+      puzzleId,
+      lessonId,
+      tries: 1,
+      lastFirstTry: true,
+      lastPlayedAt: 7,
+    });
+
+    it('should keep puzzles in their own table and read those of one lesson', async () => {
+      const store = await open();
+      await store.puzzles.put(puzzle('KEPe0', 'the-fork'));
+      await store.puzzles.put(puzzle('Zm7Ng', 'the-fork'));
+      await store.puzzles.put(puzzle('73Wh4', 'the-pin'));
+
+      expect(await store.puzzles.get('KEPe0')).toEqual(puzzle('KEPe0', 'the-fork'));
+      expect(await store.puzzles.all()).toHaveLength(3);
+      expect(await store.puzzles.ofLesson('the-pin')).toEqual([puzzle('73Wh4', 'the-pin')]);
+      expect(await store.lessons.all()).toEqual([]);
+
+      await store.puzzles.clear();
+      expect(await store.puzzles.all()).toEqual([]);
+    });
+  });
+
+  describe('upgrading from version 3', () => {
+    it('should keep every row of lines, endgames, positions and lessons', async () => {
+      const old = new Dexie('test-progress', { indexedDB, IDBKeyRange });
+      old.version(1).stores({ lines: 'key, openingId' });
+      old
+        .version(2)
+        .stores({ lines: 'key, openingId', endgames: 'endgameId', positions: 'positionId' });
+      old.version(3).stores({ lessons: 'lessonId' });
+      await old.open();
+      await old.table('lines').put(row('e2e4'));
+      await old
+        .table('endgames')
+        .put({ endgameId: 'lucena', completions: 2, firstCompletedAt: 1, lastCompletedAt: 3 });
+      await old.table('positions').put({
+        positionId: 'legal-mate',
+        solves: 1,
+        firstTry: true,
+        spoiled: false,
+        lastSolvedAt: 4,
+      });
+      const lesson = { lessonId: 'the-fork', completedAt: 5, exercises: 6, firstTry: 4 };
+      await old.table('lessons').put(lesson);
+      old.close();
+
+      const store = await open();
+
+      expect(await store.lines.all()).toEqual([row('e2e4')]);
+      expect(await store.endgames.get('lucena')).toMatchObject({ completions: 2 });
+      expect(await store.positions.get('legal-mate')).toMatchObject({ solves: 1 });
+      expect(await store.lessons.all()).toEqual([lesson]);
+      expect(await store.puzzles.all()).toEqual([]);
+    });
   });
 
   describe('upgrading from version 2', () => {

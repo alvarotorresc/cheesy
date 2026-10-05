@@ -4,6 +4,7 @@ import type {
   LessonProgress,
   LineProgress,
   PositionProgress,
+  PuzzleProgress,
 } from './progress.types';
 
 /** A row as it is stored: the progress of a line plus its key (see `progressKey`). */
@@ -22,12 +23,18 @@ export interface TableStore<Row> {
   clear(): Promise<void>;
 }
 
+/** The puzzles, which are also read one lesson at a time (by the index on the lesson). */
+export interface PuzzleTableStore extends TableStore<PuzzleProgress> {
+  ofLesson(lessonId: string): Promise<unknown[]>;
+}
+
 /** One table per section of the app. */
 export interface ProgressStore {
   readonly lines: TableStore<StoredLineProgress>;
   readonly endgames: TableStore<EndgameProgress>;
   readonly positions: TableStore<PositionProgress>;
   readonly lessons: TableStore<LessonProgress>;
+  readonly puzzles: PuzzleTableStore;
 }
 
 /** Opens the store. May reject: IndexedDB can be missing, blocked or full. */

@@ -1,4 +1,4 @@
-import { isContentId } from '../content/content-id';
+import { isContentId, isPuzzleId } from '../content/content-id';
 import {
   MASTERY_STREAK,
   type EndgameProgress,
@@ -7,6 +7,7 @@ import {
   type LineResult,
   type PositionProgress,
   type ProgressColor,
+  type PuzzleProgress,
 } from './progress.types';
 
 /** A move in standard UCI, castling written as the king move: e2e4, e1g1, e7e8q. */
@@ -140,4 +141,17 @@ export const parseLessonProgress = (value: unknown): LessonProgress | undefined 
   if (!isContentId(lessonId) || !isDate(completedAt)) return undefined;
   if (!isCount(exercises) || !isCount(firstTry) || firstTry > exercises) return undefined;
   return { lessonId, completedAt, exercises, firstTry };
+};
+
+/** Checks a puzzle row read from the database. Only the known fields are copied. */
+export const parsePuzzleProgress = (value: unknown): PuzzleProgress | undefined => {
+  if (typeof value !== 'object' || value === null) return undefined;
+  const { puzzleId, lessonId, tries, lastFirstTry, lastPlayedAt } = value as Record<
+    string,
+    unknown
+  >;
+  if (!isPuzzleId(puzzleId) || !isContentId(lessonId)) return undefined;
+  if (!isCount(tries) || tries < 1 || typeof lastFirstTry !== 'boolean') return undefined;
+  if (!isDate(lastPlayedAt)) return undefined;
+  return { puzzleId, lessonId, tries, lastFirstTry, lastPlayedAt };
 };
