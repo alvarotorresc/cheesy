@@ -1,0 +1,708 @@
+{
+  "lesson": "hanging-pieces",
+  "themes": {
+    "hangingPiece": "hanging-piece"
+  },
+  "puzzles": [
+    {
+      "id": "i1aKm",
+      "fen": "1k5r/pp6/2p5/1N2p3/1P3qB1/7K/P1Q3P1/3RR3 w - - 5 39",
+      "moves": [
+        "Bh5",
+        "Rxh5#"
+      ],
+      "rating": 918,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "54FMn",
+      "fen": "R1r4k/6p1/7p/8/5P1P/2p3P1/1b2K3/8 b - - 1 47",
+      "moves": [
+        "c2",
+        "Rxc8+",
+        "Kh7",
+        "Rxc2"
+      ],
+      "rating": 926,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "xYUur",
+      "fen": "3r1rk1/ppp2ppp/3n4/2N1b3/2B5/2P3P1/PP3P1P/3R1RK1 w - - 3 17",
+      "moves": [
+        "Rfe1",
+        "Nxc4",
+        "Rxd8",
+        "Rxd8"
+      ],
+      "rating": 927,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "89Rh8",
+      "fen": "r6Q/4q3/1p1p3R/1NpP2k1/PpP3N1/1P6/4p3/6K1 w - - 6 42",
+      "moves": [
+        "Rh5+",
+        "Kxg4",
+        "Rh4+",
+        "Qxh4",
+        "Qxh4+",
+        "Kxh4"
+      ],
+      "rating": 953,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "t6Nyi",
+      "fen": "2rk3r/2q5/3RQP2/p6p/1p3P2/8/PP4PP/K3R3 b - - 0 26",
+      "moves": [
+        "Qxd6",
+        "Qxd6#"
+      ],
+      "rating": 957,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "cRAzy",
+      "fen": "1r4k1/6pp/4p3/3p1p2/3P1P1Q/4q3/1PR2nPP/2R4K w - - 2 35",
+      "moves": [
+        "Rxf2",
+        "Qxc1+",
+        "Rf1",
+        "Qxf1#"
+      ],
+      "rating": 960,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "IVlVt",
+      "fen": "7k/3PR3/p4p1p/5b2/8/4K3/PPrp1PPP/8 b - - 0 36",
+      "moves": [
+        "Bxd7",
+        "Rxd7",
+        "d1=R",
+        "Rxd1"
+      ],
+      "rating": 962,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "hM2ch",
+      "fen": "6k1/6p1/2p4p/8/2P1b2Q/6Bq/P5rP/4RK2 b - - 9 32",
+      "moves": [
+        "Rf2+",
+        "Kxf2",
+        "Qg2+",
+        "Ke3",
+        "Qf3+",
+        "Kd4"
+      ],
+      "rating": 963,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "Rtjif",
+      "fen": "3r2k1/pp2Rn2/5r1p/4B1p1/4K3/P4PP1/1P5P/8 b - - 1 40",
+      "moves": [
+        "Kf8",
+        "Bxf6",
+        "Nd6+",
+        "Ke5"
+      ],
+      "rating": 1010,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "5D1WZ",
+      "fen": "8/1p3kpp/4pp2/2Np4/2nPP1P1/7P/1rn2P2/R3R1K1 w - - 1 30",
+      "moves": [
+        "Re2",
+        "Nxa1",
+        "Rxb2",
+        "Nxb2"
+      ],
+      "rating": 1016,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "ZhaZV",
+      "fen": "4r1k1/5pBp/p5r1/1pN5/1Pn1p3/P1Q1P2q/2R5/5R1K w - - 8 33",
+      "moves": [
+        "Rh2",
+        "Qxf1#"
+      ],
+      "rating": 1036,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "nYnR6",
+      "fen": "8/8/8/1PK5/2p5/2PknpN1/8/8 b - - 2 50",
+      "moves": [
+        "Nf5",
+        "Nxf5",
+        "f2",
+        "Ng3"
+      ],
+      "rating": 1079,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "zDdj3",
+      "fen": "8/1k4p1/2NP1p1p/p2K4/5P2/P5nP/8/8 w - - 0 42",
+      "moves": [
+        "Ke6",
+        "Kxc6",
+        "d7",
+        "Kc7",
+        "Ke7",
+        "Nf5+"
+      ],
+      "rating": 1080,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "N5Bwk",
+      "fen": "r2k1b1r/pQp2p1p/3p1n2/8/3P2B1/1N6/qPP4P/3KR3 b - - 0 24",
+      "moves": [
+        "Nxg4",
+        "Qxa8+",
+        "Kd7",
+        "Qe8#"
+      ],
+      "rating": 1090,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "vscaF",
+      "fen": "4r2k/ppqn3r/2pb1pQB/8/2BP4/2P2P2/PP3P2/R6K b - - 2 22",
+      "moves": [
+        "Bf4",
+        "Qxe8+",
+        "Nf8",
+        "Qxf8#"
+      ],
+      "rating": 1129,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "k6fCE",
+      "fen": "7k/1bp1r1pp/pn3b2/1p3p2/3N4/P7/1P2QPPP/R1B3K1 w - - 3 26",
+      "moves": [
+        "f3",
+        "Bxd4+",
+        "Kf1",
+        "Rxe2"
+      ],
+      "rating": 1149,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "Q4xAx",
+      "fen": "2br3k/p1p2pp1/2p5/2r1q3/4B2Q/8/P1P2PPP/R4RK1 b - - 6 18",
+      "moves": [
+        "Qh5",
+        "Qxd8#"
+      ],
+      "rating": 1160,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "24WLD",
+      "fen": "2R1rnk1/p4ppQ/1p6/1P1p1Bq1/1B1Pn3/8/P4PPP/6K1 b - - 0 21",
+      "moves": [
+        "Nxh7",
+        "Rxe8+",
+        "Nf8",
+        "Rxf8#"
+      ],
+      "rating": 1175,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "zDbZ4",
+      "fen": "5rk1/2pp4/8/4Pppp/6nQ/2P2R1P/3q2P1/4R1K1 w - - 0 29",
+      "moves": [
+        "Qxh5",
+        "Qxe1+",
+        "Rf1",
+        "Qe3+"
+      ],
+      "rating": 1192,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "WJrnr",
+      "fen": "5rk1/rpp3p1/2n5/4p3/1p1p3p/1P1P1q1P/1KP1QP1R/4RB2 b - - 3 23",
+      "moves": [
+        "Rfa8",
+        "Qxf3",
+        "Ra2+",
+        "Kc1",
+        "Ra1+",
+        "Kd2"
+      ],
+      "rating": 1194,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "gzgah",
+      "fen": "r6r/pp1knppp/1q1N4/3p4/3p1P2/4B2P/PPP1Q1P1/R4RK1 w - - 0 16",
+      "moves": [
+        "Bxd4",
+        "Qxd4+",
+        "Kh1",
+        "Kxd6"
+      ],
+      "rating": 1225,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "ATwCS",
+      "fen": "3r1r1k/1pb2p1p/2b2q2/8/PQ1R4/5N2/4BPPP/3R2K1 b - - 8 29",
+      "moves": [
+        "Rxd4",
+        "Qxf8#"
+      ],
+      "rating": 1230,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "EEcQl",
+      "fen": "6k1/p1p5/2p3KQ/2Pp4/1P2qP2/P7/8/7R w - - 1 46",
+      "moves": [
+        "Kh5",
+        "Qxh1+",
+        "Kg6",
+        "Qxh6+",
+        "Kxh6",
+        "d4"
+      ],
+      "rating": 1234,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "8a6Pr",
+      "fen": "r5k1/5ppp/p3p3/3p4/PP2nB2/1Qr1P3/1R2qPPP/3R2K1 w - - 3 22",
+      "moves": [
+        "Qxc3",
+        "Qxd1+",
+        "Qe1",
+        "Qxe1#"
+      ],
+      "rating": 1239,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "SLCRx",
+      "fen": "3R4/1r6/1n6/1p1k2P1/pP2pK2/4B3/8/8 b - - 5 55",
+      "moves": [
+        "Rd7",
+        "Bxb6",
+        "Rxd8",
+        "Bxd8"
+      ],
+      "rating": 1283,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "SLwfF",
+      "fen": "r3kb1r/pp3ppp/1qnpb3/8/2P5/5N2/PP2BPPP/R1BQK2R b KQkq - 1 11",
+      "moves": [
+        "Bxc4",
+        "Bxc4",
+        "Qb4+",
+        "Nd2"
+      ],
+      "rating": 1358,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "5jFUu",
+      "fen": "8/8/2P1k3/3Rb1p1/4p1n1/P5P1/5PK1/8 w - - 1 47",
+      "moves": [
+        "Rxe5+",
+        "Nxe5",
+        "c7",
+        "Kd7",
+        "c8=Q+",
+        "Kxc8"
+      ],
+      "rating": 1361,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "pI874",
+      "fen": "R7/P5k1/4ppp1/3p4/8/1K6/8/r7 b - - 0 51",
+      "moves": [
+        "Rxa7",
+        "Rxa7+",
+        "Kh6",
+        "Ra6"
+      ],
+      "rating": 1371,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "M5B9a",
+      "fen": "r1bqn2r/p4Qpk/4p3/3p2P1/NppP1P1b/4P3/PPP1N3/2KR3R b - - 0 19",
+      "moves": [
+        "Nd6",
+        "Rxh4#"
+      ],
+      "rating": 1384,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "X8cEJ",
+      "fen": "8/2N5/3k4/3p2p1/1b1P4/4PK2/8/8 w - - 4 54",
+      "moves": [
+        "Nxd5",
+        "Kxd5",
+        "Kg4",
+        "Be7"
+      ],
+      "rating": 1384,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "y9oxq",
+      "fen": "r3kbnr/pp3ppp/2p3b1/3p1P2/2n1P1P1/1QP4P/PP3q2/RNBK1BNR w kq - 3 12",
+      "moves": [
+        "Qc2",
+        "Qxf1#"
+      ],
+      "rating": 1401,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "GB6zZ",
+      "fen": "r3r1k1/bp3ppp/p3bq2/3Q4/2B5/2P2N1P/PP3PP1/3R1RK1 w - - 1 18",
+      "moves": [
+        "Qe5",
+        "Bxc4",
+        "Qxf6",
+        "gxf6"
+      ],
+      "rating": 1422,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "wCBqC",
+      "fen": "6k1/5p1p/3p2p1/4n3/1qP1P3/1r2Q2P/p4RP1/R6K w - - 0 34",
+      "moves": [
+        "Raxa2",
+        "Rxe3",
+        "Ra8+",
+        "Kg7"
+      ],
+      "rating": 1434,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "6BKzC",
+      "fen": "8/8/1P1K1k2/3B1p2/5Bp1/5bp1/7b/8 b - - 1 47",
+      "moves": [
+        "g2",
+        "Bxh2",
+        "Bxd5",
+        "Kxd5",
+        "g3",
+        "Bg1"
+      ],
+      "rating": 1446,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "pUv5X",
+      "fen": "5rk1/1p1B1pp1/p6p/P7/1P5n/6P1/2rqQ2N/R3RK2 b - - 4 33",
+      "moves": [
+        "Qxd7",
+        "Qxc2",
+        "Qh3+",
+        "Kg1"
+      ],
+      "rating": 1494,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "WS3dO",
+      "fen": "2k4Q/pp1r1p2/2p2n2/q1Pp4/Pb1P4/1P2P1B1/4KPP1/2R5 b - - 2 24",
+      "moves": [
+        "Rd8",
+        "Qxf6",
+        "Qa6+",
+        "Kf3"
+      ],
+      "rating": 1506,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "9G0yd",
+      "fen": "2k1r3/pp2q3/2p1p1Q1/2P3P1/4p3/8/PPP4r/1K1R4 b - - 0 30",
+      "moves": [
+        "Qxc5",
+        "Qxe8+",
+        "Kc7",
+        "Qd8#"
+      ],
+      "rating": 1517,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "JCj1Z",
+      "fen": "rQ4k1/2P2pp1/4p3/8/8/6B1/p4PKP/2q5 b - - 1 32",
+      "moves": [
+        "Kh7",
+        "Qxa8",
+        "a1=Q",
+        "Qxa1",
+        "Qxa1",
+        "c8=Q"
+      ],
+      "rating": 1526,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "GmDxW",
+      "fen": "6k1/5p2/6p1/4p2p/1P1pPRP1/8/r6q/1R1QN1KB w - - 1 37",
+      "moves": [
+        "Kf1",
+        "Qxh1#"
+      ],
+      "rating": 1555,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "seYcZ",
+      "fen": "1rn2rk1/1p4pp/pRp1q1n1/3pP3/Q1PP1p2/3B1P2/P2B2PP/4R1K1 w - - 2 24",
+      "moves": [
+        "cxd5",
+        "Nxb6",
+        "dxe6",
+        "Nxa4"
+      ],
+      "rating": 1569,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "iX55s",
+      "fen": "8/5pk1/2R3p1/r1bRp2p/2r1P2P/6P1/5PK1/8 b - - 1 35",
+      "moves": [
+        "Bb4",
+        "Rxc4",
+        "Rxd5",
+        "exd5"
+      ],
+      "rating": 1603,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "OoWpV",
+      "fen": "6k1/1p1R1rpp/2p1Q3/8/p5nq/2P5/PP3PB1/4R2K w - - 1 28",
+      "moves": [
+        "Bh3",
+        "Qxh3+",
+        "Kg1",
+        "Qh2+",
+        "Kf1",
+        "Qxf2#"
+      ],
+      "rating": 1619,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "ym03V",
+      "fen": "1bk3r1/pp3p2/P1n5/1NNp4/4p3/4Q1rq/1PP4P/R5RK b - - 0 24",
+      "moves": [
+        "Rxe3",
+        "Rxg8+",
+        "Nd8",
+        "axb7#"
+      ],
+      "rating": 1622,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "He1HO",
+      "fen": "1rr3k1/6pp/R1n2p2/1p3P2/2p3P1/2P5/2P2P1P/1R3BK1 w - - 0 24",
+      "moves": [
+        "Bxc4+",
+        "bxc4",
+        "Rxb8",
+        "Nxb8"
+      ],
+      "rating": 1626,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "dXOeR",
+      "fen": "r3k1nr/p2bpp1p/6p1/1B1Q4/5P2/4P3/P2B1KPP/q6R b kq - 1 14",
+      "moves": [
+        "Qxh1",
+        "Qxa8#"
+      ],
+      "rating": 1630,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "0n0F6",
+      "fen": "r4r2/4b1k1/p3p1p1/1p1p1p1R/2qP1P1P/2P5/PP1B2P1/3Q1RK1 w - - 1 26",
+      "moves": [
+        "Rf3",
+        "gxh5",
+        "Rg3+",
+        "Kh6"
+      ],
+      "rating": 1700,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "FkTpt",
+      "fen": "8/1p1n1kp1/p3rpNp/2pp4/2PP4/1PqB3P/P4QP1/R5K1 w - - 1 26",
+      "moves": [
+        "cxd5",
+        "Qxa1+",
+        "Kh2",
+        "Re1"
+      ],
+      "rating": 1700,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "mfool",
+      "fen": "r4rk1/pb1pbpp1/1pn1p2p/7q/1PP1n2B/P1N2N2/4BPPP/R2Q1RK1 w - - 0 14",
+      "moves": [
+        "Bxe7",
+        "Nxc3",
+        "Bxf8",
+        "Nxd1"
+      ],
+      "rating": 1700,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "pjKsU",
+      "fen": "r1bq1r1k/1pp1Nppp/p2p1n2/4nN2/4P2Q/1B6/PPP2PPP/R3R1K1 b - - 9 16",
+      "moves": [
+        "g6",
+        "Qxf6#"
+      ],
+      "rating": 1700,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "id": "xQIKO",
+      "fen": "4k3/1B3pp1/n7/1p4P1/2Pp1P2/3P4/8/6K1 b - - 0 33",
+      "moves": [
+        "bxc4",
+        "Bxa6",
+        "c3",
+        "Bb5+",
+        "Kf8",
+        "Ba4"
+      ],
+      "rating": 1700,
+      "themes": [
+        "hangingPiece"
+      ]
+    }
+  ]
+}

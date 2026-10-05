@@ -41,3 +41,6 @@ Thumbs.db
 # Local notes, kept out of the repository
 /design
 /docs
+
+# Downloaded data, such as the Lichess puzzle database
+/.cache

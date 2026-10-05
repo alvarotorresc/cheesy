@@ -1,0 +1,57 @@
+{
+  "source": {
+    "url": "https://database.lichess.org/lichess_db_puzzle.csv.zst",
+    "lastModified": "2026-10-02T08:51:45.000Z",
+    "sha256": "76335bfa7d7c4a7f93c1366d81549e53951ebb79dd43d34904cab8f22d962f8d",
+    "bytes": 307234795,
+    "rows": 6157341,
+    "scriptVersion": 1
+  },
+  "lessons": [
+    {
+      "lesson": "hanging-pieces",
+      "count": 50,
+      "themes": [
+        "hangingPiece"
+      ]
+    },
+    {
+      "lesson": "the-fork",
+      "count": 50,
+      "themes": [
+        "fork"
+      ]
+    },
+    {
+      "lesson": "the-pin",
+      "count": 50,
+      "themes": [
+        "pin"
+      ]
+    },
+    {
+      "lesson": "the-skewer",
+      "count": 50,
+      "themes": [
+        "skewer"
+      ]
+    },
+    {
+      "lesson": "discovered-attacks",
+      "count": 50,
+      "themes": [
+        "discoveredAttack",
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "lesson": "remove-the-defender",
+      "count": 50,
+      "themes": [
+        "capturingDefender",
+        "deflection"
+      ]
+    }
+  ]
+}

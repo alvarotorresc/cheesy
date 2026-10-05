@@ -56,10 +56,27 @@ export class LevelPage {
       : undefined;
   });
 
+  /** Ids of the lessons with Lichess puzzles; loaded apart, so the list never waits for them. */
+  private readonly puzzleLessons = signal<ReadonlySet<string>>(new Set());
+  /** "Practise more" at the foot, when a lesson of this level has puzzles. */
+  protected readonly hasPuzzles = computed(() =>
+    this.lessons().some((lesson) => this.puzzleLessons().has(lesson.id)),
+  );
+
   constructor() {
     const t = () => this.i18n.t();
     inject(PageTitle).showDetail(() => `${t().learn.levels[this.level()].name} · ${t().nav.learn}`);
     void this.load();
+    void this.loadPuzzles();
+  }
+
+  private async loadPuzzles(): Promise<void> {
+    try {
+      const { lessons } = await this.content.puzzleCatalog();
+      this.puzzleLessons.set(new Set(lessons.map((entry) => entry.lesson)));
+    } catch {
+      // Without the puzzle catalogue the level shows no link to them.
+    }
   }
 
   protected async load(): Promise<void> {

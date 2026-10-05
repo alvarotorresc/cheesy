@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import type { FindMoveStep } from '../../../../core/content';
 import { plainText } from '../../../../core/content/testing';
 import { I18nService } from '../../../../core/i18n';
-import { BoardComponent } from '../../../../shared/board';
+import { BoardComponent, BoardSpotlight } from '../../../../shared/board';
 import { addStepFrame, pressFocused } from '../../testing';
 import { FindMoveStepView } from './find-move-step';
 
@@ -27,6 +27,15 @@ const lineStep: FindMoveStep = {
   explanation: plainText('Bien'),
 };
 
+/** Lichess puzzle YYFFU: the board before the rival's Kf8, then O-O# (Rf1# mates as well). */
+const puzzleStep: FindMoveStep = {
+  kind: 'find-move',
+  text: plainText('Your move'),
+  board: { fen: 'r3r1k1/p5Rp/1n6/3pB3/8/8/P5PP/4K2R b K - 0 29', orientation: 'white' },
+  check: { by: 'engine', solution: ['O-O#'] },
+  explanation: plainText('Bien'),
+};
+
 describe('FindMoveStepView', () => {
   let fixture: ComponentFixture<FindMoveStepView>;
   let element: HTMLElement;
@@ -37,7 +46,7 @@ describe('FindMoveStepView', () => {
   const wrong = () => board().move.emit({ from: 'c2' as never, to: 'c6' as never });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    TestBed.configureTestingModule({ providers: [provideRouter([]), BoardSpotlight] });
     TestBed.inject(I18nService).setLang('en');
     fixture = TestBed.createComponent(FindMoveStepView);
     element = fixture.nativeElement as HTMLElement;
@@ -48,6 +57,7 @@ describe('FindMoveStepView', () => {
   afterEach(() => {
     localStorage.clear();
     vi.useRealTimers();
+    vi.unstubAllGlobals();
   });
 
   it('should show the message of a typical mistake, then the explanation when right', async () => {
@@ -294,6 +304,126 @@ describe('FindMoveStepView', () => {
       board().move.emit({ from: 'c2' as never, to: 'f5' as never });
       await fixture.whenStable();
       expect(skip()).toBeNull();
+    });
+  });
+
+  describe('opening move', () => {
+    const open = (step: FindMoveStep = puzzleStep) => {
+      fixture.componentRef.setInput('step', step);
+      fixture.componentRef.setInput('opening', 'Kf8');
+      fixture.detectChanges();
+    };
+
+    it('should show the board before the rival move, then play it after a moment', () => {
+      vi.useFakeTimers();
+      open();
+      expect(board().fen()).toContain('r3r1k1');
+      expect(board().dests().size).toBe(0);
+      vi.advanceTimersByTime(499);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3r1k1');
+      vi.advanceTimersByTime(1);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3rk2');
+      expect(board().lastMove()).toEqual(['g8', 'f8']);
+      expect(board().dests().size).toBeGreaterThan(0);
+      board().move.emit({ from: 'e1' as never, to: 'g1' as never });
+      fixture.detectChanges();
+      expect(done).toEqual([{ firstTry: true }]);
+    });
+
+    it('should play the rival move at once when the user asks for less motion', () => {
+      vi.stubGlobal('matchMedia', (query: string) => ({
+        matches: query.includes('reduce'),
+        addEventListener: () => undefined,
+        removeEventListener: () => undefined,
+      }));
+      open();
+      expect(board().fen()).toContain('r3rk2');
+      expect(board().lastMove()).toEqual(['g8', 'f8']);
+    });
+
+    it('should leave no timer when the step is skipped before the rival move', () => {
+      vi.useFakeTimers();
+      open();
+      expect(vi.getTimerCount()).toBe(1);
+      element.querySelector<HTMLButtonElement>('button.skip')!.click();
+      fixture.detectChanges();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('should leave no timer when the step is destroyed before the rival move', () => {
+      vi.useFakeTimers();
+      open();
+      expect(vi.getTimerCount()).toBe(1);
+      fixture.destroy();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('should accept another mate than the written one', () => {
+      vi.useFakeTimers();
+      open();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      board().move.emit({ from: 'h1' as never, to: 'f1' as never });
+      fixture.detectChanges();
+      expect(element.textContent).toContain('Bien');
+      expect(done).toEqual([{ firstTry: true }]);
+    });
+
+    it('should not play the old step opening on the step that takes its place', () => {
+      vi.useFakeTimers();
+      open();
+      vi.advanceTimersByTime(300);
+      open({ ...puzzleStep });
+      // t = 500: the opening of the old step is due now, but it belongs to the old step.
+      vi.advanceTimersByTime(200);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3r1k1');
+      vi.advanceTimersByTime(300);
+      fixture.detectChanges();
+      expect(board().fen()).toContain('r3rk2');
+    });
+  });
+
+  describe('rival reply', () => {
+    const feedback = () => element.querySelector('.feedback')!;
+    const reply = () => {
+      vi.useFakeTimers();
+      fixture.componentRef.setInput('step', lineStep);
+      fixture.detectChanges();
+      board().move.emit({ from: 'a1' as never, to: 'a7' as never });
+      fixture.detectChanges();
+    };
+
+    it('should say the rival move in the live region once it is played', () => {
+      reply();
+      expect(feedback().getAttribute('aria-live')).toBe('polite');
+      expect(feedback().textContent?.trim()).toBe('');
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      expect(feedback().textContent).toContain('Black replies:');
+      expect(feedback().querySelector('app-move')?.textContent).toContain('king to g8');
+      // A move inside the live region is not a tab stop.
+      expect(feedback().querySelector('[tabindex]')).toBeNull();
+    });
+
+    it('should say it in Spanish too', () => {
+      TestBed.inject(I18nService).setLang('es');
+      reply();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      expect(feedback().textContent).toContain('Las negras responden:');
+    });
+
+    it('should clear it with the next move of the player', () => {
+      reply();
+      vi.advanceTimersByTime(500);
+      fixture.detectChanges();
+      board().move.emit({ from: 'a7' as never, to: 'a1' as never });
+      fixture.detectChanges();
+      expect(feedback().textContent).not.toContain('Black replies:');
+      expect(feedback().textContent).toContain('Not this one. Try again.');
     });
   });
 });

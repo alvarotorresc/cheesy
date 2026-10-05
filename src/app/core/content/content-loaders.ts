@@ -8,6 +8,8 @@ import type {
   LessonSummary,
   OpeningSummary,
   OpeningTree,
+  PuzzleCatalog,
+  PuzzleFile,
 } from './content.types';
 
 /** How the content files are fetched. */
@@ -30,6 +32,14 @@ const hasText = (value: unknown, ...keys: string[]): boolean =>
 
 const isListOf = (value: unknown, ...keys: string[]): boolean =>
   Array.isArray(value) && value.every((entry) => hasText(entry, ...keys));
+
+/** A Lichess puzzle the page can play: a position and at least the rival's move and one answer. */
+const isPuzzle = (value: unknown): boolean =>
+  hasText(value, 'id', 'fen') &&
+  Array.isArray((value as Record<string, unknown>)['moves']) &&
+  ((value as Record<string, unknown>)['moves'] as unknown[]).length >= 2 &&
+  ((value as Record<string, unknown>)['moves'] as unknown[]).every((m) => typeof m === 'string') &&
+  Array.isArray((value as Record<string, unknown>)['themes']);
 
 /**
  * Downloads a content file from the same origin as the page. The files are validated in CI, so
@@ -104,4 +114,39 @@ export const createFetchLessonLoaders = (baseUrl: string): LessonLoaders => {
 export const LESSON_LOADERS = new InjectionToken<LessonLoaders>('LESSON_LOADERS', {
   providedIn: 'root',
   factory: () => createFetchLessonLoaders(inject(DOCUMENT).baseURI),
+});
+
+/** How the Lichess puzzles of "Practise more" are fetched: a token of its own, like the lessons. */
+export interface PuzzleLoaders {
+  catalog(): Promise<PuzzleCatalog>;
+  /** Only called with lesson ids taken from the catalogue. */
+  puzzles(lessonId: string): Promise<PuzzleFile>;
+}
+
+export const createFetchPuzzleLoaders = (baseUrl: string): PuzzleLoaders => {
+  const file = (path: string) => new URL(`${CONTENT_PATH}${path}`, baseUrl);
+  return {
+    catalog: () =>
+      download(
+        file('puzzle-catalog.json'),
+        (data) => isRecord(data) && isRecord(data['source']) && isListOf(data['lessons'], 'lesson'),
+      ),
+    puzzles: async (lessonId) => {
+      if (!isContentId(lessonId)) throw new Error(`Invalid lesson id: ${lessonId}`);
+      return download(
+        file(`puzzles/${lessonId}.json`),
+        (data) =>
+          isRecord(data) &&
+          data['lesson'] === lessonId &&
+          isRecord(data['themes']) &&
+          Array.isArray(data['puzzles']) &&
+          data['puzzles'].every(isPuzzle),
+      );
+    },
+  };
+};
+
+export const PUZZLE_LOADERS = new InjectionToken<PuzzleLoaders>('PUZZLE_LOADERS', {
+  providedIn: 'root',
+  factory: () => createFetchPuzzleLoaders(inject(DOCUMENT).baseURI),
 });

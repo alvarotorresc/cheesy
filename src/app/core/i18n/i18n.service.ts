@@ -6,7 +6,8 @@ import { isLang, resolveLocalized, type Lang, type Localized } from './i18n.type
 
 export const LANG_STORAGE_KEY = 'cheesy.lang';
 
-const DICTIONARIES: Record<Lang, Messages> = { es, en };
+/** The messages of every language, for texts that hold them all at once (a `RichText`). */
+export const DICTIONARIES: Readonly<Record<Lang, Messages>> = { es, en };
 
 const readStoredLang = (storage: () => Storage | undefined): Lang | undefined => {
   try {

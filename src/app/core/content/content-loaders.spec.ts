@@ -2,8 +2,14 @@ import {
   createFetchContentLoaders,
   createFetchGlossaryLoader,
   createFetchLessonLoaders,
+  createFetchPuzzleLoaders,
 } from './content-loaders';
-import { bundledContentLoaders, bundledGlossaryLoader, bundledLessonLoaders } from './testing';
+import {
+  bundledContentLoaders,
+  bundledGlossaryLoader,
+  bundledLessonLoaders,
+  bundledPuzzleLoaders,
+} from './testing';
 
 const BASE = 'https://chess.example/app/';
 
@@ -207,5 +213,91 @@ describe('bundledLessonLoaders', () => {
     const lesson = await bundledLessonLoaders.lesson('knight-moves');
     expect(lesson.id).toBe('knight-moves');
     expect(lesson.steps.length).toBeGreaterThanOrEqual(5);
+  });
+});
+
+describe('createFetchPuzzleLoaders', () => {
+  let fetchMock: ReturnType<typeof vi.fn<(url: URL | string) => Promise<Response>>>;
+
+  beforeEach(() => {
+    fetchMock = vi.fn<(url: URL | string) => Promise<Response>>();
+    vi.stubGlobal('fetch', fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should request the catalogue and the puzzles of a lesson from the content folder', async () => {
+    const catalog = { source: { url: 'https://database.lichess.org' }, lessons: [] };
+    const puzzle = {
+      id: 'KEPe0',
+      fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+      moves: ['Rf7', 'Nxf7'],
+      themes: [],
+    };
+    const file = { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [puzzle] };
+    fetchMock.mockImplementation(async (url) =>
+      reply(new URL(url).pathname.endsWith('puzzle-catalog.json') ? catalog : file),
+    );
+    const loaders = createFetchPuzzleLoaders(BASE);
+
+    expect(await loaders.catalog()).toEqual(catalog);
+    expect(await loaders.puzzles('the-fork')).toEqual(file);
+    expect(fetchMock.mock.calls.map(([url]) => url.toString())).toEqual([
+      'https://chess.example/app/content/puzzle-catalog.json',
+      'https://chess.example/app/content/puzzles/the-fork.json',
+    ]);
+  });
+
+  it('should refuse an id that is not a content id and a file of another lesson', async () => {
+    fetchMock.mockImplementation(async () => reply({ lesson: 'the-pin', themes: {}, puzzles: [] }));
+    const loaders = createFetchPuzzleLoaders(BASE);
+
+    await expect(loaders.puzzles('../secret')).rejects.toThrowError(/Invalid lesson id/);
+    await expect(loaders.puzzles('the-fork')).rejects.toThrowError(/Unexpected content/);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reject a file whose puzzles or themes the page could not play', async () => {
+    const puzzle = {
+      id: 'KEPe0',
+      fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+      moves: ['Rf7', 'Nxf7'],
+      themes: [],
+    };
+    const loaders = createFetchPuzzleLoaders(BASE);
+    const broken = [
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: ['Rf7'] }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: ['Rf7', 4] }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, moves: 'Rf7 Nxf7' }] },
+      { lesson: 'the-fork', themes: { fork: 'fork' }, puzzles: [{ ...puzzle, themes: undefined }] },
+      { lesson: 'the-fork', themes: ['fork'], puzzles: [puzzle] },
+      { lesson: 'the-fork', puzzles: [puzzle] },
+    ];
+    for (const file of broken) {
+      fetchMock.mockImplementationOnce(async () => reply(file));
+      await expect(loaders.puzzles('the-fork')).rejects.toThrowError(/Unexpected content/);
+    }
+  });
+
+  it('should reject a catalogue without its lessons or its source', async () => {
+    fetchMock.mockImplementation(async () => reply({ lessons: [] }));
+    const loaders = createFetchPuzzleLoaders(BASE);
+
+    await expect(loaders.catalog()).rejects.toThrowError(/Unexpected content/);
+  });
+});
+
+describe('bundledPuzzleLoaders', () => {
+  it('should load the real catalogue and the puzzles of each lesson in it', async () => {
+    const catalog = await bundledPuzzleLoaders.catalog();
+    expect(catalog.lessons.map((entry) => entry.lesson)).toContain('the-fork');
+
+    for (const entry of catalog.lessons) {
+      const file = await bundledPuzzleLoaders.puzzles(entry.lesson);
+      expect(file.lesson).toBe(entry.lesson);
+      expect(file.puzzles).toHaveLength(entry.count);
+    }
   });
 });

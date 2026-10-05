@@ -40,3 +40,23 @@ export const oldGlossaryLinkGuard: CanActivateFn = (route) =>
 
 export const levelGuard = guard(false);
 export const lessonGuard = guard(true);
+
+/**
+ * The puzzles of a lesson only open when the lesson is in the puzzle catalogue with puzzles; the rest goes to
+ * the list. If the catalogue cannot be loaded the page opens and shows its own error with a retry.
+ */
+export const puzzleGuard: CanActivateFn = async (route) => {
+  const router = inject(Router);
+  const content = inject(ContentService);
+  let lessons: readonly { lesson: string; count: number }[];
+  try {
+    ({ lessons } = await content.puzzleCatalog());
+  } catch {
+    return true;
+  }
+  const id = route.paramMap.get('lesson');
+  return (
+    lessons.some((entry) => entry.lesson === id && entry.count > 0) ||
+    router.createUrlTree(['/learn/puzzles'])
+  );
+};

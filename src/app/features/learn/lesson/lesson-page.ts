@@ -128,9 +128,20 @@ export class LessonPage {
     return step !== undefined && (step.kind === 'explain' || this.outcomes().has(this.index()));
   });
   protected readonly isLast = computed(() => this.index() === this.steps().length - 1);
+  /** Lessons with Lichess puzzles; loaded apart, so a lesson never waits for them. */
+  private readonly puzzleLessons = signal<ReadonlySet<string>>(new Set());
+  protected readonly hasPuzzles = computed(() => {
+    const lesson = this.lesson();
+    return lesson !== undefined && this.puzzleLessons().has(lesson.id);
+  });
+  /**
+   * "Practise more" takes the place of "Practise" when that leads to Positions, which is not by
+   * theme; a practice of endgames is another kind of practice and stays next to it.
+   */
   protected readonly practice = computed(() => {
     const lesson = this.lesson();
-    return lesson && practiceLink(lesson);
+    if (!lesson || (this.hasPuzzles() && lesson.next?.kind === 'positions')) return undefined;
+    return practiceLink(lesson);
   });
 
   /** The index of the step whose heading has the focus, so the first render keeps the page's. */
@@ -150,6 +161,7 @@ export class LessonPage {
       const id = this.params().id;
       untracked(() => void this.load(id));
     });
+    void this.loadPuzzles();
 
     effect(() => {
       if (!this.onSummary()) {
@@ -209,6 +221,15 @@ export class LessonPage {
       });
     } catch {
       if (id === this.params().id) this.state.set({ status: 'error' });
+    }
+  }
+
+  private async loadPuzzles(): Promise<void> {
+    try {
+      const { lessons } = await this.content.puzzleCatalog();
+      this.puzzleLessons.set(new Set(lessons.map((entry) => entry.lesson)));
+    } catch {
+      // Without the puzzle catalogue the summary shows no link to them.
     }
   }
 

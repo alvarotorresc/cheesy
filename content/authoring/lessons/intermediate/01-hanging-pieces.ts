@@ -131,8 +131,8 @@ export const hangingPieces: LessonSpec = {
       check: { by: 'engine', solution: ['Nxe5'] },
       wrong: {
         Qxe5: {
-          es: 'La dama vale 9: el caballo de c6 la captura y tú solo recuperas un caballo.',
-          en: 'The queen is worth 9: the knight on c6 takes her and you only get a knight back.',
+          es: 'La dama vale 9: el caballo de c6 la captura y, aunque recuperes con el caballo, das la dama por dos caballos (9 por 6).',
+          en: 'The queen is worth 9: the knight on c6 takes her and, even if your knight takes back, you give the queen for two knights (9 for 6).',
         },
       },
       hint: {

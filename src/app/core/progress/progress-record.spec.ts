@@ -7,6 +7,7 @@ import {
   parseEndgameProgress,
   parseLineProgress,
   parsePositionProgress,
+  parsePuzzleProgress,
   progressKey,
 } from './progress-record';
 import type { LineProgress, LineResult } from './progress.types';
@@ -278,5 +279,34 @@ describe('parsePositionProgress', () => {
 
   it('should reject a date on a position that was never solved', () => {
     expect(parsePositionProgress({ ...spoiledOnly, lastSolvedAt: 3 })).toBeUndefined();
+  });
+});
+
+describe('parsePuzzleProgress', () => {
+  const row = {
+    puzzleId: 'KEPe0',
+    lessonId: 'the-fork',
+    tries: 2,
+    lastFirstTry: true,
+    lastPlayedAt: 10,
+  };
+
+  it('should keep a valid row and copy only its fields', () => {
+    expect(parsePuzzleProgress({ ...row, extra: 'x' })).toEqual(row);
+  });
+
+  it.each([
+    ['a puzzle id that is not a Lichess id', { puzzleId: '../ab' }],
+    ['a lesson id that is not a content id', { lessonId: 'The Fork' }],
+    ['no tries', { tries: 0 }],
+    ['tries that are not a count', { tries: 1.5 }],
+    ['a first try that is not a boolean', { lastFirstTry: 'yes' }],
+    ['a date out of range', { lastPlayedAt: -1 }],
+  ])('should ignore a row with %s', (_name, change) => {
+    expect(parsePuzzleProgress({ ...row, ...change })).toBeUndefined();
+  });
+
+  it.each([null, undefined, 'KEPe0', 3])('should ignore %j', (value) => {
+    expect(parsePuzzleProgress(value)).toBeUndefined();
   });
 });

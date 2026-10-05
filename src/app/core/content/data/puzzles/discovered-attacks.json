@@ -1,0 +1,744 @@
+{
+  "lesson": "discovered-attacks",
+  "themes": {
+    "discoveredAttack": "discovered-attack",
+    "doubleCheck": "double-check",
+    "discoveredCheck": "discovered-check"
+  },
+  "puzzles": [
+    {
+      "id": "lsIec",
+      "fen": "1k1r4/1pp4p/p1n2p2/P6q/4P3/2P2RBB/1P2K2P/RN6 b - - 2 24",
+      "moves": [
+        "Qxh3",
+        "Bxc7+",
+        "Kxc7",
+        "Rxh3"
+      ],
+      "rating": 903,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "j1gFw",
+      "fen": "8/6k1/4p3/2Bb2pp/1R1P4/5P2/5NPP/r1b3K1 w - - 4 46",
+      "moves": [
+        "Nd3",
+        "Be3#"
+      ],
+      "rating": 924,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "n8OWI",
+      "fen": "r1b1k2r/pp2pp2/1q1p2p1/4b3/2N1P2p/2P2Pn1/PP2B1PP/RN1Q1R1K w kq - 4 15",
+      "moves": [
+        "hxg3",
+        "hxg3#"
+      ],
+      "rating": 941,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "cuDzg",
+      "fen": "8/5p2/1R6/4rpk1/1p6/pP6/P1PKB2r/4N3 b - - 15 42",
+      "moves": [
+        "Re4",
+        "Nf3+",
+        "Kg4",
+        "Nxh2+"
+      ],
+      "rating": 973,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "zeOz5",
+      "fen": "2rq1r1k/1b2bppB/p3p1Np/np6/3P4/6N1/PPQ2PPP/R4RK1 b - - 4 19",
+      "moves": [
+        "Kxh7",
+        "Nxf8+",
+        "Kg8",
+        "Qh7+",
+        "Kxf8",
+        "Qh8#"
+      ],
+      "rating": 981,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "668Xn",
+      "fen": "5R2/pp1k4/2pn4/3p4/3P4/KP3N2/PP1r4/8 b - - 4 39",
+      "moves": [
+        "Rf2",
+        "Ne5+",
+        "Ke6",
+        "Rxf2"
+      ],
+      "rating": 985,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "TXrUw",
+      "fen": "2rN2k1/pp5p/5p2/8/7P/2p5/P1n2PP1/R3R1K1 b - - 0 22",
+      "moves": [
+        "Nxa1",
+        "Re8+",
+        "Kg7",
+        "Ne6+",
+        "Kf7",
+        "Rxc8"
+      ],
+      "rating": 985,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "Mifsq",
+      "fen": "r5k1/p2q1pBp/4rN2/1pp5/3b4/6QP/PP3PP1/n4K1R b - - 2 25",
+      "moves": [
+        "Bxf6",
+        "Bxf6+",
+        "Kf8",
+        "Qg7+",
+        "Ke8",
+        "Qh8#"
+      ],
+      "rating": 986,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "YYFFU",
+      "fen": "r3r1k1/p5Rp/1n6/3pB3/8/8/P5PP/4K2R b K - 0 29",
+      "moves": [
+        "Kf8",
+        "O-O#"
+      ],
+      "rating": 991,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "JsKnF",
+      "fen": "1k1r4/pPp5/8/N3PPr1/3pQ3/1Pq5/2P1K3/R7 b - - 5 39",
+      "moves": [
+        "Qxa1",
+        "Nc6+",
+        "Kxb7",
+        "Nxd8+"
+      ],
+      "rating": 994,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "V2G1j",
+      "fen": "4k3/8/1p6/1P6/1b3P2/3KN1P1/3pR3/4r3 b - - 5 55",
+      "moves": [
+        "d1=Q+",
+        "Nxd1+",
+        "Rxe2",
+        "Kxe2"
+      ],
+      "rating": 997,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "d83WF",
+      "fen": "r4rk1/1ppq2pB/2np4/p7/2P2Nb1/1P1Q2P1/P4P1P/b1B2RK1 b - - 0 18",
+      "moves": [
+        "Kh8",
+        "Ng6+",
+        "Kxh7",
+        "Nxf8+",
+        "Kg8",
+        "Nxd7"
+      ],
+      "rating": 1003,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "lUd9x",
+      "fen": "r3k2r/4PPR1/2p5/p2pK3/1pp1nR1P/P7/1P6/8 b - - 0 38",
+      "moves": [
+        "Kxe7",
+        "f8=Q#"
+      ],
+      "rating": 1017,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "Dlsnc",
+      "fen": "8/2P2pk1/R7/p1r5/2n5/6B1/7P/2K5 w - - 1 47",
+      "moves": [
+        "Ra8",
+        "Nb6+",
+        "Kb2",
+        "Nxa8",
+        "c8=Q",
+        "Rxc8"
+      ],
+      "rating": 1028,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "wlvcT",
+      "fen": "1k6/5pp1/1P6/7p/8/4bBPP/3r1n1K/1R3R2 w - - 3 43",
+      "moves": [
+        "b7",
+        "Ng4+",
+        "Kh1",
+        "Rh2#"
+      ],
+      "rating": 1036,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "y16z9",
+      "fen": "8/p4ppk/1p2p2p/4nq2/P7/1P1r3P/2Q2PP1/R4R1K w - - 9 30",
+      "moves": [
+        "Rad1",
+        "Rxh3+",
+        "gxh3",
+        "Qxc2"
+      ],
+      "rating": 1060,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "9Yiuy",
+      "fen": "2r3k1/p1P3pp/3q4/3pr3/1PbQ4/P1N2R1P/5PPK/2R5 w - - 3 35",
+      "moves": [
+        "Qxa7",
+        "Re1+",
+        "Rg3",
+        "Rxc1"
+      ],
+      "rating": 1072,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "2ejqK",
+      "fen": "r4rk1/pp4p1/2n4p/3P2q1/5pb1/P1BB1Q2/2P2P1P/R4RK1 w - - 0 20",
+      "moves": [
+        "Qe4",
+        "Bf3#"
+      ],
+      "rating": 1081,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "QCRGm",
+      "fen": "2r5/5pkp/p3p1p1/1pq5/1P1R4/6B1/P4PP1/3R2K1 b - - 0 32",
+      "moves": [
+        "Qc3",
+        "Be5+",
+        "Kh6",
+        "Rh4+",
+        "Kg5",
+        "Bxc3"
+      ],
+      "rating": 1088,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "Ruewj",
+      "fen": "6k1/pp4b1/8/3pP1q1/7p/PN5b/1PB3pB/R1Q1RrK1 w - - 5 28",
+      "moves": [
+        "Rxf1",
+        "gxf1=Q#"
+      ],
+      "rating": 1091,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "FaKFb",
+      "fen": "r5k1/pp5p/2p3p1/3P4/1q2P3/6P1/PbQ1b1BP/1R4K1 w - - 0 24",
+      "moves": [
+        "Qxe2",
+        "Bd4+",
+        "Kh1",
+        "Qxb1+"
+      ],
+      "rating": 1102,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "MAN9U",
+      "fen": "Q7/7k/4r1qp/3p2p1/4nP2/3Bb2P/6PB/4R2K w - - 8 46",
+      "moves": [
+        "Qxd5",
+        "Nf2+",
+        "Kg1",
+        "Nxd3+"
+      ],
+      "rating": 1140,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "0OvMp",
+      "fen": "2b5/6kp/p2P1p1q/PppQb3/7p/6P1/1P3P1K/1R1R4 w - - 2 36",
+      "moves": [
+        "d7",
+        "hxg3+",
+        "Kg2",
+        "Qh2+",
+        "Kf3",
+        "Qxf2+"
+      ],
+      "rating": 1148,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "YE7Zo",
+      "fen": "8/p7/1p2RB1k/1PbP2p1/P5P1/q6n/2B5/1K6 b - - 9 47",
+      "moves": [
+        "Qb4+",
+        "Bb2#"
+      ],
+      "rating": 1148,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "mDDJJ",
+      "fen": "r1bq1r1k/pp3ppB/2p1p3/1n6/3P1bN1/P6Q/1P3P1P/R2R2K1 b - - 1 24",
+      "moves": [
+        "Bh6",
+        "Nxh6",
+        "Kxh7",
+        "Nxf7+",
+        "Kg8",
+        "Nxd8"
+      ],
+      "rating": 1155,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "mQtaf",
+      "fen": "5rk1/1p4pp/p1p1p3/q1bn4/P1B5/1QBR4/1P3rPP/R5K1 w - - 0 20",
+      "moves": [
+        "Bxa5",
+        "Rf1#"
+      ],
+      "rating": 1165,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "mIiwT",
+      "fen": "q1r5/5pk1/1pbp2pp/2n1p3/P3P3/1P3N2/2B1QPPP/2R3K1 b - - 1 30",
+      "moves": [
+        "Nxe4",
+        "Bxe4",
+        "Bxe4",
+        "Rxc8",
+        "Qxc8",
+        "Qxe4"
+      ],
+      "rating": 1166,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "G6odh",
+      "fen": "r4r2/1p4pk/2n2PNp/2qBp3/p1PpQP2/3P3P/8/1R2b1K1 b - - 0 29",
+      "moves": [
+        "Rxf6",
+        "Nf8+",
+        "Kh8",
+        "Qh7#"
+      ],
+      "rating": 1178,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "Wunar",
+      "fen": "8/1b6/p4R2/1P1p3k/3P4/5PK1/1r6/3B4 b - - 0 51",
+      "moves": [
+        "Rxb5",
+        "f4#"
+      ],
+      "rating": 1193,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "ARRYN",
+      "fen": "2k5/1p6/3pp3/p3p3/P2PP1q1/2P1PrP1/1P2Q2K/R7 w - - 0 32",
+      "moves": [
+        "Rg1",
+        "Qh5+",
+        "Kg2",
+        "Rxg3+",
+        "Kxg3",
+        "Qxe2"
+      ],
+      "rating": 1209,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "BCOQE",
+      "fen": "r4rk1/ppP2ppp/4b3/2R5/2B5/8/PP4PP/RNn2K2 w - - 1 18",
+      "moves": [
+        "Bxe6",
+        "fxe6+",
+        "Ke1",
+        "Nd3+",
+        "Ke2",
+        "Nxc5"
+      ],
+      "rating": 1221,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "c93hf",
+      "fen": "r5k1/ppp3pp/3qp3/4nr2/2P5/1PQ2p1P/PB3N1K/R4R2 w - - 0 25",
+      "moves": [
+        "Ne4",
+        "Ng4+",
+        "Kg1",
+        "Qh2#"
+      ],
+      "rating": 1249,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "8LIhV",
+      "fen": "r3k2r/ppqn1ppp/2n1P1b1/1B1p4/3Q4/1P5P/P1P2PPN/R3R1K1 b kq - 0 19",
+      "moves": [
+        "Nxd4",
+        "exd7+",
+        "Kf8",
+        "Re8+",
+        "Rxe8",
+        "dxe8=Q#"
+      ],
+      "rating": 1265,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "hIA0r",
+      "fen": "r1b3k1/pp1p1ppp/8/8/8/3q2P1/P2BnPBP/R2Q2KR w - - 5 20",
+      "moves": [
+        "Kf1",
+        "Nc3+",
+        "Kg1",
+        "Nxd1"
+      ],
+      "rating": 1269,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "p9LVs",
+      "fen": "2Qnk1nr/pp1r1ppp/8/7q/6b1/2N2N1P/PPP1PPP1/R3KB1R w KQk - 5 13",
+      "moves": [
+        "Rd1",
+        "Rxd1+",
+        "Kxd1",
+        "Bxc8"
+      ],
+      "rating": 1281,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "6aKLW",
+      "fen": "3Q4/3N2p1/4p2p/1p3pk1/3q4/7P/6PK/8 b - - 3 43",
+      "moves": [
+        "Kg6",
+        "Nf8+",
+        "Kf7",
+        "Qxd4"
+      ],
+      "rating": 1305,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "ALjme",
+      "fen": "r2q3r/ppp1n1pk/6Np/3p2B1/3P4/3Q4/P4PPP/R5K1 b - - 0 20",
+      "moves": [
+        "hxg5",
+        "Nxe7+",
+        "g6",
+        "Qxg6#"
+      ],
+      "rating": 1361,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "kuFuK",
+      "fen": "3q1rk1/2R4p/p3ppB1/2p5/2Pb4/6QP/P4PP1/6K1 b - - 0 29",
+      "moves": [
+        "Be5",
+        "Bxh7+",
+        "Kh8",
+        "Qg7#"
+      ],
+      "rating": 1365,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "ccaPU",
+      "fen": "5rk1/p5pp/1p2p3/3pPn2/1P1P4/P3P3/3Q1KPP/5r2 w - - 2 24",
+      "moves": [
+        "Kxf1",
+        "Ng3+",
+        "Ke1",
+        "Rf1#"
+      ],
+      "rating": 1457,
+      "themes": [
+        "doubleCheck"
+      ]
+    },
+    {
+      "id": "eY6Nb",
+      "fen": "5rk1/1p2bnNp/p3p3/3pP3/3n2P1/3qB2Q/PR1N3P/7K b - - 0 28",
+      "moves": [
+        "Kxg7",
+        "Bh6+",
+        "Nxh6",
+        "Qxd3"
+      ],
+      "rating": 1491,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "qcEkQ",
+      "fen": "8/8/pQp3kp/P1P3p1/3q1p2/4r2P/6P1/5RK1 w - - 2 45",
+      "moves": [
+        "Qxc6+",
+        "Re6+",
+        "Kh1",
+        "Rxc6"
+      ],
+      "rating": 1495,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "onm9H",
+      "fen": "4r3/4nk2/2b1N1pp/pp1p4/2pPP3/2P2B2/PP4PP/4R1K1 b - - 0 33",
+      "moves": [
+        "Kxe6",
+        "exd5+",
+        "Kd6",
+        "dxc6"
+      ],
+      "rating": 1502,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "O5JsK",
+      "fen": "2RN2k1/r4p1p/pp2p1p1/3n4/q2b1B2/5P2/PP4PP/5R1K b - - 1 25",
+      "moves": [
+        "Nxf4",
+        "Nxe6+",
+        "Qe8",
+        "Rxe8#"
+      ],
+      "rating": 1512,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "V6R99",
+      "fen": "2r2rkb/pQ5p/5q1P/3pn1p1/5n2/1PN5/PBPP3R/2KR2N1 w - - 1 22",
+      "moves": [
+        "Nxd5",
+        "Ned3+",
+        "Kb1",
+        "Qxb2#"
+      ],
+      "rating": 1541,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "4hNRS",
+      "fen": "5rk1/p4pbp/3q2p1/3N4/1p2r1P1/1B5Q/P6P/5R1K b - - 2 36",
+      "moves": [
+        "f5",
+        "Nf6+",
+        "Kh8",
+        "Qxh7#"
+      ],
+      "rating": 1607,
+      "themes": [
+        "doubleCheck",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "8Q57I",
+      "fen": "2k2r2/ppp3p1/2n3rp/8/2pP2n1/P2QB1qN/1P2RPBb/R2N1K2 w - - 0 22",
+      "moves": [
+        "Qxg6",
+        "Nxe3+",
+        "Nxe3",
+        "Qxg6"
+      ],
+      "rating": 1641,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "6eNNv",
+      "fen": "1r2r1k1/p4p1p/1pqp2p1/2p2RB1/3b4/2NP2Q1/PPP3PP/R6K b - - 2 18",
+      "moves": [
+        "gxf5",
+        "Bf6+",
+        "Kf8",
+        "Qg7#"
+      ],
+      "rating": 1664,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "5Cpt9",
+      "fen": "r3r2k/1p5p/8/pQ1n1pP1/3Nq3/PP2P1B1/2P2P2/1K1R3R w - - 1 36",
+      "moves": [
+        "Qxb7",
+        "Nc3+",
+        "Kc1",
+        "Qxb7"
+      ],
+      "rating": 1700,
+      "themes": [
+        "discoveredAttack"
+      ]
+    },
+    {
+      "id": "XzDjX",
+      "fen": "2k2r2/1pp4Q/4p3/pPq1p3/P1P2r2/3P4/5PPP/R4RK1 w - - 1 24",
+      "moves": [
+        "Qh6",
+        "Rxf2",
+        "Qxf8+",
+        "Rxf8+"
+      ],
+      "rating": 1700,
+      "themes": [
+        "discoveredAttack",
+        "discoveredCheck"
+      ]
+    },
+    {
+      "id": "rAqxl",
+      "fen": "r6r/1b1pqpk1/ppn1pN2/4PnN1/P1Bp2Qp/7P/1PP2PP1/R4RK1 b - - 2 17",
+      "moves": [
+        "Nxe5",
+        "Nxe6+",
+        "Kxf6",
+        "Qg5#"
+      ],
+      "rating": 1700,
+      "themes": [
+        "doubleCheck"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { isContentId } from '../content/content-id';
+import { isContentId, isPuzzleId } from '../content/content-id';
 import {
   applyResult,
   isValidResult,
@@ -7,6 +7,7 @@ import {
   parseLessonProgress,
   parseLineProgress,
   parsePositionProgress,
+  parsePuzzleProgress,
   progressKey,
 } from './progress-record';
 import { PROGRESS_STORE_LOADER, type ProgressStore } from './progress-store';
@@ -17,6 +18,8 @@ import type {
   LineProgress,
   LineResult,
   PositionProgress,
+  PuzzleProgress,
+  PuzzleResult,
 } from './progress.types';
 
 /**
@@ -27,11 +30,11 @@ import type {
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 
 /** The parts of the app that keep progress, each one deleted on its own. */
-export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons';
+export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons' | 'puzzles';
 
 /**
- * Progress of the practised lines, endgames, positions and lessons, kept only in this browser (IndexedDB). Nothing is ever sent
- * anywhere.
+ * Progress of the practised lines, endgames, positions, lessons and puzzles, kept only in this
+ * browser (IndexedDB). Nothing is ever sent anywhere.
  *
  * Storage is best effort: every method resolves, never rejects. When the store cannot be opened
  * or an operation fails, reads return nothing, writes are dropped, and `status` turns
@@ -155,6 +158,37 @@ export class ProgressService {
     });
   }
 
+  /** Every valid row of the puzzles, or of the puzzles of one lesson. */
+  async puzzles(lessonId?: string): Promise<PuzzleProgress[]> {
+    if (lessonId !== undefined && !isContentId(lessonId)) return [];
+    const rows = await this.run((store) =>
+      lessonId === undefined ? store.puzzles.all() : store.puzzles.ofLesson(lessonId),
+    );
+    return (rows ?? [])
+      .flatMap((row) => parsePuzzleProgress(row) ?? [])
+      .filter((row) => lessonId === undefined || row.lessonId === lessonId);
+  }
+
+  /** Saves a finished puzzle: one more try, and its result replaces the last one. */
+  async recordPuzzle(result: PuzzleResult, now = Date.now()): Promise<PuzzleProgress | undefined> {
+    const { puzzleId, lessonId, firstTry } = result;
+    if (!isPuzzleId(puzzleId) || !isContentId(lessonId) || typeof firstTry !== 'boolean') {
+      return undefined;
+    }
+    return this.save(async (store) => {
+      const previous = parsePuzzleProgress(await store.puzzles.get(puzzleId));
+      const next: PuzzleProgress = {
+        puzzleId,
+        lessonId,
+        tries: (previous?.tries ?? 0) + 1,
+        lastFirstTry: firstTry,
+        lastPlayedAt: now,
+      };
+      await store.puzzles.put(next);
+      return next;
+    });
+  }
+
   /** Deletes the progress of one section, and only that one. Resolves with false on failure. */
   async clear(section: ProgressSection): Promise<boolean> {
     const table = {
@@ -162,6 +196,7 @@ export class ProgressService {
       endgames: 'endgames',
       positions: 'positions',
       lessons: 'lessons',
+      puzzles: 'puzzles',
     } as const;
     const cleared = await this.run(async (store) => {
       await store[table[section]].clear();

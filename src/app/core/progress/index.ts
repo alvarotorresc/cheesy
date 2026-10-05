@@ -3,6 +3,7 @@ export {
   PROGRESS_STORE_LOADER,
   type ProgressStore,
   type ProgressStoreLoader,
+  type PuzzleTableStore,
   type StoredLineProgress,
   type TableStore,
 } from './progress-store';
@@ -16,4 +17,6 @@ export {
   type LineResult,
   type PositionProgress,
   type ProgressColor,
+  type PuzzleProgress,
+  type PuzzleResult,
 } from './progress.types';

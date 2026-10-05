@@ -312,7 +312,7 @@
           },
           {
             "kind": "text",
-            "text": " y al alfil de "
+            "text": " y a la torre de "
           },
           {
             "kind": "square",
@@ -351,7 +351,7 @@
           },
           {
             "kind": "text",
-            "text": " and the bishop on "
+            "text": " and the rook on "
           },
           {
             "kind": "square",
@@ -364,7 +364,7 @@
         ]
       },
       "board": {
-        "fen": "r5k1/5ppp/8/1n1b4/8/2P5/5PPP/6K1 w - - 0 1",
+        "fen": "r5k1/5ppp/8/1n1r4/8/2P5/5PPP/6K1 w - - 0 1",
         "orientation": "white",
         "moves": [
           "c4"
@@ -898,7 +898,15 @@
           "es": [
             {
               "kind": "text",
-              "text": "Ganas un peón, pero en "
+              "text": "Capturas un peón, pero la torre de "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " captura tu caballo en "
             },
             {
               "kind": "square",
@@ -906,13 +914,21 @@
             },
             {
               "kind": "text",
-              "text": " el caballo no ataca nada más y se queda encerrado."
+              "text": ": das un caballo por un peón."
             }
           ],
           "en": [
             {
               "kind": "text",
-              "text": "You win a pawn, but on "
+              "text": "You take a pawn, but the rook on "
+            },
+            {
+              "kind": "square",
+              "square": "a8"
+            },
+            {
+              "kind": "text",
+              "text": " takes your knight on "
             },
             {
               "kind": "square",
@@ -920,7 +936,7 @@
             },
             {
               "kind": "text",
-              "text": " the knight attacks nothing else and gets trapped."
+              "text": ": you give a knight for a pawn."
             }
           ]
         }

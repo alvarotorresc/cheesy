@@ -44,3 +44,16 @@ export const LICHESS_THEMES: Record<string, LichessTheme[]> = {
   'rook-endings': ['rookEndgame'],
   'draws-and-defence': ['defensiveMove', 'equality'],
 };
+
+/** Theme → glossary term that names its idea, for "Practise more"; null when there is none. */
+export const THEME_TERMS: Partial<Record<LichessTheme, string | null>> = {
+  hangingPiece: 'hanging-piece',
+  fork: 'fork',
+  pin: 'pin',
+  skewer: 'skewer',
+  discoveredAttack: 'discovered-attack',
+  doubleCheck: 'double-check',
+  discoveredCheck: 'discovered-check',
+  capturingDefender: 'removing-the-defender',
+  deflection: 'deflection',
+};
