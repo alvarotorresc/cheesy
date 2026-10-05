@@ -1,0 +1,830 @@
+{
+  "id": "passed-pawns",
+  "level": "advanced",
+  "order": 6,
+  "title": {
+    "es": "El peón pasado",
+    "en": "The passed pawn"
+  },
+  "summary": {
+    "es": "Cómo se crea, cómo se apoya y cómo se frena un peón pasado, con Lucena y Philidor.",
+    "en": "How a passed pawn is made, supported and stopped, with Lucena and Philidor."
+  },
+  "terms": [
+    "pawn-majority",
+    "outside-passed-pawn",
+    "connected-passed-pawns",
+    "blockade",
+    "lucena-position",
+    "philidor-position",
+    "building-a-bridge"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Passed_pawn",
+    "https://en.wikipedia.org/wiki/Tarrasch_rule",
+    "https://en.wikipedia.org/wiki/Blockade_(chess)",
+    "https://www.chesskid.com/learn/articles/lessons-guide-all-levels-topics",
+    "https://lichess.org/practice"
+  ],
+  "next": {
+    "kind": "endgames",
+    "category": "Rook and pawn"
+  },
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": " no tiene delante ningún peón rival, ni en su columna ni en las de al lado: nada lo frena salvo las piezas. Cada paso que da lo acerca a la "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "coronación"
+          },
+          {
+            "kind": "text",
+            "text": ", así que hay que vigilarlo siempre, sea tuyo o del rival. Aquí el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " es pasado."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": " has no rival pawn in front of it, on its own file or on the ones next to it: only pieces can stop it. Every step brings it closer to "
+          },
+          {
+            "kind": "term",
+            "id": "promotion",
+            "text": "promotion"
+          },
+          {
+            "kind": "text",
+            "text": ", so it must always be watched, whether it is yours or the rival’s. Here the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " is passed."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/8/1P6/8/8/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "b5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un peón pasado se crea con una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-majority",
+            "text": "mayoría de peones"
+          },
+          {
+            "kind": "text",
+            "text": ": más peones que el rival en un "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flanco"
+          },
+          {
+            "kind": "text",
+            "text": ". Aquí las blancas tienen tres contra dos en el flanco de dama. Avanzan juntos, se cambian y al final queda uno sin rival delante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A passed pawn is made with a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-majority",
+            "text": "pawn majority"
+          },
+          {
+            "kind": "text",
+            "text": ": more pawns than the rival on one "
+          },
+          {
+            "kind": "term",
+            "id": "flank",
+            "text": "flank"
+          },
+          {
+            "kind": "text",
+            "text": ". Here White has three against two on the queenside. They advance together, trade off, and in the end one is left with no rival in front of it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/pp3ppp/8/8/8/8/PPP2PP1/6K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "b4",
+          "Kf8",
+          "c4",
+          "Ke7",
+          "c5",
+          "Kd7",
+          "b5",
+          "Kc7",
+          "a4",
+          "Kb8",
+          "c6",
+          "bxc6",
+          "bxc6"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "outside-passed-pawn",
+            "text": "peón pasado alejado"
+          },
+          {
+            "kind": "text",
+            "text": " está lejos de los demás peones. El rey rival tiene que ir a pararlo, y mientras tanto tu rey se come los peones del otro lado. Aquí el rey negro tiene que quedarse junto al peón de "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": ". Mientras se lo come, el rey blanco cruza el tablero, captura el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": " y el suyo de "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " ya no tiene quien lo pare."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "An "
+          },
+          {
+            "kind": "term",
+            "id": "outside-passed-pawn",
+            "text": "outside passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": " is far from the other pawns. The rival king has to go and stop it, and meanwhile your king eats the pawns on the other side. Here the black king has to stay next to the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": ". While he eats it, the white king crosses the board, takes the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "h5"
+          },
+          {
+            "kind": "text",
+            "text": ", and his own pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "h4"
+          },
+          {
+            "kind": "text",
+            "text": " has nobody left to stop it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/8/2k5/P6p/2K4P/8/8/8 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "a5"
+        ],
+        "moves": [
+          "Kd4",
+          "Kb5",
+          "Ke5",
+          "Kxa5",
+          "Kf5",
+          "Kb6",
+          "Kg5",
+          "Kc7",
+          "Kxh5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Los "
+          },
+          {
+            "kind": "term",
+            "id": "connected-passed-pawns",
+            "text": "peones pasados unidos"
+          },
+          {
+            "kind": "text",
+            "text": " están en columnas vecinas y se protegen uno a otro al avanzar. Son tan fuertes que, en la sexta fila, valen tanto como una torre. Aquí los de "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " son pasados y están unidos: en cuanto uno avance a la sexta fila, el otro lo protegerá desde atrás."
+          }
+        ],
+        "en": [
+          {
+            "kind": "term",
+            "id": "connected-passed-pawns",
+            "text": "Connected passed pawns"
+          },
+          {
+            "kind": "text",
+            "text": " stand on neighbouring files and protect each other as they advance. They are so strong that, on the sixth rank, they are worth as much as a rook. Here the ones on "
+          },
+          {
+            "kind": "square",
+            "square": "b5"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "square",
+            "square": "c5"
+          },
+          {
+            "kind": "text",
+            "text": " are passed and connected: as soon as one steps to the sixth rank, the other protects it from behind."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/5ppp/4k3/1PP5/8/8/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "b5",
+          "c5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Con torres, la torre va detrás del peón pasado: desde ahí lo empuja, y cuanto más avanza el peón, más casillas ve la torre. Es la regla de Tarrasch. En la partida 34 del Mundial de 1927, Alekhine contra Capablanca, la torre blanca de "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": " está detrás de su peón de "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": ". Las blancas ganaron."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "With rooks, the rook goes behind the passed pawn: from there it pushes it, and the further the pawn goes, the more squares the rook sees. It is the Tarrasch rule. In game 34 of the 1927 World Championship, Alekhine against Capablanca, the white rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a4"
+          },
+          {
+            "kind": "text",
+            "text": " stands behind its pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "a5"
+          },
+          {
+            "kind": "text",
+            "text": ". White won."
+          }
+        ]
+      },
+      "board": {
+        "fen": "8/5pk1/r5pp/P7/R6P/6P1/5PK1/8 b - - 0 54",
+        "orientation": "white",
+        "highlights": [
+          "a4",
+          "a5"
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Para frenar un peón pasado, ponle una pieza delante: es el "
+          },
+          {
+            "kind": "term",
+            "id": "blockade",
+            "text": "bloqueo"
+          },
+          {
+            "kind": "text",
+            "text": ". El propio peón le hace de escudo: una torre rival no puede atacarla por la columna. El mejor bloqueador es el caballo: desde ahí sigue atacando casillas. Aquí el caballo negro de "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " para el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "To stop a passed pawn, put a piece in front of it: that is the "
+          },
+          {
+            "kind": "term",
+            "id": "blockade",
+            "text": "blockade"
+          },
+          {
+            "kind": "text",
+            "text": ". The pawn itself shields it: a rival rook cannot attack it along the file. The best blockader is the knight: from there it still attacks squares. Here the black knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " stops the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/3n4/3P4/8/8/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d6"
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "posición de Lucena"
+          },
+          {
+            "kind": "text",
+            "text": ", en la columna d. Tu peón está a punto de coronar y tu torre corta al rey negro. Gana: saca el rey y "
+          },
+          {
+            "kind": "term",
+            "id": "building-a-bridge",
+            "text": "construye un puente"
+          },
+          {
+            "kind": "text",
+            "text": " con la torre para tapar los "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "Lucena position"
+          },
+          {
+            "kind": "text",
+            "text": ", on the d-file. Your pawn is about to promote and your rook cuts off the black king. Win it: bring the king out and "
+          },
+          {
+            "kind": "term",
+            "id": "building-a-bridge",
+            "text": "build a bridge"
+          },
+          {
+            "kind": "text",
+            "text": " with the rook to block the "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "fen": "3K4/3P1k2/8/8/8/8/7r/4R3 w - - 0 1",
+      "goal": "win",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Primero sube la torre a la cuarta fila. Después saca el rey; cuando la torre negra dé "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": ", tu torre se pone delante."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "First lift the rook to the fourth rank. Then bring the king out; when the black rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": ", your rook steps in front."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "play-out",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "posición de Philidor"
+          },
+          {
+            "kind": "text",
+            "text": ", con los colores cambiados. Defiendes con blancas: tu rey está delante del peón y tu torre, en tu tercera fila, no deja pasar al rey negro. Haz tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "Philidor position"
+          },
+          {
+            "kind": "text",
+            "text": ", with the colours reversed. You defend with White: your king is in front of the pawn and your rook, on your third rank, keeps the black king out. Draw it."
+          }
+        ]
+      },
+      "fen": "8/8/8/8/2kp4/5R2/7r/3K4 w - - 0 1",
+      "goal": "draw",
+      "playerSide": "white",
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Deja la torre en la tercera fila hasta que el peón avance a ella. Entonces vete atrás con la torre y da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaques"
+          },
+          {
+            "kind": "text",
+            "text": " por detrás al rey negro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Keep the rook on the third rank until the pawn steps onto it. Then drop back with the rook and give the black king "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "checks"
+          },
+          {
+            "kind": "text",
+            "text": " from behind."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: el "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "peón pasado"
+          },
+          {
+            "kind": "text",
+            "text": " sale de una "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-majority",
+            "text": "mayoría de peones"
+          },
+          {
+            "kind": "text",
+            "text": ". El "
+          },
+          {
+            "kind": "term",
+            "id": "outside-passed-pawn",
+            "text": "peón pasado alejado"
+          },
+          {
+            "kind": "text",
+            "text": " se lleva al rey rival, y los "
+          },
+          {
+            "kind": "term",
+            "id": "connected-passed-pawns",
+            "text": "peones pasados unidos"
+          },
+          {
+            "kind": "text",
+            "text": " se protegen solos. Con torres, la torre va detrás del peón. Para frenarlo, el "
+          },
+          {
+            "kind": "term",
+            "id": "blockade",
+            "text": "bloqueo"
+          },
+          {
+            "kind": "text",
+            "text": ", mejor con un caballo. Y en los finales de torre, "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "Lucena"
+          },
+          {
+            "kind": "text",
+            "text": " gana con un "
+          },
+          {
+            "kind": "term",
+            "id": "building-a-bridge",
+            "text": "puente"
+          },
+          {
+            "kind": "text",
+            "text": " y "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "Philidor"
+          },
+          {
+            "kind": "text",
+            "text": " hace tablas."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: the "
+          },
+          {
+            "kind": "term",
+            "id": "passed-pawn",
+            "text": "passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": " comes from a "
+          },
+          {
+            "kind": "term",
+            "id": "pawn-majority",
+            "text": "pawn majority"
+          },
+          {
+            "kind": "text",
+            "text": ". The "
+          },
+          {
+            "kind": "term",
+            "id": "outside-passed-pawn",
+            "text": "outside passed pawn"
+          },
+          {
+            "kind": "text",
+            "text": " draws the rival king away, and "
+          },
+          {
+            "kind": "term",
+            "id": "connected-passed-pawns",
+            "text": "connected passed pawns"
+          },
+          {
+            "kind": "text",
+            "text": " protect themselves. With rooks, the rook goes behind the pawn. To stop it, the "
+          },
+          {
+            "kind": "term",
+            "id": "blockade",
+            "text": "blockade"
+          },
+          {
+            "kind": "text",
+            "text": ", best with a knight. And in rook endgames, "
+          },
+          {
+            "kind": "term",
+            "id": "lucena-position",
+            "text": "Lucena"
+          },
+          {
+            "kind": "text",
+            "text": " wins with a "
+          },
+          {
+            "kind": "term",
+            "id": "building-a-bridge",
+            "text": "bridge"
+          },
+          {
+            "kind": "text",
+            "text": " and "
+          },
+          {
+            "kind": "term",
+            "id": "philidor-position",
+            "text": "Philidor"
+          },
+          {
+            "kind": "text",
+            "text": " draws."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/8/1P6/8/8/5PPP/6K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "b5"
+        ]
+      }
+    }
+  ]
+}

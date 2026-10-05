@@ -29,6 +29,7 @@ import { pieceActivity } from './advanced/02-piece-activity.ts';
 import { pawnStructure } from './advanced/03-pawn-structure.ts';
 import { outposts } from './advanced/04-outposts.ts';
 import { openFilesSeventh } from './advanced/05-open-files-seventh.ts';
+import { passedPawns } from './advanced/06-passed-pawns.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -60,4 +61,5 @@ export const lessons: LessonSpec[] = [
   pawnStructure,
   outposts,
   openFilesSeventh,
+  passedPawns,
 ];

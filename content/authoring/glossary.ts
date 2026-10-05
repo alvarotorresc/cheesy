@@ -719,6 +719,78 @@ export const glossary: GlossarySpec[] = [
     lesson: 'open-files-seventh',
     sources: [WIKI_GLOSSARY, `${WIKI}Battery_(chess)`],
   },
+  {
+    id: 'pawn-majority',
+    name: { es: 'Mayoría de peones', en: 'Pawn majority' },
+    definition: {
+      es: 'Más peones que el rival en un [flanco](flank). Bien llevada, la mayoría acaba creando un [peón pasado](passed-pawn); quien tiene mayoría en un flanco suele tener minoría en el otro.',
+      en: 'More pawns than the rival on one [flank](flank). Played well, the majority ends up making a [passed pawn](passed-pawn); whoever has a majority on one flank usually has a minority on the other.',
+    },
+    example: {
+      fen: '6k1/pp3ppp/8/8/8/8/PPP2PP1/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['a2', 'b2', 'c2'],
+      arrows: [],
+    },
+    group: 'pawns',
+    level: 'advanced',
+    lesson: 'passed-pawns',
+    sources: [WIKI_GLOSSARY, `${WIKI}Pawn_majority`],
+  },
+  {
+    id: 'outside-passed-pawn',
+    name: { es: 'Peón pasado alejado', en: 'Outside passed pawn' },
+    definition: {
+      es: '[Peón pasado](passed-pawn) lejos de los demás peones, cerca del borde. En el final obliga al rey rival a ir a pararlo, y mientras tanto el otro rey se come los peones del otro lado.',
+      en: 'A [passed pawn](passed-pawn) far from the other pawns, near the edge. In the endgame it forces the rival king to go and stop it, and meanwhile the other king eats the pawns on the other side.',
+    },
+    example: {
+      fen: '8/8/2k5/P6p/2K4P/8/8/8 w - - 0 1',
+      orientation: 'white',
+      highlights: ['a5'],
+      arrows: [{ from: 'c4', to: 'd4', move: true }],
+    },
+    group: 'pawns',
+    level: 'advanced',
+    lesson: 'passed-pawns',
+    sources: [WIKI_GLOSSARY, `${WIKI}Outside_passed_pawn`, `${WIKI}Passed_pawn`],
+  },
+  {
+    id: 'connected-passed-pawns',
+    name: { es: 'Peones pasados unidos', en: 'Connected passed pawns' },
+    definition: {
+      es: 'Dos o más [peones pasados](passed-pawn) en [columnas](file) vecinas. Al avanzar se protegen uno a otro, y en la sexta fila suelen valer tanto como una torre.',
+      en: 'Two or more [passed pawns](passed-pawn) on neighbouring [files](file). As they advance they protect each other, and on the sixth rank they are often worth as much as a rook.',
+    },
+    example: {
+      fen: '8/5ppp/4k3/1PP5/8/8/5PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['b5', 'c5'],
+      arrows: [],
+    },
+    group: 'pawns',
+    level: 'advanced',
+    lesson: 'passed-pawns',
+    sources: [WIKI_GLOSSARY, `${WIKI}Passed_pawn`],
+  },
+  {
+    id: 'blockade',
+    name: { es: 'Bloqueo', en: 'Blockade' },
+    definition: {
+      es: 'Poner una pieza justo delante de un peón rival, sobre todo de un [peón pasado](passed-pawn), para que no pueda avanzar. El mejor bloqueador es el caballo: el propio peón lo protege y desde ahí sigue atacando casillas.',
+      en: 'Placing a piece right in front of a rival pawn, above all a [passed pawn](passed-pawn), so that it cannot advance. The best blockader is the knight: the pawn itself shelters it, and from there it still attacks squares.',
+    },
+    example: {
+      fen: '6k1/5ppp/3n4/3P4/8/8/5PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d6'],
+      arrows: [],
+    },
+    group: 'pawns',
+    level: 'advanced',
+    lesson: 'passed-pawns',
+    sources: [WIKI_GLOSSARY, `${WIKI}Blockade_(chess)`],
+  },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {
     id: 'tempo',
@@ -1381,6 +1453,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'advanced',
+    lesson: 'passed-pawns',
     sources: [WIKI_GLOSSARY, WIKI_LUCENA, WIKI_ROOK_ENDGAME, LICHESS_ROOK_ENDGAMES],
   },
   {
@@ -1398,6 +1471,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'advanced',
+    lesson: 'passed-pawns',
     sources: [WIKI_GLOSSARY, WIKI_PHILIDOR, WIKI_ROOK_ENDGAME, LICHESS_ROOK_ENDGAMES],
   },
   {
@@ -1415,6 +1489,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'endgames',
     level: 'advanced',
+    lesson: 'passed-pawns',
     sources: [WIKI_GLOSSARY, WIKI_LUCENA, LICHESS_ROOK_ENDGAMES],
   },
   {

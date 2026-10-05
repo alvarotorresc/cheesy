@@ -433,5 +433,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "passed-pawns",
+    "level": "advanced",
+    "order": 6,
+    "title": {
+      "es": "El peón pasado",
+      "en": "The passed pawn"
+    },
+    "summary": {
+      "es": "Cómo se crea, cómo se apoya y cómo se frena un peón pasado, con Lucena y Philidor.",
+      "en": "How a passed pawn is made, supported and stopped, with Lucena and Philidor."
+    },
+    "stepCount": 9,
+    "exerciseCount": 2
   }
 ]

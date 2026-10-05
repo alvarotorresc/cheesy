@@ -81,6 +81,10 @@ const EXPECTED_IDS = [
   'open-file',
   'half-open-file',
   'doubled-rooks',
+  'pawn-majority',
+  'outside-passed-pawn',
+  'connected-passed-pawns',
+  'blockade',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -153,6 +157,10 @@ const GROUPS: Record<string, string[]> = {
     'minority-attack',
     'passed-pawn',
     'backward-pawn',
+    'pawn-majority',
+    'outside-passed-pawn',
+    'connected-passed-pawns',
+    'blockade',
   ],
   endgames: [
     'opposition',
