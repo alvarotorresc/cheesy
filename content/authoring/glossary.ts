@@ -390,6 +390,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'plans-and-strategy',
     sources: [WIKI_GLOSSARY, `${CHESSCOM_ES}estrategia`],
   },
   {
@@ -846,6 +847,24 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'defending',
     sources: [`${WIKI}Prophylaxis_(chess)`, `${CHESSCOM_EN}prophylaxis-chess`],
+  },
+  {
+    id: 'imbalance',
+    name: { es: 'Desequilibrio', en: 'Imbalance' },
+    definition: {
+      es: 'Cualquier diferencia entre la posición de las blancas y la de las negras: alfiles contra caballos, un peón débil, más [espacio](space), un rey menos seguro. Algunas duran mucho, como la estructura de peones; otras se pierden pronto, como ir por delante en el [desarrollo](development). Los desequilibrios dicen qué plan seguir.',
+      en: 'Any difference between White’s position and Black’s: bishops against knights, a weak pawn, more [space](space), a less safe king. Some last a long time, like the pawn structure; others soon disappear, like a lead in [development](development). The imbalances tell you which plan to follow.',
+    },
+    example: {
+      fen: '4k3/pp3ppp/2n1pn2/8/3P4/2B2B2/PP3PPP/4K3 w - - 0 1',
+      orientation: 'white',
+      highlights: ['c3', 'f3', 'c6', 'f6', 'd4'],
+      arrows: [],
+    },
+    group: 'strategy',
+    level: 'advanced',
+    lesson: 'plans-and-strategy',
+    sources: [WIKI_GLOSSARY, `${WIKI}Chess_strategy`],
   },
   // ─── Tactics ─────────────────────────────────────────────────────────────────────────────────
   {

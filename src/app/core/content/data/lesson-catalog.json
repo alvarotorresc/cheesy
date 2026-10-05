@@ -523,5 +523,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 4
+  },
+  {
+    "id": "plans-and-strategy",
+    "level": "advanced",
+    "order": 12,
+    "title": {
+      "es": "Hacer un plan",
+      "en": "Making a plan"
+    },
+    "summary": {
+      "es": "Cuatro preguntas para entender la posición y elegir qué hacer cuando no hay táctica.",
+      "en": "Four questions to understand the position and choose what to do when there is no tactic."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
   }
 ]

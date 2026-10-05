@@ -1253,6 +1253,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "plans-and-strategy",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://www.chess.com/es/terms/estrategia"
@@ -2650,6 +2651,82 @@
     "sources": [
       "https://en.wikipedia.org/wiki/Prophylaxis_(chess)",
       "https://www.chess.com/terms/prophylaxis-chess"
+    ]
+  },
+  {
+    "id": "imbalance",
+    "name": {
+      "es": "Desequilibrio",
+      "en": "Imbalance"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Cualquier diferencia entre la posición de las blancas y la de las negras: alfiles contra caballos, un peón débil, más "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "espacio"
+        },
+        {
+          "kind": "text",
+          "text": ", un rey menos seguro. Algunas duran mucho, como la estructura de peones; otras se pierden pronto, como ir por delante en el "
+        },
+        {
+          "kind": "term",
+          "id": "development",
+          "text": "desarrollo"
+        },
+        {
+          "kind": "text",
+          "text": ". Los desequilibrios dicen qué plan seguir."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "Any difference between White’s position and Black’s: bishops against knights, a weak pawn, more "
+        },
+        {
+          "kind": "term",
+          "id": "space",
+          "text": "space"
+        },
+        {
+          "kind": "text",
+          "text": ", a less safe king. Some last a long time, like the pawn structure; others soon disappear, like a lead in "
+        },
+        {
+          "kind": "term",
+          "id": "development",
+          "text": "development"
+        },
+        {
+          "kind": "text",
+          "text": ". The imbalances tell you which plan to follow."
+        }
+      ]
+    },
+    "example": {
+      "fen": "4k3/pp3ppp/2n1pn2/8/3P4/2B2B2/PP3PPP/4K3 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "c3",
+        "f3",
+        "c6",
+        "f6",
+        "d4"
+      ],
+      "arrows": []
+    },
+    "group": "strategy",
+    "level": "advanced",
+    "lesson": "plans-and-strategy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glossary_of_chess",
+      "https://en.wikipedia.org/wiki/Chess_strategy"
     ]
   },
   {

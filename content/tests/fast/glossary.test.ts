@@ -95,6 +95,7 @@ const EXPECTED_IDS = [
   'clearance',
   'prophylaxis',
   'fortress',
+  'imbalance',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -162,6 +163,7 @@ const GROUPS: Record<string, string[]> = {
     'bad-bishop',
     'pawn-storm',
     'prophylaxis',
+    'imbalance',
   ],
   pawns: [
     'pawn-structure',

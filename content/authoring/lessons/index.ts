@@ -35,6 +35,7 @@ import { zugzwangTempo } from './advanced/08-zugzwang-tempo.ts';
 import { kingSafetyAttack } from './advanced/09-king-safety-attack.ts';
 import { advancedTactics } from './advanced/10-advanced-tactics.ts';
 import { defending } from './advanced/11-defending.ts';
+import { plansAndStrategy } from './advanced/12-plans-and-strategy.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -72,4 +73,5 @@ export const lessons: LessonSpec[] = [
   kingSafetyAttack,
   advancedTactics,
   defending,
+  plansAndStrategy,
 ];
