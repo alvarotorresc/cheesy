@@ -4,14 +4,19 @@ import { lessons } from '../../authoring/lessons/index.ts';
 
 const intermediate = lessons.filter((l) => l.level === 'intermediate').map((l) => l.id);
 
+// Lichess has no puzzle that teaches to save a draw: see LESSON_ORDER in puzzles-config.ts.
+const WITHOUT_PRACTICE = ['draws-and-defence'];
+
 describe('Lichess puzzle themes of the intermediate lessons', () => {
   it('maps only intermediate lessons that exist', () => {
     expect(Object.keys(LICHESS_THEMES).filter((id) => !intermediate.includes(id))).toEqual([]);
   });
 
-  it('gives every intermediate lesson at least one theme', () => {
+  it('gives every intermediate lesson at least one theme, except those without practice', () => {
     expect(intermediate.length).toBeGreaterThan(0);
-    expect(intermediate.filter((id) => !LICHESS_THEMES[id]?.length)).toEqual([]);
+    expect(intermediate.filter((id) => !LICHESS_THEMES[id]?.length)).toEqual(WITHOUT_PRACTICE);
+    // Listed on purpose, with no themes, and not by forgetting it.
+    for (const id of WITHOUT_PRACTICE) expect(LICHESS_THEMES[id]).toEqual([]);
   });
 
   it('uses only themes of the closed list, without repeating one in a lesson', () => {

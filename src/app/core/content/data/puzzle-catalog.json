@@ -52,6 +52,46 @@
         "capturingDefender",
         "deflection"
       ]
+    },
+    {
+      "lesson": "mate-patterns",
+      "count": 50,
+      "themes": [
+        "backRankMate",
+        "smotheredMate",
+        "anastasiaMate"
+      ]
+    },
+    {
+      "lesson": "forcing-moves",
+      "count": 50,
+      "themes": [
+        "mateIn2",
+        "attraction",
+        "sacrifice"
+      ]
+    },
+    {
+      "lesson": "in-between-move",
+      "count": 50,
+      "themes": [
+        "intermezzo",
+        "xRayAttack"
+      ]
+    },
+    {
+      "lesson": "king-pawn-endings",
+      "count": 50,
+      "themes": [
+        "pawnEndgame"
+      ]
+    },
+    {
+      "lesson": "rook-endings",
+      "count": 50,
+      "themes": [
+        "rookEndgame"
+      ]
     }
   ]
 }

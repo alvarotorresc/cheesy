@@ -57,7 +57,7 @@ const MIN_ROWS = 5_000_000;
 const POOL_CAP = PUZZLES_PER_LESSON * 4;
 
 // The lessons with puzzles: those of the theme map, which must agree with the fixed syllabus.
-const lessons = LESSON_ORDER.filter(({ lesson }) => lesson in LICHESS_THEMES).map(
+const lessons = LESSON_ORDER.filter(({ lesson }) => LICHESS_THEMES[lesson]?.length).map(
   (l): string => l.lesson,
 );
 for (const { lesson, themes } of LESSON_ORDER) {

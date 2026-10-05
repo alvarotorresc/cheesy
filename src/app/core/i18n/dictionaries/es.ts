@@ -206,8 +206,6 @@ export const es: Messages = {
         xRayAttack: 'Ataque en rayos X',
         pawnEndgame: 'Final de peones',
         rookEndgame: 'Final de torres',
-        defensiveMove: 'Jugada defensiva',
-        equality: 'Igualdad',
       },
     },
   },

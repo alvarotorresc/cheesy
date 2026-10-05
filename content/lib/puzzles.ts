@@ -83,6 +83,8 @@ export interface PuzzleConfig {
   perLesson: number;
   lengthQuota: LengthQuota;
   lengthQuotaByLesson: Readonly<Record<string, Partial<LengthQuota>>>;
+  /** Per theme, over the lesson's: some themes have a fixed length (`mateIn2`). */
+  lengthQuotaByTheme: Readonly<Record<string, Partial<LengthQuota>>>;
   /** Puzzle id → why it is left out. */
   excluded: Readonly<Record<string, string>>;
 }
@@ -296,13 +298,13 @@ export function selectLessons(
   const result: LessonPuzzles[] = [];
   for (const { lesson, themes } of config.order) {
     if (!lessons.includes(lesson)) continue;
-    const quota = { ...config.lengthQuota, ...config.lengthQuotaByLesson[lesson] };
+    const lessonQuota = { ...config.lengthQuota, ...config.lengthQuotaByLesson[lesson] };
     const taken = new Set<string>();
     const chosen: Candidate[] = [];
     splitEvenly(config.perLesson, themes.length).forEach((q, i) => {
       const theme = themes[i];
       const where = `${lesson} / ${theme}`;
-      const target = lengthTargets(q, quota);
+      const target = lengthTargets(q, { ...lessonQuota, ...config.lengthQuotaByTheme[theme] });
       const pick = (moves: number, count: number) =>
         roundRobin(pool.bands(lesson, theme, moves), count, taken, blocked, `${where} / ${moves}`);
       const three = pick(3, target[3]);
