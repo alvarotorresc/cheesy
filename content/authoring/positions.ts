@@ -164,7 +164,7 @@ export const positions: PositionSpec[] = [
   },
   {
     id: 'rook-skewer',
-    title: { es: 'Ensartada', en: 'Skewer' },
+    title: { es: 'Enfilada', en: 'Skewer' },
     fen: '3r4/pp6/1q3k2/8/8/8/PP3PP1/2R3KR w - - 0 1',
     playerSide: 'white',
     solution: ['Rh6+'],

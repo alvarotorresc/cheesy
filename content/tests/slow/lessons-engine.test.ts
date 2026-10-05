@@ -4,6 +4,7 @@ import { Engine } from '../../lib/engine.ts';
 import { loadLessons } from '../../lib/content.ts';
 import { checkTactic, type StepReport } from '../../lib/tactic-check.ts';
 import { checkEngineChoice } from '../../lib/choice-check.ts';
+import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
 
 const DEPTH = Math.max(18, Number(process.env.TACTIC_DEPTH ?? 22));
 const engine = new Engine(10, 512);
@@ -28,20 +29,25 @@ async function expectEngineChoice(fen: string, options: string[], correct: numbe
   expect(result.good, scores).toEqual([correct]);
 }
 
-describe.each(steps.filter(({ s }) => s.kind === 'find-move' && s.check.by === 'engine'))(
-  'find-move: $at',
-  ({ s }) => {
-    it(`10. solution is best, decisive and unambiguous (depth ${DEPTH})`, async () => {
-      if (s.kind !== 'find-move' || s.check.by !== 'engine') return;
-      const report = await checkTactic(
-        engine,
-        { fen: s.board.fen, solution: s.check.solution },
-        DEPTH,
-      );
-      expect(tacticProblems(report)).toEqual([]);
-    });
-  },
-);
+// Find-moves of an ending without a mate go to the tablebase instead (test 13).
+describe.each(
+  steps.filter(
+    ({ s }) =>
+      s.kind === 'find-move' &&
+      s.check.by === 'engine' &&
+      findMoveValidator(s.board.fen, s.check.solution) === 'stockfish',
+  ),
+)('find-move: $at', ({ s }) => {
+  it(`10. solution is best, decisive and unambiguous (depth ${DEPTH})`, async () => {
+    if (s.kind !== 'find-move' || s.check.by !== 'engine') return;
+    const report = await checkTactic(
+      engine,
+      { fen: s.board.fen, solution: s.check.solution },
+      DEPTH,
+    );
+    expect(tacticProblems(report)).toEqual([]);
+  });
+});
 
 describe.each(steps.filter(({ s }) => s.kind === 'choice' && s.answer.by === 'engine'))(
   'choice: $at',

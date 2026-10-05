@@ -61,6 +61,10 @@ const EXPECTED_IDS = [
   'lucena-position',
   'philidor-position',
   'building-a-bridge',
+  'hanging-piece',
+  'discovered-check',
+  'removing-the-defender',
+  'overloading',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -79,13 +83,17 @@ const GROUPS: Record<string, string[]> = {
     'piece-value',
   ],
   tactics: [
+    'hanging-piece',
     'pin',
     'fork',
     'knight-fork',
     'skewer',
     'double-check',
     'discovered-attack',
+    'discovered-check',
     'deflection',
+    'removing-the-defender',
+    'overloading',
     'attraction',
     'intermediate-move',
     'sacrifice',

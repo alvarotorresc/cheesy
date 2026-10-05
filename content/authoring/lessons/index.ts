@@ -12,6 +12,12 @@ import { checkMateStalemate } from './beginner/09-check-mate-stalemate.ts';
 import { castlingEnPassant } from './beginner/10-castling-en-passant.ts';
 import { basicMates } from './beginner/11-basic-mates.ts';
 import { openingPrinciples } from './beginner/12-opening-principles.ts';
+import { hangingPieces } from './intermediate/01-hanging-pieces.ts';
+import { theFork } from './intermediate/02-the-fork.ts';
+import { thePin } from './intermediate/03-the-pin.ts';
+import { theSkewer } from './intermediate/04-the-skewer.ts';
+import { discoveredAttacks } from './intermediate/05-discovered-attacks.ts';
+import { removeTheDefender } from './intermediate/06-remove-the-defender.ts';
 
 export const lessons: LessonSpec[] = [
   theBoard,
@@ -26,4 +32,10 @@ export const lessons: LessonSpec[] = [
   castlingEnPassant,
   basicMates,
   openingPrinciples,
+  hangingPieces,
+  theFork,
+  thePin,
+  theSkewer,
+  discoveredAttacks,
+  removeTheDefender,
 ];

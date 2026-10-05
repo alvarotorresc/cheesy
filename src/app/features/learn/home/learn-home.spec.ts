@@ -29,7 +29,10 @@ describe('LearnHome', () => {
     progress = TestBed.inject(ProgressService);
   });
 
-  afterEach(() => localStorage.clear());
+  afterEach(() => {
+    localStorage.clear();
+    vi.restoreAllMocks();
+  });
 
   const render = async (url: string): Promise<HTMLElement> => {
     harness = await RouterTestingHarness.create();
@@ -101,6 +104,29 @@ describe('LearnHome', () => {
     });
     const root = await render('/learn');
     expect(root.querySelector('.continue')?.textContent).toContain('The board');
+  });
+
+  it('should open the intermediate card, and continue there, once it has lessons', async () => {
+    const catalog = await fixtureLessonLoaders.catalog();
+    const hangingPieces = {
+      ...catalog[0],
+      id: 'hanging-pieces',
+      level: 'intermediate' as const,
+      order: 1,
+      title: { es: 'Piezas sin defensa', en: 'Hanging pieces' },
+    };
+    vi.spyOn(fixtureLessonLoaders, 'catalog').mockResolvedValue([...catalog, hangingPieces]);
+    for (const { id } of catalog)
+      await progress.recordLesson({ lessonId: id, exercises: 3, firstTry: 3 });
+    const root = await render('/learn');
+    const cards = Array.from(root.querySelectorAll('.level-card'));
+    expect(cards[1].querySelector('a')?.getAttribute('href')).toBe('/learn/intermediate');
+    expect(cards[1].textContent).not.toContain('Coming soon');
+    expect(cards[2].querySelector('a')).toBeNull();
+    expect(root.querySelector('.continue')?.textContent).toContain('Continue: Hanging pieces');
+    expect(root.querySelector('.continue')?.getAttribute('href')).toBe(
+      '/learn/intermediate/hanging-pieces',
+    );
   });
 
   describe('clearing the progress', () => {

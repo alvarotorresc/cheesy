@@ -1,0 +1,1038 @@
+{
+  "id": "discovered-attacks",
+  "level": "intermediate",
+  "order": 5,
+  "title": {
+    "es": "Ataque a la descubierta y jaque doble",
+    "en": "Discovered attacks and double check"
+  },
+  "summary": {
+    "es": "Una pieza se aparta y destapa el ataque de otra que estaba detrás.",
+    "en": "One piece steps aside and uncovers the attack of another behind it."
+  },
+  "terms": [
+    "discovered-attack",
+    "discovered-check",
+    "double-check"
+  ],
+  "sources": [
+    "https://lichess.org/practice",
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "En un "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-attack",
+            "text": "ataque a la descubierta"
+          },
+          {
+            "kind": "text",
+            "text": ", una pieza se aparta y destapa el ataque de otra que estaba detrás: una dama, una torre o un alfil. Aquí, si el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " se mueve, la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " ataca a la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Y el caballo, al moverse, puede atacar otra cosa: el rival tendrá dos problemas a la vez."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "In a "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-attack",
+            "text": "discovered attack"
+          },
+          {
+            "kind": "text",
+            "text": ", one piece steps aside and uncovers the attack of another that stood behind it: a queen, a rook or a bishop. Here, if the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": " moves, the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " attacks the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". And the knight, as it moves, can attack something else: the opponent will have two problems at once."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3q2k1/8/8/8/3N4/8/8/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4",
+          "d8"
+        ],
+        "arrows": [
+          {
+            "from": "d1",
+            "to": "d8"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " apunta a la dama negra, pero tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " está en medio. Aparta el alfil de forma que el rival no tenga tiempo de salvar la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d1"
+          },
+          {
+            "kind": "text",
+            "text": " points at the black queen, but your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d3"
+          },
+          {
+            "kind": "text",
+            "text": " is in the way. Move the bishop so that your opponent has no time to save the queen."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnb2rk1/pp3ppp/2pqp3/8/8/1QNB4/PPP2PPP/3R1RK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxh7+",
+          "Kxh7",
+          "Rxd6"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el alfil captura en "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que responder y la torre, ya destapada, captura la dama."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the bishop captures on "
+          },
+          {
+            "kind": "square",
+            "square": "h7"
+          },
+          {
+            "kind": "text",
+            "text": " with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to answer, and the rook, now uncovered, captures the queen."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si el alfil da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", el rival tiene que ocuparse antes de su rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If the bishop gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", your opponent has to deal with the king first."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si lo que se destapa es un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", es un "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "jaque a la descubierta"
+          },
+          {
+            "kind": "text",
+            "text": ". La pieza que se aparta puede atacar lo que quiera, porque el rival tiene que ocuparse antes de su rey. Aquí el alfil captura la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " y, a la vez, la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " da jaque al rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If what is uncovered is a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", it is a "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "discovered check"
+          },
+          {
+            "kind": "text",
+            "text": ". The piece that steps aside can attack whatever it likes, because the opponent must deal with the king first. Here the bishop captures the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": " and, at the same time, the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " gives check to the king."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r3k3/8/8/8/4B3/8/8/4R1K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Bxa8+"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tu torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " apunta al rey negro y tu alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " está en medio. Gana material con un "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "jaque a la descubierta"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Your rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " points at the black king and your bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " is in the way. Win material with a "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "discovered check"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r1b1k2r/ppp2ppp/3p1n2/8/4B3/2N5/PPP2PPP/R3R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxb7+",
+          "Kd7",
+          "Bxa8"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el alfil captura en "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Mientras el rey se aparta, el alfil captura también la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the bishop captures on "
+          },
+          {
+            "kind": "square",
+            "square": "b7"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". While the king steps aside, the bishop also captures the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Busca una casilla para el alfil desde la que capture algo y siga atacando otra pieza."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Look for a square where the bishop captures something and still attacks another piece."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "En un "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": " dan jaque dos piezas a la vez: la que se mueve y la que se destapa. No se pueden tapar ni capturar las dos en una jugada, así que el rey está obligado a moverse. Aquí el caballo salta a "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " y da jaque, y la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " da otro."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "In a "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": " two pieces give check at once: the one that moves and the one it uncovers. Both cannot be blocked or captured in one move, so the king is forced to move. Here the knight jumps to "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " and gives check, and the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": " gives another."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4k3/8/8/8/4N3/8/8/4R1K1 w - - 0 1",
+        "orientation": "white",
+        "moves": [
+          "Nf6+"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Ahora el "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": " es contra ti: la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": " atacan a tu rey a la vez. Sal del jaque."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Now the "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": " is against you: the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "b4"
+          },
+          {
+            "kind": "text",
+            "text": " attack your king at once. Get out of check."
+          }
+        ]
+      },
+      "board": {
+        "fen": "4r1k1/5ppp/8/8/1b6/3Q1N2/PP3PPP/4K3 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "rule",
+        "rule": "escape-check"
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: ante un "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": ", la única salida es mover el rey."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: against a "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": ", the only way out is to move the king."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Tapar o capturar solo resuelve uno de los dos jaques."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Blocking or capturing only deals with one of the two checks."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Da "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "jaque mate"
+          },
+          {
+            "kind": "text",
+            "text": " con un "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Give "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": " with a "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "rnbqkb1r/pppp2pp/8/8/4N3/8/PPP2PPP/4R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Nd6#"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: el caballo da jaque desde "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " y la torre, desde "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". El rey tiene que moverse, pero todas sus casillas están ocupadas o atacadas: es "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "mate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the knight gives check from "
+          },
+          {
+            "kind": "square",
+            "square": "d6"
+          },
+          {
+            "kind": "text",
+            "text": " and the rook from "
+          },
+          {
+            "kind": "square",
+            "square": "e1"
+          },
+          {
+            "kind": "text",
+            "text": ". The king has to move, but all his squares are taken or attacked: it is "
+          },
+          {
+            "kind": "term",
+            "id": "checkmate",
+            "text": "checkmate"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Nf6+": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "Es un "
+            },
+            {
+              "kind": "term",
+              "id": "double-check",
+              "text": "jaque doble"
+            },
+            {
+              "kind": "text",
+              "text": ", pero el rey escapa a "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "It is a "
+            },
+            {
+              "kind": "term",
+              "id": "double-check",
+              "text": "double check"
+            },
+            {
+              "kind": "text",
+              "text": ", but the king escapes to "
+            },
+            {
+              "kind": "square",
+              "square": "f7"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " tapa la "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "columna"
+          },
+          {
+            "kind": "text",
+            "text": " de tu torre. ¿Adónde puede saltar para dar jaque él también y quitarle al rey la casilla "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The knight on "
+          },
+          {
+            "kind": "square",
+            "square": "e4"
+          },
+          {
+            "kind": "text",
+            "text": " blocks your rook’s "
+          },
+          {
+            "kind": "term",
+            "id": "file",
+            "text": "file"
+          },
+          {
+            "kind": "text",
+            "text": ". Where can it jump to give check as well and take "
+          },
+          {
+            "kind": "square",
+            "square": "f7"
+          },
+          {
+            "kind": "text",
+            "text": " away from the king?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: en un "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-attack",
+            "text": "ataque a la descubierta"
+          },
+          {
+            "kind": "text",
+            "text": " una pieza se aparta y destapa a otra. Si lo destapado es un jaque, es un "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "jaque a la descubierta"
+          },
+          {
+            "kind": "text",
+            "text": ", y la pieza que se mueve queda libre para atacar. Si las dos dan jaque, es un "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "jaque doble"
+          },
+          {
+            "kind": "text",
+            "text": ", y el rey tiene que moverse."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: in a "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-attack",
+            "text": "discovered attack"
+          },
+          {
+            "kind": "text",
+            "text": " one piece steps aside and uncovers another. If what is uncovered is a check, it is a "
+          },
+          {
+            "kind": "term",
+            "id": "discovered-check",
+            "text": "discovered check"
+          },
+          {
+            "kind": "text",
+            "text": ", and the piece that moves is free to attack. If both give check, it is a "
+          },
+          {
+            "kind": "term",
+            "id": "double-check",
+            "text": "double check"
+          },
+          {
+            "kind": "text",
+            "text": ", and the king has to move."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3q2k1/8/8/8/3N4/8/8/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d4",
+          "d8"
+        ],
+        "arrows": [
+          {
+            "from": "d1",
+            "to": "d8"
+          }
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "discovered-attack"
+  }
+}

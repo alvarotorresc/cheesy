@@ -178,5 +178,95 @@
     },
     "stepCount": 8,
     "exerciseCount": 3
+  },
+  {
+    "id": "hanging-pieces",
+    "level": "intermediate",
+    "order": 1,
+    "title": {
+      "es": "Piezas sin defensa",
+      "en": "Hanging pieces"
+    },
+    "summary": {
+      "es": "Ver qué piezas se quedan sin defensa, las tuyas y las del rival.",
+      "en": "Spotting the pieces left without defence, yours and your opponent’s."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-fork",
+    "level": "intermediate",
+    "order": 2,
+    "title": {
+      "es": "La horquilla",
+      "en": "The fork"
+    },
+    "summary": {
+      "es": "Una pieza ataca a dos a la vez, y el rival solo puede salvar una.",
+      "en": "One piece attacks two at once, and the opponent can only save one."
+    },
+    "stepCount": 7,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-pin",
+    "level": "intermediate",
+    "order": 3,
+    "title": {
+      "es": "La clavada",
+      "en": "The pin"
+    },
+    "summary": {
+      "es": "Una pieza que no puede moverse sin dejar algo más valioso al descubierto.",
+      "en": "A piece that cannot move without exposing something worth more."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "the-skewer",
+    "level": "intermediate",
+    "order": 4,
+    "title": {
+      "es": "La enfilada",
+      "en": "The skewer"
+    },
+    "summary": {
+      "es": "Atacar a una pieza valiosa para ganar la que tiene detrás.",
+      "en": "Attacking a valuable piece to win the one behind it."
+    },
+    "stepCount": 6,
+    "exerciseCount": 3
+  },
+  {
+    "id": "discovered-attacks",
+    "level": "intermediate",
+    "order": 5,
+    "title": {
+      "es": "Ataque a la descubierta y jaque doble",
+      "en": "Discovered attacks and double check"
+    },
+    "summary": {
+      "es": "Una pieza se aparta y destapa el ataque de otra que estaba detrás.",
+      "en": "One piece steps aside and uncovers the attack of another behind it."
+    },
+    "stepCount": 8,
+    "exerciseCount": 4
+  },
+  {
+    "id": "remove-the-defender",
+    "level": "intermediate",
+    "order": 6,
+    "title": {
+      "es": "Quitar al defensor",
+      "en": "Removing the defender"
+    },
+    "summary": {
+      "es": "Capturar, desviar o sobrecargar a la pieza que defiende a otra.",
+      "en": "Capturing, deflecting or overloading the piece that defends another."
+    },
+    "stepCount": 7,
+    "exerciseCount": 3
   }
 ]

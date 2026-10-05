@@ -1,0 +1,883 @@
+{
+  "id": "remove-the-defender",
+  "level": "intermediate",
+  "order": 6,
+  "title": {
+    "es": "Quitar al defensor",
+    "en": "Removing the defender"
+  },
+  "summary": {
+    "es": "Capturar, desviar o sobrecargar a la pieza que defiende a otra.",
+    "en": "Capturing, deflecting or overloading the piece that defends another."
+  },
+  "terms": [
+    "removing-the-defender",
+    "deflection",
+    "overloading"
+  ],
+  "sources": [
+    "https://lichess.org/training/themes",
+    "https://www.chess.com/lessons/skill-level/intermediate",
+    "https://www.stappenmethode.nl/en/step4.php",
+    "https://en.wikipedia.org/wiki/Chess_tactic"
+  ],
+  "steps": [
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Si una pieza rival defiende a otra, puedes "
+          },
+          {
+            "kind": "term",
+            "id": "removing-the-defender",
+            "text": "eliminar al defensor"
+          },
+          {
+            "kind": "text",
+            "text": ": lo capturas, y lo que defendía se queda sin defensa. Aquí el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " defiende al alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ". Si tu alfil captura el caballo, el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " queda "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "colgado"
+          },
+          {
+            "kind": "text",
+            "text": " frente a tu torre."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "If an enemy piece defends another, you can "
+          },
+          {
+            "kind": "term",
+            "id": "removing-the-defender",
+            "text": "remove the defender"
+          },
+          {
+            "kind": "text",
+            "text": ": you capture it, and what it defended is left without defence. Here the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": " defends the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": ". If your bishop captures the knight, the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " is left "
+          },
+          {
+            "kind": "term",
+            "id": "hanging-piece",
+            "text": "hanging"
+          },
+          {
+            "kind": "text",
+            "text": " in front of your rook."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/5n2/3b2B1/8/8/5PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f6",
+          "d5"
+        ],
+        "arrows": [
+          {
+            "from": "g5",
+            "to": "f6"
+          },
+          {
+            "from": "d1",
+            "to": "d5"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "El alfil negro de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " solo está defendido por el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": ". Elimina al defensor y gana el alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " is only defended by the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "f6"
+          },
+          {
+            "kind": "text",
+            "text": ". Remove the defender and win the bishop."
+          }
+        ]
+      },
+      "board": {
+        "fen": "r4r2/ppp2pkp/5np1/3b2B1/7N/P7/1PP2PPP/3RR1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Bxf6+",
+          "Kxf6",
+          "Rxd5"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: el alfil captura el caballo con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ". Mientras el rey responde, el alfil de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " se ha quedado sin defensa, y tu torre lo captura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the bishop captures the knight with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ". While the king answers, the bishop on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": " is left without defence, and your rook captures it."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Captura al defensor con "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", para que el rival no tenga tiempo de salvar el alfil."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Capture the defender with "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", so that your opponent has no time to save the bishop."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "A veces no puedes capturar al defensor, pero sí "
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "desviarlo"
+          },
+          {
+            "kind": "text",
+            "text": ": obligarlo a irse de su sitio con un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " o con una amenaza. Si se va, deja sin defensa lo que protegía. Aquí la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " defiende a la dama de "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Sometimes you cannot capture the defender, but you can "
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "deflect"
+          },
+          {
+            "kind": "text",
+            "text": " it: force it away from its post with a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " or a threat. If it leaves, what it protected is left without defence. Here the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " defends the queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d5"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/pp3pp1/7p/3q4/8/5Q1P/5PP1/4R1K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "d8",
+          "d5"
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " es la única defensa de la dama negra. Desvíala."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": " is the black queen’s only defence. Deflect it."
+          }
+        ]
+      },
+      "board": {
+        "fen": "3r2k1/pp3pp1/n6p/3q4/8/1P3Q1P/PB3PP1/4R1K1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Re8+"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Eso es: la torre da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " desde "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " y ataca a la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". Si la captura, deja de defender a la dama y tu dama se la lleva. Si el rey se aparta, tu torre captura la de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "That is it: the rook gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " from "
+          },
+          {
+            "kind": "square",
+            "square": "e8"
+          },
+          {
+            "kind": "text",
+            "text": " and attacks the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": ". If it captures, it stops defending the queen and your queen takes her. If the king steps aside, your rook captures the one on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "wrong": {
+        "Qxd5": {
+          "es": [
+            {
+              "kind": "text",
+              "text": "La torre de "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " recaptura: cambias las damas y no ganas nada."
+            }
+          ],
+          "en": [
+            {
+              "kind": "text",
+              "text": "The rook on "
+            },
+            {
+              "kind": "square",
+              "square": "d8"
+            },
+            {
+              "kind": "text",
+              "text": " takes back: you trade queens and win nothing."
+            }
+          ]
+        }
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Un "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": " obliga al rival a responder. ¿Cuál ataca también a la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": " forces your opponent to answer. Which one also attacks the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "d8"
+          },
+          {
+            "kind": "text",
+            "text": "?"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Una pieza que tiene dos tareas de defensa está "
+          },
+          {
+            "kind": "term",
+            "id": "overloading",
+            "text": "sobrecargada"
+          },
+          {
+            "kind": "text",
+            "text": ": si cumple una, deja de cumplir la otra. Aquí la dama negra de "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " defiende a la vez la torre de "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " y el caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "A piece with two defensive jobs is "
+          },
+          {
+            "kind": "term",
+            "id": "overloading",
+            "text": "overloaded"
+          },
+          {
+            "kind": "text",
+            "text": ": if it does one, it stops doing the other. Here the black queen on "
+          },
+          {
+            "kind": "square",
+            "square": "d7"
+          },
+          {
+            "kind": "text",
+            "text": " defends both the rook on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": " and the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2r3k1/3q1ppp/8/8/3n4/8/5QPP/2R3K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "c8",
+          "d4"
+        ],
+        "arrows": [
+          {
+            "from": "d7",
+            "to": "c8"
+          },
+          {
+            "from": "d7",
+            "to": "d4"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "find-move",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "La dama negra defiende dos piezas a la vez. Aprovecha la sobrecarga."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "The black queen defends two pieces at once. Take advantage of the overload."
+          }
+        ]
+      },
+      "board": {
+        "fen": "2r3k1/pp1q1pp1/7p/8/3n4/8/PP3QPP/2R2BK1 w - - 0 1",
+        "orientation": "white"
+      },
+      "check": {
+        "by": "engine",
+        "solution": [
+          "Rxc8+",
+          "Qxc8",
+          "Qxd4"
+        ]
+      },
+      "explanation": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Bien: la dama tiene que recapturar en "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": ", y desde allí ya no defiende al caballo de "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ". Tu dama lo captura."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Well done: the queen has to take back on "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": ", and from there she no longer defends the knight on "
+          },
+          {
+            "kind": "square",
+            "square": "d4"
+          },
+          {
+            "kind": "text",
+            "text": ". Your queen captures it."
+          }
+        ]
+      },
+      "hint": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Empieza por la captura que da "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Start with the capture that gives "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": "."
+          }
+        ]
+      }
+    },
+    {
+      "kind": "explain",
+      "text": {
+        "es": [
+          {
+            "kind": "text",
+            "text": "Resumen: si una pieza defiende a otra, ataca al defensor. Puedes capturarlo ("
+          },
+          {
+            "kind": "term",
+            "id": "removing-the-defender",
+            "text": "eliminar al defensor"
+          },
+          {
+            "kind": "text",
+            "text": "), obligarlo a irse ("
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "desviación"
+          },
+          {
+            "kind": "text",
+            "text": ") o aprovechar que tiene demasiadas tareas ("
+          },
+          {
+            "kind": "term",
+            "id": "overloading",
+            "text": "sobrecarga"
+          },
+          {
+            "kind": "text",
+            "text": "). En los tres casos, lo que defendía se queda sin defensa."
+          }
+        ],
+        "en": [
+          {
+            "kind": "text",
+            "text": "Summary: if a piece defends another, go after the defender. You can capture it ("
+          },
+          {
+            "kind": "term",
+            "id": "removing-the-defender",
+            "text": "removing the defender"
+          },
+          {
+            "kind": "text",
+            "text": "), force it away ("
+          },
+          {
+            "kind": "term",
+            "id": "deflection",
+            "text": "deflection"
+          },
+          {
+            "kind": "text",
+            "text": ") or exploit that it has too many jobs ("
+          },
+          {
+            "kind": "term",
+            "id": "overloading",
+            "text": "overloading"
+          },
+          {
+            "kind": "text",
+            "text": "). In all three cases, what it defended is left without defence."
+          }
+        ]
+      },
+      "board": {
+        "fen": "6k1/5ppp/5n2/3b2B1/8/8/5PPP/3R2K1 w - - 0 1",
+        "orientation": "white",
+        "highlights": [
+          "f6",
+          "d5"
+        ],
+        "arrows": [
+          {
+            "from": "g5",
+            "to": "f6"
+          },
+          {
+            "from": "d1",
+            "to": "d5"
+          }
+        ]
+      }
+    }
+  ],
+  "next": {
+    "kind": "positions",
+    "tag": "deflection"
+  }
+}

@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { ProgressService } from '../../../core/progress';
-import { LEVELS, nextLesson } from '../learn-progress';
+import { byLevelAndOrder, LEVELS, nextLesson } from '../learn-progress';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -47,12 +47,7 @@ export class LearnHome {
   protected readonly continueWith = computed(() => {
     const current = this.state();
     return current.status === 'ready' && current.done.size
-      ? nextLesson(
-          [...current.catalog].sort(
-            (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
-          ),
-          current.done,
-        )
+      ? nextLesson([...current.catalog].sort(byLevelAndOrder), current.done)
       : undefined;
   });
 

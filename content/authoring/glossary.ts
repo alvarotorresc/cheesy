@@ -586,6 +586,28 @@ export const glossary: GlossarySpec[] = [
     ],
   },
   {
+    id: 'hanging-piece',
+    name: { es: 'Pieza colgada', en: 'Hanging piece' },
+    definition: {
+      es: 'Pieza atacada que nadie defiende: el rival puede capturarla gratis. Antes de mover conviene mirar qué piezas han quedado colgadas, las propias y las del rival.',
+      en: 'An attacked piece that nobody defends: the opponent can capture it for free. Before moving, it pays to look at which pieces have been left hanging, your own and your opponent’s.',
+    },
+    example: {
+      fen: '6k1/5ppp/8/4b3/8/5N2/5PPP/6K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e5'],
+      arrows: [{ from: 'f3', to: 'e5', move: true }],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'hanging-pieces',
+    sources: [
+      `${CHESSCOM_EN}hanging-piece-chess`,
+      'https://lichess.org/training/hangingPiece',
+      `${WIKI}Chess_tactic`,
+    ],
+  },
+  {
     id: 'pin',
     name: { es: 'Clavada', en: 'Pin' },
     definition: {
@@ -600,6 +622,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-pin',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/the-pin/9ogFv8Ac',
@@ -608,10 +631,10 @@ export const glossary: GlossarySpec[] = [
   },
   {
     id: 'fork',
-    name: { es: 'Ataque doble', en: 'Fork' },
+    name: { es: 'Horquilla', en: 'Fork' },
     definition: {
-      es: 'Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada.',
-      en: 'A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move.',
+      es: 'Una sola pieza ataca a la vez a dos o más piezas del rival, que no puede salvarlas todas en una jugada. También se llama ataque doble.',
+      en: 'A single piece attacks two or more enemy pieces at the same time, and the opponent cannot save them all in one move. It is also called a double attack.',
     },
     example: {
       fen: 'r5k1/6pp/8/8/8/8/6PP/3Q2K1 w - - 0 1',
@@ -621,13 +644,14 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-fork',
     sources: [WIKI_GLOSSARY, LICHESS_FORK, `${CHESSCOM_ES}ataque-doble`],
   },
   {
     id: 'knight-fork',
     name: { es: 'Horquilla de caballo', en: 'Knight fork' },
     definition: {
-      es: '[Ataque doble](fork) hecho por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
+      es: '[Horquilla](fork) hecha por un caballo. Es especialmente peligroso porque el caballo salta y ataca de una forma que no comparte ninguna otra pieza, así que las piezas atacadas no pueden devolverle el golpe, salvo que una de ellas sea otro caballo.',
       en: 'A [fork](fork) made by a knight. It is especially dangerous because the knight jumps and attacks in a pattern no other piece shares, so the pieces it hits cannot hit it back unless one of them is also a knight.',
     },
     example: {
@@ -638,13 +662,14 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-fork',
     sources: [WIKI_GLOSSARY, LICHESS_FORK, `${WIKI}Fork_(chess)`],
   },
   {
     id: 'skewer',
-    name: { es: 'Ensartada', en: 'Skewer' },
+    name: { es: 'Enfilada', en: 'Skewer' },
     definition: {
-      es: 'Se ataca a una pieza valiosa que, al apartarse, deja al descubierto otra que estaba detrás en la misma línea, y esa es la que cae. Es como una [clavada](pin) al revés: la pieza de delante es la que más vale.',
+      es: 'Se ataca a una pieza valiosa que, al apartarse, deja al descubierto otra que estaba detrás en la misma línea, y esa es la que cae. Es como una [clavada](pin) al revés: la pieza de delante es la que más vale. También se llama ensartada.',
       en: 'A valuable piece is attacked and, when it steps aside, it uncovers another piece behind it on the same line, which is then taken. It is like a [pin](pin) turned around: the piece in front is the more valuable one.',
     },
     example: {
@@ -655,6 +680,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'the-skewer',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/the-skewer/tuoBxVE5',
@@ -676,6 +702,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'discovered-attacks',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/double-check/RUQASaZm',
@@ -700,9 +727,35 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'discovered-attacks',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/fundamental-tactics/discovered-attacks/MnsJEWnI',
+      `${WIKI}Discovered_attack`,
+    ],
+  },
+  {
+    id: 'discovered-check',
+    name: { es: 'Jaque a la descubierta', en: 'Discovered check' },
+    definition: {
+      es: 'Una pieza se aparta y destapa el [jaque](check) de otra de su mismo bando que estaba detrás. Como el rival tiene que atender a su rey, la pieza que se ha movido queda libre para capturar o atacar lo que quiera.',
+      en: 'A piece moves out of the way and uncovers a [check](check) from another piece of the same side behind it. Since the opponent has to deal with the king, the piece that moved is free to capture or attack whatever it likes.',
+    },
+    example: {
+      fen: '4k3/8/8/8/4B3/8/8/4R1K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e8'],
+      arrows: [
+        { from: 'e4', to: 'h7', move: true },
+        { from: 'e1', to: 'e8', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'discovered-attacks',
+    sources: [
+      `${CHESSCOM_EN}discovered-check-chess`,
+      'https://lichess.org/training/discoveredCheck',
       `${WIKI}Discovered_attack`,
     ],
   },
@@ -721,6 +774,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'tactics',
     level: 'intermediate',
+    lesson: 'remove-the-defender',
     sources: [
       WIKI_GLOSSARY,
       'https://lichess.org/practice/advanced-tactics/deflection/kdKpaYLW',
@@ -728,10 +782,60 @@ export const glossary: GlossarySpec[] = [
     ],
   },
   {
+    id: 'removing-the-defender',
+    name: { es: 'Eliminar al defensor', en: 'Removing the defender' },
+    definition: {
+      es: 'Capturar la pieza rival que defiende a otra, para que esa otra se quede sin defensa y se pueda ganar.',
+      en: 'Capturing the enemy piece that defends another, so that the other one is left without defence and can be won.',
+    },
+    example: {
+      fen: '6k1/5ppp/5n2/3b4/8/8/1B3PPP/3R2K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['f6', 'd5'],
+      arrows: [
+        { from: 'b2', to: 'f6', move: true },
+        { from: 'd1', to: 'd5', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'remove-the-defender',
+    sources: [
+      `${CHESSCOM_EN}removing-the-defender-chess`,
+      'https://lichess.org/practice/advanced-tactics/undermining/udx042D6',
+      `${WIKI}Undermining_(chess)`,
+    ],
+  },
+  {
+    id: 'overloading',
+    name: { es: 'Sobrecarga', en: 'Overloading' },
+    definition: {
+      es: 'Una pieza tiene dos tareas de defensa a la vez y no puede cumplir las dos: si atiende una, deja sin defensa lo que protegía con la otra.',
+      en: 'A piece has two defensive jobs at once and cannot do both: if it attends to one, it leaves unguarded what it protected with the other.',
+    },
+    example: {
+      fen: '2r3k1/3q1ppp/8/8/3n4/8/5QPP/2R3K1 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d7'],
+      arrows: [
+        { from: 'c1', to: 'c8', move: true },
+        { from: 'f2', to: 'd4', move: false },
+      ],
+    },
+    group: 'tactics',
+    level: 'intermediate',
+    lesson: 'remove-the-defender',
+    sources: [
+      `${CHESSCOM_EN}overloading-chess`,
+      'https://lichess.org/practice/fundamental-tactics/overloaded-pieces/o734CNqp',
+      `${WIKI}Overloading_(chess)`,
+    ],
+  },
+  {
     id: 'attraction',
     name: { es: 'Atracción', en: 'Attraction' },
     definition: {
-      es: 'Obligar a una pieza rival, a menudo el rey, a ir a una casilla concreta mediante un [sacrificio](sacrifice), porque allí se la puede atacar mejor, por ejemplo con un [ataque doble](fork).',
+      es: 'Obligar a una pieza rival, a menudo el rey, a ir a una casilla concreta mediante un [sacrificio](sacrifice), porque allí se la puede atacar mejor, por ejemplo con una [horquilla](fork).',
       en: 'Luring an enemy piece, often the king, onto a particular square by means of a [sacrifice](sacrifice), because there it can be hit harder, for instance with a [fork](fork).',
     },
     example: {
