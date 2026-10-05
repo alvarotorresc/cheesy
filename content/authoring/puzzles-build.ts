@@ -44,6 +44,11 @@ if (!file) {
   console.error('usage: pnpm content:puzzles <lichess_db_puzzle.csv.zst> [--last-modified=<date>]');
   process.exit(1);
 }
+if (lastModifiedArg !== undefined && Number.isNaN(Date.parse(lastModifiedArg))) {
+  console.error(`--last-modified: "${lastModifiedArg}" is not a date`);
+  process.exit(1);
+}
+
 // The database has over five million puzzles: fewer rows mean a cut or damaged file.
 const MIN_ROWS = 5_000_000;
 
@@ -71,6 +76,11 @@ const sha256 = async (f: string): Promise<string> => {
 
 const started = Date.now();
 const { size, mtime } = statSync(file);
+if (lastModifiedArg === undefined)
+  console.warn(
+    `warning: no --last-modified, using the modified time of the file (${mtime.toISOString()})`,
+  );
+const lastModified = new Date(lastModifiedArg ?? mtime).toISOString();
 const digest = await sha256(file);
 console.log(`sha256 ${digest}, ${size} bytes`);
 
@@ -137,7 +147,7 @@ for (const { lesson, themes, puzzles } of picked) {
 const catalog: PuzzleCatalog = {
   source: {
     url: PUZZLE_SOURCE_URL,
-    lastModified: new Date(lastModifiedArg ?? mtime).toISOString(),
+    lastModified,
     sha256: digest,
     bytes: size,
     rows,
