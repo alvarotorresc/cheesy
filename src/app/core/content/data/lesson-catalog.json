@@ -463,5 +463,20 @@
     },
     "stepCount": 8,
     "exerciseCount": 2
+  },
+  {
+    "id": "zugzwang-tempo",
+    "level": "advanced",
+    "order": 8,
+    "title": {
+      "es": "Zugzwang y tiempos",
+      "en": "Zugzwang and tempo"
+    },
+    "summary": {
+      "es": "Cuando mover es un problema: el zugzwang recíproco, la jugada de espera y la triangulación.",
+      "en": "When having to move is the problem: mutual zugzwang, the waiting move and triangulation."
+    },
+    "stepCount": 8,
+    "exerciseCount": 3
   }
 ]

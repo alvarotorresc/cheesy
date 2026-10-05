@@ -87,6 +87,8 @@ const EXPECTED_IDS = [
   'blockade',
   'bad-bishop',
   'opposite-coloured-bishops',
+  'mutual-zugzwang',
+  'triangulation',
 ].sort();
 
 /** The family of every term: the glossary page groups the terms by it, in this order. */
@@ -176,6 +178,8 @@ const GROUPS: Record<string, string[]> = {
     'seventh-rank',
     'cutting-off-the-king',
     'opposite-coloured-bishops',
+    'mutual-zugzwang',
+    'triangulation',
   ],
 };
 

@@ -825,6 +825,7 @@ export const glossary: GlossarySpec[] = [
     },
     group: 'strategy',
     level: 'advanced',
+    lesson: 'zugzwang-tempo',
     sources: [WIKI_GLOSSARY, `${WIKI}Tempo_(chess)`],
   },
   {
@@ -1563,5 +1564,41 @@ export const glossary: GlossarySpec[] = [
     level: 'advanced',
     lesson: 'minor-piece-endings',
     sources: [`${WIKI}Opposite-colored_bishops_endgame`, WIKI_GLOSSARY],
+  },
+  {
+    id: 'mutual-zugzwang',
+    name: { es: 'Zugzwang recíproco', en: 'Mutual zugzwang' },
+    definition: {
+      es: 'Una posición en la que los dos bandos están en [zugzwang](zugzwang): el que tenga que mover empeora, sea quien sea. Aquí, el rey que mueva tiene que dejar de defender su peón y lo pierde. Por eso, en estos finales, tener una jugada de espera de sobra decide la partida.',
+      en: 'A position in which both sides are in [zugzwang](zugzwang): whoever has to move makes things worse, whoever it is. Here, the king that moves has to stop guarding its pawn and loses it. That is why, in these endings, having a spare waiting move decides the game.',
+    },
+    example: {
+      fen: '8/8/8/3pK3/2kP4/8/8/8 w - - 0 1',
+      orientation: 'white',
+      highlights: ['d4', 'd5'],
+      arrows: [],
+    },
+    group: 'endgames',
+    level: 'advanced',
+    lesson: 'zugzwang-tempo',
+    sources: [`${WIKI}Zugzwang`, WIKI_GLOSSARY],
+  },
+  {
+    id: 'triangulation',
+    name: { es: 'Triangulación', en: 'Triangulation' },
+    definition: {
+      es: 'Una maniobra del rey para perder un [tiempo](tempo): en lugar de ir directo a una casilla, da un rodeo por tres casillas en triángulo y vuelve a la misma posición con el turno del rival. Sirve cuando el rey rival solo puede ir y volver entre dos casillas.',
+      en: 'A king manoeuvre to lose a [tempo](tempo): instead of going straight to a square, it takes a detour round three squares in a triangle and comes back to the same position with the opponent to move. It works when the enemy king can only shuttle between two squares.',
+    },
+    example: {
+      fen: '8/4k1p1/6P1/4KP2/8/8/8/8 w - - 0 1',
+      orientation: 'white',
+      highlights: ['e5', 'd5', 'e4'],
+      arrows: [{ from: 'e5', to: 'd5', move: true }],
+    },
+    group: 'endgames',
+    level: 'advanced',
+    lesson: 'zugzwang-tempo',
+    sources: [`${WIKI}Triangulation_(chess)`, WIKI_GLOSSARY],
   },
 ];

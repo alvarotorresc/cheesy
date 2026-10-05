@@ -2585,6 +2585,7 @@
     },
     "group": "strategy",
     "level": "advanced",
+    "lesson": "zugzwang-tempo",
     "sources": [
       "https://en.wikipedia.org/wiki/Glossary_of_chess",
       "https://en.wikipedia.org/wiki/Tempo_(chess)"
@@ -4870,6 +4871,123 @@
     "lesson": "minor-piece-endings",
     "sources": [
       "https://en.wikipedia.org/wiki/Opposite-colored_bishops_endgame",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "mutual-zugzwang",
+    "name": {
+      "es": "Zugzwang recíproco",
+      "en": "Mutual zugzwang"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una posición en la que los dos bandos están en "
+        },
+        {
+          "kind": "term",
+          "id": "zugzwang",
+          "text": "zugzwang"
+        },
+        {
+          "kind": "text",
+          "text": ": el que tenga que mover empeora, sea quien sea. Aquí, el rey que mueva tiene que dejar de defender su peón y lo pierde. Por eso, en estos finales, tener una jugada de espera de sobra decide la partida."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A position in which both sides are in "
+        },
+        {
+          "kind": "term",
+          "id": "zugzwang",
+          "text": "zugzwang"
+        },
+        {
+          "kind": "text",
+          "text": ": whoever has to move makes things worse, whoever it is. Here, the king that moves has to stop guarding its pawn and loses it. That is why, in these endings, having a spare waiting move decides the game."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/8/8/3pK3/2kP4/8/8/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "d4",
+        "d5"
+      ],
+      "arrows": []
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "zugzwang-tempo",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Zugzwang",
+      "https://en.wikipedia.org/wiki/Glossary_of_chess"
+    ]
+  },
+  {
+    "id": "triangulation",
+    "name": {
+      "es": "Triangulación",
+      "en": "Triangulation"
+    },
+    "definition": {
+      "es": [
+        {
+          "kind": "text",
+          "text": "Una maniobra del rey para perder un "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tiempo"
+        },
+        {
+          "kind": "text",
+          "text": ": en lugar de ir directo a una casilla, da un rodeo por tres casillas en triángulo y vuelve a la misma posición con el turno del rival. Sirve cuando el rey rival solo puede ir y volver entre dos casillas."
+        }
+      ],
+      "en": [
+        {
+          "kind": "text",
+          "text": "A king manoeuvre to lose a "
+        },
+        {
+          "kind": "term",
+          "id": "tempo",
+          "text": "tempo"
+        },
+        {
+          "kind": "text",
+          "text": ": instead of going straight to a square, it takes a detour round three squares in a triangle and comes back to the same position with the opponent to move. It works when the enemy king can only shuttle between two squares."
+        }
+      ]
+    },
+    "example": {
+      "fen": "8/4k1p1/6P1/4KP2/8/8/8/8 w - - 0 1",
+      "orientation": "white",
+      "highlights": [
+        "e5",
+        "d5",
+        "e4"
+      ],
+      "arrows": [
+        {
+          "from": "e5",
+          "to": "d5",
+          "move": true
+        }
+      ]
+    },
+    "group": "endgames",
+    "level": "advanced",
+    "lesson": "zugzwang-tempo",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Triangulation_(chess)",
       "https://en.wikipedia.org/wiki/Glossary_of_chess"
     ]
   }
