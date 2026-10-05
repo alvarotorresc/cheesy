@@ -1,0 +1,197 @@
+:host {
+  display: block;
+  /* The column of the level pages: a list of lessons in the order of the course. */
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.page-head {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-6);
+}
+
+.page-head h1 {
+  font-size: var(--text-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.lede {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  max-width: 34rem;
+}
+
+.lessons {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Marker and title on the first row; on a phone, the tally and the action share the second. */
+.lesson-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'order body body'
+    '. tally action';
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.lesson-card:hover {
+  border-color: var(--color-accent);
+}
+
+.lesson-card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.order {
+  grid-area: order;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+
+.started .order {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.body {
+  grid-area: body;
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.themes {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  line-height: 1.4;
+}
+
+/* ---- How many went in at the first try: one part of the bar per batch of ten ---------------- */
+
+.tally {
+  grid-area: tally;
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.meter {
+  display: flex;
+  gap: 3px;
+  max-width: 12rem;
+}
+
+.part {
+  flex: 1 1 0;
+  height: 0.375rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-hover);
+  overflow: hidden;
+}
+
+.part span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+}
+
+.count {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.action {
+  grid-area: action;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---- Notes under the list -------------------------------------------------------------------- */
+
+.unavailable {
+  margin-top: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.attribution {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.attribution a {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+@media (min-width: 40rem) {
+  .lesson-card {
+    grid-template-columns: auto minmax(0, 1fr) 11rem auto;
+    grid-template-areas: 'order body tally action';
+    gap: var(--space-4);
+  }
+
+  .order {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-card {
+    transition: none;
+  }
+}
