@@ -537,7 +537,7 @@
           },
           {
             "kind": "text",
-            "text": ". Y si no la captura, tu torre lo sigue persiguiendo con jaques y no lo deja en paz. Una torre así se llama a veces «torre loca»."
+            "text": ". Y si no la captura, tu torre lo sigue persiguiendo con jaques y no lo deja en paz."
           }
         ],
         "en": [
@@ -569,7 +569,7 @@
           },
           {
             "kind": "text",
-            "text": ". And if he does not take it, your rook keeps chasing him with checks and gives him no peace. A rook like this is sometimes called a “desperado rook”."
+            "text": ". And if he does not take it, your rook keeps chasing him with checks and gives him no peace."
           }
         ]
       },
@@ -866,7 +866,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "Último reto: tienes rey y peón contra dama. Parece perdido, pero es tablas si sabes usar el "
+            "text": "Último reto: tienes rey y peón contra dama. Parece perdido, pero con un peón de c es tablas si sabes usar el "
           },
           {
             "kind": "term",
@@ -875,13 +875,22 @@
           },
           {
             "kind": "text",
-            "text": ". Aguanta: no te separes del peón."
+            "text": ". Aguanta: cada vez que te den "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "jaque"
+          },
+          {
+            "kind": "text",
+            "text": ", lleva el rey hacia la esquina o delante del peón."
           }
         ],
         "en": [
           {
             "kind": "text",
-            "text": "Last challenge: you have king and pawn against a queen. It looks lost, but it is a draw if you know how to use "
+            "text": "Last challenge: you have king and pawn against a queen. It looks lost, but with a c-pawn it is a draw if you know how to use "
           },
           {
             "kind": "term",
@@ -890,7 +899,16 @@
           },
           {
             "kind": "text",
-            "text": ". Hold on: do not leave your pawn."
+            "text": ". Hold on: every time you get a "
+          },
+          {
+            "kind": "term",
+            "id": "check",
+            "text": "check"
+          },
+          {
+            "kind": "text",
+            "text": ", take the king towards the corner or in front of the pawn."
           }
         ]
       },
@@ -901,7 +919,7 @@
         "es": [
           {
             "kind": "text",
-            "text": "Quédate junto al peón. Cuando te den "
+            "text": "Sal del "
           },
           {
             "kind": "term",
@@ -910,7 +928,63 @@
           },
           {
             "kind": "text",
-            "text": ", a veces lo mejor es meter el rey en la esquina: si la dama captura el peón, puede quedar "
+            "text": " a "
+          },
+          {
+            "kind": "square",
+            "square": "a7"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": " o "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": "; si te vas a "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": " o a "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": ", pierdes. Con tu rey en "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ", si la dama captura el peón de "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ", es "
           },
           {
             "kind": "term",
@@ -925,7 +999,7 @@
         "en": [
           {
             "kind": "text",
-            "text": "Stay next to the pawn. When you get a "
+            "text": "Get out of "
           },
           {
             "kind": "term",
@@ -934,7 +1008,63 @@
           },
           {
             "kind": "text",
-            "text": ", sometimes the best thing is to put the king in the corner: if the queen takes the pawn, it may be "
+            "text": " to "
+          },
+          {
+            "kind": "square",
+            "square": "a7"
+          },
+          {
+            "kind": "text",
+            "text": ", "
+          },
+          {
+            "kind": "square",
+            "square": "b8"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "c8"
+          },
+          {
+            "kind": "text",
+            "text": "; if you go to "
+          },
+          {
+            "kind": "square",
+            "square": "b6"
+          },
+          {
+            "kind": "text",
+            "text": " or "
+          },
+          {
+            "kind": "square",
+            "square": "a6"
+          },
+          {
+            "kind": "text",
+            "text": ", you lose. With your king on "
+          },
+          {
+            "kind": "square",
+            "square": "a8"
+          },
+          {
+            "kind": "text",
+            "text": ", if the queen takes the pawn on "
+          },
+          {
+            "kind": "square",
+            "square": "c7"
+          },
+          {
+            "kind": "text",
+            "text": ", it is "
           },
           {
             "kind": "term",
