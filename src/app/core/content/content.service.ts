@@ -92,11 +92,15 @@ export class ContentService {
     return this.cached('puzzle-catalog', () => this.puzzleLoaders.catalog());
   }
 
-  /** The puzzles of one lesson; undefined when the lesson has none. */
+  /** The puzzles of one lesson; undefined when the lesson has none. A file with none is an error. */
   async puzzles(lessonId: string): Promise<PuzzleFile | undefined> {
     const { lessons } = await this.puzzleCatalog();
-    if (!lessons.some((entry) => entry.lesson === lessonId)) return undefined;
-    return this.cached(`puzzles:${lessonId}`, () => this.puzzleLoaders.puzzles(lessonId));
+    if (!lessons.some((entry) => entry.lesson === lessonId && entry.count > 0)) return undefined;
+    return this.cached(`puzzles:${lessonId}`, async () => {
+      const file = await this.puzzleLoaders.puzzles(lessonId);
+      if (file.puzzles.length === 0) throw new Error(`No puzzles in ${lessonId}`);
+      return file;
+    });
   }
 
   /** Shared by `opening` and `openingBook`, so the file is downloaded once. */

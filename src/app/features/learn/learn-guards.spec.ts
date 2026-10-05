@@ -93,6 +93,18 @@ describe('learn guards', () => {
       expect(await open('/learn/puzzles/Not-An-Id')).toBe('/learn/puzzles');
     });
 
+    it('should send a lesson the catalogue gives no puzzles to the list', async () => {
+      const catalog = await fixturePuzzleLoaders.catalog();
+      await withPuzzles({
+        ...fixturePuzzleLoaders,
+        catalog: async () => ({
+          ...catalog,
+          lessons: catalog.lessons.map((entry) => ({ ...entry, count: 0 })),
+        }),
+      });
+      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles');
+    });
+
     it('should let the page open when the catalogue cannot be loaded', async () => {
       await withPuzzles({
         ...fixturePuzzleLoaders,

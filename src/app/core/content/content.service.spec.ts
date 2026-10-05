@@ -378,6 +378,25 @@ describe('ContentService puzzles', () => {
     expect(loaders.puzzles).not.toHaveBeenCalled();
   });
 
+  it('should treat a lesson the catalogue gives no puzzles as having none', async () => {
+    const { content, loaders } = setupPuzzles();
+    loaders.catalog.mockResolvedValue({
+      ...CATALOG,
+      lessons: [{ lesson: 'the-fork', count: 0, themes: ['fork'] }],
+    });
+
+    expect(await content.puzzles('the-fork')).toBeUndefined();
+    expect(loaders.puzzles).not.toHaveBeenCalled();
+  });
+
+  it('should fail when the file of a lesson has no puzzles, and not cache the failure', async () => {
+    const { content, loaders } = setupPuzzles();
+    loaders.puzzles.mockResolvedValueOnce({ ...fileOf('the-fork'), puzzles: [] });
+
+    await expect(content.puzzles('the-fork')).rejects.toThrow('No puzzles');
+    expect((await content.puzzles('the-fork'))?.puzzles).toHaveLength(1);
+  });
+
   it('should download the catalogue and each file once, and again after a failure', async () => {
     const { content, loaders } = setupPuzzles();
     loaders.puzzles.mockRejectedValueOnce(new Error('offline'));

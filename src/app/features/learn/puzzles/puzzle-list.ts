@@ -40,7 +40,8 @@ export const puzzleRows = (
   catalog.lessons
     .flatMap((entry) => {
       const lesson = lessons.find((summary) => summary.id === entry.lesson);
-      if (!lesson) return [];
+      // A lesson the catalogue says has no puzzles has nothing to practise.
+      if (!lesson || entry.count <= 0) return [];
       const rows = progress.filter((row) => row.lessonId === entry.lesson);
       const firstTry = Math.min(entry.count, rows.filter((row) => row.lastFirstTry).length);
       const parts = Array.from({ length: Math.ceil(entry.count / BATCH_SIZE) }, (_, i) => {

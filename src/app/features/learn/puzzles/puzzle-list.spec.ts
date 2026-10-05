@@ -84,7 +84,7 @@ describe('PuzzleList', () => {
     expect(card.querySelector<HTMLElement>('.part span')?.style.width).toBe('10%');
   });
 
-  it('should follow the order of the course and leave out lessons that do not exist', async () => {
+  it('should follow the order of the course and leave out lessons that do not exist or have no puzzles', async () => {
     const catalog = await fixturePuzzleLoaders.catalog();
     setup({
       ...fixturePuzzleLoaders,
@@ -94,6 +94,7 @@ describe('PuzzleList', () => {
           ...catalog.lessons,
           { lesson: 'nowhere', count: 30, themes: ['pin'] },
           { lesson: 'knight-moves', count: 30, themes: ['pin', 'skewer'] },
+          { lesson: 'the-board', count: 0, themes: ['pin'] },
         ],
       }),
     });
