@@ -1988,26 +1988,26 @@
       "es": [
         {
           "kind": "text",
-          "text": "Una dama, una torre o un alfil ataca o defiende una casilla a través de otra pieza que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego."
+          "text": "Una dama, una torre o un alfil ataca o defiende una casilla a través de una pieza rival que tiene delante en la misma línea. En cuanto esa pieza se aparta o captura, la de detrás entra en juego. Si la pieza de delante es propia, no son rayos X sino una batería."
         }
       ],
       "en": [
         {
           "kind": "text",
-          "text": "A queen, rook or bishop attacks or defends a square through another piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play."
+          "text": "A queen, rook or bishop attacks or defends a square through an enemy piece standing in front of it on the same line. As soon as that piece moves away or captures, the one behind comes into play. If the piece in front is your own, it is not an x-ray but a battery."
         }
       ]
     },
     "example": {
-      "fen": "3r2k1/5ppp/8/8/8/8/3Q1PPP/3R2K1 w - - 0 1",
+      "fen": "6k1/pp3ppp/3Npn2/3r4/8/8/PP2KPPP/3R4 b - - 0 1",
       "orientation": "white",
       "highlights": [
-        "d8"
+        "d6"
       ],
       "arrows": [
         {
           "from": "d1",
-          "to": "d8",
+          "to": "d6",
           "move": false
         }
       ]

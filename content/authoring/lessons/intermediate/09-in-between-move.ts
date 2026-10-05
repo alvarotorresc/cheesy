@@ -81,14 +81,14 @@ export const inBetweenMove: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Un apunte más: los [rayos X](x-ray). Una dama, una torre o un alfil puede atacar o defender una casilla a través de otra pieza que está en la misma línea, porque en cuanto esa pieza se va o captura, la de detrás entra en juego. Aquí la torre de d1 también mira a d8, a través de su propia dama: si la dama captura allí y alguien la recupera, la torre captura detrás.',
-        en: 'One more note: [x-ray](x-ray). A queen, a rook or a bishop can attack or defend a square through another piece standing on the same line, because as soon as that piece leaves or captures, the one behind it comes into play. Here the rook on d1 also looks at d8, through its own queen: if the queen captures there and someone takes back, the rook captures from behind.',
+        es: 'Un apunte más: los [rayos X](x-ray). Una dama, una torre o un alfil puede atacar o defender una casilla a través de una pieza rival que está en la misma línea, porque en cuanto esa pieza se aparta o captura, la de detrás entra en juego. Aquí la torre negra de d5 parece poder capturar tu caballo de d6, pero tu torre de d1 lo defiende a través de ella: si la torre negra captura en d6, deja libre la columna y tu torre la recupera.',
+        en: 'One more note: [x-ray](x-ray). A queen, a rook or a bishop can attack or defend a square through an enemy piece standing on the same line, because as soon as that piece moves away or captures, the one behind it comes into play. Here the black rook on d5 seems able to take your knight on d6, but your rook on d1 defends it through the rook: if the black rook takes on d6, it opens the file and your rook takes it back.',
       },
       board: {
-        fen: '3r2k1/5ppp/8/8/8/8/3Q1PPP/3R2K1 w - - 0 1',
+        fen: '6k1/pp3ppp/3Npn2/3r4/8/8/PP2KPPP/3R4 b - - 0 1',
         orientation: 'white',
-        highlights: ['d8'],
-        arrows: [{ from: 'd1', to: 'd8' }],
+        highlights: ['d6'],
+        arrows: [{ from: 'd1', to: 'd6' }],
       },
     },
     {
@@ -97,22 +97,22 @@ export const inBetweenMove: LessonSpec = {
         es: 'Usa los [rayos X](x-ray) de tu torre y da [mate](checkmate) en dos jugadas.',
         en: 'Use your rook’s [x-ray](x-ray) and give [checkmate](checkmate) in two moves.',
       },
-      board: { fen: 'r2q2k1/pp3ppp/8/8/8/8/PP1Q1PPP/3R2K1 w - - 0 1', orientation: 'white' },
-      check: { by: 'engine', solution: ['Qxd8+', 'Rxd8', 'Rxd8#'] },
+      board: { fen: '6k1/pp1r1ppp/1n6/6Q1/8/8/PP3PPP/3R2K1 w - - 0 1', orientation: 'white' },
+      check: { by: 'engine', solution: ['Qd8+', 'Rxd8', 'Rxd8#'] },
       hint: {
-        es: 'Captura la dama negra con [jaque](check). La torre de a8 la recupera… y detrás está tu torre.',
-        en: 'Take the black queen with [check](check). The rook on a8 takes back… and your rook is behind.',
+        es: 'Tu torre de d1 mira a d8 a través de la torre negra de d7. Lleva la dama a d8 con [jaque](check): si la torre negra la captura, la columna queda libre.',
+        en: 'Your rook on d1 looks at d8 through the black rook on d7. Take the queen to d8 with [check](check): if the black rook takes her, the file is open.',
       },
       explanation: {
-        es: 'Eso es. Tu dama captura en d8 con [jaque](check), la torre negra la recupera y tu torre, que defendía d8 a través de la dama, captura a su vez: [mate del pasillo](back-rank).',
-        en: 'That is it. Your queen takes on d8 with [check](check), the black rook takes back and your rook, which defended d8 through the queen, captures in turn: [back-rank mate](back-rank).',
+        es: 'Eso es. Tu dama entra en d8 con [jaque](check) y la torre negra tiene que capturarla. Al hacerlo deja libre la columna d, y tu torre, que defendía d8 a través de ella, captura a su vez: [mate del pasillo](back-rank).',
+        en: 'That is it. Your queen lands on d8 with [check](check) and the black rook has to take her. In doing so it opens the d-file, and your rook, which defended d8 through it, captures in turn: [back-rank mate](back-rank).',
       },
     },
     {
       kind: 'explain',
       text: {
-        es: 'Resumen: recapturar no siempre es lo primero. Antes, pregúntate si tienes un [jaque](check) o una amenaza que el rival tenga que atender: esa [jugada intermedia](intermediate-move) puede ganar material, y la recaptura seguirá ahí. Y recuerda los [rayos X](x-ray): una pieza de largo alcance sigue contando aunque tenga otra delante en su línea.',
-        en: 'Summary: taking back is not always the first thing. Before you do, ask yourself whether you have a [check](check) or a threat the rival must answer: that [in-between move](intermediate-move) can win material, and the recapture will still be there. And remember [x-ray](x-ray): a long-range piece still counts even with another piece in front of it on its line.',
+        es: 'Resumen: recapturar no siempre es lo primero. Antes, pregúntate si tienes un [jaque](check) o una amenaza que el rival tenga que atender: esa [jugada intermedia](intermediate-move) puede ganar material, y la recaptura seguirá ahí. Y recuerda los [rayos X](x-ray): una pieza de largo alcance sigue contando aunque tenga una pieza rival delante en su línea.',
+        en: 'Summary: taking back is not always the first thing. Before you do, ask yourself whether you have a [check](check) or a threat the rival must answer: that [in-between move](intermediate-move) can win material, and the recapture will still be there. And remember [x-ray](x-ray): a long-range piece still counts even with an enemy piece in front of it on its line.',
       },
       board: { fen: '1kr5/pppN2pp/8/8/8/8/PPP3PP/1KR1q3 b - - 0 1', orientation: 'white' },
     },
