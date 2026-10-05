@@ -107,8 +107,8 @@ export const passedPawns: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Para frenar un peón pasado, ponle una pieza delante: es el [bloqueo](blockade). El propio peón le hace de escudo: una torre rival no puede atacarla por la columna. El mejor bloqueador es el caballo: desde ahí sigue atacando casillas. Aquí el caballo negro de d6 para el peón de d5.',
-        en: 'To stop a passed pawn, put a piece in front of it: that is the [blockade](blockade). The pawn itself shields it: a rival rook cannot attack it along the file. The best blockader is the knight: from there it still attacks squares. Here the black knight on d6 stops the pawn on d5.',
+        es: 'Para frenar un peón pasado, ponle una pieza delante: es el [bloqueo](blockade). El propio peón le hace de escudo: una torre rival no puede atacarla desde detrás del peón. El mejor bloqueador es el caballo: desde ahí sigue atacando casillas. Aquí el caballo negro de d6 para el peón de d5.',
+        en: 'To stop a passed pawn, put a piece in front of it: that is the [blockade](blockade). The pawn itself shields it: a rival rook cannot attack it from behind the pawn. The best blockader is the knight: from there it still attacks squares. Here the black knight on d6 stops the pawn on d5.',
       },
       board: {
         fen: '6k1/5ppp/3n4/3P4/8/8/5PPP/6K1 w - - 0 1',

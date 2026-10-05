@@ -423,7 +423,7 @@
           },
           {
             "kind": "text",
-            "text": ". El propio peón le hace de escudo: una torre rival no puede atacarla por la columna. El mejor bloqueador es el caballo: desde ahí sigue atacando casillas. Aquí el caballo negro de "
+            "text": ". El propio peón le hace de escudo: una torre rival no puede atacarla desde detrás del peón. El mejor bloqueador es el caballo: desde ahí sigue atacando casillas. Aquí el caballo negro de "
           },
           {
             "kind": "square",
@@ -454,7 +454,7 @@
           },
           {
             "kind": "text",
-            "text": ". The pawn itself shields it: a rival rook cannot attack it along the file. The best blockader is the knight: from there it still attacks squares. Here the black knight on "
+            "text": ". The pawn itself shields it: a rival rook cannot attack it from behind the pawn. The best blockader is the knight: from there it still attacks squares. Here the black knight on "
           },
           {
             "kind": "square",

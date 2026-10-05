@@ -65,8 +65,8 @@ export const pieceActivity: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Cada pieza tiene su sitio. La torre busca [columnas](file) sin peones, por donde puede entrar en el campo rival. Y en el final, cuando quedan pocas piezas, el rey deja de esconderse: sale al centro y pelea como una pieza más. Aquí la torre blanca entra por la columna d hasta la séptima fila, y el rey blanco en e4 está mucho mejor que el negro en g7.',
-        en: 'Each piece has its place. The rook looks for [files](file) without pawns, through which it can get into the rival camp. And in the endgame, when few pieces are left, the king stops hiding: he comes out to the centre and fights like any other piece. Here the white rook gets in along the d-file to the seventh rank, and the white king on e4 is much better placed than the black one on g7.',
+        es: 'Cada pieza tiene su sitio. La torre busca [columnas](file) sin peones, por donde puede entrar en el campo rival. Y en el final, cuando quedan pocas piezas, el rey deja de esconderse: sale al centro y pelea como una pieza más. Aquí la torre blanca entra por la columna d hasta la séptima fila, y el rey blanco en e4 está mucho más activo que el negro en g7.',
+        en: 'Each piece has its place. The rook looks for [files](file) without pawns, through which it can get into the rival camp. And in the endgame, when few pieces are left, the king stops hiding: he comes out to the centre and fights like any other piece. Here the white rook gets in along the d-file to the seventh rank, and the white king on e4 is far more active than the black one on g7.',
       },
       board: {
         fen: '1r6/5pk1/6p1/8/4K3/8/5P2/3R4 w - - 0 1',
@@ -102,8 +102,8 @@ export const pieceActivity: LessonSpec = {
     {
       kind: 'explain',
       text: {
-        es: 'Quien tiene las piezas más activas suele llevar la [iniciativa](initiative): hace amenazas, y el rival tiene que contestarlas en lugar de seguir su plan. La [iniciativa](initiative) no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ataca los peones negros y el rey blanco está en el centro: son las negras las que tienen que defenderse.',
-        en: 'Whoever has the more active pieces usually holds the [initiative](initiative): he makes threats, and the rival has to answer them instead of following his own plan. The [initiative](initiative) is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh attacks the black pawns and the white king stands in the centre: it is Black who has to defend.',
+        es: 'Quien tiene las piezas más activas suele llevar la [iniciativa](initiative): hace amenazas, y el rival tiene que contestarlas en lugar de seguir su plan. La [iniciativa](initiative) no es ventaja material, pero muchas veces termina en ella. Aquí el material está igualado, pero la torre blanca en la séptima ataca los peones negros y el rey blanco está en el centro: son las blancas las que eligen el plan, y las negras van detrás.',
+        en: 'Whoever has the more active pieces usually holds the [initiative](initiative): he makes threats, and the rival has to answer them instead of following his own plan. The [initiative](initiative) is not a material advantage, but it often ends in one. Here material is level, but the white rook on the seventh attacks the black pawns and the white king stands in the centre: White chooses the plan, and Black follows.',
       },
       board: {
         fen: '1r4k1/3R1ppp/8/8/4K3/8/5PPP/8 w - - 0 1',
