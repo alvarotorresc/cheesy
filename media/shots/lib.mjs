@@ -167,9 +167,10 @@ function seededRandom() {
 }
 
 // The progress database of the app (src/app/core/progress/progress-db.ts): Dexie schema version
-// 2, which IndexedDB sees as 20 because Dexie multiplies its versions by 10. The stores are
+// 4, which IndexedDB sees as 40 because Dexie multiplies its versions by 10. The stores are
 // created here exactly as Dexie would, so the app opens the database without an upgrade.
-const PROGRESS_DB = { name: 'cheesy', version: 20 };
+const PROGRESS_DB = { name: 'cheesy', version: 40 };
+const PROGRESS_STORES = ['lines', 'endgames', 'positions', 'lessons', 'puzzles'];
 // A file of the build that is not the app: it puts the page on the origin without starting it.
 const STATIC_FILE = '/3rdpartylicenses.txt';
 
@@ -177,7 +178,10 @@ const STATIC_FILE = '/3rdpartylicenses.txt';
 // origin, the database is created there with its rows, and the goto() of the caller finds it.
 // The rows go in as they are; the app checks them when it reads them and drops the bad ones
 // without a word, so each scene that seeds progress checks that it shows.
-async function seedProgress(page, { lines = [], endgames = [], positions = [] }) {
+async function seedProgress(page, progress) {
+  const rows = Object.fromEntries(PROGRESS_STORES.map((store) => [store, progress[store] ?? []]));
+  const unknown = Object.keys(progress).filter((store) => !PROGRESS_STORES.includes(store));
+  if (unknown.length > 0) throw new Error(`progress: unknown stores ${unknown.join(', ')}`);
   await page.goto(BASE_URL + STATIC_FILE);
   const written = await page.evaluate(
     ({ db: { name, version }, rows }) =>
@@ -190,6 +194,11 @@ async function seedProgress(page, { lines = [], endgames = [], positions = [] })
           db.createObjectStore('lines', { keyPath: 'key' }).createIndex('openingId', 'openingId');
           db.createObjectStore('endgames', { keyPath: 'endgameId' });
           db.createObjectStore('positions', { keyPath: 'positionId' });
+          db.createObjectStore('lessons', { keyPath: 'lessonId' });
+          db.createObjectStore('puzzles', { keyPath: 'puzzleId' }).createIndex(
+            'lessonId',
+            'lessonId',
+          );
         };
         request.onsuccess = () => {
           const db = request.result;
@@ -208,9 +217,9 @@ async function seedProgress(page, { lines = [], endgames = [], positions = [] })
           tx.onabort = () => fail(tx.error ?? new Error('the progress transaction was aborted'));
         };
       }),
-    { db: PROGRESS_DB, rows: { lines, endgames, positions } },
+    { db: PROGRESS_DB, rows },
   );
-  const wanted = lines.length + endgames.length + positions.length;
+  const wanted = Object.values(rows).reduce((sum, list) => sum + list.length, 0);
   if (written !== wanted) throw new Error(`progress: ${written} of ${wanted} rows written`);
 }
 
@@ -219,7 +228,8 @@ async function seedProgress(page, { lines = [], endgames = [], positions = [] })
 //   theme     'light' | 'dark'. The app has no toggle: it follows prefers-color-scheme.
 //   storage   extra localStorage entries, with their full keys ({ 'cheesy.foo': 'bar' }).
 //   progress  saved progress to seed in the IndexedDB database `cheesy`, before the app starts:
-//             { lines, endgames, positions }, rows as the app stores them (see progress.mjs).
+//             { lines, endgames, positions, lessons, puzzles }, rows as the app stores them
+//             (see progress.mjs).
 export async function openPage(
   browser,
   { lang = 'es', theme = 'light', mobile = false, storage = {}, progress = {} } = {},
