@@ -126,6 +126,17 @@ describe('PuzzlePage', () => {
       expect(puzzleOf()).toBe('Puzzle 1 of 10');
     });
 
+    it('should describe the focused heading with the progress and the prompt', async () => {
+      await render();
+      const heading = root().querySelector('h1')!;
+      const described = heading
+        .getAttribute('aria-describedby')!
+        .split(' ')
+        .map((id) => document.getElementById(id)?.textContent?.trim());
+      expect(described[0]).toBe('Puzzle 1 of 10');
+      expect(described[1]).toContain('You play Black. White just moved:');
+    });
+
     it('should name the tab after the lesson, in the active language', async () => {
       await render();
       expect(document.title).toBe('The fork · Practise more · Cheesy');
@@ -289,5 +300,75 @@ describe('PuzzlePage', () => {
       expect(puzzleOf()).toBe('Puzzle 1 of 10');
     });
     expect(TestBed.inject(Router).url).toBe('/learn/puzzles/the-fork');
+    // The retry button is gone: the focus goes to the heading, not to the body.
+    expect(document.activeElement).toBe(root().querySelector('h1'));
+  });
+
+  it('should not repeat the same puzzles on another batch when nothing can be saved', async () => {
+    setup(fixturePuzzleLoaders, () => Promise.reject(new DOMException('Blocked', 'SecurityError')));
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    await render();
+    const { puzzles } = await fixturePuzzleLoaders.puzzles('the-fork');
+    await playBatch(() => true);
+    root().querySelector<HTMLButtonElement>('button.another')!.click();
+    await vi.waitFor(async () => {
+      await settle();
+      expect(puzzleOf()).toBe('Puzzle 1 of 10');
+    });
+    // The two never played come first, then the ones played in this visit.
+    expect(view()!.step().board.fen).toBe(puzzles[10].fen);
+    vi.restoreAllMocks();
+  });
+
+  describe('with saves that take their time', () => {
+    let release: () => void;
+
+    beforeEach(() => {
+      setup();
+      const held: (() => void)[] = [];
+      const put = memory.store.puzzles.put;
+      memory.store.puzzles.put = (row) =>
+        new Promise((resolve) => held.push(() => resolve(put(row))));
+      release = () => held.splice(0).forEach((resolve) => resolve());
+    });
+
+    /** Finishes every puzzle of the batch, whose saves are held back, up to the summary. */
+    const reachSummary = async () => {
+      for (let index = 0; !root().querySelector('.summary'); index++) {
+        await finishPuzzle(true);
+        await clickNext();
+      }
+    };
+
+    it('should count the lesson only once the saves of the batch are done', async () => {
+      await render();
+      await reachSummary();
+      await vi.waitFor(() => expect(root().querySelector('.summary .first-try')).not.toBeNull());
+      await settle();
+      expect(root().querySelector('.summary .tally')).toBeNull();
+
+      release();
+      await vi.waitFor(async () => {
+        await settle();
+        expect(root().querySelector('.summary .tally')?.textContent).toContain('So far, 10 of');
+      });
+    });
+
+    it('should start another batch only once the saves are done', async () => {
+      await render();
+      await reachSummary();
+      root().querySelector<HTMLButtonElement>('button.another')!.click();
+      await settle();
+      expect(root().querySelector('.summary')).not.toBeNull();
+
+      release();
+      await vi.waitFor(async () => {
+        await settle();
+        expect(puzzleOf()).toBe('Puzzle 1 of 10');
+      });
+      // The ten just played are done: the first of the batch is one of the two never played.
+      const { puzzles } = await fixturePuzzleLoaders.puzzles('the-fork');
+      expect(view()!.step().board.fen).toBe(puzzles[10].fen);
+    });
   });
 });

@@ -20,7 +20,7 @@ import {
 } from '../../../core/content';
 import { DICTIONARIES, I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
-import { ProgressService } from '../../../core/progress';
+import { ProgressService, type PuzzleProgress } from '../../../core/progress';
 import { BoardSpotlight } from '../../../shared/board';
 import { FindMoveStepView } from '../lesson/steps/find-move-step';
 import { firstTryCount, nextBatch } from './next-batch';
@@ -41,6 +41,9 @@ type PageState =
       /** The lesson in the lesson catalogue, for its title and the way back to it. */
       readonly lesson?: LessonSummary;
     };
+
+/** No puzzle has the focus yet, but the next heading to show must take it. */
+const NO_KEY = '';
 
 /** What the summary says about the whole lesson; unknown while the results are being saved. */
 interface LessonTally {
@@ -106,6 +109,10 @@ export class PuzzlePage {
 
   /** Saves still on their way, awaited before the summary counts the lesson. */
   private readonly writes: Promise<unknown>[] = [];
+  /** The puzzles finished in this visit, for the next batch when nothing can be saved. */
+  private readonly played = new Map<string, PuzzleProgress>();
+  /** Whether a page was shown already, so a new one takes the focus like a new puzzle. */
+  private shownOnce = false;
   private focusedKey: string | undefined;
 
   constructor() {
@@ -136,6 +143,10 @@ export class PuzzlePage {
 
   protected async load(id: string): Promise<void> {
     this.state.set({ status: 'loading' });
+    this.played.clear();
+    // The first page of the visit keeps the focus where the router put it; one that replaces
+    // another (a new address, or a retry after the focus was lost with the button) takes it.
+    if (this.shownOnce) this.focusedKey = NO_KEY;
     try {
       const [file, catalog, rows] = await Promise.all([
         this.content.puzzles(id),
@@ -149,6 +160,7 @@ export class PuzzlePage {
         return;
       }
       this.startBatch(file, rows);
+      this.shownOnce = true;
       this.state.set({
         status: 'ready',
         file,
@@ -160,6 +172,7 @@ export class PuzzlePage {
   }
 
   protected retry(): void {
+    this.focusedKey = NO_KEY;
     void this.load(this.lessonId());
   }
 
@@ -167,6 +180,13 @@ export class PuzzlePage {
     if (this.outcomes().has(index)) return;
     this.outcomes.update((outcomes) => new Map(outcomes).set(index, result.firstTry));
     const puzzle = this.batch()[index];
+    this.played.set(puzzle.id, {
+      puzzleId: puzzle.id,
+      lessonId: this.lessonId(),
+      tries: (this.played.get(puzzle.id)?.tries ?? 0) + 1,
+      lastFirstTry: result.firstTry,
+      lastPlayedAt: Date.now(),
+    });
     this.writes.push(
       this.progress.recordPuzzle({
         puzzleId: puzzle.id,
@@ -184,7 +204,12 @@ export class PuzzlePage {
     const state = this.state();
     if (state.status !== 'ready') return;
     await Promise.all(this.writes);
-    this.startBatch(state.file, await this.progress.puzzles(state.file.lesson));
+    const saved = await this.progress.puzzles(state.file.lesson);
+    // Without storage nothing is read back: the next batch goes by what was played in this visit.
+    this.startBatch(
+      state.file,
+      this.progress.status() === 'unavailable' ? [...this.played.values()] : saved,
+    );
   }
 
   private startBatch(file: PuzzleFile, rows: Parameters<typeof nextBatch>[1]): void {

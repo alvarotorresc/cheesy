@@ -3,8 +3,11 @@
 
 <ng-template #head>
   <a class="back" routerLink="/learn/puzzles">← {{ p.backToList }}</a>
-  <h1 data-step-heading tabindex="-1">{{ title() || p.title }}</h1>
-  <p class="step-of">{{ p.puzzleOf(index() + 1, batch().length) }}</p>
+  <!-- The heading says where the puzzle is and what to do when it takes the focus. -->
+  <h1 data-step-heading tabindex="-1" aria-describedby="puzzle-progress find-move-prompt">
+    {{ title() || p.title }}
+  </h1>
+  <p id="puzzle-progress" class="step-of">{{ p.puzzleOf(index() + 1, batch().length) }}</p>
   <div class="progress-bar" aria-hidden="true">
     <span [style.width.%]="((index() + 1) / batch().length) * 100"></span>
   </div>
