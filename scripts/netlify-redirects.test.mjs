@@ -4,9 +4,11 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
+import { orderPositions } from '../src/app/features/positions/position-order.ts';
 import {
   BEGIN,
   checkBuilt,
+  OLD_POSITION_NUMBERS,
   checkPages,
   END,
   loadSources,
@@ -52,7 +54,6 @@ const firstMatch = (path) => {
 
 /** The old addresses, listed straight from the catalogues as the old routes were. */
 const expectedOldAddresses = () => {
-  const positionCount = sources.positions.length;
   return [
     '/openings',
     ...sources.openings.flatMap(({ id }) => [
@@ -63,7 +64,7 @@ const expectedOldAddresses = () => {
     '/endgames',
     ...sources.endgames.map(({ id }) => `/endgames/${id}`),
     '/positions',
-    ...Array.from({ length: positionCount }, (_, index) => `/positions/${index + 1}`),
+    ...Array.from({ length: 13 }, (_, index) => `/positions/${index + 1}`),
     ...sources.positions.map(({ id }) => `/positions/${id}`),
     '/learn',
     '/learn/glossary',
@@ -111,20 +112,18 @@ describe('redirects of the old addresses', () => {
     assert.equal(target['/acerca'], '/en/about');
   });
 
-  it('should number the positions as the gallery did (fewest moves first)', () => {
+  it('should keep the numbers of the positions of v0.2.0, which match the gallery of today', () => {
+    assert.equal(OLD_POSITION_NUMBERS.length, 13);
+    // Today the gallery numbers them the same; once a position is added this may differ, and the
+    // frozen table still wins.
+    assert.deepEqual(
+      orderPositions(sources.positions).map(({ id }) => id),
+      OLD_POSITION_NUMBERS,
+    );
     const target = Object.fromEntries(rules);
-    const moves = (id) =>
-      Math.ceil(sources.positions.find((position) => position.id === id).solution.length / 2);
-    const numbered = Array.from({ length: sources.positions.length }, (_, index) => {
-      const slug = target[`/positions/${index + 1}`].split('/').at(-1);
-      return Object.keys(sources.slugs.positions).find(
-        (id) => sources.slugs.positions[id].en === slug,
-      );
-    });
-    assert.equal(new Set(numbered).size, sources.positions.length);
-    for (let i = 1; i < numbered.length; i++) {
-      assert.ok(moves(numbered[i - 1]) <= moves(numbered[i]), numbered.join(', '));
-    }
+    assert.equal(target['/positions/1'], '/en/positions/kieninger-trap');
+    assert.equal(target['/positions/13'], '/en/positions/evergreen-game');
+    assert.equal(target['/positions/14'], undefined);
   });
 });
 
