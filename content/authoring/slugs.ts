@@ -61,7 +61,7 @@ export const endgameSlugs: SlugTable = {
 
 export const positionSlugs: SlugTable = {
   'legal-mate': { es: 'mate-de-legal', en: 'legal-mate' },
-  'reti-tartakower-1910': { es: 'sacrificio-de-dama-reti-tartakower', en: 'reti-tartakower' },
+  'reti-tartakower-1910': { es: 'reti-tartakower', en: 'reti-tartakower' },
   'opera-game-1858': { es: 'partida-de-la-opera', en: 'opera-game' },
   'kieninger-trap': { es: 'trampa-de-kieninger', en: 'kieninger-trap' },
   'smothered-mate': { es: 'mate-de-la-coz', en: 'smothered-mate' },

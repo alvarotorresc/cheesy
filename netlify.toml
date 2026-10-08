@@ -287,8 +287,8 @@
   force = true
 
 [[redirects]]
-  from = "/es/posiciones/sacrificio-de-dama-reti-tartakower.html"
-  to = "/es/posiciones/sacrificio-de-dama-reti-tartakower"
+  from = "/es/posiciones/reti-tartakower.html"
+  to = "/es/posiciones/reti-tartakower"
   status = 301
   force = true
 

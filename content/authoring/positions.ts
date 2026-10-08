@@ -27,7 +27,7 @@ export const positions: PositionSpec[] = [
   },
   {
     id: 'reti-tartakower-1910',
-    title: { es: 'Sacrificio de dama en d8', en: 'Queen sacrifice on d8' },
+    title: { es: 'Réti–Tartakower, Viena 1910', en: 'Réti–Tartakower, Vienna 1910' },
     source: 'Réti – Tartakower, Vienna 1910',
     moves: 'e4 c6 d4 d5 Nc3 dxe4 Nxe4 Nf6 Qd3 e5 dxe5 Qa5+ Bd2 Qxe5 O-O-O Nxe4',
     gameEnd: 'Qd8+ Kxd8 Bg5+ Kc7 Bd8#',
