@@ -32,6 +32,26 @@ describe('pageHead', () => {
     expect(result.ogLocaleAlternate).toBe('en_US');
   });
 
+  it('shares each page with the card of its section, described in its language', () => {
+    const cards: [string, string][] = [
+      ['/', 'og.png'],
+      ['/es', 'og.png'],
+      ['/en/about', 'og.png'],
+      ['/es/aperturas', 'og/openings.png'],
+      ['/en/openings/italian-game', 'og/openings.png'],
+      ['/es/finales/posicion-de-lucena', 'og/endgames.png'],
+      ['/en/positions', 'og/positions.png'],
+      ['/es/aprender', 'og/learn.png'],
+      ['/en/learn/beginner', 'og/learn.png'],
+      ['/es/aprender/glosario', 'og/learn.png'],
+    ];
+    for (const [path, file] of cards) {
+      expect(head(path).ogImage, path).toBe(`${SITE_ORIGIN}/${file}`);
+    }
+    expect(head('/es/finales').ogImageAlt).toMatch(/^Cheesy, Finales: un rey/);
+    expect(head('/en/endgames').ogImageAlt).toMatch(/^Cheesy, Endgames: a white king/);
+  });
+
   it('names an entity page after it, keyword first and the site last', () => {
     const result = head('/es/finales/posicion-de-lucena', lucenaEs);
     expect(result.title).toBe('Posición de Lucena: final de ajedrez para practicar · Cheesy');

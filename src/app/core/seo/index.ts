@@ -1,7 +1,6 @@
 export { describe, hasNotation, MAX_DESCRIPTION, sentencesOf, textOf } from './describe';
 export {
   crumbsOf,
-  OG_IMAGE,
   pageHead,
   SITE_NAME,
   SITE_ORIGIN,

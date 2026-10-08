@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
+import { ogImageOf } from '../src/app/core/seo/og-image.ts';
 import { checkPage, checkSite, decodeEntities, parseHead } from './check-pages.mjs';
 import { loadSources, ORIGIN, sitemapEntries, sitemapXml } from './sitemap.mjs';
 
@@ -41,6 +42,14 @@ const graphOf = (kind, lang, own) => {
 const jsonLdScript = (graph) =>
   `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 
+const attr = (text) => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+
+/** The card of a page as the fixture tags it: og:image, twitter:image and their alt. */
+const cardOf = (page, lang) => {
+  const { url, alt } = ogImageOf(page, lang);
+  return { ogImage: url, twitterImage: url, ogAlt: alt };
+};
+
 /**
  * A page that passes every rule; `over` replaces parts of it (`kind` is the kind of page, `graph`
  * its JSON-LD graph, `jsonLd` all of its structured data as HTML).
@@ -64,11 +73,13 @@ ${Object.entries(alternates)
   .map(([hreflang, href]) => `<link rel="alternate" hreflang="${hreflang}" href="${href}">`)
   .join('\n')}
 <meta property="og:url" content="${over.canonical ?? own}">
-<meta property="og:title" content="t"><meta property="og:description" content="d">
-<meta property="og:image" content="https://cheesy.alvarotc.com/og.png">
+<meta property="og:title" content="t"><meta property="og:description" content="${over.ogDescription ?? 'd'}">
+<meta property="og:image" content="${over.ogImage ?? 'https://cheesy.alvarotc.com/og.png'}">
+<meta property="og:image:alt" content="${attr(over.ogAlt ?? 'Alt')}">
 <meta property="og:locale" content="${lang === 'es' ? 'es_ES' : 'en_US'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="t">
-<meta name="twitter:description" content="d"><meta name="twitter:image" content="https://cheesy.alvarotc.com/og.png">
+<meta name="twitter:description" content="d"><meta name="twitter:image" content="${over.twitterImage ?? 'https://cheesy.alvarotc.com/og.png'}">
+<meta name="twitter:image:alt" content="${attr(over.ogAlt ?? 'Alt')}">
 ${jsonLd}
 ${over.head ?? ''}
 </head><body>${over.body ?? `<h1>Heading of ${path}</h1>`}</body></html>`;
@@ -127,6 +138,44 @@ describe('checkPage', () => {
 
   it('should accept a good page', () => {
     assert.deepEqual(check(), []);
+  });
+
+  it('should fail when a description has a move in notation', () => {
+    assert.match(
+      check({ description: 'Con 2.c3 las blancas preparan d4.' }).join('\n'),
+      /meta description has a move in notation/,
+    );
+    assert.match(
+      check({ ogDescription: 'Tras 5...a6 las negras.' }).join('\n'),
+      /og:description has a move in notation/,
+    );
+    assert.deepEqual(check({ description: 'Peón a c3 prepara d4.' }), []);
+  });
+
+  it('should fail when the shared image is not the card of the section, or Twitter has another', () => {
+    const og = { url: `${ORIGIN}/og/learn.png`, alt: 'Alt' };
+    const withOg = (over) =>
+      checkPage(parseHead(html(over)), { ...expected, og }, '/en/x').join('\n');
+    assert.match(withOg({}), /og:image is .*og\.png, expected .*og\/learn\.png/);
+    assert.equal(withOg({ ogImage: og.url, twitterImage: og.url }), '');
+    assert.match(withOg({ ogImage: og.url }), /twitter:image is .* not the og:image/);
+    assert.match(
+      withOg({ ogImage: og.url, twitterImage: og.url, ogAlt: 'Other' }),
+      /og:image:alt is "Other", expected "Alt"/,
+    );
+  });
+
+  it('should fail with a breadcrumb step that has no name or is no ListItem', () => {
+    const bad = {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '', item: `${ORIGIN}/en` },
+        { '@type': 'Thing', position: 2, name: 'x', item: own },
+      ],
+    };
+    const problems = check({ graph: [bad] }).join('\n');
+    assert.match(problems, /item 1 has no name/);
+    assert.match(problems, /item 2 is not a ListItem/);
   });
 
   it('should fail with two h1', () => {
@@ -286,6 +335,7 @@ describe('checkSite', () => {
             otherPath: paths[other],
             xDefault: ORIGIN + paths.en,
             kind: page.kind,
+            ...cardOf(page, lang),
           }),
         );
       }
@@ -298,6 +348,7 @@ describe('checkSite', () => {
         canonical: `${ORIGIN}/en`,
         kind: 'home',
         body: '<h1>Home</h1>',
+        ...cardOf({ kind: 'home' }, 'en'),
       }),
     );
     write(

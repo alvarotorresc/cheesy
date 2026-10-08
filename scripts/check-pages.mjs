@@ -5,9 +5,12 @@
 // For each indexable page (see `indexablePages()` x `langs` in page-url.ts) it checks one title,
 // one description of at most 160 characters, the canonical, `<html lang>`, one `<h1>`, the three
 // hreflang alternates (reciprocal between the languages), Open Graph and Twitter tags (each
-// exactly once, never duplicated), no `noindex` and exactly one JSON-LD block whose graph fits the
+// exactly once, never duplicated; the card of the page's section as og:image and twitter:image,
+// with its alternative text in the page's language), descriptions with no move in notation, no
+// `noindex` and exactly one JSON-LD block whose graph fits the
 // kind of page (a WebSite on the home page, a BreadcrumbList from the home page of the language to
-// the canonical on the rest, a LearningResource on lessons, never a WebApplication). Across the
+// the canonical on the rest, every step a named ListItem that is an indexable page, a
+// LearningResource on lessons, never a WebApplication). Across the
 // pages of a language, titles, descriptions, h1s and canonicals are unique and no sentence of a
 // description appears in another one.
 // It also checks `/` (the English home, canonical `/en`), the static 404, the app shell (noindex,
@@ -20,6 +23,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
+import { hasNotation } from '../src/app/core/seo/notation.ts';
+import { ogImageOf } from '../src/app/core/seo/og-image.ts';
 import { loadSources, ORIGIN } from './sitemap.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -118,7 +123,7 @@ const hasNoindex = (head) =>
 const expectedFor = (urls, page, lang) => {
   const alternates = Object.fromEntries(urls.langs.map((l) => [l, ORIGIN + urls.pathOf(page, l)]));
   alternates['x-default'] = alternates.en;
-  return { lang, kind: page.kind, canonical: alternates[lang], alternates };
+  return { lang, kind: page.kind, canonical: alternates[lang], alternates, og: ogImageOf(page, lang) };
 };
 
 const typesOf = (node) => [node?.['@type']].flat().filter((type) => typeof type === 'string');
@@ -169,6 +174,12 @@ const checkGraph = (graph, expected) => {
       problems.push('JSON-LD BreadcrumbList has fewer than 2 items');
     } else {
       items.forEach((entry, index) => {
+        if (!typesOf(entry).includes('ListItem')) {
+          problems.push(`JSON-LD BreadcrumbList item ${index + 1} is not a ListItem`);
+        }
+        if (typeof entry?.name !== 'string' || entry.name.trim() === '') {
+          problems.push(`JSON-LD BreadcrumbList item ${index + 1} has no name`);
+        }
         if (entry?.position !== index + 1) {
           problems.push(
             `JSON-LD BreadcrumbList item ${index + 1} has position ${JSON.stringify(entry?.position)}`,
@@ -269,16 +280,45 @@ export const checkPage = (head, expected, label) => {
     return found.length === 1 ? found[0] : undefined;
   };
   single('property', 'og:title');
-  single('property', 'og:description');
+  const ogDescription = single('property', 'og:description');
   const ogImage = single('property', 'og:image');
   if (ogImage && !ogImage.startsWith('https://'))
     fail(`og:image is not an absolute https address: ${ogImage}`);
+  // The card of the section of the page, the same for Twitter, described in the page's language.
+  if (expected.og) {
+    if (ogImage !== undefined && ogImage !== expected.og.url) {
+      fail(`og:image is ${ogImage}, expected ${expected.og.url}`);
+    }
+    for (const [key, name] of [
+      ['property', 'og:image:alt'],
+      ['name', 'twitter:image:alt'],
+    ]) {
+      const alt = single(key, name);
+      if (alt !== undefined && alt !== expected.og.alt) {
+        fail(`${name} is "${alt}", expected "${expected.og.alt}"`);
+      }
+    }
+  }
   const locale = single('property', 'og:locale');
   if (locale && locale !== LOCALES[expected.lang]) {
     fail(`og:locale is ${locale}, expected ${LOCALES[expected.lang]}`);
   }
-  for (const name of ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
-    single('name', name);
+  const twitter = Object.fromEntries(
+    ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'].map((name) => [
+      name,
+      single('name', name),
+    ]),
+  );
+  if (ogImage && twitter['twitter:image'] && twitter['twitter:image'] !== ogImage) {
+    fail(`twitter:image is ${twitter['twitter:image']}, not the og:image ${ogImage}`);
+  }
+  // Read by people who may not know notation: moves go in words.
+  for (const [name, text] of [
+    ['meta description', description],
+    ['og:description', ogDescription],
+    ['twitter:description', twitter['twitter:description']],
+  ]) {
+    if (text && hasNotation(text)) fail(`${name} has a move in notation: "${text}"`);
   }
 
   if (hasNoindex(head)) fail('has a robots noindex');
@@ -378,6 +418,24 @@ export const checkSite = (browserDir, sources) => {
         problems.push(
           `${path}: hreflang="${hreflang}" is not reciprocal: ${href} does not list it back`,
         );
+      }
+    }
+  }
+
+  // Every step of a breadcrumb is an indexable page of the build (so it is in the sitemap too).
+  const canonicalSet = new Set(pages.map(({ expected }) => expected.canonical));
+  for (const { path, head } of pages) {
+    let graph = [];
+    try {
+      graph = JSON.parse(head.jsonLd[0] ?? '{}')['@graph'] ?? [];
+    } catch {
+      continue; // reported by checkPage
+    }
+    for (const list of graph.filter((node) => typesOf(node).includes('BreadcrumbList'))) {
+      for (const entry of list.itemListElement ?? []) {
+        if (typeof entry?.item === 'string' && !canonicalSet.has(entry.item)) {
+          problems.push(`${path}: JSON-LD BreadcrumbList names ${entry.item}, which is no page`);
+        }
       }
     }
   }
