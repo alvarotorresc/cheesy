@@ -38,7 +38,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('shows nothing on a page without a breadcrumb', async () => {
-    const element = await render('/en/openings');
+    const element = await render('/en');
     expect(element.querySelector('nav')).toBeNull();
   });
 });
