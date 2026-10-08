@@ -3,10 +3,8 @@
   publish = "dist/cheesy/browser"
 
 # Pages are written as `route.html` (scripts/flatten-prerender.mjs): Netlify serves them at `/route`
-# and sends `/route/` there. Pretty URLs also sends `/route.html` there instead of serving it twice.
-# Set here so it does not depend on the setting in the Netlify UI.
-[build.processing.html]
-  pretty_urls = true
+# and sends `/route/` there. Pretty URLs (which would also send `/route.html` there) is not set: it is
+# a post-processing pass that rewrites the HTML the app hydrates; the canonical URL covers that case.
 
 [build.environment]
   NODE_VERSION = "26.10.0"
