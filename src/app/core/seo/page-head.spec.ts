@@ -73,9 +73,40 @@ describe('pageHead', () => {
     expect(root.title).toBe(en.title);
   });
 
-  it('describes the site on the home page', () => {
-    const graph = (head('/es').jsonLd as { '@graph': { '@type': string }[] })['@graph'];
-    expect(graph.map((node) => node['@type'])).toEqual(['WebSite', 'WebApplication']);
+  it('describes the site on the home page, once, at one address for both languages', () => {
+    for (const [path, lang] of [
+      ['/es', 'es'],
+      ['/en', 'en'],
+    ]) {
+      const graph = (head(path).jsonLd as { '@graph': Record<string, unknown>[] })['@graph'];
+      expect(graph).toEqual([
+        {
+          '@type': 'WebSite',
+          '@id': `${SITE_ORIGIN}/#website`,
+          url: `${SITE_ORIGIN}/`,
+          name: 'Cheesy',
+          inLanguage: lang,
+        },
+      ]);
+    }
+  });
+
+  it('gives the categories, the glossary and about their breadcrumb', () => {
+    expect(head('/es/finales').crumbs).toEqual([
+      { name: 'Inicio', path: '/es' },
+      { name: 'Finales', path: '/es/finales' },
+    ]);
+    expect(head('/en/learn/glossary').crumbs.map((crumb) => crumb.path)).toEqual([
+      '/en',
+      '/en/learn',
+      '/en/learn/glossary',
+    ]);
+    expect(head('/es/acerca').crumbs).toEqual([
+      { name: 'Inicio', path: '/es' },
+      { name: 'Acerca de', path: '/es/acerca' },
+    ]);
+    const graph = (head('/es/acerca').jsonLd as { '@graph': { '@type': string }[] })['@graph'];
+    expect(graph.map((node) => node['@type'])).toEqual(['BreadcrumbList']);
   });
 
   it('marks a lesson as a learning resource', () => {

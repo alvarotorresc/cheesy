@@ -19,6 +19,7 @@ import { describe } from './describe';
 
 export const SITE_ORIGIN = 'https://cheesy.alvarotc.com';
 export const SITE_NAME = 'Cheesy';
+const SITE_ID = `${SITE_ORIGIN}/#website`;
 /** The image of every page when shared: no capture of 1200×630 but this one exists. */
 export const OG_IMAGE = `${SITE_ORIGIN}/og.png`;
 
@@ -183,6 +184,12 @@ export const crumbsOf = (
   const entity = (category: CategoryId): Crumb[] =>
     facts ? [home, section(category), at(page, facts.name)] : [];
   switch (page.kind) {
+    case 'category':
+      return [home, section(page.category)];
+    case 'glossary':
+      return [home, section('learn'), at(page, t.glossary.title)];
+    case 'about':
+      return [home, at(page, t.nav.about)];
     case 'opening':
       return entity('openings');
     case 'endgame':
@@ -224,25 +231,17 @@ const jsonLdOf = (
   crumbs: readonly Crumb[],
   t: Messages,
 ): object | undefined => {
-  const site = { '@type': 'WebSite', '@id': `${SITE_ORIGIN}/#website`, name: SITE_NAME };
   const graph: object[] = [];
+  // The site, once, under one address for both languages. No WebApplication: without real ratings
+  // search engines report it as invalid, and none are made up.
   if (page.kind === 'home') {
-    graph.push(
-      { ...site, url: canonical, inLanguage: lang, description: texts.description },
-      {
-        '@type': 'WebApplication',
-        name: SITE_NAME,
-        url: canonical,
-        description: texts.description,
-        inLanguage: lang,
-        applicationCategory: 'EducationalApplication',
-        operatingSystem: 'Any',
-        browserRequirements: 'Requires JavaScript',
-        isAccessibleForFree: true,
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-        license: 'https://www.gnu.org/licenses/gpl-3.0.html',
-      },
-    );
+    graph.push({
+      '@type': 'WebSite',
+      '@id': SITE_ID,
+      url: `${SITE_ORIGIN}/`,
+      name: SITE_NAME,
+      inLanguage: lang,
+    });
   }
   if (crumbs.length > 0) graph.push(breadcrumbList(crumbs));
   if (page.kind === 'lesson' && crumbs.length > 0) {
@@ -255,7 +254,7 @@ const jsonLdOf = (
       learningResourceType: 'lesson',
       educationalLevel: t.learn.levels[page.level].name,
       isAccessibleForFree: true,
-      isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+      isPartOf: { '@id': SITE_ID },
     });
   }
   return graph.length > 0 ? { '@context': 'https://schema.org', '@graph': graph } : undefined;
