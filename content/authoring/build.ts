@@ -9,6 +9,7 @@ import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
 import { glossary } from './glossary.ts';
 import { lessons } from './lessons/index.ts';
+import { slugData } from './slugs.ts';
 import { buildLesson, lessonSummary } from '../lib/lesson-build.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
@@ -20,6 +21,7 @@ import {
   OPENING_CATALOG_FILE,
   OPENINGS_DIR,
   POSITIONS_FILE,
+  SLUGS_FILE,
 } from '../lib/content.ts';
 import { richOf } from '../lib/rich-text.ts';
 import type {
@@ -124,3 +126,6 @@ lessonCatalog.sort(
   (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
 );
 out(LESSON_CATALOG_FILE, lessonCatalog);
+
+// URL slugs per language; the app maps ids to paths and back with them.
+out(SLUGS_FILE, slugData);
