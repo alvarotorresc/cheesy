@@ -35,12 +35,13 @@ export class Home {
   constructor() {
     this.wait(() => this.load());
     // `/` is the home page in English for everyone, search engines included; once it is on screen,
-    // a reader who chose Spanish (or whose browser prefers it) goes on to `/es`.
+    // a reader who chose Spanish with the switch goes on to `/es`. The browser language decides
+    // nothing.
     if (!routeLang(inject(ActivatedRoute).snapshot)) {
       const router = inject(Router);
       afterNextRender(() => {
-        const lang = this.i18n.preferredLang();
-        if (lang === 'en') return;
+        const lang = this.i18n.storedLang();
+        if (lang === undefined || lang === 'en') return;
         void router.navigateByUrl(pageUrls.translateUrl(router.url, lang), { replaceUrl: true });
       });
     }

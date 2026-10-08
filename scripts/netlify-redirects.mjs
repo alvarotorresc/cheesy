@@ -23,7 +23,6 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
-import { orderPositions } from '../src/app/features/positions/position-order.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const DATA = join(ROOT, 'src/app/core/content/data');
@@ -43,6 +42,26 @@ export const FILE_END = '# END page files';
 
 /** The app shell: the page every client-rendered route is answered with. */
 export const SHELL = '/index.csr.html';
+/**
+ * The numbers of the positions in the gallery of v0.2.0, the last version with `/positions/:n`
+ * (`orderPositions` over the content of then). Frozen: a position added later would move the
+ * numbers of today, and an old link must keep landing on the position it showed.
+ */
+export const OLD_POSITION_NUMBERS = [
+  'kieninger-trap',
+  'arabian-mate',
+  'pin-wins-queen',
+  'rook-skewer',
+  'legal-mate',
+  'opera-game-1858',
+  'smothered-mate',
+  'boden-mate-1853',
+  'back-rank-battery',
+  'anastasia-mate',
+  'royal-fork',
+  'reti-tartakower-1910',
+  'evergreen-game-1852',
+];
 
 const readJson = (name) => JSON.parse(readFileSync(join(DATA, name), 'utf8'));
 
@@ -58,7 +77,7 @@ export const loadSources = () => ({
 /**
  * Every old address with the page it now is, as `[from, page]`. The old routes were:
  * `/openings[/:id[/practice|/drill]]`, `/endgames[/:id]`, `/positions[/:n|/:id]` (`n` the number
- * in the gallery, `id` the content id of older links), `/learn[/glossary|/puzzles[/:lesson]|
+ * in the gallery of v0.2.0, `id` the content id of older links), `/learn[/glossary|/puzzles[/:lesson]|
  * /:level[/:lesson]]`, `/glossary`, `/analysis` and `/acerca`.
  */
 export const oldAddresses = ({ openings, endgames, positions, lessons }) => {
@@ -73,10 +92,11 @@ export const oldAddresses = ({ openings, endgames, positions, lessons }) => {
     ['/endgames', { kind: 'category', category: 'endgames' }],
     ...endgames.map(({ id }) => [`/endgames/${id}`, { kind: 'endgame', id }]),
     ['/positions', { kind: 'category', category: 'positions' }],
-    ...orderPositions(positions).flatMap(({ id }, index) => [
-      [`/positions/${index + 1}`, { kind: 'position', id }],
-      [`/positions/${id}`, { kind: 'position', id }],
+    ...OLD_POSITION_NUMBERS.map((id, index) => [
+      `/positions/${index + 1}`,
+      { kind: 'position', id },
     ]),
+    ...positions.map(({ id }) => [`/positions/${id}`, { kind: 'position', id }]),
     ['/learn', { kind: 'category', category: 'learn' }],
     ['/learn/glossary', { kind: 'glossary' }],
     ['/learn/puzzles', { kind: 'puzzles' }],

@@ -1579,17 +1579,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/kieninger-trap"
-  to = "/en/positions/kieninger-trap"
-  status = 301
-
-[[redirects]]
   from = "/positions/2"
-  to = "/en/positions/arabian-mate"
-  status = 301
-
-[[redirects]]
-  from = "/positions/arabian-mate"
   to = "/en/positions/arabian-mate"
   status = 301
 
@@ -1599,17 +1589,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/pin-wins-queen"
-  to = "/en/positions/pinning-the-queen"
-  status = 301
-
-[[redirects]]
   from = "/positions/4"
-  to = "/en/positions/rook-skewer"
-  status = 301
-
-[[redirects]]
-  from = "/positions/rook-skewer"
   to = "/en/positions/rook-skewer"
   status = 301
 
@@ -1619,17 +1599,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/legal-mate"
-  to = "/en/positions/legal-mate"
-  status = 301
-
-[[redirects]]
   from = "/positions/6"
-  to = "/en/positions/opera-game"
-  status = 301
-
-[[redirects]]
-  from = "/positions/opera-game-1858"
   to = "/en/positions/opera-game"
   status = 301
 
@@ -1639,17 +1609,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/smothered-mate"
-  to = "/en/positions/smothered-mate"
-  status = 301
-
-[[redirects]]
   from = "/positions/8"
-  to = "/en/positions/boden-mate"
-  status = 301
-
-[[redirects]]
-  from = "/positions/boden-mate-1853"
   to = "/en/positions/boden-mate"
   status = 301
 
@@ -1659,17 +1619,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/back-rank-battery"
-  to = "/en/positions/back-rank-mate"
-  status = 301
-
-[[redirects]]
   from = "/positions/10"
-  to = "/en/positions/anastasia-mate"
-  status = 301
-
-[[redirects]]
-  from = "/positions/anastasia-mate"
   to = "/en/positions/anastasia-mate"
   status = 301
 
@@ -1679,17 +1629,7 @@
   status = 301
 
 [[redirects]]
-  from = "/positions/royal-fork"
-  to = "/en/positions/knight-fork"
-  status = 301
-
-[[redirects]]
   from = "/positions/12"
-  to = "/en/positions/reti-tartakower"
-  status = 301
-
-[[redirects]]
-  from = "/positions/reti-tartakower-1910"
   to = "/en/positions/reti-tartakower"
   status = 301
 
@@ -1699,8 +1639,68 @@
   status = 301
 
 [[redirects]]
+  from = "/positions/legal-mate"
+  to = "/en/positions/legal-mate"
+  status = 301
+
+[[redirects]]
+  from = "/positions/reti-tartakower-1910"
+  to = "/en/positions/reti-tartakower"
+  status = 301
+
+[[redirects]]
+  from = "/positions/opera-game-1858"
+  to = "/en/positions/opera-game"
+  status = 301
+
+[[redirects]]
+  from = "/positions/kieninger-trap"
+  to = "/en/positions/kieninger-trap"
+  status = 301
+
+[[redirects]]
+  from = "/positions/smothered-mate"
+  to = "/en/positions/smothered-mate"
+  status = 301
+
+[[redirects]]
   from = "/positions/evergreen-game-1852"
   to = "/en/positions/evergreen-game"
+  status = 301
+
+[[redirects]]
+  from = "/positions/boden-mate-1853"
+  to = "/en/positions/boden-mate"
+  status = 301
+
+[[redirects]]
+  from = "/positions/back-rank-battery"
+  to = "/en/positions/back-rank-mate"
+  status = 301
+
+[[redirects]]
+  from = "/positions/anastasia-mate"
+  to = "/en/positions/anastasia-mate"
+  status = 301
+
+[[redirects]]
+  from = "/positions/arabian-mate"
+  to = "/en/positions/arabian-mate"
+  status = 301
+
+[[redirects]]
+  from = "/positions/royal-fork"
+  to = "/en/positions/knight-fork"
+  status = 301
+
+[[redirects]]
+  from = "/positions/pin-wins-queen"
+  to = "/en/positions/pinning-the-queen"
+  status = 301
+
+[[redirects]]
+  from = "/positions/rook-skewer"
+  to = "/en/positions/rook-skewer"
   status = 301
 
 [[redirects]]

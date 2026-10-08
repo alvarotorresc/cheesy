@@ -20,20 +20,11 @@ const readStoredLang = (storage: () => Storage | undefined): Lang | undefined =>
   }
 };
 
-const detectBrowserLang = (navigator: Navigator | undefined): Lang => {
-  const preferred = navigator?.languages?.length ? navigator.languages : [navigator?.language];
-  for (const tag of preferred) {
-    const base = tag?.toLowerCase().split('-')[0];
-    if (isLang(base)) return base;
-  }
-  return 'en';
-};
-
 /**
  * The language of the screen. It is the language of the address (`/es/…`, `/en/…`): on the server
  * that prerenders a page and in the first render of the browser, so a page hydrates in the
  * language it was written in, and after every navigation (`followUrl`). `/` is English. The
- * language the reader chose before, or that of the browser, only decides where `/` takes them.
+ * language the reader chose with the switch only decides where `/` takes them.
  */
 @Injectable({ providedIn: 'root' })
 export class I18nService {
@@ -74,11 +65,12 @@ export class I18nService {
     }
   }
 
-  /** The language to open `/` in: the one chosen before or, failing that, the browser's. */
-  preferredLang(): Lang {
-    return (
-      readStoredLang(() => this.window?.localStorage) ?? detectBrowserLang(this.window?.navigator)
-    );
+  /**
+   * The language the reader chose with the switch, if any: it takes them from `/` to `/es`. The
+   * language of the browser decides nothing; without a choice `/` stays in English.
+   */
+  storedLang(): Lang | undefined {
+    return readStoredLang(() => this.window?.localStorage);
   }
 
   /** A move in SAN as the active language shows it (Spanish letters for the pieces). Display only. */
