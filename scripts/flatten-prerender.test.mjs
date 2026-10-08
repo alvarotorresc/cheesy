@@ -47,6 +47,34 @@ describe('flattenPrerender', () => {
     assert.throws(() => flattenPrerender(dir, routes('/', '/openings')), /italian-game/);
   });
 
+  it('should write the home of a language and its sections without a trailing slash too', () => {
+    write('es/index.html', 'inicio');
+    write('es/aperturas/index.html', 'aperturas');
+    write('es/aperturas/apertura-italiana/index.html', 'italiana');
+
+    const moved = flattenPrerender(
+      dir,
+      routes(
+        '/',
+        '/openings',
+        '/openings/italian-game',
+        '/es',
+        '/es/aperturas',
+        '/es/aperturas/apertura-italiana',
+      ),
+    );
+
+    assert.equal(moved, 5);
+    assert.equal(readFileSync(join(dir, 'es.html'), 'utf8'), 'inicio');
+    assert.equal(readFileSync(join(dir, 'es/aperturas.html'), 'utf8'), 'aperturas');
+    assert.equal(
+      readFileSync(join(dir, 'es/aperturas/apertura-italiana.html'), 'utf8'),
+      'italiana',
+    );
+    assert.equal(existsSync(join(dir, 'es/index.html')), false);
+    assert.equal(existsSync(join(dir, 'es/aperturas/index.html')), false);
+  });
+
   it('should fail without the app shell', () => {
     rmSync(join(dir, 'index.csr.html'));
 
