@@ -7,6 +7,7 @@ import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { nextLesson } from '../learn-progress';
+import { injectPrerenderWait } from '../../../core/prerender';
 
 type LevelState =
   | { readonly status: 'loading' }
@@ -26,6 +27,8 @@ type LevelState =
 })
 export class LevelPage {
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   private readonly content = inject(ContentService);
   private readonly progress = inject(ProgressService);
 
@@ -66,8 +69,8 @@ export class LevelPage {
   constructor() {
     const t = () => this.i18n.t();
     inject(PageTitle).showDetail(() => `${t().learn.levels[this.level()].name} · ${t().nav.learn}`);
-    void this.load();
-    void this.loadPuzzles();
+    this.wait(() => this.load());
+    this.wait(() => this.loadPuzzles());
   }
 
   private async loadPuzzles(): Promise<void> {
@@ -81,18 +84,21 @@ export class LevelPage {
 
   protected async load(): Promise<void> {
     this.state.set({ status: 'loading' });
+    let catalog: readonly LessonSummary[];
     try {
-      const [catalog, rows] = await Promise.all([
-        this.content.lessonCatalog(),
-        this.progress.lessons(),
-      ]);
-      this.state.set({
-        status: 'ready',
-        catalog,
-        done: new Set(rows.map((row) => row.lessonId)),
-      });
+      catalog = await this.content.lessonCatalog();
     } catch {
       this.state.set({ status: 'error' });
+      return;
     }
+    // The lessons first, as the prerendered page shows them, and the saved progress when it is read:
+    // a page that waited for both would not hydrate the HTML it was sent with.
+    this.state.set({ status: 'ready', catalog, done: new Set() });
+    const rows = await this.progress.lessons();
+    this.state.update((current) =>
+      current.status === 'ready'
+        ? { ...current, done: new Set(rows.map((row) => row.lessonId)) }
+        : current,
+    );
   }
 }

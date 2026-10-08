@@ -16,6 +16,7 @@ import { OpeningMoves } from '../opening-moves/opening-moves';
 import { OpeningSession } from '../opening-session';
 import { PlayOptions } from '../play-options/play-options';
 import { TheoryPanel } from '../theory-panel/theory-panel';
+import { injectPrerenderWait } from '../../../core/prerender';
 
 export { STRENGTH_LEVELS } from '../play-options/play-options';
 
@@ -118,9 +119,11 @@ export class OpeningPlay {
       const opening = this.session.opening();
       return opening && this.i18n.localize(opening.name);
     });
+    // The prerender waits until the opening is on the page.
+    const wait = injectPrerenderWait();
     inject(ActivatedRoute)
       .paramMap.pipe(takeUntilDestroyed())
-      .subscribe((params) => void this.session.load(params.get('id') ?? ''));
+      .subscribe((params) => wait(() => this.session.load(params.get('id') ?? '')));
   }
 
   protected onMove(move: BoardMove): void {

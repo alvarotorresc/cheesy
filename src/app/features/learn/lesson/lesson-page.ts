@@ -31,6 +31,7 @@ import { FindMoveStepView } from './steps/find-move-step';
 import { PlayOutStepView } from './steps/play-out-step';
 import { ReachStepView } from './steps/reach-step';
 import { TapSquareStepView } from './steps/tap-square-step';
+import { injectPrerenderWait } from '../../../core/prerender';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -90,6 +91,8 @@ const practiceLink = (
 export class LessonPage {
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   private readonly progress = inject(ProgressService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
@@ -157,11 +160,17 @@ export class LessonPage {
       const lesson = this.lesson();
       return lesson && `${this.i18n.localize(lesson.title)} · ${this.i18n.t().nav.learn}`;
     });
+    // The first lesson starts loading here, not in the effect: effects run with the first render,
+    // which would then show the loading state instead of the prerendered lesson it hydrates.
+    let requested = this.params().id;
+    this.wait(() => this.load(requested));
     effect(() => {
       const id = this.params().id;
-      untracked(() => void this.load(id));
+      if (id === requested) return;
+      requested = id;
+      untracked(() => this.wait(() => this.load(id)));
     });
-    void this.loadPuzzles();
+    this.wait(() => this.loadPuzzles());
 
     effect(() => {
       if (!this.onSummary()) {

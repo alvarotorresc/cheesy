@@ -75,6 +75,9 @@ const ready = async (positions: ContentLoaders['positions'] = async () => POSITI
     page.harness.detectChanges();
     expect(cards(page.element).length).toBeGreaterThan(0);
   });
+  // The cards show first and the marks of the saved progress right after, once it has been read.
+  await new Promise((resolve) => setTimeout(resolve));
+  page.harness.detectChanges();
   return page;
 };
 
