@@ -18,7 +18,7 @@
     "ng": "ng",
     "dev": "ng serve",
     "start": "ng serve",
-    "build": "ng build && node scripts/flatten-prerender.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/netlify-redirects.mjs --built",
+    "build": "ng build && node scripts/flatten-prerender.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/netlify-redirects.mjs --built && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sitemap.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-pages.mjs",
     "test": "ng test --watch=false && pnpm content:test && pnpm scripts:test",
     "test:coverage": "ng test --watch=false --coverage",
     "lint": "eslint .",
