@@ -428,9 +428,10 @@ export const checkSite = (browserDir, sources) => {
     }
   }
 
-  // Every step of a breadcrumb is an indexable page of the build (so it is in the sitemap too).
-  const canonicalSet = new Set(pages.map(({ expected }) => expected.canonical));
-  for (const { path, head } of pages) {
+  // Every step of a breadcrumb is an indexable page of the build (so it is in the sitemap too), in
+  // the language of the page.
+  const langOfCanonical = new Map(pages.map(({ expected }) => [expected.canonical, expected.lang]));
+  for (const { path, lang, head } of pages) {
     let graph = [];
     try {
       graph = JSON.parse(head.jsonLd[0] ?? '{}')['@graph'] ?? [];
@@ -439,8 +440,14 @@ export const checkSite = (browserDir, sources) => {
     }
     for (const list of graph.filter((node) => typesOf(node).includes('BreadcrumbList'))) {
       for (const entry of list.itemListElement ?? []) {
-        if (typeof entry?.item === 'string' && !canonicalSet.has(entry.item)) {
+        if (typeof entry?.item !== 'string') continue;
+        const stepLang = langOfCanonical.get(entry.item);
+        if (stepLang === undefined) {
           problems.push(`${path}: JSON-LD BreadcrumbList names ${entry.item}, which is no page`);
+        } else if (stepLang !== lang) {
+          problems.push(
+            `${path}: JSON-LD BreadcrumbList names ${entry.item}, a page in ${stepLang}, not ${lang}`,
+          );
         }
       }
     }

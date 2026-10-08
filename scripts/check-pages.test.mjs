@@ -378,6 +378,15 @@ describe('checkSite', () => {
     );
   });
 
+  it('should fail when a breadcrumb step is a page in the other language', () => {
+    const file = fileOf(enPath);
+    write(file, read(file).replace(`"item":"${ORIGIN}/en"`, `"item":"${ORIGIN}/es"`));
+    assert.match(
+      checkSite(dir, sources).join('\n'),
+      new RegExp(`${enPath}: JSON-LD BreadcrumbList names ${ORIGIN}/es, a page in es, not en`),
+    );
+  });
+
   it('should name a page missing from the build', () => {
     rmSync(join(dir, fileOf(esPath)));
     assert.match(checkSite(dir, sources).join('\n'), new RegExp(`${esPath}: no `));
