@@ -72,6 +72,17 @@ describe('App', () => {
     expect(attr('meta[name="robots"]', 'content')).toBeNull();
   });
 
+  it('should show the home page at /index.html, the file it is served from', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/index.html');
+    await harness.fixture.whenStable();
+    expect(TestBed.inject(Router).url).toBe('/');
+    expect(document.querySelector('app-not-found')).toBeNull();
+    expect(document.title).toBe('Chess openings, endgames and tactics in your browser · Cheesy');
+  });
+
   it('should open the Learn landing at /en/learn instead of the glossary', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });

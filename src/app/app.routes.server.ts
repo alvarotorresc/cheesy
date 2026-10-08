@@ -94,5 +94,8 @@ const langServerRoutes = (lang: Lang): ServerRoute[] => {
  */
 export const serverRoutes: ServerRoute[] = [
   ...LANGS.flatMap(langServerRoutes),
+  // A redirect to the home page, for the file the home page is already written to: prerendering it
+  // would try to write a folder where `index.html` is.
+  { path: 'index.html', renderMode: RenderMode.Client },
   { path: '**', renderMode: RenderMode.Prerender },
 ];
