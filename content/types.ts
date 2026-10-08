@@ -1,5 +1,6 @@
 import type {
   ChoiceStep,
+  CuratedPosition,
   EndgamePosition,
   ExplainStep,
   FindMoveStep,
@@ -9,6 +10,7 @@ import type {
   OpeningTree,
   PlayOutStep,
   ReachStep,
+  RichText,
   TapSquareStep,
 } from '../src/app/core/content/content.types.ts';
 
@@ -61,7 +63,25 @@ export type AuthoringTree = Omit<OpeningTree, 'description' | 'root'> & {
   root: AuthoringNode[];
 };
 
-export type EndgameSpec = Omit<EndgamePosition, 'explanation'> & { explanation: Localized };
+/**
+ * The longer text of an endgame or position page: what it is, when it comes up in a game, what to
+ * remember and, for historical positions, where it comes from. 80 to 200 words per language.
+ * The app types do not declare it yet; the page that shows it adds `about: RichText` to them.
+ */
+export interface About {
+  about: RichText;
+}
+
+export type EndgameSpec = Omit<EndgamePosition, 'explanation'> & {
+  explanation: Localized;
+  about: Localized;
+};
+
+/** An endgame as the build writes it, with its longer text. */
+export type EndgameEntry = EndgamePosition & About;
+
+/** A curated position as the build writes it, with its longer text. */
+export type CuratedEntry = CuratedPosition & About;
 
 export type GlossarySpec = Omit<GlossaryTerm, 'definition'> & { definition: Localized };
 

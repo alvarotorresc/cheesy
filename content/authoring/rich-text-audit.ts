@@ -13,8 +13,14 @@ const texts: { at: string; value: Localized }[] = [
       note.comment ? [{ at: `${o.id} ${path}`, value: note.comment }] : [],
     ),
   ]),
-  ...endgames.map((e) => ({ at: `${e.id}.explanation`, value: e.explanation })),
-  ...positions.map((p) => ({ at: `${p.id}.explanation`, value: p.explanation })),
+  ...endgames.flatMap((e) => [
+    { at: `${e.id}.explanation`, value: e.explanation },
+    { at: `${e.id}.about`, value: e.about },
+  ]),
+  ...positions.flatMap((p) => [
+    { at: `${p.id}.explanation`, value: p.explanation },
+    { at: `${p.id}.about`, value: p.about },
+  ]),
 ];
 
 for (const { at, value } of texts) {

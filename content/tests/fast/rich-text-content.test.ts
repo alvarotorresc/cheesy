@@ -26,8 +26,15 @@ for (const tree of loadOpenings()) {
   walk(tree.id, tree.root, []);
 }
 for (const e of loadEndgames())
-  texts.push({ at: `${e.id}.explanation`, text: e.explanation, fen: e.fen });
-for (const p of loadPositions()) texts.push({ at: `${p.id}.explanation`, text: p.explanation });
+  texts.push(
+    { at: `${e.id}.explanation`, text: e.explanation, fen: e.fen },
+    { at: `${e.id}.about`, text: e.about, fen: e.fen },
+  );
+for (const p of loadPositions())
+  texts.push(
+    { at: `${p.id}.explanation`, text: p.explanation },
+    { at: `${p.id}.about`, text: p.about },
+  );
 for (const t of loadGlossary())
   texts.push({ at: `glossary.${t.id}.definition`, text: t.definition });
 
