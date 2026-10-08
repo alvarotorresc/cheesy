@@ -26,7 +26,7 @@
     Cross-Origin-Opener-Policy = "same-origin"
     X-Frame-Options = "DENY"
 
-# The pages people search for are prerendered at build time (`dir/index.html`) and Netlify serves
+# The pages people search for are prerendered at build time (`route.html`) and Netlify serves
 # an existing file before this rule. The rest (analysis, opening practice, the puzzles of "Practise
 # more", old addresses that redirect in the router) gets the app shell, which renders in the
 # browser: `index.html` is the prerendered home page now, and hydrating it on another route fails.
