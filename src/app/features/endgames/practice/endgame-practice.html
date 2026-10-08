@@ -1,11 +1,15 @@
 @let t = i18n.t().endgames;
 @let tb = i18n.t().tablebase;
 <ng-template #back>
-  <p class="back play-lead">
-    <a [routerLink]="links.category('endgames')"
-      ><app-icon name="arrow-left" />{{ t.backToCatalog }}</a
-    >
-  </p>
+  @if (crumbs().length > 0) {
+    <app-breadcrumbs class="back play-lead" />
+  } @else {
+    <p class="back play-lead">
+      <a [routerLink]="links.category('endgames')"
+        ><app-icon name="arrow-left" />{{ t.backToCatalog }}</a
+      >
+    </p>
+  }
 </ng-template>
 
 @if (!session.endgame()) {
@@ -310,6 +314,11 @@
             }
           </ol>
         }
+      </section>
+
+      <section class="about" aria-labelledby="about-title">
+        <h2 id="about-title">{{ i18n.t().seo.aboutEndgame }}</h2>
+        <p><app-rich-text [text]="current.about" /></p>
       </section>
     </div>
   </div>

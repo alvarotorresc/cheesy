@@ -24,6 +24,7 @@ import {
 import { familyOf, groupByFamily } from '../opening-families';
 import { summarizeByColor, type ColorProgress, type OpeningStatus } from '../opening-progress';
 import { injectPrerenderWait } from '../../../core/prerender';
+import { CategoryAbout } from '../../../shared/category-about';
 
 type ListState =
   | { status: 'loading' }
@@ -39,7 +40,7 @@ type Summary = Record<ProgressColor, ColorProgress>;
  */
 @Component({
   selector: 'app-opening-list',
-  imports: [Icon, OpeningCard],
+  imports: [CategoryAbout, Icon, OpeningCard],
   templateUrl: './opening-list.html',
   styleUrl: './opening-list.css',
   host: { class: 'catalog' },

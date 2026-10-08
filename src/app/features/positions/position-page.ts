@@ -36,6 +36,7 @@ import { PositionTrainer } from './position-trainer';
 import type { SolutionStep } from './solution-line';
 import { PageLinks, routeId, routeLang } from '../../core/routing';
 import { PageMeta, textOf } from '../../core/seo';
+import { Breadcrumbs } from '../../shared/breadcrumbs';
 
 interface StepView {
   step: SolutionStep;
@@ -74,7 +75,16 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RichTextView, RouterLink, TermView],
+  imports: [
+    Breadcrumbs,
+    BoardComponent,
+    Icon,
+    MoveText,
+    NgTemplateOutlet,
+    RichTextView,
+    RouterLink,
+    TermView,
+  ],
   providers: [GameService, PositionTrainer, PositionList, BoardSpotlight],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
@@ -84,6 +94,8 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
   },
 })
 export class PositionPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   protected readonly reading = inject(ReadingModeService);

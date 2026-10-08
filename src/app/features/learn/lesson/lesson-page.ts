@@ -34,6 +34,7 @@ import { TapSquareStepView } from './steps/tap-square-step';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
 import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -79,6 +80,7 @@ const practiceLink = (
 @Component({
   selector: 'app-lesson-page',
   imports: [
+    Breadcrumbs,
     ChoiceStepView,
     ExplainStepView,
     FindMoveStepView,
@@ -94,6 +96,8 @@ const practiceLink = (
   host: { '(document:keydown)': 'onKey($event)' },
 })
 export class LessonPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);

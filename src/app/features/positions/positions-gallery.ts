@@ -33,6 +33,7 @@ import { PositionList } from './position-list';
 import { playerMoveCount } from './position-order';
 import { injectPrerenderWait } from '../../core/prerender';
 import { PageLinks } from '../../core/routing';
+import { CategoryAbout } from '../../shared/category-about';
 
 interface Card {
   readonly position: CuratedPosition;
@@ -58,7 +59,7 @@ interface Group {
  */
 @Component({
   selector: 'app-positions-gallery',
-  imports: [RouterLink, Icon, MiniBoard],
+  imports: [CategoryAbout, RouterLink, Icon, MiniBoard],
   templateUrl: './positions-gallery.html',
   styleUrl: './positions-gallery.css',
   providers: [PositionList],

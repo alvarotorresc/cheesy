@@ -160,13 +160,13 @@ describe('PositionPage', () => {
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
     });
 
-    it('should keep the browser tab neutral, without the name of the position', () => {
-      expect(document.title).toBe('Position 3 of 3 · Cheesy');
+    it('should name the tab after the position, as its address does', () => {
+      expect(document.title).toBe('Smothered mate · Cheesy');
     });
 
-    it('should not tell the title, themes, game, explanation or analysis link before the end', () => {
+    it('should not tell the themes, game, explanation or analysis link before the end', () => {
       const shown = element().textContent ?? '';
-      for (const spoiler of ['Smothered mate', 'Lucena, 1497', 'The queen is sacrificed.']) {
+      for (const spoiler of ['Lucena, 1497', 'The queen is sacrificed.']) {
         expect(shown).not.toContain(spoiler);
       }
       expect(element().querySelector('.theme-tag')).toBeNull();
@@ -179,7 +179,8 @@ describe('PositionPage', () => {
     it('should show the position from the side to play with its details', () => {
       expect(board().orientation()).toBe('white');
       expect(board().viewOnly()).toBe(false);
-      expect(text('h1')).toBe('White to play2 moves of yours');
+      expect(text('h1')).toBe('Smothered mate');
+      expect(text('.riddle')).toBe('White to play2 moves of yours');
       expect(text('.message')).toContain('Find the winning line: 2 moves of yours.');
     });
 

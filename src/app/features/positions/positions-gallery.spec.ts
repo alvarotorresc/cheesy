@@ -110,7 +110,10 @@ describe('PositionsGallery', () => {
 
   it('should not tell the title, themes or game of any position (no spoilers)', async () => {
     const { element } = await ready();
-    const text = element.textContent ?? '';
+    // The cards and the filters; the text about the category names patterns in general.
+    const text = [...element.querySelectorAll('.groups, .filters')]
+      .map((part) => part.textContent)
+      .join(' ');
 
     for (const spoiler of ['With a game', 'Morphy', 'Back rank', 'windmill', 'Smothered', 'Pin']) {
       expect(text).not.toContain(spoiler);

@@ -25,6 +25,7 @@ import {
 } from './endgame-catalog';
 import { fill } from './endgame-goal';
 import { PageLinks } from '../../core/routing';
+import { CategoryAbout } from '../../shared/category-about';
 
 interface Card {
   readonly endgame: EndgamePosition;
@@ -41,7 +42,7 @@ interface Card {
  */
 @Component({
   selector: 'app-endgames',
-  imports: [RouterLink, Icon, MiniBoard],
+  imports: [CategoryAbout, RouterLink, Icon, MiniBoard],
   templateUrl: './endgames.html',
   styleUrl: './endgames.css',
   host: { class: 'catalog' },

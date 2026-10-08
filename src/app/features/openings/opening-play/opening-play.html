@@ -1,14 +1,18 @@
 <ng-template #topbar>
-  <nav class="topbar play-lead" [attr.aria-label]="i18n.t().openings.play.thisOpening">
-    <a class="back back-link" [routerLink]="links.category('openings')">
-      <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
-    </a>
+  <div class="topbar play-lead">
+    @if (crumbs().length > 0) {
+      <app-breadcrumbs />
+    } @else {
+      <a class="back back-link" [routerLink]="links.category('openings')">
+        <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+      </a>
+    }
     @if (session.opening(); as opening) {
       <a class="back swap-link" [routerLink]="links.practice(opening.id)">
         {{ i18n.t().practice.fromPlay }}
       </a>
     }
-  </nav>
+  </div>
 </ng-template>
 
 @if (!session.opening()) {

@@ -19,6 +19,7 @@ import { TheoryPanel } from '../theory-panel/theory-panel';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
 import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 export { STRENGTH_LEVELS } from '../play-options/play-options';
 
@@ -41,7 +42,15 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
  */
 @Component({
   selector: 'app-opening-play',
-  imports: [BoardComponent, NgTemplateOutlet, OpeningMoves, PlayOptions, RouterLink, TheoryPanel],
+  imports: [
+    Breadcrumbs,
+    BoardComponent,
+    NgTemplateOutlet,
+    OpeningMoves,
+    PlayOptions,
+    RouterLink,
+    TheoryPanel,
+  ],
   providers: [GameService, EngineService, OpeningSession, BoardSpotlight],
   templateUrl: './opening-play.html',
   styleUrls: ['../opening-page.css', './opening-play.css'],
@@ -51,6 +60,8 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
   },
 })
 export class OpeningPlay {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(OpeningSession);

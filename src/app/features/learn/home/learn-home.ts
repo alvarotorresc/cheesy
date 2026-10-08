@@ -16,6 +16,7 @@ import { ProgressService } from '../../../core/progress';
 import { byLevelAndOrder, LEVELS, nextLesson } from '../learn-progress';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks } from '../../../core/routing';
+import { CategoryAbout } from '../../../shared/category-about';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -35,7 +36,7 @@ type HomeState =
  */
 @Component({
   selector: 'app-learn-home',
-  imports: [NgTemplateOutlet, RouterLink],
+  imports: [CategoryAbout, NgTemplateOutlet, RouterLink],
   templateUrl: './learn-home.html',
   styleUrl: './learn-home.css',
 })

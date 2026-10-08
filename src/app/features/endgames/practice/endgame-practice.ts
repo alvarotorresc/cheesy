@@ -36,6 +36,7 @@ import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tab
 import { EndgameSession } from './endgame-session';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
 import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 /** Open or closed state of the tablebase panel; the panel starts closed. */
 export const TABLEBASE_PANEL_STORAGE_KEY = 'cheesy.endgames.tablebase-panel';
@@ -62,6 +63,7 @@ interface MoveView {
 @Component({
   selector: 'app-endgame-practice',
   imports: [
+    Breadcrumbs,
     BoardComponent,
     Icon,
     MoveText,
@@ -79,6 +81,8 @@ interface MoveView {
   },
 })
 export class EndgamePractice {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);

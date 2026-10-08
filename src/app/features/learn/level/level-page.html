@@ -1,5 +1,5 @@
 @let t = i18n.t().learn;
-<a class="back" [routerLink]="links.category('learn')">← {{ t.backToLearn }}</a>
+<app-breadcrumbs class="trail" />
 <header class="page-head">
   <h1>{{ t.levels[level()].name }}</h1>
   <p class="lede">{{ t.levels[level()].description }}</p>
