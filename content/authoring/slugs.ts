@@ -153,6 +153,18 @@ export const sectionSlugs: Record<SectionId, Slug> = {
   about: { es: 'acerca', en: 'about' },
 };
 
+/**
+ * Pages of the app that are states rather than content (never indexed, rendered in the browser):
+ * Analysis, the practice of an opening (`/es/aperturas/<apertura>/practica`) and the Lichess puzzles
+ * of "Practise more" (`/es/aprender/problemas/<lección>`).
+ */
+export type AppPageId = 'analysis' | 'practice' | 'puzzles';
+export const appSlugs: Record<AppPageId, Slug> = {
+  analysis: { es: 'analisis', en: 'analysis' },
+  practice: { es: 'practica', en: 'practice' },
+  puzzles: { es: 'problemas', en: 'puzzles' },
+};
+
 /** Everything the app needs, in one serialisable object (written to `slugs.json` by the build). */
 export interface SlugData {
   sections: Record<SectionId, Slug>;
@@ -161,6 +173,7 @@ export interface SlugData {
   endgames: SlugTable;
   positions: SlugTable;
   lessons: Record<LessonLevel, SlugTable>;
+  app: Record<AppPageId, Slug>;
 }
 
 export const slugData: SlugData = {
@@ -170,6 +183,7 @@ export const slugData: SlugData = {
   endgames: endgameSlugs,
   positions: positionSlugs,
   lessons: lessonSlugs,
+  app: appSlugs,
 };
 
 const LEVEL_IDS = Object.keys(levelSlugs) as LessonLevel[];

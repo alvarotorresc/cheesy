@@ -388,5 +388,19 @@
         "en": "plans-and-strategy"
       }
     }
+  },
+  "app": {
+    "analysis": {
+      "es": "analisis",
+      "en": "analysis"
+    },
+    "practice": {
+      "es": "practica",
+      "en": "practice"
+    },
+    "puzzles": {
+      "es": "problemas",
+      "en": "puzzles"
+    }
   }
 }
