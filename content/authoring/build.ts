@@ -9,9 +9,11 @@ import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
 import { glossary } from './glossary.ts';
 import { lessons } from './lessons/index.ts';
+import { categoryTexts } from './categories.ts';
 import { buildLesson, lessonSummary } from '../lib/lesson-build.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
+  CATEGORY_TEXTS_FILE,
   DATA_DIR,
   ENDGAMES_FILE,
   GLOSSARY_FILE,
@@ -125,3 +127,6 @@ lessonCatalog.sort(
   (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
 );
 out(LESSON_CATALOG_FILE, lessonCatalog);
+
+// Texts of the category pages, plain paragraphs read by the page metadata.
+out(CATEGORY_TEXTS_FILE, categoryTexts);
