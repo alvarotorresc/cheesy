@@ -473,7 +473,7 @@
         },
         {
           "kind": "text",
-          "text": " responden a una pregunta práctica: dónde tiene que estar mi rey para que el peón corone pase lo que pase. Para un peón que todavía está en su mitad del tablero, y que no sea de torre, son las tres casillas situadas dos filas por delante de él. Si tu rey pisa una, ganas aunque el rival juegue perfecto. Así te ahorras cálculo: en vez de contar jugadas de peón, cuentas cuántas le faltan a tu rey para llegar a esa fila. El error típico es empujar el peón demasiado pronto. El peón no se va a escapar, así que primero va el rey, abriendo camino, y el peón le sigue después. En esta posición, de las siete jugadas de rey que tienes, cuatro ganan y tres dejan escapar la victoria."
+          "text": " responden a una pregunta práctica: dónde tiene que estar mi rey para que el peón corone pase lo que pase. Para un peón que todavía está en su mitad del tablero, y que no sea de torre, son las tres casillas situadas dos filas por delante de él. Si tu rey pisa una, ganas aunque el rival juegue sin errores. Así te ahorras cálculo: en vez de contar jugadas de peón, cuentas cuántas le faltan a tu rey para llegar a esa fila. El error típico es empujar el peón demasiado pronto. El peón no se va a escapar, así que primero va el rey, abriendo camino, y el peón le sigue después. En esta posición, de las siete jugadas de rey que tienes, cuatro ganan y tres dejan escapar la victoria."
         }
       ],
       "en": [
@@ -1102,7 +1102,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "El peón de torre, el de la columna a o la h, es la gran excepción de los finales de rey y peón. Con cualquier otro peón, un rey atacante bien colocado gana a menudo; con este, el defensor se salva casi siempre que su rey llegue a la esquina de coronación. El motivo es la falta de espacio. El rey atacante no puede rodear al defensor por fuera, porque por fuera no hay tablero, y si intenta sacarlo de la esquina lo deja "
+          "text": "El peón de torre, el de la columna a o la h, es la gran excepción de los finales de rey y peón. Con cualquier otro peón, un rey atacante bien colocado gana a menudo; con este, el defensor se salva siempre que su rey llegue a la esquina de coronación. El motivo es la falta de espacio. El rey atacante no puede rodear al defensor por fuera, porque por fuera no hay tablero, y si intenta sacarlo de la esquina lo deja "
         },
         {
           "kind": "term",
@@ -1125,7 +1125,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "The rook pawn, the one on the a- or h-file, is the big exception in king and pawn endings. With any other pawn, a well-placed attacking king often wins; with this one, the defender is nearly always saved once their king reaches the queening corner. The reason is lack of room. The attacking king cannot go round the defender on the outside, because there is no board out there, and if it tries to drive the defender out of the corner it "
+          "text": "The rook pawn, the one on the a- or h-file, is the big exception in king and pawn endings. With any other pawn, a well-placed attacking king often wins; with this one, the defender is saved once their king reaches the queening corner. The reason is lack of room. The attacking king cannot go round the defender on the outside, because there is no board out there, and if it tries to drive the defender out of the corner it "
         },
         {
           "kind": "term",
@@ -1254,7 +1254,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Es la posición ganadora más importante de los finales de torre y peón, que son los más frecuentes del ajedrez. Su nombre es un error histórico. Luis Ramírez de Lucena publicó en Salamanca, en 1497, el libro de ajedrez impreso más antiguo que se conserva, pero la posición no aparece en él: el primer análisis conocido es de Alessandro Salvio, en 1634. Aun así, el nombre se quedó. Para que haya Lucena hacen falta tres cosas: tu peón a un paso de "
+          "text": "Es la posición ganadora más importante de los finales de torre y peón. Los finales de torre son los más frecuentes del ajedrez. Su nombre es un error histórico. Luis Ramírez de Lucena publicó en Salamanca, hacia 1497, el tratado de ajedrez impreso más antiguo que se conserva, pero la posición no aparece en él: el primer análisis conocido es de Alessandro Salvio, en 1634. Aun así, el nombre se quedó. Para que haya Lucena hacen falta tres cosas: tu peón a un paso de "
         },
         {
           "kind": "term",
@@ -1296,7 +1296,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "It is the most important winning position in rook and pawn endings, which are the most common endings in chess. Its name is a historical mistake. Luis Ramírez de Lucena published the oldest printed chess book that survives, in Salamanca in 1497, but the position is not in it: the earliest known analysis is by Alessandro Salvio, in 1634. The name stuck anyway. A Lucena needs three things: your pawn one step from "
+          "text": "It is the most important winning position in rook and pawn endings. Rook endings are the most common endings in chess. Its name is a historical mistake. Luis Ramírez de Lucena published the oldest printed chess treatise that survives, in Salamanca around 1497, but the position is not in it: the earliest known analysis is by Alessandro Salvio, in 1634. The name stuck anyway. A Lucena needs three things: your pawn one step from "
         },
         {
           "kind": "term",
@@ -1690,7 +1690,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Cuando el peón es de torre y la torre atacante está delante de él, la defensa cambia: tu torre no corta al rey, ataca el peón de lado. Esta posición lleva el nombre de Josef Vančura, que la estudió a principios del siglo XX. Desde "
+          "text": "Cuando el peón es de torre y la torre atacante está delante de él, la defensa cambia: tu torre no corta al rey, ataca el peón de lado. Esta posición lleva el nombre de Josef Vančura (o Vancura), que la estudió a principios del siglo XX. Desde "
         },
         {
           "kind": "square",
@@ -1739,7 +1739,23 @@
         },
         {
           "kind": "text",
-          "text": ", lejos del peón, para no estorbar a tu torre. Tu torre ataca el peón de lado y, cuando el peón llega a la "
+          "text": ", vigilando "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": " y "
+        },
+        {
+          "kind": "square",
+          "square": "h8"
+        },
+        {
+          "kind": "text",
+          "text": ": si se aleja, el peón avanza a la "
         },
         {
           "kind": "term",
@@ -1748,7 +1764,24 @@
         },
         {
           "kind": "text",
-          "text": ", se coloca detrás de él. Y no te lo comas: la torre de "
+          "text": " y la torre blanca sale de "
+        },
+        {
+          "kind": "square",
+          "square": "a8"
+        },
+        {
+          "kind": "text",
+          "text": " con jaque, o amenazando una "
+        },
+        {
+          "kind": "term",
+          "id": "skewer",
+          "text": "enfilada"
+        },
+        {
+          "kind": "text",
+          "text": ", y el peón corona. Tu torre ataca el peón de lado y, cuando el peón llega a la séptima, se coloca detrás de él. Y no te lo comas: la torre de "
         },
         {
           "kind": "square",
@@ -1762,7 +1795,7 @@
       "en": [
         {
           "kind": "text",
-          "text": "When the pawn is a rook pawn and the attacking rook stands in front of it, the defence changes: your rook does not cut off the king, it attacks the pawn from the side. This position is named after Josef Vančura, who studied it in the early 20th century. From "
+          "text": "When the pawn is a rook pawn and the attacking rook stands in front of it, the defence changes: your rook does not cut off the king, it attacks the pawn from the side. This position is named after Josef Vančura (or Vancura), who studied it in the early 20th century. From "
         },
         {
           "kind": "square",
@@ -1811,7 +1844,23 @@
         },
         {
           "kind": "text",
-          "text": ", far from the pawn, so it does not get in your rook’s way. Your rook attacks the pawn from the side and, once the pawn reaches the "
+          "text": ", guarding "
+        },
+        {
+          "kind": "square",
+          "square": "g8"
+        },
+        {
+          "kind": "text",
+          "text": " and "
+        },
+        {
+          "kind": "square",
+          "square": "h8"
+        },
+        {
+          "kind": "text",
+          "text": ": if it wanders off, the pawn advances to the "
         },
         {
           "kind": "term",
@@ -1820,7 +1869,24 @@
         },
         {
           "kind": "text",
-          "text": ", gets behind it. And do not grab the pawn: the "
+          "text": " and the white rook leaves "
+        },
+        {
+          "kind": "square",
+          "square": "a8"
+        },
+        {
+          "kind": "text",
+          "text": " with check, or threatening a "
+        },
+        {
+          "kind": "term",
+          "id": "skewer",
+          "text": "skewer"
+        },
+        {
+          "kind": "text",
+          "text": ", and the pawn queens. Your rook attacks the pawn from the side and, once the pawn reaches the seventh, gets behind it. And do not grab the pawn: the "
         },
         {
           "kind": "square",
@@ -2473,7 +2539,7 @@
         },
         {
           "kind": "text",
-          "text": ", junto al peón, las blancas ganarían. Por eso, en una carrera de peones, cuenta también dónde queda tu rey cuando el rival corona: a veces una sola casilla decide si el final es tablas o se pierde."
+          "text": ", junto al peón, las blancas ganarían. Por eso, en una carrera de peones, cuenta también dónde queda el rey del bando que corona: a veces una sola casilla decide si el final es tablas o se pierde."
         }
       ],
       "en": [
@@ -2514,7 +2580,7 @@
         },
         {
           "kind": "text",
-          "text": ", next to the pawn, White would win. So in a pawn race, also count where your king will be when the opponent queens: sometimes a single square decides between a draw and a loss."
+          "text": ", next to the pawn, White would win. So in a pawn race, also count where the king of the side that queens will be: sometimes a single square decides between a draw and a loss."
         }
       ]
     }

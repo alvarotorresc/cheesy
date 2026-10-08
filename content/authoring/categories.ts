@@ -24,7 +24,7 @@ export const categoryTexts: Record<Category, CategoryText> = {
   endgames: {
     es: [
       'Muchas partidas igualadas se deciden en el final, con pocas piezas en el tablero. Aquí están los finales que conviene saber de memoria: rey y peón contra rey, con la oposición y la regla del cuadrado; torre y peón, con las posiciones de Lucena y de Philidor; dama contra peón, y los mates básicos con dama, con torre y con dos alfiles. Cada uno trae su idea clave por si te atascas.',
-      'El rival juega perfecto, porque responde con la tablebase de Lichess, que conoce el resultado exacto de cada posición con pocas piezas. Si el objetivo es ganar, tienes que dar mate o coronar sin dejar escapar la victoria. Si es hacer tablas, tienes que aguantar 15 jugadas sin pasar a una posición perdida, o forzar las tablas por las reglas, por ejemplo con un ahogado.',
+      'El rival juega a la perfección, porque responde con la tablebase de Lichess, que conoce el resultado exacto de cada posición con pocas piezas. Si el objetivo es ganar, tienes que dar mate o coronar sin dejar escapar la victoria. Si es hacer tablas, tienes que aguantar 15 jugadas sin pasar a una posición perdida, o forzar las tablas por las reglas, por ejemplo con un ahogado.',
     ],
     en: [
       'Many level games are decided in the endgame, with few pieces left on the board. Here are the endgames worth knowing by heart: king and pawn against king, with the opposition and the rule of the square; rook and pawn, with the Lucena and Philidor positions; queen against pawn; and the basic mates with queen, with rook and with two bishops. Each one comes with its key idea in case you get stuck.',
