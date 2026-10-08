@@ -72,11 +72,13 @@ async function answers(url) {
   }
 }
 
-// File for a request path. A path without an extension that has no file gets index.html (the
-// app is an SPA and the router owns those paths); a missing file with an extension (an asset)
-// gives null, which is answered with a 404. Nothing outside the build directory is ever served.
+// File for a request path, as Netlify picks it: the file itself, the prerendered page of the
+// route (`route.html`, see scripts/flatten-prerender.mjs) with or without a trailing slash, and
+// for any other path without an extension the app shell, index.csr.html (the router owns those
+// paths). A missing file with an extension (an asset) gives null, which is answered with a 404.
+// Nothing outside the build directory is ever served.
 function fileFor(pathname) {
-  const index = join(DIST, 'index.html');
+  const index = join(DIST, 'index.csr.html');
   let decoded;
   try {
     decoded = decodeURIComponent(pathname);
@@ -84,9 +86,12 @@ function fileFor(pathname) {
     return index;
   }
   const file = resolve(DIST, `.${sep}${decoded}`);
-  if (file !== DIST && !file.startsWith(DIST + sep)) return index;
+  if (file === DIST) return join(DIST, 'index.html');
+  if (!file.startsWith(DIST + sep)) return index;
   if (existsSync(file) && statSync(file).isFile()) return file;
-  return extname(pathname) === '' ? index : null;
+  if (extname(pathname) !== '') return null;
+  const page = `${file}.html`;
+  return existsSync(page) && statSync(page).isFile() ? page : index;
 }
 
 // It always starts its own server. If the port already answers it fails: that could be the

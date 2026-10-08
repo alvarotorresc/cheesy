@@ -16,7 +16,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink, type AnalysisLink } from '../../../core/analysis-link';
-import { ContentService, isContentId } from '../../../core/content';
+import { ContentService, isContentId, startingWith } from '../../../core/content';
 import { EngineService } from '../../../core/engine';
 import { GameService, type PlayedMove } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
@@ -91,10 +91,12 @@ export class EndgamePractice {
   );
 
   /** Anything in the address but a content id is not looked up at all. */
-  protected readonly endgames = resource({
+  private readonly endgamesRef = resource({
     params: () => (isContentId(this.id()) ? true : undefined),
     loader: () => this.content.endgames(),
   });
+  /** Starts with the endgames a prerendered page carries, so it hydrates as it was rendered. */
+  protected readonly endgames = startingWith(this.endgamesRef, this.content.loadedEndgames());
 
   /** The endgame of the address; anything but a content id is not looked up at all. */
   protected readonly endgame = computed(() => {
@@ -364,6 +366,10 @@ export class EndgamePractice {
       const card = this.resultCard()?.nativeElement;
       if (card) untracked(() => card.focus({ preventScroll: true }));
     });
+  }
+
+  protected reloadEndgames(): void {
+    this.endgamesRef.reload();
   }
 
   protected onMove(move: BoardMove): void {

@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { ContentService, type CuratedPosition } from '../../core/content';
 import { orderPositions } from './position-order';
+import { injectPrerenderWait } from '../../core/prerender';
 
 export type PositionListStatus = 'loading' | 'ready' | 'error';
 
@@ -12,6 +13,8 @@ export type PositionListStatus = 'loading' | 'ready' | 'error';
 @Injectable()
 export class PositionList {
   private readonly content = inject(ContentService);
+  /** Keeps the prerender waiting until the positions are on the page. */
+  private readonly wait = injectPrerenderWait();
 
   readonly status = signal<PositionListStatus>('loading');
   readonly positions = signal<readonly CuratedPosition[]>([]);
@@ -27,12 +30,14 @@ export class PositionList {
 
   private load(): void {
     this.status.set('loading');
-    this.content.positions().then(
-      (positions) => {
-        this.positions.set(orderPositions(positions));
-        this.status.set('ready');
-      },
-      () => this.status.set('error'),
+    this.wait(() =>
+      this.content.positions().then(
+        (positions) => {
+          this.positions.set(orderPositions(positions));
+          this.status.set('ready');
+        },
+        () => this.status.set('error'),
+      ),
     );
   }
 }

@@ -15,7 +15,7 @@
 } @else if (endgames.error()) {
   <div class="notice" role="alert">
     <p>{{ t.loadError }}</p>
-    <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
+    <button type="button" class="button" (click)="reloadEndgames()">{{ t.retry }}</button>
   </div>
 } @else if (session.endgame(); as current) {
   <div class="practice play-stage">

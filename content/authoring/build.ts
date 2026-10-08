@@ -10,6 +10,7 @@ import { endgames } from './endgames.ts';
 import { glossary } from './glossary.ts';
 import { lessons } from './lessons/index.ts';
 import { categoryTexts } from './categories.ts';
+import { slugData } from './slugs.ts';
 import { buildLesson, lessonSummary } from '../lib/lesson-build.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
@@ -22,6 +23,7 @@ import {
   OPENING_CATALOG_FILE,
   OPENINGS_DIR,
   POSITIONS_FILE,
+  SLUGS_FILE,
 } from '../lib/content.ts';
 import { richOf } from '../lib/rich-text.ts';
 import type {
@@ -130,3 +132,6 @@ out(LESSON_CATALOG_FILE, lessonCatalog);
 
 // Texts of the category pages, plain paragraphs read by the page metadata.
 out(CATEGORY_TEXTS_FILE, categoryTexts);
+
+// URL slugs per language; the app maps ids to paths and back with them.
+out(SLUGS_FILE, slugData);

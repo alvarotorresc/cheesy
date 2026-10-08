@@ -1,4 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from '@angular/core';
 import {
   CONTENT_LOADERS,
   GLOSSARY_LOADER,
@@ -25,6 +26,10 @@ import { OpeningBook } from './opening-book';
  * Every file is downloaded once and kept in memory; a failed download is forgotten, so the next
  * call tries again. Ids usually come from the URL, so an unknown id resolves to undefined instead
  * of failing.
+ *
+ * A prerendered page carries the files it was built with (`TransferState`), and the browser takes
+ * them from there instead of downloading them. That way the first render in the browser already
+ * has the content and matches the HTML it hydrates.
  */
 @Injectable({ providedIn: 'root' })
 export class ContentService {
@@ -33,6 +38,9 @@ export class ContentService {
   private readonly lessonLoaders = inject(LESSON_LOADERS);
   private readonly puzzleLoaders = inject(PUZZLE_LOADERS);
   private readonly cache = new Map<string, Promise<unknown>>();
+  private readonly loaded = new Map<string, unknown>();
+  private readonly transfer = inject(TransferState);
+  private readonly prerendering = isPlatformServer(inject(PLATFORM_ID));
 
   /** Every opening, in display order, without its move tree. */
   openingCatalog(): Promise<readonly OpeningSummary[]> {
@@ -47,13 +55,21 @@ export class ContentService {
   /** The opening with its positions computed, ready to answer where a game stands in theory. */
   async openingBook(id: string): Promise<OpeningBook | undefined> {
     if (!(await this.hasOpening(id))) return undefined;
-    return this.cached(`opening-book:${id}`, async () =>
-      OpeningBook.from(await this.openingTree(id)),
+    return this.cached(
+      `opening-book:${id}`,
+      async () => OpeningBook.from(await this.openingTree(id)),
+      // Built from the tree, which is carried: the book itself is not data.
+      { carry: false },
     );
   }
 
   endgames(): Promise<readonly EndgamePosition[]> {
     return this.cached('endgames', () => this.loaders.endgames());
+  }
+
+  /** The endgames when they are already here, for a first render that cannot wait for them. */
+  loadedEndgames(): readonly EndgamePosition[] | undefined {
+    return this.peek('endgames');
   }
 
   async endgame(id: string): Promise<EndgamePosition | undefined> {
@@ -73,6 +89,11 @@ export class ContentService {
     return this.cached('glossary', () => this.glossaryLoader());
   }
 
+  /** The glossary when it is already here, like `loadedEndgames`. */
+  loadedGlossary(): readonly GlossaryTerm[] | undefined {
+    return this.peek('glossary');
+  }
+
   async glossaryTerm(id: string): Promise<GlossaryTerm | undefined> {
     return (await this.glossary()).find((term) => term.id === id);
   }
@@ -80,6 +101,11 @@ export class ContentService {
   /** Every lesson of every level, by level and order, without their steps. */
   lessonCatalog(): Promise<readonly LessonSummary[]> {
     return this.cached('lesson-catalog', () => this.lessonLoaders.catalog());
+  }
+
+  /** The lesson catalogue when it is already here, like `loadedEndgames`. */
+  loadedLessonCatalog(): readonly LessonSummary[] | undefined {
+    return this.peek('lesson-catalog');
   }
 
   async lesson(id: string): Promise<Lesson | undefined> {
@@ -112,12 +138,31 @@ export class ContentService {
     return (await this.openingCatalog()).some((opening) => opening.id === id);
   }
 
-  private cached<T>(key: string, load: () => Promise<T>): Promise<T> {
+  private cached<T>(key: string, load: () => Promise<T>, { carry = true } = {}): Promise<T> {
     const hit = this.cache.get(key) as Promise<T> | undefined;
     if (hit) return hit;
-    const pending = load();
+    const stateKey = makeStateKey<T>(`content:${key}`);
+    const pending =
+      carry && this.transfer.hasKey(stateKey)
+        ? Promise.resolve(this.transfer.get(stateKey, null) as T)
+        : load();
     this.cache.set(key, pending);
-    pending.catch(() => this.cache.delete(key));
+    pending.then(
+      (value) => {
+        this.loaded.set(key, value);
+        if (carry && this.prerendering) this.transfer.set(stateKey, value);
+      },
+      () => this.cache.delete(key),
+    );
     return pending;
+  }
+
+  /** A file already loaded in this visit, or carried by the prerendered page. */
+  private peek<T>(key: string): T | undefined {
+    if (this.loaded.has(key)) return this.loaded.get(key) as T;
+    return this.transfer.get<T | undefined>(
+      makeStateKey<T | undefined>(`content:${key}`),
+      undefined,
+    );
   }
 }

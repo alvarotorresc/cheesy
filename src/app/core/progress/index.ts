@@ -1,3 +1,4 @@
+export { emptyProgressStoreLoader } from './empty-progress-store';
 export { ProgressService, type ProgressSection, type ProgressStatus } from './progress.service';
 export {
   PROGRESS_STORE_LOADER,
