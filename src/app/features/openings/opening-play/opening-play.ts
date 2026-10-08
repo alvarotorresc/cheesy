@@ -18,6 +18,7 @@ import { PlayOptions } from '../play-options/play-options';
 import { TheoryPanel } from '../theory-panel/theory-panel';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
 
 export { STRENGTH_LEVELS } from '../play-options/play-options';
 
@@ -121,6 +122,21 @@ export class OpeningPlay {
     inject(PageTitle).showDetail(() => {
       const opening = this.session.opening();
       return opening && this.i18n.localize(opening.name);
+    });
+    // Its description: what the opening is for, then the notes of its main line.
+    inject(PageMeta).describe(() => {
+      const opening = this.session.opening();
+      const book = this.session.book();
+      if (!opening) return undefined;
+      const lang = this.i18n.lang();
+      const notes = (book?.mainLine ?? []).flatMap((node) =>
+        node.comment ? [textOf(node.comment[lang])] : [],
+      );
+      return {
+        id: opening.id,
+        name: opening.name[lang],
+        texts: [textOf(opening.description[lang]), ...notes],
+      };
     });
     // The prerender waits until the opening is on the page.
     const wait = injectPrerenderWait();

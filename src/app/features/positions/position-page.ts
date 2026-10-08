@@ -35,6 +35,7 @@ import { PositionList } from './position-list';
 import { PositionTrainer } from './position-trainer';
 import type { SolutionStep } from './solution-line';
 import { PageLinks, routeId, routeLang } from '../../core/routing';
+import { PageMeta, textOf } from '../../core/seo';
 
 interface StepView {
   step: SolutionStep;
@@ -270,11 +271,21 @@ export class PositionPage {
   constructor() {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.wrongTimer));
 
-    // The tab is neutral ("Position 3 of 13") until the position is solved or its solution is out.
+    // Named after the position, as its address is: the name says the pattern, never the moves.
     inject(PageTitle).showDetail(() => {
       const position = this.position();
-      if (!position) return undefined;
-      return this.revealed() ? this.i18n.localize(position.title) : this.where();
+      return position && this.i18n.localize(position.title);
+    });
+    inject(PageMeta).describe(() => {
+      const position = this.position();
+      const lang = this.i18n.lang();
+      return (
+        position && {
+          id: position.id,
+          name: position.title[lang],
+          texts: [textOf(position.about[lang])],
+        }
+      );
     });
     effect(() => {
       const position = this.position();

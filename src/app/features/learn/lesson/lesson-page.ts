@@ -33,6 +33,7 @@ import { ReachStepView } from './steps/reach-step';
 import { TapSquareStepView } from './steps/tap-square-step';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -176,6 +177,19 @@ export class LessonPage {
     inject(PageTitle).showDetail(() => {
       const lesson = this.lesson();
       return lesson && `${this.i18n.localize(lesson.title)} · ${this.i18n.t().nav.learn}`;
+    });
+    // Its description: the summary of the lesson, then the text of its first step.
+    inject(PageMeta).describe(() => {
+      const lesson = this.lesson();
+      const lang = this.i18n.lang();
+      const first = lesson?.steps[0];
+      return (
+        lesson && {
+          id: lesson.id,
+          name: lesson.title[lang],
+          texts: [lesson.summary[lang], ...(first ? [textOf(first.text[lang])] : [])],
+        }
+      );
     });
     // The first lesson starts loading here, not in the effect: effects run with the first render,
     // which would then show the loading state instead of the prerendered lesson it hydrates.

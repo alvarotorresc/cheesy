@@ -35,6 +35,7 @@ import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
 import { EndgameSession } from './endgame-session';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
 
 /** Open or closed state of the tablebase panel; the panel starts closed. */
 export const TABLEBASE_PANEL_STORAGE_KEY = 'cheesy.endgames.tablebase-panel';
@@ -339,6 +340,17 @@ export class EndgamePractice {
     inject(PageTitle).showDetail(() => {
       const endgame = this.session.endgame();
       return endgame && this.i18n.localize(endgame.name);
+    });
+    inject(PageMeta).describe(() => {
+      const endgame = this.endgame();
+      const lang = this.i18n.lang();
+      return (
+        endgame && {
+          id: endgame.id,
+          name: endgame.name[lang],
+          texts: [textOf(endgame.about[lang])],
+        }
+      );
     });
     effect(() => {
       const endgame = this.endgame();
