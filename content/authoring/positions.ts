@@ -2,9 +2,9 @@
 // with chessops (see build.ts), so the stored FEN can never drift from the move record.
 import type { CuratedPosition, Localized } from '../types.ts';
 
-export type PositionSpec = Omit<CuratedPosition, 'fen' | 'explanation'> & {
+export type PositionSpec = Omit<CuratedPosition, 'fen' | 'explanation' | 'about'> & {
   explanation: Localized;
-  /** Longer text of the position page, 80 to 200 words per language (see `About`). */
+  /** Longer text of the position page, 80 to 200 words per language (see `EndgameSpec`). */
   about: Localized;
 } & ({ fen: string } | { moves: string; gameEnd?: string });
 
