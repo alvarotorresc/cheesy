@@ -903,7 +903,7 @@
         },
         {
           "kind": "text",
-          "text": " y no puede moverse. Lo que hay que recordar es que una pieza clavada no defiende nada. Antes de capturar material en la apertura, mira qué piezas tuyas pueden quedar clavadas contra el rey y qué casillas le quedan libres a tu rey."
+          "text": " y ya no puede capturar nada. Lo que hay que recordar es que una pieza clavada no puede capturar fuera de la línea de la clavada, así que las casillas que parecía defender quedan libres. Antes de capturar material en la apertura, mira qué piezas tuyas pueden quedar clavadas contra el rey y qué casillas le quedan libres a tu rey."
         }
       ],
       "en": [
@@ -943,7 +943,7 @@
         },
         {
           "kind": "text",
-          "text": " and cannot move. What to remember is that a pinned piece defends nothing. Before you grab material in the opening, check which of your pieces could end up pinned to the king and which squares your king has left."
+          "text": " and can no longer capture anything. What to remember is that a pinned piece cannot capture off the line of the pin, so the squares it seemed to guard are open. Before you grab material in the opening, check which of your pieces could end up pinned to the king and which squares your king has left."
         }
       ]
     },
@@ -1282,7 +1282,7 @@
       "es": [
         {
           "kind": "text",
-          "text": "Adolf Anderssen ganó esta partida a Jean Dufresne en 1852, probablemente en Berlín y en una partida amistosa. Wilhelm Steinitz, el primer campeón del mundo, la llamó evergreen («siempreviva», en inglés) en un homenaje a Anderssen, y el nombre se quedó. Empezó con un "
+          "text": "Adolf Anderssen ganó esta partida a Jean Dufresne en 1852, probablemente en Berlín y en una partida amistosa. Wilhelm Steinitz, el primer campeón del mundo, la llamó evergreen, que en inglés quiere decir «siempreviva», en un homenaje a Anderssen, y el nombre se quedó. Empezó con un "
         },
         {
           "kind": "term",
@@ -2380,7 +2380,7 @@
         },
         {
           "kind": "text",
-          "text": " ocurre cuando una pieza no puede moverse sin dejar al descubierto otra más valiosa que está detrás. Si detrás está el rey, la pieza clavada no puede moverse de ninguna manera, porque las reglas no permiten dejar al propio rey en "
+          "text": " ocurre cuando una pieza no puede moverse sin dejar al descubierto otra más valiosa que está detrás. Si detrás está el rey, la pieza clavada no puede salirse de la línea, porque las reglas no permiten dejar al propio rey en "
         },
         {
           "kind": "term",
@@ -2389,7 +2389,7 @@
         },
         {
           "kind": "text",
-          "text": ". Solo clavan las piezas que se mueven en línea recta: el alfil por las diagonales, la torre por filas y columnas, y la dama por todas. Las columnas abiertas son un lugar típico, y la columna e lo es todavía más cuando un rey se queda sin "
+          "text": ". Solo puede moverse a lo largo de ella, y eso incluye capturar a la pieza que la clava si puede alcanzarla. Solo clavan las piezas que se mueven en línea recta: el alfil por las diagonales, la torre por filas y columnas, y la dama por todas. Las columnas abiertas son un lugar típico, y la columna e lo es todavía más cuando un rey se queda sin "
         },
         {
           "kind": "term",
@@ -2413,7 +2413,7 @@
         },
         {
           "kind": "text",
-          "text": " happens when a piece cannot move without exposing a more valuable one behind it. If the king is behind, the pinned piece cannot move at all, because the rules do not allow you to leave your own king in "
+          "text": " happens when a piece cannot move without exposing a more valuable one behind it. If the king is behind, the pinned piece cannot leave the line, because the rules do not allow you to leave your own king in "
         },
         {
           "kind": "term",
@@ -2422,7 +2422,7 @@
         },
         {
           "kind": "text",
-          "text": ". Only pieces that move in straight lines can pin: the bishop along diagonals, the rook along ranks and files, and the queen along all of them. Open files are a typical place for it, and the e-file even more so when a king has not "
+          "text": ". It can only move along it, which includes taking the pinning piece if it can reach it. Only pieces that move in straight lines can pin: the bishop along diagonals, the rook along ranks and files, and the queen along all of them. Open files are a typical place for it, and the e-file even more so when a king has not "
         },
         {
           "kind": "term",

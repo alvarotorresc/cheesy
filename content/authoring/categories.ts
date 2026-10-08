@@ -34,11 +34,11 @@ export const categoryTexts: Record<Category, CategoryText> = {
   positions: {
     es: [
       'Cada posición tiene una jugada ganadora, y tu tarea es encontrarla. Hay mates con nombre propio, como el de la coz, el del pasillo o el de Anastasia, golpes tácticos como la horquilla, la clavada o la enfilada, y momentos de partidas célebres, como la partida de la Ópera de Morphy o la Siempreviva de Anderssen. Si te atascas, puedes empezar de nuevo o ver la solución.',
-      'El nombre y el tema de cada posición no se ven hasta que la resuelves, para que no te den pistas: en una partida de verdad nadie te avisa de que hay una horquilla. Cuando terminas, cada posición explica por qué funciona la combinación y qué hay que buscar para reconocerla la próxima vez. Todas las soluciones están comprobadas con Stockfish: cada jugada tuya es la mejor y no hay otra igual de buena.',
+      'El nombre y el tema de cada posición no se ven hasta que la resuelves, para que no te den pistas: en una partida de verdad nadie te avisa de que hay una horquilla. Cuando terminas, cada posición explica por qué funciona la combinación. Todas las soluciones están comprobadas con Stockfish: cada jugada tuya es la mejor y no hay otra igual de buena.',
     ],
     en: [
       'Each position has a winning move, and your job is to find it. There are named mates, such as the smothered mate, the back-rank mate or Anastasia’s mate, tactical blows such as the fork, the pin or the skewer, and moments from famous games, such as Morphy’s Opera Game or Anderssen’s Evergreen. If you get stuck, you can start again or see the solution.',
-      'The name and theme of each position stay hidden until you solve it, so they do not give you hints: in a real game nobody warns you that there is a fork. Once you finish, each position explains why the combination works and what to look for to spot it next time. Every solution has been checked with Stockfish: each of your moves is the best one, with no equally good alternative.',
+      'The name and theme of each position stay hidden until you solve it, so they do not give you hints: in a real game nobody warns you that there is a fork. Once you finish, each position explains why the combination works. Every solution has been checked with Stockfish: each of your moves is the best one, with no equally good alternative.',
     ],
   },
   learn: {
