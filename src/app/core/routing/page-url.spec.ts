@@ -118,7 +118,7 @@ describe('the same address in the other language', () => {
     ['/es/aperturas/apertura-espanola/practica', 'en', '/en/openings/ruy-lopez/practice'],
     ['/es', 'es', '/es'],
     ['/', 'es', '/es'],
-    ['/', 'en', '/'],
+    ['/', 'en', '/en'],
     ['/?x=1', 'es', '/es?x=1'],
     ['/es/no-such-page', 'en', '/en'],
   ] as const)('%s in %s is %s', (url, lang, expected) => {
