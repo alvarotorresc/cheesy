@@ -6,7 +6,8 @@
 // file:// (they are not in dist/), with the fonts from the repo's own node_modules. Run it after
 // shots.mjs: it needs the cover PNGs in media/out/.
 
-import { access, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OUT, REPO_ROOT, checkSize, chromium } from './lib.mjs';
@@ -84,8 +85,41 @@ async function renderIcon(page) {
   console.log('OK    icon.png');
 }
 
+// The social cards of the sections (aperturas, finales, posiciones, aprender), one per section for
+// both languages. Each one is rendered twice and must come out the same, byte for byte.
+const OG_CATEGORIES = ['openings', 'endgames', 'positions', 'learn'];
+
+async function renderOgCategories(page) {
+  await mkdir(OUT, { recursive: true });
+  await page.setViewportSize({ width: 1200, height: 630 });
+  for (const cat of OG_CATEGORIES) {
+    const url = new URL(pathToFileURL(join(PROMO_DIR, 'og-category.html')));
+    url.searchParams.set('cat', cat);
+    const shots = [];
+    for (let i = 0; i < 2; i++) {
+      await page.goto(url.href);
+      await ready(page);
+      shots.push(await page.screenshot());
+    }
+    const [a, b] = shots.map((buf) => createHash('sha256').update(buf).digest('hex'));
+    if (a !== b) throw new Error(`og-${cat}.png differs between two renders`);
+    const outPath = join(OUT, `og-${cat}.png`);
+    checkSize(shots[0], outPath, 1200, 630);
+    await writeFile(outPath, shots[0]);
+    console.log(`OK    og-${cat}.png  sha256 ${a.slice(0, 12)}`);
+  }
+}
+
 async function main() {
   const browser = await chromium.launch();
+  if (process.argv.includes('--og')) {
+    try {
+      await renderOgCategories(await browser.newPage({ deviceScaleFactor: 1 }));
+    } finally {
+      await browser.close();
+    }
+    return;
+  }
   try {
     const page = await browser.newPage({
       viewport: { width: 1920, height: 1080 },
@@ -103,6 +137,7 @@ async function main() {
     }
     await page.setViewportSize({ width: 1200, height: 630 });
     await renderPage(page, 'og.html', { lang: 'en' }, 'og.png', 1200, 630);
+    await renderOgCategories(page);
     await renderIcon(page);
   } finally {
     await browser.close();

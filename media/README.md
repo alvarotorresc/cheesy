@@ -12,6 +12,22 @@ From the repo root. The first time, install the browser: `pnpm exec playwright i
 pnpm media                                              # shots -> labels -> promo, writes media/out/
 pnpm media:shots --only screen-02 --lang es --no-build  # repeat a single screenshot
 pnpm media:readme                                       # refresh .github/readme/ (1280x800, es and en)
+pnpm media:promo --og                                   # only the social cards of the sections
+```
+
+### Social cards of the sections
+
+`media/promo/og-category.html?cat=openings|endgames|positions|learn`: the card of `og.png` with the
+name of the section (Spanish as the headline, English under it, one card for both languages) and
+a made-up idea of the section on the board strip, never a position of the site. Each card is
+rendered twice and must come out byte for byte the same. The site serves them from `public/og/`
+(`src/app/core/seo/og-image.ts` says which page uses which, with the alt text per language), as
+palette PNGs of 128 colours without dithering:
+
+```sh
+python3 -c "from PIL import Image
+for c in ['openings', 'endgames', 'positions', 'learn']:
+    Image.open(f'media/out/og-{c}.png').convert('RGB').quantize(128, dither=Image.Dither.NONE).save(f'public/og/{c}.png', optimize=True)"
 ```
 
 `media/out/` is not in git. `.github/readme/` is.
@@ -57,6 +73,7 @@ Guards of each capture. If one fails, nothing is written:
 | `screen-puzzle-{es,en}.png`                     | 1600x1000  | ~80                                                     |
 | `promo-{es,en}.png`, `promo-mobile-{es,en}.png` | 1920x1080  | 195-240                                                 |
 | `og.png`                                        | 1200x630   | 41 (copy it to `public/og.png` when it changes)         |
+| `og-{openings,endgames,positions,learn}.png`    | 1200x630   | 32-42 (13-17 in `public/og/`, see below)                |
 | `icon.png`                                      | 1024x1024  | 26                                                      |
 | `labels.json`                                   | -          | name, alt, caption and text per screenshot and language |
 
