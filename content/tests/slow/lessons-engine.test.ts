@@ -7,7 +7,7 @@ import { checkEngineChoice } from '../../lib/choice-check.ts';
 import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
 
 const DEPTH = Math.max(18, Number(process.env.TACTIC_DEPTH ?? 22));
-const engine = new Engine(10, 512);
+const engine = new Engine(1, 512);
 afterAll(() => engine.quit());
 
 const steps = loadLessons().flatMap((l) =>

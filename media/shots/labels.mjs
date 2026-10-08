@@ -83,13 +83,13 @@ const TEXTS = {
   'screen-glossary': {
     es: t(
       'Glosario',
-      'El glosario en el tema oscuro, filtrado por la familia Táctica: el buscador, los filtros por nivel y por familia, el recuento «21 de 78 términos» y la primera fila de tarjetas, cada una con su tablero de ejemplo, su nivel, su definición y la lección donde se aprende.',
+      'El glosario en el tema oscuro, filtrado por la familia Táctica: el buscador, los filtros por nivel y por familia, el recuento «24 de 89 términos» y la primera fila de tarjetas, cada una con su tablero de ejemplo, su nivel, su definición y la lección donde se aprende.',
       'Las palabras del ajedrez, con tablero',
       'Explica en llano cada palabra del ajedrez con un tablero de ejemplo, por familias y niveles, y lleva a la lección que la enseña.',
     ),
     en: t(
       'Glossary',
-      'The glossary in the dark theme, filtered by the Tactics family: the search box, the filters by level and by family, the count “21 of 78 terms” and the first row of cards, each with its example board, its level, its definition and the lesson where it is learnt.',
+      'The glossary in the dark theme, filtered by the Tactics family: the search box, the filters by level and by family, the count “24 of 89 terms” and the first row of cards, each with its example board, its level, its definition and the lesson where it is learnt.',
       'Chess words, with a board',
       'Explains every chess word in plain language with an example board, by family and level, and leads to the lesson that teaches it.',
     ),
