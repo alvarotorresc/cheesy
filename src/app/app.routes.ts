@@ -8,6 +8,8 @@ interface RouteData {
   main: MainKind;
 }
 
+const notFound = () => import('./features/not-found/not-found').then((m) => m.NotFound);
+
 const home = (): Routes[number] => ({
   path: '',
   pathMatch: 'full',
@@ -64,5 +66,10 @@ export const langRoutes = (lang: Lang): Routes => [
 export const routes: Routes = [
   home(),
   ...LANGS.map((lang) => ({ path: lang, data: { lang }, children: langRoutes(lang) })),
-  { path: '**', redirectTo: '' },
+  // The home page file itself (`/index.html`, which Netlify serves): the home page, not a 404 over it.
+  { path: 'index.html', redirectTo: '' },
+  // Prerendered as `404.html`, which Netlify serves with status 404 at any address that is no page.
+  { path: '404', title: 'notFound' satisfies PageSection, loadComponent: notFound },
+  // A link of the app to no page (an address that is no page never reaches the app: see `404`).
+  { path: '**', title: 'notFound' satisfies PageSection, loadComponent: notFound },
 ];

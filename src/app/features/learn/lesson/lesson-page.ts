@@ -33,6 +33,8 @@ import { ReachStepView } from './steps/reach-step';
 import { TapSquareStepView } from './steps/tap-square-step';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
+import { PageMeta } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -78,6 +80,7 @@ const practiceLink = (
 @Component({
   selector: 'app-lesson-page',
   imports: [
+    Breadcrumbs,
     ChoiceStepView,
     ExplainStepView,
     FindMoveStepView,
@@ -93,6 +96,8 @@ const practiceLink = (
   host: { '(document:keydown)': 'onKey($event)' },
 })
 export class LessonPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
@@ -176,6 +181,13 @@ export class LessonPage {
     inject(PageTitle).showDetail(() => {
       const lesson = this.lesson();
       return lesson && `${this.i18n.localize(lesson.title)} · ${this.i18n.t().nav.learn}`;
+    });
+    // Its description is the summary of the lesson: the first step tends to say it again, and
+    // talks about a board the reader of the search results does not see.
+    inject(PageMeta).describe(() => {
+      const lesson = this.lesson();
+      const lang = this.i18n.lang();
+      return lesson && { id: lesson.id, name: lesson.title[lang], texts: [lesson.summary[lang]] };
     });
     // The first lesson starts loading here, not in the effect: effects run with the first render,
     // which would then show the loading state instead of the prerendered lesson it hydrates.

@@ -18,6 +18,8 @@ import { PlayOptions } from '../play-options/play-options';
 import { TheoryPanel } from '../theory-panel/theory-panel';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 export { STRENGTH_LEVELS } from '../play-options/play-options';
 
@@ -40,7 +42,15 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
  */
 @Component({
   selector: 'app-opening-play',
-  imports: [BoardComponent, NgTemplateOutlet, OpeningMoves, PlayOptions, RouterLink, TheoryPanel],
+  imports: [
+    Breadcrumbs,
+    BoardComponent,
+    NgTemplateOutlet,
+    OpeningMoves,
+    PlayOptions,
+    RouterLink,
+    TheoryPanel,
+  ],
   providers: [GameService, EngineService, OpeningSession, BoardSpotlight],
   templateUrl: './opening-play.html',
   styleUrls: ['../opening-page.css', './opening-play.css'],
@@ -50,6 +60,8 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
   },
 })
 export class OpeningPlay {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(OpeningSession);
@@ -121,6 +133,19 @@ export class OpeningPlay {
     inject(PageTitle).showDetail(() => {
       const opening = this.session.opening();
       return opening && this.i18n.localize(opening.name);
+    });
+    // Its description is what the opening is for, in its own words: the notes of its moves are
+    // shared with other openings (the same move, the same idea) and would repeat across pages.
+    inject(PageMeta).describe(() => {
+      const opening = this.session.opening();
+      const lang = this.i18n.lang();
+      return (
+        opening && {
+          id: opening.id,
+          name: opening.name[lang],
+          texts: [textOf(opening.description[lang])],
+        }
+      );
     });
     // The prerender waits until the opening is on the page.
     const wait = injectPrerenderWait();

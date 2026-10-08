@@ -198,14 +198,15 @@ export function createPageUrls(data: SlugData) {
 
   /**
    * The same address in another language, with its query and fragment: the same entity under its
-   * translated slug. `/` is the English home page, so it stays `/` in English. An address that is no
+   * translated slug. `/` is the English home page, whose canonical address is `/en`: every link of
+   * the site points at canonical addresses, so `/` gives `/en` in English. An address that is no
    * page goes to the home page of the language.
    */
   const translateUrl = (url: string, lang: Lang): string => {
     const match = /^([^?#]*)(.*)$/.exec(url);
     const path = match?.[1] ?? '';
     const tail = match?.[2] ?? '';
-    if (path === '' || path === '/') return lang === 'en' ? `/${tail}` : `/${lang}${tail}`;
+    if (path === '' || path === '/') return `/${lang}${tail}`;
     const located = pageOf(path);
     return located ? `${pathOf(located.page, lang)}${tail}` : `/${lang}`;
   };

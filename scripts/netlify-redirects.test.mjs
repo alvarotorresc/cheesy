@@ -6,8 +6,16 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
 import { orderPositions } from '../src/app/features/positions/position-order.ts';
 import {
+  APP_BEGIN,
+  APP_END,
+  appRouteBlock,
+  appRoutePaths,
   BEGIN,
   checkBuilt,
+  FILE_BEGIN,
+  FILE_END,
+  pageFileBlock,
+  pageFileRules,
   OLD_POSITION_NUMBERS,
   checkPages,
   END,
@@ -16,13 +24,17 @@ import {
   pageFileOf,
   redirectBlock,
   redirectRules,
+  SHELL,
   withBlock,
+  withBlocks,
 } from './netlify-redirects.mjs';
 
 const sources = loadSources();
 const urls = createPageUrls(sources.slugs);
 const rules = redirectRules(sources);
 const toml = readFileSync(NETLIFY_TOML, 'utf8');
+
+const paths = appRoutePaths(sources);
 
 /** The `[[redirects]]` of netlify.toml, in order, as Netlify reads them. */
 const tomlRedirects = toml
@@ -129,8 +141,21 @@ describe('redirects of the old addresses', () => {
 
 describe('netlify.toml', () => {
   it('should carry the generated block as it is now (run node scripts/netlify-redirects.mjs)', () => {
-    assert.equal(withBlock(toml, redirectBlock(rules)), toml);
+    assert.equal(
+      withBlocks(toml, redirectBlock(rules), appRouteBlock(paths), pageFileBlock()),
+      toml,
+    );
     assert.ok(toml.includes(BEGIN) && toml.includes(END));
+    assert.ok(toml.includes(APP_BEGIN) && toml.includes(APP_END));
+    assert.ok(toml.includes(FILE_BEGIN) && toml.includes(FILE_END));
+  });
+
+  it('should be found out of date when either block is stale', () => {
+    const stale = (block) => toml.replace(block, `# stale\n${block}`);
+    assert.notEqual(withBlocks(stale(END)), stale(END));
+    assert.notEqual(withBlocks(stale(APP_END)), stale(APP_END));
+    assert.notEqual(withBlocks(stale(FILE_END)), stale(FILE_END));
+    assert.throws(() => withBlock('', 'x', APP_BEGIN, APP_END), /no block/);
   });
 
   it('should send the Netlify domain to the real one first, forced, keeping the path', () => {
@@ -150,13 +175,113 @@ describe('netlify.toml', () => {
         assert.deepEqual(rule && [rule.to, rule.status], [to, 301], path);
       }
     }
-    const last = tomlRedirects.at(-1);
-    assert.deepEqual([last.from, last.to, last.status], ['/*', '/index.csr.html', 200]);
   });
 
-  it('should leave the new addresses to their files or the app shell', () => {
-    for (const path of ['/', '/en', '/es/aperturas/apertura-italiana', '/en/analysis']) {
-      assert.equal(firstMatch(path)?.to, '/index.csr.html', path);
+  it('should have no catch-all: unknown addresses get the 404 page', () => {
+    assert.ok(!tomlRedirects.some(({ from }) => from === '/*'));
+    for (const path of ['/', '/en', '/es/aperturas/apertura-italiana', '/en/nothing-here']) {
+      assert.equal(firstMatch(path), undefined, path);
+    }
+  });
+
+  it('should answer the app routes with the shell, keeping them out of search engines', () => {
+    for (const path of paths) assert.equal(firstMatch(path)?.to, SHELL, path);
+    const noindex = [
+      ...toml.matchAll(
+        /\[\[headers\]\]\n  for = "([^"]+)"\n  \[headers\.values\]\n    X-Robots-Tag = "noindex"/g,
+      ),
+    ];
+    assert.deepEqual(
+      noindex.map(([, path]) => path),
+      [...paths, SHELL],
+    );
+  });
+});
+
+describe('page files', () => {
+  const fileRules = pageFileRules(sources);
+
+  it('should have a rule for each indexable page in both languages', () => {
+    assert.equal(fileRules.length, 2 * urls.indexablePages().length);
+    assert.equal(new Set(fileRules.map(([from]) => from)).size, fileRules.length);
+    for (const [from, to] of fileRules) {
+      assert.ok(from.endsWith('.html'), from);
+      assert.ok(!to.includes('.'), to);
+      assert.equal(from, `${to}.html`);
+      assert.ok(urls.pageOf(to), to);
+    }
+  });
+
+  it('should force a 301 to the address, after the domain rule and before the old addresses', () => {
+    const block = pageFileBlock([['/es/aperturas.html', '/es/aperturas']]);
+    assert.equal(
+      block,
+      `${FILE_BEGIN}\n[[redirects]]\n  from = "/es/aperturas.html"\n  to = "/es/aperturas"\n  status = 301\n  force = true\n${FILE_END}`,
+    );
+    assert.ok(toml.indexOf(FILE_BEGIN) > tomlRedirects[0].from.length);
+    assert.ok(toml.indexOf('https://playcheesy') < toml.indexOf(FILE_BEGIN));
+    assert.ok(toml.indexOf(FILE_END) < toml.indexOf(BEGIN));
+    const rule = firstMatch('/es/aperturas.html');
+    assert.deepEqual([rule.to, rule.status, rule.force], ['/es/aperturas', 301, true]);
+    assert.equal(firstMatch('/es/aperturas'), undefined);
+  });
+});
+
+describe('app routes', () => {
+  const lessonIds = sources.lessons.map(({ id }) => id);
+
+  it('should list both languages, one practice per opening and one puzzle page per lesson', () => {
+    assert.equal(paths.length, 2 * (2 + sources.openings.length + lessonIds.length));
+    for (const lang of urls.langs) {
+      const pages = paths
+        .map((path) => urls.pageOf(path))
+        .filter((located) => located?.lang === lang)
+        .map(({ page }) => page);
+      assert.equal(pages.filter(({ kind }) => kind === 'analysis').length, 1);
+      assert.equal(pages.filter(({ kind }) => kind === 'puzzles').length, 1);
+      assert.deepEqual(
+        pages.filter(({ kind }) => kind === 'practice').map(({ id }) => id),
+        sources.openings.map(({ id }) => id),
+      );
+      assert.deepEqual(
+        pages.filter(({ kind }) => kind === 'puzzle').map(({ lesson }) => lesson),
+        lessonIds,
+      );
+    }
+  });
+
+  it('should use the canonical address of each page, with no trailing slash or duplicate', () => {
+    assert.equal(new Set(paths).size, paths.length);
+    for (const path of paths) {
+      assert.ok(!path.endsWith('/'), path);
+      const located = urls.pageOf(path);
+      assert.ok(located, path);
+      assert.equal(urls.pathOf(located.page, located.lang), path);
+    }
+    assert.ok(paths.includes('/es/analisis') && paths.includes('/en/analysis'));
+    assert.ok(paths.includes('/es/aprender/problemas') && paths.includes('/en/learn/puzzles'));
+    assert.ok(paths.includes('/es/aperturas/apertura-italiana/practica'));
+    assert.ok(paths.includes('/en/openings/italian-game/practice'));
+  });
+
+  it('should write a rewrite and a noindex header for each path, and a header for the shell', () => {
+    const block = appRouteBlock(['/en/analysis', '/es/analisis']);
+    const body = [
+      '[[redirects]]\n  from = "/en/analysis"\n  to = "/index.csr.html"\n  status = 200',
+      '[[redirects]]\n  from = "/es/analisis"\n  to = "/index.csr.html"\n  status = 200',
+      '[[headers]]\n  for = "/en/analysis"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
+      '[[headers]]\n  for = "/es/analisis"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
+      '[[headers]]\n  for = "/index.csr.html"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
+    ].join('\n\n');
+    assert.equal(block, `${APP_BEGIN}\n${body}\n${APP_END}`);
+    const full = appRouteBlock(paths);
+    assert.equal(full.split('status = 200').length - 1, paths.length);
+    assert.equal(full.split('X-Robots-Tag').length - 1, paths.length + 1);
+  });
+
+  it('should target every shell redirect with a rewrite', () => {
+    for (const [, to] of rules) {
+      if (pageFileOf(to, sources) === null) assert.ok(paths.includes(to), to);
     }
   });
 });
@@ -189,6 +314,24 @@ describe('checkBuilt', () => {
     assert.equal(pageFileOf('/en/analysis', sources), null);
     assert.equal(pageFileOf('/en/openings/italian-game/practice', sources), null);
     assert.equal(pageFileOf('/en/learn/glossary', sources), 'en/learn/glossary.html');
+  });
+
+  it('should fail when a 301 sent to the shell has no rewrite', () => {
+    writeAllPages();
+    const withoutPractice = appRoutePaths(sources).filter((path) => !path.endsWith('/practice'));
+    assert.throws(
+      () => checkBuilt(dir, sources, withoutPractice),
+      /\/openings\/italian-game\/practice → \/en\/openings\/italian-game\/practice: no rewrite/,
+    );
+  });
+
+  it('should fail when a rewrite path is a file of the build, which Netlify would serve', () => {
+    writeAllPages();
+    write('en/analysis.html');
+    assert.throws(() => checkBuilt(dir, sources), /\/en\/analysis is a file/);
+    rmSync(join(dir, 'en/analysis.html'));
+    write('es/aprender/problemas/index.html');
+    assert.throws(() => checkBuilt(dir, sources), /\/es\/aprender\/problemas is a file/);
   });
 
   it('should fail when a target has no page', () => {

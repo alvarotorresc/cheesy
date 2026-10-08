@@ -17,6 +17,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'white',
     solution: ['Rh8#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['back-rank', 'windmill-attack'],
   },
   {
@@ -26,6 +27,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'black',
     solution: ['Rh1#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['pin'],
   },
   {
@@ -35,6 +37,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'white',
     solution: ['Ra8+', 'Kd7', 'Ra7+'],
     explanation: plainText('Jaques.', 'Checks.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['fork'],
   },
 ];
@@ -107,7 +110,10 @@ describe('PositionsGallery', () => {
 
   it('should not tell the title, themes or game of any position (no spoilers)', async () => {
     const { element } = await ready();
-    const text = element.textContent ?? '';
+    // The cards and the filters; the text about the category names patterns in general.
+    const text = [...element.querySelectorAll('.groups, .filters')]
+      .map((part) => part.textContent)
+      .join(' ');
 
     for (const spoiler of ['With a game', 'Morphy', 'Back rank', 'windmill', 'Smothered', 'Pin']) {
       expect(text).not.toContain(spoiler);

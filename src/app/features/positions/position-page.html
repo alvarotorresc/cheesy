@@ -1,12 +1,16 @@
 @let t = i18n.t().positions;
 
 <ng-template #topbar>
-  <nav class="topbar play-lead" [attr.aria-label]="t.positionNavigation">
-    <a class="topbar-link" [routerLink]="links.category('positions')">
-      <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
-    </a>
+  <div class="topbar play-lead">
+    @if (crumbs().length > 0) {
+      <app-breadcrumbs />
+    } @else {
+      <a class="topbar-link" [routerLink]="links.category('positions')">
+        <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
+      </a>
+    }
     @if (position()) {
-      <div class="neighbours">
+      <nav class="neighbours" [attr.aria-label]="t.positionNavigation">
         @if (previousId(); as id) {
           <a class="topbar-link" [routerLink]="links.position(id)">
             <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
@@ -26,9 +30,9 @@
             {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
           </a>
         }
-      </div>
+      </nav>
     }
-  </nav>
+  </div>
 </ng-template>
 
 @if (!ready()) {
@@ -74,27 +78,23 @@
       <div class="panel play-panel">
         <ng-container [ngTemplateOutlet]="topbar" />
         <div class="head play-lead" [class.revealing]="revealed()">
+          <!-- The name, as in the address: it says the pattern, never the moves. Solving it underlines it. -->
+          <h1 #heading tabindex="-1">
+            <span class="title-text">{{ i18n.localize(position.title) }}</span>
+          </h1>
           @if (revealed()) {
             <p class="riddle-line">
               <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
               {{ sideToPlayLabel(position.playerSide, t) }},
               {{ t.ownMoves(trainer.playerMoveCount()) }}
             </p>
+          } @else {
+            <p class="riddle">
+              <i class="king pc" [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"></i>
+              <span>{{ sideToPlayLabel(position.playerSide, t) }}</span>
+              <span class="own-pill">{{ t.ownMoves(trainer.playerMoveCount()) }}</span>
+            </p>
           }
-          <h1 #heading tabindex="-1">
-            @if (revealed()) {
-              <span class="title-text">{{ i18n.localize(position.title) }}</span>
-            } @else {
-              <span class="riddle">
-                <i
-                  class="king pc"
-                  [class]="position.playerSide === 'white' ? 'pc-wK' : 'pc-bK'"
-                ></i>
-                <span>{{ sideToPlayLabel(position.playerSide, t) }}</span>
-                <span class="own-pill">{{ t.ownMoves(trainer.playerMoveCount()) }}</span>
-              </span>
-            }
-          </h1>
           @if (revealed()) {
             <div class="found">
               <ul class="tags" [attr.aria-label]="t.themes">
@@ -297,6 +297,14 @@
             }
           </div>
         }
+
+        <details class="about">
+          <summary>
+            <span>{{ i18n.t().seo.aboutPosition }}</span>
+            <app-icon name="mini-chevron" />
+          </summary>
+          <p><app-rich-text [text]="position.about" /></p>
+        </details>
       </div>
     </div>
   }

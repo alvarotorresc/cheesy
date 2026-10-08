@@ -15,6 +15,7 @@ import {
   renameSync,
   rmdirSync,
   statSync,
+  writeFileSync,
 } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -63,10 +64,45 @@ export const flattenPrerender = (dir, routes) => {
 export const publishLicenses = (dist) =>
   copyFileSync(join(dist, '3rdpartylicenses.txt'), join(dist, 'browser', '3rdpartylicenses.txt'));
 
+const ROBOTS = /<meta\s[^>]*name\s*=\s*["']?robots\b/i;
+
+/**
+ * Adds `<meta name="robots" content="noindex">` to the app shell. The client routes (analysis,
+ * practice, puzzles) are served from `index.csr.html` and must never be indexed; the prerendered
+ * pages are built from the same `src/index.html`, which is why the tag cannot be written there.
+ * Does nothing when the shell already has a robots meta. Returns whether it changed the file.
+ */
+export const markShellNoindex = (dir) => {
+  const file = join(dir, 'index.csr.html');
+  const html = readFileSync(file, 'utf8');
+  if (ROBOTS.test(html)) return false;
+  if (!html.includes('</head>')) throw new Error(`${file} has no </head>`);
+  writeFileSync(file, html.replace('</head>', '<meta name="robots" content="noindex"></head>'));
+  return true;
+};
+
+/**
+ * Makes `404.html` a plain page: no scripts (but the structured data) and no module preloads, with
+ * the stylesheets kept. Netlify serves it at any unknown address (`/es/aperturas/nada`); booting
+ * the app there would route to the opening page and break hydration, so it is HTML with links.
+ */
+export const staticNotFound = (dir) => {
+  const file = join(dir, '404.html');
+  if (!existsSync(file)) throw new Error(`404.html is missing in ${dir}`);
+  const html = readFileSync(file, 'utf8')
+    .replace(/<script\b([^>]*)>[\s\S]*?<\/script\s*>/gi, (script, attributes) =>
+      /type\s*=\s*["']?application\/ld\+json/i.test(attributes) ? script : '',
+    )
+    .replace(/<link\b[^>]*\brel\s*=\s*["']?modulepreload\b[^>]*>/gi, '');
+  writeFileSync(file, html);
+};
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const dist = fileURLToPath(new URL('../dist/cheesy/', import.meta.url));
   const { routes } = JSON.parse(readFileSync(join(dist, 'prerendered-routes.json'), 'utf8'));
   const moved = flattenPrerender(join(dist, 'browser'), routes);
   console.log(`Flattened ${moved} prerendered pages to route.html.`);
+  markShellNoindex(join(dist, 'browser'));
+  staticNotFound(join(dist, 'browser'));
   publishLicenses(dist);
 }

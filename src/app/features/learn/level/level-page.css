@@ -5,17 +5,6 @@
   margin-inline: auto;
 }
 
-.back {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-
 .page-head {
   display: grid;
   gap: var(--space-3);

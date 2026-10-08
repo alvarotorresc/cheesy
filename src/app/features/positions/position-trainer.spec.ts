@@ -13,6 +13,7 @@ const position = (overrides: Partial<CuratedPosition>): CuratedPosition => ({
   playerSide: 'white',
   solution: ['Qg8+', 'Rxg8', 'Nf7#'],
   explanation: plainText('Explicación', 'Explanation'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: ['smothered-mate'],
   ...overrides,
 });

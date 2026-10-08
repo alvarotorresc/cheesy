@@ -9,6 +9,8 @@ import { ProgressService } from '../../../core/progress';
 import { nextLesson } from '../learn-progress';
 import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
+import { PageMeta } from '../../../core/seo';
 
 type LevelState =
   | { readonly status: 'loading' }
@@ -22,11 +24,13 @@ type LevelState =
 /** The lessons of one level in order, with the completed ones marked and the next one highlighted. */
 @Component({
   selector: 'app-level-page',
-  imports: [RouterLink],
+  imports: [Breadcrumbs, RouterLink],
   templateUrl: './level-page.html',
   styleUrl: './level-page.css',
 })
 export class LevelPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   /** Keeps the prerender waiting until the content is on the page. */

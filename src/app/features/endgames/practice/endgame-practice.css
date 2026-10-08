@@ -501,6 +501,18 @@ details.fold p {
   max-width: 60ch;
 }
 
+/* ---- About the endgame: what it is, when it comes up, what to remember ---- */
+
+.about h2 {
+  font-size: var(--text-md);
+  margin-bottom: var(--space-2);
+}
+
+.about p {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
 /* ---- Moves ---------------------------------------------------------------------------------- */
 
 .moves h2 {

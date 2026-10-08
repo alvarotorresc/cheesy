@@ -18,7 +18,7 @@ describe('App', () => {
     localStorage.clear();
   });
 
-  it('should name the browser tab after the section of each route, in the language of the address', async () => {
+  it('should title each route in the language of the address (search titles for the pages, the section for the app)', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
@@ -29,8 +29,58 @@ describe('App', () => {
 
     await harness.navigateByUrl('/es');
     await harness.fixture.whenStable();
-    expect(document.title).toBe('Inicio · Cheesy');
+    expect(document.title).toBe('Ajedrez en el navegador: aperturas, finales y táctica · Cheesy');
     expect(TestBed.inject(I18nService).lang()).toBe('es');
+  });
+
+  it('should write the head of each page once, and keep the app states out of search engines', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+    const head = document.head;
+    const attr = (selector: string, name: string) =>
+      head.querySelector(selector)?.getAttribute(name) ?? null;
+
+    await harness.navigateByUrl('/es/finales');
+    await harness.fixture.whenStable();
+    expect(attr('link[rel="canonical"]', 'href')).toBe('https://cheesy.alvarotc.com/es/finales');
+    expect(
+      [...head.querySelectorAll('link[rel="alternate"][hreflang]')].map((link) => [
+        link.getAttribute('hreflang'),
+        link.getAttribute('href'),
+      ]),
+    ).toEqual([
+      ['es', 'https://cheesy.alvarotc.com/es/finales'],
+      ['en', 'https://cheesy.alvarotc.com/en/endgames'],
+      ['x-default', 'https://cheesy.alvarotc.com/en/endgames'],
+    ]);
+    expect(attr('meta[name="robots"]', 'content')).toBeNull();
+    expect(attr('meta[property="og:locale"]', 'content')).toBe('es_ES');
+
+    await harness.navigateByUrl('/en/analysis');
+    await harness.fixture.whenStable();
+    expect(attr('meta[name="robots"]', 'content')).toBe('noindex');
+    expect(head.querySelector('link[rel="canonical"]')).toBeNull();
+    expect(head.querySelectorAll('link[rel="alternate"]').length).toBe(0);
+
+    await harness.navigateByUrl('/en');
+    await harness.fixture.whenStable();
+    expect(head.querySelectorAll('link[rel="canonical"]').length).toBe(1);
+    expect(head.querySelectorAll('link[rel="alternate"]').length).toBe(3);
+    expect(head.querySelectorAll('meta[name="description"]').length).toBe(1);
+    expect(head.querySelectorAll('script[type="application/ld+json"]').length).toBe(1);
+    expect(attr('meta[name="robots"]', 'content')).toBeNull();
+  });
+
+  it('should show the home page at /index.html, the file it is served from', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/index.html');
+    await harness.fixture.whenStable();
+    expect(TestBed.inject(Router).url).toBe('/');
+    expect(document.querySelector('app-not-found')).toBeNull();
+    expect(document.title).toBe('Chess openings, endgames and tactics in your browser · Cheesy');
   });
 
   it('should open the Learn landing at /en/learn instead of the glossary', async () => {
@@ -55,11 +105,13 @@ describe('App', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/en/learn/glossary');
     await harness.fixture.whenStable();
-    expect(document.title).toBe('Glossary · Cheesy');
+    expect(document.title).toBe('Chess glossary: the words of chess in plain English · Cheesy');
 
     await harness.navigateByUrl('/es/aprender/glosario');
     await harness.fixture.whenStable();
-    expect(document.title).toBe('Glosario · Cheesy');
+    expect(document.title).toBe(
+      'Glosario de ajedrez: las palabras del ajedrez explicadas · Cheesy',
+    );
   });
 
   it('should title the About page in both languages', async () => {
@@ -69,11 +121,13 @@ describe('App', () => {
 
     await harness.navigateByUrl('/en/about');
     await harness.fixture.whenStable();
-    expect(document.title).toBe('About · Cheesy');
+    expect(document.title).toBe('About Cheesy, a free and open-source chess trainer · Cheesy');
 
     await harness.navigateByUrl('/es/acerca');
     await harness.fixture.whenStable();
-    expect(document.title).toBe('Acerca de · Cheesy');
+    expect(document.title).toBe(
+      'Acerca de Cheesy, un entrenador de ajedrez libre y gratuito · Cheesy',
+    );
   });
 
   it('should give the padding of each kind of page to the main content', async () => {

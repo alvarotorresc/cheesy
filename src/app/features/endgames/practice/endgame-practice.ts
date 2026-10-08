@@ -35,6 +35,8 @@ import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
 import { EndgameSession } from './endgame-session';
 import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 /** Open or closed state of the tablebase panel; the panel starts closed. */
 export const TABLEBASE_PANEL_STORAGE_KEY = 'cheesy.endgames.tablebase-panel';
@@ -61,6 +63,7 @@ interface MoveView {
 @Component({
   selector: 'app-endgame-practice',
   imports: [
+    Breadcrumbs,
     BoardComponent,
     Icon,
     MoveText,
@@ -78,6 +81,8 @@ interface MoveView {
   },
 })
 export class EndgamePractice {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
   protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
@@ -339,6 +344,17 @@ export class EndgamePractice {
     inject(PageTitle).showDetail(() => {
       const endgame = this.session.endgame();
       return endgame && this.i18n.localize(endgame.name);
+    });
+    inject(PageMeta).describe(() => {
+      const endgame = this.endgame();
+      const lang = this.i18n.lang();
+      return (
+        endgame && {
+          id: endgame.id,
+          name: endgame.name[lang],
+          texts: [textOf(endgame.about[lang])],
+        }
+      );
     });
     effect(() => {
       const endgame = this.endgame();

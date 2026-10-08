@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideUmami } from './core/analytics';
 import { PageTitle } from './core/page-title';
 import { provideLangFromUrl } from './core/routing';
+import { providePageMeta } from './core/seo';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideLangFromUrl(),
     { provide: TitleStrategy, useExisting: PageTitle },
+    providePageMeta(),
     provideUmami(),
   ],
 };

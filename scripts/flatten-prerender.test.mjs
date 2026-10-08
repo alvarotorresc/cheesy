@@ -3,7 +3,12 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
-import { flattenPrerender, publishLicenses } from './flatten-prerender.mjs';
+import {
+  flattenPrerender,
+  markShellNoindex,
+  publishLicenses,
+  staticNotFound,
+} from './flatten-prerender.mjs';
 
 describe('flattenPrerender', () => {
   let dir;
@@ -95,5 +100,70 @@ describe('publishLicenses', () => {
 
     assert.equal(readFileSync(join(dist, 'browser', '3rdpartylicenses.txt'), 'utf8'), 'MIT');
     rmSync(dist, { recursive: true, force: true });
+  });
+});
+
+describe('markShellNoindex', () => {
+  let dir;
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'shell-'));
+  });
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('should add a noindex robots meta to the app shell, once', () => {
+    writeFileSync(join(dir, 'index.csr.html'), '<html><head><title>x</title></head><body></body>');
+
+    assert.equal(markShellNoindex(dir), true);
+    assert.equal(markShellNoindex(dir), false);
+
+    const html = readFileSync(join(dir, 'index.csr.html'), 'utf8');
+    assert.equal(html.match(/name="robots"/g).length, 1);
+    assert.match(html, /<meta name="robots" content="noindex"><\/head>/);
+  });
+
+  it('should leave a shell that already has a robots meta as it is', () => {
+    const html = '<head><meta content="noindex,follow" name="robots"></head>';
+    writeFileSync(join(dir, 'index.csr.html'), html);
+
+    assert.equal(markShellNoindex(dir), false);
+    assert.equal(readFileSync(join(dir, 'index.csr.html'), 'utf8'), html);
+  });
+});
+
+describe('staticNotFound', () => {
+  let dir;
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'notfound-'));
+  });
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('should drop the scripts and module preloads but keep stylesheets and structured data', () => {
+    writeFileSync(
+      join(dir, '404.html'),
+      [
+        '<head><link rel="stylesheet" href="styles.css">',
+        '<link rel="modulepreload" href="main.js">',
+        '<script type="application/ld+json">{"@context":"https://schema.org"}</script></head>',
+        '<body><a href="/en">Home</a>',
+        '<script id="ng-state" type="application/json">{"a":1}</script>',
+        '<script src="main.js" type="module"></script>',
+        '<script>window.x = 1;</script></body>',
+      ].join('\n'),
+    );
+
+    staticNotFound(dir);
+
+    const html = readFileSync(join(dir, '404.html'), 'utf8');
+    assert.ok(!html.includes('modulepreload'));
+    assert.ok(!html.includes('ng-state'));
+    assert.ok(!html.includes('main.js'));
+    assert.ok(!html.includes('window.x'));
+    assert.ok(html.includes('rel="stylesheet"'));
+    assert.ok(html.includes('application/ld+json'));
+    assert.ok(html.includes('<a href="/en">Home</a>'));
+  });
+
+  it('should fail without 404.html', () => {
+    assert.throws(() => staticNotFound(dir), /404\.html/);
   });
 });

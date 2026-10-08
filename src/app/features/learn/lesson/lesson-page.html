@@ -2,7 +2,11 @@
 @let levelName = t.levels[level()].name;
 
 <ng-template #head>
-  <a class="back" [routerLink]="links.level(level())">← {{ t.backToLevel(levelName) }}</a>
+  @if (crumbs().length > 0) {
+    <app-breadcrumbs class="trail" />
+  } @else {
+    <a class="back" [routerLink]="links.level(level())">← {{ t.backToLevel(levelName) }}</a>
+  }
   <h1 data-step-heading tabindex="-1">{{ i18n.localize(lesson()!.title) }}</h1>
   <p class="step-of">{{ t.stepOf(index() + 1, steps().length) }}</p>
   <div class="progress-bar" aria-hidden="true">

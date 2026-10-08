@@ -15,6 +15,7 @@ const SECTIONS = {
   about: (t) => t.nav.about,
   glossary: (t) => t.glossary.title,
   puzzles: (t) => t.learn.puzzles.title,
+  notFound: (t) => t.seo.titles.notFound,
 } satisfies Record<string, (t: Messages) => string>;
 
 export type PageSection = keyof typeof SECTIONS;
@@ -32,9 +33,12 @@ export class PageTitle extends TitleStrategy {
   private readonly i18n = inject(I18nService);
   private readonly section = signal<string | undefined>(undefined);
   private readonly detail = signal<(() => string | undefined) | undefined>(undefined);
+  private readonly page = signal<string | undefined>(undefined);
 
   /** Text of the title as it is now. */
   readonly text = computed(() => {
+    const page = this.page();
+    if (page) return page;
     const t = this.i18n.t();
     const section = this.section();
     const name = this.detail()?.() ?? (isSection(section) ? SECTIONS[section](t) : undefined);
@@ -45,6 +49,14 @@ export class PageTitle extends TitleStrategy {
     super();
     const title = inject(Title);
     effect(() => title.setTitle(this.text()));
+  }
+
+  /**
+   * The whole title of a page people search for, written for search engines (`core/seo`): it wins
+   * over the section and the detail. Undefined gives the title back to them (the states of the app).
+   */
+  setPageTitle(title: string | undefined): void {
+    this.page.set(title);
   }
 
   override updateTitle(snapshot: RouterStateSnapshot): void {

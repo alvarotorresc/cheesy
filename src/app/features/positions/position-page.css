@@ -60,6 +60,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2) var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: 700;
 }
 
 .riddle .king {
@@ -100,9 +102,53 @@
   background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
   background-position: 0 100%;
-  background-size: 100% 0.16em;
+  background-size: 0% 0.16em;
   padding-bottom: 0.16em;
   line-height: 1.25;
+}
+
+/* The underline is the mark of a solved (or shown) position. */
+.head.revealing .title-text {
+  background-size: 100% 0.16em;
+}
+
+/* ---- About the position: folded, closed by default, in the HTML for search engines ---- */
+.about {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.about summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.about summary::-webkit-details-marker {
+  display: none;
+}
+
+.about summary app-icon {
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.about[open] summary app-icon {
+  transform: rotate(180deg);
+}
+
+.about p {
+  max-width: 60ch;
+  margin: 0;
+  padding: 0 var(--space-4) var(--space-4);
+  color: var(--color-text-muted);
 }
 
 .found {
