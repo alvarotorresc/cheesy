@@ -369,6 +369,15 @@ describe('checkSite', () => {
     assert.deepEqual(checkSite(dir, sources), []);
   });
 
+  it('should fail when a breadcrumb step is no page of the build', () => {
+    const file = fileOf(enPath);
+    write(file, read(file).replace(`"item":"${ORIGIN}/en"`, `"item":"${ORIGIN}/en/nope"`));
+    assert.match(
+      checkSite(dir, sources).join('\n'),
+      new RegExp(`${enPath}: JSON-LD BreadcrumbList names ${ORIGIN}/en/nope, which is no page`),
+    );
+  });
+
   it('should name a page missing from the build', () => {
     rmSync(join(dir, fileOf(esPath)));
     assert.match(checkSite(dir, sources).join('\n'), new RegExp(`${esPath}: no `));
