@@ -20,6 +20,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadSources, redirectRules } from '../../scripts/netlify-redirects.mjs';
+import { createPageUrls } from '../../src/app/core/routing/page-url.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 // media/shots/lib.mjs -> the repository root is two levels up.
@@ -37,6 +39,17 @@ const BASE_URL = `http://localhost:${PORT}`;
 // Fixed time for everything that reads the clock (progress dates, review schedules):
 // Monday 28 September 2026, 10:30 in Madrid. Only `Date` is pinned; timers keep running.
 const FIXED_NOW = new Date('2026-09-28T08:30:00Z');
+
+// The scenes name each page by its address of before the languages (`/openings/ruy-lopez`), the
+// same for both; this is that page in a language (`/es/aperturas/apertura-espanola`), through the
+// redirect Netlify answers the old address with. `/` stays the home page in English.
+export function pathIn(path, lang) {
+  const [, bare, tail] = /^([^?#]*)(.*)$/.exec(path);
+  const sources = loadSources();
+  const to = bare === '/' ? '/' : Object.fromEntries(redirectRules(sources))[bare];
+  if (!to) throw new Error(`${path} is no page of the app`);
+  return createPageUrls(sources.slugs).translateUrl(to + tail, lang);
+}
 
 export function buildSite() {
   const res = spawnSync('pnpm', ['build'], { cwd: REPO_ROOT, stdio: 'inherit' });
