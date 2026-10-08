@@ -17,20 +17,20 @@ describe('textOf', () => {
     { kind: 'text', text: '.\n' },
   ] as const;
 
-  it('tells moves in words, as the page does by default, terms by their words and squares by name', () => {
-    expect(textOf(segments, 'es')).toBe('Solo rey a e7 toma la oposición en e7.');
+  it('tells moves as prose, terms by their words and squares by name', () => {
+    expect(textOf(segments, 'es')).toBe('Solo el rey a e7 toma la oposición en e7.');
   });
 
-  it('starts a sentence with a capital when the move opens it', () => {
+  it('starts a sentence with a capital when a piece move opens it', () => {
     expect(
       textOf(
         [
-          { kind: 'move', san: 'c3', number: '2.', start: true, written: '2.c3' },
-          { kind: 'text', text: ' prepares d4.' },
+          { kind: 'move', san: 'Nf3', number: '2.', start: true, written: '2.Nf3' },
+          { kind: 'text', text: ' develops.' },
         ],
         'en',
       ),
-    ).toBe('Pawn to c3 prepares d4.');
+    ).toBe('The knight to f3 develops.');
   });
 
   it('never leaves notation behind: no move number, piece letter, capture or castling sign', () => {
@@ -44,7 +44,7 @@ describe('textOf', () => {
       ],
       'en',
     );
-    expect(text).toBe('With bishop takes on f7, check and kingside castling Black is fine.');
+    expect(text).toBe('With the bishop capture on f7 and castling kingside Black is fine.');
     expect(hasNotation(text)).toBe(false);
   });
 });
@@ -61,6 +61,14 @@ describe('hasNotation', () => {
       'exd5 abre',
       'O-O-O y ataque',
       '1. e4',
+      'Con 5…a6 las negras',
+      'tras …d5',
+      '(Cf3) y',
+      '«Ab4» clava',
+      '"Nf3" develops',
+      '“Bb5” pins',
+      'y e8=D gana',
+      'then a1=Q wins',
     ]) {
       expect(hasNotation(text), text).toBe(true);
     }
@@ -74,6 +82,12 @@ describe('hasNotation', () => {
       'Rey a e7, jaque.',
       'Dama de la Torre de Londres.',
       'Siglo XIX: 1858.',
+      'Con c3 las blancas preparan d4.',
+      'el alfil a b4 y el caballo a d2',
+      'the bishop to b4 and castling kingside',
+      'Y entonces… e4 cae.',
+      'Las torres (en e1 y d1) presionan.',
+      'A1 es una casilla.',
     ]) {
       expect(hasNotation(text), text).toBe(false);
     }
