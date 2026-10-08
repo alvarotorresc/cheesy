@@ -9,6 +9,7 @@ export {
   type LessonLoaders,
   type PuzzleLoaders,
 } from './content-loaders';
+export { startingWith } from './starting-with';
 export { OpeningBook, type BookLookup, type BookNode } from './opening-book';
 export type {
   BoardSetup,

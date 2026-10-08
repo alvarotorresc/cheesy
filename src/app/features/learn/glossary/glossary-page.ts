@@ -20,7 +20,7 @@ import {
   Router,
   RouterLink,
 } from '@angular/router';
-import { ContentService, type LessonSummary } from '../../../core/content';
+import { ContentService, startingWith, type LessonSummary } from '../../../core/content';
 import {
   GLOSSARY_GROUPS,
   type GlossaryLevel,
@@ -76,8 +76,13 @@ export class GlossaryPage {
   protected readonly levels = GLOSSARY_LEVELS;
   protected readonly levelRank = LEVEL_RANK;
 
-  protected readonly glossary = resource({ loader: () => this.content.glossary() });
-  private readonly lessons = resource({ loader: () => this.content.lessonCatalog() });
+  private readonly glossaryRef = resource({ loader: () => this.content.glossary() });
+  // Both start with what a prerendered page carries, so it hydrates as it was rendered.
+  protected readonly glossary = startingWith(this.glossaryRef, this.content.loadedGlossary());
+  private readonly lessons = startingWith(
+    resource({ loader: () => this.content.lessonCatalog() }),
+    this.content.loadedLessonCatalog(),
+  );
 
   protected readonly filters = signal<GlossaryFilters>(
     filtersFromParams(this.route.snapshot.queryParamMap),
@@ -142,6 +147,10 @@ export class GlossaryPage {
       clearTimeout(this.arrivalTimer);
       scroller.setOffset([0, 0]);
     });
+  }
+
+  protected reloadGlossary(): void {
+    this.glossaryRef.reload();
   }
 
   private remPx(): number {
