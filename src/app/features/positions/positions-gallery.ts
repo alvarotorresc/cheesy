@@ -185,7 +185,9 @@ export class PositionsGallery {
     this.foldOpen.update((open) => !open);
   }
 
-  protected askToClear(): void {
+  protected async askToClear(): Promise<void> {
+    // The gallery shows before the saved progress is read: wait for it rather than say "nothing".
+    if (!this.rows()) await this.loadRows();
     if (this.rows()?.size) {
       this.message.set('');
       this.dialog()?.nativeElement.showModal();

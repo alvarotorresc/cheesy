@@ -49,10 +49,18 @@ const row = (positionId: string, solves: number, firstTry: boolean): PositionPro
 
 const setup = async (
   positions: ContentLoaders['positions'],
-  options: { lang?: 'es' | 'en'; rows?: PositionProgress[] } = {},
+  options: { lang?: 'es' | 'en'; rows?: PositionProgress[]; slowRows?: Promise<void> } = {},
 ) => {
   const memory = memoryProgressStore();
   for (const saved of options.rows ?? []) memory.positionRows.set(saved.positionId, saved);
+  const { slowRows } = options;
+  if (slowRows) {
+    const all = memory.store.positions.all;
+    memory.store.positions.all = async () => {
+      await slowRows;
+      return all();
+    };
+  }
   TestBed.configureTestingModule({
     providers: [
       provideRouter([{ path: 'positions', children: POSITIONS_ROUTES }]),
@@ -200,6 +208,30 @@ describe('PositionsGallery', () => {
       expect(page.element.querySelector('.status-msg')?.textContent).toBe('Progress cleared.');
       expect(cards(page.element)[0].getAttribute('aria-label')).toContain('Unsolved.');
     });
+  });
+
+  it('should wait for the saved progress before saying there is nothing to clear', async () => {
+    let release!: () => void;
+    const slowRows = new Promise<void>((resolve) => (release = resolve));
+    const page = await setup(async () => POSITIONS, {
+      rows: [row('with-source', 1, true)],
+      slowRows,
+    });
+    await vi.waitFor(() => {
+      page.harness.detectChanges();
+      expect(cards(page.element).length).toBeGreaterThan(0);
+    });
+    const dialog = page.element.querySelector('dialog') as HTMLDialogElement;
+    dialog.showModal = vi.fn();
+
+    page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    release();
+
+    await vi.waitFor(() => expect(dialog.showModal).toHaveBeenCalled());
+    page.harness.detectChanges();
+    expect(page.element.querySelector('.status-msg')?.textContent ?? '').not.toContain(
+      'There is no saved progress.',
+    );
   });
 
   it('should say there is nothing to clear when no progress is saved', async () => {
