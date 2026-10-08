@@ -121,8 +121,24 @@ h1 {
   white-space: nowrap;
 }
 
+/*
+ * Three states, as before: played moves muted, the current one in the text colour and underlined,
+ * the ones to come fainter still. The faint text is the muted colour mixed into the surface just as
+ * far as 4.5:1 allows (about 4.7:1 in each theme; the old 40% opacity gave 1.9 and 2.4), with a
+ * lighter weight; the piece images, which only repeat what the square says, fade further.
+ */
+.moves {
+  --future-mix: 84%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .moves {
+    --future-mix: 74%;
+  }
+}
+
 .moves .mv {
-  transition: opacity var(--duration-fast) ease;
+  transition: color var(--duration-fast) ease;
 }
 
 .moves .mv.now {
@@ -131,6 +147,11 @@ h1 {
 }
 
 .moves .mv.future {
+  color: color-mix(in srgb, var(--color-text-muted) var(--future-mix), var(--color-surface));
+  font-weight: 500;
+}
+
+.moves .mv.future ::ng-deep .pc {
   opacity: 0.4;
 }
 

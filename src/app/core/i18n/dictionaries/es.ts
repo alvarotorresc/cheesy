@@ -1108,8 +1108,6 @@ export const es: Messages = {
         'Qué es Cheesy y quién lo hace: un entrenador de ajedrez libre y gratuito que guarda tu progreso en tu navegador, sin cuentas, sin cookies y sin anuncios.',
       notFound: 'Esta dirección no es una página de Cheesy.',
     },
-    ogImageAlt:
-      'El nombre Cheesy, la frase «Aperturas, finales y táctica, en tu navegador.» y un caballo de ajedrez sobre un tablero.',
     breadcrumb: 'Ruta de navegación',
     categoryAbout: {
       openings: 'Sobre las aperturas',

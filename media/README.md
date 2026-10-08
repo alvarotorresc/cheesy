@@ -12,6 +12,25 @@ From the repo root. The first time, install the browser: `pnpm exec playwright i
 pnpm media                                              # shots -> labels -> promo, writes media/out/
 pnpm media:shots --only screen-02 --lang es --no-build  # repeat a single screenshot
 pnpm media:readme                                       # refresh .github/readme/ (1280x800, es and en)
+pnpm media:promo --og                                   # only the social cards (site and sections, es and en)
+```
+
+### Social cards
+
+One card per language for the site (`og.html?lang=`) and for each section
+(`media/promo/og-category.html?cat=openings|endgames|positions|learn&lang=es|en`): the card of
+`og.png` with the name of the section in the language as the headline, its name in the other
+language under it, and a made-up idea of the section on the board strip, never a position of the
+site. Each card is rendered twice and must come out byte for byte the same. The site serves them
+from `public/og/<lang>/<card>.png` (`src/app/core/seo/og-image.ts` says which page uses which, with
+the alt text per language), as palette PNGs of 128 colours without dithering. `public/og.png` stays
+as the card of the app shell (`src/index.html`).
+
+```sh
+python3 -c "from PIL import Image
+for l in ['es', 'en']:
+    for c in ['site', 'openings', 'endgames', 'positions', 'learn']:
+        Image.open(f'media/out/og-{l}-{c}.png').convert('RGB').quantize(128, dither=Image.Dither.NONE).save(f'public/og/{l}/{c}.png', optimize=True)"
 ```
 
 `media/out/` is not in git. `.github/readme/` is.
@@ -45,20 +64,21 @@ Guards of each capture. If one fails, nothing is written:
 
 ## Files in media/out/
 
-| File                                            | Dimensions | Weight (KB)                                             |
-| ----------------------------------------------- | ---------- | ------------------------------------------------------- |
-| `cover-{es,en}.png`                             | 1600x1000  | ~170-185                                                |
-| `cover-mobile-{es,en}.png`                      | 1080x2340  | ~180-185                                                |
-| `screen-01...08-*-{es,en}.png`                  | 1600x1000  | 110-170                                                 |
-| `screen-learn-{es,en}.png`                      | 1600x1000  | ~90                                                     |
-| `screen-lesson-{es,en}.png`                     | 1600x1000  | ~105                                                    |
-| `screen-glossary-{es,en}.png`                   | 1600x1000  | ~140                                                    |
-| `screen-puzzles-{es,en}.png`                    | 1600x1000  | 115-125                                                 |
-| `screen-puzzle-{es,en}.png`                     | 1600x1000  | ~80                                                     |
-| `promo-{es,en}.png`, `promo-mobile-{es,en}.png` | 1920x1080  | 195-240                                                 |
-| `og.png`                                        | 1200x630   | 41 (copy it to `public/og.png` when it changes)         |
-| `icon.png`                                      | 1024x1024  | 26                                                      |
-| `labels.json`                                   | -          | name, alt, caption and text per screenshot and language |
+| File                                                      | Dimensions | Weight (KB)                                             |
+| --------------------------------------------------------- | ---------- | ------------------------------------------------------- |
+| `cover-{es,en}.png`                                       | 1600x1000  | ~170-185                                                |
+| `cover-mobile-{es,en}.png`                                | 1080x2340  | ~180-185                                                |
+| `screen-01...08-*-{es,en}.png`                            | 1600x1000  | 110-170                                                 |
+| `screen-learn-{es,en}.png`                                | 1600x1000  | ~90                                                     |
+| `screen-lesson-{es,en}.png`                               | 1600x1000  | ~105                                                    |
+| `screen-glossary-{es,en}.png`                             | 1600x1000  | ~140                                                    |
+| `screen-puzzles-{es,en}.png`                              | 1600x1000  | 115-125                                                 |
+| `screen-puzzle-{es,en}.png`                               | 1600x1000  | ~80                                                     |
+| `promo-{es,en}.png`, `promo-mobile-{es,en}.png`           | 1920x1080  | 195-240                                                 |
+| `og.png`                                                  | 1200x630   | 41 (copy it to `public/og.png` when it changes)         |
+| `og-{es,en}-{site,openings,endgames,positions,learn}.png` | 1200x630   | 32-45 (13-18 in `public/og/`, see above)                |
+| `icon.png`                                                | 1024x1024  | 26                                                      |
+| `labels.json`                                             | -          | name, alt, caption and text per screenshot and language |
 
 What the Learn screenshots show: `screen-learn`, Learn with the demo progress ("continue" with
 the next lesson); `screen-lesson`, the first step of the fork lesson with the bubble of a term

@@ -295,7 +295,7 @@ export class PositionPage {
         position && {
           id: position.id,
           name: position.title[lang],
-          texts: [textOf(position.about[lang])],
+          texts: [textOf(position.about[lang], lang)],
         }
       );
     });

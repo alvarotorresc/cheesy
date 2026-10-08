@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cheesy social image of a section</title>
+    <link rel="stylesheet" href="promo.css" />
+    <link rel="stylesheet" href="../../src/styles/pieces.css" />
+    <style>
+      /* Same canvas and board strip as og.html: six ranks of 105px, four files on the right. */
+      :root {
+        --w: 1200px;
+        --h: 630px;
+        --sq: 105px;
+      }
+      .copy {
+        position: absolute;
+        top: 136px;
+        left: 84px;
+        width: 620px;
+      }
+      /* The brand stays as the signature: the logo tile and the name, in one line. */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .brand .name {
+        font-size: 84px;
+        color: var(--paper);
+      }
+      /* The section is what the card says: its Spanish name in cheddar, the English one below. */
+      .section {
+        margin: 62px 0 0;
+        font-size: 124px;
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -0.045em;
+        color: var(--cheddar);
+      }
+      .other {
+        margin: 22px 0 0;
+        font-size: 50px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--paper);
+        opacity: 0.72;
+      }
+      .board {
+        top: 0;
+        right: 0;
+        width: 420px;
+        height: 630px;
+      }
+      .board .from {
+        position: absolute;
+        left: calc(var(--col) * var(--sq));
+        top: calc(var(--row) * var(--sq));
+        width: var(--sq);
+        height: var(--sq);
+        /* The square the piece left: a cheddar ring, the square itself unpainted. */
+        box-shadow: inset 0 0 0 8px var(--cheddar);
+      }
+      .pc {
+        position: absolute;
+        left: calc(var(--col) * var(--sq));
+        top: calc(var(--row) * var(--sq));
+        width: var(--sq);
+        height: var(--sq);
+        background-size: 100% 100%;
+      }
+      /* Where a piece can go, as the app marks it: a dot in the middle of the square. */
+      .dot {
+        position: absolute;
+        left: calc(var(--col) * var(--sq) + var(--sq) * 0.36);
+        top: calc(var(--row) * var(--sq) + var(--sq) * 0.36);
+        width: calc(var(--sq) * 0.28);
+        height: calc(var(--sq) * 0.28);
+        border-radius: 50%;
+        background: rgb(19 34 45 / 0.42);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board" id="board"></div>
+    <div class="copy">
+      <div class="brand">
+        <img class="logo" src="../../public/favicon.svg" alt="" />
+        <span class="name">Cheesy</span>
+      </div>
+      <p class="section" id="section"></p>
+      <p class="other" id="other"></p>
+    </div>
+    <script src="og-category.js"></script>
+  </body>
+</html>

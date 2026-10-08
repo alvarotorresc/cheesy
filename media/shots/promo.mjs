@@ -6,7 +6,8 @@
 // file:// (they are not in dist/), with the fonts from the repo's own node_modules. Run it after
 // shots.mjs: it needs the cover PNGs in media/out/.
 
-import { access, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OUT, REPO_ROOT, checkSize, chromium } from './lib.mjs';
@@ -84,8 +85,47 @@ async function renderIcon(page) {
   console.log('OK    icon.png');
 }
 
+// The social cards, one per language: the site (og.html) and each section (og-category.html).
+// Each one is rendered twice and must come out the same, byte for byte.
+const OG_CATEGORIES = ['openings', 'endgames', 'positions', 'learn'];
+
+async function renderOgCategories(page) {
+  await mkdir(OUT, { recursive: true });
+  await page.setViewportSize({ width: 1200, height: 630 });
+  for (const lang of LANGS) {
+    // `site` is og.html in the language: the card of the pages of no section.
+    for (const card of ['site', ...OG_CATEGORIES]) {
+      const html = card === 'site' ? 'og.html' : 'og-category.html';
+      const url = new URL(pathToFileURL(join(PROMO_DIR, html)));
+      url.searchParams.set('lang', lang);
+      if (card !== 'site') url.searchParams.set('cat', card);
+      const name = `og-${lang}-${card}.png`;
+      const shots = [];
+      for (let i = 0; i < 2; i++) {
+        await page.goto(url.href);
+        await ready(page);
+        shots.push(await page.screenshot());
+      }
+      const [a, b] = shots.map((buf) => createHash('sha256').update(buf).digest('hex'));
+      if (a !== b) throw new Error(`${name} differs between two renders`);
+      const outPath = join(OUT, name);
+      checkSize(shots[0], outPath, 1200, 630);
+      await writeFile(outPath, shots[0]);
+      console.log(`OK    ${name}  sha256 ${a.slice(0, 12)}`);
+    }
+  }
+}
+
 async function main() {
   const browser = await chromium.launch();
+  if (process.argv.includes('--og')) {
+    try {
+      await renderOgCategories(await browser.newPage({ deviceScaleFactor: 1 }));
+    } finally {
+      await browser.close();
+    }
+    return;
+  }
   try {
     const page = await browser.newPage({
       viewport: { width: 1920, height: 1080 },
@@ -103,6 +143,7 @@ async function main() {
     }
     await page.setViewportSize({ width: 1200, height: 630 });
     await renderPage(page, 'og.html', { lang: 'en' }, 'og.png', 1200, 630);
+    await renderOgCategories(page);
     await renderIcon(page);
   } finally {
     await browser.close();
