@@ -25,7 +25,7 @@ import { richOf } from '../lib/rich-text.ts';
 import type {
   AuthoringNode,
   AuthoringTree,
-  CuratedPosition,
+  CuratedEntry,
   LessonSummary,
   OpeningNode,
   OpeningSummary,
@@ -80,7 +80,7 @@ const replay = (pos: Chess, moves: string, id: string): Chess => {
   return pos;
 };
 
-const curated: CuratedPosition[] = positions.map((p) => {
+const curated: CuratedEntry[] = positions.map((p) => {
   let fen: string;
   if ('moves' in p) {
     const pos = replay(Chess.default(), p.moves, p.id);
@@ -99,13 +99,14 @@ const curated: CuratedPosition[] = positions.map((p) => {
     playerSide: p.playerSide,
     solution: p.solution,
     explanation: richOf(p.explanation),
+    about: richOf(p.about),
     tags: p.tags,
   };
 });
 out(POSITIONS_FILE, curated);
 out(
   ENDGAMES_FILE,
-  endgames.map((e) => ({ ...e, explanation: richOf(e.explanation) })),
+  endgames.map((e) => ({ ...e, explanation: richOf(e.explanation), about: richOf(e.about) })),
 );
 out(
   GLOSSARY_FILE,

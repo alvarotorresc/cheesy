@@ -168,7 +168,7 @@ export function validateEndgame(e: unknown, at: string): Errors {
   if (!isObj(e)) return [`${at}: must be an object`];
   checkKeys(
     e,
-    ['id', 'name', 'category', 'fen', 'goal', 'playerSide', 'explanation'],
+    ['id', 'name', 'category', 'fen', 'goal', 'playerSide', 'explanation', 'about'],
     [],
     at,
     errs,
@@ -180,6 +180,7 @@ export function validateEndgame(e: unknown, at: string): Errors {
   if (e.goal !== 'win' && e.goal !== 'draw') errs.push(`${at}.goal: must be win|draw`);
   if (!SIDES.includes(e.playerSide as string)) errs.push(`${at}.playerSide: must be white|black`);
   checkRichText(e.explanation, `${at}.explanation`, errs);
+  checkRichText(e.about, `${at}.about`, errs);
   return errs;
 }
 
@@ -188,7 +189,7 @@ export function validateCurated(p: unknown, at: string): Errors {
   if (!isObj(p)) return [`${at}: must be an object`];
   checkKeys(
     p,
-    ['id', 'title', 'fen', 'playerSide', 'solution', 'explanation', 'tags'],
+    ['id', 'title', 'fen', 'playerSide', 'solution', 'explanation', 'about', 'tags'],
     ['source'],
     at,
     errs,
@@ -202,6 +203,7 @@ export function validateCurated(p: unknown, at: string): Errors {
   if (!Array.isArray(p.solution) || p.solution.length === 0 || !p.solution.every(nonEmpty))
     errs.push(`${at}.solution: must be a non-empty array of SAN strings`);
   checkRichText(p.explanation, `${at}.explanation`, errs);
+  checkRichText(p.about, `${at}.about`, errs);
   if (!Array.isArray(p.tags) || p.tags.length === 0)
     errs.push(`${at}.tags: must be a non-empty array`);
   else
