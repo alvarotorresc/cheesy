@@ -18,7 +18,7 @@ export type SlugTable = Record<string, Slug>;
 export const SLUG_FORMAT = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 export const openingSlugs: SlugTable = {
-  'ruy-lopez': { es: 'apertura-espanola-ruy-lopez', en: 'ruy-lopez' },
+  'ruy-lopez': { es: 'apertura-espanola', en: 'ruy-lopez' },
   'italian-game': { es: 'apertura-italiana', en: 'italian-game' },
   'sicilian-najdorf': { es: 'defensa-siciliana-najdorf', en: 'sicilian-najdorf' },
   'french-defence': { es: 'defensa-francesa', en: 'french-defence' },
@@ -42,7 +42,7 @@ export const openingSlugs: SlugTable = {
 };
 
 export const endgameSlugs: SlugTable = {
-  'kp-opposition-defence': { es: 'la-oposicion-defensa', en: 'opposition-defence' },
+  'kp-opposition-defence': { es: 'defensa-con-la-oposicion', en: 'opposition-defence' },
   'kp-key-squares': { es: 'casillas-clave', en: 'key-squares' },
   'kp-square-rule-defence': { es: 'regla-del-cuadrado-defensa', en: 'square-rule-defence' },
   'kp-square-rule-race': { es: 'regla-del-cuadrado-carrera', en: 'square-rule-race' },
@@ -60,8 +60,8 @@ export const endgameSlugs: SlugTable = {
 
 export const positionSlugs: SlugTable = {
   'legal-mate': { es: 'mate-de-legal', en: 'legal-mate' },
-  'reti-tartakower-1910': { es: 'sacrificio-de-dama-en-d8', en: 'reti-tartakower-1910' },
-  'opera-game-1858': { es: 'la-partida-de-la-opera', en: 'opera-game' },
+  'reti-tartakower-1910': { es: 'sacrificio-de-dama-reti-tartakower', en: 'reti-tartakower-1910' },
+  'opera-game-1858': { es: 'partida-de-la-opera', en: 'opera-game' },
   'kieninger-trap': { es: 'trampa-de-kieninger', en: 'kieninger-trap' },
   'smothered-mate': { es: 'mate-de-la-coz', en: 'smothered-mate' },
   'evergreen-game-1852': { es: 'la-siempreviva', en: 'evergreen-game' },

@@ -41,7 +41,7 @@
   },
   "openings": {
     "ruy-lopez": {
-      "es": "apertura-espanola-ruy-lopez",
+      "es": "apertura-espanola",
       "en": "ruy-lopez"
     },
     "italian-game": {
@@ -127,7 +127,7 @@
   },
   "endgames": {
     "kp-opposition-defence": {
-      "es": "la-oposicion-defensa",
+      "es": "defensa-con-la-oposicion",
       "en": "opposition-defence"
     },
     "kp-key-squares": {
@@ -189,11 +189,11 @@
       "en": "legal-mate"
     },
     "reti-tartakower-1910": {
-      "es": "sacrificio-de-dama-en-d8",
+      "es": "sacrificio-de-dama-reti-tartakower",
       "en": "reti-tartakower-1910"
     },
     "opera-game-1858": {
-      "es": "la-partida-de-la-opera",
+      "es": "partida-de-la-opera",
       "en": "opera-game"
     },
     "kieninger-trap": {
