@@ -29,8 +29,20 @@ const reasonOf = async (promise: Promise<unknown>): Promise<string | undefined> 
 describe('TablebaseClient', () => {
   let fake: FakeTablebaseHttp;
   let client: TablebaseClient;
+  let left: AbortController;
+  let leftBehind: Promise<unknown>[];
+
+  /**
+   * A request the test sends and leaves unanswered. It is given up when the test ends: left alone,
+   * its time limit would fire ten seconds later, in another test file, as an unhandled rejection.
+   */
+  const leave = (fen: string): void => {
+    leftBehind.push(client.probe(fen, left.signal));
+  };
 
   beforeEach(() => {
+    left = new AbortController();
+    leftBehind = [];
     fake = new FakeTablebaseHttp();
     TestBed.configureTestingModule({
       providers: [{ provide: TABLEBASE_HTTP, useValue: fake.http }],
@@ -38,8 +50,16 @@ describe('TablebaseClient', () => {
     client = TestBed.inject(TablebaseClient);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     vi.useRealTimers();
+    left.abort();
+    const outcomes = await Promise.allSettled(leftBehind);
+    // Given up, each one ends as aborted: anything else is a failure the test did not see.
+    for (const outcome of outcomes) {
+      expect(outcome.status === 'rejected' && (outcome.reason as TablebaseError).reason).toBe(
+        'aborted',
+      );
+    }
   });
 
   describe('which positions it covers', () => {
@@ -86,7 +106,7 @@ describe('TablebaseClient', () => {
     });
 
     it('should send a normalized FEN with the move number reset', () => {
-      void client.probe('  1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 12 57 ');
+      leave('  1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 12 57 ');
 
       expect(fake.last().fen).toBe('1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 12 1');
     });
@@ -108,13 +128,13 @@ describe('TablebaseClient', () => {
       fake.last().respond(200, LUCENA_RESPONSE);
       await first;
 
-      void client.probe('1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 97 60');
+      leave('1K6/1P2k3/8/8/8/8/2r5/3R4 w - - 97 60');
 
       expect(fake.requests).toHaveLength(2);
     });
 
     it('should not know a position before it has been answered', () => {
-      void client.probe(LUCENA_FEN);
+      leave(LUCENA_FEN);
 
       expect(client.peek(LUCENA_FEN)).toBeUndefined();
       expect(client.peek('garbage')).toBeUndefined();
@@ -135,7 +155,7 @@ describe('TablebaseClient', () => {
       fake.last().fail();
       expect(await reasonOf(first)).toBe('network');
 
-      void client.probe(LUCENA_FEN);
+      leave(LUCENA_FEN);
 
       expect(fake.requests).toHaveLength(2);
     });
@@ -171,7 +191,7 @@ describe('TablebaseClient', () => {
       controller.abort();
       await reasonOf(pending);
 
-      void client.probe(LUCENA_FEN);
+      leave(LUCENA_FEN);
 
       expect(fake.requests).toHaveLength(2);
     });
@@ -274,7 +294,7 @@ describe('TablebaseClient', () => {
       await rateLimited();
 
       await vi.advanceTimersByTimeAsync(RATE_LIMIT_PAUSE_MS);
-      void client.probe(SQUARE_RULE_FEN);
+      leave(SQUARE_RULE_FEN);
 
       expect(fake.requests).toHaveLength(2);
     });
