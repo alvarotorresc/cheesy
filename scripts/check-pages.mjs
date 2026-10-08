@@ -123,7 +123,13 @@ const hasNoindex = (head) =>
 const expectedFor = (urls, page, lang) => {
   const alternates = Object.fromEntries(urls.langs.map((l) => [l, ORIGIN + urls.pathOf(page, l)]));
   alternates['x-default'] = alternates.en;
-  return { lang, kind: page.kind, canonical: alternates[lang], alternates, og: ogImageOf(page, lang) };
+  return {
+    lang,
+    kind: page.kind,
+    canonical: alternates[lang],
+    alternates,
+    og: ogImageOf(page, lang),
+  };
 };
 
 const typesOf = (node) => [node?.['@type']].flat().filter((type) => typeof type === 'string');
