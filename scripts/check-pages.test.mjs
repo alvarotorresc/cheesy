@@ -153,10 +153,16 @@ describe('checkPage', () => {
   });
 
   it('should fail when the shared image is not the card of the section, or Twitter has another', () => {
-    const og = { url: `${ORIGIN}/og/learn.png`, alt: 'Alt' };
+    const og = { url: `${ORIGIN}/og/en/learn.png`, alt: 'Alt' };
     const withOg = (over) =>
       checkPage(parseHead(html(over)), { ...expected, og }, '/en/x').join('\n');
-    assert.match(withOg({}), /og:image is .*og\.png, expected .*og\/learn\.png/);
+    assert.match(withOg({}), /og:image is .*og\.png, expected .*og\/en\/learn\.png/);
+    // The card of the other language is not the card of the page.
+    const spanish = `${ORIGIN}/og/es/learn.png`;
+    assert.match(
+      withOg({ ogImage: spanish, twitterImage: spanish }),
+      /og:image is .*og\/es\/learn\.png, expected .*og\/en\/learn\.png/,
+    );
     assert.equal(withOg({ ogImage: og.url, twitterImage: og.url }), '');
     assert.match(withOg({ ogImage: og.url }), /twitter:image is .* not the og:image/);
     assert.match(

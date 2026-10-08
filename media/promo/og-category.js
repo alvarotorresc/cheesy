@@ -1,7 +1,8 @@
-// Fills og-category.html from its query string: ?cat=openings|endgames|positions|learn.
+// Fills og-category.html from its query string: ?cat=openings|endgames|positions|learn and
+// ?lang=es|en (Spanish by default).
 //
-// One card per section, for both languages: the Spanish name of the section is the headline (the
-// gap of the site is in Spanish) and the English one goes under it. The board strip shows one idea
+// One card per section and language: the name of the section in the language of the page is the
+// headline, and its name in the other language goes under it, smaller (the site is in both). The board strip shows one idea
 // of the section, made up for the card: it is no position of the site, so it gives nothing away.
 // Squares are [file, rank] counted from the top left of the strip (four files, six ranks).
 const CARDS = {
@@ -57,11 +58,15 @@ const CARDS = {
   },
 };
 
-const card = CARDS[new URLSearchParams(location.search).get('cat')] ?? CARDS.openings;
-document.getElementById('section').textContent = card.es;
+const params = new URLSearchParams(location.search);
+const card = CARDS[params.get('cat')] ?? CARDS.openings;
+const lang = params.get('lang') === 'en' ? 'en' : 'es';
+const otherLang = lang === 'es' ? 'en' : 'es';
+document.documentElement.lang = lang;
+document.getElementById('section').textContent = card[lang];
 const other = document.getElementById('other');
-other.textContent = card.en;
-other.lang = 'en';
+other.textContent = card[otherLang];
+other.lang = otherLang;
 
 const board = document.getElementById('board');
 const square = (className, [col, row]) => {

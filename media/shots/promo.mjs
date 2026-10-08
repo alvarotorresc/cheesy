@@ -85,28 +85,34 @@ async function renderIcon(page) {
   console.log('OK    icon.png');
 }
 
-// The social cards of the sections (aperturas, finales, posiciones, aprender), one per section for
-// both languages. Each one is rendered twice and must come out the same, byte for byte.
+// The social cards, one per language: the site (og.html) and each section (og-category.html).
+// Each one is rendered twice and must come out the same, byte for byte.
 const OG_CATEGORIES = ['openings', 'endgames', 'positions', 'learn'];
 
 async function renderOgCategories(page) {
   await mkdir(OUT, { recursive: true });
   await page.setViewportSize({ width: 1200, height: 630 });
-  for (const cat of OG_CATEGORIES) {
-    const url = new URL(pathToFileURL(join(PROMO_DIR, 'og-category.html')));
-    url.searchParams.set('cat', cat);
-    const shots = [];
-    for (let i = 0; i < 2; i++) {
-      await page.goto(url.href);
-      await ready(page);
-      shots.push(await page.screenshot());
+  for (const lang of LANGS) {
+    // `site` is og.html in the language: the card of the pages of no section.
+    for (const card of ['site', ...OG_CATEGORIES]) {
+      const html = card === 'site' ? 'og.html' : 'og-category.html';
+      const url = new URL(pathToFileURL(join(PROMO_DIR, html)));
+      url.searchParams.set('lang', lang);
+      if (card !== 'site') url.searchParams.set('cat', card);
+      const name = `og-${lang}-${card}.png`;
+      const shots = [];
+      for (let i = 0; i < 2; i++) {
+        await page.goto(url.href);
+        await ready(page);
+        shots.push(await page.screenshot());
+      }
+      const [a, b] = shots.map((buf) => createHash('sha256').update(buf).digest('hex'));
+      if (a !== b) throw new Error(`${name} differs between two renders`);
+      const outPath = join(OUT, name);
+      checkSize(shots[0], outPath, 1200, 630);
+      await writeFile(outPath, shots[0]);
+      console.log(`OK    ${name}  sha256 ${a.slice(0, 12)}`);
     }
-    const [a, b] = shots.map((buf) => createHash('sha256').update(buf).digest('hex'));
-    if (a !== b) throw new Error(`og-${cat}.png differs between two renders`);
-    const outPath = join(OUT, `og-${cat}.png`);
-    checkSize(shots[0], outPath, 1200, 630);
-    await writeFile(outPath, shots[0]);
-    console.log(`OK    og-${cat}.png  sha256 ${a.slice(0, 12)}`);
   }
 }
 

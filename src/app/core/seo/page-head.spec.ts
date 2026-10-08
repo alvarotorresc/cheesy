@@ -32,18 +32,19 @@ describe('pageHead', () => {
     expect(result.ogLocaleAlternate).toBe('en_US');
   });
 
-  it('shares each page with the card of its section, described in its language', () => {
+  it('shares each page with the card of its section in its language, described in it', () => {
     const cards: [string, string][] = [
-      ['/', 'og.png'],
-      ['/es', 'og.png'],
-      ['/en/about', 'og.png'],
-      ['/es/aperturas', 'og/openings.png'],
-      ['/en/openings/italian-game', 'og/openings.png'],
-      ['/es/finales/posicion-de-lucena', 'og/endgames.png'],
-      ['/en/positions', 'og/positions.png'],
-      ['/es/aprender', 'og/learn.png'],
-      ['/en/learn/beginner', 'og/learn.png'],
-      ['/es/aprender/glosario', 'og/learn.png'],
+      ['/', 'og/en/site.png'],
+      ['/es', 'og/es/site.png'],
+      ['/en/about', 'og/en/site.png'],
+      ['/es/aperturas', 'og/es/openings.png'],
+      ['/en/openings/italian-game', 'og/en/openings.png'],
+      ['/es/finales/posicion-de-lucena', 'og/es/endgames.png'],
+      ['/en/positions', 'og/en/positions.png'],
+      ['/es/aprender', 'og/es/learn.png'],
+      ['/en/learn/beginner', 'og/en/learn.png'],
+      ['/es/aprender/glosario', 'og/es/learn.png'],
+      ['/es/no-existe', 'og/es/site.png'],
     ];
     for (const [path, file] of cards) {
       expect(head(path).ogImage, path).toBe(`${SITE_ORIGIN}/${file}`);

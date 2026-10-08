@@ -1,8 +1,8 @@
 // The image of a page when it is shared (Open Graph and Twitter) and its alternative text.
 //
-// One card per section (`public/og/<section>.png`, made by `media/shots/promo.mjs --og`) for the
-// section page and every page under it; the home page, the about page and the rest keep the card of
-// the site (`public/og.png`). No imports but types, so the build check (`scripts/check-pages.mjs`)
+// One card per section and language (`public/og/<lang>/<section>.png`, made by
+// `media/shots/promo.mjs --og`) for the section page and every page under it; the home page, the
+// about page and the rest take the card of the site in their language (`public/og/<lang>/site.png`). No imports but types, so the build check (`scripts/check-pages.mjs`)
 // reads it as it is.
 import type { Lang } from '../i18n/i18n.types';
 import type { CategoryId, Page } from '../routing/page-url';
@@ -41,7 +41,8 @@ const ALTS: Readonly<Record<Card, Readonly<Record<Lang, string>>>> = {
 
 /** The section a page belongs to, for its card; `site` for the pages of no section. */
 const cardOf = (page: Page | undefined): Card => {
-  switch (page?.kind) {
+  if (page === undefined) return 'site';
+  switch (page.kind) {
     case 'category':
       return page.category;
     case 'opening':
@@ -57,16 +58,20 @@ const cardOf = (page: Page | undefined): Card => {
     case 'puzzles':
     case 'puzzle':
       return 'learn';
-    default:
+    case 'home':
+    case 'about':
+    case 'analysis':
       return 'site';
+    default: {
+      // A new kind of page must choose its card here.
+      const unknown: never = page;
+      return unknown;
+    }
   }
 };
 
 /** The shared image of `page` (undefined for an address that is no page) in `lang`. */
 export const ogImageOf = (page: Page | undefined, lang: Lang): OgImage => {
   const card = cardOf(page);
-  return {
-    url: card === 'site' ? `${ORIGIN}/og.png` : `${ORIGIN}/og/${card}.png`,
-    alt: ALTS[card][lang],
-  };
+  return { url: `${ORIGIN}/og/${lang}/${card}.png`, alt: ALTS[card][lang] };
 };
