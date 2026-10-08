@@ -216,6 +216,22 @@ describe('App', () => {
     await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/es'));
   });
 
+  it('should keep / in English for a browser in Spanish when nothing was chosen', async () => {
+    TestBed.resetTestingModule();
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['es-ES', 'es']);
+    vi.spyOn(navigator, 'language', 'get').mockReturnValue('es-ES');
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/');
+    await harness.fixture.whenStable();
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    await harness.fixture.whenStable();
+
+    expect(TestBed.inject(Router).url).toBe('/');
+    expect(TestBed.inject(I18nService).lang()).toBe('en');
+  });
+
   it('should switch between words and notation from the header', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });

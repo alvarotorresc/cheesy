@@ -63,57 +63,31 @@ describe('I18nService', () => {
     });
   });
 
-  describe('preferred language (where / takes the reader)', () => {
-    it('should use the stored language when one was saved before', () => {
+  describe('stored language (where / takes the reader)', () => {
+    it('should give the language chosen before', () => {
       localStorage.setItem(LANG_STORAGE_KEY, 'es');
 
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('es');
+      expect(createService().storedLang()).toBe('es');
     });
 
-    it('should detect Spanish when the browser prefers a Spanish locale', () => {
+    it('should give nothing without a choice, whatever the browser prefers', () => {
       mockBrowserLanguages(['es-ES', 'en']);
 
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('es');
+      expect(createService().storedLang()).toBeUndefined();
     });
 
-    it('should pick the first supported language when the browser lists several', () => {
-      mockBrowserLanguages(['fr-FR', 'es-MX', 'en']);
-
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('es');
-    });
-
-    it('should fall back to English when no browser language is supported', () => {
-      mockBrowserLanguages(['de-DE', 'fr']);
-
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('en');
-    });
-
-    it('should ignore the stored value when it is not a supported language', () => {
+    it('should ignore a stored value that is not a supported language', () => {
       localStorage.setItem(LANG_STORAGE_KEY, 'klingon');
-      mockBrowserLanguages(['es']);
 
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('es');
+      expect(createService().storedLang()).toBeUndefined();
     });
 
-    it('should detect the browser language when storage throws', () => {
+    it('should give nothing when storage throws', () => {
       vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
         throw new Error('blocked');
       });
-      mockBrowserLanguages(['es']);
 
-      const i18n = createService();
-
-      expect(i18n.preferredLang()).toBe('es');
+      expect(createService().storedLang()).toBeUndefined();
     });
   });
 
