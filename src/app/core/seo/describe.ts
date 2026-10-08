@@ -46,33 +46,44 @@ export const sentencesOf = (text: string): string[] =>
     }, [])
     .filter((sentence) => sentence.length > 0);
 
-/** A description shorter than this would waste the room search engines give it. */
-export const MIN_DESCRIPTION = 120;
+/** A clause shorter than this says too little to stand for a page. */
+const MIN_CLAUSE = 25;
 
-/** `text` cut at a word to fit `max` characters with the `…` that ends it. */
-const cutAtWord = (text: string, max: number): string => {
-  const cut = text.slice(0, max - 1);
-  const word = cut.lastIndexOf(' ');
-  return `${(word > 0 ? cut.slice(0, word) : cut).replace(/[\s,;:.—–-]+$/u, '')}…`;
+/**
+ * The first clause of a sentence too long to fit: the longest start of it that ends at a comma or
+ * a full stop (followed by a space, so never inside `1...Re7`) within `max` characters, closed
+ * with a full stop. Undefined when there is none, or it is too short to say anything.
+ */
+const firstClause = (sentence: string, max: number): string | undefined => {
+  let end = -1;
+  for (const match of sentence.slice(0, max).matchAll(/(?:(?<!\d)\.|,)(?=\s)/g)) end = match.index;
+  if (end < MIN_CLAUSE - 1) return undefined;
+  return `${sentence.slice(0, end)}.`;
 };
 
 /**
- * A description from the texts of a page, in their order: as many whole sentences as fit in `max`
- * characters, stopping at the first that does not fit. When the whole sentences are too short to
- * say much (under `MIN_DESCRIPTION`), the one that did not fit follows them, cut at a word and
- * ending with `…`; so does a first sentence that alone is too long.
+ * A description from the texts of a page, in their order: whole sentences while they fit in `max`
+ * characters, never a sentence cut in the middle. A first sentence that alone is too long gives
+ * its first clause (up to a comma or a full stop, closed with a full stop); if it has none, the
+ * next text of the page is tried instead. A short description is fine: search engines rewrite
+ * them anyway, and a cut sentence reads worse.
  */
 export const describe = (texts: readonly string[], max = MAX_DESCRIPTION): string => {
-  const sentences = texts.flatMap(sentencesOf);
-  let description = '';
-  for (const sentence of sentences) {
-    const next = description ? `${description} ${sentence}` : sentence;
-    if (next.length > max) {
-      if (description.length >= MIN_DESCRIPTION) break;
-      const prefix = description ? `${description} ` : '';
-      return prefix + cutAtWord(sentence, max - prefix.length);
+  for (let start = 0; start < texts.length; start++) {
+    const sentences = texts.slice(start).flatMap(sentencesOf);
+    if (sentences.length === 0) continue;
+    if (sentences[0].length > max) {
+      const clause = firstClause(sentences[0], max);
+      if (clause) return clause;
+      continue;
     }
-    description = next;
+    let description = sentences[0];
+    for (const sentence of sentences.slice(1)) {
+      const next = `${description} ${sentence}`;
+      if (next.length > max) break;
+      description = next;
+    }
+    return description;
   }
-  return description;
+  return '';
 };

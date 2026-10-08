@@ -151,7 +151,8 @@ describe('pageHead', () => {
 
     it('has a description of at most 160 characters', () => {
       for (const result of heads) {
-        expect(result.description.length, result.canonical).toBeGreaterThan(60);
+        expect(result.description.length, result.canonical).toBeGreaterThan(0);
+        expect(result.description.endsWith('…'), result.canonical).toBe(false);
         expect(result.description.length, result.canonical).toBeLessThanOrEqual(MAX_DESCRIPTION);
       }
     });
