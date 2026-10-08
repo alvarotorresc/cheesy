@@ -32,11 +32,12 @@ describe('prerender parameters', () => {
     expect(params).toContainEqual({ id: 'lucena-position' });
   });
 
-  it('should list every curated position', async () => {
+  it('should list every curated position by its number in the gallery', async () => {
     const params = positionParams(await bundledContentLoaders.positions());
 
     expect(params).toHaveLength(13);
-    expect(params).toContainEqual({ id: 'smothered-mate' });
+    expect(params[0]).toEqual({ id: '1' });
+    expect(params.at(-1)).toEqual({ id: '13' });
   });
 
   it('should list the levels that have lessons, in the order of Learn', async () => {

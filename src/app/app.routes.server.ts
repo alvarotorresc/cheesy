@@ -16,8 +16,12 @@ export const openingParams = (catalog: readonly OpeningSummary[]) =>
 export const endgameParams = (endgames: readonly EndgamePosition[]) =>
   endgames.map(({ id }) => ({ id }));
 
+/**
+ * A position is addressed by its number in the gallery (`/positions/3`), from 1; the content ids
+ * of older links redirect there in the browser.
+ */
 export const positionParams = (positions: readonly CuratedPosition[]) =>
-  positions.map(({ id }) => ({ id }));
+  positions.map((_, index) => ({ id: String(index + 1) }));
 
 /** The levels that have lessons, in the order of Learn; the guard sends the others away. */
 export const levelParams = (catalog: readonly LessonSummary[]) =>
