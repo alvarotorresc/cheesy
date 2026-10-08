@@ -7,7 +7,15 @@
 //
 // It runs after `ng build` (see `pnpm build`) and fails when the pages and the routes Angular
 // reports as prerendered do not match, so a change in the output of the build is never missed.
-import { existsSync, readdirSync, readFileSync, renameSync, rmdirSync, statSync } from 'node:fs';
+import {
+  copyFileSync,
+  existsSync,
+  readdirSync,
+  readFileSync,
+  renameSync,
+  rmdirSync,
+  statSync,
+} from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,9 +56,17 @@ export const flattenPrerender = (dir, routes) => {
   return pages.length;
 };
 
+/**
+ * With a server build, Angular writes the licenses of the dependencies next to `browser/`, not
+ * inside it; they were published at `/3rdpartylicenses.txt` before and still are.
+ */
+export const publishLicenses = (dist) =>
+  copyFileSync(join(dist, '3rdpartylicenses.txt'), join(dist, 'browser', '3rdpartylicenses.txt'));
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const dist = fileURLToPath(new URL('../dist/cheesy/', import.meta.url));
   const { routes } = JSON.parse(readFileSync(join(dist, 'prerendered-routes.json'), 'utf8'));
   const moved = flattenPrerender(join(dist, 'browser'), routes);
   console.log(`Flattened ${moved} prerendered pages to route.html.`);
+  publishLicenses(dist);
 }

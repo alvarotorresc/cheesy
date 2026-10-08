@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
-import { flattenPrerender } from './flatten-prerender.mjs';
+import { flattenPrerender, publishLicenses } from './flatten-prerender.mjs';
 
 describe('flattenPrerender', () => {
   let dir;
@@ -54,5 +54,18 @@ describe('flattenPrerender', () => {
       () => flattenPrerender(dir, routes('/', '/openings', '/openings/italian-game')),
       /index\.csr\.html/,
     );
+  });
+});
+
+describe('publishLicenses', () => {
+  it('should put the licenses of the dependencies next to the site, as before the prerender', () => {
+    const dist = mkdtempSync(join(tmpdir(), 'licenses-'));
+    mkdirSync(join(dist, 'browser'));
+    writeFileSync(join(dist, '3rdpartylicenses.txt'), 'MIT');
+
+    publishLicenses(dist);
+
+    assert.equal(readFileSync(join(dist, 'browser', '3rdpartylicenses.txt'), 'utf8'), 'MIT');
+    rmSync(dist, { recursive: true, force: true });
   });
 });
