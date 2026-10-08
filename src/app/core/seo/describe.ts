@@ -4,12 +4,20 @@
 // from its own texts (the note of an opening, the `about` of an endgame, the first step of a
 // lesson): whole sentences, never a template with the name swapped in.
 import type { Segment } from '../content/content.types';
+import type { Lang } from '../i18n/i18n.types';
+import { moveProse } from './move-prose';
+
+export { hasNotation } from './notation';
 
 /** The longest description: search engines cut what goes past it. */
 export const MAX_DESCRIPTION = 160;
 
-/** A text of the content as it reads: moves as the author wrote them, terms by their words. */
-export const textOf = (segments: readonly Segment[]): string =>
+/**
+ * A text of the content as prose: moves in words as a chess writer puts them in a sentence («Con c3
+ * las blancas…», «el alfil a b4», see `moveProse`), terms by their words, squares by name. A search
+ * result is read by people who may not know notation, and `2.c3` says nothing to them.
+ */
+export const textOf = (segments: readonly Segment[], lang: Lang): string =>
   segments
     .map((segment) => {
       switch (segment.kind) {
@@ -17,7 +25,7 @@ export const textOf = (segments: readonly Segment[]): string =>
         case 'term':
           return segment.text;
         case 'move':
-          return segment.written;
+          return moveProse(segment.san, lang, segment.start);
         case 'square':
           return segment.square;
       }

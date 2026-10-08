@@ -1087,8 +1087,6 @@ export const en = {
         'What Cheesy is and who makes it: a free, open-source chess trainer that keeps your progress in your browser, with no accounts, no cookies and no ads.',
       notFound: 'This address is not a page of Cheesy.',
     },
-    ogImageAlt:
-      'The name Cheesy, the line "Openings, endgames and tactics, in your browser." and a chess knight on a board.',
     breadcrumb: 'Breadcrumb',
     /** Heading of the two paragraphs about each category, at the end of its page. */
     categoryAbout: {

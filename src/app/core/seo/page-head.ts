@@ -16,12 +16,11 @@ import {
   type PageUrls,
 } from '../routing/page-url';
 import { describe } from './describe';
+import { ogImageOf } from './og-image';
 
 export const SITE_ORIGIN = 'https://cheesy.alvarotc.com';
 export const SITE_NAME = 'Cheesy';
 const SITE_ID = `${SITE_ORIGIN}/#website`;
-/** The image of every page when shared: no capture of 1200×630 but this one exists. */
-export const OG_IMAGE = `${SITE_ORIGIN}/og.png`;
 
 const OG_LOCALES: Readonly<Record<Lang, string>> = { es: 'es_ES', en: 'en_US' };
 
@@ -270,12 +269,13 @@ export const pageHead = (input: HeadInput): PageHead => {
   const lang: Lang = located?.lang ?? langOfPath(path) ?? 'en';
   const t = input.messages[lang];
   const other: Lang = lang === 'es' ? 'en' : 'es';
+  const image = ogImageOf(located?.page, lang);
   const base = {
     lang,
     ogLocale: OG_LOCALES[lang],
     ogLocaleAlternate: OG_LOCALES[other],
-    ogImage: OG_IMAGE,
-    ogImageAlt: t.seo.ogImageAlt,
+    ogImage: image.url,
+    ogImageAlt: image.alt,
   };
   if (!located) {
     return {

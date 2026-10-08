@@ -32,6 +32,27 @@ describe('pageHead', () => {
     expect(result.ogLocaleAlternate).toBe('en_US');
   });
 
+  it('shares each page with the card of its section in its language, described in it', () => {
+    const cards: [string, string][] = [
+      ['/', 'og/en/site.png'],
+      ['/es', 'og/es/site.png'],
+      ['/en/about', 'og/en/site.png'],
+      ['/es/aperturas', 'og/es/openings.png'],
+      ['/en/openings/italian-game', 'og/en/openings.png'],
+      ['/es/finales/posicion-de-lucena', 'og/es/endgames.png'],
+      ['/en/positions', 'og/en/positions.png'],
+      ['/es/aprender', 'og/es/learn.png'],
+      ['/en/learn/beginner', 'og/en/learn.png'],
+      ['/es/aprender/glosario', 'og/es/learn.png'],
+      ['/es/no-existe', 'og/es/site.png'],
+    ];
+    for (const [path, file] of cards) {
+      expect(head(path).ogImage, path).toBe(`${SITE_ORIGIN}/${file}`);
+    }
+    expect(head('/es/finales').ogImageAlt).toMatch(/^Cheesy, Finales: un rey/);
+    expect(head('/en/endgames').ogImageAlt).toMatch(/^Cheesy, Endgames: a white king/);
+  });
+
   it('names an entity page after it, keyword first and the site last', () => {
     const result = head('/es/finales/posicion-de-lucena', lucenaEs);
     expect(result.title).toBe('Posición de Lucena: final de ajedrez para practicar · Cheesy');
@@ -153,7 +174,7 @@ describe('pageHead', () => {
       kind,
       id,
       name,
-      texts: [textOf(about[lang])],
+      texts: [textOf(about[lang], lang)],
     });
     const heads = LANGS.flatMap((lang) =>
       pageUrls.indexablePages().flatMap((page) => {

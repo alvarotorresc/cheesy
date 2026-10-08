@@ -352,7 +352,7 @@ export class EndgamePractice {
         endgame && {
           id: endgame.id,
           name: endgame.name[lang],
-          texts: [textOf(endgame.about[lang])],
+          texts: [textOf(endgame.about[lang], lang)],
         }
       );
     });
