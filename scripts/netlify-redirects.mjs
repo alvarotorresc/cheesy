@@ -123,6 +123,24 @@ export const checkBuilt = (browser, sources = loadSources()) => {
   if (problems.length > 0) throw new Error(`Old addresses:\n${problems.join('\n')}`);
 };
 
+/**
+ * After the build: every page of the content has its prerendered file in both languages
+ * (`es/aperturas/apertura-italiana.html`, `en/openings/italian-game.html`…), and `/` its
+ * `index.html`. Returns how many pages were found.
+ */
+export const checkPages = (browser, sources = loadSources()) => {
+  const urls = createPageUrls(sources.slugs);
+  const files = [
+    'index.html',
+    ...urls.langs.flatMap((lang) =>
+      urls.indexablePages().map((page) => `${urls.pathOf(page, lang).slice(1)}.html`),
+    ),
+  ];
+  const missing = files.filter((file) => !existsSync(join(browser, file)));
+  if (missing.length > 0) throw new Error(`Pages missing from the build:\n${missing.join('\n')}`);
+  return files.length;
+};
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const toml = readFileSync(NETLIFY_TOML, 'utf8');
   const updated = withBlock(toml, redirectBlock());
@@ -132,7 +150,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       process.exit(1);
     }
   } else if (process.argv.includes('--built')) {
-    checkBuilt(join(ROOT, 'dist/cheesy/browser'));
+    const browser = join(ROOT, 'dist/cheesy/browser');
+    console.log(`Found the ${checkPages(browser)} pages of the content in both languages.`);
+    checkBuilt(browser);
     console.log(`Checked ${redirectRules().length} old addresses against the build.`);
   } else {
     writeFileSync(NETLIFY_TOML, updated);

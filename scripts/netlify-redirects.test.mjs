@@ -7,6 +7,7 @@ import { createPageUrls } from '../src/app/core/routing/page-url.ts';
 import {
   BEGIN,
   checkBuilt,
+  checkPages,
   END,
   loadSources,
   NETLIFY_TOML,
@@ -201,5 +202,36 @@ describe('checkBuilt', () => {
     writeAllPages();
     write('openings/italian-game.html');
     assert.throws(() => checkBuilt(dir, sources), /openings\/italian-game is a file/);
+  });
+});
+
+describe('checkPages', () => {
+  let dir;
+  const write = (path) => {
+    mkdirSync(dirname(join(dir, path)), { recursive: true });
+    writeFileSync(join(dir, path), path);
+  };
+  const writeAll = () => {
+    write('index.html');
+    for (const lang of urls.langs) {
+      for (const page of urls.indexablePages()) write(`${urls.pathOf(page, lang).slice(1)}.html`);
+    }
+  };
+
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'pages-'));
+  });
+
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('should find the 189 pages: / and 94 per language', () => {
+    writeAll();
+    assert.equal(checkPages(dir, sources), 189);
+  });
+
+  it('should fail when the page of an entity is missing in one language', () => {
+    writeAll();
+    rmSync(join(dir, 'es/aprender/glosario.html'));
+    assert.throws(() => checkPages(dir, sources), /es\/aprender\/glosario\.html/);
   });
 });
