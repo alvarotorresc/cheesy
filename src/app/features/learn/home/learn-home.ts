@@ -5,6 +5,7 @@ import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { ProgressService } from '../../../core/progress';
 import { byLevelAndOrder, LEVELS, nextLesson } from '../learn-progress';
+import { injectPrerenderWait } from '../../../core/prerender';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -30,6 +31,8 @@ type HomeState =
 })
 export class LearnHome {
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   private readonly content = inject(ContentService);
   protected readonly progress = inject(ProgressService);
 
@@ -57,27 +60,23 @@ export class LearnHome {
   });
 
   constructor() {
-    void this.load();
-    void this.loadPuzzles();
+    this.wait(() => this.load());
+    this.wait(() => this.loadPuzzles());
   }
 
   protected async load(): Promise<void> {
     this.state.set({ status: 'loading' });
+    let catalog: readonly LessonSummary[];
     try {
-      const [catalog, rows, puzzles] = await Promise.all([
-        this.content.lessonCatalog(),
-        this.progress.lessons(),
-        this.progress.puzzles(),
-      ]);
-      this.state.set({
-        status: 'ready',
-        catalog,
-        done: new Set(rows.map((row) => row.lessonId)),
-        puzzlesSaved: puzzles.length,
-      });
+      catalog = await this.content.lessonCatalog();
     } catch {
       this.state.set({ status: 'error' });
+      return;
     }
+    // The lessons first, as the prerendered page shows them, and the saved progress when it is read:
+    // a page that waited for both would not hydrate the HTML it was sent with.
+    this.state.set({ status: 'ready', catalog, done: new Set(), puzzlesSaved: 0 });
+    await this.refresh();
   }
 
   /** Reads the saved progress again, keeping the catalogue and the page as they are. */

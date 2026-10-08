@@ -39,6 +39,9 @@ describe('LevelPage', () => {
       harness.detectChanges();
       expect(root.querySelector('.notice[role=status]')).toBeNull();
     });
+    // The lessons show first and the saved progress right after, once it has been read.
+    await new Promise((resolve) => setTimeout(resolve));
+    harness.detectChanges();
     return root;
   };
 

@@ -5,6 +5,7 @@ import { I18nService } from '../../core/i18n';
 import { HomeHero } from './hero/home-hero';
 import { buildHomeData, type HomeData } from './home-data';
 import { HomeSections } from './sections/home-sections';
+import { injectPrerenderWait } from '../../core/prerender';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -24,11 +25,13 @@ type HomeState =
 export class Home {
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
 
   protected readonly state = signal<HomeState>({ status: 'loading' });
 
   constructor() {
-    void this.load();
+    this.wait(() => this.load());
   }
 
   protected async load(): Promise<void> {

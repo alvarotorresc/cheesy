@@ -1,4 +1,11 @@
-import { DOCUMENT, inject, provideAppInitializer, type EnvironmentProviders } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  DOCUMENT,
+  inject,
+  PLATFORM_ID,
+  provideAppInitializer,
+  type EnvironmentProviders,
+} from '@angular/core';
 
 /** Where the visits are counted: a self-hosted Umami, without cookies or personal data. */
 export const UMAMI_ORIGIN = 'https://analytics.alvarotc.com';
@@ -24,7 +31,8 @@ export const provideUmami = (
   countLocal = false,
 ): EnvironmentProviders =>
   provideAppInitializer(() => {
-    if (!umamiEnabled(websiteId)) return;
+    // The prerendered pages carry no script: the browser adds it when the app starts.
+    if (!umamiEnabled(websiteId) || !isPlatformBrowser(inject(PLATFORM_ID))) return;
     const document = inject(DOCUMENT);
     if (!countLocal && isLocalHost(document.location.hostname)) return;
     const script = document.createElement('script');

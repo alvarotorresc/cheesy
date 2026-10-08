@@ -20,6 +20,7 @@ import {
   type MiniFrame,
   prefersReducedMotion,
 } from '../../shared/mini-board';
+import { injectPrerenderWait } from '../../core/prerender';
 
 /** Whether the visits counter is on, so this page only mentions Umami when it is. Specs replace it. */
 export const ABOUT_UMAMI = new InjectionToken<boolean>('ABOUT_UMAMI', {
@@ -62,6 +63,8 @@ interface SentPosition {
 })
 export class About {
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   protected readonly t = this.i18n.t;
   private readonly content = inject(ContentService);
   private readonly destroyRef = inject(DestroyRef);
@@ -78,7 +81,7 @@ export class About {
   private swept = false;
 
   constructor() {
-    void this.load();
+    this.wait(() => this.load());
     this.destroyRef.onDestroy(() => this.stopSweep());
     effect(() => {
       const figure = this.figure();

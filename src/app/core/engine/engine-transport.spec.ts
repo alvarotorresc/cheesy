@@ -1,3 +1,4 @@
+import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   createWorkerTransport,
@@ -228,5 +229,18 @@ describe('createWorkerTransport', () => {
     expect(new URL(download().url).origin).toBe(new URL(document.baseURI).origin);
     expect(worker().url.pathname).toBe('/engine/stockfish-19-lite-single.js');
     expect(worker().url.origin).toBe(new URL(document.baseURI).origin);
+  });
+
+  it('should start no worker and download nothing in the prerender', () => {
+    TestBed.configureTestingModule({ providers: [{ provide: PLATFORM_ID, useValue: 'server' }] });
+    const factory = TestBed.inject(ENGINE_TRANSPORT);
+
+    const transport = factory(handlers);
+    transport.send('uci');
+    transport.terminate();
+
+    expect(FakeWorker.instances).toEqual([]);
+    expect(downloads).toEqual([]);
+    expect(handlers.errors).toBe(0);
   });
 });
