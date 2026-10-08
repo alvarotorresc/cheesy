@@ -4,10 +4,15 @@
 //
 // For each indexable page (see `indexablePages()` x `langs` in page-url.ts) it checks one title,
 // one description of at most 160 characters, the canonical, `<html lang>`, one `<h1>`, the three
-// hreflang alternates (reciprocal between the languages), Open Graph and Twitter tags, no
-// `noindex` and valid JSON-LD; across pages, titles, descriptions, h1s and canonicals are unique.
+// hreflang alternates (reciprocal between the languages), Open Graph and Twitter tags (each
+// exactly once, never duplicated), no `noindex` and exactly one JSON-LD block whose graph fits the
+// kind of page (a WebSite on the home page, a BreadcrumbList from the home page of the language to
+// the canonical on the rest, a LearningResource on lessons, never a WebApplication). Across the
+// pages of a language, titles, descriptions, h1s and canonicals are unique and no sentence of a
+// description appears in another one.
 // It also checks `/` (the English home, canonical `/en`), the static 404, the app shell (noindex,
-// for the client routes) and that the sitemap lists exactly the canonicals of the indexable pages.
+// for the client routes) and that the sitemap lists exactly the canonicals of the indexable pages,
+// each with the same es, en and x-default alternates as the head of the page.
 //
 // The HTML is read with a small tolerant tokenizer, not a parser: the build is Angular's own
 // output and only a handful of tags matter. Every problem is reported, not only the first.
@@ -113,11 +118,104 @@ const hasNoindex = (head) =>
 const expectedFor = (urls, page, lang) => {
   const alternates = Object.fromEntries(urls.langs.map((l) => [l, ORIGIN + urls.pathOf(page, l)]));
   alternates['x-default'] = alternates.en;
-  return { lang, canonical: alternates[lang], alternates };
+  return { lang, kind: page.kind, canonical: alternates[lang], alternates };
+};
+
+const typesOf = (node) => [node?.['@type']].flat().filter((type) => typeof type === 'string');
+
+/** The problems of the JSON-LD graph of a page of `expected.kind`, as messages. */
+const checkGraph = (graph, expected) => {
+  const problems = [];
+  const nodes = graph.filter((node) => node && typeof node === 'object');
+  const ofType = (type) => nodes.filter((node) => typesOf(node).includes(type));
+  if (ofType('WebApplication').length > 0) problems.push('JSON-LD has a WebApplication node');
+  if (expected.kind !== 'home' && ofType('WebSite').length > 0) {
+    problems.push('JSON-LD has a WebSite node outside the home page');
+  }
+
+  if (expected.kind === 'home') {
+    if (graph.length !== 1) {
+      problems.push(`JSON-LD graph of the home page has ${graph.length} nodes, expected 1`);
+    }
+    if (ofType('BreadcrumbList').length > 0) {
+      problems.push('JSON-LD of the home page has a BreadcrumbList');
+    }
+    const [site] = ofType('WebSite');
+    if (!site) problems.push('JSON-LD of the home page has no WebSite node');
+    else {
+      const wanted = {
+        url: `${ORIGIN}/`,
+        '@id': `${ORIGIN}/#website`,
+        name: 'Cheesy',
+        inLanguage: expected.lang,
+      };
+      for (const [key, value] of Object.entries(wanted)) {
+        if (site[key] !== value) {
+          problems.push(
+            `JSON-LD WebSite ${key} is ${JSON.stringify(site[key])}, expected ${JSON.stringify(value)}`,
+          );
+        }
+      }
+    }
+    return problems;
+  }
+
+  const lists = ofType('BreadcrumbList');
+  if (lists.length !== 1) {
+    problems.push(`JSON-LD has ${lists.length} BreadcrumbList nodes, expected 1`);
+  } else {
+    const items = lists[0].itemListElement;
+    if (!Array.isArray(items) || items.length < 2) {
+      problems.push('JSON-LD BreadcrumbList has fewer than 2 items');
+    } else {
+      items.forEach((entry, index) => {
+        if (entry?.position !== index + 1) {
+          problems.push(
+            `JSON-LD BreadcrumbList item ${index + 1} has position ${JSON.stringify(entry?.position)}`,
+          );
+        }
+        const item = entry?.item;
+        if (typeof item !== 'string' || !item.startsWith(`${ORIGIN}/`) || item.endsWith('/')) {
+          problems.push(
+            `JSON-LD BreadcrumbList item ${index + 1} is not an absolute address on the site without trailing slash: ${JSON.stringify(item)}`,
+          );
+        }
+      });
+      const first = items[0]?.item;
+      const last = items[items.length - 1]?.item;
+      if (first !== `${ORIGIN}/${expected.lang}`) {
+        problems.push(
+          `JSON-LD BreadcrumbList starts at ${first}, expected ${ORIGIN}/${expected.lang}`,
+        );
+      }
+      if (last !== expected.canonical) {
+        problems.push(`JSON-LD BreadcrumbList ends at ${last}, expected ${expected.canonical}`);
+      }
+    }
+  }
+
+  if (expected.kind === 'lesson') {
+    const resources = ofType('LearningResource');
+    if (resources.length !== 1) {
+      problems.push(`JSON-LD has ${resources.length} LearningResource nodes, expected 1`);
+    } else {
+      if (resources[0].url !== expected.canonical) {
+        problems.push(
+          `JSON-LD LearningResource url is ${resources[0].url}, expected ${expected.canonical}`,
+        );
+      }
+      if (resources[0].inLanguage !== expected.lang) {
+        problems.push(
+          `JSON-LD LearningResource inLanguage is ${resources[0].inLanguage}, expected ${expected.lang}`,
+        );
+      }
+    }
+  }
+  return problems;
 };
 
 /**
- * The problems of one page, each prefixed with `label`. `expected` is `{ lang, canonical,
+ * The problems of one page, each prefixed with `label`. `expected` is `{ lang, kind, canonical,
  * alternates: { es, en, 'x-default' } }`.
  */
 export const checkPage = (head, expected, label) => {
@@ -161,22 +259,31 @@ export const checkPage = (head, expected, label) => {
       fail(`hreflang="${hreflang}" is ${found[0][1]}, expected ${href}`);
   }
 
-  const ogUrl = exactlyOne(metaContent(head, 'property', 'og:url'), 'og:url');
+  const ogUrl = exactlyOne(metaContent(head, 'property', 'og:url'), 'og:url tags');
   if (ogUrl !== undefined && ogUrl !== canonical) fail(`og:url is ${ogUrl}, not the canonical`);
-  for (const property of ['og:title', 'og:description']) {
-    if (!metaContent(head, 'property', property).some(Boolean)) fail(`${property} is missing`);
-  }
-  const ogImage = metaContent(head, 'property', 'og:image')[0];
-  if (!ogImage?.startsWith('https://'))
+  // Each of these tags exactly once and not empty.
+  const single = (key, name) => {
+    const found = metaContent(head, key, name);
+    if (found.length !== 1) fail(`${found.length} ${name} tags, expected 1`);
+    else if (found[0].trim() === '') fail(`${name} is empty`);
+    return found.length === 1 ? found[0] : undefined;
+  };
+  single('property', 'og:title');
+  single('property', 'og:description');
+  const ogImage = single('property', 'og:image');
+  if (ogImage && !ogImage.startsWith('https://'))
     fail(`og:image is not an absolute https address: ${ogImage}`);
-  const locale = metaContent(head, 'property', 'og:locale')[0];
-  if (locale !== LOCALES[expected.lang]) {
+  const locale = single('property', 'og:locale');
+  if (locale && locale !== LOCALES[expected.lang]) {
     fail(`og:locale is ${locale}, expected ${LOCALES[expected.lang]}`);
   }
-  if (!metaContent(head, 'name', 'twitter:card').some(Boolean)) fail('twitter:card is missing');
+  for (const name of ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
+    single('name', name);
+  }
 
   if (hasNoindex(head)) fail('has a robots noindex');
 
+  if (head.jsonLd.length !== 1) fail(`${head.jsonLd.length} JSON-LD blocks, expected 1`);
   head.jsonLd.forEach((text, index) => {
     let data;
     try {
@@ -185,14 +292,40 @@ export const checkPage = (head, expected, label) => {
       fail(`JSON-LD block ${index + 1} is not valid JSON (${error.message})`);
       return;
     }
-    for (const item of Array.isArray(data) ? data : [data]) {
-      const context = String(item?.['@context'] ?? '').replace(/\/$/, '');
-      if (context !== 'https://schema.org') {
-        fail(`JSON-LD block ${index + 1} has @context ${JSON.stringify(item?.['@context'])}`);
-      }
+    const context = String(data?.['@context'] ?? '').replace(/\/$/, '');
+    if (context !== 'https://schema.org') {
+      fail(`JSON-LD block ${index + 1} has @context ${JSON.stringify(data?.['@context'])}`);
+    }
+    if (!Array.isArray(data?.['@graph'])) fail(`JSON-LD block ${index + 1} has no @graph array`);
+    else if (head.jsonLd.length === 1) {
+      for (const problem of checkGraph(data['@graph'], expected)) fail(problem);
     }
   });
 
+  return problems;
+};
+
+/** Reports the sentences of the descriptions that several pages of one language share. */
+const sharedSentences = (pages) => {
+  const problems = [];
+  for (const lang of new Set(pages.map((page) => page.lang))) {
+    const bySentence = new Map();
+    for (const { path, head, lang: pageLang } of pages) {
+      if (pageLang !== lang) continue;
+      const description = metaContent(head, 'name', 'description')[0] ?? '';
+      for (const piece of description.split(/(?<=[.!?…])\s+/)) {
+        const sentence = piece.trim();
+        if (sentence === '') continue;
+        const paths = bySentence.get(sentence) ?? [];
+        if (!paths.includes(path)) bySentence.set(sentence, [...paths, path]);
+      }
+    }
+    for (const [sentence, paths] of bySentence) {
+      if (paths.length > 1) {
+        problems.push(`Shared sentence in descriptions "${sentence}": ${paths.join(', ')}`);
+      }
+    }
+  }
   return problems;
 };
 
@@ -266,6 +399,7 @@ export const checkSite = (browserDir, sources) => {
       'canonical',
       pages.map(({ path, head }) => [path, canonicalsOf(head)[0]]),
     ),
+    ...sharedSentences(pages),
   );
 
   // `/` is the English home page under another address.
@@ -296,7 +430,9 @@ export const checkSite = (browserDir, sources) => {
 const checkSitemap = (browserDir, pages) => {
   const file = join(browserDir, 'sitemap.xml');
   if (!existsSync(file)) return ['sitemap.xml: missing from the build'];
-  const locs = [...readFileSync(file, 'utf8').matchAll(/<loc>([^<]*)<\/loc>/g)].map(([, loc]) =>
+  const xml = readFileSync(file, 'utf8');
+  const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, block]) => block);
+  const locs = [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map(([, loc]) =>
     decodeEntities(loc.trim()),
   );
   const problems = [];
@@ -312,6 +448,38 @@ const checkSitemap = (browserDir, pages) => {
       : undefined;
     if (head && hasNoindex(head))
       problems.push(`sitemap.xml: lists ${loc}, which has a robots noindex`);
+  }
+  // The alternates of each listed page must be the ones the head of the page declares.
+  const byCanonical = new Map(pages.map((page) => [page.expected.canonical, page]));
+  for (const block of blocks) {
+    const loc = block.match(/<loc>([^<]*)<\/loc>/)?.[1];
+    const page = loc === undefined ? undefined : byCanonical.get(decodeEntities(loc.trim()));
+    if (!page) continue;
+    const found = [...block.matchAll(/<xhtml:link\b([^>]*)>/g)]
+      .map(([, attributes]) => parseAttributes(attributes))
+      .filter((link) => link.rel?.toLowerCase() === 'alternate' && link.hreflang !== undefined)
+      .map((link) => [link.hreflang, link.href ?? '']);
+    const wanted = new Map(alternatesOf(page.head));
+    const label = `sitemap.xml: ${page.expected.canonical}`;
+    const seen = new Set();
+    for (const [hreflang, href] of found) {
+      if (seen.has(hreflang)) {
+        problems.push(`${label} lists the hreflang="${hreflang}" alternate twice`);
+      }
+      seen.add(hreflang);
+      if (!['es', 'en', 'x-default'].includes(hreflang)) {
+        problems.push(`${label} has an extra alternate hreflang="${hreflang}"`);
+      } else if (wanted.has(hreflang) && wanted.get(hreflang) !== href) {
+        problems.push(
+          `${label} has hreflang="${hreflang}" ${href}, the page says ${wanted.get(hreflang)}`,
+        );
+      }
+    }
+    for (const hreflang of ['es', 'en', 'x-default']) {
+      if (!seen.has(hreflang)) {
+        problems.push(`${label} is missing the hreflang="${hreflang}" alternate`);
+      }
+    }
   }
   if (listed.size !== locs.length) problems.push('sitemap.xml: lists an address twice');
   return problems;

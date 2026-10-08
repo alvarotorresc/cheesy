@@ -10,10 +10,46 @@ import { loadSources, ORIGIN, sitemapEntries, sitemapXml } from './sitemap.mjs';
 const sources = loadSources();
 const urls = createPageUrls(sources.slugs);
 
-/** A page that passes every rule; `over` replaces parts of it. */
+/** The JSON-LD graph a page of `kind` must carry. */
+const graphOf = (kind, lang, own) => {
+  if (kind === 'home') {
+    return [
+      {
+        '@type': 'WebSite',
+        '@id': `${ORIGIN}/#website`,
+        url: `${ORIGIN}/`,
+        name: 'Cheesy',
+        inLanguage: lang,
+      },
+    ];
+  }
+  const graph = [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/${lang}` },
+        { '@type': 'ListItem', position: 2, name: 'Page', item: own },
+      ],
+    },
+  ];
+  if (kind === 'lesson') {
+    graph.push({ '@type': 'LearningResource', url: own, inLanguage: lang, name: 'Lesson' });
+  }
+  return graph;
+};
+
+const jsonLdScript = (graph) =>
+  `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
+
+/**
+ * A page that passes every rule; `over` replaces parts of it (`kind` is the kind of page, `graph`
+ * its JSON-LD graph, `jsonLd` all of its structured data as HTML).
+ */
 const pageHtml = (path, lang, over = {}) => {
   const other = lang === 'es' ? 'en' : 'es';
   const own = ORIGIN + path;
+  const jsonLd =
+    over.jsonLd ?? jsonLdScript(over.graph ?? graphOf(over.kind ?? 'about', lang, own));
   const alternates = over.alternates ?? {
     [lang]: own,
     [other]: ORIGIN + over.otherPath,
@@ -31,7 +67,9 @@ ${Object.entries(alternates)
 <meta property="og:title" content="t"><meta property="og:description" content="d">
 <meta property="og:image" content="https://cheesy.alvarotc.com/og.png">
 <meta property="og:locale" content="${lang === 'es' ? 'es_ES' : 'en_US'}">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="t">
+<meta name="twitter:description" content="d"><meta name="twitter:image" content="https://cheesy.alvarotc.com/og.png">
+${jsonLd}
 ${over.head ?? ''}
 </head><body>${over.body ?? `<h1>Heading of ${path}</h1>`}</body></html>`;
 };
@@ -65,17 +103,27 @@ describe('parseHead', () => {
 describe('checkPage', () => {
   const expected = {
     lang: 'en',
+    kind: 'about',
     canonical: `${ORIGIN}/en/x`,
     alternates: { es: `${ORIGIN}/es/x`, en: `${ORIGIN}/en/x`, 'x-default': `${ORIGIN}/en/x` },
   };
-  const check = (over = {}) =>
-    checkPage(
-      parseHead(
-        pageHtml('/en/x', 'en', { otherPath: '/es/x', xDefault: `${ORIGIN}/en/x`, ...over }),
-      ),
-      expected,
-      '/en/x',
-    );
+  const own = `${ORIGIN}/en/x`;
+  const html = (over = {}, kind = 'about') =>
+    pageHtml('/en/x', 'en', { otherPath: '/es/x', xDefault: own, kind, ...over });
+  const check = (over = {}, kind = 'about') =>
+    checkPage(parseHead(html(over, kind)), { ...expected, kind }, '/en/x');
+  const crumb = (position, item) => ({ '@type': 'ListItem', position, name: 'n', item });
+  const trail = (...items) => ({
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => crumb(index + 1, item)),
+  });
+  const site = {
+    '@type': 'WebSite',
+    '@id': `${ORIGIN}/#website`,
+    url: `${ORIGIN}/`,
+    name: 'Cheesy',
+    inLanguage: 'en',
+  };
 
   it('should accept a good page', () => {
     assert.deepEqual(check(), []);
@@ -107,10 +155,99 @@ describe('checkPage', () => {
   });
 
   it('should fail with invalid JSON-LD or another context', () => {
-    const ld = (text) => `<script type="application/ld+json">${text}</script>`;
-    assert.match(check({ head: ld('{oops') }).join('\n'), /not valid JSON/);
-    assert.match(check({ head: ld('{"@context":"http://x"}') }).join('\n'), /@context/);
-    assert.deepEqual(check({ head: ld('{"@context":"https://schema.org"}') }), []);
+    const raw = (text) => ({ jsonLd: `<script type="application/ld+json">${text}</script>` });
+    assert.match(check(raw('{oops')).join('\n'), /not valid JSON/);
+    assert.match(check(raw('{"@context":"http://x","@graph":[]}')).join('\n'), /@context/);
+    assert.match(check(raw('{"@context":"https://schema.org"}')).join('\n'), /no @graph/);
+  });
+
+  it('should fail without JSON-LD or with two blocks', () => {
+    assert.match(check({ jsonLd: '' }).join('\n'), /0 JSON-LD blocks, expected 1/);
+    const two = jsonLdScript(graphOf('about', 'en', own));
+    assert.match(check({ jsonLd: two + two }).join('\n'), /2 JSON-LD blocks, expected 1/);
+  });
+
+  it('should accept the home page with a WebSite node only', () => {
+    assert.deepEqual(check({ graph: [site] }, 'home'), []);
+  });
+
+  it('should fail when the home page strays from the WebSite node', () => {
+    const problems = (graph) => check({ graph }, 'home').join('\n');
+    const withTrail = problems([site, trail(`${ORIGIN}/en`, own)]);
+    assert.match(withTrail, /2 nodes/);
+    assert.match(withTrail, /BreadcrumbList/);
+    assert.match(problems([{ ...site, url: `${ORIGIN}/en` }]), /WebSite url is/);
+    assert.match(problems([{ ...site, '@id': 'x' }]), /WebSite @id is/);
+    assert.match(problems([{ ...site, name: 'Other' }]), /WebSite name is/);
+    assert.match(problems([{ ...site, inLanguage: 'es' }]), /WebSite inLanguage is "es"/);
+    assert.match(problems([site, { '@type': 'WebApplication' }]), /WebApplication/);
+  });
+
+  it('should fail when another page has a WebSite or a WebApplication', () => {
+    const good = trail(`${ORIGIN}/en`, own);
+    assert.match(check({ graph: [good, site] }).join('\n'), /WebSite node outside the home/);
+    const app = check({ graph: [good, { '@type': 'WebApplication' }] }).join('\n');
+    assert.match(app, /WebApplication/);
+  });
+
+  it('should fail with a broken BreadcrumbList', () => {
+    const problems = (graph) => check({ graph }).join('\n');
+    assert.match(problems([]), /0 BreadcrumbList nodes/);
+    assert.match(problems([trail(own)]), /fewer than 2 items/);
+    assert.match(problems([trail(`${ORIGIN}/en`, `${ORIGIN}/en/y`)]), /ends at .*\/en\/y/);
+    assert.match(problems([trail(`${ORIGIN}/es`, own)]), /starts at .*\/es, expected .*\/en/);
+    assert.match(problems([trail(`${ORIGIN}/en`, `${own}/`)]), /without trailing slash/);
+    assert.match(problems([trail(`${ORIGIN}/en`, '/en/x')]), /not an absolute address/);
+    assert.match(problems([trail('https://example.com/en', own)]), /not an absolute address/);
+    const wrong = trail(`${ORIGIN}/en`, own);
+    wrong.itemListElement[1].position = 3;
+    assert.match(problems([wrong]), /item 2 has position 3/);
+  });
+
+  it('should require a LearningResource on lessons', () => {
+    const good = trail(`${ORIGIN}/en`, own);
+    const resource = { '@type': 'LearningResource', url: own, inLanguage: 'en' };
+    const problems = (graph) => check({ graph }, 'lesson').join('\n');
+    assert.deepEqual(check({ graph: [good, resource] }, 'lesson'), []);
+    assert.match(problems([good]), /0 LearningResource/);
+    assert.match(problems([good, { ...resource, url: `${own}y` }]), /LearningResource url is/);
+    assert.match(problems([good, { ...resource, inLanguage: 'es' }]), /LearningResource inLang/);
+  });
+
+  it('should fail with a duplicated, missing or empty Open Graph or Twitter tag', () => {
+    const tags = [
+      ['og:title', 'property'],
+      ['og:description', 'property'],
+      ['og:url', 'property'],
+      ['og:image', 'property'],
+      ['og:locale', 'property'],
+      ['twitter:card', 'name'],
+      ['twitter:title', 'name'],
+      ['twitter:description', 'name'],
+      ['twitter:image', 'name'],
+    ];
+    for (const [name, key] of tags) {
+      const tag = new RegExp(`<meta ${key}="${name}" content="([^"]*)">`);
+      const base = html();
+      const [line, value] = base.match(tag);
+      const twice = base.replace(line, line + line);
+      assert.match(
+        checkPage(parseHead(twice), expected, '/en/x').join('\n'),
+        new RegExp(`2 ${name} tags, expected 1`),
+      );
+      const none = base.replace(line, '');
+      assert.match(
+        checkPage(parseHead(none), expected, '/en/x').join('\n'),
+        new RegExp(`0 ${name} tags, expected 1`),
+      );
+      if (name !== 'og:url') {
+        const empty = base.replace(line, line.replace(`content="${value}"`, 'content=""'));
+        assert.match(
+          checkPage(parseHead(empty), expected, '/en/x').join('\n'),
+          new RegExp(`${name} is empty`),
+        );
+      }
+    }
   });
 
   it('should fail with a noindex', () => {
@@ -145,7 +282,11 @@ describe('checkSite', () => {
         const other = lang === 'es' ? 'en' : 'es';
         write(
           fileOf(paths[lang]),
-          pageHtml(paths[lang], lang, { otherPath: paths[other], xDefault: ORIGIN + paths.en }),
+          pageHtml(paths[lang], lang, {
+            otherPath: paths[other],
+            xDefault: ORIGIN + paths.en,
+            kind: page.kind,
+          }),
         );
       }
     }
@@ -155,6 +296,7 @@ describe('checkSite', () => {
         otherPath: '/es',
         xDefault: `${ORIGIN}/en`,
         canonical: `${ORIGIN}/en`,
+        kind: 'home',
         body: '<h1>Home</h1>',
       }),
     );
@@ -251,5 +393,61 @@ describe('checkSite', () => {
       read(fileOf(enPath)).replace('</head>', '<meta name="robots" content="noindex"></head>'),
     );
     assert.match(checkSite(dir, sources).join('\n'), /which has a robots noindex/);
+  });
+
+  it('should fail when two pages of a language share a sentence of the description', () => {
+    const describeAs = (path, text) =>
+      write(
+        fileOf(path),
+        read(fileOf(path)).replace(
+          /<meta name="description" content="[^"]*">/,
+          `<meta name="description" content="${text}">`,
+        ),
+      );
+    const otherEnPath = pagePaths('en')[3];
+    describeAs(enPath, 'Own words. Shared words!');
+    describeAs(otherEnPath, 'Other words. Shared words!');
+    // The same sentence in the other language is no clash.
+    describeAs(esPath, 'Own words. Shared words!');
+
+    const problems = checkSite(dir, sources).filter((p) => p.startsWith('Shared sentence'));
+
+    assert.equal(problems.length, 1);
+    assert.match(problems[0], /"Shared words!": /);
+    assert.ok(problems[0].includes(enPath) && problems[0].includes(otherEnPath));
+  });
+
+  describe('sitemap alternates', () => {
+    /** The `<xhtml:link>` line of the sitemap block of the English page 2 for `hreflang`. */
+    const lineOf = (hreflang) => {
+      const xml = read('sitemap.xml');
+      const start = xml.indexOf(`<loc>${ORIGIN}${enPath}</loc>`);
+      const end = xml.indexOf('</url>', start);
+      return xml
+        .slice(start, end)
+        .split('\n')
+        .find((line) => line.includes(`hreflang="${hreflang}"`));
+    };
+
+    it('should fail with a missing alternate', () => {
+      write('sitemap.xml', read('sitemap.xml').replace(`${lineOf('es')}\n`, ''));
+      assert.match(checkSite(dir, sources).join('\n'), /is missing the hreflang="es" alternate/);
+    });
+
+    it('should fail with an extra alternate', () => {
+      const line = lineOf('es');
+      write(
+        'sitemap.xml',
+        read('sitemap.xml').replace(line, `${line}\n${line.replace('"es"', '"fr"')}`),
+      );
+      assert.match(checkSite(dir, sources).join('\n'), /extra alternate hreflang="fr"/);
+    });
+
+    it('should fail with a different alternate', () => {
+      const line = lineOf('x-default');
+      const other = line.replace(/href="[^"]*"/, `href="${ORIGIN}${esPath}"`);
+      write('sitemap.xml', read('sitemap.xml').replace(line, other));
+      assert.match(checkSite(dir, sources).join('\n'), /hreflang="x-default" .*, the page says/);
+    });
   });
 });
