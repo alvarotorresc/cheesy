@@ -14,19 +14,5 @@ export const orderPositions = (positions: readonly CuratedPosition[]): CuratedPo
     .sort((a, b) => playerMoveCount(a.position) - playerMoveCount(b.position) || a.index - b.index)
     .map(({ position }) => position);
 
-/** Public segment of a position in the URL: `1`, `2`, `3`... Never a number with a zero in front. */
+/** Number of a position in the gallery as older links give it (`1`, `2`...), never with a zero in front. */
 export const POSITION_NUMBER = /^[1-9]\d{0,3}$/;
-
-/**
- * Number in the URL of the position with a content id, or undefined if there is none. Old links
- * name a position by its content id (`/positions/legal-mate`): the page sends them to the number.
- * Progress is kept by the content id, never by this number, which changes when positions are
- * added.
- */
-export const numberOfContentId = (
-  positions: readonly CuratedPosition[],
-  id: string,
-): string | undefined => {
-  const index = positions.findIndex((position) => position.id === id);
-  return index < 0 ? undefined : String(index + 1);
-};

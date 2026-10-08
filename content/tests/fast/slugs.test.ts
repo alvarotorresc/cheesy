@@ -42,6 +42,7 @@ const allSlugs: [string, Slug][] = [
   ...tables.flatMap(([name, table]) => entries(name, table)),
   ...entries('levels', slugData.levels),
   ...entries('sections', slugData.sections),
+  ...entries('app', slugData.app),
 ];
 
 const sorted = (xs: string[]) => [...xs].sort();
@@ -100,6 +101,27 @@ describe('slug format and uniqueness', () => {
         ...Object.values(slugData.levels).map((s) => s[lang]),
         ...Object.values(slugData.sections).map((s) => s[lang]),
       ];
+      expect(new Set(values).size, lang).toBe(values.length);
+    }
+  });
+
+  it('names the pages of the app that are not indexed, apart from the levels and sections', () => {
+    expect(sorted(Object.keys(slugData.app))).toEqual(['analysis', 'practice', 'puzzles']);
+    for (const lang of SLUG_LANGS) {
+      const values = [
+        ...Object.values(slugData.levels).map((s) => s[lang]),
+        ...Object.values(slugData.sections).map((s) => s[lang]),
+        ...Object.values(slugData.app).map((s) => s[lang]),
+      ];
+      expect(new Set(values).size, lang).toBe(values.length);
+    }
+  });
+
+  it('keeps lesson slugs unique across levels (the puzzles of a lesson have no level in the URL)', () => {
+    for (const lang of SLUG_LANGS) {
+      const values = LEVELS.flatMap((level) =>
+        Object.values(slugData.lessons[level]).map((s) => s[lang]),
+      );
       expect(new Set(values).size, lang).toBe(values.length);
     }
   });

@@ -32,6 +32,7 @@ import { PlayOutStepView } from './steps/play-out-step';
 import { ReachStepView } from './steps/reach-step';
 import { TapSquareStepView } from './steps/tap-square-step';
 import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -51,16 +52,19 @@ const NO_STEP = -1;
 /** Where "Practise" leads after a lesson; undefined when the lesson has nowhere to practise. */
 const practiceLink = (
   lesson: Lesson,
-): { path: string; queryParams?: Record<string, string> } | undefined => {
+): { page: Page; queryParams?: Record<string, string> } | undefined => {
   const next = lesson.next;
   switch (next?.kind) {
     // The endgame list opens on the category named by its English name.
     case 'endgames':
-      return { path: '/endgames', queryParams: { category: next.category } };
+      return {
+        page: { kind: 'category', category: 'endgames' },
+        queryParams: { category: next.category },
+      };
     case 'positions':
-      return { path: '/positions' };
+      return { page: { kind: 'category', category: 'positions' } };
     case 'openings':
-      return { path: '/openings' };
+      return { page: { kind: 'category', category: 'openings' } };
     default:
       return undefined;
   }
@@ -89,6 +93,7 @@ const practiceLink = (
   host: { '(document:keydown)': 'onKey($event)' },
 })
 export class LessonPage {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   /** Keeps the prerender waiting until the content is on the page. */
@@ -96,9 +101,21 @@ export class LessonPage {
   private readonly progress = inject(ProgressService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  private readonly route = inject(ActivatedRoute);
   private readonly params = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(
-      map((params) => ({ level: params.get('level') ?? '', id: params.get('lesson') ?? '' })),
+    this.route.paramMap.pipe(
+      map((params) => {
+        const level = routeId(
+          params,
+          routeLang(this.route.snapshot),
+          'level',
+          'level',
+        ) as LessonLevel;
+        return {
+          level,
+          id: routeId(params, routeLang(this.route.snapshot), 'lesson', 'lesson', level),
+        };
+      }),
     ),
     { requireSync: true },
   );

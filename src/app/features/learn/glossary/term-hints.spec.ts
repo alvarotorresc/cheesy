@@ -44,7 +44,7 @@ describe('TermHints', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      providers: [provideRouter([{ path: 'learn/glossary', children: [] }])],
+      providers: [provideRouter([{ path: 'es/aprender/glosario', children: [] }])],
     });
     TestBed.inject(I18nService).setLang('es');
     fixture = TestBed.createComponent(Host);
@@ -180,7 +180,7 @@ describe('TermHints', () => {
     await fixture.whenStable();
     link().click();
     await fixture.whenStable();
-    expect(TestBed.inject(Router).url).toBe('/learn/glossary#file');
+    expect(TestBed.inject(Router).url).toBe('/es/aprender/glosario#file');
     expect(hint()).toBeNull();
   });
 

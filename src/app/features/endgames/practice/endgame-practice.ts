@@ -34,6 +34,7 @@ import { DRAW_TARGET } from '../endgame-milestones';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
 import { EndgameSession } from './endgame-session';
+import { PageLinks, routeId, routeLang } from '../../../core/routing';
 
 /** Open or closed state of the tablebase panel; the panel starts closed. */
 export const TABLEBASE_PANEL_STORAGE_KEY = 'cheesy.endgames.tablebase-panel';
@@ -77,6 +78,7 @@ interface MoveView {
   },
 })
 export class EndgamePractice {
+  protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
   protected readonly i18n = inject(I18nService);
@@ -85,8 +87,12 @@ export class EndgamePractice {
   private readonly progress = inject(ProgressService);
   private readonly window = inject(DOCUMENT).defaultView;
 
+  private readonly route = inject(ActivatedRoute);
+  /** Content id of the endgame, from the slug in the address. */
   private readonly id = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('id') ?? '')),
+    this.route.paramMap.pipe(
+      map((params) => routeId(params, routeLang(this.route.snapshot), 'id', 'endgame')),
+    ),
     { initialValue: '' },
   );
 
@@ -321,6 +327,7 @@ export class EndgamePractice {
     const endgame = this.session.endgame();
     if (!endgame) return undefined;
     return analysisLink({
+      lang: this.i18n.lang(),
       fen: this.game.startFen(),
       moves: this.game.moves().map((move) => move.san),
       ply: this.game.ply(),

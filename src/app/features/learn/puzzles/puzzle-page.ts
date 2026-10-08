@@ -25,6 +25,7 @@ import { BoardSpotlight } from '../../../shared/board';
 import { FindMoveStepView } from '../lesson/steps/find-move-step';
 import { firstTryCount, nextBatch } from './next-batch';
 import { puzzleStep, type PuzzleTexts } from './puzzle-step';
+import { PageLinks, routeId, routeLang } from '../../../core/routing';
 
 const TEXTS: PuzzleTexts = {
   es: DICTIONARIES.es.learn.puzzles,
@@ -65,13 +66,17 @@ interface LessonTally {
   styleUrls: ['../lesson/lesson-page.css', './puzzle-page.css'],
 })
 export class PuzzlePage {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   protected readonly progress = inject(ProgressService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  private readonly route = inject(ActivatedRoute);
   private readonly lessonId = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('lesson') ?? '')),
+    this.route.paramMap.pipe(
+      map((params) => routeId(params, routeLang(this.route.snapshot), 'lesson', 'lesson')),
+    ),
     { requireSync: true },
   );
 

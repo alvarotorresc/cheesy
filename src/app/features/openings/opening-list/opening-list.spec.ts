@@ -14,7 +14,7 @@ import { OpeningList } from './opening-list';
 
 const CATALOG = [
   testTree({ id: 'french', eco: 'C00-C19', side: 'black' }),
-  testTree({ id: 'ruy', eco: 'C60-C99' }),
+  testTree({ id: 'ruy-lopez', eco: 'C60-C99' }),
   testTree({ id: 'caro', eco: 'B10-B19', side: 'black' }),
 ];
 
@@ -83,7 +83,10 @@ describe('OpeningList', () => {
     const links = Array.from(element.querySelectorAll('.card .actions a')).map((a) =>
       a.getAttribute('href'),
     );
-    expect(links.slice(0, 2)).toEqual(['/openings/ruy', '/openings/ruy/practice']);
+    expect(links.slice(0, 2)).toEqual([
+      '/en/openings/ruy-lopez',
+      '/en/openings/ruy-lopez/practice',
+    ]);
     expect(element.querySelector('.card .actions a')?.getAttribute('aria-label')).toBe(
       'Play Test Opening',
     );
@@ -235,7 +238,7 @@ describe('OpeningList', () => {
     const PETROV = 'e2e4 e7e5 g1f3 g8f6';
 
     it('should show the progress of each colour with a pip for each line', async () => {
-      store(saved('ruy', MAIN, 'white', 3), saved('ruy', CENTRE, 'black'));
+      store(saved('ruy-lopez', MAIN, 'white', 3), saved('ruy-lopez', CENTRE, 'black'));
       await create();
       await settle();
 
@@ -256,7 +259,7 @@ describe('OpeningList', () => {
     });
 
     it('should ignore progress of lines and openings that are not in the content', async () => {
-      store(saved('ruy', 'e2e4 c7c5'), saved('gone-opening', 'e2e4'));
+      store(saved('ruy-lopez', 'e2e4 c7c5'), saved('gone-opening', 'e2e4'));
       await create();
       await settle();
 
@@ -265,9 +268,9 @@ describe('OpeningList', () => {
 
     it('should call an opening mastered only with all its lines mastered with its own colour', async () => {
       store(
-        saved('ruy', MAIN, 'white', 3),
-        saved('ruy', CENTRE, 'white', 3),
-        saved('ruy', PETROV, 'white', 3),
+        saved('ruy-lopez', MAIN, 'white', 3),
+        saved('ruy-lopez', CENTRE, 'white', 3),
+        saved('ruy-lopez', PETROV, 'white', 3),
         saved('french', MAIN, 'black', 3),
       );
       await create();
@@ -296,7 +299,7 @@ describe('OpeningList', () => {
       const showModal = vi.fn();
       HTMLDialogElement.prototype.showModal = showModal;
       HTMLDialogElement.prototype.close = vi.fn();
-      store(saved('ruy', CENTRE));
+      store(saved('ruy-lopez', CENTRE));
       await create();
       await settle();
 
@@ -312,7 +315,7 @@ describe('OpeningList', () => {
     });
 
     it('should show the list without progress when the trees cannot be read', async () => {
-      store(saved('ruy', CENTRE));
+      store(saved('ruy-lopez', CENTRE));
       loaders = { ...loaders, opening: () => Promise.reject(new Error('offline')) };
       await create();
       await settle();

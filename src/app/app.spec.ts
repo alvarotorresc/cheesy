@@ -18,44 +18,48 @@ describe('App', () => {
     localStorage.clear();
   });
 
-  it('should name the browser tab after the section of each route', async () => {
+  it('should name the browser tab after the section of each route, in the language of the address', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
 
-    await harness.navigateByUrl('/analysis');
+    await harness.navigateByUrl('/en/analysis');
     await harness.fixture.whenStable();
     expect(document.title).toBe('Analysis · Cheesy');
 
-    TestBed.inject(I18nService).setLang('es');
-    await harness.navigateByUrl('/');
+    await harness.navigateByUrl('/es');
     await harness.fixture.whenStable();
     expect(document.title).toBe('Inicio · Cheesy');
+    expect(TestBed.inject(I18nService).lang()).toBe('es');
   });
 
-  it('should send the old glossary address, with its anchor, to the glossary inside Learn', async () => {
+  it('should open the Learn landing at /en/learn instead of the glossary', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/glossary#pin');
-    expect(TestBed.inject(Router).url).toBe('/learn/glossary#pin');
+    await harness.navigateByUrl('/en/learn');
+    expect(TestBed.inject(Router).url).toBe('/en/learn');
   });
 
-  it('should open the Learn landing at /learn instead of the glossary', async () => {
+  it('should send the old fragment of the Learn landing to the glossary, once it is on screen', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/learn');
-    expect(TestBed.inject(Router).url).toBe('/learn');
+    await harness.navigateByUrl('/en/learn#pin');
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/en/learn/glossary#pin'));
   });
 
   it('should name the glossary tab', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/learn/glossary');
+    await harness.navigateByUrl('/en/learn/glossary');
     await harness.fixture.whenStable();
     expect(document.title).toBe('Glossary · Cheesy');
+
+    await harness.navigateByUrl('/es/aprender/glosario');
+    await harness.fixture.whenStable();
+    expect(document.title).toBe('Glosario · Cheesy');
   });
 
   it('should title the About page in both languages', async () => {
@@ -63,11 +67,11 @@ describe('App', () => {
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
 
-    await harness.navigateByUrl('/acerca');
+    await harness.navigateByUrl('/en/about');
     await harness.fixture.whenStable();
     expect(document.title).toBe('About · Cheesy');
 
-    TestBed.inject(I18nService).setLang('es');
+    await harness.navigateByUrl('/es/acerca');
     await harness.fixture.whenStable();
     expect(document.title).toBe('Acerca de · Cheesy');
   });
@@ -84,16 +88,16 @@ describe('App', () => {
       return main?.className ?? '';
     };
 
-    expect(await classes('/')).toBe('main main--home');
-    expect(await classes('/openings')).toBe('main');
-    expect(await classes('/openings/ruy-lopez')).toBe('main main--play');
-    expect(await classes('/openings/ruy-lopez/practice')).toBe('main main--play');
-    expect(await classes('/analysis')).toBe('main main--play');
-    expect(await classes('/endgames')).toBe('main');
-    expect(await classes('/endgames/kp-opposition-defence')).toBe('main main--play');
-    expect(await classes('/positions')).toBe('main');
-    expect(await classes('/positions/1')).toBe('main main--play');
-    expect(await classes('/acerca')).toBe('main main--about');
+    expect(await classes('/en')).toBe('main main--home');
+    expect(await classes('/en/openings')).toBe('main');
+    expect(await classes('/en/openings/ruy-lopez')).toBe('main main--play');
+    expect(await classes('/en/openings/ruy-lopez/practice')).toBe('main main--play');
+    expect(await classes('/en/analysis')).toBe('main main--play');
+    expect(await classes('/en/endgames')).toBe('main');
+    expect(await classes('/en/endgames/opposition-defence')).toBe('main main--play');
+    expect(await classes('/en/positions')).toBe('main');
+    expect(await classes('/en/positions/smothered-mate')).toBe('main main--play');
+    expect(await classes('/es/acerca')).toBe('main main--about');
   });
 
   it('should mark the shell and the footer of a play page, which is one window tall', async () => {
@@ -111,22 +115,22 @@ describe('App', () => {
       ];
     };
 
-    expect(await marks('/analysis')).toEqual([true, true]);
-    expect(await marks('/openings')).toEqual([false, false]);
-    expect(await marks('/positions/1')).toEqual([true, true]);
-    expect(await marks('/')).toEqual([false, false]);
+    expect(await marks('/en/analysis')).toEqual([true, true]);
+    expect(await marks('/en/openings')).toEqual([false, false]);
+    expect(await marks('/en/positions/smothered-mate')).toEqual([true, true]);
+    expect(await marks('/en')).toEqual([false, false]);
   });
 
-  it('should send the old drill address to the practice page', async () => {
+  it('should open the practice page of an opening under its translated address', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const harness = await RouterTestingHarness.create();
 
-    await harness.navigateByUrl('/openings/ruy-lopez/drill');
+    await harness.navigateByUrl('/es/aperturas/apertura-espanola/practica');
     await harness.fixture.whenStable();
 
-    expect(TestBed.inject(Router).url).toBe('/openings/ruy-lopez/practice');
-    expect(document.title).toBe('Practice · Cheesy');
+    expect(TestBed.inject(Router).url).toBe('/es/aperturas/apertura-espanola/practica');
+    expect(document.title).toBe('Practicar · Cheesy');
   });
 
   it('should show the footer with its four links on every page', async () => {
@@ -135,15 +139,15 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     const router = TestBed.inject(Router);
 
-    for (const url of ['/', '/openings', '/analysis', '/acerca']) {
+    for (const url of ['/en', '/en/openings', '/en/analysis', '/en/about']) {
       await router.navigateByUrl(url);
       await fixture.whenStable();
       const links = (fixture.nativeElement as HTMLElement).querySelectorAll('footer a');
       expect(Array.from(links, (link) => link.getAttribute('href'))).toEqual([
         'https://github.com/alvarotorresc/cheesy',
-        '/acerca#privacidad',
-        '/learn/glossary',
-        '/acerca',
+        '/en/about#privacidad',
+        '/en/learn/glossary',
+        '/en/about',
         'https://alvarotc.com',
       ]);
     }
@@ -167,21 +171,65 @@ describe('App', () => {
       link.getAttribute('href'),
     );
 
-    expect(links).toEqual(['/learn', '/openings', '/endgames', '/positions', '/analysis']);
+    expect(links).toEqual([
+      '/en/learn',
+      '/en/openings',
+      '/en/endgames',
+      '/en/positions',
+      '/en/analysis',
+    ]);
   });
 
-  it('should translate the navigation when the language button is pressed', async () => {
+  it('should link the language switch to the same page in the other language and remember the choice', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: appConfig.providers });
     const fixture = TestBed.createComponent(App);
+    await TestBed.inject(Router).navigateByUrl('/en/openings/ruy-lopez');
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
-    const spanish = element.querySelector<HTMLButtonElement>('button[lang="es"]');
+    const spanish = element.querySelector<HTMLAnchorElement>('a.lang-button[lang="es"]');
+    const english = element.querySelector<HTMLAnchorElement>('a.lang-button[lang="en"]');
+
+    expect(spanish?.getAttribute('href')).toBe('/es/aperturas/apertura-espanola');
+    expect(english?.getAttribute('aria-current')).toBe('true');
+    expect(spanish?.getAttribute('aria-current')).toBeNull();
 
     spanish?.click();
     await fixture.whenStable();
 
+    expect(TestBed.inject(Router).url).toBe('/es/aperturas/apertura-espanola');
     expect(TestBed.inject(I18nService).lang()).toBe('es');
+    expect(localStorage.getItem('cheesy.lang')).toBe('es');
     expect(element.querySelector('nav')?.textContent).toContain('Aperturas');
-    expect(spanish?.getAttribute('aria-pressed')).toBe('true');
+    expect(spanish?.getAttribute('aria-current')).toBe('true');
+    expect(english?.getAttribute('href')).toBe('/en/openings/ruy-lopez');
+  });
+
+  it('should take a reader who chose Spanish from / to /es', async () => {
+    TestBed.resetTestingModule();
+    localStorage.setItem('cheesy.lang', 'es');
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/');
+
+    await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/es'));
+  });
+
+  it('should keep / in English for a browser in Spanish when nothing was chosen', async () => {
+    TestBed.resetTestingModule();
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['es-ES', 'es']);
+    vi.spyOn(navigator, 'language', 'get').mockReturnValue('es-ES');
+    TestBed.configureTestingModule({ providers: appConfig.providers });
+    const harness = await RouterTestingHarness.create();
+
+    await harness.navigateByUrl('/');
+    await harness.fixture.whenStable();
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    await harness.fixture.whenStable();
+
+    expect(TestBed.inject(Router).url).toBe('/');
+    expect(TestBed.inject(I18nService).lang()).toBe('en');
   });
 
   it('should switch between words and notation from the header', async () => {

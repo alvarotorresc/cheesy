@@ -24,6 +24,7 @@ import {
   type GoalFilter,
 } from './endgame-catalog';
 import { fill } from './endgame-goal';
+import { PageLinks } from '../../core/routing';
 
 interface Card {
   readonly endgame: EndgamePosition;
@@ -46,6 +47,7 @@ interface Card {
   host: { class: 'catalog' },
 })
 export class Endgames {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   protected readonly progress = inject(ProgressService);
   private readonly content = inject(ContentService);

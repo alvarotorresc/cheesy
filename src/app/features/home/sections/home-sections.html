@@ -4,7 +4,7 @@
     <li>
       <app-section-card
         [title]="i18n.t().nav.openings"
-        route="/openings"
+        [route]="links.category('openings')"
         [count]="i18n.t().home.openingsCount(data().counts.openings)"
         [description]="i18n.t().home.openingsDesc"
         [buttonLabel]="i18n.t().home.openingsButton(i18n.t().home.dragonName)"
@@ -42,7 +42,7 @@
     <li>
       <app-section-card
         [title]="i18n.t().nav.endgames"
-        route="/endgames"
+        [route]="links.category('endgames')"
         [count]="i18n.t().home.endgamesCount(data().counts.endgames)"
         [description]="i18n.t().home.endgamesDesc"
         [buttonLabel]="i18n.t().home.endgamesButton(i18n.localize(data().endgame.name))"
@@ -76,7 +76,7 @@
     <li>
       <app-section-card
         [title]="i18n.t().nav.positions"
-        route="/positions"
+        [route]="links.category('positions')"
         [count]="i18n.t().home.positionsCount(data().counts.positions)"
         [description]="i18n.t().home.positionsDesc"
         [buttonLabel]="i18n.t().home.positionsButton"
@@ -100,7 +100,7 @@
     <li>
       <app-section-card
         [title]="i18n.t().nav.analysis"
-        route="/analysis"
+        [route]="links.analysis()"
         [count]="i18n.t().home.analysisCount"
         [description]="i18n.t().home.analysisDesc"
         [buttonLabel]="i18n.t().home.analysisButton(i18n.localize(data().italian.name))"

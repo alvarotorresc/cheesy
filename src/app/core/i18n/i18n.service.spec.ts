@@ -1,3 +1,4 @@
+import { PlatformLocation } from '@angular/common';
 import { DOCUMENT } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { I18nService, LANG_STORAGE_KEY } from './i18n.service';
@@ -10,8 +11,10 @@ const mockBrowserLanguages = (languages: readonly string[]): void => {
   vi.spyOn(navigator, 'language', 'get').mockReturnValue(languages[0] ?? '');
 };
 
-const createService = (): I18nService => {
-  TestBed.configureTestingModule({});
+const createService = (pathname?: string): I18nService => {
+  TestBed.configureTestingModule({
+    providers: pathname ? [{ provide: PlatformLocation, useValue: { pathname } }] : [],
+  });
   return TestBed.inject(I18nService);
 };
 
@@ -27,56 +30,64 @@ describe('I18nService', () => {
   });
 
   describe('initial language', () => {
-    it('should use the stored language when one was saved before', () => {
+    it('should take the language of the address', () => {
+      expect(createService('/es/aperturas/apertura-italiana').lang()).toBe('es');
+      TestBed.resetTestingModule();
+      expect(createService('/en/openings').lang()).toBe('en');
+    });
+
+    it('should be English at / and at an address without a language, whatever was saved', () => {
       localStorage.setItem(LANG_STORAGE_KEY, 'es');
+      mockBrowserLanguages(['es-ES']);
 
-      const i18n = createService();
-
-      expect(i18n.lang()).toBe('es');
+      expect(createService('/').lang()).toBe('en');
+      TestBed.resetTestingModule();
+      expect(createService('/openings').lang()).toBe('en');
     });
 
-    it('should detect Spanish when the browser prefers a Spanish locale', () => {
-      mockBrowserLanguages(['es-ES', 'en']);
+    it('should set the document language at once', () => {
+      createService('/es');
 
-      const i18n = createService();
-
-      expect(i18n.lang()).toBe('es');
+      expect(TestBed.inject(DOCUMENT).documentElement.lang).toBe('es');
     });
+  });
 
-    it('should pick the first supported language when the browser lists several', () => {
-      mockBrowserLanguages(['fr-FR', 'es-MX', 'en']);
+  describe('followUrl', () => {
+    it('should follow the language of each address', () => {
+      const i18n = createService('/en');
 
-      const i18n = createService();
-
+      i18n.followUrl('/es/finales?x=1');
       expect(i18n.lang()).toBe('es');
-    });
-
-    it('should fall back to English when no browser language is supported', () => {
-      mockBrowserLanguages(['de-DE', 'fr']);
-
-      const i18n = createService();
-
+      i18n.followUrl('/');
       expect(i18n.lang()).toBe('en');
     });
+  });
 
-    it('should ignore the stored value when it is not a supported language', () => {
-      localStorage.setItem(LANG_STORAGE_KEY, 'klingon');
-      mockBrowserLanguages(['es']);
+  describe('stored language (where / takes the reader)', () => {
+    it('should give the language chosen before', () => {
+      localStorage.setItem(LANG_STORAGE_KEY, 'es');
 
-      const i18n = createService();
-
-      expect(i18n.lang()).toBe('es');
+      expect(createService().storedLang()).toBe('es');
     });
 
-    it('should detect the browser language when storage throws', () => {
+    it('should give nothing without a choice, whatever the browser prefers', () => {
+      mockBrowserLanguages(['es-ES', 'en']);
+
+      expect(createService().storedLang()).toBeUndefined();
+    });
+
+    it('should ignore a stored value that is not a supported language', () => {
+      localStorage.setItem(LANG_STORAGE_KEY, 'klingon');
+
+      expect(createService().storedLang()).toBeUndefined();
+    });
+
+    it('should give nothing when storage throws', () => {
       vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
         throw new Error('blocked');
       });
-      mockBrowserLanguages(['es']);
 
-      const i18n = createService();
-
-      expect(i18n.lang()).toBe('es');
+      expect(createService().storedLang()).toBeUndefined();
     });
   });
 
@@ -91,23 +102,23 @@ describe('I18nService', () => {
       expect(i18n.t().nav.home).toBe('Inicio');
     });
 
-    it('should persist the language when it changes', () => {
+    it('should not remember the language: only the choice of the reader is', () => {
       const i18n = createService();
 
       i18n.setLang('es');
+      expect(localStorage.getItem(LANG_STORAGE_KEY)).toBeNull();
 
+      i18n.rememberLang('es');
       expect(localStorage.getItem(LANG_STORAGE_KEY)).toBe('es');
     });
 
-    it('should still switch the language when storage throws', () => {
+    it('should not fail to remember when storage throws', () => {
       vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
         throw new Error('blocked');
       });
       const i18n = createService();
 
-      i18n.setLang('es');
-
-      expect(i18n.lang()).toBe('es');
+      expect(() => i18n.rememberLang('es')).not.toThrow();
     });
 
     it('should update the document language when the language changes', () => {

@@ -3,7 +3,8 @@
 // One entry per screenshot. The runner writes media/out/<file>-<lang>.png for each language.
 //
 //   file        name of the PNG, without language or extension
-//   path        route of the app (the same in both languages)
+//   path        address of the page before the languages (`/openings/ruy-lopez`); `pathIn` gives
+//               it in each language (`/es/aperturas/apertura-espanola`)
 //   theme       'light' | 'dark'
 //   mobile      true for the 360x780 viewport at 3x (PNG of 1080x2340)
 //   storage     extra localStorage entries, with their full keys

@@ -82,13 +82,13 @@
   <div class="actions">
     <a
       class="button primary"
-      [routerLink]="['/openings', o.id]"
+      [routerLink]="links.opening(o.id)"
       [attr.aria-label]="t.playLabel(name())"
       >{{ t.modePlay }}</a
     >
     <a
       class="button"
-      [routerLink]="['/openings', o.id, 'practice']"
+      [routerLink]="links.practice(o.id)"
       [attr.aria-label]="i18n.t().practice.practiceLinkLabel(name())"
       >{{ t.modePractice }}</a
     >

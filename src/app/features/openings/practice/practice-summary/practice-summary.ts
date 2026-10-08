@@ -66,6 +66,7 @@ export class PracticeSummary {
     const opening = this.session.opening();
     if (!line || !opening) return undefined;
     return analysisLink({
+      lang: this.i18n.lang(),
       moves: line.nodes.map((node) => node.san),
       from: { kind: 'practice', id: opening.id },
     });

@@ -192,7 +192,7 @@
                   <a
                     class="button"
                     [class.primary]="!card.done"
-                    [routerLink]="['/endgames', card.endgame.id]"
+                    [routerLink]="links.endgame(card.endgame.id)"
                     [attr.aria-label]="
                       (card.done ? t.repeat : t.practice) + ' ' + i18n.localize(card.endgame.name)
                     "

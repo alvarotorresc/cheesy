@@ -1,26 +1,24 @@
 import type { Routes } from '@angular/router';
+import slugs from '../../core/content/data/slugs.json';
+import type { Lang } from '../../core/i18n/i18n.types';
 import type { PageSection } from '../../core/page-title';
 import type { MainKind } from '../../layout/main-kind';
 
 /**
- * Routes under `/openings`: the catalogue, the play page of each opening and its practice. The
- * practice hangs from the opening (`/openings/:id/practice`) because it practises the lines of that
- * opening only; it is its own lazy page, so playing an opening never downloads the practice, and
- * the practice never downloads the engine. `/openings/:id/drill` is the address it had before and
- * goes on to the new one, so old bookmarks keep working.
+ * Routes under the openings of a language (`/en/openings`, `/es/aperturas`): the catalogue, the
+ * play page of each opening (by its slug) and its practice. The practice hangs from the opening
+ * (`/en/openings/:slug/practice`) because it practises the lines of that opening only; it is its
+ * own lazy page, so playing an opening never downloads the practice, and the practice never
+ * downloads the engine.
  */
-export const OPENINGS_ROUTES: Routes = [
+export const openingRoutes = (lang: Lang): Routes => [
   {
     path: '',
     title: 'openings' satisfies PageSection,
     loadComponent: () => import('./opening-list/opening-list').then((m) => m.OpeningList),
   },
   {
-    path: ':id/drill',
-    redirectTo: ':id/practice',
-  },
-  {
-    path: ':id/practice',
+    path: `:id/${slugs.app.practice[lang]}`,
     title: 'practice' satisfies PageSection,
     data: { main: 'play' } satisfies { main: MainKind },
     loadComponent: () =>

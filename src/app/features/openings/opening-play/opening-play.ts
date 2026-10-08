@@ -17,6 +17,7 @@ import { OpeningSession } from '../opening-session';
 import { PlayOptions } from '../play-options/play-options';
 import { TheoryPanel } from '../theory-panel/theory-panel';
 import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks, routeId, routeLang } from '../../../core/routing';
 
 export { STRENGTH_LEVELS } from '../play-options/play-options';
 
@@ -49,6 +50,7 @@ const opposite = (color: Color): Color => (color === 'white' ? 'black' : 'white'
   },
 })
 export class OpeningPlay {
+  protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(OpeningSession);
   protected readonly i18n = inject(I18nService);
@@ -108,6 +110,7 @@ export class OpeningPlay {
   protected readonly analysis = computed(() => {
     const opening = this.session.opening();
     return analysisLink({
+      lang: this.i18n.lang(),
       moves: this.sans(),
       ply: this.game.ply(),
       from: opening ? { kind: 'opening', id: opening.id } : undefined,
@@ -121,9 +124,12 @@ export class OpeningPlay {
     });
     // The prerender waits until the opening is on the page.
     const wait = injectPrerenderWait();
-    inject(ActivatedRoute)
-      .paramMap.pipe(takeUntilDestroyed())
-      .subscribe((params) => wait(() => this.session.load(params.get('id') ?? '')));
+    const route = inject(ActivatedRoute);
+    route.paramMap
+      .pipe(takeUntilDestroyed())
+      .subscribe((params) =>
+        wait(() => this.session.load(routeId(params, routeLang(route.snapshot), 'id', 'opening'))),
+      );
   }
 
   protected onMove(move: BoardMove): void {

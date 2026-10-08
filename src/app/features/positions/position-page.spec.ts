@@ -1,8 +1,7 @@
 import { plainText } from '../../core/content/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Location } from '@angular/common';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { CONTENT_LOADERS, type ContentLoaders, type CuratedPosition } from '../../core/content';
 import { GameService } from '../../core/game';
@@ -15,7 +14,7 @@ import { PositionPage } from './position-page';
 import { POSITIONS_ROUTES } from './positions.routes';
 
 const SMOTHERED: CuratedPosition = {
-  id: 'smothered',
+  id: 'smothered-mate',
   title: { es: 'Mate de la coz', en: 'Smothered mate' },
   source: 'Lucena, 1497',
   fen: '2q2r1k/6pp/7N/3Q4/8/8/5PPP/6K1 w - - 0 1',
@@ -26,7 +25,7 @@ const SMOTHERED: CuratedPosition = {
 };
 
 const KIENINGER: CuratedPosition = {
-  id: 'kieninger',
+  id: 'kieninger-trap',
   title: { es: 'Trampa de Kieninger', en: 'Kieninger Trap' },
   fen: 'r1b1k2r/ppppqppp/2n5/4n3/1PP2B2/5N2/1P1NPPPP/R2QKB1R b KQkq - 0 8',
   playerSide: 'black',
@@ -35,7 +34,7 @@ const KIENINGER: CuratedPosition = {
   tags: ['pin'],
 };
 
-const BROKEN: CuratedPosition = { ...SMOTHERED, id: 'broken', solution: ['Kxg8'] };
+const BROKEN: CuratedPosition = { ...SMOTHERED, id: 'legal-mate', solution: ['Kxg8'] };
 
 const POSITIONS = [SMOTHERED, KIENINGER, BROKEN];
 
@@ -102,7 +101,7 @@ describe('PositionPage', () => {
 
   describe('loading', () => {
     it('should announce the loading state while the content arrives', async () => {
-      await open('/positions/3', () => new Promise(() => undefined));
+      await open('/positions/smothered-mate', () => new Promise(() => undefined));
 
       expect(text('[role="status"]')).toBe('Loading positions…');
     });
@@ -112,7 +111,7 @@ describe('PositionPage', () => {
         .fn<ContentLoaders['positions']>()
         .mockRejectedValueOnce(new Error('offline'))
         .mockResolvedValue(POSITIONS);
-      await open('/positions/3', positions);
+      await open('/positions/smothered-mate', positions);
       await vi.waitFor(() => expect(text('[role="alert"]')).toContain('could not be loaded'));
 
       button('Try again').click();
@@ -129,37 +128,22 @@ describe('PositionPage', () => {
           expect(text('[role="alert"]')).toBe('This position does not exist.'),
         );
         expect(element().querySelector('app-board')).toBeNull();
-        expect(element().querySelector('a')?.getAttribute('href')).toBe('/positions');
+        expect(element().querySelector('a')?.getAttribute('href')).toBe('/en/positions');
       },
     );
 
     it('should number the positions from the fewest moves to the most, keeping the content order', async () => {
-      await open('/positions/1');
+      await open('/positions/kieninger-trap');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
+      expect(text('.where')).toBe('Position 1 of 3');
 
-      await harness.navigateByUrl('/positions/3');
+      await harness.navigateByUrl('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
-    });
-
-    it('should send an old link by content id to the number of the position', async () => {
-      await open('/positions/smothered');
-
-      await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
-      expect(TestBed.inject(Router).url).toBe('/positions/3');
-    });
-
-    it('should not keep the old address in the history', async () => {
-      await open('/positions/kieninger');
-      await vi.waitFor(() => expect(TestBed.inject(Router).url).toBe('/positions/1'));
-
-      TestBed.inject(Location).back();
-      await harness.fixture.whenStable();
-
-      expect(TestBed.inject(Router).url).not.toBe('/positions/kieninger');
+      expect(text('.where')).toBe('Position 3 of 3');
     });
 
     it('should refuse a position of the content that cannot be played', async () => {
-      await open('/positions/2');
+      await open('/positions/legal-mate');
 
       await vi.waitFor(() =>
         expect(text('[role="alert"]')).toBe('This position cannot be played.'),
@@ -170,7 +154,7 @@ describe('PositionPage', () => {
 
   describe('guessing', () => {
     beforeEach(async () => {
-      await open('/positions/3');
+      await open('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
     });
 
@@ -184,7 +168,7 @@ describe('PositionPage', () => {
         expect(shown).not.toContain(spoiler);
       }
       expect(element().querySelector('.theme-tag')).toBeNull();
-      expect(element().querySelector('a[href^="/analysis"]')).toBeNull();
+      expect(element().querySelector('a[href^="/en/analysis"]')).toBeNull();
       expect(element().querySelector('.board-col')?.getAttribute('aria-label')).toBe(
         'Board: White to play.',
       );
@@ -263,8 +247,8 @@ describe('PositionPage', () => {
       expect(document.title).toBe('Smothered mate · Cheesy');
       expect(text('.theme-tag')).toBe('Smothered mate');
       expect(text('.source dd')).toBe('Lucena, 1497');
-      expect(element().querySelector('a[href^="/analysis"]')?.getAttribute('href')).toMatch(
-        /from=position(%3A|:)smothered/,
+      expect(element().querySelector('a[href^="/en/analysis"]')?.getAttribute('href')).toMatch(
+        /from=position(%3A|:)smothered-mate/,
       );
       expect(board().viewOnly()).toBe(true);
       expect(text('.step-text')).toBe('Your move: 2. Nf7# (checkmate).');
@@ -294,7 +278,7 @@ describe('PositionPage', () => {
           ],
         },
       };
-      await open('/positions/3', async () => [pointed, KIENINGER, BROKEN]);
+      await open('/positions/smothered-mate', async () => [pointed, KIENINGER, BROKEN]);
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       await moveOnBoard({ from: 'd5', to: 'g8' });
       await moveOnBoard({ from: 'h6', to: 'f7' });
@@ -312,7 +296,7 @@ describe('PositionPage', () => {
 
   describe('replay', () => {
     beforeEach(async () => {
-      await open('/positions/3');
+      await open('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       button('Show solution').click();
       await harness.fixture.whenStable();
@@ -419,23 +403,23 @@ describe('PositionPage', () => {
 
   describe('navigation between positions', () => {
     it('should link to the next position only when on the first one', async () => {
-      await open('/positions/1');
+      await open('/positions/kieninger-trap');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       const links = [...element().querySelectorAll('.neighbours a[href]')];
-      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
+      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/en/positions/legal-mate']);
     });
 
     it('should link to the previous position only when on the last one', async () => {
-      await open('/positions/3');
+      await open('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       const links = [...element().querySelectorAll('.neighbours a[href]')];
-      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/positions/2']);
+      expect(links.map((link) => link.getAttribute('href'))).toEqual(['/en/positions/legal-mate']);
     });
 
     it('should show a black position from the black side', async () => {
-      await open('/positions/1');
+      await open('/positions/kieninger-trap');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       expect(board().orientation()).toBe('black');
@@ -449,11 +433,11 @@ describe('PositionPage', () => {
     });
 
     it('should start a fresh exercise and focus the title when moving to another position', async () => {
-      await open('/positions/3');
+      await open('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
       await moveOnBoard({ from: 'd5', to: 'd6' });
 
-      await harness.navigateByUrl('/positions/1');
+      await harness.navigateByUrl('/positions/kieninger-trap');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       expect(text('.message')).toContain('Find the winning move.');
@@ -461,7 +445,7 @@ describe('PositionPage', () => {
     });
 
     it('should keep the focus where it is on the first position shown', async () => {
-      await open('/positions/3');
+      await open('/positions/smothered-mate');
       await vi.waitFor(() => expect(element().querySelector('app-board')).not.toBeNull());
 
       expect(document.activeElement).not.toBe(element().querySelector('h1'));

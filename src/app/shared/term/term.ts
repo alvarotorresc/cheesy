@@ -20,6 +20,7 @@ import { I18nService } from '../../core/i18n';
 import { frameFromFen, MiniBoard } from '../mini-board';
 import { RichTextView } from '../rich-text';
 import { TermRegistry } from './term-registry';
+import { PageLinks } from '../../core/routing';
 
 type State =
   | { kind: 'closed' }
@@ -61,6 +62,7 @@ let nextId = 0;
   host: { '(focusout)': 'onFocusOut($event)' },
 })
 export class TermView {
+  protected readonly links = inject(PageLinks);
   readonly id = input.required<string>();
   readonly text = input.required<string>();
 

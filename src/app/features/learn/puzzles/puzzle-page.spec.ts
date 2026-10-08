@@ -13,7 +13,7 @@ import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, type PuzzleProgress } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
 import { FindMoveStepView } from '../lesson/steps/find-move-step';
-import { LEARN_ROUTES } from '../learn.routes';
+import { learnRoutes } from '../learn.routes';
 import {
   FIXTURE_PUZZLE_COUNT,
   fixturePuzzleLoaders,
@@ -30,7 +30,7 @@ describe('PuzzlePage', () => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter([
-          { path: 'learn', children: LEARN_ROUTES },
+          { path: 'learn', children: learnRoutes('en') },
           { path: 'elsewhere', children: [] },
         ]),
         { provide: TitleStrategy, useExisting: PageTitle },
@@ -113,7 +113,7 @@ describe('PuzzlePage', () => {
       await render();
       expect(root().querySelector('h1')?.textContent).toContain('The fork');
       expect(puzzleOf()).toBe('Puzzle 1 of 10');
-      expect(root().querySelector('.back')?.getAttribute('href')).toBe('/learn/puzzles');
+      expect(root().querySelector('.back')?.getAttribute('href')).toBe('/en/learn/puzzles');
       const prompt = root().querySelector('.step-text')?.textContent ?? '';
       expect(prompt).toContain('You play Black. White just moved:');
       expect(prompt).toContain('rook to f7');
@@ -230,9 +230,9 @@ describe('PuzzlePage', () => {
       );
       expect(summary.querySelector('.all-solved')).toBeNull();
       expect(summary.querySelector('a.back-to-lesson')?.getAttribute('href')).toBe(
-        '/learn/intermediate/the-fork',
+        '/en/learn/intermediate/the-fork',
       );
-      expect(summary.querySelector('a.to-list')?.getAttribute('href')).toBe('/learn/puzzles');
+      expect(summary.querySelector('a.to-list')?.getAttribute('href')).toBe('/en/learn/puzzles');
 
       // The next batch starts with the two puzzles never played, then the missed ones.
       const fresh = (await fixturePuzzleLoaders.puzzles('the-fork')).puzzles.slice(10);

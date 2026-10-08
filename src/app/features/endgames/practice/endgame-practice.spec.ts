@@ -229,7 +229,7 @@ describe('EndgamePractice', () => {
     expect(card?.querySelector('h2')?.textContent?.trim()).toBe('Goal achieved');
     expect(card?.textContent).toContain('You end the game with 1.Ra8#.');
     expect(card?.querySelector('a.button')?.getAttribute('href')).toBe(
-      '/endgames/kp-square-rule-defence',
+      '/en/endgames/square-rule-defence',
     );
     expect(memory.endgameRows.get('lucena-position')?.completions).toBe(1);
     expect(card?.textContent).toContain('Endgame passed, saved in this browser');
@@ -358,7 +358,7 @@ describe('EndgamePractice', () => {
 
     const href = element().querySelector('a.analyze')?.getAttribute('href') ?? '';
 
-    expect(href).toContain('/analysis?');
+    expect(href).toContain('/en/analysis?');
     expect(href).toContain('from=endgame:lucena-position');
     expect(decodeURIComponent(href)).toContain('1. Rd4');
   });

@@ -32,6 +32,7 @@ import {
 import { PositionList } from './position-list';
 import { playerMoveCount } from './position-order';
 import { injectPrerenderWait } from '../../core/prerender';
+import { PageLinks } from '../../core/routing';
 
 interface Card {
   readonly position: CuratedPosition;
@@ -64,6 +65,7 @@ interface Group {
   host: { class: 'catalog' },
 })
 export class PositionsGallery {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   /** Keeps the prerender waiting until the content is on the page. */
   private readonly wait = injectPrerenderWait();

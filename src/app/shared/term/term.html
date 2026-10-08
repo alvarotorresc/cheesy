@@ -46,7 +46,7 @@
               [arrows]="term.example.arrows"
               [label]="i18n.t().glossary.boardLabel(i18n.localize(term.name))"
             />
-            <a class="more" routerLink="/learn/glossary" [fragment]="term.id">{{
+            <a class="more" [routerLink]="links.glossary()" [fragment]="term.id">{{
               i18n.t().glossary.seeInGlossary
             }}</a>
           } @else {

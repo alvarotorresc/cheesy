@@ -2,7 +2,7 @@
 @let p = t.puzzles;
 
 <ng-template #head>
-  <a class="back" routerLink="/learn/puzzles">← {{ p.backToList }}</a>
+  <a class="back" [routerLink]="links.puzzles()">← {{ p.backToList }}</a>
   <!-- The heading says where the puzzle is and what to do when it takes the focus. -->
   <h1 data-step-heading tabindex="-1" aria-describedby="puzzle-progress find-move-prompt">
     {{ title() || p.title }}
@@ -39,7 +39,7 @@
   @case ('notFound') {
     <div class="notice" role="alert">
       <p>{{ p.empty }}</p>
-      <a routerLink="/learn/puzzles">{{ p.backToList }}</a>
+      <a [routerLink]="links.puzzles()">{{ p.backToList }}</a>
     </div>
   }
   @case ('ready') {
@@ -64,11 +64,11 @@
             {{ p.anotherBatch }}
           </button>
           @if (page.lesson; as lesson) {
-            <a class="button back-to-lesson" [routerLink]="['/learn', lesson.level, lesson.id]">{{
+            <a class="button back-to-lesson" [routerLink]="links.lesson(lesson.level, lesson.id)">{{
               p.backToLesson
             }}</a>
           }
-          <a class="button to-list" routerLink="/learn/puzzles">{{ p.title }}</a>
+          <a class="button to-list" [routerLink]="links.puzzles()">{{ p.title }}</a>
         </div>
       </section>
     } @else {

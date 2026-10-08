@@ -14,7 +14,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { OUT, SITE } from './lib.mjs';
+import { OUT, pathIn, SITE } from './lib.mjs';
 import { SCENES } from './scenes.mjs';
 
 const LANGS = ['es', 'en'];
@@ -253,7 +253,7 @@ function buildEntries(lang) {
       file: scene.file,
       image,
       path: scene.path,
-      href: SITE + scene.path,
+      href: SITE + pathIn(scene.path, lang),
       theme: scene.theme,
       name: txt.name,
       alt: txt.alt,

@@ -4,6 +4,7 @@ import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/ro
 import { routes } from './app.routes';
 import { provideUmami } from './core/analytics';
 import { PageTitle } from './core/page-title';
+import { provideLangFromUrl } from './core/routing';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
     ),
+    provideLangFromUrl(),
     { provide: TitleStrategy, useExisting: PageTitle },
     provideUmami(),
   ],

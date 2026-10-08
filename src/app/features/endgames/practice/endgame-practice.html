@@ -2,7 +2,9 @@
 @let tb = i18n.t().tablebase;
 <ng-template #back>
   <p class="back play-lead">
-    <a routerLink="/endgames"><app-icon name="arrow-left" />{{ t.backToCatalog }}</a>
+    <a [routerLink]="links.category('endgames')"
+      ><app-icon name="arrow-left" />{{ t.backToCatalog }}</a
+    >
   </p>
 </ng-template>
 
@@ -93,7 +95,7 @@
           <p>{{ resultWhy() }}</p>
           <div class="row">
             @if (nextId(); as next) {
-              <a class="button primary" [routerLink]="['/endgames', next]">{{ t.nextEndgame }}</a>
+              <a class="button primary" [routerLink]="links.endgame(next)">{{ t.nextEndgame }}</a>
             }
             @if (saveState() === 'saved') {
               <span class="saved"><app-icon name="check-bold" />{{ t.saved }}</span>

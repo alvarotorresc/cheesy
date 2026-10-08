@@ -612,7 +612,7 @@ describe('PracticePage', () => {
 
       expect(link?.textContent?.trim()).toBe('Analyse this position');
       const url = new URL(link?.href ?? '', 'http://localhost');
-      expect(url.pathname).toBe('/analysis');
+      expect(url.pathname).toBe('/en/analysis');
       expect(url.searchParams.get('pgn')).toBe('1. e4 e5 2. Nf3 Nc6 3. Bb5');
       expect(url.searchParams.get('from')).toBe('practice:test-opening');
     });

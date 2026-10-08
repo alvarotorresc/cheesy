@@ -71,7 +71,7 @@ describe('TermView', () => {
     expect(popup()?.querySelector('.name')?.textContent?.trim()).toBe('Clavada');
     expect(popup()?.textContent).toContain('Una pieza no puede moverse.');
     expect(popup()?.querySelector('app-mini-board')).not.toBeNull();
-    expect(popup()?.querySelector('a')?.getAttribute('href')).toBe('/learn/glossary#pin');
+    expect(popup()?.querySelector('a')?.getAttribute('href')).toBe('/es/aprender/glosario#pin');
   });
 
   it('should announce that the word opens a dialog', () => {
@@ -366,7 +366,9 @@ describe('TermView', () => {
     await fixture.whenStable();
     button().click();
     await fixture.whenStable();
-    expect(popup()?.querySelector('a.term')?.getAttribute('href')).toBe('/learn/glossary#check');
+    expect(popup()?.querySelector('a.term')?.getAttribute('href')).toBe(
+      '/es/aprender/glosario#check',
+    );
     expect(popup()?.querySelector('app-term')).toBeNull();
   });
 

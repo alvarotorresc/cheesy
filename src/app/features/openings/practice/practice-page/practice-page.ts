@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Color, SquareName } from 'chessops';
 import { GameService } from '../../../../core/game';
@@ -29,6 +30,7 @@ import { PracticeProgress } from '../practice-progress/practice-progress';
 import { PracticeSession, type PracticePhase } from '../practice-session';
 import { PracticeSetup } from '../practice-setup/practice-setup';
 import { PracticeSummary } from '../practice-summary/practice-summary';
+import { PageLinks, routeId, routeLang } from '../../../../core/routing';
 
 /** What the message above the board looks like: the colours and the icon go with it. */
 type FeedbackTone = 'turn' | 'idle' | 'right' | 'wrong';
@@ -67,14 +69,20 @@ interface FeedbackView {
   },
 })
 export class PracticePage {
+  protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(PracticeSession);
   protected readonly i18n = inject(I18nService);
   private readonly reading = inject(ReadingModeService);
 
   private readonly route = inject(ActivatedRoute);
-  /** Id of the opening in the URL, for the link to play it while it loads. */
-  protected readonly openingId = toSignal(this.route.paramMap, { initialValue: undefined });
+  /** Id of the opening in the URL (behind its slug), for the link to play it while it loads. */
+  protected readonly openingId = toSignal(
+    this.route.paramMap.pipe(
+      map((params) => routeId(params, routeLang(this.route.snapshot), 'id', 'opening')),
+    ),
+    { initialValue: undefined },
+  );
 
   protected readonly sans = computed(() => this.game.moves().map((move) => move.san));
   protected readonly isReviewing = computed(() => this.game.ply() < this.game.moves().length);
@@ -217,7 +225,10 @@ export class PracticePage {
     });
     this.route.paramMap
       .pipe(takeUntilDestroyed())
-      .subscribe((params) => void this.session.load(params.get('id') ?? ''));
+      .subscribe(
+        (params) =>
+          void this.session.load(routeId(params, routeLang(this.route.snapshot), 'id', 'opening')),
+      );
 
     // Starting or finishing a line removes the button that was pressed: keep the focus in the
     // practice, on its message (or on the title of the choice of line), instead of letting it fall

@@ -1,7 +1,9 @@
 import type { ParamMap } from '@angular/router';
 import { INITIAL_FEN } from 'chessops/fen';
 import { isContentId } from '../content/content-id';
+import type { Lang } from '../i18n/i18n.types';
 import { MoveTree, ROOT_ID } from '../move-tree';
+import { pageUrls } from '../routing/site-urls';
 
 /** A FEN is under 100 characters; anything much longer is not one and is not parsed. */
 export const MAX_SHARED_FEN_LENGTH = 128;
@@ -33,11 +35,13 @@ export interface AnalysisLinkInput {
   /** Half-moves of the main line to show; left out when it is the end of the line. */
   readonly ply?: number;
   readonly from?: AnalysisOrigin;
+  /** Language of the page the link opens (`/en/analysis`, `/es/analisis`); English by default. */
+  readonly lang?: Lang;
 }
 
 /** What `routerLink` needs to open Analysis. */
 export interface AnalysisLink {
-  readonly commands: ['/analysis'];
+  readonly commands: [string];
   readonly queryParams: Record<string, string>;
 }
 
@@ -80,13 +84,13 @@ export const analysisLink = (input: AnalysisLinkInput): AnalysisLink => {
     queryParams[PLY_PARAM] = String(ply);
   }
   if (input.from) queryParams[FROM_PARAM] = `${input.from.kind}:${input.from.id}`;
-  return { commands: ['/analysis'], queryParams };
+  return { commands: [pageUrls.pathOf({ kind: 'analysis' }, input.lang ?? 'en')], queryParams };
 };
 
 /** The same link as an absolute URL, for "Copy link". `baseHref` is the `<base href>`. */
 export const absoluteAnalysisUrl = (input: AnalysisLinkInput, baseHref: string): string => {
   const { queryParams } = analysisLink(input);
-  const url = new URL('analysis', baseHref);
+  const url = new URL(pageUrls.pathOf({ kind: 'analysis' }, input.lang ?? 'en').slice(1), baseHref);
   for (const [name, value] of Object.entries(queryParams)) url.searchParams.set(name, value);
   return url.toString().replace(/\+/g, '%20');
 };

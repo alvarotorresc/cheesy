@@ -45,8 +45,8 @@ describe('Endgames list', () => {
     expect(headings).toEqual(['King and pawn', 'Rook and pawn']);
     const links = [...element.querySelectorAll('.card a.button')];
     expect(links.map((link) => link.getAttribute('href'))).toEqual([
-      '/endgames/kp-square-rule-defence',
-      '/endgames/lucena-position',
+      '/en/endgames/square-rule-defence',
+      '/en/endgames/lucena-position',
     ]);
     const cards = [...element.querySelectorAll('.card')];
     expect(cards[0].textContent).toContain('Draw');

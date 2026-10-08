@@ -42,6 +42,7 @@ import {
   type LevelFilter,
 } from './glossary-catalog';
 import { TermHints } from './term-hints';
+import { PageLinks } from '../../../core/routing';
 
 /** How long the card of the address keeps its ring after the page has taken the reader to it. */
 export const ARRIVAL_MS = 2200;
@@ -63,6 +64,7 @@ const LEVEL_RANK: Record<GlossaryLevel, number> = { beginner: 1, intermediate: 2
   host: { class: 'catalog', '(click)': 'onClick($event)' },
 })
 export class GlossaryPage {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   private readonly injector = inject(Injector);
