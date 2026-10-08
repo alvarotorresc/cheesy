@@ -91,8 +91,6 @@ export class Engine {
    * `searchMoves` restricts the root moves (UCI, standard castling notation).
    */
   async analyse(fen: string, depth: number, multiPv = 1, searchMoves?: string[]): Promise<Line[]> {
-    // Clear the hash so a search never depends on which positions were searched before it.
-    await this.newGame();
     this.send(`setoption name MultiPV value ${multiPv}`);
     this.send(`position fen ${fen}`);
     await this.ready();

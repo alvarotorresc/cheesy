@@ -143,7 +143,7 @@ export const pawnStructure: LessonSpec = {
         en: 'The white chain is d4 and e5. You play Black. Three candidate pawn breaks: push the pawn from f7 to f6, the one from c7 to c5 or the one from b7 to b5. Which one attacks the base of the chain?',
       },
       board: {
-        fen: 'r1bq1rk1/1pp2ppp/4p3/3pP3/3Pn3/3B1N2/PP3PPP/R2Q1RK1 b - - 0 1',
+        fen: 'r1bq1rk1/1pp2ppp/4p3/3pP3/3Pn3/3B1N2/P4PPP/R2Q1RK1 b - - 0 1',
         orientation: 'black',
       },
       answer: { by: 'engine', options: ['f6', 'c5', 'b5'], correct: 1 },

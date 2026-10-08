@@ -92,7 +92,7 @@ export const theFork: LessonSpec = {
         es: 'Un [jaque](check) de la dama también puede ser una [horquilla](fork): ataca al rey y, a la vez, a una pieza que nadie defiende. Búscalo.',
         en: 'A queen [check](check) can also be a [fork](fork): it attacks the king and, at the same time, a piece nobody defends. Find it.',
       },
-      board: { fen: 'r4bk1/p5pp/1p6/q1p5/8/8/PPP2PPP/2BQ1RK1 w - - 0 1', orientation: 'white' },
+      board: { fen: 'r4bk1/p5pp/1p6/q1p5/8/8/PPP3PP/2BQ1RK1 w - - 0 1', orientation: 'white' },
       check: { by: 'engine', solution: ['Qd5+', 'Kh8', 'Qxa8'] },
       hint: {
         es: 'La torre de a8 no tiene defensa. ¿Desde qué casilla ve tu dama a la vez a8 y el rey de g8?',

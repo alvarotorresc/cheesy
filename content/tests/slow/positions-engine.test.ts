@@ -7,7 +7,9 @@ import { ROOT, loadPositions } from '../../lib/content.ts';
 import { checkTactic, type StepReport } from '../../lib/tactic-check.ts';
 
 const DEPTH = Math.max(18, Number(process.env.TACTIC_DEPTH ?? 22));
-const engine = new Engine(10, 512);
+// One thread: deterministic at a fixed depth, so the verdict does not depend on the load of the
+// machine (see lessons-engine.test.ts).
+const engine = new Engine(1, 512);
 const report: Record<string, StepReport[]> = {};
 
 afterAll(() => {

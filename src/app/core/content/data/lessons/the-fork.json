@@ -579,7 +579,7 @@
         ]
       },
       "board": {
-        "fen": "r4bk1/p5pp/1p6/q1p5/8/8/PPP2PPP/2BQ1RK1 w - - 0 1",
+        "fen": "r4bk1/p5pp/1p6/q1p5/8/8/PPP3PP/2BQ1RK1 w - - 0 1",
         "orientation": "white"
       },
       "check": {

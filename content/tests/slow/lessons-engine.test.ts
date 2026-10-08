@@ -7,6 +7,9 @@ import { checkEngineChoice } from '../../lib/choice-check.ts';
 import { findMoveValidator } from '../../lib/tablebase-find-move.ts';
 
 const DEPTH = Math.max(18, Number(process.env.TACTIC_DEPTH ?? 22));
+// One thread: a search at a fixed depth is then deterministic, so the scores (and the verdict on
+// each exercise) do not change with the load of the machine. With several threads the scores of a
+// position vary by tens of cp, and where the engine finds a mate or not, from one run to the next.
 const engine = new Engine(1, 512);
 afterAll(() => engine.quit());
 

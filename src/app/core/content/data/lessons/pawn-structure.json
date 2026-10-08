@@ -892,7 +892,7 @@
         ]
       },
       "board": {
-        "fen": "r1bq1rk1/1pp2ppp/4p3/3pP3/3Pn3/3B1N2/PP3PPP/R2Q1RK1 b - - 0 1",
+        "fen": "r1bq1rk1/1pp2ppp/4p3/3pP3/3Pn3/3B1N2/P4PPP/R2Q1RK1 b - - 0 1",
         "orientation": "black"
       },
       "answer": {
