@@ -3,8 +3,9 @@
 //
 // URL policy: once a slug is published it must not change (a change breaks inbound links and
 // search ranking; if it ever has to change, the old URL needs a permanent redirect).
-// Format: lowercase ASCII, digits and single hyphens (no accents, ñ -> n). Spanish slugs keep a
-// leading article only when the displayed name has it ("la-siempreviva").
+// Format: lowercase ASCII, digits and single hyphens (no accents, ñ -> n). Spanish slugs of endgames
+// and positions have no leading article, except proper names that carry it ("la-siempreviva");
+// lesson slugs keep the article when the title has it ("el-caballo").
 import type { LessonLevel } from '../types.ts';
 
 export type SlugLang = 'es' | 'en';
@@ -60,7 +61,7 @@ export const endgameSlugs: SlugTable = {
 
 export const positionSlugs: SlugTable = {
   'legal-mate': { es: 'mate-de-legal', en: 'legal-mate' },
-  'reti-tartakower-1910': { es: 'sacrificio-de-dama-reti-tartakower', en: 'reti-tartakower-1910' },
+  'reti-tartakower-1910': { es: 'sacrificio-de-dama-reti-tartakower', en: 'reti-tartakower' },
   'opera-game-1858': { es: 'partida-de-la-opera', en: 'opera-game' },
   'kieninger-trap': { es: 'trampa-de-kieninger', en: 'kieninger-trap' },
   'smothered-mate': { es: 'mate-de-la-coz', en: 'smothered-mate' },
