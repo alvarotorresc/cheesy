@@ -1,4 +1,5 @@
-import { DOCUMENT, inject, InjectionToken } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, inject, InjectionToken, PLATFORM_ID } from '@angular/core';
 
 /** Callbacks the transport uses to hand the engine's output to `EngineService`. */
 export interface EngineTransportHandlers {
@@ -94,8 +95,20 @@ export const createWorkerTransport =
     };
   };
 
+/**
+ * A transport that never answers, for the prerender: there are no workers outside the browser, and
+ * a page is rendered as it is before the engine has started.
+ */
+export const idleTransport: EngineTransportFactory = () => ({
+  send: () => undefined,
+  terminate: () => undefined,
+});
+
 /** How `EngineService` reaches the engine. Tests replace it with a fake engine. */
 export const ENGINE_TRANSPORT = new InjectionToken<EngineTransportFactory>('ENGINE_TRANSPORT', {
   providedIn: 'root',
-  factory: () => createWorkerTransport(inject(DOCUMENT).baseURI),
+  factory: () =>
+    isPlatformBrowser(inject(PLATFORM_ID))
+      ? createWorkerTransport(inject(DOCUMENT).baseURI)
+      : idleTransport,
 });
