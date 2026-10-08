@@ -1,11 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { afterNextRender, Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { HomeHero } from './hero/home-hero';
 import { buildHomeData, type HomeData } from './home-data';
 import { HomeSections } from './sections/home-sections';
 import { injectPrerenderWait } from '../../core/prerender';
+import { PageLinks, pageUrls, routeLang } from '../../core/routing';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -23,6 +24,7 @@ type HomeState =
   styleUrl: './home.css',
 })
 export class Home {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   /** Keeps the prerender waiting until the content is on the page. */
@@ -32,6 +34,16 @@ export class Home {
 
   constructor() {
     this.wait(() => this.load());
+    // `/` is the home page in English for everyone, search engines included; once it is on screen,
+    // a reader who chose Spanish (or whose browser prefers it) goes on to `/es`.
+    if (!routeLang(inject(ActivatedRoute).snapshot)) {
+      const router = inject(Router);
+      afterNextRender(() => {
+        const lang = this.i18n.preferredLang();
+        if (lang === 'en') return;
+        void router.navigateByUrl(pageUrls.translateUrl(router.url, lang), { replaceUrl: true });
+      });
+    }
   }
 
   protected async load(): Promise<void> {

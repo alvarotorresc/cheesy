@@ -3,14 +3,23 @@ import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { LESSON_LOADERS, PUZZLE_LOADERS } from '../../core/content';
 import { mainKindOf } from '../../layout/main-kind';
-import { LEARN_ROUTES } from './learn.routes';
+import { learnRoutes } from './learn.routes';
 import { fixtureLessonLoaders, fixturePuzzleLoaders, lessonLoadersWithPuzzles } from './testing';
+
+const ROUTES = [
+  { path: 'en', data: { lang: 'en' }, children: [{ path: 'learn', children: learnRoutes('en') }] },
+  {
+    path: 'es',
+    data: { lang: 'es' },
+    children: [{ path: 'aprender', children: learnRoutes('es') }],
+  },
+];
 
 describe('learn guards', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter(ROUTES),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
       ],
@@ -31,21 +40,27 @@ describe('learn guards', () => {
   };
 
   it('should let a level with lessons through and send the others to /learn', async () => {
-    expect(await open('/learn/beginner')).toBe('/learn/beginner');
-    expect(await open('/learn/intermediate')).toBe('/learn');
+    expect(await open('/en/learn/beginner')).toBe('/en/learn/beginner');
+    expect(await open('/en/learn/intermediate')).toBe('/en/learn');
+    expect(await open('/es/aprender/principiante')).toBe('/es/aprender/principiante');
+    expect(await open('/es/aprender/beginner')).toBe('/es/aprender');
   });
 
   it('should let an existing lesson of its level through and send the others to /learn', async () => {
-    expect(await open('/learn/beginner/knight-moves')).toBe('/learn/beginner/knight-moves');
-    expect(await open('/learn/beginner/nope')).toBe('/learn');
-    expect(await open('/learn/advanced/knight-moves')).toBe('/learn');
+    expect(await open('/en/learn/beginner/knight-moves')).toBe('/en/learn/beginner/knight-moves');
+    expect(await open('/en/learn/beginner/nope')).toBe('/en/learn');
+    expect(await open('/en/learn/advanced/knight-moves')).toBe('/en/learn');
+    expect(await open('/es/aprender/principiante/el-caballo')).toBe(
+      '/es/aprender/principiante/el-caballo',
+    );
+    expect(await open('/es/aprender/principiante/knight-moves')).toBe('/es/aprender');
   });
 
   it('should send an unknown level to /learn even when the catalogue cannot be loaded', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter(ROUTES),
         {
           provide: LESSON_LOADERS,
           useValue: { ...fixtureLessonLoaders, catalog: () => Promise.reject(new Error('off')) },
@@ -53,17 +68,13 @@ describe('learn guards', () => {
       ],
     });
     harness = await RouterTestingHarness.create();
-    expect(await open('/learn/foo')).toBe('/learn');
-    expect(await open('/learn/foo/bar')).toBe('/learn');
-  });
-
-  it('should send an old glossary link with a term to the glossary, keeping the term', async () => {
-    expect(await open('/learn#pin')).toBe('/learn/glossary#pin');
-    expect(await open('/learn')).toBe('/learn');
+    expect(await open('/en/learn/foo')).toBe('/en/learn');
+    expect(await open('/en/learn/foo/bar')).toBe('/en/learn');
   });
 
   it('should lay the glossary out as a list, in the same container as the other catalogues', async () => {
-    expect(await open('/learn/glossary')).toBe('/learn/glossary');
+    expect(await open('/en/learn/glossary')).toBe('/en/learn/glossary');
+    expect(await open('/es/aprender/glosario')).toBe('/es/aprender/glosario');
     expect(mainKindOf(TestBed.inject(Router).routerState.snapshot.root)).toBeUndefined();
   });
 
@@ -72,7 +83,7 @@ describe('learn guards', () => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
         providers: [
-          provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+          provideRouter(ROUTES),
           { provide: LESSON_LOADERS, useValue: lessonLoadersWithPuzzles },
           { provide: PUZZLE_LOADERS, useValue: puzzles },
         ],
@@ -82,15 +93,19 @@ describe('learn guards', () => {
 
     it('should open the list, and a lesson with puzzles on the play layout', async () => {
       await withPuzzles();
-      expect(await open('/learn/puzzles')).toBe('/learn/puzzles');
-      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles/the-fork');
+      expect(await open('/en/learn/puzzles')).toBe('/en/learn/puzzles');
+      expect(await open('/en/learn/puzzles/the-fork')).toBe('/en/learn/puzzles/the-fork');
+      expect(await open('/es/aprender/problemas/la-horquilla')).toBe(
+        '/es/aprender/problemas/la-horquilla',
+      );
       expect(mainKindOf(TestBed.inject(Router).routerState.snapshot.root)).toBe('play');
     });
 
     it('should send a lesson without puzzles to the list', async () => {
       await withPuzzles();
-      expect(await open('/learn/puzzles/the-pin')).toBe('/learn/puzzles');
-      expect(await open('/learn/puzzles/Not-An-Id')).toBe('/learn/puzzles');
+      expect(await open('/en/learn/puzzles/the-pin')).toBe('/en/learn/puzzles');
+      expect(await open('/en/learn/puzzles/Not-An-Id')).toBe('/en/learn/puzzles');
+      expect(await open('/es/aprender/problemas/the-fork')).toBe('/es/aprender/problemas');
     });
 
     it('should send a lesson the catalogue gives no puzzles to the list', async () => {
@@ -102,7 +117,7 @@ describe('learn guards', () => {
           lessons: catalog.lessons.map((entry) => ({ ...entry, count: 0 })),
         }),
       });
-      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles');
+      expect(await open('/en/learn/puzzles/the-fork')).toBe('/en/learn/puzzles');
     });
 
     it('should let the page open when the catalogue cannot be loaded', async () => {
@@ -110,7 +125,7 @@ describe('learn guards', () => {
         ...fixturePuzzleLoaders,
         catalog: () => Promise.reject(new Error('offline')),
       });
-      expect(await open('/learn/puzzles/the-fork')).toBe('/learn/puzzles/the-fork');
+      expect(await open('/en/learn/puzzles/the-fork')).toBe('/en/learn/puzzles/the-fork');
     });
   });
 });

@@ -211,7 +211,7 @@
             <li>
               <a
                 class="card"
-                [routerLink]="['/positions', card.number]"
+                [routerLink]="links.position(card.position.id)"
                 [style.--i]="card.order"
                 [attr.aria-label]="cardLabel(card)"
               >

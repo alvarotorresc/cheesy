@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RenderMode, type ServerRoute } from '@angular/ssr';
+import { langRoutes } from './app.routes';
 import {
   endgameParams,
   lessonParams,
@@ -10,6 +11,8 @@ import {
 } from './app.routes.server';
 import { CONTENT_LOADERS, LESSON_LOADERS } from './core/content';
 import { bundledContentLoaders, bundledLessonLoaders } from './core/content/testing';
+import { LANGS, type Lang } from './core/i18n';
+import { pageUrls } from './core/routing';
 
 const routeOf = (path: string): ServerRoute => {
   const route = serverRoutes.find((entry) => entry.path === path);
@@ -18,58 +21,70 @@ const routeOf = (path: string): ServerRoute => {
 };
 
 describe('prerender parameters', () => {
-  it('should list every opening of the catalogue', async () => {
-    const params = openingParams(await bundledContentLoaders.openingCatalog());
+  it('should list every opening of the catalogue by its slug in each language', async () => {
+    const catalog = await bundledContentLoaders.openingCatalog();
 
-    expect(params).toHaveLength(21);
-    expect(params).toContainEqual({ id: 'italian-game' });
+    expect(openingParams(catalog, 'en')).toHaveLength(21);
+    expect(openingParams(catalog, 'en')).toContainEqual({ id: 'italian-game' });
+    expect(openingParams(catalog, 'es')).toContainEqual({ id: 'apertura-italiana' });
   });
 
   it('should list every endgame', async () => {
-    const params = endgameParams(await bundledContentLoaders.endgames());
+    const endgames = await bundledContentLoaders.endgames();
 
-    expect(params).toHaveLength(14);
-    expect(params).toContainEqual({ id: 'lucena-position' });
+    expect(endgameParams(endgames, 'en')).toHaveLength(14);
+    expect(endgameParams(endgames, 'es')).toContainEqual({ id: 'posicion-de-lucena' });
   });
 
-  it('should list every curated position by its number in the gallery', async () => {
-    const params = positionParams(await bundledContentLoaders.positions());
+  it('should list every curated position by its slug', async () => {
+    const positions = await bundledContentLoaders.positions();
 
-    expect(params).toHaveLength(13);
-    expect(params[0]).toEqual({ id: '1' });
-    expect(params.at(-1)).toEqual({ id: '13' });
+    expect(positionParams(positions, 'en')).toHaveLength(13);
+    expect(positionParams(positions, 'es')).toContainEqual({ id: 'mate-de-la-coz' });
   });
 
   it('should list the levels that have lessons, in the order of Learn', async () => {
     const catalog = await bundledLessonLoaders.catalog();
 
-    expect(levelParams(catalog)).toEqual([
-      { level: 'beginner' },
-      { level: 'intermediate' },
-      { level: 'advanced' },
+    expect(levelParams(catalog, 'es')).toEqual([
+      { level: 'principiante' },
+      { level: 'intermedio' },
+      { level: 'avanzado' },
     ]);
-    expect(levelParams(catalog.filter((lesson) => lesson.level === 'beginner'))).toEqual([
-      { level: 'beginner' },
-    ]);
+    expect(
+      levelParams(
+        catalog.filter((lesson) => lesson.level === 'beginner'),
+        'en',
+      ),
+    ).toEqual([{ level: 'beginner' }]);
   });
 
   it('should list every lesson under its own level', async () => {
-    const params = lessonParams(await bundledLessonLoaders.catalog());
+    const catalog = await bundledLessonLoaders.catalog();
 
-    expect(params).toHaveLength(36);
-    expect(params).toContainEqual({ level: 'beginner', lesson: 'the-board' });
-    expect(new Set(params.map((entry) => entry.lesson)).size).toBe(36);
+    expect(lessonParams(catalog, 'en')).toHaveLength(36);
+    expect(lessonParams(catalog, 'en')).toContainEqual({ level: 'beginner', lesson: 'the-board' });
+    expect(lessonParams(catalog, 'es')).toContainEqual({
+      level: 'principiante',
+      lesson: 'el-caballo',
+    });
+  });
+
+  it('should fail rather than leave out an entity without a slug', () => {
+    expect(() => openingParams([{ id: 'no-such-opening' } as never], 'es')).toThrow();
   });
 });
 
 describe('serverRoutes', () => {
   it.each([
-    'analysis',
-    'openings/:id/practice',
-    'openings/:id/drill',
-    'learn/puzzles',
-    'learn/puzzles/:lesson',
-    'glossary',
+    'en/analysis',
+    'es/analisis',
+    'en/openings/:id/practice',
+    'es/aperturas/:id/practica',
+    'en/learn/puzzles',
+    'es/aprender/problemas',
+    'en/learn/puzzles/:lesson',
+    'es/aprender/problemas/:lesson',
   ])('should leave %s to the browser', (path) => {
     expect(routeOf(path).renderMode).toBe(RenderMode.Client);
   });
@@ -77,33 +92,54 @@ describe('serverRoutes', () => {
   it('should list the client routes before the routes that would match them', () => {
     const paths = serverRoutes.map((route) => route.path);
 
-    expect(paths.indexOf('openings/:id/practice')).toBeLessThan(paths.indexOf('openings/:id'));
-    expect(paths.indexOf('learn/puzzles/:lesson')).toBeLessThan(
-      paths.indexOf('learn/:level/:lesson'),
+    expect(paths.indexOf('es/aperturas/:id/practica')).toBeLessThan(
+      paths.indexOf('es/aperturas/:id'),
+    );
+    expect(paths.indexOf('en/learn/puzzles/:lesson')).toBeLessThan(
+      paths.indexOf('en/learn/:level/:lesson'),
     );
     expect(paths.at(-1)).toBe('**');
   });
 
-  it('should take the entity pages from the content catalogues', async () => {
+  /** Every address the prerender builds in a language: the routes with parameters, expanded. */
+  const prerenderedWithParams = async (lang: Lang): Promise<string[]> => {
+    const urls: string[] = [];
+    for (const route of serverRoutes) {
+      if (!route.path.startsWith(`${lang}/`) || !('getPrerenderParams' in route)) continue;
+      const { getPrerenderParams } = route;
+      const params = await TestBed.runInInjectionContext(() => getPrerenderParams());
+      for (const entry of params) {
+        urls.push(`/${route.path.replace(/:(\w+)/g, (_, name: string) => entry[name])}`);
+      }
+    }
+    return urls;
+  };
+
+  it('should prerender every page of the content in both languages, at its own address', async () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: CONTENT_LOADERS, useValue: bundledContentLoaders },
         { provide: LESSON_LOADERS, useValue: bundledLessonLoaders },
       ],
     });
-    const paramsOf = async (path: string) => {
-      const route = routeOf(path);
-      if (route.renderMode !== RenderMode.Prerender || !('getPrerenderParams' in route)) {
-        throw new Error(`${path} is not prerendered with parameters`);
+    for (const lang of LANGS) {
+      const expected = pageUrls.indexablePages().map((page) => pageUrls.pathOf(page, lang));
+      const withParams = await prerenderedWithParams(lang);
+      // 21 openings, 14 endgames, 13 positions, 3 levels and 36 lessons.
+      expect(withParams).toHaveLength(87);
+      expect(expected).toEqual(expect.arrayContaining(withParams));
+      // The rest (home, four categories, glossary, about) are routes without parameters, built by
+      // the `**` server route.
+      const literal = new Set(
+        langRoutes(lang).map((route) => (route.path ? `/${lang}/${route.path}` : `/${lang}`)),
+      );
+      const rest = expected.filter((url) => !withParams.includes(url));
+      expect(rest).toHaveLength(7);
+      for (const url of rest) {
+        const [, , section, child] = url.split('/');
+        const top = child === undefined ? url : `/${lang}/${section}`;
+        expect(literal.has(top), url).toBe(true);
       }
-      const { getPrerenderParams } = route;
-      return TestBed.runInInjectionContext(() => getPrerenderParams());
-    };
-
-    expect(await paramsOf('openings/:id')).toHaveLength(21);
-    expect(await paramsOf('endgames/:id')).toHaveLength(14);
-    expect(await paramsOf('positions/:id')).toHaveLength(13);
-    expect(await paramsOf('learn/:level')).toHaveLength(3);
-    expect(await paramsOf('learn/:level/:lesson')).toHaveLength(36);
+    }
   });
 });

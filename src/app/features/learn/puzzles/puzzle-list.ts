@@ -5,6 +5,7 @@ import { I18nService } from '../../../core/i18n';
 import { ProgressService, type PuzzleProgress } from '../../../core/progress';
 import { byLevelAndOrder } from '../learn-progress';
 import { BATCH_SIZE } from './next-batch';
+import { PageLinks } from '../../../core/routing';
 
 type ListState =
   | { readonly status: 'loading' }
@@ -69,6 +70,7 @@ export const puzzleRows = (
   styleUrl: './puzzle-list.css',
 })
 export class PuzzleList {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
   protected readonly progress = inject(ProgressService);

@@ -8,6 +8,7 @@ import { PageTitle } from '../../../core/page-title';
 import { ProgressService } from '../../../core/progress';
 import { nextLesson } from '../learn-progress';
 import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks, routeId, routeLang } from '../../../core/routing';
 
 type LevelState =
   | { readonly status: 'loading' }
@@ -26,14 +27,22 @@ type LevelState =
   styleUrl: './level-page.css',
 })
 export class LevelPage {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   /** Keeps the prerender waiting until the content is on the page. */
   private readonly wait = injectPrerenderWait();
   private readonly content = inject(ContentService);
   private readonly progress = inject(ProgressService);
 
+  private readonly route = inject(ActivatedRoute);
+  /** The guard only lets known levels in. */
   protected readonly level = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('level') as LessonLevel)),
+    this.route.paramMap.pipe(
+      map(
+        (params) =>
+          routeId(params, routeLang(this.route.snapshot), 'level', 'level') as LessonLevel,
+      ),
+    ),
     { requireSync: true },
   );
   protected readonly state = signal<LevelState>({ status: 'loading' });

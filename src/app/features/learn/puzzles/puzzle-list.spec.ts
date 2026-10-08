@@ -5,7 +5,7 @@ import { LESSON_LOADERS, PUZZLE_LOADERS, type PuzzleLoaders } from '../../../cor
 import { I18nService } from '../../../core/i18n';
 import { PROGRESS_STORE_LOADER, type ProgressStoreLoader } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
-import { LEARN_ROUTES } from '../learn.routes';
+import { learnRoutes } from '../learn.routes';
 import {
   emptyPuzzleLoaders,
   FIXTURE_PUZZLE_COUNT,
@@ -21,7 +21,7 @@ describe('PuzzleList', () => {
     memory = memoryProgressStore();
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
         { provide: LESSON_LOADERS, useValue: lessonLoadersWithPuzzles },
         { provide: PUZZLE_LOADERS, useValue: puzzles },
         { provide: PROGRESS_STORE_LOADER, useValue: store ?? memory.loader },
@@ -57,7 +57,7 @@ describe('PuzzleList', () => {
     expect(root.querySelector('h1')?.textContent).toContain('Practise more');
     const cards = Array.from(root.querySelectorAll<HTMLAnchorElement>('.lesson-card'));
     expect(cards).toHaveLength(1);
-    expect(cards[0].getAttribute('href')).toBe('/learn/puzzles/the-fork');
+    expect(cards[0].getAttribute('href')).toBe('/en/learn/puzzles/the-fork');
     expect(cards[0].querySelector('.title')?.textContent).toContain('The fork');
     // A single theme is the lesson itself: it is not repeated under the title.
     expect(cards[0].querySelector('.themes')).toBeNull();

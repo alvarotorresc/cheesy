@@ -2,13 +2,13 @@
 
 <ng-template #topbar>
   <nav class="topbar play-lead" [attr.aria-label]="t.positionNavigation">
-    <a class="topbar-link" routerLink="/positions">
+    <a class="topbar-link" [routerLink]="links.category('positions')">
       <span aria-hidden="true">&larr;</span> {{ t.backToGallery }}
     </a>
     @if (position()) {
       <div class="neighbours">
         @if (previousId(); as id) {
-          <a class="topbar-link" [routerLink]="['/positions', id]">
+          <a class="topbar-link" [routerLink]="links.position(id)">
             <span aria-hidden="true">&lsaquo;</span> {{ t.previousPosition }}
           </a>
         } @else {
@@ -18,7 +18,7 @@
         }
         <span class="where">{{ where() }}</span>
         @if (nextId(); as id) {
-          <a class="topbar-link" [routerLink]="['/positions', id]">
+          <a class="topbar-link" [routerLink]="links.position(id)">
             {{ t.nextPosition }} <span aria-hidden="true">&rsaquo;</span>
           </a>
         } @else {
@@ -41,7 +41,7 @@
     <p>{{ t.loadErrorHint }}</p>
     <button type="button" class="button" (click)="list.retry()">{{ t.retry }}</button>
   </div>
-} @else if (list.status() === 'loading' || redirecting()) {
+} @else if (list.status() === 'loading') {
   <p class="notice" role="status">{{ t.loading }}</p>
 } @else if (!position()) {
   <p class="notice" role="alert">{{ t.notFound }}</p>
@@ -285,7 +285,7 @@
           </div>
           <div class="after-actions revealing-late">
             @if (nextId(); as id) {
-              <a class="button primary" [routerLink]="['/positions', id]">{{ t.nextExercise }}</a>
+              <a class="button primary" [routerLink]="links.position(id)">{{ t.nextExercise }}</a>
             }
             <button type="button" class="button" (click)="trainer.retry()">
               {{ t.tryAgain }}

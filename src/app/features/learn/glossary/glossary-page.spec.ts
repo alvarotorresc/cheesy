@@ -15,7 +15,11 @@ describe('GlossaryPage', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn/glossary', component: GlossaryPage }]),
+        provideRouter([
+          { path: 'learn/glossary', component: GlossaryPage },
+          // The links of the cards go to the Spanish address, which this page also answers.
+          { path: 'es/aprender/glosario', component: GlossaryPage },
+        ]),
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
         { provide: LESSON_LOADERS, useValue: bundledLessonLoaders },
       ],
@@ -198,7 +202,9 @@ describe('GlossaryPage', () => {
     const root = await open();
     const lesson = root.querySelector('article#rank .lesson');
     expect(lesson?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Se aprende en: El tablero');
-    expect(lesson?.querySelector('a')?.getAttribute('href')).toBe('/learn/beginner/the-board');
+    expect(lesson?.querySelector('a')?.getAttribute('href')).toBe(
+      '/es/aprender/principiante/el-tablero',
+    );
     expect(root.querySelector('article#gambit .lesson')).toBeNull();
   });
 
@@ -225,7 +231,7 @@ describe('GlossaryPage', () => {
   });
 
   it('should take the reader to the card again when a link goes to the term of the address', async () => {
-    const root = await open('/learn/glossary#check');
+    const root = await open('/es/aprender/glosario#check');
     expect(scrolled).toContain(root.querySelector('article#check'));
     scrolled.length = 0;
     // Typing leaves the router's address behind: the next link to #check is the same URL to it.

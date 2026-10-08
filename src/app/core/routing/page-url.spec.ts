@@ -91,6 +91,21 @@ describe('page addresses', () => {
   });
 });
 
+describe('the id behind a slug', () => {
+  it('looks each kind up in its own language', () => {
+    const { idOfSlug } = pageUrls;
+    expect(idOfSlug('opening', 'apertura-italiana', 'es')).toBe('italian-game');
+    expect(idOfSlug('opening', 'apertura-italiana', 'en')).toBeUndefined();
+    expect(idOfSlug('endgame', 'cutting-off-the-king', 'en')).toBe('rook-cuts-king');
+    expect(idOfSlug('position', 'mate-de-la-coz', 'es')).toBe('smothered-mate');
+    expect(idOfSlug('level', 'intermedio', 'es')).toBe('intermediate');
+    expect(idOfSlug('lesson', 'el-caballo', 'es', 'beginner')).toBe('knight-moves');
+    expect(idOfSlug('lesson', 'el-caballo', 'es', 'advanced')).toBeUndefined();
+    expect(idOfSlug('lesson', 'la-horquilla', 'es')).toBe('the-fork');
+    expect(idOfSlug('lesson', 'nope', 'en')).toBeUndefined();
+  });
+});
+
 describe('the same address in the other language', () => {
   it.each([
     ['/es/finales/posicion-de-lucena', 'en', '/en/endgames/lucena-position'],

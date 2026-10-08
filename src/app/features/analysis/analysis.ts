@@ -16,6 +16,7 @@ import { AnalysisSession } from './analysis-session';
 import { bookNames } from './book-names';
 import { IoPanel } from './io-panel/io-panel';
 import { MoveTreeView } from './move-tree/move-tree-view';
+import { PageLinks } from '../../core/routing';
 
 /** Best lines shown by the engine. */
 const LINE_COUNT = 3;
@@ -47,6 +48,7 @@ const KEYS: Record<string, (session: AnalysisSession) => void> = {
   host: { '(document:keydown)': 'onKey($event)' },
 })
 export class Analysis {
+  protected readonly links = inject(PageLinks);
   protected readonly session = inject(AnalysisSession);
   protected readonly engine = inject(EngineService);
   protected readonly i18n = inject(I18nService);

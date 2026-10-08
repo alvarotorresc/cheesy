@@ -2,12 +2,12 @@
 
 <ng-template #topbar>
   <nav class="topbar play-lead" [attr.aria-label]="t.thisOpening">
-    <a class="back-link" routerLink="/openings">
+    <a class="back-link" [routerLink]="links.category('openings')">
       <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
     </a>
     @if (session.loadState() === 'loading' || session.loadState() === 'ready') {
-      @if (openingId()?.get('id'); as id) {
-        <a class="swap-link" [routerLink]="['/openings', id]">{{ t.backToOpening }}</a>
+      @if (openingId(); as id) {
+        <a class="swap-link" [routerLink]="links.opening(id)">{{ t.backToOpening }}</a>
       }
     }
   </nav>

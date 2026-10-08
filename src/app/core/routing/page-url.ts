@@ -68,6 +68,34 @@ export function createPageUrls(data: SlugData) {
   const levelOfLesson = (id: string): LessonLevel | undefined =>
     levels.find((level) => Object.hasOwn(data.lessons[level], id));
 
+  /**
+   * The id behind the slug of a route parameter, or undefined when no entity has that slug in that
+   * language. A lesson slug is looked up in its level, or in every level (the puzzles of a lesson).
+   */
+  const idOfSlug = (
+    kind: 'opening' | 'endgame' | 'position' | 'level' | 'lesson',
+    slug: string,
+    lang: Lang,
+    level?: LessonLevel,
+  ): string | undefined => {
+    switch (kind) {
+      case 'opening':
+        return idOf(data.openings, slug, lang);
+      case 'endgame':
+        return idOf(data.endgames, slug, lang);
+      case 'position':
+        return idOf(data.positions, slug, lang);
+      case 'level':
+        return levels.find((l) => data.levels[l][lang] === slug);
+      case 'lesson':
+        for (const l of level ? [level] : levels) {
+          const id = idOf(data.lessons[l] ?? {}, slug, lang);
+          if (id) return id;
+        }
+        return undefined;
+    }
+  };
+
   /** The address of a page in a language. An unknown id gives the page of its category. */
   const pathOf = (page: Page, lang: Lang): string => {
     const root = `/${lang}`;
@@ -201,7 +229,7 @@ export function createPageUrls(data: SlugData) {
     { kind: 'about' },
   ];
 
-  return { pathOf, pageOf, translateUrl, indexablePages, langs: PAGE_LANGS };
+  return { pathOf, pageOf, translateUrl, idOfSlug, indexablePages, langs: PAGE_LANGS };
 }
 
 export type PageUrls = ReturnType<typeof createPageUrls>;

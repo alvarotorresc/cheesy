@@ -21,6 +21,7 @@ import { MoveText } from '../../../shared/move';
 import { MiniBoard, ReplayCoordinator } from '../../../shared/mini-board';
 import { HERO_OPENING_IDS, type OpeningLine } from '../home-data';
 import { createHeroPlayer } from '../hero-player';
+import { PageLinks } from '../../../core/routing';
 
 interface MovePair {
   readonly number: number;
@@ -43,6 +44,7 @@ interface MovePair {
   styleUrl: './home-hero.css',
 })
 export class HomeHero implements OnInit {
+  protected readonly links = inject(PageLinks);
   readonly lines = input.required<readonly OpeningLine[]>();
 
   protected readonly i18n = inject(I18nService);

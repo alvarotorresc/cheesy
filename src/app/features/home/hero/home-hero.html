@@ -100,7 +100,7 @@
 
     <a
       class="button primary cta"
-      [routerLink]="['/openings', line().id]"
+      [routerLink]="links.opening(line().id)"
       [attr.aria-label]="i18n.t().home.playOpeningLabel(name())"
       >{{ i18n.t().home.playOpening }}</a
     >

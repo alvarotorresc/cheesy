@@ -1,11 +1,21 @@
-import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  computed,
+  DOCUMENT,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { ProgressService } from '../../../core/progress';
 import { byLevelAndOrder, LEVELS, nextLesson } from '../learn-progress';
 import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks } from '../../../core/routing';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -30,6 +40,7 @@ type HomeState =
   styleUrl: './learn-home.css',
 })
 export class LearnHome {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   /** Keeps the prerender waiting until the content is on the page. */
   private readonly wait = injectPrerenderWait();
@@ -37,6 +48,7 @@ export class LearnHome {
   protected readonly progress = inject(ProgressService);
 
   protected readonly state = signal<HomeState>({ status: 'loading' });
+
   /** Result of the last try to delete the progress, announced to screen readers. */
   protected readonly message = signal('');
   /** Lessons with puzzles; the "Practise more" card only shows when there is one. */
@@ -62,6 +74,20 @@ export class LearnHome {
   constructor() {
     this.wait(() => this.load());
     this.wait(() => this.loadPuzzles());
+
+    // Before the lessons, Learn was the glossary, and links to a term (`/learn#pin`, which Netlify
+    // now sends to `/en/learn#pin`) are out there. They still land on the term. It happens once the
+    // page is on screen, so the prerendered page hydrates as it is.
+    const route = inject(ActivatedRoute);
+    const router = inject(Router);
+    const document = inject(DOCUMENT);
+    afterNextRender(() => {
+      const fragment = route.snapshot.fragment;
+      if (!fragment || document.getElementById(fragment)) return;
+      void router.navigateByUrl(`${this.links.glossary()}#${encodeURIComponent(fragment)}`, {
+        replaceUrl: true,
+      });
+    });
   }
 
   protected async load(): Promise<void> {

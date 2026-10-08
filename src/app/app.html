@@ -4,7 +4,7 @@
 
 <header class="header">
   <div class="header-inner">
-    <a class="brand" routerLink="/" [attr.aria-label]="i18n.t().app.homeLabel">
+    <a class="brand" [routerLink]="links.home()" [attr.aria-label]="i18n.t().app.homeLabel">
       <app-logo class="logo" />
       <span class="wordmark">{{ i18n.t().app.name }}</span>
     </a>
@@ -13,7 +13,7 @@
       @for (section of sections; track section) {
         <a
           class="nav-link"
-          [routerLink]="['/', section]"
+          [routerLink]="sectionLink(section)"
           routerLinkActive="active"
           ariaCurrentWhenActive="page"
         >
@@ -37,15 +37,16 @@
 
     <div class="lang" role="group" [attr.aria-label]="i18n.t().app.language">
       @for (lang of langs; track lang) {
-        <button
-          type="button"
+        <a
           class="lang-button"
+          [routerLink]="langLink(lang)"
           [attr.lang]="lang"
-          [attr.aria-pressed]="i18n.lang() === lang"
-          (click)="i18n.setLang(lang)"
+          [attr.hreflang]="lang"
+          [attr.aria-current]="i18n.lang() === lang ? 'true' : null"
+          (click)="i18n.rememberLang(lang)"
         >
           {{ lang.toUpperCase() }}
-        </button>
+        </a>
       }
     </div>
   </div>

@@ -147,11 +147,19 @@
   cursor: pointer;
 }
 
+/* The language switch is a pair of links (each to this page in that language) that look the same. */
+a.lang-button {
+  display: inline-grid;
+  place-items: center;
+  text-decoration: none;
+}
+
 .lang-button:hover {
   color: var(--color-on-ink);
 }
 
-.lang-button[aria-pressed='true'] {
+.lang-button[aria-pressed='true'],
+.lang-button[aria-current='true'] {
   background: var(--color-accent);
   color: var(--color-on-accent);
 }

@@ -50,9 +50,9 @@ describe('SiteFooter', () => {
     const element = await render('en');
     const [, privacy, glossary, about] = Array.from(element.querySelectorAll('a'));
 
-    expect(glossary.getAttribute('href')).toBe('/learn/glossary');
-    expect(privacy.getAttribute('href')).toBe('/acerca#privacidad');
-    expect(about.getAttribute('href')).toBe('/acerca');
+    expect(glossary.getAttribute('href')).toBe('/en/learn/glossary');
+    expect(privacy.getAttribute('href')).toBe('/en/about#privacidad');
+    expect(about.getAttribute('href')).toBe('/en/about');
   });
 
   it('should never mention analytics', async () => {

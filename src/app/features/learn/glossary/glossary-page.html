@@ -125,7 +125,7 @@
                   @if (lessonOf(term); as lesson) {
                     <p class="lesson">
                       {{ g.learnedIn }}
-                      <a [routerLink]="['/learn', lesson.level, lesson.id]">{{
+                      <a [routerLink]="links.lesson(lesson.level, lesson.id)">{{
                         i18n.localize(lesson.title)
                       }}</a>
                     </p>
