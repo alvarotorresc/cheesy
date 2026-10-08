@@ -7,6 +7,6 @@
         [prefix]="segment.number"
       />} @else if (segment.kind === 'square') {<span class="square" [appSpot]="{ kind: 'squares', squares: [segment.square] }">{{
         segment.square
-      }}</span>} @else if (termLinks()) {<a class="term" routerLink="/learn/glossary" [fragment]="segment.id">{{
+      }}</span>} @else if (termLinks()) {<a class="term" [routerLink]="links.glossary()" [fragment]="segment.id">{{
         segment.text
       }}</a>} @else {<app-term [id]="segment.id" [text]="segment.text" />}}

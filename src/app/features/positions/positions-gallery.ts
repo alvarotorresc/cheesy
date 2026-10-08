@@ -31,6 +31,9 @@ import {
 } from './position-filters';
 import { PositionList } from './position-list';
 import { playerMoveCount } from './position-order';
+import { injectPrerenderWait } from '../../core/prerender';
+import { PageLinks } from '../../core/routing';
+import { CategoryAbout } from '../../shared/category-about';
 
 interface Card {
   readonly position: CuratedPosition;
@@ -56,14 +59,17 @@ interface Group {
  */
 @Component({
   selector: 'app-positions-gallery',
-  imports: [RouterLink, Icon, MiniBoard],
+  imports: [CategoryAbout, RouterLink, Icon, MiniBoard],
   templateUrl: './positions-gallery.html',
   styleUrl: './positions-gallery.css',
   providers: [PositionList],
   host: { class: 'catalog' },
 })
 export class PositionsGallery {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   protected readonly list = inject(PositionList);
   protected readonly progress = inject(ProgressService);
 
@@ -84,7 +90,9 @@ export class PositionsGallery {
 
   private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
 
-  protected readonly ready = computed(() => this.list.status() === 'ready' && !!this.rows());
+  // Not waiting for the saved progress: the prerendered page shows the gallery without it, and a
+  // first render that waited would not hydrate that HTML. The marks appear when it is read.
+  protected readonly ready = computed(() => this.list.status() === 'ready');
   protected readonly failed = computed(() => this.list.status() === 'error');
 
   /** One frame per position, kept while the rows change so the boards are not redrawn. */
@@ -131,7 +139,7 @@ export class PositionsGallery {
     // Read the rows again whenever progress changes (deleted from here, or saved by an exercise).
     effect(() => {
       this.progress.revision();
-      untracked(() => void this.loadRows());
+      untracked(() => this.wait(() => this.loadRows()));
     });
   }
 
@@ -180,7 +188,9 @@ export class PositionsGallery {
     this.foldOpen.update((open) => !open);
   }
 
-  protected askToClear(): void {
+  protected async askToClear(): Promise<void> {
+    // The gallery shows before the saved progress is read: wait for it rather than say "nothing".
+    if (!this.rows()) await this.loadRows();
     if (this.rows()?.size) {
       this.message.set('');
       this.dialog()?.nativeElement.showModal();

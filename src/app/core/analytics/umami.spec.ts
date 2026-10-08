@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/core';
+import { DOCUMENT, PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideUmami, UMAMI_ORIGIN, UMAMI_WEBSITE_ID, umamiEnabled } from './umami';
 
@@ -51,6 +51,13 @@ describe('Umami', () => {
     expect(script.defer).toBe(true);
     expect(script.getAttribute('data-website-id')).toBe('7f4c1a2e-0000-4000-8000-000000000000');
     expect(script.getAttribute('data-do-not-track')).toBe('true');
+  });
+
+  it('should add no script to the prerendered pages', () => {
+    TestBed.configureTestingModule({ providers: [{ provide: PLATFORM_ID, useValue: 'server' }] });
+    start('7f4c1a2e-0000-4000-8000-000000000000');
+
+    expect(scripts()).toEqual([]);
   });
 
   it('should know it is enabled when there is an id', () => {

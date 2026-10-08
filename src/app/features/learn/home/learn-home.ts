@@ -1,10 +1,22 @@
-import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  computed,
+  DOCUMENT,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService, type LessonSummary } from '../../../core/content';
 import { I18nService } from '../../../core/i18n';
 import { ProgressService } from '../../../core/progress';
 import { byLevelAndOrder, LEVELS, nextLesson } from '../learn-progress';
+import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks } from '../../../core/routing';
+import { CategoryAbout } from '../../../shared/category-about';
 
 type HomeState =
   | { readonly status: 'loading' }
@@ -24,16 +36,20 @@ type HomeState =
  */
 @Component({
   selector: 'app-learn-home',
-  imports: [NgTemplateOutlet, RouterLink],
+  imports: [CategoryAbout, NgTemplateOutlet, RouterLink],
   templateUrl: './learn-home.html',
   styleUrl: './learn-home.css',
 })
 export class LearnHome {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   private readonly content = inject(ContentService);
   protected readonly progress = inject(ProgressService);
 
   protected readonly state = signal<HomeState>({ status: 'loading' });
+
   /** Result of the last try to delete the progress, announced to screen readers. */
   protected readonly message = signal('');
   /** Lessons with puzzles; the "Practise more" card only shows when there is one. */
@@ -57,27 +73,37 @@ export class LearnHome {
   });
 
   constructor() {
-    void this.load();
-    void this.loadPuzzles();
+    this.wait(() => this.load());
+    this.wait(() => this.loadPuzzles());
+
+    // Before the lessons, Learn was the glossary, and links to a term (`/learn#pin`, which Netlify
+    // now sends to `/en/learn#pin`) are out there. They still land on the term. It happens once the
+    // page is on screen, so the prerendered page hydrates as it is.
+    const route = inject(ActivatedRoute);
+    const router = inject(Router);
+    const document = inject(DOCUMENT);
+    afterNextRender(() => {
+      const fragment = route.snapshot.fragment;
+      if (!fragment || document.getElementById(fragment)) return;
+      void router.navigateByUrl(`${this.links.glossary()}#${encodeURIComponent(fragment)}`, {
+        replaceUrl: true,
+      });
+    });
   }
 
   protected async load(): Promise<void> {
     this.state.set({ status: 'loading' });
+    let catalog: readonly LessonSummary[];
     try {
-      const [catalog, rows, puzzles] = await Promise.all([
-        this.content.lessonCatalog(),
-        this.progress.lessons(),
-        this.progress.puzzles(),
-      ]);
-      this.state.set({
-        status: 'ready',
-        catalog,
-        done: new Set(rows.map((row) => row.lessonId)),
-        puzzlesSaved: puzzles.length,
-      });
+      catalog = await this.content.lessonCatalog();
     } catch {
       this.state.set({ status: 'error' });
+      return;
     }
+    // The lessons first, as the prerendered page shows them, and the saved progress when it is read:
+    // a page that waited for both would not hydrate the HTML it was sent with.
+    this.state.set({ status: 'ready', catalog, done: new Set(), puzzlesSaved: 0 });
+    await this.refresh();
   }
 
   /** Reads the saved progress again, keeping the catalogue and the page as they are. */

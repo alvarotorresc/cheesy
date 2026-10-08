@@ -21,7 +21,7 @@
   }
   @case ('ready') {
     @if (continueWith(); as next) {
-      <a class="continue button" [routerLink]="['/learn', next.level, next.id]">
+      <a class="continue button" [routerLink]="links.lesson(next.level, next.id)">
         {{ t.continueWith(i18n.localize(next.title)) }}
       </a>
     }
@@ -31,7 +31,7 @@
           <h2>{{ t.levels[entry.level].name }}</h2>
           <p>{{ t.levels[entry.level].description }}</p>
           @if (entry.lessons.length) {
-            <a class="button" [routerLink]="['/learn', entry.level]">
+            <a class="button" [routerLink]="links.level(entry.level)">
               {{ t.lessonCount(entry.lessons.length) }}
             </a>
           } @else {
@@ -64,7 +64,7 @@
     <li class="puzzles-card">
       <h2>{{ t.puzzles.title }}</h2>
       <p>{{ t.puzzles.cardDescription }}</p>
-      <a class="button" routerLink="/learn/puzzles">{{ t.puzzles.open }}</a>
+      <a class="button" [routerLink]="links.puzzles()">{{ t.puzzles.open }}</a>
     </li>
   }
 </ng-template>
@@ -73,7 +73,7 @@
   <li class="glossary-card">
     <h2>{{ g.title }}</h2>
     <p>{{ g.cardDescription }}</p>
-    <a class="button" routerLink="/learn/glossary">{{ g.open }}</a>
+    <a class="button" [routerLink]="links.glossary()">{{ g.open }}</a>
   </li>
 </ng-template>
 
@@ -87,3 +87,5 @@
     </button>
   </div>
 </dialog>
+
+<app-category-about category="learn" />

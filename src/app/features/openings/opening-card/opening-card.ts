@@ -11,6 +11,7 @@ import { MoveText } from '../../../shared/move';
 import { RichTextView } from '../../../shared/rich-text';
 import { createReplay, framesFromLine, MiniBoard, ReplayTrigger } from '../../../shared/mini-board';
 import type { ColorProgress } from '../opening-progress';
+import { PageLinks } from '../../../core/routing';
 
 /** A move of the strip with its number in front (empty for Black's). */
 interface ShownMove {
@@ -37,6 +38,7 @@ interface ProgressRow {
   templateUrl: './opening-card.html',
 })
 export class OpeningCard {
+  protected readonly links = inject(PageLinks);
   readonly opening = input.required<OpeningSummary>();
   readonly progress = input<Record<ProgressColor, ColorProgress> | undefined>(undefined);
 

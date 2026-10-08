@@ -2,6 +2,7 @@ import type { AnalysisOrigin } from '../../core/analysis-link';
 import type { ContentService, OpeningBook, Side } from '../../core/content';
 import type { Localized } from '../../core/i18n';
 import type { MoveTree } from '../../core/move-tree';
+import type { Page } from '../../core/routing';
 import { orderPositions, POSITION_NUMBER } from '../positions/position-order';
 
 /** What the "From" notice says about where the user came from, and the way back. */
@@ -14,21 +15,21 @@ export type AnalysisOriginInfo =
       /** Node the user arrived at, to write "after 7...Qc7". */
       readonly arrivalId: string;
       readonly book: OpeningBook;
-      readonly back: readonly string[];
+      readonly back: Page;
     }
   | {
       readonly kind: 'endgame';
       readonly title: Localized;
       readonly goal: 'win' | 'draw';
       readonly side: Side;
-      readonly back: readonly string[];
+      readonly back: Page;
     }
   | {
       readonly kind: 'position';
       readonly title: Localized;
       readonly number: number;
       readonly total: number;
-      readonly back: readonly string[];
+      readonly back: Page;
     };
 
 /**
@@ -48,8 +49,10 @@ export const resolveOrigin = async (
         const book = await content.openingBook(origin.id);
         if (!book) return undefined;
         const path = tree.path(arrivalId).map((node) => node.san);
-        const back =
-          origin.kind === 'opening' ? ['/openings', book.id] : ['/openings', book.id, 'practice'];
+        const back: Page =
+          origin.kind === 'opening'
+            ? { kind: 'opening', id: book.id }
+            : { kind: 'practice', id: book.id };
         return {
           kind: origin.kind,
           title: book.name,
@@ -67,7 +70,7 @@ export const resolveOrigin = async (
           title: endgame.name,
           goal: endgame.goal,
           side: endgame.playerSide,
-          back: ['/endgames', endgame.id],
+          back: { kind: 'endgame', id: endgame.id },
         };
       }
       case 'position': {
@@ -84,7 +87,7 @@ export const resolveOrigin = async (
           title: ordered[index].title,
           number: index + 1,
           total: ordered.length,
-          back: ['/positions', String(index + 1)],
+          back: { kind: 'position', id: ordered[index].id },
         };
       }
     }

@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ContentService, type EndgamePosition } from '../../core/content';
+import { ContentService, startingWith, type EndgamePosition } from '../../core/content';
 import { I18nService } from '../../core/i18n';
 import { ProgressService } from '../../core/progress';
 import { Icon } from '../../shared/icon';
@@ -24,6 +24,8 @@ import {
   type GoalFilter,
 } from './endgame-catalog';
 import { fill } from './endgame-goal';
+import { PageLinks } from '../../core/routing';
+import { CategoryAbout } from '../../shared/category-about';
 
 interface Card {
   readonly endgame: EndgamePosition;
@@ -40,17 +42,20 @@ interface Card {
  */
 @Component({
   selector: 'app-endgames',
-  imports: [RouterLink, Icon, MiniBoard],
+  imports: [CategoryAbout, RouterLink, Icon, MiniBoard],
   templateUrl: './endgames.html',
   styleUrl: './endgames.css',
   host: { class: 'catalog' },
 })
 export class Endgames {
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   protected readonly progress = inject(ProgressService);
   private readonly content = inject(ContentService);
 
-  protected readonly endgames = resource({ loader: () => this.content.endgames() });
+  private readonly endgamesRef = resource({ loader: () => this.content.endgames() });
+  /** Starts with the endgames a prerendered page carries, so it hydrates as it was rendered. */
+  protected readonly endgames = startingWith(this.endgamesRef, this.content.loadedEndgames());
   private readonly passed = resource({
     params: () => this.progress.revision(),
     loader: () => this.progress.endgames(),
@@ -123,6 +128,10 @@ export class Endgames {
         untracked(() => this.filters.update((filters) => ({ ...filters, category })));
       }
     });
+  }
+
+  protected reloadEndgames(): void {
+    this.endgamesRef.reload();
   }
 
   protected countOf(category: string): number {

@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  margin-top: var(--space-12);
+}
+
+/* A reading column under a hairline, quieter than the list above it. */
+.category-about {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 65ch;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.category-about h2 {
+  font-size: var(--text-lg);
+}
+
+.category-about p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}

@@ -7,7 +7,7 @@ import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
-import { LEARN_ROUTES } from '../learn.routes';
+import { learnRoutes } from '../learn.routes';
 import { fixturePuzzleLoaders, lessonLoadersWithPuzzles } from '../testing';
 
 describe('LevelPage', () => {
@@ -17,7 +17,11 @@ describe('LevelPage', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([
+          { path: 'learn', children: learnRoutes('en') },
+          // The links of the pages go to the canonical address, which answers the same pages.
+          { path: 'en/learn', children: learnRoutes('en') },
+        ]),
         { provide: TitleStrategy, useExisting: PageTitle },
         { provide: LESSON_LOADERS, useValue: lessonLoadersWithPuzzles },
         { provide: PUZZLE_LOADERS, useValue: fixturePuzzleLoaders },
@@ -39,6 +43,9 @@ describe('LevelPage', () => {
       harness.detectChanges();
       expect(root.querySelector('.notice[role=status]')).toBeNull();
     });
+    // The lessons show first and the saved progress right after, once it has been read.
+    await new Promise((resolve) => setTimeout(resolve));
+    harness.detectChanges();
     return root;
   };
 
@@ -56,12 +63,12 @@ describe('LevelPage', () => {
     const items = Array.from(root.querySelectorAll('.lesson-item'));
     for (const item of items) expect(item.querySelectorAll('a')).toHaveLength(1);
     const card = items[1].querySelector('a');
-    expect(card?.getAttribute('href')).toBe('/learn/beginner/knight-moves');
+    expect(card?.getAttribute('href')).toBe('/en/learn/beginner/knight-moves');
     expect(card?.contains(items[1].querySelector('.summary'))).toBe(true);
     expect(card?.contains(items[1].querySelector('.order'))).toBe(true);
     (items[1].querySelector('.summary') as HTMLElement).click();
     const router = TestBed.inject(Router);
-    await vi.waitFor(() => expect(router.url).toBe('/learn/beginner/knight-moves'));
+    await vi.waitFor(() => expect(router.url).toBe('/en/learn/beginner/knight-moves'));
   });
 
   it('should put the next tag in the title row and name the completed lessons', async () => {
@@ -78,7 +85,7 @@ describe('LevelPage', () => {
   it('should link to the glossary after the list', async () => {
     const root = await render('/learn/beginner');
     const link = root.querySelector('.glossary-link');
-    expect(link?.getAttribute('href')).toBe('/learn/glossary');
+    expect(link?.getAttribute('href')).toBe('/en/learn/glossary');
     expect(link?.textContent).toContain('A word you don’t know?');
   });
 
@@ -104,7 +111,7 @@ describe('LevelPage', () => {
       expect(intermediate.querySelector('.puzzles-link')).not.toBeNull();
     });
     const link = intermediate.querySelector('.puzzles-link');
-    expect(link?.getAttribute('href')).toBe('/learn/puzzles');
+    expect(link?.getAttribute('href')).toBe('/en/learn/puzzles');
     expect(link?.textContent).toContain('Want more exercises?');
     expect(link?.textContent).toContain('Practise more');
   });

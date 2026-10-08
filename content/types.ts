@@ -1,5 +1,6 @@
 import type {
   ChoiceStep,
+  CuratedPosition,
   EndgamePosition,
   ExplainStep,
   FindMoveStep,
@@ -61,7 +62,21 @@ export type AuthoringTree = Omit<OpeningTree, 'description' | 'root'> & {
   root: AuthoringNode[];
 };
 
-export type EndgameSpec = Omit<EndgamePosition, 'explanation'> & { explanation: Localized };
+/**
+ * The longer text of an endgame or position page (`about`): what it is, when it comes up in a
+ * game, what to remember and, for historical positions, where it comes from. 80 to 200 words per
+ * language, written as plain text with term marks and cut into a `RichText` by the build.
+ */
+export type EndgameSpec = Omit<EndgamePosition, 'explanation' | 'about'> & {
+  explanation: Localized;
+  about: Localized;
+};
+
+/** An endgame as the build writes it, with its longer text. */
+export type EndgameEntry = EndgamePosition;
+
+/** A curated position as the build writes it, with its longer text. */
+export type CuratedEntry = CuratedPosition;
 
 export type GlossarySpec = Omit<GlossaryTerm, 'definition'> & { definition: Localized };
 

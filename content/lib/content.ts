@@ -2,8 +2,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
-  CuratedPosition,
-  EndgamePosition,
+  CuratedEntry,
+  EndgameEntry,
   GlossaryTerm,
   Lesson,
   OpeningTree,
@@ -22,6 +22,8 @@ export const POSITIONS_FILE = path.join(DATA_DIR, 'positions.json');
 export const GLOSSARY_FILE = path.join(DATA_DIR, 'glossary.json');
 export const LESSONS_DIR = path.join(DATA_DIR, 'lessons');
 export const LESSON_CATALOG_FILE = path.join(DATA_DIR, 'lesson-catalog.json');
+export const CATEGORY_TEXTS_FILE = path.join(DATA_DIR, 'category-texts.json');
+export const SLUGS_FILE = path.join(DATA_DIR, 'slugs.json');
 export const PUZZLES_DIR = path.join(DATA_DIR, 'puzzles');
 export const PUZZLE_CATALOG_FILE = path.join(DATA_DIR, 'puzzle-catalog.json');
 
@@ -37,9 +39,11 @@ export function loadOpeningFiles(): { file: string; data: unknown }[] {
 export const loadOpenings = () => loadOpeningFiles().map((f) => f.data as OpeningTree);
 export const loadOpeningCatalogRaw = () => readJson(OPENING_CATALOG_FILE);
 export const loadEndgamesRaw = () => readJson(ENDGAMES_FILE);
-export const loadEndgames = () => loadEndgamesRaw() as EndgamePosition[];
+export const loadEndgames = () => loadEndgamesRaw() as EndgameEntry[];
 export const loadPositionsRaw = () => readJson(POSITIONS_FILE);
-export const loadPositions = () => loadPositionsRaw() as CuratedPosition[];
+export const loadPositions = () => loadPositionsRaw() as CuratedEntry[];
+
+export const loadCategoryTextsRaw = () => readJson(CATEGORY_TEXTS_FILE);
 
 export const loadGlossaryRaw = () => readJson(GLOSSARY_FILE);
 export const loadGlossary = () => loadGlossaryRaw() as GlossaryTerm[];

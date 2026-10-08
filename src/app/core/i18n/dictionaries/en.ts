@@ -1049,6 +1049,57 @@ export const en = {
     moveMine: 'your move',
     moveRival: 'the rival’s',
   },
+  seo: {
+    /** Titles of the pages, keyword first; the name of the site is added after them. */
+    titles: {
+      home: 'Chess openings, endgames and tactics in your browser',
+      openings: (n: number) => `Chess openings: learn ${n} openings by playing them`,
+      endgames: (n: number) => `Chess endgames: ${n} endgames to practise`,
+      positions: 'Chess positions: famous traps and tactics to solve',
+      learn: (n: number) => `Learn chess from scratch: ${n} interactive lessons`,
+      levels: {
+        beginner: (n: number) => `Chess for beginners: ${n} interactive lessons`,
+        intermediate: (n: number) => `Intermediate chess: tactics and endgames in ${n} lessons`,
+        advanced: (n: number) => `Advanced chess: strategy and plans in ${n} lessons`,
+      },
+      glossary: 'Chess glossary: the words of chess in plain English',
+      about: 'About Cheesy, a free and open-source chess trainer',
+      opening: (name: string) => `${name}: learn the opening by playing`,
+      endgame: (name: string) => `${name}: chess endgame to practise`,
+      position: (name: string) => `${name}: chess position to solve`,
+      lesson: (title: string, level: string) => `${title}: ${level.toLowerCase()} chess lesson`,
+      notFound: 'Page not found',
+    },
+    /** Descriptions of the pages that have no text of their own to cut one from. */
+    descriptions: {
+      home: 'Learn chess in your browser: play the openings move by move, practise endgames against the Lichess tablebase and solve famous tactics. Free, no account.',
+      levels: {
+        beginner:
+          'Start chess from zero: the board, how each piece moves, check, castling and your first checkmates, in short lessons where you move the pieces yourself.',
+        intermediate:
+          'Forks, pins, skewers, discovered attacks and the endgames every player must know, explained step by step with exercises on a board that answers you.',
+        advanced:
+          'Chess strategy for club players: pawn structures, outposts, open files, plans and calculation, with lessons that make you find the moves on the board.',
+      },
+      glossary:
+        'The words of chess explained in plain English, from fork and pin to opposition and zugzwang, each with a small board that shows the idea in a real position.',
+      about:
+        'What Cheesy is and who makes it: a free, open-source chess trainer that keeps your progress in your browser, with no accounts, no cookies and no ads.',
+      notFound: 'This address is not a page of Cheesy.',
+    },
+    ogImageAlt:
+      'The name Cheesy, the line "Openings, endgames and tactics, in your browser." and a chess knight on a board.',
+    breadcrumb: 'Breadcrumb',
+    /** Heading of the two paragraphs about each category, at the end of its page. */
+    categoryAbout: {
+      openings: 'About the openings',
+      endgames: 'About the endgames',
+      positions: 'About the positions',
+      learn: 'About the lessons',
+    },
+    aboutEndgame: 'About this endgame',
+    aboutPosition: 'About this position',
+  },
   tablebase: {
     title: 'Tablebase',
     show: 'Show',

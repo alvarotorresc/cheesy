@@ -13,6 +13,7 @@ const POSITION: CuratedPosition = {
   playerSide: 'white',
   solution: ['Rh8#'],
   explanation: plainText('Mate.'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: ['back-rank'],
 };
 

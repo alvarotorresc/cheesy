@@ -61,7 +61,7 @@ export class IoPanel {
     const tree = this.session.tree();
     const current = this.session.currentId();
     const ply = tree.isMainLine(current) ? tree.path(current).length : undefined;
-    const { commands, queryParams } = analysisLink({ tree, ply });
+    const { commands, queryParams } = analysisLink({ tree, ply, lang: this.i18n.lang() });
     return this.router.createUrlTree(commands, { queryParams });
   });
 

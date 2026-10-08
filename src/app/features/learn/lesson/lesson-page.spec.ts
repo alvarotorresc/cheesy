@@ -14,7 +14,7 @@ import { I18nService } from '../../../core/i18n';
 import { PageTitle } from '../../../core/page-title';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
-import { LEARN_ROUTES } from '../learn.routes';
+import { learnRoutes } from '../learn.routes';
 import {
   emptyPuzzleLoaders,
   FIXTURE_CATALOG,
@@ -38,7 +38,11 @@ describe('LessonPage', () => {
   ) => {
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([
+          { path: 'learn', children: learnRoutes('en') },
+          // The links of the pages go to the canonical address, which answers the same pages.
+          { path: 'en/learn', children: learnRoutes('en') },
+        ]),
         { provide: TitleStrategy, useExisting: PageTitle },
         { provide: LESSON_LOADERS, useValue: loaders },
         { provide: GLOSSARY_LOADER, useValue: bundledGlossaryLoader },
@@ -203,15 +207,15 @@ describe('LessonPage', () => {
       const summary = root().querySelector('.summary')!;
       const terms = Array.from(summary.querySelectorAll<HTMLAnchorElement>('.terms a'));
       expect(terms.map((link) => link.textContent?.trim())).toEqual(['Check', 'Checkmate']);
-      expect(terms[0].getAttribute('href')).toBe('/learn/glossary#check');
+      expect(terms[0].getAttribute('href')).toBe('/en/learn/glossary#check');
       expect(summary.querySelector('a.practise')?.getAttribute('href')).toBe(
-        '/endgames?category=Basic%20mates',
+        '/en/endgames?category=Basic%20mates',
       );
       expect(summary.querySelector('a.back-to-level')?.getAttribute('href')).toBe(
-        '/learn/beginner',
+        '/en/learn/beginner',
       );
       // One way back to the level, not two.
-      expect(summary.querySelectorAll('a[href="/learn/beginner"]')).toHaveLength(1);
+      expect(summary.querySelectorAll('a[href="/en/learn/beginner"]')).toHaveLength(1);
       // The last lesson of the level, and no later level has lessons: there is no next one.
       expect(summary.querySelector('a.next-lesson')).toBeNull();
       expect(document.activeElement).toBe(summary.querySelector('h2'));
@@ -248,10 +252,10 @@ describe('LessonPage', () => {
     });
 
     it('should start the next lesson from its first step', async () => {
-      await render('/learn/beginner/the-board');
+      await render('/en/learn/beginner/the-board');
       await solveEveryStep();
       const link = root().querySelector<HTMLAnchorElement>('.summary a.next-lesson')!;
-      expect(link.getAttribute('href')).toBe('/learn/beginner/knight-moves');
+      expect(link.getAttribute('href')).toBe('/en/learn/beginner/knight-moves');
       expect(root().querySelector('.summary a.practise')).toBeNull();
       link.click();
       await vi.waitFor(async () => {
@@ -286,7 +290,7 @@ describe('LessonPage', () => {
     await render('/learn/beginner/knight-moves');
     await solveEveryStep();
     const link = root().querySelector<HTMLAnchorElement>('.summary a.next-lesson')!;
-    expect(link.getAttribute('href')).toBe('/learn/intermediate/hanging-pieces');
+    expect(link.getAttribute('href')).toBe('/en/learn/intermediate/hanging-pieces');
     link.click();
     await vi.waitFor(async () => {
       await settle();
@@ -303,7 +307,7 @@ describe('LessonPage', () => {
       const summary = root().querySelector('.summary')!;
       const link = summary.querySelector('a.puzzles');
       expect(link?.textContent).toContain('Practise more');
-      expect(link?.getAttribute('href')).toBe('/learn/puzzles/the-fork');
+      expect(link?.getAttribute('href')).toBe('/en/learn/puzzles/the-fork');
       expect(summary.querySelector('a.practise')).toBeNull();
     });
 
@@ -320,7 +324,7 @@ describe('LessonPage', () => {
       await solveEveryStep();
       const summary = root().querySelector('.summary')!;
       expect(summary.querySelector('a.puzzles')?.getAttribute('href')).toBe(
-        '/learn/puzzles/knight-moves',
+        '/en/learn/puzzles/knight-moves',
       );
       expect(summary.querySelector('a.practise')).not.toBeNull();
     });

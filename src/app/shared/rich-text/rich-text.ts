@@ -6,6 +6,7 @@ import { I18nService } from '../../core/i18n';
 import { SpotTrigger } from '../board';
 import { MoveText } from '../move';
 import { TermView } from '../term';
+import { PageLinks } from '../../core/routing';
 
 type MoveSegment = Extract<Segment, { kind: 'move' }>;
 
@@ -20,6 +21,7 @@ type MoveSegment = Extract<Segment, { kind: 'move' }>;
   styleUrl: './rich-text.css',
 })
 export class RichTextView {
+  protected readonly links = inject(PageLinks);
   readonly text = input.required<RichText>();
   /** Terms become links to the glossary page instead of opening a popup (inside a popup). */
   readonly termLinks = input(false);

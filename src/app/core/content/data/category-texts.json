@@ -1,0 +1,42 @@
+{
+  "openings": {
+    "es": [
+      "Una apertura se aprende mejor jugándola que leyéndola. Aquí cada apertura es un árbol de jugadas con su línea principal y una selección de respuestas del rival, y las jugadas importantes llevan una nota corta que explica para qué sirven. Las hay para blancas y para negras, ordenadas por familias: las que empiezan avanzando el peón de rey, las de peón de dama y unas pocas más.",
+      "Puedes jugar una apertura de dos maneras. En partida libre, el rival responde con nuestras líneas y, cuando se acaban o te sales de ellas, sigue jugando Stockfish. En el modo estricto solo vale la jugada de la línea, y una línea queda dominada cuando la completas tres veces seguidas sin fallos. Así sabes qué te sabes de memoria y qué te falta."
+    ],
+    "en": [
+      "An opening is easier to learn by playing it than by reading about it. Here each opening is a tree of moves with its main line and a selection of the opponent’s replies, and the key moves carry a short note on what they are for. There are openings for White and for Black, grouped by family: those that start by advancing the king’s pawn, those with the queen’s pawn, and a few others.",
+      "You can play an opening in two ways. In a free game, the opponent answers with our lines and, once they run out or you leave them, Stockfish takes over. In strict mode only the move of the line counts, and a line is mastered once you complete it three times in a row without a mistake. That way you know what you have memorised and what is still missing."
+    ]
+  },
+  "endgames": {
+    "es": [
+      "Muchas partidas igualadas se deciden en el final, con pocas piezas en el tablero. Aquí están los finales que conviene saber de memoria: rey y peón contra rey, con la oposición y la regla del cuadrado; torre y peón, con las posiciones de Lucena y de Philidor; dama contra peón, y los mates básicos con dama, con torre y con dos alfiles. Cada uno trae su idea clave por si te atascas.",
+      "El rival juega a la perfección, porque responde con la tablebase de Lichess, que conoce el resultado exacto de cada posición con pocas piezas. Si el objetivo es ganar, tienes que dar mate o coronar sin dejar escapar la victoria. Si es hacer tablas, tienes que aguantar 15 jugadas sin pasar a una posición perdida, o forzar las tablas por las reglas, por ejemplo con un ahogado."
+    ],
+    "en": [
+      "Many level games are decided in the endgame, with few pieces left on the board. Here are the endgames worth knowing by heart: king and pawn against king, with the opposition and the rule of the square; rook and pawn, with the Lucena and Philidor positions; queen against pawn; and the basic mates with queen, with rook and with two bishops. Each one comes with its key idea in case you get stuck.",
+      "The opponent plays perfectly, because it answers with the Lichess tablebase, which knows the exact result of every position with few pieces. If your goal is to win, you have to mate or promote without letting the win slip. If it is to draw, you have to hold out for 15 moves without reaching a lost position, or force a draw by the rules, with a stalemate for example."
+    ]
+  },
+  "positions": {
+    "es": [
+      "Cada posición tiene una jugada ganadora, y tu tarea es encontrarla. Hay mates con nombre propio, como el de la coz, el del pasillo o el de Anastasia, golpes tácticos como la horquilla, la clavada o la enfilada, y momentos de partidas célebres, como la partida de la Ópera de Morphy o la Siempreviva de Anderssen. Si te atascas, puedes empezar de nuevo o ver la solución.",
+      "La galería no dice el nombre de ninguna posición, porque en una partida de verdad nadie te avisa de que hay una horquilla. Dentro, el nombre puede darte una pista, pero la solución no se ve hasta que la resuelves o pides verla, y entonces cada posición explica por qué funciona la combinación. Todas las soluciones están comprobadas con Stockfish: cada jugada tuya es la mejor y no hay otra igual de buena."
+    ],
+    "en": [
+      "Each position has a winning move, and your job is to find it. There are named mates, such as the smothered mate, the back-rank mate or Anastasia’s mate, tactical blows such as the fork, the pin or the skewer, and moments from famous games, such as Morphy’s Opera Game or Anderssen’s Evergreen. If you get stuck, you can start again or see the solution.",
+      "The gallery names no position, because in a real game nobody warns you that there is a fork. Inside, the name may give you a hint, but the solution stays hidden until you solve it or ask to see it, and then each position explains why the combination works. Every solution has been checked with Stockfish: each of your moves is the best one, with no equally good alternative."
+    ]
+  },
+  "learn": {
+    "es": [
+      "Las lecciones enseñan ajedrez desde cero, en pasos cortos y con el tablero siempre delante. Están en tres niveles. Principiante: el tablero, cómo se mueve cada pieza y los primeros mates. Medio: la táctica y los finales que hay que saber. Avanzado: estrategia, es decir, estructuras de peones, planes y cálculo. Cada lección mezcla explicaciones con ejercicios en los que mueves tú.",
+      "Las palabras del ajedrez que aparecen en las lecciones están en el glosario, con una definición sencilla y un tablero de ejemplo, y puedes consultarlas sin salir de la lección. Muchas lecciones del nivel medio terminan con Practica más: problemas reales de partidas de la base abierta de Lichess, ordenados por tema y del más fácil al más difícil."
+    ],
+    "en": [
+      "The lessons teach chess from scratch, in short steps and always with the board in front of you. They come in three levels. Beginner: the board, how each piece moves and the first mates. Intermediate: tactics and the endgames you need to know. Advanced: strategy, that is, pawn structures, plans and calculation. Each lesson mixes explanations with exercises where you make the moves.",
+      "The chess words used in the lessons are in the glossary, with a plain definition and an example board, and you can look them up without leaving the lesson. Many intermediate lessons end with Practise more: real puzzles from games in the open Lichess database, grouped by theme and going from easiest to hardest."
+    ]
+  }
+}

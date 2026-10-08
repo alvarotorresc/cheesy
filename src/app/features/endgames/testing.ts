@@ -10,6 +10,7 @@ export const LUCENA: EndgamePosition = {
   goal: 'win',
   playerSide: 'white',
   explanation: plainText('Construye el puente.', 'Build the bridge.'),
+  about: plainText('Sobre el final.', 'About the endgame.'),
 };
 
 /** Rule of the square: Black to move and draw. */
@@ -21,6 +22,7 @@ export const SQUARE_RULE: EndgamePosition = {
   goal: 'draw',
   playerSide: 'black',
   explanation: plainText('Entra en el cuadrado.', 'Step into the square.'),
+  about: plainText('Sobre el final.', 'About the endgame.'),
 };
 
 /** Mate with the queen, but White starts with Black to move: the engine moves first. */
@@ -32,4 +34,5 @@ export const ENGINE_FIRST: EndgamePosition = {
   goal: 'win',
   playerSide: 'white',
   explanation: plainText('Espera.', 'Wait.'),
+  about: plainText('Sobre el final.', 'About the endgame.'),
 };

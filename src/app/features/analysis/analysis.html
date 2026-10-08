@@ -48,7 +48,7 @@
             </p>
             <p class="origin-sub">{{ originSub() }} {{ t.originTry }}</p>
             <div class="origin-actions">
-              <a class="text-button" [routerLink]="origin.back">{{ originBack() }}</a>
+              <a class="text-button" [routerLink]="links.to(origin.back)">{{ originBack() }}</a>
             </div>
           </section>
         }

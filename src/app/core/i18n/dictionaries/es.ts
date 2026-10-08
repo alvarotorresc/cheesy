@@ -1070,6 +1070,56 @@ export const es: Messages = {
     moveMine: 'tu jugada',
     moveRival: 'del rival',
   },
+  seo: {
+    titles: {
+      home: 'Ajedrez en el navegador: aperturas, finales y táctica',
+      openings: (n: number) => `Aperturas de ajedrez: aprende ${n} aperturas jugando`,
+      endgames: (n: number) => `Finales de ajedrez: ${n} finales para practicar`,
+      positions: 'Posiciones de ajedrez: trampas y combinaciones célebres',
+      learn: (n: number) => `Aprender ajedrez desde cero: ${n} lecciones interactivas`,
+      levels: {
+        beginner: (n: number) => `Ajedrez para principiantes: ${n} lecciones interactivas`,
+        intermediate: (n: number) =>
+          `Ajedrez de nivel intermedio: táctica y finales en ${n} lecciones`,
+        advanced: (n: number) => `Ajedrez avanzado: estrategia y planes en ${n} lecciones`,
+      },
+      glossary: 'Glosario de ajedrez: las palabras del ajedrez explicadas',
+      about: 'Acerca de Cheesy, un entrenador de ajedrez libre y gratuito',
+      opening: (name: string) => `${name}: aprende la apertura jugando`,
+      endgame: (name: string) => `${name}: final de ajedrez para practicar`,
+      position: (name: string) => `${name}: posición de ajedrez para resolver`,
+      lesson: (title: string, level: string) =>
+        `${title}: lección de ajedrez (${level.toLowerCase()})`,
+      notFound: 'Página no encontrada',
+    },
+    descriptions: {
+      home: 'Aprende ajedrez en el navegador: juega las aperturas jugada a jugada, practica finales contra la tablebase de Lichess y resuelve tácticas célebres. Gratis.',
+      levels: {
+        beginner:
+          'Empieza el ajedrez desde cero: el tablero, cómo se mueve cada pieza, el jaque, el enroque y tus primeros mates, en lecciones cortas donde mueves tú.',
+        intermediate:
+          'Horquillas, clavadas, enfiladas, ataques a la descubierta y los finales que todo jugador debe saber, paso a paso y con ejercicios en un tablero que responde.',
+        advanced:
+          'Estrategia de ajedrez para jugadores de club: estructuras de peones, puestos avanzados, columnas abiertas, planes y cálculo, buscando tú las jugadas.',
+      },
+      glossary:
+        'Las palabras del ajedrez explicadas en llano, de la horquilla y la clavada a la oposición y el zugzwang, cada una con un tablero que enseña la idea.',
+      about:
+        'Qué es Cheesy y quién lo hace: un entrenador de ajedrez libre y gratuito que guarda tu progreso en tu navegador, sin cuentas, sin cookies y sin anuncios.',
+      notFound: 'Esta dirección no es una página de Cheesy.',
+    },
+    ogImageAlt:
+      'El nombre Cheesy, la frase «Aperturas, finales y táctica, en tu navegador.» y un caballo de ajedrez sobre un tablero.',
+    breadcrumb: 'Ruta de navegación',
+    categoryAbout: {
+      openings: 'Sobre las aperturas',
+      endgames: 'Sobre los finales',
+      positions: 'Sobre las posiciones',
+      learn: 'Sobre las lecciones',
+    },
+    aboutEndgame: 'Sobre este final',
+    aboutPosition: 'Sobre esta posición',
+  },
   tablebase: {
     title: 'Tablebase',
     show: 'Mostrar',

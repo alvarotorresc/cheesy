@@ -14,13 +14,13 @@
           <a href="https://github.com/alvarotorresc/cheesy" rel="noopener">{{ f.source }}</a>
         </li>
         <li>
-          <a routerLink="/acerca" fragment="privacidad">{{ f.privacy }}</a>
+          <a [routerLink]="links.about()" fragment="privacidad">{{ f.privacy }}</a>
         </li>
         <li>
-          <a routerLink="/learn/glossary">{{ f.glossary }}</a>
+          <a [routerLink]="links.glossary()">{{ f.glossary }}</a>
         </li>
         <li>
-          <a routerLink="/acerca">{{ f.about }}</a>
+          <a [routerLink]="links.about()">{{ f.about }}</a>
         </li>
         <li>
           <a href="https://alvarotc.com" rel="noopener">alvarotc.com</a>

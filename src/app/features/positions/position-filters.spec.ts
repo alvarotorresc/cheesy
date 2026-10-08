@@ -19,6 +19,7 @@ const position = (
   playerSide,
   solution,
   explanation: plainText('-'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: [],
 });
 

@@ -54,7 +54,7 @@
     <div class="notice" role="alert">
       <p>{{ t.loadError }}</p>
       <p>{{ t.loadErrorHint }}</p>
-      <button type="button" class="button" (click)="endgames.reload()">{{ t.retry }}</button>
+      <button type="button" class="button" (click)="reloadEndgames()">{{ t.retry }}</button>
     </div>
   </div>
 } @else {
@@ -192,7 +192,7 @@
                   <a
                     class="button"
                     [class.primary]="!card.done"
-                    [routerLink]="['/endgames', card.endgame.id]"
+                    [routerLink]="links.endgame(card.endgame.id)"
                     [attr.aria-label]="
                       (card.done ? t.repeat : t.practice) + ' ' + i18n.localize(card.endgame.name)
                     "
@@ -238,3 +238,5 @@
     </button>
   </div>
 </dialog>
+
+<app-category-about category="endgames" />

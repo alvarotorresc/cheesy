@@ -77,13 +77,14 @@ describe('RichTextView', () => {
     fixture.componentRef.setInput('termLinks', true);
     await fixture.whenStable();
     expect(element.querySelector('a.term')?.getAttribute('href')).toBe(
-      '/learn/glossary#opposition',
+      '/es/aprender/glosario#opposition',
     );
   });
 
   it('should point the board at a square of the text', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: [BoardSpotlight, provideRouter([])] });
+    TestBed.inject(I18nService).setLang('es');
     const f = TestBed.createComponent(RichTextView);
     f.componentRef.setInput('text', TEXT);
     await f.whenStable();

@@ -20,6 +20,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadSources, redirectRules } from '../../scripts/netlify-redirects.mjs';
+import { createPageUrls } from '../../src/app/core/routing/page-url.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 // media/shots/lib.mjs -> the repository root is two levels up.
@@ -37,6 +39,17 @@ const BASE_URL = `http://localhost:${PORT}`;
 // Fixed time for everything that reads the clock (progress dates, review schedules):
 // Monday 28 September 2026, 10:30 in Madrid. Only `Date` is pinned; timers keep running.
 const FIXED_NOW = new Date('2026-09-28T08:30:00Z');
+
+// The scenes name each page by its address of before the languages (`/openings/ruy-lopez`), the
+// same for both; this is that page in a language (`/es/aperturas/apertura-espanola`), through the
+// redirect Netlify answers the old address with. `/` stays the home page in English.
+export function pathIn(path, lang) {
+  const [, bare, tail] = /^([^?#]*)(.*)$/.exec(path);
+  const sources = loadSources();
+  const to = bare === '/' ? '/' : Object.fromEntries(redirectRules(sources))[bare];
+  if (!to) throw new Error(`${path} is no page of the app`);
+  return createPageUrls(sources.slugs).translateUrl(to + tail, lang);
+}
 
 export function buildSite() {
   const res = spawnSync('pnpm', ['build'], { cwd: REPO_ROOT, stdio: 'inherit' });
@@ -72,11 +85,13 @@ async function answers(url) {
   }
 }
 
-// File for a request path. A path without an extension that has no file gets index.html (the
-// app is an SPA and the router owns those paths); a missing file with an extension (an asset)
-// gives null, which is answered with a 404. Nothing outside the build directory is ever served.
+// File for a request path, as Netlify picks it: the file itself, the prerendered page of the
+// route (`route.html`, see scripts/flatten-prerender.mjs) with or without a trailing slash, and
+// for any other path without an extension the app shell, index.csr.html (the router owns those
+// paths). A missing file with an extension (an asset) gives null, which is answered with a 404.
+// Nothing outside the build directory is ever served.
 function fileFor(pathname) {
-  const index = join(DIST, 'index.html');
+  const index = join(DIST, 'index.csr.html');
   let decoded;
   try {
     decoded = decodeURIComponent(pathname);
@@ -84,9 +99,12 @@ function fileFor(pathname) {
     return index;
   }
   const file = resolve(DIST, `.${sep}${decoded}`);
-  if (file !== DIST && !file.startsWith(DIST + sep)) return index;
+  if (file === DIST) return join(DIST, 'index.html');
+  if (!file.startsWith(DIST + sep)) return index;
   if (existsSync(file) && statSync(file).isFile()) return file;
-  return extname(pathname) === '' ? index : null;
+  if (extname(pathname) !== '') return null;
+  const page = `${file}.html`;
+  return existsSync(page) && statSync(page).isFile() ? page : index;
 }
 
 // It always starts its own server. If the port already answers it fails: that could be the

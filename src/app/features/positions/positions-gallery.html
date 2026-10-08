@@ -211,7 +211,7 @@
             <li>
               <a
                 class="card"
-                [routerLink]="['/positions', card.number]"
+                [routerLink]="links.position(card.position.id)"
                 [style.--i]="card.order"
                 [attr.aria-label]="cardLabel(card)"
               >
@@ -280,3 +280,5 @@
     </button>
   </div>
 </dialog>
+
+<app-category-about category="positions" />

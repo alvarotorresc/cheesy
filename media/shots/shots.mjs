@@ -19,6 +19,7 @@ import {
   ready,
   settle,
   startServer,
+  pathIn,
 } from './lib.mjs';
 import { SCENES } from './scenes.mjs';
 
@@ -77,7 +78,7 @@ async function main() {
             progress: scene.progress,
           });
           if (scene.before) await scene.before(page, language);
-          await page.goto(server.url + scene.path);
+          await page.goto(server.url + pathIn(scene.path, language));
           await ready(page);
           if (scene.prep) await scene.prep(page, language);
           await settle(page, { keepScroll: scene.keepScroll === true });

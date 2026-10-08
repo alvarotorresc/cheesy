@@ -1,29 +1,31 @@
 import type { Routes } from '@angular/router';
+import slugs from '../../core/content/data/slugs.json';
+import type { Lang } from '../../core/i18n/i18n.types';
 import type { PageSection } from '../../core/page-title';
 import type { MainKind } from '../../layout/main-kind';
-import { lessonGuard, levelGuard, oldGlossaryLinkGuard, puzzleGuard } from './learn-guards';
+import { lessonGuard, levelGuard, puzzleGuard } from './learn-guards';
 
-export const LEARN_ROUTES: Routes = [
+/** Routes under Learn in a language (`/en/learn`, `/es/aprender`); levels and lessons by slug. */
+export const learnRoutes = (lang: Lang): Routes => [
   {
     path: '',
     pathMatch: 'full',
     title: 'learn' satisfies PageSection,
-    canActivate: [oldGlossaryLinkGuard],
     loadComponent: () => import('./home/learn-home').then((m) => m.LearnHome),
   },
-  // Before ':level', so "glossary" and "puzzles" are never read as levels.
+  // Before ':level', so the glossary and the puzzles are never read as levels.
   {
-    path: 'glossary',
+    path: slugs.sections.glossary[lang],
     title: 'glossary' satisfies PageSection,
     loadComponent: () => import('./glossary/glossary-page').then((m) => m.GlossaryPage),
   },
   {
-    path: 'puzzles',
+    path: slugs.app.puzzles[lang],
     title: 'puzzles' satisfies PageSection,
     loadComponent: () => import('./puzzles/puzzle-list').then((m) => m.PuzzleList),
   },
   {
-    path: 'puzzles/:lesson',
+    path: `${slugs.app.puzzles[lang]}/:lesson`,
     title: 'puzzles' satisfies PageSection,
     canActivate: [puzzleGuard],
     data: { main: 'play' } satisfies { main: MainKind },

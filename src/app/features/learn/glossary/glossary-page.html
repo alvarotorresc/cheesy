@@ -9,7 +9,7 @@
 @if (glossary.error()) {
   <div class="notice" role="alert">
     <p>{{ g.failed }}</p>
-    <button type="button" class="button" (click)="glossary.reload()">{{ g.retry }}</button>
+    <button type="button" class="button" (click)="reloadGlossary()">{{ g.retry }}</button>
   </div>
 } @else if (glossary.isLoading()) {
   <p class="notice" role="status">{{ g.loading }}</p>
@@ -125,7 +125,7 @@
                   @if (lessonOf(term); as lesson) {
                     <p class="lesson">
                       {{ g.learnedIn }}
-                      <a [routerLink]="['/learn', lesson.level, lesson.id]">{{
+                      <a [routerLink]="links.lesson(lesson.level, lesson.id)">{{
                         i18n.localize(lesson.title)
                       }}</a>
                     </p>

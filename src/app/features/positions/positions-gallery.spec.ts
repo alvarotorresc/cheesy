@@ -10,31 +10,34 @@ import { POSITIONS_ROUTES } from './positions.routes';
 
 const POSITIONS: CuratedPosition[] = [
   {
-    id: 'with-source',
+    id: 'legal-mate',
     title: { es: 'Con partida', en: 'With a game' },
     source: 'Morphy – Duke Karl of Brunswick, Paris 1858',
     fen: '4k3/8/8/8/8/8/8/4K2R w K - 0 1',
     playerSide: 'white',
     solution: ['Rh8#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['back-rank', 'windmill-attack'],
   },
   {
-    id: 'black-to-play',
+    id: 'kieninger-trap',
     title: { es: 'Juegan negras', en: 'Black plays' },
     fen: '4k2r/8/8/8/8/8/8/4K3 b k - 0 1',
     playerSide: 'black',
     solution: ['Rh1#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['pin'],
   },
   {
-    id: 'two-moves',
+    id: 'smothered-mate',
     title: { es: 'Dos', en: 'Two' },
     fen: '4k3/8/8/8/8/8/8/R3K3 w Q - 0 1',
     playerSide: 'white',
     solution: ['Ra8+', 'Kd7', 'Ra7+'],
     explanation: plainText('Jaques.', 'Checks.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['fork'],
   },
 ];
@@ -49,10 +52,18 @@ const row = (positionId: string, solves: number, firstTry: boolean): PositionPro
 
 const setup = async (
   positions: ContentLoaders['positions'],
-  options: { lang?: 'es' | 'en'; rows?: PositionProgress[] } = {},
+  options: { lang?: 'es' | 'en'; rows?: PositionProgress[]; slowRows?: Promise<void> } = {},
 ) => {
   const memory = memoryProgressStore();
   for (const saved of options.rows ?? []) memory.positionRows.set(saved.positionId, saved);
+  const { slowRows } = options;
+  if (slowRows) {
+    const all = memory.store.positions.all;
+    memory.store.positions.all = async () => {
+      await slowRows;
+      return all();
+    };
+  }
   TestBed.configureTestingModule({
     providers: [
       provideRouter([{ path: 'positions', children: POSITIONS_ROUTES }]),
@@ -75,6 +86,9 @@ const ready = async (positions: ContentLoaders['positions'] = async () => POSITI
     page.harness.detectChanges();
     expect(cards(page.element).length).toBeGreaterThan(0);
   });
+  // The cards show first and the marks of the saved progress right after, once it has been read.
+  await new Promise((resolve) => setTimeout(resolve));
+  page.harness.detectChanges();
   return page;
 };
 
@@ -96,7 +110,10 @@ describe('PositionsGallery', () => {
 
   it('should not tell the title, themes or game of any position (no spoilers)', async () => {
     const { element } = await ready();
-    const text = element.textContent ?? '';
+    // The cards and the filters; the text about the category names patterns in general.
+    const text = [...element.querySelectorAll('.groups, .filters')]
+      .map((part) => part.textContent)
+      .join(' ');
 
     for (const spoiler of ['With a game', 'Morphy', 'Back rank', 'windmill', 'Smothered', 'Pin']) {
       expect(text).not.toContain(spoiler);
@@ -115,22 +132,22 @@ describe('PositionsGallery', () => {
     ]);
   });
 
-  it('should link each card to the number of its position in the whole gallery', async () => {
+  it('should link each card to the address of its position', async () => {
     const { element } = await ready();
 
     expect(cards(element).map((card) => card.getAttribute('href'))).toEqual([
-      '/positions/1',
-      '/positions/2',
-      '/positions/3',
+      '/en/positions/legal-mate',
+      '/en/positions/kieninger-trap',
+      '/en/positions/smothered-mate',
     ]);
   });
 
   it('should show the status of each position from the saved progress', async () => {
     const { element } = await ready(async () => POSITIONS, {
       rows: [
-        row('with-source', 1, true),
-        row('black-to-play', 2, false),
-        row('two-moves', 0, false),
+        row('legal-mate', 1, true),
+        row('kieninger-trap', 2, false),
+        row('smothered-mate', 0, false),
       ],
     });
 
@@ -143,14 +160,16 @@ describe('PositionsGallery', () => {
     expect(element.querySelector('.result-count')?.textContent).toContain('3 positions, 2 solved');
   });
 
-  it('should filter by side and by status, keeping the number of each card', async () => {
-    const page = await ready(async () => POSITIONS, { rows: [row('with-source', 1, true)] });
+  it('should filter by side and by status, keeping the address of each card', async () => {
+    const page = await ready(async () => POSITIONS, { rows: [row('legal-mate', 1, true)] });
 
     page.element
       .querySelector<HTMLInputElement>('input[name="side"][value="black"]')
       ?.dispatchEvent(new Event('change'));
     page.harness.detectChanges();
-    expect(cards(page.element).map((card) => card.getAttribute('href'))).toEqual(['/positions/2']);
+    expect(cards(page.element).map((card) => card.getAttribute('href'))).toEqual([
+      '/en/positions/kieninger-trap',
+    ]);
     expect(page.element.querySelector('.result-count')?.textContent).toContain('1 of 3 positions');
 
     page.element
@@ -181,7 +200,7 @@ describe('PositionsGallery', () => {
   });
 
   it('should clear the saved progress of positions after a confirmation', async () => {
-    const page = await ready(async () => POSITIONS, { rows: [row('with-source', 1, true)] });
+    const page = await ready(async () => POSITIONS, { rows: [row('legal-mate', 1, true)] });
     HTMLDialogElement.prototype.showModal ??= () => undefined;
     const dialog = page.element.querySelector('dialog') as HTMLDialogElement;
     dialog.showModal = vi.fn();
@@ -197,6 +216,30 @@ describe('PositionsGallery', () => {
       expect(page.element.querySelector('.status-msg')?.textContent).toBe('Progress cleared.');
       expect(cards(page.element)[0].getAttribute('aria-label')).toContain('Unsolved.');
     });
+  });
+
+  it('should wait for the saved progress before saying there is nothing to clear', async () => {
+    let release!: () => void;
+    const slowRows = new Promise<void>((resolve) => (release = resolve));
+    const page = await setup(async () => POSITIONS, {
+      rows: [row('legal-mate', 1, true)],
+      slowRows,
+    });
+    await vi.waitFor(() => {
+      page.harness.detectChanges();
+      expect(cards(page.element).length).toBeGreaterThan(0);
+    });
+    const dialog = page.element.querySelector('dialog') as HTMLDialogElement;
+    dialog.showModal = vi.fn();
+
+    page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    release();
+
+    await vi.waitFor(() => expect(dialog.showModal).toHaveBeenCalled());
+    page.harness.detectChanges();
+    expect(page.element.querySelector('.status-msg')?.textContent ?? '').not.toContain(
+      'There is no saved progress.',
+    );
   });
 
   it('should say there is nothing to clear when no progress is saved', async () => {

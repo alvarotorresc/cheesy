@@ -26,7 +26,11 @@ const roundTrip = (input: AnalysisLinkInput) => {
 
 describe('analysisLink', () => {
   it('should point at Analysis with no parameters for the initial position', () => {
-    expect(analysisLink({})).toEqual({ commands: ['/analysis'], queryParams: {} });
+    expect(analysisLink({})).toEqual({ commands: ['/en/analysis'], queryParams: {} });
+  });
+
+  it('should point at the Spanish address when asked for the Spanish page', () => {
+    expect(analysisLink({ lang: 'es' }).commands).toEqual(['/es/analisis']);
   });
 
   it('should leave the FEN out when it is the initial one', () => {
@@ -83,10 +87,10 @@ describe('analysisLink', () => {
 describe('absoluteAnalysisUrl', () => {
   it('should build the URL from the base of the app', () => {
     expect(absoluteAnalysisUrl({ moves: ['e4'] }, 'https://cheesy.example/')).toBe(
-      'https://cheesy.example/analysis?pgn=1.%20e4',
+      'https://cheesy.example/en/analysis?pgn=1.%20e4',
     );
     expect(absoluteAnalysisUrl({}, 'https://cheesy.example/app/')).toBe(
-      'https://cheesy.example/app/analysis',
+      'https://cheesy.example/app/en/analysis',
     );
   });
 });

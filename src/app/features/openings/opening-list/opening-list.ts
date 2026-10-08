@@ -23,6 +23,8 @@ import {
 } from '../opening-filters';
 import { familyOf, groupByFamily } from '../opening-families';
 import { summarizeByColor, type ColorProgress, type OpeningStatus } from '../opening-progress';
+import { injectPrerenderWait } from '../../../core/prerender';
+import { CategoryAbout } from '../../../shared/category-about';
 
 type ListState =
   | { status: 'loading' }
@@ -38,13 +40,15 @@ type Summary = Record<ProgressColor, ColorProgress>;
  */
 @Component({
   selector: 'app-opening-list',
-  imports: [Icon, OpeningCard],
+  imports: [CategoryAbout, Icon, OpeningCard],
   templateUrl: './opening-list.html',
   styleUrl: './opening-list.css',
   host: { class: 'catalog' },
 })
 export class OpeningList {
   protected readonly i18n = inject(I18nService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   protected readonly progressService = inject(ProgressService);
   private readonly content = inject(ContentService);
 
@@ -88,11 +92,11 @@ export class OpeningList {
   private progressGeneration = 0;
 
   constructor() {
-    void this.load();
+    this.wait(() => this.load());
     // Reads the progress again whenever it changes, such as after deleting it.
     effect(() => {
       this.progressService.revision();
-      untracked(() => void this.loadProgress());
+      untracked(() => this.wait(() => this.loadProgress()));
     });
   }
 

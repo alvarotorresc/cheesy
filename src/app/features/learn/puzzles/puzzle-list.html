@@ -1,6 +1,6 @@
 @let t = i18n.t().learn;
 @let p = t.puzzles;
-<a class="back" routerLink="/learn">← {{ p.backToLearn }}</a>
+<a class="back" [routerLink]="links.category('learn')">← {{ p.backToLearn }}</a>
 <header class="page-head">
   <h1>{{ p.title }}</h1>
   <p class="lede">{{ p.intro }}</p>
@@ -20,7 +20,7 @@
       <ol class="lessons">
         @for (row of rows(); track row.lesson.id) {
           <li class="lesson-item" [class.started]="row.started">
-            <a class="lesson-card" [routerLink]="['/learn/puzzles', row.lesson.id]">
+            <a class="lesson-card" [routerLink]="links.puzzle(row.lesson.id)">
               <span class="order" aria-hidden="true">{{ row.lesson.order }}</span>
               <span class="body">
                 <span class="title">{{ i18n.localize(row.lesson.title) }}</span>

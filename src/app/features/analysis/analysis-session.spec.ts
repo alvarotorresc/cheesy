@@ -163,7 +163,7 @@ describe('AnalysisSession', () => {
         description: plainText('-'),
         root: [],
       }),
-      back: ['/openings', 'french-defence'],
+      back: { kind: 'opening', id: 'french-defence' },
     });
     session.open({ status: 'ok', tree, currentId: 'n2' });
 

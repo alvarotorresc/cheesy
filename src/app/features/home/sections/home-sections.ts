@@ -8,6 +8,7 @@ import { prefersReducedMotion } from '../../../shared/mini-board/replay';
 import { PUZZLE_COUNT, type HomeData } from '../home-data';
 import { createPuzzleReplay } from '../puzzle-replay';
 import { SectionCard } from '../section-card/section-card';
+import { PageLinks } from '../../../core/routing';
 
 /**
  * Levels of the illustrative bar of the Analysis card, one per move of the line. The bar is
@@ -37,6 +38,7 @@ interface ShownMove {
   styleUrl: './home-sections.css',
 })
 export class HomeSections {
+  protected readonly links = inject(PageLinks);
   readonly data = input.required<HomeData>();
 
   protected readonly i18n = inject(I18nService);

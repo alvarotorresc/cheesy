@@ -1,4 +1,6 @@
+import { PlatformLocation } from '@angular/common';
 import { computed, DOCUMENT, effect, inject, Injectable, signal } from '@angular/core';
+import { langOfPath } from '../routing/page-url';
 import { en, type Messages } from './dictionaries/en';
 import { es } from './dictionaries/es';
 import { localizeSan } from './san';
@@ -18,22 +20,17 @@ const readStoredLang = (storage: () => Storage | undefined): Lang | undefined =>
   }
 };
 
-const detectBrowserLang = (navigator: Navigator | undefined): Lang => {
-  const preferred = navigator?.languages?.length ? navigator.languages : [navigator?.language];
-  for (const tag of preferred) {
-    const base = tag?.toLowerCase().split('-')[0];
-    if (isLang(base)) return base;
-  }
-  return 'en';
-};
-
+/**
+ * The language of the screen. It is the language of the address (`/es/…`, `/en/…`): on the server
+ * that prerenders a page and in the first render of the browser, so a page hydrates in the
+ * language it was written in, and after every navigation (`followUrl`). `/` is English. The
+ * language the reader chose with the switch only decides where `/` takes them.
+ */
 @Injectable({ providedIn: 'root' })
 export class I18nService {
   private readonly document = inject(DOCUMENT);
   private readonly window = this.document.defaultView ?? undefined;
-  private readonly current = signal<Lang>(
-    readStoredLang(() => this.window?.localStorage) ?? detectBrowserLang(this.window?.navigator),
-  );
+  private readonly current = signal<Lang>(langOfPath(inject(PlatformLocation).pathname) ?? 'en');
 
   /** Active language. */
   readonly lang = this.current.asReadonly();
@@ -42,18 +39,38 @@ export class I18nService {
   readonly t = computed(() => DICTIONARIES[this.current()]);
 
   constructor() {
+    // Set at once, too, so the prerendered page already carries it.
+    this.document.documentElement.lang = this.current();
     effect(() => {
       this.document.documentElement.lang = this.current();
     });
   }
 
+  /** Shows the screen in a language. The app calls it with the language of each address. */
   setLang(lang: Lang): void {
     this.current.set(lang);
+  }
+
+  /** Takes the language of an address (English for `/` and any address without one). */
+  followUrl(url: string): void {
+    this.setLang(langOfPath(url) ?? 'en');
+  }
+
+  /** Remembers the language the reader chose, for the next time they open `/`. */
+  rememberLang(lang: Lang): void {
     try {
       this.window?.localStorage.setItem(LANG_STORAGE_KEY, lang);
     } catch {
       // Storage can be unavailable (private mode, blocked site data); the choice lasts this visit.
     }
+  }
+
+  /**
+   * The language the reader chose with the switch, if any: it takes them from `/` to `/es`. The
+   * language of the browser decides nothing; without a choice `/` stays in English.
+   */
+  storedLang(): Lang | undefined {
+    return readStoredLang(() => this.window?.localStorage);
   }
 
   /** A move in SAN as the active language shows it (Spanish letters for the pieces). Display only. */

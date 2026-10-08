@@ -1,11 +1,6 @@
 import type { CuratedPosition } from '../../core/content';
 import { bundledContentLoaders, plainText } from '../../core/content/testing';
-import {
-  numberOfContentId,
-  orderPositions,
-  playerMoveCount,
-  POSITION_NUMBER,
-} from './position-order';
+import { orderPositions, playerMoveCount, POSITION_NUMBER } from './position-order';
 
 const position = (id: string, solution: string[]): CuratedPosition => ({
   id,
@@ -14,6 +9,7 @@ const position = (id: string, solution: string[]): CuratedPosition => ({
   playerSide: 'white',
   solution,
   explanation: plainText('-'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: [],
 });
 
@@ -55,22 +51,6 @@ describe('orderPositions', () => {
 
     expect(counts).toEqual([...counts].sort((a, b) => a - b));
     expect(new Set(real.map((item) => item.id)).size).toBe(real.length);
-    expect(numberOfContentId(real, real[0].id)).toBe('1');
-    expect(numberOfContentId(real, real.at(-1)?.id ?? '')).toBe(String(real.length));
-  });
-});
-
-describe('numberOfContentId', () => {
-  const ordered = orderPositions([position('a', ['x', 'y', 'z']), position('b', ['x'])]);
-
-  it('should give the number a content id has in the URL', () => {
-    expect(numberOfContentId(ordered, 'b')).toBe('1');
-    expect(numberOfContentId(ordered, 'a')).toBe('2');
-  });
-
-  it('should give nothing for an id that is not there', () => {
-    expect(numberOfContentId(ordered, 'c')).toBeUndefined();
-    expect(numberOfContentId(ordered, '1')).toBeUndefined();
   });
 });
 

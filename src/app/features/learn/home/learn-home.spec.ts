@@ -5,7 +5,7 @@ import { GLOSSARY_LOADER, LESSON_LOADERS, PUZZLE_LOADERS } from '../../../core/c
 import { I18nService } from '../../../core/i18n';
 import { PROGRESS_STORE_LOADER, ProgressService } from '../../../core/progress';
 import { memoryProgressStore } from '../../openings/testing/memory-progress-store';
-import { LEARN_ROUTES } from '../learn.routes';
+import { learnRoutes } from '../learn.routes';
 import { emptyPuzzleLoaders, fixtureLessonLoaders, fixturePuzzleLoaders } from '../testing';
 
 describe('LearnHome', () => {
@@ -19,7 +19,7 @@ describe('LearnHome', () => {
     glossary = vi.fn(async () => []);
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: PROGRESS_STORE_LOADER, useValue: memory.loader },
         { provide: GLOSSARY_LOADER, useValue: glossary },
@@ -43,6 +43,9 @@ describe('LearnHome', () => {
       harness.detectChanges();
       expect(root.querySelector('.notice[role=status]')).toBeNull();
     });
+    // The lessons show first and the saved progress right after, once it has been read.
+    await new Promise((resolve) => setTimeout(resolve));
+    harness.detectChanges();
     return root;
   };
 
@@ -50,7 +53,7 @@ describe('LearnHome', () => {
     const root = await render('/learn');
     const cards = Array.from(root.querySelectorAll('.level-card'));
     expect(cards).toHaveLength(3);
-    expect(cards[0].querySelector('a')?.getAttribute('href')).toBe('/learn/beginner');
+    expect(cards[0].querySelector('a')?.getAttribute('href')).toBe('/en/learn/beginner');
     expect(cards[1].querySelector('a')).toBeNull();
     expect(cards[1].textContent).toContain('Coming soon');
     expect(root.querySelector('.continue')).toBeNull();
@@ -63,7 +66,7 @@ describe('LearnHome', () => {
     expect(card?.textContent).toContain('Chess words in plain language');
     const link = card?.querySelector<HTMLAnchorElement>('a');
     expect(link?.textContent?.trim()).toBe('Open the glossary');
-    expect(link?.getAttribute('href')).toBe('/learn/glossary');
+    expect(link?.getAttribute('href')).toBe('/en/learn/glossary');
     expect(root.querySelector('.glossary-link')).toBeNull();
     expect(glossary).not.toHaveBeenCalled();
   });
@@ -72,7 +75,7 @@ describe('LearnHome', () => {
     vi.spyOn(fixtureLessonLoaders, 'catalog').mockRejectedValueOnce(new Error('offline'));
     const root = await render('/learn');
     expect(root.querySelector('.notice[role=alert]')).not.toBeNull();
-    expect(root.querySelector('.glossary-card a')?.getAttribute('href')).toBe('/learn/glossary');
+    expect(root.querySelector('.glossary-card a')?.getAttribute('href')).toBe('/en/learn/glossary');
   });
 
   it('should offer to continue with the next lesson once one is completed', async () => {
@@ -80,7 +83,7 @@ describe('LearnHome', () => {
     const root = await render('/learn');
     expect(root.querySelector('.continue')?.textContent).toContain('Continue: Knight moves');
     expect(root.querySelector('.continue')?.getAttribute('href')).toBe(
-      '/learn/beginner/knight-moves',
+      '/en/learn/beginner/knight-moves',
     );
   });
 
@@ -89,7 +92,7 @@ describe('LearnHome', () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
         {
           provide: LESSON_LOADERS,
           useValue: { ...fixtureLessonLoaders, catalog: async () => [knight, board] },
@@ -122,12 +125,12 @@ describe('LearnHome', () => {
       await progress.recordLesson({ lessonId: id, exercises: 3, firstTry: 3 });
     const root = await render('/learn');
     const cards = Array.from(root.querySelectorAll('.level-card'));
-    expect(cards[1].querySelector('a')?.getAttribute('href')).toBe('/learn/intermediate');
+    expect(cards[1].querySelector('a')?.getAttribute('href')).toBe('/en/learn/intermediate');
     expect(cards[1].textContent).not.toContain('Coming soon');
     expect(cards[2].querySelector('a')).toBeNull();
     expect(root.querySelector('.continue')?.textContent).toContain('Continue: Hanging pieces');
     expect(root.querySelector('.continue')?.getAttribute('href')).toBe(
-      '/learn/intermediate/hanging-pieces',
+      '/en/learn/intermediate/hanging-pieces',
     );
   });
 
@@ -140,7 +143,7 @@ describe('LearnHome', () => {
     const card = root.querySelector('.puzzles-card')!;
     expect(card.querySelector('h2')?.textContent?.trim()).toBe('Practise more');
     expect(card.textContent).toContain('Real puzzles from Lichess, by theme.');
-    expect(card.querySelector('a')?.getAttribute('href')).toBe('/learn/puzzles');
+    expect(card.querySelector('a')?.getAttribute('href')).toBe('/en/learn/puzzles');
   });
 
   it('should leave Practise more out when the catalogue has no lessons or fails', async () => {
@@ -151,7 +154,7 @@ describe('LearnHome', () => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
         providers: [
-          provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+          provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
           { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
           { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
           { provide: PUZZLE_LOADERS, useValue: loaders },
@@ -169,7 +172,7 @@ describe('LearnHome', () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
         {
           provide: LESSON_LOADERS,
           useValue: {
@@ -198,7 +201,7 @@ describe('LearnHome', () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       providers: [
-        provideRouter([{ path: 'learn', children: LEARN_ROUTES }]),
+        provideRouter([{ path: 'learn', children: learnRoutes('en') }]),
         { provide: LESSON_LOADERS, useValue: fixtureLessonLoaders },
         { provide: PROGRESS_STORE_LOADER, useValue: memoryProgressStore().loader },
         {

@@ -16,7 +16,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Color } from 'chessops';
 import { map } from 'rxjs';
 import { analysisLink, type AnalysisLink } from '../../../core/analysis-link';
-import { ContentService, isContentId } from '../../../core/content';
+import { ContentService, isContentId, startingWith } from '../../../core/content';
 import { EngineService } from '../../../core/engine';
 import { GameService, type PlayedMove } from '../../../core/game';
 import { I18nService } from '../../../core/i18n';
@@ -34,6 +34,9 @@ import { DRAW_TARGET } from '../endgame-milestones';
 import { fill } from '../endgame-goal';
 import { TablebasePanel, type TablebasePanelState } from '../tablebase-panel/tablebase-panel';
 import { EndgameSession } from './endgame-session';
+import { PageLinks, routeId, routeLang } from '../../../core/routing';
+import { PageMeta, textOf } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 /** Open or closed state of the tablebase panel; the panel starts closed. */
 export const TABLEBASE_PANEL_STORAGE_KEY = 'cheesy.endgames.tablebase-panel';
@@ -60,6 +63,7 @@ interface MoveView {
 @Component({
   selector: 'app-endgame-practice',
   imports: [
+    Breadcrumbs,
     BoardComponent,
     Icon,
     MoveText,
@@ -77,6 +81,9 @@ interface MoveView {
   },
 })
 export class EndgamePractice {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
+  protected readonly links = inject(PageLinks);
   protected readonly game = inject(GameService);
   protected readonly session = inject(EndgameSession);
   protected readonly i18n = inject(I18nService);
@@ -85,16 +92,22 @@ export class EndgamePractice {
   private readonly progress = inject(ProgressService);
   private readonly window = inject(DOCUMENT).defaultView;
 
+  private readonly route = inject(ActivatedRoute);
+  /** Content id of the endgame, from the slug in the address. */
   private readonly id = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('id') ?? '')),
+    this.route.paramMap.pipe(
+      map((params) => routeId(params, routeLang(this.route.snapshot), 'id', 'endgame')),
+    ),
     { initialValue: '' },
   );
 
   /** Anything in the address but a content id is not looked up at all. */
-  protected readonly endgames = resource({
+  private readonly endgamesRef = resource({
     params: () => (isContentId(this.id()) ? true : undefined),
     loader: () => this.content.endgames(),
   });
+  /** Starts with the endgames a prerendered page carries, so it hydrates as it was rendered. */
+  protected readonly endgames = startingWith(this.endgamesRef, this.content.loadedEndgames());
 
   /** The endgame of the address; anything but a content id is not looked up at all. */
   protected readonly endgame = computed(() => {
@@ -319,6 +332,7 @@ export class EndgamePractice {
     const endgame = this.session.endgame();
     if (!endgame) return undefined;
     return analysisLink({
+      lang: this.i18n.lang(),
       fen: this.game.startFen(),
       moves: this.game.moves().map((move) => move.san),
       ply: this.game.ply(),
@@ -330,6 +344,17 @@ export class EndgamePractice {
     inject(PageTitle).showDetail(() => {
       const endgame = this.session.endgame();
       return endgame && this.i18n.localize(endgame.name);
+    });
+    inject(PageMeta).describe(() => {
+      const endgame = this.endgame();
+      const lang = this.i18n.lang();
+      return (
+        endgame && {
+          id: endgame.id,
+          name: endgame.name[lang],
+          texts: [textOf(endgame.about[lang])],
+        }
+      );
     });
     effect(() => {
       const endgame = this.endgame();
@@ -364,6 +389,10 @@ export class EndgamePractice {
       const card = this.resultCard()?.nativeElement;
       if (card) untracked(() => card.focus({ preventScroll: true }));
     });
+  }
+
+  protected reloadEndgames(): void {
+    this.endgamesRef.reload();
   }
 
   protected onMove(move: BoardMove): void {

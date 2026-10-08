@@ -31,6 +31,10 @@ import { FindMoveStepView } from './steps/find-move-step';
 import { PlayOutStepView } from './steps/play-out-step';
 import { ReachStepView } from './steps/reach-step';
 import { TapSquareStepView } from './steps/tap-square-step';
+import { injectPrerenderWait } from '../../../core/prerender';
+import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
+import { PageMeta } from '../../../core/seo';
+import { Breadcrumbs } from '../../../shared/breadcrumbs';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -50,16 +54,19 @@ const NO_STEP = -1;
 /** Where "Practise" leads after a lesson; undefined when the lesson has nowhere to practise. */
 const practiceLink = (
   lesson: Lesson,
-): { path: string; queryParams?: Record<string, string> } | undefined => {
+): { page: Page; queryParams?: Record<string, string> } | undefined => {
   const next = lesson.next;
   switch (next?.kind) {
     // The endgame list opens on the category named by its English name.
     case 'endgames':
-      return { path: '/endgames', queryParams: { category: next.category } };
+      return {
+        page: { kind: 'category', category: 'endgames' },
+        queryParams: { category: next.category },
+      };
     case 'positions':
-      return { path: '/positions' };
+      return { page: { kind: 'category', category: 'positions' } };
     case 'openings':
-      return { path: '/openings' };
+      return { page: { kind: 'category', category: 'openings' } };
     default:
       return undefined;
   }
@@ -73,6 +80,7 @@ const practiceLink = (
 @Component({
   selector: 'app-lesson-page',
   imports: [
+    Breadcrumbs,
     ChoiceStepView,
     ExplainStepView,
     FindMoveStepView,
@@ -88,14 +96,31 @@ const practiceLink = (
   host: { '(document:keydown)': 'onKey($event)' },
 })
 export class LessonPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   private readonly content = inject(ContentService);
+  /** Keeps the prerender waiting until the content is on the page. */
+  private readonly wait = injectPrerenderWait();
   private readonly progress = inject(ProgressService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  private readonly route = inject(ActivatedRoute);
   private readonly params = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(
-      map((params) => ({ level: params.get('level') ?? '', id: params.get('lesson') ?? '' })),
+    this.route.paramMap.pipe(
+      map((params) => {
+        const level = routeId(
+          params,
+          routeLang(this.route.snapshot),
+          'level',
+          'level',
+        ) as LessonLevel;
+        return {
+          level,
+          id: routeId(params, routeLang(this.route.snapshot), 'lesson', 'lesson', level),
+        };
+      }),
     ),
     { requireSync: true },
   );
@@ -157,11 +182,24 @@ export class LessonPage {
       const lesson = this.lesson();
       return lesson && `${this.i18n.localize(lesson.title)} · ${this.i18n.t().nav.learn}`;
     });
+    // Its description is the summary of the lesson: the first step tends to say it again, and
+    // talks about a board the reader of the search results does not see.
+    inject(PageMeta).describe(() => {
+      const lesson = this.lesson();
+      const lang = this.i18n.lang();
+      return lesson && { id: lesson.id, name: lesson.title[lang], texts: [lesson.summary[lang]] };
+    });
+    // The first lesson starts loading here, not in the effect: effects run with the first render,
+    // which would then show the loading state instead of the prerendered lesson it hydrates.
+    let requested = this.params().id;
+    this.wait(() => this.load(requested));
     effect(() => {
       const id = this.params().id;
-      untracked(() => void this.load(id));
+      if (id === requested) return;
+      requested = id;
+      untracked(() => this.wait(() => this.load(id)));
     });
-    void this.loadPuzzles();
+    this.wait(() => this.loadPuzzles());
 
     effect(() => {
       if (!this.onSummary()) {

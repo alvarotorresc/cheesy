@@ -1,14 +1,18 @@
 <ng-template #topbar>
-  <nav class="topbar play-lead" [attr.aria-label]="i18n.t().openings.play.thisOpening">
-    <a class="back back-link" routerLink="/openings">
-      <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
-    </a>
+  <div class="topbar play-lead">
+    @if (crumbs().length > 0) {
+      <app-breadcrumbs />
+    } @else {
+      <a class="back back-link" [routerLink]="links.category('openings')">
+        <span aria-hidden="true">&larr;</span> {{ i18n.t().openings.backToList }}
+      </a>
+    }
     @if (session.opening(); as opening) {
-      <a class="back swap-link" [routerLink]="['/openings', opening.id, 'practice']">
+      <a class="back swap-link" [routerLink]="links.practice(opening.id)">
         {{ i18n.t().practice.fromPlay }}
       </a>
     }
-  </nav>
+  </div>
 </ng-template>
 
 @if (!session.opening()) {
@@ -37,7 +41,9 @@
     <div class="notice page-notice" role="alert">
       <p>{{ i18n.t().openings.notFound }}</p>
       <p class="muted">{{ i18n.t().openings.play.notFoundHelp }}</p>
-      <a class="button primary" routerLink="/openings">{{ i18n.t().openings.play.seeAll }}</a>
+      <a class="button primary" [routerLink]="links.category('openings')">{{
+        i18n.t().openings.play.seeAll
+      }}</a>
     </div>
   }
   @case ('error') {

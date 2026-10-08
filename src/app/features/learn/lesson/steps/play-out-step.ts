@@ -80,6 +80,7 @@ export class PlayOutStepView {
           goal: step.goal,
           playerSide: step.playerSide,
           explanation: step.text,
+          about: step.text,
         });
       });
     });

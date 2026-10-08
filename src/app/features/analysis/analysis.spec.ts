@@ -721,7 +721,7 @@ describe('Analysis', () => {
       TestBed.inject(ReadingModeService).setMode('words');
       await render();
       expect(origin?.textContent).toContain('Winawer Variation, after 3... bishop to b4.');
-      expect(origin?.querySelector('a')?.getAttribute('href')).toBe('/openings/french-defence');
+      expect(origin?.querySelector('a')?.getAttribute('href')).toBe('/en/openings/french-defence');
       expect(element.querySelector('app-move-tree .mv-name')).not.toBeNull();
 
       button('Reset').click();

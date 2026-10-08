@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import type { Key } from '@lichess-org/chessground/types';
 import type { Color } from 'chessops';
 import { map } from 'rxjs';
@@ -31,10 +31,12 @@ import { MoveText } from '../../shared/move';
 import { RichTextView } from '../../shared/rich-text';
 import { TermView } from '../../shared/term';
 import { sideToPlayLabel, tagLabel } from './position-labels';
-import { numberOfContentId, POSITION_NUMBER } from './position-order';
 import { PositionList } from './position-list';
 import { PositionTrainer } from './position-trainer';
 import type { SolutionStep } from './solution-line';
+import { PageLinks, routeId, routeLang } from '../../core/routing';
+import { PageMeta, textOf } from '../../core/seo';
+import { Breadcrumbs } from '../../shared/breadcrumbs';
 
 interface StepView {
   step: SolutionStep;
@@ -73,7 +75,16 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
  */
 @Component({
   selector: 'app-position-page',
-  imports: [BoardComponent, Icon, MoveText, NgTemplateOutlet, RichTextView, RouterLink, TermView],
+  imports: [
+    Breadcrumbs,
+    BoardComponent,
+    Icon,
+    MoveText,
+    NgTemplateOutlet,
+    RichTextView,
+    RouterLink,
+    TermView,
+  ],
   providers: [GameService, PositionTrainer, PositionList, BoardSpotlight],
   templateUrl: './position-page.html',
   styleUrl: './position-page.css',
@@ -83,32 +94,28 @@ const NO_MARKS: ReadonlyMap<Key, BoardMark> = new Map();
   },
 })
 export class PositionPage {
+  /** The breadcrumb of the page, once it knows what it shows. */
+  protected readonly crumbs = inject(PageMeta).crumbs;
+  protected readonly links = inject(PageLinks);
   protected readonly i18n = inject(I18nService);
   protected readonly reading = inject(ReadingModeService);
   protected readonly game = inject(GameService);
   protected readonly trainer = inject(PositionTrainer);
   protected readonly list = inject(PositionList);
 
+  private readonly route = inject(ActivatedRoute);
+  /** Content id of the position, from the slug in the address. */
   private readonly id = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('id') ?? '')),
+    this.route.paramMap.pipe(
+      map((params) => routeId(params, routeLang(this.route.snapshot), 'id', 'position')),
+    ),
     { initialValue: '' },
   );
 
-  /** Place of the position in the gallery: its number in the URL, minus one. */
-  private readonly index = computed(() => {
-    const id = this.id();
-    const index = POSITION_NUMBER.test(id) ? Number(id) - 1 : -1;
-    return index < this.list.positions().length ? index : -1;
-  });
-
-  /** Number that replaces the id of an old link, while the page is on its way there. */
-  private readonly redirect = computed(() =>
-    this.list.status() === 'ready' && this.index() < 0
-      ? numberOfContentId(this.list.positions(), this.id())
-      : undefined,
+  /** Place of the position in the gallery, which gives its number ("Position 3 of 13"). */
+  private readonly index = computed(() =>
+    this.list.positions().findIndex((position) => position.id === this.id()),
   );
-
-  protected readonly redirecting = computed(() => this.redirect() !== undefined);
 
   protected readonly position = computed<CuratedPosition | undefined>(
     () => this.list.positions()[this.index()],
@@ -140,7 +147,6 @@ export class PositionPage {
     () =>
       this.list.status() !== 'error' &&
       this.list.status() !== 'loading' &&
-      !this.redirecting() &&
       this.exercise() === 'ready',
   );
 
@@ -242,6 +248,7 @@ export class PositionPage {
     const position = this.position();
     if (!position || !this.revealed()) return undefined;
     return analysisLink({
+      lang: this.i18n.lang(),
       fen: position.fen,
       moves: position.solution,
       from: { kind: 'position', id: position.id },
@@ -274,18 +281,23 @@ export class PositionPage {
   private shownMessage: Message | undefined;
 
   constructor() {
-    const router = inject(Router);
     inject(DestroyRef).onDestroy(() => clearTimeout(this.wrongTimer));
 
-    // The tab is neutral ("Position 3 of 13") until the position is solved or its solution is out.
+    // Named after the position, as its address is: the name says the pattern, never the moves.
     inject(PageTitle).showDetail(() => {
       const position = this.position();
-      if (!position) return undefined;
-      return this.revealed() ? this.i18n.localize(position.title) : this.where();
+      return position && this.i18n.localize(position.title);
     });
-    effect(() => {
-      const number = this.redirect();
-      if (number) untracked(() => router.navigate(['/positions', number], { replaceUrl: true }));
+    inject(PageMeta).describe(() => {
+      const position = this.position();
+      const lang = this.i18n.lang();
+      return (
+        position && {
+          id: position.id,
+          name: position.title[lang],
+          texts: [textOf(position.about[lang])],
+        }
+      );
     });
     effect(() => {
       const position = this.position();
@@ -375,12 +387,12 @@ export class PositionPage {
     else this.trainer.goToEnd();
   }
 
-  /** Number in the URL of the position next to this one, if there is one. */
+  /** Content id of the position next to this one in the gallery, if there is one. */
   private neighbourId(offset: number): string | undefined {
     const neighbour = this.index() + offset;
     if (this.index() < 0 || neighbour < 0 || neighbour >= this.list.positions().length) {
       return undefined;
     }
-    return String(neighbour + 1);
+    return this.list.positions()[neighbour].id;
   }
 }

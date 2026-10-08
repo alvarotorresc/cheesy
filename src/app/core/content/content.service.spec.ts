@@ -1,3 +1,4 @@
+import { makeStateKey, PLATFORM_ID, TransferState } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   CONTENT_LOADERS,
@@ -407,5 +408,59 @@ describe('ContentService puzzles', () => {
 
     expect(loaders.catalog).toHaveBeenCalledTimes(1);
     expect(loaders.puzzles).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('ContentService and the prerendered pages', () => {
+  const carried = <T>(key: string) => makeStateKey<T>(`content:${key}`);
+
+  const setupOn = (platform: 'browser' | 'server', loaders = spyLoaders()) => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: PLATFORM_ID, useValue: platform },
+        { provide: CONTENT_LOADERS, useValue: loaders },
+      ],
+    });
+    return { content: TestBed.inject(ContentService), loaders };
+  };
+
+  it('should carry every file the prerender loads in the page, but not the opening books', async () => {
+    const { content } = setupOn('server');
+
+    await content.openingBook('italian-game');
+    await content.endgames();
+
+    const state = TestBed.inject(TransferState);
+    expect(state.get(carried<OpeningTree>('opening:italian-game'), null)?.id).toBe('italian-game');
+    expect(state.get(carried<unknown[]>('opening-catalog'), null)).toHaveLength(21);
+    expect(state.get(carried<unknown[]>('endgames'), null)).toHaveLength(14);
+    expect(state.hasKey(carried('opening-book:italian-game'))).toBe(false);
+  });
+
+  it('should not carry anything when it runs in the browser', async () => {
+    const { content } = setupOn('browser');
+
+    await content.endgames();
+
+    expect(TestBed.inject(TransferState).isEmpty).toBe(true);
+  });
+
+  it('should use what the prerendered page carries instead of downloading it', async () => {
+    const { content, loaders } = setupOn('browser');
+    const endgames = await bundledContentLoaders.endgames();
+    TestBed.inject(TransferState).set(carried('endgames'), endgames);
+
+    expect(content.loadedEndgames()).toBe(endgames);
+    expect(await content.endgames()).toBe(endgames);
+    expect(loaders.endgames).not.toHaveBeenCalled();
+  });
+
+  it('should give a file already loaded at once, and nothing before', async () => {
+    const { content } = setupOn('browser');
+
+    expect(content.loadedEndgames()).toBeUndefined();
+    const endgames = await content.endgames();
+
+    expect(content.loadedEndgames()).toBe(endgames);
   });
 });

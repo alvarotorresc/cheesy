@@ -81,8 +81,10 @@ describe('Home', () => {
 
     expect(element.querySelector('h1')?.textContent).toContain('Aperturas, finales y táctica');
     const links = Array.from(element.querySelectorAll('.sec-link'), (a) => a.getAttribute('href'));
-    expect(links).toEqual(['/openings', '/endgames', '/positions', '/analysis']);
-    expect(element.querySelector('.cta')?.getAttribute('href')).toBe('/openings/ruy-lopez');
+    expect(links).toEqual(['/es/aperturas', '/es/finales', '/es/posiciones', '/es/analisis']);
+    expect(element.querySelector('.cta')?.getAttribute('href')).toBe(
+      '/es/aperturas/apertura-espanola',
+    );
     expect(element.querySelectorAll('app-mini-board')).toHaveLength(5);
   });
 
@@ -94,7 +96,7 @@ describe('Home', () => {
       'app-home-hero + .learn-band',
     );
 
-    expect(band?.querySelector('a')?.getAttribute('href')).toBe('/learn/beginner');
+    expect(band?.querySelector('a')?.getAttribute('href')).toBe('/en/learn/beginner');
     expect(band?.textContent).toContain('Starting from scratch?');
     expect(band?.nextElementSibling?.tagName).toBe('APP-HOME-SECTIONS');
   });

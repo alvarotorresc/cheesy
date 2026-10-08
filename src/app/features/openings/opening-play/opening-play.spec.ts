@@ -110,12 +110,13 @@ describe('OpeningPlay', () => {
     });
 
     it('should link to the practice of the opening', async () => {
-      await create('test-opening');
+      loaders = testLoaders([testTree({ id: 'ruy-lopez' })]);
+      await create('ruy-lopez');
 
       const links = Array.from(element.querySelectorAll('a.back'));
       expect(links.map((link) => link.getAttribute('href'))).toEqual([
-        '/openings',
-        '/openings/test-opening/practice',
+        '/en/openings',
+        '/en/openings/ruy-lopez/practice',
       ]);
       expect(links[1].textContent?.trim()).toBe('Practise these lines');
     });
@@ -131,7 +132,7 @@ describe('OpeningPlay', () => {
       await create('no-such-opening');
 
       expect(text('[role="alert"] p')).toBe('We do not have this opening.');
-      expect(element.querySelector('a.back')?.getAttribute('href')).toBe('/openings');
+      expect(element.querySelector('a.back')?.getAttribute('href')).toBe('/en/openings');
     });
 
     it('should report a failed load and load again when retried', async () => {
@@ -391,7 +392,7 @@ describe('OpeningPlay', () => {
 
       const link = element.querySelector('.analyze a') as HTMLAnchorElement;
       const url = new URL(link.href, 'http://localhost');
-      expect(url.pathname).toBe('/analysis');
+      expect(url.pathname).toBe('/en/analysis');
       expect(url.searchParams.get('pgn')).toBe('1. e4 e5 2. Nf3 Nc6');
       expect(url.searchParams.get('ply')).toBe('3');
       expect(url.searchParams.get('from')).toBe('opening:test-opening');
