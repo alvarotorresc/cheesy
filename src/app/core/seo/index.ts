@@ -1,4 +1,4 @@
-export { describe, MAX_DESCRIPTION, sentencesOf, textOf } from './describe';
+export { describe, hasNotation, MAX_DESCRIPTION, sentencesOf, textOf } from './describe';
 export {
   crumbsOf,
   OG_IMAGE,

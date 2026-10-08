@@ -143,7 +143,7 @@ export class OpeningPlay {
         opening && {
           id: opening.id,
           name: opening.name[lang],
-          texts: [textOf(opening.description[lang])],
+          texts: [textOf(opening.description[lang], lang)],
         }
       );
     });

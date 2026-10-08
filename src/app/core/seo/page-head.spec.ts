@@ -153,7 +153,7 @@ describe('pageHead', () => {
       kind,
       id,
       name,
-      texts: [textOf(about[lang])],
+      texts: [textOf(about[lang], lang)],
     });
     const heads = LANGS.flatMap((lang) =>
       pageUrls.indexablePages().flatMap((page) => {

@@ -1,18 +1,82 @@
-import { describe as describeText, MAX_DESCRIPTION, sentencesOf, textOf } from './describe';
+import {
+  describe as describeText,
+  hasNotation,
+  MAX_DESCRIPTION,
+  sentencesOf,
+  textOf,
+} from './describe';
 
 describe('textOf', () => {
-  it('reads moves as written, terms by their words and squares by name', () => {
+  const segments = [
+    { kind: 'text', text: 'Solo ' },
+    { kind: 'move', san: 'Ke7', number: '1...', start: false, written: '1...Re7' },
+    { kind: 'text', text: ' toma la ' },
+    { kind: 'term', id: 'opposition', text: 'oposición' },
+    { kind: 'text', text: ' en ' },
+    { kind: 'square', square: 'e7' },
+    { kind: 'text', text: '.\n' },
+  ] as const;
+
+  it('tells moves in words, as the page does by default, terms by their words and squares by name', () => {
+    expect(textOf(segments, 'es')).toBe('Solo rey a e7 toma la oposición en e7.');
+  });
+
+  it('starts a sentence with a capital when the move opens it', () => {
     expect(
-      textOf([
-        { kind: 'text', text: 'Solo ' },
-        { kind: 'move', san: 'Ke7', number: '1...', start: false, written: '1...Re7' },
-        { kind: 'text', text: ' toma la ' },
-        { kind: 'term', id: 'opposition', text: 'oposición' },
-        { kind: 'text', text: ' en ' },
-        { kind: 'square', square: 'e7' },
-        { kind: 'text', text: '.\n' },
-      ]),
-    ).toBe('Solo 1...Re7 toma la oposición en e7.');
+      textOf(
+        [
+          { kind: 'move', san: 'c3', number: '2.', start: true, written: '2.c3' },
+          { kind: 'text', text: ' prepares d4.' },
+        ],
+        'en',
+      ),
+    ).toBe('Pawn to c3 prepares d4.');
+  });
+
+  it('never leaves notation behind: no move number, piece letter, capture or castling sign', () => {
+    const text = textOf(
+      [
+        { kind: 'text', text: 'With ' },
+        { kind: 'move', san: 'Bxf7+', number: '5.', start: false, written: '5.Bxf7+' },
+        { kind: 'text', text: ' and ' },
+        { kind: 'move', san: 'O-O', number: '5...', start: false, written: '5...O-O' },
+        { kind: 'text', text: ' Black is fine.' },
+      ],
+      'en',
+    );
+    expect(text).toBe('With bishop takes on f7, check and kingside castling Black is fine.');
+    expect(hasNotation(text)).toBe(false);
+  });
+});
+
+describe('hasNotation', () => {
+  it('finds moves written in notation, in either language', () => {
+    for (const text of [
+      'Con 2.c3 las blancas',
+      'Con 5...a6 las negras',
+      'tras ...d5',
+      'el salto Cf3',
+      'Nf3 develops',
+      'Txe5 gana',
+      'exd5 abre',
+      'O-O-O y ataque',
+      '1. e4',
+    ]) {
+      expect(hasNotation(text), text).toBe(true);
+    }
+  });
+
+  it('lets squares, numbers and words pass', () => {
+    for (const text of [
+      'El peón de e4 controla d5.',
+      'Peón a c3 prepara d4.',
+      'Las 21 aperturas, 14 finales y 13 posiciones.',
+      'Rey a e7, jaque.',
+      'Dama de la Torre de Londres.',
+      'Siglo XIX: 1858.',
+    ]) {
+      expect(hasNotation(text), text).toBe(false);
+    }
   });
 });
 
