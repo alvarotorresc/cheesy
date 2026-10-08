@@ -113,7 +113,7 @@ describe('pageHead', () => {
     const result = head('/es/aperturas/nada');
     expect(result.lang).toBe('es');
     expect(result.noindex).toBe(true);
-    expect(result.title).toBe('Página no encontrada · Cheesy');
+    expect(result.title).toBeUndefined();
     expect(result.canonical).toBeUndefined();
   });
 

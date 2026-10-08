@@ -281,7 +281,8 @@ export const pageHead = (input: HeadInput): PageHead => {
   if (!located) {
     return {
       ...base,
-      title: withSite(t.seo.titles.notFound),
+      // The 404 page names itself (`PageTitle`): a route of no page can be a state of the app.
+      title: undefined,
       description: t.seo.descriptions.notFound,
       canonical: undefined,
       alternates: [],

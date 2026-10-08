@@ -39,6 +39,8 @@ export class PageMeta {
   private readonly pageTitle = inject(PageTitle);
   private readonly path = signal(pathOf(inject(PlatformLocation).pathname));
   private readonly facts = signal<(() => PageFacts | undefined) | undefined>(undefined);
+  /** The router has shown a page: until then (a page built on its own, in a spec) nothing is written. */
+  private readonly navigated = signal(false);
 
   /** The head of the page shown. */
   readonly head = computed<PageHead>(() =>
@@ -57,8 +59,13 @@ export class PageMeta {
   constructor() {
     inject(Router)
       .events.pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => this.path.set(pathOf(event.urlAfterRedirects)));
-    effect(() => this.write(this.head()));
+      .subscribe((event) => {
+        this.path.set(pathOf(event.urlAfterRedirects));
+        this.navigated.set(true);
+      });
+    effect(() => {
+      if (this.navigated()) this.write(this.head());
+    });
   }
 
   /**
