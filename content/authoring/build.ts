@@ -9,10 +9,12 @@ import { positions } from './positions.ts';
 import { endgames } from './endgames.ts';
 import { glossary } from './glossary.ts';
 import { lessons } from './lessons/index.ts';
+import { categoryTexts } from './categories.ts';
 import { slugData } from './slugs.ts';
 import { buildLesson, lessonSummary } from '../lib/lesson-build.ts';
 import { fenOf, playSan } from '../lib/chess.ts';
 import {
+  CATEGORY_TEXTS_FILE,
   DATA_DIR,
   ENDGAMES_FILE,
   GLOSSARY_FILE,
@@ -27,7 +29,7 @@ import { richOf } from '../lib/rich-text.ts';
 import type {
   AuthoringNode,
   AuthoringTree,
-  CuratedPosition,
+  CuratedEntry,
   LessonSummary,
   OpeningNode,
   OpeningSummary,
@@ -82,7 +84,7 @@ const replay = (pos: Chess, moves: string, id: string): Chess => {
   return pos;
 };
 
-const curated: CuratedPosition[] = positions.map((p) => {
+const curated: CuratedEntry[] = positions.map((p) => {
   let fen: string;
   if ('moves' in p) {
     const pos = replay(Chess.default(), p.moves, p.id);
@@ -101,13 +103,14 @@ const curated: CuratedPosition[] = positions.map((p) => {
     playerSide: p.playerSide,
     solution: p.solution,
     explanation: richOf(p.explanation),
+    about: richOf(p.about),
     tags: p.tags,
   };
 });
 out(POSITIONS_FILE, curated);
 out(
   ENDGAMES_FILE,
-  endgames.map((e) => ({ ...e, explanation: richOf(e.explanation) })),
+  endgames.map((e) => ({ ...e, explanation: richOf(e.explanation), about: richOf(e.about) })),
 );
 out(
   GLOSSARY_FILE,
@@ -126,6 +129,9 @@ lessonCatalog.sort(
   (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level) || a.order - b.order,
 );
 out(LESSON_CATALOG_FILE, lessonCatalog);
+
+// Texts of the category pages, plain paragraphs read by the page metadata.
+out(CATEGORY_TEXTS_FILE, categoryTexts);
 
 // URL slugs per language; the app maps ids to paths and back with them.
 out(SLUGS_FILE, slugData);
