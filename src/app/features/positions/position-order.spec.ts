@@ -14,6 +14,7 @@ const position = (id: string, solution: string[]): CuratedPosition => ({
   playerSide: 'white',
   solution,
   explanation: plainText('-'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: [],
 });
 

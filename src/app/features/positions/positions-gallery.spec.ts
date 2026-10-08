@@ -17,6 +17,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'white',
     solution: ['Rh8#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['back-rank', 'windmill-attack'],
   },
   {
@@ -26,6 +27,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'black',
     solution: ['Rh1#'],
     explanation: plainText('Mate.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['pin'],
   },
   {
@@ -35,6 +37,7 @@ const POSITIONS: CuratedPosition[] = [
     playerSide: 'white',
     solution: ['Ra8+', 'Kd7', 'Ra7+'],
     explanation: plainText('Jaques.', 'Checks.'),
+    about: plainText('Sobre la posición.', 'About the position.'),
     tags: ['fork'],
   },
 ];

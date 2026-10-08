@@ -84,6 +84,11 @@ export interface EndgamePosition {
   playerSide: Side;
   /** Key idea, two to four sentences, cut into segments by the content build. */
   explanation: RichText;
+  /**
+   * What the endgame is, when it comes up and what to remember (80 to 200 words), shown as text of
+   * the page and the source of its description for search engines.
+   */
+  about: RichText;
 }
 
 export interface CuratedPosition {
@@ -97,6 +102,11 @@ export interface CuratedPosition {
   solution: string[];
   /** One or two sentences, cut into segments by the content build. */
   explanation: RichText;
+  /**
+   * The pattern and the story of the position (80 to 200 words), never its solution: the page
+   * folds it away, and it is the source of the description for search engines.
+   */
+  about: RichText;
   /** English, kebab-case: "back-rank", "smothered-mate"... */
   tags: string[];
 }

@@ -21,6 +21,7 @@ const SMOTHERED: CuratedPosition = {
   playerSide: 'white',
   solution: ['Qg8+', 'Rxg8', 'Nf7#'],
   explanation: plainText('La dama se sacrifica.', 'The queen is sacrificed.'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: ['smothered-mate'],
 };
 
@@ -31,6 +32,7 @@ const KIENINGER: CuratedPosition = {
   playerSide: 'black',
   solution: ['Nd3#'],
   explanation: plainText('Mate ahogado.', 'Smothered.'),
+  about: plainText('Sobre la posición.', 'About the position.'),
   tags: ['pin'],
 };
 
