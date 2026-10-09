@@ -51,6 +51,9 @@
   </section>
 </section>
 
+<!-- One region for the results of the account, kept across the states so changes are read. -->
+<p class="message page-message" role="status">{{ message() }}</p>
+
 @if (unavailable) {
   <section class="block" aria-labelledby="unavailable-title">
     <div class="block-head">
@@ -61,7 +64,7 @@
 } @else if (linked()) {
   <section class="block account" aria-labelledby="code-title">
     <div class="block-head">
-      <h2 id="code-title">{{ p.codeTitle }}</h2>
+      <h2 id="code-title" tabindex="-1">{{ p.codeTitle }}</h2>
     </div>
     <div class="code-card">
       <div class="code-main">
@@ -86,14 +89,13 @@
           >
             {{ p.show }}
           </button>
-          <button #copyButton type="button" class="button primary" (click)="copy(sync.code())">
+          <button type="button" class="button primary" (click)="copy(sync.code())">
             {{ p.copy }}
           </button>
         </div>
       </div>
       <p class="warning">{{ p.warning }}</p>
     </div>
-    <p class="message" role="status">{{ message() }}</p>
     <div class="manage">
       <button type="button" class="button" [disabled]="busy() !== undefined" (click)="askLeave()">
         {{ p.leave }}
@@ -113,13 +115,13 @@
     @if (sync.error() === 'gone') {
       <p class="gone">{{ p.gone }}</p>
     }
-    <p class="message" role="status">{{ message() }}</p>
     <div class="panes">
       <article class="pane" aria-labelledby="create-title">
         <h2 id="create-title">{{ p.createTitle }}</h2>
         <p class="pane-text">{{ p.createText }}</p>
         <div>
           <button
+            id="create-button"
             type="button"
             class="button primary"
             [disabled]="busy() !== undefined"

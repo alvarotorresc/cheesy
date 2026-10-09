@@ -339,6 +339,7 @@ describe('ProgressPage', () => {
       const sync = linked();
       const { fixture, element } = await render({ sync });
 
+      const region = element.querySelector('.page-message[role="status"]');
       byText(element, 'Stop syncing here').click();
       fixture.detectChanges();
       const dialog = openDialog(element);
@@ -347,8 +348,10 @@ describe('ProgressPage', () => {
       await settle(fixture);
 
       expect(sync.leave).toHaveBeenCalledWith(false);
-      expect(element.textContent).toContain('This browser no longer syncs.');
-      expect(byText(element, 'Create my code')).toBeTruthy();
+      // The same live region, so the change is read; and the focus lands on the new state.
+      expect(element.querySelector('.page-message[role="status"]')).toBe(region);
+      expect(region?.textContent).toContain('This browser no longer syncs.');
+      expect(document.activeElement).toBe(byText(element, 'Create my code'));
     });
 
     it('should ask again when changes could not be uploaded, and leave only if told to', async () => {

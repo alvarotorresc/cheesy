@@ -4,6 +4,8 @@ import {
   computed,
   DestroyRef,
   DOCUMENT,
+  afterNextRender,
+  Injector,
   effect,
   ElementRef,
   inject,
@@ -78,6 +80,8 @@ export class ProgressPage {
   protected readonly sync = inject(PROGRESS_SYNC);
   protected readonly progress = inject(ProgressService);
   private readonly document = inject(DOCUMENT);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
 
   /** The progress of this browser, read again whenever it changes. */
   protected readonly local = signal<SyncDocument | undefined>(undefined);
@@ -140,7 +144,6 @@ export class ProgressPage {
   private readonly leaveDialog = viewChild<ElementRef<HTMLDialogElement>>('leaveDialog');
   private readonly unsyncedDialog = viewChild<ElementRef<HTMLDialogElement>>('unsyncedDialog');
   private readonly deleteDialog = viewChild<ElementRef<HTMLDialogElement>>('deleteDialog');
-  private readonly copyButton = viewChild<ElementRef<HTMLButtonElement>>('copyButton');
 
   constructor() {
     effect(() => {
@@ -183,7 +186,8 @@ export class ProgressPage {
 
   protected createdClosed(): void {
     this.created.set(undefined);
-    queueMicrotask(() => this.copyButton()?.nativeElement.focus());
+    if (!this.linked()) this.message.set(this.t().progressPage.notSaved);
+    this.focusAfterRender(this.linked() ? '.code-actions .button.primary' : '#create-button');
   }
 
   protected async enter(event?: Event): Promise<void> {
@@ -239,6 +243,7 @@ export class ProgressPage {
       this.pendingLeave.set(undefined);
       this.shown.set(false);
       this.message.set(this.t().progressPage.left);
+      this.focusAfterRender('#create-button');
     } finally {
       this.busy.set(undefined);
     }
@@ -261,6 +266,7 @@ export class ProgressPage {
       const p = this.t().progressPage;
       if (deleted) this.shown.set(false);
       this.message.set(deleted ? p.deleted : p.deleteFailed);
+      if (deleted) this.focusAfterRender('#create-button');
     } finally {
       this.busy.set(undefined);
     }
@@ -357,6 +363,7 @@ export class ProgressPage {
     if (joined.ok) {
       this.codeInput.set('');
       this.message.set(p.joined);
+      this.focusAfterRender('#code-title');
       return;
     }
     // Progress appeared here meanwhile (another tab): ask again, with what there is now.
@@ -388,6 +395,16 @@ export class ProgressPage {
     if (!element || element.open) return;
     element.showModal();
     element.querySelector<HTMLElement>('[data-autofocus], button, input')?.focus();
+  }
+
+  /**
+   * Moves the focus once the page shows its new state: the control that opened the dialog is
+   * gone with the old one, and the focus would fall back to the body.
+   */
+  private focusAfterRender(selector: string): void {
+    afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>(selector)?.focus(), {
+      injector: this.injector,
+    });
   }
 
   private async readLocal(): Promise<void> {

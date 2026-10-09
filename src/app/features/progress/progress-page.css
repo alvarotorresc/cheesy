@@ -213,12 +213,22 @@
   font-weight: 600;
 }
 
+/* Empty, a region stays in the page (and is read when it fills) but takes no room. */
 .message:empty {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
-.block > .message {
-  margin-bottom: var(--space-4);
+.page-message {
+  max-width: 44rem;
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
 }
 
 .gone {
@@ -376,10 +386,6 @@
   .code-card .warning {
     margin-top: 0;
   }
-}
-
-.account .message {
-  margin-top: var(--space-4);
 }
 
 .manage {
