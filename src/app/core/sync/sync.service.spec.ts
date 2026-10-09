@@ -93,7 +93,7 @@ describe('SyncService: accounts', () => {
       const created = await sync.create();
       await sync.idle();
 
-      expect(created).toEqual({ ok: true, code: CODE });
+      expect(created).toEqual({ ok: true, code: CODE, saved: true });
       expect((await server.document(CODE)).lessons).toEqual([lesson('pins', 50)]);
       const state = states.read();
       expect(state).toMatchObject({ code: CODE, version: 1, cleared: {}, failures: 0 });
@@ -113,6 +113,30 @@ describe('SyncService: accounts', () => {
       } finally {
         delete (window as unknown as { umami?: unknown }).umami;
       }
+    });
+
+    it('still hands out the code when this browser cannot keep it', async () => {
+      const sync = await start();
+      const write = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('full');
+      });
+      expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: false });
+      expect(write).toHaveBeenCalledTimes(2); // one retry
+      expect(server.accounts.has(CODE)).toBe(true);
+    });
+
+    it('keeps the code when the second write works', async () => {
+      const sync = await start();
+      const original = Storage.prototype.setItem;
+      vi.spyOn(Storage.prototype, 'setItem')
+        .mockImplementationOnce(() => {
+          throw new Error('busy');
+        })
+        .mockImplementation(function (this: Storage, key: string, value: string) {
+          original.call(this, key, value);
+        });
+      expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: true });
+      expect(states.read()?.code).toBe(CODE);
     });
 
     it('does not create a second account when one is linked', async () => {

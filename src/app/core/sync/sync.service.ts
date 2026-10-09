@@ -38,8 +38,12 @@ export type SyncStatus =
 /** `gone`: the account no longer exists on the server; it was unlinked. */
 export type SyncError = 'conflict' | 'too-large' | 'unavailable' | 'gone';
 
+/**
+ * `saved: false`: the account was created but this browser could not keep the code (storage full
+ * or blocked); it is not linked, and the page must tell the user to write the code down.
+ */
 export type CreateResult =
-  | { ok: true; code: string }
+  | { ok: true; code: string; saved: boolean }
   | { ok: false; error: 'linked' | 'offline' | 'too-large' | 'unavailable' };
 
 export type ReadFailure = 'bad-code' | 'not-found' | 'unavailable' | 'offline' | 'outdated';
@@ -205,7 +209,7 @@ export class SyncService {
               : 'unavailable',
         };
       }
-      const stored = this.states.write({
+      const state: StoredSync = {
         code: created.value.code,
         version: created.value.version,
         pushedHash: await documentHash(local),
@@ -214,11 +218,12 @@ export class SyncService {
         failures: 0,
         lastSyncAt: Date.now(),
         skew: Math.round(created.now - Date.now()),
-      });
-      if (!stored) return { ok: false, error: 'unavailable' };
-      this.settle('idle');
+      };
+      // The account exists now: whatever happens here, the code must reach the user.
+      const saved = this.states.write(state) || this.states.write(state);
+      if (saved) this.settle('idle');
       trackEvent('sync-create', this.window);
-      return { ok: true, code: created.value.code };
+      return { ok: true, code: created.value.code, saved };
     }, UNAVAILABLE_CREATE);
   }
 
