@@ -350,6 +350,27 @@ describe('ProgressPage', () => {
       expect(sync.syncNow).toHaveBeenCalledOnce();
     });
 
+    it('should announce a hidden code once, not as empty items', async () => {
+      const { fixture, element } = await render({ sync: linked() });
+
+      const items = [...element.querySelectorAll('.account .code li')];
+      expect(items).toHaveLength(4);
+      for (const item of items) expect(item.getAttribute('aria-hidden')).toBe('true');
+      expect(element.querySelectorAll('.account .code [aria-label]')).toHaveLength(0);
+      expect(element.querySelector('.account .code')?.hasAttribute('aria-label')).toBe(false);
+      const notes = [...element.querySelectorAll('.account .visually-hidden')].filter(
+        (n) => n.textContent?.trim() === 'Code hidden',
+      );
+      expect(notes).toHaveLength(1);
+
+      byText(element, 'Show').click();
+      fixture.detectChanges();
+      for (const item of element.querySelectorAll('.account .code li')) {
+        expect(item.hasAttribute('aria-hidden')).toBe(false);
+      }
+      expect(element.textContent).not.toContain('Code hidden');
+    });
+
     it('should keep the code hidden until asked, and copy it', async () => {
       const writeText = vi.fn(async () => undefined);
       Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });

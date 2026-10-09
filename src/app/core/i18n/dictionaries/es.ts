@@ -573,7 +573,7 @@ export const es: Messages = {
     savedFirst: 'Marca «Lo he guardado» para cerrar.',
     done: 'Hecho',
     codeTitle: 'Tu código',
-    codeHidden: 'Oculto',
+    codeHidden: 'Código oculto',
     show: 'Mostrar',
     hide: 'Ocultar',
     copy: 'Copiar',

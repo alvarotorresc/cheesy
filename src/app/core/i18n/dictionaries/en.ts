@@ -572,7 +572,7 @@ export const en = {
     savedFirst: 'Tick “I have saved it” to close.',
     done: 'Done',
     codeTitle: 'Your code',
-    codeHidden: 'Hidden',
+    codeHidden: 'Code hidden',
     show: 'Show',
     hide: 'Hide',
     copy: 'Copy',
