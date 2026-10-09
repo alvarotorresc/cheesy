@@ -275,6 +275,13 @@ describe('Workers static assets routing', () => {
     });
   });
 
+  it('should keep the query when an app route loses its trailing slash', () => {
+    assert.deepEqual(resolve('/es/analisis/', '?x=1'), {
+      status: 301,
+      location: '/es/analisis?x=1',
+    });
+  });
+
   it('should serve a page at its address and send its .html and its slash there', () => {
     assert.deepEqual(resolve('/es/aperturas'), { status: 200, file: 'es/aperturas.html' });
     assert.deepEqual(resolve('/es/aperturas.html'), { status: 301, location: '/es/aperturas' });
