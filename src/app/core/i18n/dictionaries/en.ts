@@ -573,7 +573,6 @@ export const en = {
     done: 'Done',
     codeTitle: 'Your code',
     codeHidden: 'Hidden',
-    wordLabel: (position: number) => `Word ${position}`,
     show: 'Show',
     hide: 'Hide',
     copy: 'Copy',

@@ -574,7 +574,6 @@ export const es: Messages = {
     done: 'Hecho',
     codeTitle: 'Tu código',
     codeHidden: 'Oculto',
-    wordLabel: (position: number) => `Palabra ${position}`,
     show: 'Mostrar',
     hide: 'Ocultar',
     copy: 'Copiar',
