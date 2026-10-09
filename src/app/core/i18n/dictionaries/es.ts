@@ -566,6 +566,8 @@ export const es: Messages = {
     revealTitle: 'Tu código',
     revealText: 'Cópialo o apúntalo ahora. Si lo pierdes, no hay forma de recuperarlo.',
     saved: 'Lo he guardado',
+    notSaved:
+      'Este navegador no ha podido guardar el código, así que aquí no se sincroniza. Apúntalo ahora: es la única forma de volver a tu progreso del servidor.',
     savedFirst: 'Marca «Lo he guardado» para cerrar.',
     done: 'Hecho',
     codeTitle: 'Tu código',
@@ -585,6 +587,11 @@ export const es: Messages = {
     keep: 'Mantenerlo',
     erase: 'Borrarlo de este navegador',
     left: 'Este navegador ya no se sincroniza.',
+    unsyncedTitle: 'Hay cambios sin subir',
+    unsyncedText:
+      'Lo último que has hecho en este navegador aún no ha llegado al servidor (sin conexión o el servidor no responde). Si sales ahora, ya no llegará.',
+    unsyncedErase: 'Y como vas a borrarlo de este navegador, se perderá.',
+    leaveAnyway: 'Salir igualmente',
     deleteTitle: '¿Borrar tu progreso del servidor?',
     deleteText:
       'Se borra tu progreso del servidor. Este navegador lo conserva. El código deja de funcionar en todos tus dispositivos.',

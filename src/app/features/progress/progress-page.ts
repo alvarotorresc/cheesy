@@ -100,6 +100,10 @@ export class ProgressPage {
   /** The code of a new account, shown once in its dialog. */
   protected readonly created = signal<string | undefined>(undefined);
   protected readonly savedIt = signal(false);
+  /** The new code could not be kept here: the dialog insists on writing it down. */
+  protected readonly unsaved = signal(false);
+  /** The choice of «leave» waiting for «leave anyway», after changes failed to upload. */
+  protected readonly pendingLeave = signal<boolean | undefined>(undefined);
   protected readonly choice = signal<Choice | undefined>(undefined);
   /** Whether the code of the linked account is on screen. */
   protected readonly shown = signal(false);
@@ -134,6 +138,7 @@ export class ProgressPage {
   private readonly createDialog = viewChild<ElementRef<HTMLDialogElement>>('createDialog');
   private readonly chooseDialog = viewChild<ElementRef<HTMLDialogElement>>('chooseDialog');
   private readonly leaveDialog = viewChild<ElementRef<HTMLDialogElement>>('leaveDialog');
+  private readonly unsyncedDialog = viewChild<ElementRef<HTMLDialogElement>>('unsyncedDialog');
   private readonly deleteDialog = viewChild<ElementRef<HTMLDialogElement>>('deleteDialog');
   private readonly copyButton = viewChild<ElementRef<HTMLButtonElement>>('copyButton');
 
@@ -158,6 +163,7 @@ export class ProgressPage {
       }
       this.message.set('');
       this.savedIt.set(false);
+      this.unsaved.set(!result.saved);
       this.created.set(result.code);
       this.open(this.createDialog());
     } finally {
@@ -213,16 +219,34 @@ export class ProgressPage {
     this.open(this.leaveDialog());
   }
 
-  protected async leave(keepLocal: boolean): Promise<void> {
+  /**
+   * Leaves after uploading what is pending. When that upload fails it stays linked and asks
+   * whether to leave anyway; `force` is that answer.
+   */
+  protected async leave(keepLocal: boolean, force = false): Promise<void> {
     this.leaveDialog()?.nativeElement.close();
+    this.unsyncedDialog()?.nativeElement.close();
     if (!this.start('leave')) return;
     try {
-      await this.sync.leave(keepLocal);
+      const left = await (force
+        ? this.sync.leave(keepLocal, { force: true })
+        : this.sync.leave(keepLocal));
+      if (!left.ok) {
+        this.pendingLeave.set(keepLocal);
+        this.open(this.unsyncedDialog());
+        return;
+      }
+      this.pendingLeave.set(undefined);
       this.shown.set(false);
       this.message.set(this.t().progressPage.left);
     } finally {
       this.busy.set(undefined);
     }
+  }
+
+  protected leaveAnyway(): void {
+    const keepLocal = this.pendingLeave();
+    if (keepLocal !== undefined) void this.leave(keepLocal, true);
   }
 
   protected askDelete(): void {

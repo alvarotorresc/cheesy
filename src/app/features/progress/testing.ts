@@ -3,6 +3,7 @@ import { vi } from 'vitest';
 import type {
   CreateResult,
   JoinResult,
+  LeaveResult,
   PreviewResult,
   ProgressSync,
   SyncError,
@@ -31,7 +32,7 @@ export class FakeProgressSync implements ProgressSync {
 
   readonly create = vi.fn(async (): Promise<CreateResult> => {
     this.link();
-    return { ok: true, code: 'abandon-ability-able-about' };
+    return { ok: true, code: 'abandon-ability-able-about', saved: true };
   });
 
   readonly preview = vi.fn(async (): Promise<PreviewResult> => ({
@@ -44,10 +45,14 @@ export class FakeProgressSync implements ProgressSync {
     return { ok: true };
   });
 
-  readonly leave = vi.fn(async (): Promise<void> => {
-    this.linked.set(undefined);
-    this.state.set('off');
-  });
+  readonly leave = vi.fn(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async (_keepLocal: boolean, _options?: { force?: boolean }): Promise<LeaveResult> => {
+      this.linked.set(undefined);
+      this.state.set('off');
+      return { ok: true };
+    },
+  );
 
   readonly deleteRemote = vi.fn(async (): Promise<boolean> => {
     this.linked.set(undefined);

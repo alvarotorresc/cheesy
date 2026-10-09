@@ -151,6 +151,21 @@ describe('ProgressPage', () => {
       expect(element.querySelector('dialog[open]')).toBeNull();
     });
 
+    it('should insist on writing the code down when this browser could not keep it', async () => {
+      const sync = new FakeProgressSync();
+      sync.create.mockResolvedValueOnce({ ok: true, code: CODE, saved: false });
+      const { fixture, element } = await render({ sync });
+
+      byText(element, 'Create my code').click();
+      await settle(fixture);
+
+      const dialog = openDialog(element);
+      expect(dialog.querySelector('[role="alert"]')?.textContent).toContain(
+        'This browser could not keep the code',
+      );
+      expect(byText(dialog, 'Done').disabled).toBe(true);
+    });
+
     it('should explain why a code could not be created', async () => {
       const sync = new FakeProgressSync();
       sync.create.mockResolvedValueOnce({ ok: false, error: 'offline' });
@@ -334,6 +349,26 @@ describe('ProgressPage', () => {
       expect(sync.leave).toHaveBeenCalledWith(false);
       expect(element.textContent).toContain('This browser no longer syncs.');
       expect(byText(element, 'Create my code')).toBeTruthy();
+    });
+
+    it('should ask again when changes could not be uploaded, and leave only if told to', async () => {
+      const sync = linked();
+      sync.leave.mockResolvedValueOnce({ ok: false, reason: 'unsynced' });
+      const { fixture, element } = await render({ sync });
+
+      byText(element, 'Stop syncing here').click();
+      fixture.detectChanges();
+      byText(openDialog(element), 'Delete it from this browser').click();
+      await settle(fixture);
+
+      const dialog = openDialog(element);
+      expect(dialog.querySelector('h2')?.textContent).toBe('Some changes are not on the server');
+      expect(dialog.textContent).toContain('it will be lost');
+      byText(dialog, 'Leave anyway').click();
+      await settle(fixture);
+
+      expect(sync.leave).toHaveBeenLastCalledWith(false, { force: true });
+      expect(element.textContent).toContain('This browser no longer syncs.');
     });
 
     it('should confirm before deleting from the server', async () => {

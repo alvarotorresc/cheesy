@@ -9,8 +9,9 @@ export type SyncStatus =
   'unavailable' | 'off' | 'idle' | 'syncing' | 'offline' | 'error' | 'outdated';
 export type SyncError = 'conflict' | 'too-large' | 'unavailable' | 'gone';
 
+/** `saved: false`: the account exists but this browser could not keep the code; not linked. */
 export type CreateResult =
-  | { ok: true; code: string }
+  | { ok: true; code: string; saved: boolean }
   | { ok: false; error: 'linked' | 'offline' | 'too-large' | 'unavailable' };
 
 export type ReadFailure = 'bad-code' | 'not-found' | 'unavailable' | 'offline' | 'outdated';
@@ -22,6 +23,9 @@ export type PreviewResult =
 export type JoinResult =
   { ok: true } | { ok: false; reason: ReadFailure | 'choose' | 'linked'; word?: number };
 
+/** `unsynced`: changes could not be uploaded, so it is still linked; `force` leaves anyway. */
+export type LeaveResult = { ok: true } | { ok: false; reason: 'unsynced' };
+
 export interface ProgressSync {
   readonly status: Signal<SyncStatus>;
   readonly error: Signal<SyncError | undefined>;
@@ -30,7 +34,7 @@ export interface ProgressSync {
   create(): Promise<CreateResult>;
   preview(input: string): Promise<PreviewResult>;
   join(input: string, mode?: 'merge' | 'replace'): Promise<JoinResult>;
-  leave(keepLocal: boolean): Promise<void>;
+  leave(keepLocal: boolean, options?: { force?: boolean }): Promise<LeaveResult>;
   deleteRemote(): Promise<boolean>;
   syncNow(): Promise<void>;
 }
@@ -44,7 +48,7 @@ export const unavailableSync = (): ProgressSync => ({
   create: async () => ({ ok: false, error: 'unavailable' }),
   preview: async () => ({ ok: false, reason: 'unavailable' }),
   join: async () => ({ ok: false, reason: 'unavailable' }),
-  leave: async () => undefined,
+  leave: async () => ({ ok: true }),
   deleteRemote: async () => false,
   syncNow: async () => undefined,
 });

@@ -566,6 +566,8 @@ export const en = {
     revealTitle: 'Your code',
     revealText: 'Copy it or write it down now. If you lose it, there is no way to get it back.',
     saved: 'I have saved it',
+    notSaved:
+      'This browser could not keep the code, so it does not sync here. Write it down now: it is the only way back to your progress on the server.',
     savedFirst: 'Tick “I have saved it” to close.',
     done: 'Done',
     codeTitle: 'Your code',
@@ -585,6 +587,11 @@ export const en = {
     keep: 'Keep it',
     erase: 'Delete it from this browser',
     left: 'This browser no longer syncs.',
+    unsyncedTitle: 'Some changes are not on the server',
+    unsyncedText:
+      'What you did last in this browser has not reached the server yet (no connection, or the server is not answering). If you leave now, it will not get there.',
+    unsyncedErase: 'And as you are deleting it from this browser, it will be lost.',
+    leaveAnyway: 'Leave anyway',
     deleteTitle: 'Delete your progress from the server?',
     deleteText:
       'Your progress is deleted from the server. This browser keeps it. The code stops working on all your devices.',

@@ -193,6 +193,9 @@
   >
     <h2 id="reveal-title">{{ p.revealTitle }}</h2>
     <p id="reveal-text" class="reveal-text">{{ p.revealText }}</p>
+    @if (unsaved()) {
+      <p class="not-saved" role="alert">{{ p.notSaved }}</p>
+    }
     <ol class="code">
       @for (word of createdWords(); track $index) {
         <li class="tile">
@@ -295,6 +298,29 @@
       <button type="button" class="button" (click)="leave(false)">{{ p.erase }}</button>
       <button type="button" class="button primary" data-autofocus (click)="leave(true)">
         {{ p.keep }}
+      </button>
+    </div>
+  </dialog>
+
+  <dialog
+    #unsyncedDialog
+    aria-labelledby="unsynced-title"
+    aria-describedby="unsynced-text"
+    (close)="pendingLeave.set(undefined)"
+  >
+    <h2 id="unsynced-title">{{ p.unsyncedTitle }}</h2>
+    <p id="unsynced-text">
+      {{ p.unsyncedText }}
+      @if (pendingLeave() === false) {
+        <strong>{{ p.unsyncedErase }}</strong>
+      }
+    </p>
+    <div class="dialog-actions">
+      <button type="button" class="button" data-autofocus (click)="unsyncedDialog.close()">
+        {{ p.cancel }}
+      </button>
+      <button type="button" class="button danger" (click)="leaveAnyway()">
+        {{ p.leaveAnyway }}
       </button>
     </div>
   </dialog>
