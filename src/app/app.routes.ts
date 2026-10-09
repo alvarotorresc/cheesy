@@ -60,15 +60,15 @@ export const langRoutes = (lang: Lang): Routes => [
 /**
  * `/` is the home page in English (the canonical one is `/en`); the browser takes a reader who
  * prefers Spanish to `/es`. Each language hangs from its own prefix, which gives the language of
- * every page below it (`data.lang`). The addresses of before the languages answer with a 301 in
- * Netlify (`netlify.toml`), so the router never sees them.
+ * every page below it (`data.lang`). The addresses of before the languages answer with a 301 at
+ * the edge (`_redirects`, from `scripts/edge-rules.mjs`), so the router never sees them.
  */
 export const routes: Routes = [
   home(),
   ...LANGS.map((lang) => ({ path: lang, data: { lang }, children: langRoutes(lang) })),
-  // The home page file itself (`/index.html`, which Netlify serves): the home page, not a 404 over it.
+  // The home page file itself (`/index.html`, should it reach the app): the home page, not a 404.
   { path: 'index.html', redirectTo: '' },
-  // Prerendered as `404.html`, which Netlify serves with status 404 at any address that is no page.
+  // Prerendered as `404.html`, which the host serves with status 404 at any address that is no page.
   { path: '404', title: 'notFound' satisfies PageSection, loadComponent: notFound },
   // A link of the app to no page (an address that is no page never reaches the app: see `404`).
   { path: '**', title: 'notFound' satisfies PageSection, loadComponent: notFound },

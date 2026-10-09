@@ -1,8 +1,8 @@
 // Turns the prerendered pages of the build from `route/index.html` into `route.html`.
 //
-// Netlify serves `route/index.html` at `/route/` and answers `/route` with a 301 there; with
-// `route.html` it serves `/route` and sends `/route/` to it, so the addresses keep no trailing
-// slash, as they are linked and as the canonical URLs will be. The home page stays `index.html`
+// A host serves `route/index.html` at `/route/` and sends `/route` there; with `route.html` it
+// serves `/route`, and the edge rules send `/route/` to it (`scripts/edge-rules.mjs`), so the
+// addresses keep no trailing slash, as they are linked and as the canonical URLs will be. The home page stays `index.html`
 // and the app shell `index.csr.html`.
 //
 // It runs after `ng build` (see `pnpm build`) and fails when the pages and the routes Angular
@@ -83,7 +83,7 @@ export const markShellNoindex = (dir) => {
 
 /**
  * Makes `404.html` a plain page: no scripts (but the structured data) and no module preloads, with
- * the stylesheets kept. Netlify serves it at any unknown address (`/es/aperturas/nada`); booting
+ * the stylesheets kept. Cloudflare serves it at any unknown address (`/es/aperturas/nada`); booting
  * the app there would route to the opening page and break hydration, so it is HTML with links.
  */
 export const staticNotFound = (dir) => {
