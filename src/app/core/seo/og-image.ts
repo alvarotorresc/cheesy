@@ -61,6 +61,7 @@ const cardOf = (page: Page | undefined): Card => {
     case 'home':
     case 'about':
     case 'analysis':
+    case 'progress':
       return 'site';
     default: {
       // A new kind of page must choose its card here.

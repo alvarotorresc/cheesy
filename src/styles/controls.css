@@ -65,6 +65,12 @@
   color: #fff;
 }
 
+.button.danger:hover:not(:disabled, [aria-disabled='true']) {
+  border-color: var(--color-danger);
+  background: var(--color-danger);
+  filter: brightness(0.92);
+}
+
 @media (prefers-color-scheme: dark) {
   .button.danger {
     color: #13222d;
@@ -100,6 +106,11 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
   cursor: pointer;
+}
+
+a.text-button {
+  display: inline-flex;
+  align-items: center;
 }
 
 .back-link {

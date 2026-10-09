@@ -19,7 +19,7 @@ export interface SlugData {
   endgames: SlugTable;
   positions: SlugTable;
   lessons: Record<LessonLevel, SlugTable>;
-  app: Record<'analysis' | 'practice' | 'puzzles', Slug>;
+  app: Record<'analysis' | 'practice' | 'puzzles' | 'progress', Slug>;
 }
 
 /** The four categories, each with a page that lists its entities. */
@@ -38,6 +38,7 @@ export type Page =
   | { readonly kind: 'glossary' }
   | { readonly kind: 'about' }
   | { readonly kind: 'analysis' }
+  | { readonly kind: 'progress' }
   | { readonly kind: 'puzzles' }
   | { readonly kind: 'puzzle'; readonly lesson: string };
 
@@ -134,6 +135,8 @@ export function createPageUrls(data: SlugData) {
         return section('about');
       case 'analysis':
         return `${root}/${app('analysis')}`;
+      case 'progress':
+        return `${root}/${app('progress')}`;
       case 'puzzles':
         return `${section('learn')}/${app('puzzles')}`;
       case 'puzzle': {
@@ -154,6 +157,9 @@ export function createPageUrls(data: SlugData) {
     if (sectionSlug === undefined) return at({ kind: 'home' });
     if (sectionSlug === data.app.analysis[lang]) {
       return rest.length === 0 ? at({ kind: 'analysis' }) : undefined;
+    }
+    if (sectionSlug === data.app.progress[lang]) {
+      return rest.length === 0 ? at({ kind: 'progress' }) : undefined;
     }
     if (sectionSlug === data.sections.about[lang]) {
       return rest.length === 0 ? at({ kind: 'about' }) : undefined;

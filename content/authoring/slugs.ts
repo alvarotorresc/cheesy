@@ -155,13 +155,14 @@ export const sectionSlugs: Record<SectionId, Slug> = {
 
 /**
  * Pages of the app that are states rather than content (never indexed, rendered in the browser):
- * Analysis, the practice of an opening (`/es/aperturas/<apertura>/practica`) and the Lichess puzzles
+ * Analysis, your progress, the practice of an opening (`/es/aperturas/<apertura>/practica`) and the Lichess puzzles
  * of "Practise more" (`/es/aprender/problemas/<lección>`).
  */
-export type AppPageId = 'analysis' | 'practice' | 'puzzles';
+export type AppPageId = 'analysis' | 'practice' | 'progress' | 'puzzles';
 export const appSlugs: Record<AppPageId, Slug> = {
   analysis: { es: 'analisis', en: 'analysis' },
   practice: { es: 'practica', en: 'practice' },
+  progress: { es: 'tu-progreso', en: 'your-progress' },
   puzzles: { es: 'problemas', en: 'puzzles' },
 };
 
