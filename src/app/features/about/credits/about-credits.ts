@@ -8,6 +8,7 @@ export type CreditId =
   | 'tablebase'
   | 'openings'
   | 'puzzles'
+  | 'wordlist'
   | 'chessground'
   | 'chessops'
   | 'pieces'
@@ -40,6 +41,10 @@ export const CREDIT_GROUPS: readonly CreditGroup[] = [
       { id: 'tablebase', url: 'https://tablebase.lichess.ovh', quiet: true },
       { id: 'openings', url: 'https://github.com/lichess-org/chess-openings' },
       { id: 'puzzles', url: 'https://database.lichess.org' },
+      {
+        id: 'wordlist',
+        url: 'https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases',
+      },
     ],
   },
   {

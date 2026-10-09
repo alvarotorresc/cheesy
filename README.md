@@ -6,14 +6,15 @@ _**Español** · [English](README.en.md)_
 con lecciones cortas, juega aperturas y finales contra el ordenador, encuentra la
 jugada en posiciones tácticas y analiza con motor. Todo en lenguaje llano: las
 jugadas se leen en palabras («caballo a f3») y, si lo prefieres, en notación.
-Es para quien quiere aprender y practicar ajedrez a su ritmo: no hay cuenta que
-crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
+Es para quien quiere aprender y practicar ajedrez a su ritmo: no hay registro
+que hacer, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo
+salvo que decidas sincronizarlo con un código.
 
 [![Abrir Cheesy](https://img.shields.io/badge/Abrir%20Cheesy-cheesy.alvarotc.com-f4c542?style=for-the-badge&labelColor=13222d)](https://cheesy.alvarotc.com)
 
 ![21 aperturas · 14 finales · 13 posiciones](https://img.shields.io/badge/21%20aperturas%20%C2%B7%2014%20finales-13%20posiciones-f4c542?style=flat-square&labelColor=13222d)
 ![Español / English](https://img.shields.io/badge/Espa%C3%B1ol-English-f4c542?style=flat-square&labelColor=13222d)
-![Sin cuentas · Sin anuncios](https://img.shields.io/badge/Sin%20cuentas-Sin%20anuncios-f4c542?style=flat-square&labelColor=13222d)
+![Sin registro · Sin anuncios](https://img.shields.io/badge/Sin%20registro-Sin%20anuncios-f4c542?style=flat-square&labelColor=13222d)
 ![Licencia GPL-3.0](https://img.shields.io/badge/licencia-GPL--3.0-f4c542?style=flat-square&labelColor=13222d)
 [![CI](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml)
 
@@ -77,11 +78,22 @@ crear, ni nada que instalar, ni anuncios, y tu progreso se queda en tu equipo.
 
 ## Privacidad
 
-No hay servidor propio, ni cuenta, ni cookies. Tu progreso se guarda en tu
-navegador (IndexedDB), y la página Acerca de lo explica dentro de la app, con
-cómo borrarlo.
+Sin cookies, sin email y sin contraseña. Tu progreso se guarda en tu navegador
+(IndexedDB) y, si no creas un código, no sale de ahí. La página Acerca de lo
+explica dentro de la app, con cómo borrarlo.
 
-Solo salen dos cosas del navegador:
+- **Sincronizar con un código (opcional).** Si creas un código de cuatro palabras,
+  Cheesy guarda una copia de tu progreso en Cloudflare (Workers y D1, que actúa
+  como encargado del tratamiento) para que sigas en otro navegador. Se guarda tu
+  progreso, las fechas de creación, último cambio y último uso, y una huella del
+  código que no permite recuperarlo; no se guarda nombre, email ni contraseña.
+  Cloudflare ve tu IP al servir la petición y Cheesy no la guarda; los registros
+  de errores no llevan el código ni tu progreso y se borran a los 3 días. La copia
+  se borra con «Borrar del servidor» o 12 meses después del último uso. Quien
+  tenga el código puede ver y cambiar tu progreso, y si lo pierdes no hay forma
+  de recuperarlo. Tu progreso sigue también en el dispositivo.
+
+Aparte de eso, solo salen dos cosas del navegador:
 
 - **En Finales**, la posición se consulta en la
   [tablebase de Lichess](https://tablebase.lichess.ovh), sin cookies ni
@@ -215,3 +227,4 @@ Hecha por [Alvaro Torres](https://github.com/alvarotorresc). Licencia
 - [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), nombres y códigos ECO de las aperturas, usados para comprobar el contenido, dedicados al dominio público con CC0.
 - La [base abierta de problemas de Lichess](https://database.lichess.org), dedicada al dominio público con CC0, de la que salen los problemas de «Practica más».
 - La [tablebase de Lichess](https://tablebase.lichess.ovh) y [Stockfish](https://stockfishchess.org), usados para verificar los finales y las posiciones.
+- La [lista de palabras de la EFF](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), con licencia CC BY 3.0 US / 4.0, de la que salen las palabras del código para sincronizar el progreso.

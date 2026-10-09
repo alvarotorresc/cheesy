@@ -23,7 +23,8 @@ export const en = {
     about: 'About',
   },
   footer: {
-    tagline: 'is open source. No accounts, no cookies: your progress stays in your browser.',
+    tagline:
+      'is open source. No cookies or sign-up: your progress stays in your browser, unless you choose to sync it with a code.',
     navigation: 'Footer',
     source: 'Source code (GPL-3)',
     privacy: 'Privacy',
@@ -131,7 +132,7 @@ export const en = {
     homeBand: { title: 'Starting from scratch?', cta: 'Learn to play' },
     progressTitle: 'Your progress',
     privacy:
-      'Completed lessons and puzzles are saved only in this browser. No accounts, no cookies: if you clear the browser data, they are lost.',
+      'Completed lessons and puzzles are saved in this browser, with no cookies or sign-up. If you clear the browser data and have not synced them with a code, they are lost.',
     progressUnavailable:
       'This browser does not let progress be saved. You can keep learning without it.',
     clearProgress: 'Delete progress',
@@ -214,13 +215,13 @@ export const en = {
     toc: 'On this page',
     briefTitle: 'In short',
     brief: [
-      'Your progress stays in your browser.',
-      'Only the positions of the endgames leave, towards Lichess.',
-      'No accounts, no cookies.',
+      'Your progress stays in your browser, unless you sync it with a code.',
+      'The endgame position goes to Lichess, and your progress if you sync it.',
+      'No cookies, no email and no password.',
       'Open source, under the GPL-3 licence.',
     ],
-    privacyClaim: 'No accounts, no cookies.',
-    privacyIntro: 'This is what is saved in your browser and the only thing that leaves it.',
+    privacyClaim: 'No cookies and no personal data.',
+    privacyIntro: 'This is what is saved in your browser and what can leave it.',
     staysTitle: 'Stays in your browser',
     stays: [
       {
@@ -247,13 +248,83 @@ export const en = {
       { title: 'The tablebase panel', text: 'Whether you want it open or folded in Endgames.' },
     ],
     staysNote:
-      'None of this leaves your device. If you switch browser or computer, you start from scratch.',
+      'If you do not use a code, none of this leaves your device. If you switch browser without a code, you start from scratch.',
     eraseTitle: 'How to delete it',
     eraseButton: 'Clear progress',
     eraseButtonText:
       ', in Learn, Openings, Endgames and Positions, clears the progress of that section.',
     eraseAll:
       'To delete everything at once, clear the data of this site from your browser settings.',
+    syncTitle: 'If you sync with a code',
+    syncIntro:
+      'It is optional. If you create a four-word code, Cheesy keeps a copy of your progress on a server so you can carry on in another browser or computer. Without a code, nothing is saved outside your device.',
+    syncItems: [
+      {
+        title: 'What is saved',
+        text: 'Your progress (what is in the list above, except the language, the reading mode and the panel), the dates it was created, last changed and last used, and a fingerprint of the code that cannot be turned back into it. Nothing else: no name, no email, no password.',
+      },
+      {
+        title: 'Where',
+        text: 'At Cloudflare (Workers and D1), which acts as data processor. As on any website, Cloudflare sees your IP address when it serves the request; Cheesy does not store it. The server error logs do not include the code or your progress and are deleted after 3 days.',
+      },
+      {
+        title: 'For how long',
+        text: 'Until you delete it with «Delete from the server», or 12 months after it was last used.',
+      },
+      {
+        title: 'Who can see it',
+        text: 'Anyone who has your code: they can see and change your progress. Do not share it.',
+      },
+      {
+        title: 'If you lose the code',
+        text: 'There is no way to get it back: the progress on the server stays out of reach until it is purged. Keep it in your password manager or export a file.',
+      },
+      {
+        title: 'Your progress stays on your device',
+        text: 'The copy on the server is only a copy. Deleting it from the server does not touch what is saved in this browser.',
+      },
+    ],
+    syncLegal: [
+      {
+        title: 'Who is responsible',
+        before:
+          'Cheesy is made and run by Álvaro Torres Carrasco. For any question or request about your data, write to ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Why, and on what basis',
+        before:
+          'To keep your progress so you can pick it up on another device. You do it yourself when you create or use a code (your consent), and you can withdraw it at any time by deleting the account or stopping the sync. It is optional: without a code everything works and nothing is sent. If you are under 14, do it with an adult.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Outside the European Union',
+        before:
+          'Cloudflare is a US company. The transfer relies on the EU-US Data Privacy Framework and, if that stops being valid, on the standard contractual clauses of its processor agreement. You can ask me for a copy at ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Your rights',
+        before:
+          'You can access, correct and delete your data, restrict its use, object to it and take it with you («Export» downloads a file). The fastest way is to do it yourself on the page, with «Delete from the server». If you would rather write to me, I cannot tell who you are without your code (I store no name or email), so you will need to send it; with it I can find your data. I will not ask for anything else.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'If you think it is mishandled',
+        before: 'You can complain to the ',
+        link: 'Spanish Data Protection Agency (AEPD)',
+        href: 'https://www.aepd.es',
+        after: '.',
+      },
+    ],
     sendsTitle: 'Goes to Lichess',
     sendsIntro: {
       before: 'In Endgames, the opponent plays what the ',
@@ -327,6 +398,11 @@ export const en = {
       bricolage: {
         license: 'OFL 1.1',
         text: 'The typeface of the whole site.',
+      },
+      wordlist: {
+        name: 'EFF wordlist',
+        license: 'CC BY 3.0 US / 4.0',
+        text: 'The words that make up the four-word code for syncing your progress.',
       },
       phosphor: {
         name: 'Phosphor Icons',
@@ -701,7 +777,7 @@ export const en = {
     saveFailed: 'This result could not be saved in this browser.',
     errorHint: 'Check your connection and try again.',
     privacy:
-      'Your progress is saved in this browser only. There are no accounts or cookies and your progress never leaves this device; if you clear the browser data, it is lost.',
+      'Your progress is saved in this browser, with no cookies or sign-up. It only leaves this device if you sync it with a code; if you clear the browser data and have not synced it, it is lost.',
     unavailable:
       'This browser is not letting us save progress (private browsing or blocked storage). Everything else works.',
     clear: 'Delete progress',
@@ -837,7 +913,7 @@ export const en = {
     noMatches: 'No position matches these filters.',
     noMatchesHint: 'Try another colour, another number of moves or another status.',
     progressNote:
-      'Your progress is saved in this browser only, with no accounts or cookies. If you clear the browser data, it is lost.',
+      'Your progress is saved in this browser, with no cookies or sign-up. If you clear the browser data and have not synced it with a code, it is lost.',
     clearProgress: 'Clear progress',
     nothingToClear: 'There is no saved progress.',
     progressCleared: 'Progress cleared.',
@@ -965,7 +1041,7 @@ export const en = {
     notFound: 'This endgame does not exist.',
     progressTitle: 'Your progress',
     privacy:
-      'Passed endgames are saved only in this browser. No accounts, no cookies: if you clear the browser data, they are lost.',
+      'Passed endgames are saved in this browser, with no cookies or sign-up. If you clear the browser data and have not synced them with a code, they are lost.',
     progressUnavailable:
       'This browser does not let progress be saved. You can keep practising without it.',
     clearProgress: 'Delete progress',
@@ -1072,7 +1148,7 @@ export const en = {
     },
     /** Descriptions of the pages that have no text of their own to cut one from. */
     descriptions: {
-      home: 'Learn chess in your browser: play the openings move by move, practise endgames against the Lichess tablebase and solve famous tactics. Free, no account.',
+      home: 'Learn chess in your browser: play the openings move by move, practise endgames against the Lichess tablebase and solve famous tactics. Free, no sign-up.',
       levels: {
         beginner:
           'Start chess from zero: the board, how each piece moves, check, castling and your first checkmates, in short lessons where you move the pieces yourself.',
@@ -1084,7 +1160,7 @@ export const en = {
       glossary:
         'The words of chess explained in plain English, from fork and pin to opposition and zugzwang, each with a small board that shows the idea in a real position.',
       about:
-        'What Cheesy is and who makes it: a free, open-source chess trainer that keeps your progress in your browser, with no accounts, no cookies and no ads.',
+        'What Cheesy is and who makes it: a free, open-source chess trainer that keeps your progress in your browser, with no cookies, no sign-up and no ads.',
       notFound: 'This address is not a page of Cheesy.',
     },
     breadcrumb: 'Breadcrumb',

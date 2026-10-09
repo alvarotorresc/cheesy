@@ -66,9 +66,9 @@ describe('About', () => {
     const element = await open();
 
     expect(Array.from(element.querySelectorAll('.file li p'), (p) => p.textContent)).toEqual([
-      'Tu progreso se queda en tu navegador.',
-      'Solo las posiciones de los finales salen, hacia Lichess.',
-      'Sin cuentas ni cookies.',
+      'Tu progreso se queda en tu navegador, salvo que lo sincronices con un código.',
+      'Sale la posición de los finales, hacia Lichess, y tu progreso si lo sincronizas.',
+      'Sin cookies, sin email y sin contraseña.',
       'Código abierto, con licencia GPL-3.',
     ]);
     expect(
@@ -81,17 +81,76 @@ describe('About', () => {
   it('should say what is saved and how to clear it, section by section', async () => {
     const element = await open();
 
-    expect(element.querySelectorAll('.stays li')).toHaveLength(7);
-    expect(text(element.querySelector('.stays li:nth-child(6)'))).toContain('El modo de lectura');
-    expect(text(element.querySelector('.stays li:nth-child(2)'))).toContain(
+    expect(element.querySelectorAll('.pane:not(.sync) .stays li')).toHaveLength(7);
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(6)'))).toContain(
+      'El modo de lectura',
+    );
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(2)'))).toContain(
       'Las lecciones completadas',
     );
-    expect(text(element.querySelector('.stays li:nth-child(3)'))).toContain(
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(3)'))).toContain(
       'Los problemas de Practica más',
     );
     expect(text(element.querySelector('.erase p'))).toBe(
       'Borrar el progreso, en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     );
+  });
+
+  it('should say what syncing with a code stores, where, for how long and what if the code is lost', async () => {
+    const element = await open();
+
+    const sync = element.querySelector('#privacidad .sync');
+    expect(text(sync?.querySelector('h3'))).toBe('Si sincronizas con un código');
+    expect(sync?.querySelectorAll('.stays li')).toHaveLength(11);
+    const body = text(sync) ?? '';
+    expect(body).toContain('Cloudflare');
+    expect(body).toContain('encargado del tratamiento');
+    expect(body).toContain('12 meses');
+    expect(body).toContain('Borrar del servidor');
+    expect(body).toContain('No hay forma de recuperarlo');
+    expect(body).toContain('sigue en tu dispositivo');
+    expect(body).toContain('Álvaro Torres Carrasco');
+    expect(body).toContain('tu consentimiento');
+    expect(body).toContain('menos de 14 años');
+    expect(body).toContain('Marco de Privacidad de Datos UE-EE. UU.');
+    expect(body).toContain('cláusulas contractuales tipo');
+    expect(body).toContain('no sé quién eres sin tu código');
+    expect(body).toContain('limitar su uso');
+    expect(body).toContain('«Exportar»');
+    expect(Array.from(sync?.querySelectorAll('a') ?? [], (a) => a.getAttribute('href'))).toEqual([
+      'mailto:alvarotc.dev@protonmail.com',
+      'mailto:alvarotc.dev@protonmail.com',
+      'https://www.aepd.es',
+    ]);
+  });
+
+  it('should say the same about syncing in English', async () => {
+    const element = await open({ lang: 'en' });
+
+    const body = text(element.querySelector('#privacidad .sync')) ?? '';
+    expect(body).toContain('If you sync with a code');
+    expect(body).toContain('Cloudflare');
+    expect(body).toContain('data processor');
+    expect(body).toContain('12 months');
+    expect(body).toContain('Delete from the server');
+    expect(body).toContain('no way to get it back');
+    expect(body).toContain('your consent');
+    expect(body).toContain('restrict its use');
+    expect(body).toContain('under 14');
+    expect(body).toContain('EU-US Data Privacy Framework');
+    expect(body).toContain('standard contractual clauses');
+    expect(body).toContain('I cannot tell who you are without your code');
+    expect(body).toContain('Spanish Data Protection Agency (AEPD)');
+  });
+
+  it('should credit the EFF wordlist with its licence', async () => {
+    const element = await open();
+
+    const credit = Array.from(element.querySelectorAll('.credits .item')).find((item) =>
+      text(item)?.includes('Lista de palabras de la EFF'),
+    );
+    expect(text(credit)).toContain('CC BY 3.0 US / 4.0');
+    expect(credit?.querySelector('a')?.getAttribute('href')).toContain('eff.org');
   });
 
   it('should say that every position of the endgame goes to Lichess', async () => {

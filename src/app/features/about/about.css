@@ -360,6 +360,15 @@ h3 {
     align-items: start;
   }
 
+  .sync {
+    grid-column: 1 / -1;
+  }
+
+  .sync .stays {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+
   .fen-figure {
     grid-template-columns: 15rem minmax(0, 1fr);
   }

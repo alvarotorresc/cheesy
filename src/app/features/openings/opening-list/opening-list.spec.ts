@@ -287,7 +287,7 @@ describe('OpeningList', () => {
       await settle();
 
       expect(element.querySelector('.privacy')?.textContent).toContain(
-        'Your progress is saved in this browser only',
+        'Your progress is saved in this browser, with no cookies or sign-up',
       );
       await click(element.querySelector('.privacy .text-button'));
       expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe(
