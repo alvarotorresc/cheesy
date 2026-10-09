@@ -1,5 +1,15 @@
 import { isPlatformBrowser } from '@angular/common';
-import { DOCUMENT, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import {
+  afterNextRender,
+  DestroyRef,
+  DOCUMENT,
+  effect,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+  untracked,
+} from '@angular/core';
 import { trackEvent } from '../analytics/umami';
 import { ProgressService } from '../progress/progress.service';
 import type { ProgressSection } from '../progress/progress.types';
@@ -16,7 +26,7 @@ import {
   type ClearedAt,
   type SyncDocument,
 } from './sync-document';
-import { noteClear, SyncStateStore, type StoredSync } from './sync-state';
+import { noteClear, SYNC_STORAGE_KEY, SyncStateStore, type StoredSync } from './sync-state';
 
 /**
  * `unavailable`: no sync in this browser (prerender, no storage, no progress store). `off`: no
@@ -48,6 +58,17 @@ export type JoinResult =
 
 /** Pushes per trigger when they keep colliding with other devices. */
 export const MAX_ATTEMPTS = 3;
+/** Quiet time after a change before pushing it, so a session of practice goes up in one push. */
+export const DEBOUNCE_MS = 5000;
+/** The lock that keeps the tabs of this browser from syncing at the same time. */
+export const LOCK_NAME = 'cheesy-sync';
+
+/** Wait before the automatic triggers try again: one minute, doubling, up to an hour. */
+export const backoffMs = (failures: number): number =>
+  Math.min(60_000 * 2 ** (Math.max(1, failures) - 1), 3_600_000);
+
+/** What started a sync on its own: `open` pulls first, `online` ignores the backoff. */
+type Trigger = 'open' | 'change' | 'hide' | 'online';
 
 /** A document read from the server: as it is there (for its hash) and fit to merge. */
 interface Remote {
@@ -102,6 +123,9 @@ export class SyncService {
   private readonly linked = signal<string | undefined>(undefined);
   private outdated = false;
   private queue: Promise<unknown> = Promise.resolve();
+  /** A local change not pushed yet (waiting for the debounce, the backoff or the network). */
+  private pending = false;
+  private timer: ReturnType<typeof setTimeout> | undefined;
 
   readonly status = this.state.asReadonly();
   readonly error = this.failure.asReadonly();
@@ -113,6 +137,41 @@ export class SyncService {
   constructor() {
     if (!this.usable) return;
     this.refresh();
+
+    // Only changes made here: merging what comes from the server does not move it, so a pull
+    // never leads to a push of the same thing.
+    let seen = untracked(this.progress.localRevision);
+    effect(() => {
+      const revision = this.progress.localRevision();
+      if (revision === seen) return;
+      seen = revision;
+      untracked(() => this.changed());
+    });
+    afterNextRender(() => void this.trigger('open'));
+
+    const view = this.window;
+    const document = view?.document;
+    const onVisibility = (): void => {
+      if (document?.visibilityState !== 'hidden' || !this.pending) return;
+      clearTimeout(this.timer);
+      this.timer = undefined;
+      void this.trigger('hide');
+    };
+    const onOnline = (): void => {
+      if (this.pending || (this.states.read()?.failures ?? 0) > 0) void this.trigger('online');
+    };
+    const onStorage = (event: StorageEvent): void => {
+      if (event.key === SYNC_STORAGE_KEY || event.key === null) this.refresh();
+    };
+    document?.addEventListener('visibilitychange', onVisibility);
+    view?.addEventListener('online', onOnline);
+    view?.addEventListener('storage', onStorage);
+    inject(DestroyRef).onDestroy(() => {
+      clearTimeout(this.timer);
+      document?.removeEventListener('visibilitychange', onVisibility);
+      view?.removeEventListener('online', onOnline);
+      view?.removeEventListener('storage', onStorage);
+    });
   }
 
   /** Creates an account with the progress of this browser and links it. */
@@ -243,7 +302,10 @@ export class SyncService {
   /** Pulls, merges and pushes now, whatever the backoff says. */
   syncNow(): Promise<void> {
     if (!this.usable) return Promise.resolve();
-    return this.exclusive(() => this.cycle(true));
+    return this.exclusive(() => {
+      this.pending = false;
+      return this.cycle(true, false);
+    });
   }
 
   /** Notes the clear of a section for the linked account (nothing when none is linked). */
@@ -256,11 +318,36 @@ export class SyncService {
     return this.queue.then(() => undefined);
   }
 
+  /** A change made here: push it once things have been quiet for `DEBOUNCE_MS`. */
+  private changed(): void {
+    this.pending = true;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.timer = undefined;
+      void this.trigger('change');
+    }, DEBOUNCE_MS);
+  }
+
+  /**
+   * A sync nobody asked for: only when linked, and not before `retryAt` after failures (except
+   * when the browser says it is back online). Nothing retries on a timer.
+   */
+  private trigger(trigger: Trigger): Promise<void> {
+    return this.exclusive(async () => {
+      const state = this.states.read();
+      if (!state) return this.refresh();
+      const waiting = state.retryAt !== undefined && Date.now() < state.retryAt;
+      if (waiting && trigger !== 'online') return;
+      this.pending = false;
+      await this.cycle(trigger === 'open', trigger === 'hide');
+    });
+  }
+
   /**
    * One sync of the linked account: with `pull`, read the server first and merge; then push what
-   * the server lacks.
+   * the server lacks. `keepalive` lets the push outlive the page.
    */
-  private async cycle(pull: boolean): Promise<void> {
+  private async cycle(pull: boolean, keepalive: boolean): Promise<void> {
     const state = this.states.read();
     this.refresh();
     if (!state || this.outdated) return;
@@ -273,7 +360,7 @@ export class SyncService {
     } else {
       doc = await this.localDocument(state);
     }
-    if (doc) await this.upload(state.code, doc, false);
+    if (doc) await this.upload(state.code, doc, keepalive);
   }
 
   /**
@@ -331,6 +418,7 @@ export class SyncService {
       version,
       pushedHash,
       remoteCleared: read.remote.usable.cleared,
+      lastSyncAt: Date.now(),
       skew: Math.round(serverNow - Date.now()),
     }));
     return merged;
@@ -400,8 +488,8 @@ export class SyncService {
         ...rest,
         cleared: unsent(state.cleared, sent),
         failures: 0,
-        lastSyncAt: Date.now(),
         ...(pushed && {
+          lastSyncAt: Date.now(),
           version: pushed.version,
           pushedHash: pushed.pushedHash,
           remoteCleared: pushed.remoteCleared,
@@ -416,12 +504,19 @@ export class SyncService {
   private failed(code: string, result: Exclude<ApiResult<unknown>, { kind: 'ok' }>): void {
     if (result.kind === 'not-found' || result.kind === 'bad-code') {
       // Purged, or deleted from another device: unlink, keep the progress here.
+      this.pending = false;
       this.update(code, () => undefined);
       this.settle('off', 'gone');
       return;
     }
     if (result.kind === 'too-large') return this.settle('error', 'too-large');
-    this.update(code, (state) => ({ ...state, failures: state.failures + 1 }));
+    // Still to push; the next trigger after `retryAt` (or `online`, or the button) tries again.
+    this.pending = true;
+    this.update(code, (state) => ({
+      ...state,
+      failures: state.failures + 1,
+      retryAt: Date.now() + backoffMs(state.failures + 1),
+    }));
     if (result.kind === 'offline') this.settle('offline');
     else this.settle('error', 'unavailable');
   }
@@ -475,10 +570,15 @@ export class SyncService {
     else if (status === 'off' || status === 'unavailable') this.state.set('idle');
   }
 
-  /** Runs `task` after the ones before it, never two at a time in this tab. */
+  /**
+   * Runs `task` after the ones before it, never two at a time in this tab, and inside the lock
+   * `cheesy-sync` so no other tab syncs meanwhile (without `navigator.locks`, this tab only).
+   * Every task reads the stored state again, so it sees what another tab did before it.
+   */
   private exclusive<T>(task: () => Promise<T>): Promise<T> {
-    const run = this.queue.then(task);
+    const locks = (this.window?.navigator as { locks?: LockManager } | undefined)?.locks;
+    const run = this.queue.then(() => (locks ? locks.request(LOCK_NAME, task) : task()));
     this.queue = run.catch((error: unknown) => console.error(error));
-    return run;
+    return run as Promise<T>;
   }
 }
