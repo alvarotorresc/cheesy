@@ -4,6 +4,7 @@ declare namespace Cloudflare {
     mainModule: typeof import('../src/index');
   }
   interface Env {
+    ASSETS: Fetcher;
     DB: D1Database;
     PEPPER: string;
     /** Set in `vitest.config.ts`, applied by `test/apply-migrations.ts`. */

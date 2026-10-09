@@ -11,5 +11,5 @@ it('answers any /api path with a JSON 404 that is never cached', async () => {
     "default-src 'none'; frame-ancestors 'none'",
   );
   expect(res.headers.get('referrer-policy')).toBe('no-referrer');
-  expect(await res.json()).toEqual({ error: 'not-found' });
+  expect(await res.json()).toEqual({ error: 'not-found', now: expect.any(Number) });
 });
