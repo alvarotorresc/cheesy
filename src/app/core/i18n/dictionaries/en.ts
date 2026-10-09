@@ -574,6 +574,7 @@ export const en = {
     codeHidden: 'Hidden',
     wordLabel: (position: number) => `Word ${position}`,
     show: 'Show',
+    hide: 'Hide',
     copy: 'Copy',
     copied: 'Code copied.',
     copyFailed: 'Could not copy it. Show the code and copy the words by hand.',

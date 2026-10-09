@@ -81,13 +81,8 @@
           }
         </ol>
         <div class="code-actions">
-          <button
-            type="button"
-            class="button"
-            [attr.aria-pressed]="shown()"
-            (click)="shown.set(!shown())"
-          >
-            {{ p.show }}
+          <button type="button" class="button" (click)="shown.set(!shown())">
+            {{ shown() ? p.hide : p.show }}
           </button>
           <button type="button" class="button primary" (click)="copy(sync.code())">
             {{ p.copy }}

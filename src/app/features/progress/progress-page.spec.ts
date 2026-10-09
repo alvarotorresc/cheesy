@@ -321,9 +321,10 @@ describe('ProgressPage', () => {
 
       expect(element.querySelector('.code')?.textContent).not.toContain('abandon');
       const show = byText(element, 'Show');
-      expect(show.getAttribute('aria-pressed')).toBe('false');
+      expect(show.hasAttribute('aria-pressed')).toBe(false);
       show.click();
       fixture.detectChanges();
+      expect(byText(element, 'Hide').hasAttribute('aria-pressed')).toBe(false);
       expect(element.querySelector('.code')?.textContent).toContain('abandon');
       expect(element.textContent).toContain(
         'Anyone with the code can see and change your progress.',

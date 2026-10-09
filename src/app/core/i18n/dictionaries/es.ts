@@ -574,6 +574,7 @@ export const es: Messages = {
     codeHidden: 'Oculto',
     wordLabel: (position: number) => `Palabra ${position}`,
     show: 'Mostrar',
+    hide: 'Ocultar',
     copy: 'Copiar',
     copied: 'Código copiado.',
     copyFailed: 'No se ha podido copiar. Muestra el código y copia las palabras a mano.',
