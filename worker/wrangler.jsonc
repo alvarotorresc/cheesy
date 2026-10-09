@@ -13,4 +13,21 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"],
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cheesy",
+      "database_id": "4eba7dad-f714-4f84-8eee-55ac0f1ffef0",
+      "migrations_dir": "migrations",
+    },
+  ],
+  // Daily purge of accounts idle for 12 months (03:17 UTC).
+  "triggers": { "crons": ["17 3 * * *"] },
+  // PEPPER: base64 of 32 random bytes; locally it comes from `.dev.vars`.
+  "secrets": { "required": ["PEPPER"] },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": { "invocation_logs": false },
+  },
 }

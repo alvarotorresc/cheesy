@@ -1,0 +1,3 @@
+# Copy to `.dev.vars` (ignored by git) for `wrangler dev`. Local only, never the real secret:
+# openssl rand -base64 32
+PEPPER=<base64 of 32 bytes, local only>
