@@ -482,6 +482,21 @@ describe('SyncService: triggers', () => {
       });
     });
 
+    it('starts when another tab links an account', async () => {
+      configure();
+      TestBed.tick();
+      await vi.advanceTimersByTimeAsync(1000);
+      await linked(doc({ lessons: [lesson('pins', 10)] }));
+      window.dispatchEvent(new StorageEvent('storage', { key: SYNC_STORAGE_KEY }));
+      await vi.waitFor(async () => {
+        TestBed.tick();
+        await vi.advanceTimersByTimeAsync(0);
+        expect(server.pull).toHaveBeenCalledTimes(1);
+      });
+      await TestBed.inject(SyncService).idle();
+      expect([...memory.lessonRows.keys()]).toEqual(['pins']);
+    });
+
     it('does not even load without an account', async () => {
       configure();
       TestBed.tick();
