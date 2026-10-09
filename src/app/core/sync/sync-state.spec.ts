@@ -78,6 +78,7 @@ describe('SyncStateStore', () => {
     ['a code that is not four words', JSON.stringify(state({ code: 'one-two-three' }))],
     ['a code with other characters', JSON.stringify(state({ code: 'a b-c-d-e' }))],
     ['a negative version', JSON.stringify(state({ version: -1 }))],
+    ['version zero (the server starts at 1)', JSON.stringify(state({ version: 0 }))],
     ['a fractional version', JSON.stringify(state({ version: 1.5 }))],
     ['a version as text', JSON.stringify({ ...state(), version: '1' })],
     ['a hash that is not hex', JSON.stringify(state({ pushedHash: 'xyz' }))],

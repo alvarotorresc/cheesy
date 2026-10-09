@@ -56,7 +56,8 @@ const parseStored = (value: unknown): StoredSync | undefined => {
   const cleared = readCleared(raw['cleared']);
   const remoteCleared = readCleared(raw['remoteCleared']);
   if (typeof code !== 'string' || code.length > 100 || !CODE_SHAPE.test(code)) return undefined;
-  if (!isCount(version) || !isCount(failures) || !cleared) return undefined;
+  // The server starts every account at version 1.
+  if (!isCount(version) || version < 1 || !isCount(failures) || !cleared) return undefined;
   if (
     pushedHash !== undefined &&
     (typeof pushedHash !== 'string' || !HASH_SHAPE.test(pushedHash))
