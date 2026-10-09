@@ -61,6 +61,13 @@ export type JoinResult =
 
 const UNAVAILABLE_CREATE = { ok: false, error: 'unavailable' } as const;
 const UNAVAILABLE_READ = { ok: false, reason: 'unavailable' } as const;
+const UNSYNCED = { ok: false, reason: 'unsynced' } as const;
+
+/**
+ * `unsynced`: changes of this browser could not be uploaded (offline, server error), so it is
+ * still linked; the page asks and calls `leave(keepLocal, { force: true })` to leave anyway.
+ */
+export type LeaveResult = { ok: true } | { ok: false; reason: 'unsynced' };
 
 /** Pushes per trigger when they keep colliding with other devices. */
 export const MAX_ATTEMPTS = 3;
@@ -288,12 +295,28 @@ export class SyncService {
   }
 
   /**
-   * Forgets the code. With `keepLocal` false the progress of this browser is deleted too (for a
-   * shared computer); the account is unlinked first, so that deletion notes no marks.
+   * Forgets the code. First it uploads what is still pending; when that fails it stays linked and
+   * answers `unsynced`, so the page can ask whether to leave anyway (`force`). With `keepLocal`
+   * false the progress of this browser is deleted too (for a shared computer); the account is
+   * unlinked first, so that deletion notes no marks.
    */
-  leave(keepLocal: boolean): Promise<void> {
-    if (!this.usable) return Promise.resolve();
-    return this.exclusive(async () => {
+  leave(keepLocal: boolean, options: { force?: boolean } = {}): Promise<LeaveResult> {
+    if (!this.usable) return Promise.resolve({ ok: true });
+    return this.exclusive(async (): Promise<LeaveResult> => {
+      const state = this.states.read();
+      if (state && !options.force) {
+        clearTimeout(this.timer);
+        this.timer = undefined;
+        this.pending = false;
+        await this.cycle(false, false);
+        const after = this.states.read();
+        if (after?.code === state.code && !(await this.uploaded(after))) {
+          return { ok: false, reason: 'unsynced' };
+        }
+      }
+      clearTimeout(this.timer);
+      this.timer = undefined;
+      this.pending = false;
       this.states.clear();
       this.failure.set(undefined);
       this.refresh();
@@ -303,7 +326,8 @@ export class SyncService {
           cleared: () => ({}),
         });
       }
-    }, undefined);
+      return { ok: true };
+    }, UNSYNCED);
   }
 
   /** Deletes the account on the server and unlinks; the progress of this browser stays. */
@@ -502,6 +526,14 @@ export class SyncService {
     const latest = Date.now() + (state.skew ?? 0);
     const cleared = latestMarks(state.remoteCleared ?? {}, boundMarks(state.cleared, latest));
     return mergeDocuments(local, { ...emptyDocument(), cleared });
+  }
+
+  /** Whether the server holds everything of this browser: no pending marks, the same hash. */
+  private async uploaded(state: StoredSync): Promise<boolean> {
+    if (Object.keys(state.cleared).length > 0) return false;
+    const local = await this.localDocument(state);
+    // Without a progress store there is nothing here that could be lost.
+    return !local || (await documentHash(local)) === state.pushedHash;
   }
 
   /** The server holds the content of `sent`: what was pending and is in it is done. */

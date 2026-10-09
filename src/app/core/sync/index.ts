@@ -16,6 +16,7 @@ export {
   SyncService,
   type CreateResult,
   type JoinResult,
+  type LeaveResult,
   type PreviewResult,
   type ReadFailure,
   type SyncError,

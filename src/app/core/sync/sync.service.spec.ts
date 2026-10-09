@@ -324,7 +324,7 @@ describe('SyncService: accounts', () => {
       await link();
       const sync = await start();
       await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 }, 20);
-      await sync.leave(true);
+      expect(await sync.leave(true)).toEqual({ ok: true });
       expect(states.read()).toBeUndefined();
       expect(memory.lessonRows.size).toBe(1);
       expect(sync.status()).toBe('off');
@@ -335,9 +335,45 @@ describe('SyncService: accounts', () => {
       await link();
       const sync = await start();
       await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 }, 20);
-      await sync.leave(false);
+      expect(await sync.leave(false)).toEqual({ ok: true });
       expect(states.read()).toBeUndefined();
       expect(memory.lessonRows.size).toBe(0);
+    });
+
+    it('uploads what is pending before leaving', async () => {
+      await link();
+      const sync = await start();
+      await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 }, 20);
+      await progress.clear('openings', 10);
+      expect(await sync.leave(false)).toEqual({ ok: true });
+      const held = await server.document(CODE);
+      expect(held.lessons.map((row) => row.lessonId)).toEqual(['pins']);
+      expect(held.cleared).toEqual({ openings: 10 });
+    });
+
+    it('does not leave with changes it could not upload, unless forced', async () => {
+      await link();
+      const sync = await start();
+      await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 }, 20);
+      server.fail({ kind: 'offline' });
+      expect(await sync.leave(false)).toEqual({ ok: false, reason: 'unsynced' });
+      expect(states.read()?.code).toBe(CODE);
+      expect(memory.lessonRows.size).toBe(1);
+
+      server.fail({ kind: 'offline' });
+      expect(await sync.leave(false, { force: true })).toEqual({ ok: true });
+      expect(states.read()).toBeUndefined();
+      expect(memory.lessonRows.size).toBe(0);
+      expect(server.push).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not leave with a clear it could not upload', async () => {
+      await link();
+      const sync = await start();
+      await progress.clear('lessons', 10);
+      server.fail({ kind: 'unavailable' });
+      expect(await sync.leave(true)).toEqual({ ok: false, reason: 'unsynced' });
+      expect(states.read()?.cleared).toEqual({ lessons: 10 });
     });
 
     it('deletes the account on the server and unlinks, keeping the progress here', async () => {
@@ -447,7 +483,7 @@ describe('SyncService: accounts', () => {
       expect(await sync.join(CODE, 'merge')).toEqual({ ok: false, reason: 'unavailable' });
       expect(await sync.deleteRemote()).toBe(false);
       await sync.syncNow();
-      await sync.leave(false);
+      expect(await sync.leave(false)).toEqual({ ok: true });
       sync.noteClear('lessons', 1);
       for (const call of [server.create, server.pull, server.push, server.remove]) {
         expect(call).not.toHaveBeenCalled();
