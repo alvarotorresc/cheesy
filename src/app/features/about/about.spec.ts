@@ -117,11 +117,41 @@ describe('About', () => {
     expect(body).toContain('no sé quién eres sin tu código');
     expect(body).toContain('limitar su uso');
     expect(body).toContain('«Exportar»');
-    expect(Array.from(sync?.querySelectorAll('a') ?? [], (a) => a.getAttribute('href'))).toEqual([
+    expect(
+      Array.from(sync?.querySelectorAll('a:not([href^="/"])') ?? [], (a) => a.getAttribute('href')),
+    ).toEqual([
       'mailto:alvarotc.dev@protonmail.com',
       'mailto:alvarotc.dev@protonmail.com',
       'https://www.aepd.es',
     ]);
+  });
+
+  it('should link the buttons it names to the page «Tu progreso»', async () => {
+    const element = await open();
+
+    const links = Array.from(
+      element.querySelectorAll<HTMLAnchorElement>('#sincronizar a[href^="/es/"]'),
+    );
+    expect(links.map((a) => text(a))).toEqual([
+      '«Borrar del servidor»',
+      '«Exportar»',
+      '«Borrar del servidor»',
+    ]);
+    for (const link of links) expect(link.getAttribute('href')).toBe('/es/tu-progreso');
+  });
+
+  it('should link them in English too', async () => {
+    const element = await open({ lang: 'en' });
+
+    const links = Array.from(
+      element.querySelectorAll<HTMLAnchorElement>('#sincronizar a[href^="/en/"]'),
+    );
+    expect(links.map((a) => text(a))).toEqual([
+      '«Delete from the server»',
+      '«Export»',
+      '«Delete from the server»',
+    ]);
+    for (const link of links) expect(link.getAttribute('href')).toBe('/en/your-progress');
   });
 
   it('should say the same about syncing in English', async () => {

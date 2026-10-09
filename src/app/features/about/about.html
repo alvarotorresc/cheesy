@@ -72,7 +72,15 @@
           <li>
             <div>
               <b>{{ item.title }}</b
-              ><span>{{ item.text }}</span>
+              ><span>
+                @for (part of segments(item.text); track $index) {
+                  @if (part.link) {
+                    <a [routerLink]="links.progress()">{{ part.text }}</a>
+                  } @else {
+                    {{ part.text }}
+                  }
+                }
+              </span>
             </div>
           </li>
         }
@@ -80,8 +88,14 @@
           <li>
             <div>
               <b>{{ item.title }}</b
-              ><span
-                >{{ item.before }}
+              ><span>
+                @for (part of segments(item.before); track $index) {
+                  @if (part.link) {
+                    <a [routerLink]="links.progress()">{{ part.text }}</a>
+                  } @else {
+                    {{ part.text }}
+                  }
+                }
                 @if (item.link) {
                   <a [href]="item.href" rel="noopener">{{ item.link }}</a>
                 }
