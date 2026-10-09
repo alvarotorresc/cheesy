@@ -16,10 +16,17 @@ export interface StoredSync {
   pushedHash?: string;
   /** Clears made while linked, sent with the next push. */
   cleared: ClearedAt;
+  /**
+   * The marks of the document the server holds: every push carries them again, so a push built
+   * from the local rows (which have no marks) does not drop them from the server.
+   */
+  remoteCleared?: ClearedAt;
   lastSyncAt?: number;
   /** Consecutive failures, for the backoff. */
   failures: number;
   retryAt?: number;
+  /** Server clock minus this browser's, in ms, at the last answer: to bound local dates. */
+  skew?: number;
 }
 
 const CODE_SHAPE = /^[a-z]{1,16}(-[a-z]{1,16}){3}$/;
@@ -43,8 +50,9 @@ const readCleared = (value: unknown): ClearedAt | undefined => {
 const parseStored = (value: unknown): StoredSync | undefined => {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return undefined;
   const raw = value as Record<string, unknown>;
-  const { code, version, pushedHash, failures, lastSyncAt, retryAt } = raw;
+  const { code, version, pushedHash, failures, lastSyncAt, retryAt, skew } = raw;
   const cleared = readCleared(raw['cleared']);
+  const remoteCleared = readCleared(raw['remoteCleared']);
   if (typeof code !== 'string' || code.length > 100 || !CODE_SHAPE.test(code)) return undefined;
   if (!isCount(version) || !isCount(failures) || !cleared) return undefined;
   if (
@@ -58,9 +66,11 @@ const parseStored = (value: unknown): StoredSync | undefined => {
     version,
     ...(pushedHash === undefined ? {} : { pushedHash }),
     cleared,
+    ...(remoteCleared ? { remoteCleared } : {}),
     ...(isDate(lastSyncAt) ? { lastSyncAt } : {}),
     failures,
     ...(isDate(retryAt) ? { retryAt } : {}),
+    ...(Number.isSafeInteger(skew) ? { skew: skew as number } : {}),
   };
 };
 

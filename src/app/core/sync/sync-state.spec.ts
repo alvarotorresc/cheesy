@@ -33,9 +33,11 @@ describe('SyncStateStore', () => {
     const full = state({
       pushedHash: HASH,
       cleared: { lessons: 5, openings: 9 },
+      remoteCleared: { positions: 3 },
       lastSyncAt: 100,
       failures: 2,
       retryAt: 200,
+      skew: -86_400_000,
     });
     store.write(full);
     expect(store.read()).toEqual(full);
@@ -92,12 +94,16 @@ describe('SyncStateStore', () => {
       JSON.stringify({
         ...state(),
         cleared: { lessons: 5, bogus: 6, puzzles: -1, endgames: 'x' },
+        remoteCleared: { openings: 4, lessons: 'x' },
         lastSyncAt: 'soon',
         retryAt: Infinity,
+        skew: 1.5,
         extra: true,
       }),
     );
-    expect(store.read()).toEqual(state({ cleared: { lessons: 5 } }));
+    expect(store.read()).toEqual(
+      state({ cleared: { lessons: 5 }, remoteCleared: { openings: 4 } }),
+    );
   });
 
   it('is unavailable in prerender and does not touch the storage', () => {
