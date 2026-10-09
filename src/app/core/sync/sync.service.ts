@@ -100,6 +100,8 @@ interface Prepared {
   data: string;
   hash: string;
   cleared: ClearedAt;
+  /** How many local changes it includes (see `changes`). */
+  changes: number;
 }
 
 type Read = { ok: true; remote: Remote } | { ok: false; reason: 'outdated' | 'unavailable' };
@@ -162,6 +164,8 @@ export class SyncService {
   private pending = false;
   private timer: ReturnType<typeof setTimeout> | undefined;
   private prepared: Prepared | undefined;
+  /** Local changes seen so far, to tell whether a prepared push has them all. */
+  private changes = 0;
   private preparing: Promise<void> | undefined;
   private prepareAgain = false;
 
@@ -382,6 +386,7 @@ export class SyncService {
 
   /** A change made here: push it once things have been quiet for `DEBOUNCE_MS`. */
   private changed(): void {
+    this.changes++;
     this.pending = true;
     this.prepare();
     clearTimeout(this.timer);
@@ -567,6 +572,7 @@ export class SyncService {
   }
 
   private async build(): Promise<Prepared | undefined> {
+    const changes = this.changes;
     const state = this.states.read();
     if (!state || this.outdated) return undefined;
     const doc = await this.localDocument(state);
@@ -575,7 +581,7 @@ export class SyncService {
     if (hash === state.pushedHash) return undefined;
     const data = await encodeDocument(doc);
     if (dataBytes(data) > MAX_DATA_BYTES) return undefined;
-    return { code: state.code, version: state.version, data, hash, cleared: doc.cleared };
+    return { code: state.code, version: state.version, data, hash, cleared: doc.cleared, changes };
   }
 
   /**
@@ -586,11 +592,16 @@ export class SyncService {
     const prepared = this.prepared;
     const state = this.states.read();
     if (!prepared || state?.code !== prepared.code || prepared.hash === state.pushedHash) return;
+    // Built on a version the server has moved past: it could only answer 409.
+    if (prepared.version !== state.version) return;
     if (state.retryAt !== undefined && Date.now() < state.retryAt) return;
     this.prepared = undefined;
-    clearTimeout(this.timer);
-    this.timer = undefined;
-    this.pending = false;
+    // A change made after it was prepared is not in it: leave it to the next trigger.
+    if (prepared.changes === this.changes) {
+      clearTimeout(this.timer);
+      this.timer = undefined;
+      this.pending = false;
+    }
     const { code, version, data, hash, cleared } = prepared;
     void this.api
       .push(code, version, data, true)

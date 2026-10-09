@@ -897,6 +897,34 @@ describe('SyncService: triggers', () => {
       await running;
     });
 
+    it('does not send what was prepared on a version the server already moved past', async () => {
+      await linked();
+      await open();
+      await practise('pins');
+      await wait(1000);
+      const state = states.read();
+      localStorage.setItem(SYNC_STORAGE_KEY, JSON.stringify({ ...state, version: 7 }));
+      hide();
+      expect(server.push).not.toHaveBeenCalled();
+    });
+
+    it('leaves a change newer than the prepared push for the next trigger', async () => {
+      await linked();
+      await open();
+      await practise('pins');
+      await wait(1000);
+      await practise('checkmate'); // after the preparation, before it is built again
+      hide();
+      expect(server.push).toHaveBeenCalledTimes(1);
+      expect((await server.pushed(0)).lessons.map((row) => row.lessonId)).toEqual(['pins']);
+      await wait(DEBOUNCE_MS);
+      expect(server.push).toHaveBeenCalledTimes(2);
+      expect((await server.document(CODE)).lessons.map((row) => row.lessonId)).toEqual([
+        'checkmate',
+        'pins',
+      ]);
+    });
+
     it('sends nothing when nothing changed', async () => {
       await linked();
       await open();
