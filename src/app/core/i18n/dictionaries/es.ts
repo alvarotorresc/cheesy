@@ -550,6 +550,8 @@ export const es: Messages = {
         'Ese progreso lo guardó un Cheesy más nuevo. Recarga la página e inténtalo de nuevo.',
       linked: 'Este navegador ya se sincroniza con un código. Deja de sincronizar aquí primero.',
     },
+    chooseAgain:
+      'Ha cambiado el progreso de este navegador mientras tanto. Vuelve a escribir el código.',
     joined: 'Listo: este navegador se sincroniza con tu código.',
     chooseTitle: 'Este navegador ya tiene progreso',
     chooseText: '¿Qué hacemos con él?',

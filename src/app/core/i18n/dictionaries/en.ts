@@ -550,6 +550,7 @@ export const en = {
       outdated: 'That progress was saved by a newer Cheesy. Reload the page and try again.',
       linked: 'This browser already syncs with a code. Stop syncing here first.',
     },
+    chooseAgain: 'Progress changed in this browser meanwhile. Enter the code again.',
     joined: 'Done: this browser now syncs with your code.',
     chooseTitle: 'This browser already has progress',
     chooseText: 'What should happen to it?',

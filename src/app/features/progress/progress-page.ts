@@ -368,7 +368,10 @@ export class ProgressPage {
     }
     // Progress appeared here meanwhile (another tab): ask again, with what there is now.
     if (joined.reason === 'choose' && retry) return this.ask(code, false);
-    if (joined.reason === 'choose') return;
+    if (joined.reason === 'choose') {
+      this.message.set(p.chooseAgain);
+      return;
+    }
     this.codeError.set(
       joined.reason === 'linked'
         ? p.joinFailed.linked

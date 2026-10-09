@@ -247,6 +247,22 @@ describe('ProgressPage', () => {
       expect(sync.join).toHaveBeenCalledWith(CODE, 'merge');
     });
 
+    it('should say so when progress appears again after choosing, instead of going quiet', async () => {
+      const sync = new FakeProgressSync();
+      const local = { ...emptyDocument(), lessons: [lesson('pins')] };
+      sync.preview.mockResolvedValue({ ok: true, code: CODE, remote: remoteDoc(), local });
+      sync.join.mockResolvedValueOnce({ ok: false, reason: 'choose' });
+      const { fixture, element } = await render({ sync });
+
+      await enter(fixture, element, CODE);
+      byText(openDialog(element), 'Join both').click();
+      await settle(fixture);
+
+      expect(element.querySelector('.page-message')?.textContent).toContain(
+        'Progress changed in this browser meanwhile. Enter the code again.',
+      );
+    });
+
     it('should name the word that is not in the list', async () => {
       const sync = new FakeProgressSync();
       sync.preview.mockResolvedValueOnce({ ok: false, reason: 'bad-code', word: 3 });
