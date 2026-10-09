@@ -24,6 +24,42 @@ const rules = redirectRules(sources);
 
 const paths = appRoutePaths(sources);
 
+/**
+ * How Workers static assets answer a request, from the lines of `_redirects` and the files of the
+ * build, with `html_handling: "drop-trailing-slash"` and `not_found_handling: "404-page"`. Returns
+ * `resolve(path, query)` → `{ status, location }` for a redirect or `{ status, file }` for a file.
+ *
+ * The first rule whose source is the path (without the query) wins, over any file: a 301 keeps the
+ * query, a 200 serves its target as an asset. With no rule, `html_handling` serves `/x` from `x.html`
+ * and sends `/x.html` and `/x/` there with a 307 (that 307 only shows up when a rule is missing);
+ * anything else is the 404 page.
+ */
+const cloudflare = (lines, files) => {
+  const rules = new Map();
+  for (const line of lines) {
+    const [from, to, status] = line.split(' ');
+    if (!rules.has(from)) rules.set(from, { to, status: Number(status) });
+  }
+  const built = new Set(files);
+  const asset = (path) => {
+    if (path === '/') return { status: 200, file: 'index.html' };
+    const bare = path.slice(1);
+    if (bare.endsWith('.html') && built.has(bare))
+      return { status: 307, location: `/${bare.slice(0, -'.html'.length)}` };
+    if (path.endsWith('/') && built.has(`${bare.slice(0, -1)}.html`))
+      return { status: 307, location: path.slice(0, -1) };
+    if (built.has(`${bare}.html`)) return { status: 200, file: `${bare}.html` };
+    if (built.has(bare)) return { status: 200, file: bare };
+    return { status: 404, file: '404.html' };
+  };
+  return (path, query = '') => {
+    const rule = rules.get(path);
+    if (!rule) return asset(path);
+    if (rule.status === 301) return { status: 301, location: rule.to + query };
+    return asset(rule.to);
+  };
+};
+
 /** The old addresses, listed straight from the catalogues as the old routes were. */
 const expectedOldAddresses = () => {
   return [
@@ -137,6 +173,78 @@ describe('_redirects', () => {
       'only static rules',
     );
     assert.ok(lines.every((l) => l.length <= 1000));
+  });
+});
+
+describe('Workers static assets routing', () => {
+  /** The files of the build the rules are resolved against: the shell, the 404 page and the pages. */
+  const builtFiles = () => [
+    'index.html',
+    '404.html',
+    'index.csr.html',
+    ...urls.langs.flatMap((lang) =>
+      urls.indexablePages().map((page) => `${urls.pathOf(page, lang).slice(1)}.html`),
+    ),
+  ];
+  const resolve = cloudflare(redirectLines(sources), builtFiles());
+
+  it('should send an old address with a slash and a query to its page, keeping the query', () => {
+    assert.deepEqual(resolve('/openings/', '?fen=abc'), {
+      status: 301,
+      location: '/en/openings?fen=abc',
+    });
+    assert.deepEqual(resolve('/openings', '?fen=abc'), {
+      status: 301,
+      location: '/en/openings?fen=abc',
+    });
+  });
+
+  it('should send an app route with a trailing slash to the route, which is the shell', () => {
+    assert.deepEqual(resolve('/es/analisis/'), { status: 301, location: '/es/analisis' });
+    assert.deepEqual(resolve('/es/analisis'), { status: 200, file: 'index.csr.html' });
+    assert.deepEqual(resolve('/en/openings/italian-game/practice/'), {
+      status: 301,
+      location: '/en/openings/italian-game/practice',
+    });
+  });
+
+  it('should serve a page at its address and send its .html and its slash there', () => {
+    assert.deepEqual(resolve('/es/aperturas'), { status: 200, file: 'es/aperturas.html' });
+    assert.deepEqual(resolve('/es/aperturas.html'), { status: 301, location: '/es/aperturas' });
+    assert.deepEqual(resolve('/es/aperturas/'), { status: 301, location: '/es/aperturas' });
+    assert.deepEqual(resolve('/'), { status: 200, file: 'index.html' });
+    assert.deepEqual(resolve('/es'), { status: 200, file: 'es.html' });
+    assert.deepEqual(resolve('/es/'), { status: 301, location: '/es' });
+  });
+
+  it('should answer an unknown address with the 404 page', () => {
+    assert.deepEqual(resolve('/es/aperturas/nada'), { status: 404, file: '404.html' });
+    assert.deepEqual(resolve('/en/nothing-here/'), { status: 404, file: '404.html' });
+  });
+
+  it('should land every old address on a page or an app route in one hop', () => {
+    for (const [from] of rules) {
+      for (const path of [from, `${from}/`]) {
+        const first = resolve(path);
+        assert.equal(first.status, 301, path);
+        assert.equal(resolve(first.location).status, 200, `${path} → ${first.location}`);
+      }
+    }
+  });
+
+  it('should answer every app route with the shell and every page with its file', () => {
+    for (const path of paths) {
+      assert.deepEqual(resolve(path), { status: 200, file: 'index.csr.html' }, path);
+      assert.deepEqual(resolve(`${path}/`), { status: 301, location: path }, path);
+    }
+    for (const lang of urls.langs) {
+      for (const page of urls.indexablePages()) {
+        const path = urls.pathOf(page, lang);
+        assert.deepEqual(resolve(path), { status: 200, file: `${path.slice(1)}.html` }, path);
+        assert.deepEqual(resolve(`${path}.html`), { status: 301, location: path }, path);
+        assert.deepEqual(resolve(`${path}/`), { status: 301, location: path }, path);
+      }
+    }
   });
 });
 
