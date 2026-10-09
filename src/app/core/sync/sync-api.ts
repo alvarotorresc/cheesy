@@ -4,7 +4,7 @@ import { dataBytes, MAX_DATA_BYTES } from './sync-codec';
 
 export type ApiResult<T> =
   | { kind: 'ok'; value: T; now: number }
-  | { kind: 'conflict'; version: number; data: string }
+  | { kind: 'conflict'; version: number; data: string; now: number }
   | { kind: 'not-found' }
   | { kind: 'bad-code'; word?: number }
   | { kind: 'too-large' }
@@ -131,9 +131,9 @@ export class SyncApi {
         : { kind: 'unavailable' };
     }
     if (response.status === 409) {
-      const { version, data: current } = body;
-      return isInt(version) && isText(current)
-        ? { kind: 'conflict', version, data: current }
+      const { version, data: current, now } = body;
+      return isInt(version) && isText(current) && typeof now === 'number'
+        ? { kind: 'conflict', version, data: current, now }
         : { kind: 'unavailable' };
     }
     if (response.status === 404 && body['error'] === 'not-found') return { kind: 'not-found' };

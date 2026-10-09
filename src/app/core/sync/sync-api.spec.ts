@@ -73,9 +73,14 @@ describe('SyncApi', () => {
     expect(inits[1].keepalive).toBe(true);
   });
 
-  it('turns a 409 into a conflict that carries the server data', async () => {
+  it('turns a 409 into a conflict that carries the server data and time', async () => {
     answer(reply(409, { error: 'conflict', version: 8, data: GZIP, now: 1 }));
-    expect(await api.push(CODE, 3, GZIP)).toEqual({ kind: 'conflict', version: 8, data: GZIP });
+    expect(await api.push(CODE, 3, GZIP)).toEqual({
+      kind: 'conflict',
+      version: 8,
+      data: GZIP,
+      now: 1,
+    });
   });
 
   it('maps the error statuses to their kind', async () => {
@@ -101,6 +106,9 @@ describe('SyncApi', () => {
     answer(reply(200, { code: CODE, version: 'x', data: GZIP, updatedAt: 7, now: 9 }));
     expect(await api.pull(CODE)).toEqual({ kind: 'unavailable' });
     answer(reply(409, { error: 'conflict', version: 1 }));
+    expect(await api.push(CODE, 0, GZIP)).toEqual({ kind: 'unavailable' });
+    // Without the server time the data could not be checked against the right clock.
+    answer(reply(409, { error: 'conflict', version: 1, data: GZIP }));
     expect(await api.push(CODE, 0, GZIP)).toEqual({ kind: 'unavailable' });
   });
 
