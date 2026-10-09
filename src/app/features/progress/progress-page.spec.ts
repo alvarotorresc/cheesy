@@ -503,5 +503,16 @@ describe('ProgressPage', () => {
       expect(modal).toHaveBeenCalledOnce();
       expect(document.activeElement?.closest('dialog')).toBe(openDialog(element));
     });
+
+    it('should focus the control marked for it, not the first one, when a dialog opens', async () => {
+      const sync = new FakeProgressSync();
+      sync.link(CODE);
+      const { fixture, element } = await render({ sync });
+
+      byText(element, 'Stop syncing here').click();
+      fixture.detectChanges();
+
+      expect(document.activeElement).toBe(byText(openDialog(element), 'Keep it'));
+    });
   });
 });

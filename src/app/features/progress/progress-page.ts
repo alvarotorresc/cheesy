@@ -394,7 +394,10 @@ export class ProgressPage {
     const element = dialog?.nativeElement;
     if (!element || element.open) return;
     element.showModal();
-    element.querySelector<HTMLElement>('[data-autofocus], button, input')?.focus();
+    const first =
+      element.querySelector<HTMLElement>('[data-autofocus]') ??
+      element.querySelector<HTMLElement>('button, input');
+    first?.focus();
   }
 
   /**
