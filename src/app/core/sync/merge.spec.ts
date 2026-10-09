@@ -272,13 +272,15 @@ describe('mergeDocuments properties', () => {
             }[table]
           ],
         );
+  /** The rows that pass their `parse*`: the generator also writes bad ones. */
+  const valid = (document: SyncDocument, table: SyncTable): object[] =>
+    (document[table] as readonly unknown[]).filter(
+      (row): row is object =>
+        typeof row === 'object' && row !== null && PARSE[table](row as never) !== undefined,
+    );
   const keys = (document: SyncDocument, table: SyncTable): string[] =>
     [
-      ...new Set(
-        (document[table] as readonly object[]).map((row) =>
-          keyOf(table, row as Record<string, unknown>),
-        ),
-      ),
+      ...new Set(valid(document, table).map((row) => keyOf(table, row as Record<string, unknown>))),
     ].sort();
   const unmarked = (document: SyncDocument): SyncDocument => ({ ...document, cleared: {} });
 
@@ -356,5 +358,54 @@ describe('mergeDocuments properties', () => {
       }
     }
     expect(dropped).toBeGreaterThan(RUNS / 10);
+  });
+
+  it('neither inflates nor loses: each field comes from the rows merged', () => {
+    type Rule = 'max' | 'min' | 'or' | 'maxDefined' | 'oneOf';
+    const RULES: Record<SyncTable, Record<string, Rule>> = {
+      lines: {
+        practiced: 'max',
+        clean: 'max',
+        bestMistakes: 'min',
+        lastPracticed: 'max',
+        streak: 'oneOf',
+      },
+      endgames: { completions: 'max', firstCompletedAt: 'min', lastCompletedAt: 'max' },
+      positions: {
+        solves: 'max',
+        spoiled: 'or',
+        lastSolvedAt: 'maxDefined',
+        spoiledAt: 'maxDefined',
+      },
+      lessons: { completedAt: 'max', exercises: 'oneOf', firstTry: 'oneOf' },
+      puzzles: { tries: 'max', lastPlayedAt: 'max', lastFirstTry: 'oneOf', lessonId: 'oneOf' },
+    };
+    const expected = (rule: Rule, values: unknown[]): unknown => {
+      const defined = values.filter((value) => value !== undefined) as number[];
+      if (rule === 'max') return Math.max(...(values as number[]));
+      if (rule === 'min') return Math.min(...(values as number[]));
+      if (rule === 'or') return values.some(Boolean);
+      if (rule === 'maxDefined') return defined.length ? Math.max(...defined) : undefined;
+      return undefined;
+    };
+    const random = seededRandom(7);
+    for (let run = 0; run < RUNS; run++) {
+      const a = unmarked(randomDocument(random));
+      const b = unmarked(randomDocument(random));
+      const merged = mergeDocuments(a, b);
+      for (const table of TABLES) {
+        const inputs = [...valid(a, table), ...valid(b, table)] as Record<string, unknown>[];
+        for (const row of merged[table] as readonly object[]) {
+          const out = row as Record<string, unknown>;
+          const sources = inputs.filter((input) => keyOf(table, input) === keyOf(table, out));
+          expect(sources.length).toBeGreaterThan(0);
+          for (const [field, rule] of Object.entries(RULES[table])) {
+            const values = sources.map((source) => source[field]);
+            if (rule === 'oneOf') expect(values).toContain(out[field]);
+            else expect(out[field]).toEqual(expected(rule, values));
+          }
+        }
+      }
+    }
   });
 });

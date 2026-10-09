@@ -41,10 +41,17 @@ const LESSONS = ['the-board', 'checkmate', 'pins'];
 const PUZZLES = ['KEPe0', 'a1B2c', 'zzzzz', '00000'];
 export const MAX_TIME = 20;
 
+/** Close to the latest date a `Date` can hold (8.64e15): valid, but far in the future. */
+export const FAR_FUTURE = 8.64e15 - 100;
+
+/** A date in the narrow range, or now and then one far in the future. */
+const date = (random: Random, max = MAX_TIME): number =>
+  (random() < 0.05 ? FAR_FUTURE : 0) + int(random, max);
+
 /** A run of one to four events, each at the same time as the one before or later. */
 const times = (random: Random): number[] => {
   const count = 1 + int(random, 3);
-  const result = [int(random, MAX_TIME - 6)];
+  const result = [date(random, MAX_TIME - 6)];
   while (result.length < count) result.push(result[result.length - 1] + int(random, 2));
   return result;
 };
@@ -121,7 +128,7 @@ const randomLesson = (random: Random): LessonProgress => {
   const exercises = int(random, 3);
   return {
     lessonId: pick(random, LESSONS),
-    completedAt: int(random, MAX_TIME),
+    completedAt: date(random),
     exercises,
     firstTry: int(random, exercises),
   };
@@ -132,12 +139,21 @@ const randomPuzzle = (random: Random): PuzzleProgress => ({
   lessonId: pick(random, LESSONS.slice(0, 2)),
   tries: 1 + int(random, 3),
   lastFirstTry: random() < 0.5,
-  lastPlayedAt: int(random, MAX_TIME),
+  lastPlayedAt: date(random),
 });
 
-/** Several rows, possibly with repeated keys: a document can arrive like that. */
+/** A row broken the way a tampered document could be: it must be dropped, never merged. */
+const broken = <T>(random: Random, row: T): T => {
+  const fields = Object.keys(row as object);
+  const field = pick(random, fields);
+  return { ...row, [field]: pick(random, [-1, 'x', null, Number.NaN, 1e300]) };
+};
+
+/** Several rows, possibly with repeated keys and bad rows: a document can arrive like that. */
 const rows = <T>(random: Random, make: (random: Random) => T): T[] =>
-  Array.from({ length: int(random, 4) }, () => make(random));
+  Array.from({ length: int(random, 4) }, () =>
+    random() < 0.1 ? broken(random, make(random)) : make(random),
+  );
 
 const SECTIONS: readonly ProgressSection[] = [
   'openings',
@@ -149,7 +165,7 @@ const SECTIONS: readonly ProgressSection[] = [
 
 const randomCleared = (random: Random): ClearedAt => {
   const cleared: Partial<Record<ProgressSection, number>> = {};
-  for (const section of SECTIONS) if (random() < 0.25) cleared[section] = int(random, MAX_TIME);
+  for (const section of SECTIONS) if (random() < 0.25) cleared[section] = date(random);
   return cleared;
 };
 
