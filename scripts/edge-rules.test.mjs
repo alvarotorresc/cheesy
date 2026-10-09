@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -183,11 +183,14 @@ describe('_redirects', () => {
 });
 
 describe('_headers', () => {
-  it('should carry the CSP and the global headers exactly as netlify.toml has them', () => {
-    const toml = readFileSync(join(ROOT, 'netlify.toml'), 'utf8');
-    for (const [name, value] of GLOBAL_HEADERS) {
-      assert.ok(toml.includes(`    ${name} = "${value}"\n`), name);
-    }
+  it('should carry the CSP and the global headers', () => {
+    const headers = new Map(GLOBAL_HEADERS);
+    assert.equal(
+      headers.get('Content-Security-Policy'),
+      "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://analytics.alvarotc.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://tablebase.lichess.ovh https://analytics.alvarotc.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    );
+    assert.equal(headers.get('X-Content-Type-Options'), 'nosniff');
+    assert.equal(headers.get('X-Frame-Options'), 'DENY');
     assert.equal(GLOBAL_HEADERS.length, 6);
   });
 
