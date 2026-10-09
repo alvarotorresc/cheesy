@@ -1,1 +1,8 @@
-export { provideUmami, UMAMI_ORIGIN, UMAMI_WEBSITE_ID, umamiEnabled } from './umami';
+export {
+  provideUmami,
+  trackEvent,
+  UMAMI_ORIGIN,
+  UMAMI_WEBSITE_ID,
+  umamiEnabled,
+  type TrackedEvent,
+} from './umami';

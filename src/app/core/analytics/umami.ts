@@ -42,3 +42,24 @@ export const provideUmami = (
     script.dataset['doNotTrack'] = 'true';
     document.head.appendChild(script);
   });
+
+/** The events counted besides the visits. They carry no data: only their name. */
+export type TrackedEvent = 'sync-create' | 'sync-join';
+
+/**
+ * Counts one event in Umami, with nothing but its name. Does nothing without a window (prerender),
+ * when counting is off or when the script did not load (blocked, local development, do not
+ * track). Analytics never breaks the caller.
+ */
+export const trackEvent = (
+  name: TrackedEvent,
+  view: Window | undefined,
+  websiteId: string = UMAMI_WEBSITE_ID,
+): void => {
+  if (!view || !umamiEnabled(websiteId)) return;
+  try {
+    (view as Window & { umami?: { track?: (name: string) => unknown } }).umami?.track?.(name);
+  } catch {
+    // Nothing to do: the event is just not counted.
+  }
+};
