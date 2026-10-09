@@ -17,8 +17,7 @@
     {
       "binding": "DB",
       "database_name": "cheesy",
-      // Placeholder: replace with the id printed by `wrangler d1 create cheesy` before deploying.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "4eba7dad-f714-4f84-8eee-55ac0f1ffef0",
       "migrations_dir": "migrations",
     },
   ],
