@@ -736,7 +736,14 @@ describe('ProgressService', () => {
 
     it('should tell the sync about a cleared section', async () => {
       await service.clear('lessons', 300);
-      expect(onCleared).toHaveBeenCalledWith('lessons', 300);
+      expect(onCleared).toHaveBeenCalledWith('lessons', 300, 0);
+    });
+
+    it('should tell the sync the latest activity of the rows it deletes', async () => {
+      await service.recordLesson({ lessonId: 'knight-moves', exercises: 4, firstTry: 2 }, 250);
+      await service.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 2 }, 900);
+      await service.clear('lessons', 300);
+      expect(onCleared).toHaveBeenCalledWith('lessons', 300, 900);
     });
 
     it('should do nothing on its own when a section is cleared', async () => {

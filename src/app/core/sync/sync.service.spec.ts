@@ -6,7 +6,7 @@ import type { LessonProgress, LineProgress } from '../progress/progress.types';
 import { provideSync } from './provide-sync';
 import { SyncApi } from './sync-api';
 import { encodeDocument } from './sync-codec';
-import { emptyDocument, type SyncDocument } from './sync-document';
+import { emptyDocument, FUTURE_SLACK, type SyncDocument } from './sync-document';
 import { SyncStateStore, SYNC_STORAGE_KEY, type StoredSync } from './sync-state';
 import { FakeSyncServer } from './sync-testing';
 import { backoffMs, DEBOUNCE_MS, MAX_ATTEMPTS, SyncService } from './sync.service';
@@ -121,22 +121,8 @@ describe('SyncService: accounts', () => {
         throw new Error('full');
       });
       expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: false });
-      expect(write).toHaveBeenCalledTimes(2); // one retry
+      expect(write).toHaveBeenCalledTimes(1);
       expect(server.accounts.has(CODE)).toBe(true);
-    });
-
-    it('keeps the code when the second write works', async () => {
-      const sync = await start();
-      const original = Storage.prototype.setItem;
-      vi.spyOn(Storage.prototype, 'setItem')
-        .mockImplementationOnce(() => {
-          throw new Error('busy');
-        })
-        .mockImplementation(function (this: Storage, key: string, value: string) {
-          original.call(this, key, value);
-        });
-      expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: true });
-      expect(states.read()?.code).toBe(CODE);
     });
 
     it('does not create a second account when one is linked', async () => {
@@ -437,12 +423,33 @@ describe('SyncService: accounts', () => {
       expect(states.read()?.cleared.openings).toBeLessThanOrEqual(server.now + 1000);
     });
 
-    it('bounds pending marks to the server clock when it sends them', async () => {
+    it('deletes rows it uploaded with a clock ahead of the server', async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      try {
+        // This clock runs twelve hours ahead of the server's.
+        vi.setSystemTime(server.now + 12 * HOUR);
+        await link();
+        const sync = await start();
+        await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 });
+        await sync.syncNow();
+        expect((await server.document(CODE)).lessons).toHaveLength(1);
+
+        await progress.clear('lessons');
+        await sync.syncNow();
+
+        expect(memory.lessonRows.size).toBe(0);
+        expect((await server.document(CODE)).lessons).toEqual([]);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('keeps a stored mark far ahead from being dropped on the way', async () => {
       await link({ cleared: { lessons: 8.64e15 } });
       await start();
       await TestBed.inject(SyncService).syncNow();
       const sent = await server.document(CODE);
-      expect(sent.cleared.lessons).toBe(server.now);
+      expect(sent.cleared.lessons).toBe(server.now + FUTURE_SLACK);
     });
   });
 
@@ -457,6 +464,15 @@ describe('SyncService: accounts', () => {
       localStorage.removeItem(SYNC_STORAGE_KEY);
       server.create.mockRejectedValueOnce(new Error('boom'));
       await expect(sync.create()).resolves.toEqual({ ok: false, error: 'unavailable' });
+    });
+
+    it('does not let a failed preview put the linked account in error', async () => {
+      await link();
+      const sync = await start();
+      server.pull.mockRejectedValueOnce(new Error('boom'));
+      expect(await sync.preview(OTHER)).toEqual({ ok: false, reason: 'unavailable' });
+      expect(sync.status()).toBe('idle');
+      expect(sync.error()).toBeUndefined();
     });
 
     it('is unavailable without gzip streams or Web Crypto', async () => {
@@ -874,6 +890,34 @@ describe('SyncService: triggers', () => {
       expect(server.push.mock.calls[0][3]).toBe(true);
       release({ kind: 'offline' });
       await running;
+    });
+
+    it('does not send what was prepared on a version the server already moved past', async () => {
+      await linked();
+      await open();
+      await practise('pins');
+      await wait(1000);
+      const state = states.read();
+      localStorage.setItem(SYNC_STORAGE_KEY, JSON.stringify({ ...state, version: 7 }));
+      hide();
+      expect(server.push).not.toHaveBeenCalled();
+    });
+
+    it('leaves a change newer than the prepared push for the next trigger', async () => {
+      await linked();
+      await open();
+      await practise('pins');
+      await wait(1000);
+      await practise('checkmate'); // after the preparation, before it is built again
+      hide();
+      expect(server.push).toHaveBeenCalledTimes(1);
+      expect((await server.pushed(0)).lessons.map((row) => row.lessonId)).toEqual(['pins']);
+      await wait(DEBOUNCE_MS);
+      expect(server.push).toHaveBeenCalledTimes(2);
+      expect((await server.document(CODE)).lessons.map((row) => row.lessonId)).toEqual([
+        'checkmate',
+        'pins',
+      ]);
     });
 
     it('sends nothing when nothing changed', async () => {

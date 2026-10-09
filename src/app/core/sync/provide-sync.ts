@@ -27,8 +27,8 @@ export const provideSync = (): EnvironmentProviders =>
       provide: PROGRESS_CLEARED,
       useFactory: () => {
         const states = inject(SyncStateStore);
-        return (section: Parameters<typeof noteClear>[1], at: number) =>
-          noteClear(states, section, at);
+        return (section: Parameters<typeof noteClear>[1], at: number, latest: number) =>
+          noteClear(states, section, at, latest);
       },
     },
     provideAppInitializer(() => {
