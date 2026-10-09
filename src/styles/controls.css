@@ -102,6 +102,11 @@
   cursor: pointer;
 }
 
+a.text-button {
+  display: inline-flex;
+  align-items: center;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;

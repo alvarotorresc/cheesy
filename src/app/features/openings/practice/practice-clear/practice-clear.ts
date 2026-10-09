@@ -1,6 +1,8 @@
 import { Component, ElementRef, inject, input, signal, viewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { I18nService } from '../../../../core/i18n';
 import { ProgressService } from '../../../../core/progress';
+import { PageLinks } from '../../../../core/routing';
 
 /**
  * Where the progress is kept, said in one line, and the action to delete the progress of the
@@ -9,6 +11,7 @@ import { ProgressService } from '../../../../core/progress';
  */
 @Component({
   selector: 'app-practice-clear',
+  imports: [RouterLink],
   templateUrl: './practice-clear.html',
   styleUrl: './practice-clear.css',
 })
@@ -17,6 +20,7 @@ export class PracticeClear {
   readonly hasProgress = input(false);
 
   protected readonly i18n = inject(I18nService);
+  protected readonly links = inject(PageLinks);
   private readonly progress = inject(ProgressService);
 
   /** Result of the last try, announced to screen readers. */

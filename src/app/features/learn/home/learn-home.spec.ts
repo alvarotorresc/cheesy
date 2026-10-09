@@ -239,6 +239,9 @@ describe('LearnHome', () => {
       await progress.recordEndgame('lucena');
       const root = await render('/learn');
       expect(root.querySelector('.continue')).not.toBeNull();
+      expect(root.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+        '/en/your-progress',
+      );
 
       const showModal = openDialog(root);
       expect(showModal).toHaveBeenCalled();

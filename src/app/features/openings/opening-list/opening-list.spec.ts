@@ -289,6 +289,9 @@ describe('OpeningList', () => {
       expect(element.querySelector('.privacy')?.textContent).toContain(
         'Your progress is saved in this browser, with no cookies or sign-up',
       );
+      expect(element.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+        '/en/your-progress',
+      );
       await click(element.querySelector('.privacy .text-button'));
       expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe(
         'There is no saved progress.',

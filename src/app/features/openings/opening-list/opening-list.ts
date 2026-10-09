@@ -9,8 +9,10 @@ import {
   viewChild,
 } from '@angular/core';
 import { ContentService, type OpeningSummary } from '../../../core/content';
+import { RouterLink } from '@angular/router';
 import { I18nService } from '../../../core/i18n';
 import { ProgressService, type LineProgress, type ProgressColor } from '../../../core/progress';
+import { PageLinks } from '../../../core/routing';
 import { Icon } from '../../../shared/icon';
 import { OpeningCard } from '../opening-card/opening-card';
 import {
@@ -40,13 +42,14 @@ type Summary = Record<ProgressColor, ColorProgress>;
  */
 @Component({
   selector: 'app-opening-list',
-  imports: [CategoryAbout, Icon, OpeningCard],
+  imports: [CategoryAbout, Icon, OpeningCard, RouterLink],
   templateUrl: './opening-list.html',
   styleUrl: './opening-list.css',
   host: { class: 'catalog' },
 })
 export class OpeningList {
   protected readonly i18n = inject(I18nService);
+  protected readonly links = inject(PageLinks);
   /** Keeps the prerender waiting until the content is on the page. */
   private readonly wait = injectPrerenderWait();
   protected readonly progressService = inject(ProgressService);

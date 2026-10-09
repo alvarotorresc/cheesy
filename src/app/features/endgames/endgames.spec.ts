@@ -177,6 +177,9 @@ describe('Endgames list', () => {
     await fixture.whenStable();
 
     expect(element.querySelector('.status-msg')?.textContent).toBe('There is no saved progress.');
+    const sync = element.querySelector('.privacy a.text-button');
+    expect(sync?.textContent?.trim()).toBe('Sync or export');
+    expect(sync?.getAttribute('href')).toBe('/en/your-progress');
   });
 
   it('should show a skeleton while loading', async () => {
