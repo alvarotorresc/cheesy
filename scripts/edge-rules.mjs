@@ -5,9 +5,9 @@
 // English (`/en/openings/italian-game`). The rules are generated, never written by hand: one per
 // old address, from the catalogues and the slugs, between the two marker lines of `netlify.toml`.
 //
-//   node scripts/netlify-redirects.mjs           rewrites the three blocks in netlify.toml
-//   node scripts/netlify-redirects.mjs --check   fails if a block is not up to date
-//   node scripts/netlify-redirects.mjs --built   after the build: fails if a target has no page in
+//   node scripts/edge-rules.mjs           rewrites the three blocks in netlify.toml
+//   node scripts/edge-rules.mjs --check   fails if a block is not up to date
+//   node scripts/edge-rules.mjs --built   after the build: fails if a target has no page in
 //                                                dist/cheesy/browser, or an old address or an app
 //                                                route is a file
 //
@@ -271,7 +271,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const updated = withBlocks(toml);
   if (process.argv.includes('--check')) {
     if (updated !== toml) {
-      console.error('netlify.toml is out of date: run node scripts/netlify-redirects.mjs');
+      console.error('netlify.toml is out of date: run node scripts/edge-rules.mjs');
       process.exit(1);
     }
   } else if (process.argv.includes('--built')) {

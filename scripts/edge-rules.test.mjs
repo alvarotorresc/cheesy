@@ -27,7 +27,7 @@ import {
   SHELL,
   withBlock,
   withBlocks,
-} from './netlify-redirects.mjs';
+} from './edge-rules.mjs';
 
 const sources = loadSources();
 const urls = createPageUrls(sources.slugs);

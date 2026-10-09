@@ -20,7 +20,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadSources, redirectRules } from '../../scripts/netlify-redirects.mjs';
+import { loadSources, redirectRules } from '../../scripts/edge-rules.mjs';
 import { createPageUrls } from '../../src/app/core/routing/page-url.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
