@@ -254,6 +254,24 @@ describe('ProgressPage', () => {
       expect(sync.join).toHaveBeenCalledWith(CODE, 'replace');
     });
 
+    it('should announce «Export it first» inside the dialog, not in the files block', async () => {
+      vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:progress');
+      vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined);
+      vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => undefined);
+      const sync = new FakeProgressSync();
+      const local = { ...emptyDocument(), lessons: [lesson('pins')] };
+      sync.preview.mockResolvedValue({ ok: true, code: CODE, remote: remoteDoc(), local });
+      const { fixture, element } = await render({ sync });
+
+      await enter(fixture, element, CODE);
+      const dialog = openDialog(element);
+      byText(dialog, 'Export it first').click();
+      await settle(fixture);
+
+      expect(dialog.querySelector('[role="status"]')?.textContent).toContain('Downloaded');
+      expect(element.querySelector('.files .message')?.textContent?.trim()).toBe('');
+    });
+
     it('should join both sides when asked to', async () => {
       const sync = new FakeProgressSync();
       const local = { ...emptyDocument(), lessons: [lesson('pins')] };

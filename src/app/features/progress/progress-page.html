@@ -275,12 +275,13 @@
         </button>
         <p>
           <span id="replace-text">{{ p.replaceText }}</span>
-          <button type="button" class="text-button" (click)="exportFile()">
+          <button type="button" class="text-button" (click)="exportFile(chooseMessage)">
             {{ p.exportFirst }}
           </button>
         </p>
       </div>
     </div>
+    <p class="message" role="status">{{ chooseMessage() }}</p>
     <div class="dialog-actions">
       <button type="button" class="button quiet" (click)="chooseDialog.close()">
         {{ p.cancel }}

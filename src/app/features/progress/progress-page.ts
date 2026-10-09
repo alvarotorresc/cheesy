@@ -12,6 +12,7 @@ import {
   PLATFORM_ID,
   signal,
   untracked,
+  type WritableSignal,
   viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -97,6 +98,8 @@ export class ProgressPage {
   protected readonly message = signal('');
   /** Result of the last export or import, announced politely. */
   protected readonly fileMessage = signal('');
+  /** Result of «Export it first», announced inside the dialog that asked for it. */
+  protected readonly chooseMessage = signal('');
 
   protected readonly codeInput = signal('');
   protected readonly codeError = signal<string | undefined>(undefined);
@@ -296,13 +299,14 @@ export class ProgressPage {
     }
   }
 
-  protected async exportFile(): Promise<void> {
+  /** Downloads a copy; the result is announced in `report`, the region next to the button. */
+  protected async exportFile(report: WritableSignal<string> = this.fileMessage): Promise<void> {
     if (!this.start('export')) return;
     const p = this.t().progressPage;
     try {
       const doc = await this.progress.snapshot();
       if (!doc) {
-        this.fileMessage.set(p.exportFailed);
+        report.set(p.exportFailed);
         return;
       }
       const name = exportFileName(new Date());
@@ -313,7 +317,7 @@ export class ProgressPage {
       anchor.download = name;
       anchor.click();
       setTimeout(() => URL.revokeObjectURL(url));
-      this.fileMessage.set(p.exported(name));
+      report.set(p.exported(name));
     } finally {
       this.busy.set(undefined);
     }
@@ -352,6 +356,7 @@ export class ProgressPage {
         remote: rowCounts(preview.remote),
         local: rowCounts(preview.local),
       });
+      this.chooseMessage.set('');
       this.open(this.chooseDialog());
       return;
     }
