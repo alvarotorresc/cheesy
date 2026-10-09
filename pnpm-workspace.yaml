@@ -1,3 +1,6 @@
+packages:
+  - worker
+
 # Dependencies whose install scripts are not needed: they ship prebuilt binaries.
 allowBuilds:
   '@parcel/watcher': false
@@ -6,3 +9,4 @@ allowBuilds:
   lmdb: false
   msgpackr-extract: false
   stockfish: false
+  workerd: false
