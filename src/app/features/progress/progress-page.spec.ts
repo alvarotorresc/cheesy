@@ -447,7 +447,7 @@ describe('ProgressPage', () => {
       await settle(fixture);
     };
 
-    it('should import a valid file and count its rows', async () => {
+    it('should import a valid file and say how many rows it held', async () => {
       const { fixture, element, memory } = await render();
       const importDocument = vi.spyOn(TestBed.inject(ProgressService), 'importDocument');
 
@@ -455,7 +455,7 @@ describe('ProgressPage', () => {
 
       expect(importDocument).toHaveBeenCalledOnce();
       expect(memory.lessonRows.size).toBe(3);
-      expect(element.textContent).toContain('Imported 4 rows.');
+      expect(element.textContent).toContain('File imported: 4 rows read.');
     });
 
     it('should refuse a file that is too big or not a document, and change nothing', async () => {

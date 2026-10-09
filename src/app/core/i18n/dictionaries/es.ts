@@ -607,7 +607,10 @@ export const es: Messages = {
     import: 'Importar un fichero',
     exported: (name: string) => `Descargado ${name}.`,
     exportFailed: 'No se ha podido leer el progreso de este navegador.',
-    imported: (count: number) => (count === 1 ? 'Importada 1 fila.' : `Importadas ${count} filas.`),
+    imported: (count: number) =>
+      count === 1
+        ? 'Fichero importado: 1 fila leída.'
+        : `Fichero importado: ${count} filas leídas.`,
     importFailed: {
       'too-big': 'Ese fichero pasa de 1 MB: no es una exportación de Cheesy.',
       'not-json': 'Ese fichero no es una exportación de Cheesy.',

@@ -606,7 +606,8 @@ export const en = {
     import: 'Import a file',
     exported: (name: string) => `Downloaded ${name}.`,
     exportFailed: 'Could not read the progress of this browser.',
-    imported: (count: number) => (count === 1 ? 'Imported 1 row.' : `Imported ${count} rows.`),
+    imported: (count: number) =>
+      count === 1 ? 'File imported: 1 row read.' : `File imported: ${count} rows read.`,
     importFailed: {
       'too-big': 'That file is over 1 MB: it is not a Cheesy export.',
       'not-json': 'That file is not a Cheesy export.',
