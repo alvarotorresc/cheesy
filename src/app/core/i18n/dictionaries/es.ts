@@ -281,6 +281,47 @@ export const es: Messages = {
         text: 'La copia del servidor es solo eso, una copia. Borrarla del servidor no toca lo que tienes guardado en este navegador.',
       },
     ],
+    syncLegal: [
+      {
+        title: 'Quién es el responsable',
+        before:
+          'Cheesy la hace y mantiene Álvaro Torres Carrasco. Para cualquier duda o petición sobre tus datos, escribe a ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Para qué y con qué permiso',
+        before:
+          'Guardar tu progreso para que lo recuperes en otro dispositivo. Lo haces tú al crear o usar un código (tu consentimiento), y puedes retirarlo cuando quieras borrando la cuenta o dejando de sincronizar. Es opcional: sin código todo funciona y no se envía nada. Si tienes menos de 14 años, hazlo con un adulto.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Fuera de la Unión Europea',
+        before:
+          'Cloudflare es una empresa de EE. UU. La transferencia se ampara en el Marco de Privacidad de Datos UE-EE. UU. y, si dejara de valer, en las cláusulas contractuales tipo de su contrato de encargado. Puedes pedirme una copia en ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Tus derechos',
+        before:
+          'Puedes acceder a tus datos, corregirlos, borrarlos, oponerte a su uso y llevártelos (con «Exportar» bajas un fichero). Lo más rápido es hacerlo tú en la página, con «Borrar del servidor». Si prefieres escribirme, no sé quién eres sin tu código (no guardo nombre ni email), así que tendrás que enviármelo; con él localizo lo tuyo. No te pediré nada más.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Si crees que no se tratan bien',
+        before: 'Puedes reclamar ante la ',
+        link: 'Agencia Española de Protección de Datos',
+        href: 'https://www.aepd.es',
+        after: '.',
+      },
+    ],
     sendsTitle: 'Sale hacia Lichess',
     sendsIntro: {
       before: 'En Finales, el rival juega lo que dice la ',

@@ -76,6 +76,20 @@
             </div>
           </li>
         }
+        @for (item of a.syncLegal; track $index) {
+          <li>
+            <div>
+              <b>{{ item.title }}</b
+              ><span
+                >{{ item.before }}
+                @if (item.link) {
+                  <a [href]="item.href" rel="noopener">{{ item.link }}</a>
+                }
+                {{ item.after }}</span
+              >
+            </div>
+          </li>
+        }
       </ul>
     </article>
 

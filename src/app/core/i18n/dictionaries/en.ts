@@ -284,6 +284,47 @@ export const en = {
         text: 'The copy on the server is only a copy. Deleting it from the server does not touch what is saved in this browser.',
       },
     ],
+    syncLegal: [
+      {
+        title: 'Who is responsible',
+        before:
+          'Cheesy is made and run by Álvaro Torres Carrasco. For any question or request about your data, write to ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Why, and on what basis',
+        before:
+          'To keep your progress so you can pick it up on another device. You do it yourself when you create or use a code (your consent), and you can withdraw it at any time by deleting the account or stopping the sync. It is optional: without a code everything works and nothing is sent. If you are under 14, do it with an adult.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Outside the European Union',
+        before:
+          'Cloudflare is a US company. The transfer relies on the EU-US Data Privacy Framework and, if that stops being valid, on the standard contractual clauses of its processor agreement. You can ask me for a copy at ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Your rights',
+        before:
+          'You can access, correct and delete your data, object to its use and take it with you («Export» downloads a file). The fastest way is to do it yourself on the page, with «Delete from the server». If you would rather write to me, I cannot tell who you are without your code (I store no name or email), so you will need to send it; with it I can find your data. I will not ask for anything else.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'If you think it is mishandled',
+        before: 'You can complain to the ',
+        link: 'Spanish Data Protection Agency (AEPD)',
+        href: 'https://www.aepd.es',
+        after: '.',
+      },
+    ],
     sendsTitle: 'Goes to Lichess',
     sendsIntro: {
       before: 'In Endgames, the opponent plays what the ',

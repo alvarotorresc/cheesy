@@ -101,7 +101,7 @@ describe('About', () => {
 
     const sync = element.querySelector('#privacidad .sync');
     expect(text(sync?.querySelector('h3'))).toBe('Si sincronizas con un código');
-    expect(sync?.querySelectorAll('.stays li')).toHaveLength(6);
+    expect(sync?.querySelectorAll('.stays li')).toHaveLength(11);
     const body = text(sync) ?? '';
     expect(body).toContain('Cloudflare');
     expect(body).toContain('encargado del tratamiento');
@@ -109,6 +109,18 @@ describe('About', () => {
     expect(body).toContain('Borrar del servidor');
     expect(body).toContain('No hay forma de recuperarlo');
     expect(body).toContain('sigue en tu dispositivo');
+    expect(body).toContain('Álvaro Torres Carrasco');
+    expect(body).toContain('tu consentimiento');
+    expect(body).toContain('menos de 14 años');
+    expect(body).toContain('Marco de Privacidad de Datos UE-EE. UU.');
+    expect(body).toContain('cláusulas contractuales tipo');
+    expect(body).toContain('no sé quién eres sin tu código');
+    expect(body).toContain('«Exportar»');
+    expect(Array.from(sync?.querySelectorAll('a') ?? [], (a) => a.getAttribute('href'))).toEqual([
+      'mailto:alvarotc.dev@protonmail.com',
+      'mailto:alvarotc.dev@protonmail.com',
+      'https://www.aepd.es',
+    ]);
   });
 
   it('should say the same about syncing in English', async () => {
@@ -121,6 +133,12 @@ describe('About', () => {
     expect(body).toContain('12 months');
     expect(body).toContain('Delete from the server');
     expect(body).toContain('no way to get it back');
+    expect(body).toContain('your consent');
+    expect(body).toContain('under 14');
+    expect(body).toContain('EU-US Data Privacy Framework');
+    expect(body).toContain('standard contractual clauses');
+    expect(body).toContain('I cannot tell who you are without your code');
+    expect(body).toContain('Spanish Data Protection Agency (AEPD)');
   });
 
   it('should credit the EFF wordlist with its licence', async () => {
