@@ -6,7 +6,7 @@ import type { LessonProgress, LineProgress } from '../progress/progress.types';
 import { provideSync } from './provide-sync';
 import { SyncApi } from './sync-api';
 import { encodeDocument } from './sync-codec';
-import { emptyDocument, FUTURE_SLACK, type SyncDocument } from './sync-document';
+import { emptyDocument, type SyncDocument } from './sync-document';
 import { SyncStateStore, SYNC_STORAGE_KEY, type StoredSync } from './sync-state';
 import { FakeSyncServer } from './sync-testing';
 import { backoffMs, DEBOUNCE_MS, MAX_ATTEMPTS, SyncService } from './sync.service';
@@ -331,17 +331,25 @@ describe('SyncService: accounts', () => {
       expect(states.read()?.cleared).toEqual({ lessons: 100 });
     });
 
-    it('bounds a mark to a day ahead of the server clock', async () => {
+    it('bounds a mark to the server clock', async () => {
       // The server clock of the fake is years behind this one: a mark at this clock's now is
-      // bounded to a day after the server's.
+      // bounded to the server's now (as estimated from the last answer).
       await link();
       const sync = await start();
       const skew = states.read()?.skew ?? 0;
       expect(skew).toBeLessThan(-10 * DAY);
       const now = Date.now();
       sync.noteClear('openings', now);
-      expect(states.read()?.cleared.openings).toBeCloseTo(now + skew + FUTURE_SLACK, -3);
-      expect(states.read()?.cleared.openings).toBeLessThanOrEqual(server.now + FUTURE_SLACK + 1000);
+      expect(states.read()?.cleared.openings).toBeCloseTo(now + skew, -3);
+      expect(states.read()?.cleared.openings).toBeLessThanOrEqual(server.now + 1000);
+    });
+
+    it('bounds pending marks to the server clock when it sends them', async () => {
+      await link({ cleared: { lessons: 8.64e15 } });
+      await start();
+      await TestBed.inject(SyncService).syncNow();
+      const sent = await server.document(CODE);
+      expect(sent.cleared.lessons).toBe(server.now);
     });
   });
 

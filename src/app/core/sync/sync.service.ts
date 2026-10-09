@@ -20,7 +20,6 @@ import { dataBytes, decodeDocument, encodeDocument, MAX_DATA_BYTES } from './syn
 import {
   documentHash,
   emptyDocument,
-  FUTURE_SLACK,
   parseSyncDocument,
   PROGRESS_SECTIONS,
   type ClearedAt,
@@ -82,7 +81,10 @@ type Read = { ok: true; remote: Remote } | { ok: false; reason: 'outdated' | 'un
 
 const hasRows = (doc: SyncDocument): boolean => SYNC_TABLES.some((table) => doc[table].length > 0);
 
-/** Marks bounded to `latest`: a later one would be dropped on the way, and the clear lost. */
+/**
+ * Marks bounded to `latest` (the server clock): a later mark would delete what other devices do
+ * next, and one far ahead would be dropped on the way, losing the clear.
+ */
 const boundMarks = (marks: ClearedAt, latest: number): ClearedAt => {
   const bounded: Partial<Record<ProgressSection, number>> = {};
   for (const section of PROGRESS_SECTIONS) {
@@ -434,13 +436,12 @@ export class SyncService {
     serverNow: number,
     mode: 'merge' | 'replace',
   ): Promise<SyncDocument | undefined> {
-    const latest = serverNow + FUTURE_SLACK;
     return this.progress.mergeRemote(remote.usable, {
       mode,
       // The pending marks, read inside the transaction so a clear noted meanwhile counts too.
       // While joining nothing is linked yet, so there are none.
       cleared: () =>
-        mode === 'replace' ? {} : boundMarks(this.states.read()?.cleared ?? {}, latest),
+        mode === 'replace' ? {} : boundMarks(this.states.read()?.cleared ?? {}, serverNow),
       now: serverNow,
     });
   }
@@ -470,7 +471,8 @@ export class SyncService {
   private async localDocument(state: StoredSync): Promise<SyncDocument | undefined> {
     const local = await this.progress.snapshot();
     if (!local) return this.noProgress(undefined);
-    const latest = Date.now() + (state.skew ?? 0) + FUTURE_SLACK;
+    // A mark is never later than the server clock: it would delete what other devices do next.
+    const latest = Date.now() + (state.skew ?? 0);
     const cleared = latestMarks(state.remoteCleared ?? {}, boundMarks(state.cleared, latest));
     return mergeDocuments(local, { ...emptyDocument(), cleared });
   }
