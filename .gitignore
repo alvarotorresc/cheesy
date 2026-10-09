@@ -20,8 +20,6 @@ __screenshots__/
 .env
 .env.*
 
-# Netlify
-.netlify
 
 # Cloudflare Workers: local state, local secrets and a local preview config
 .wrangler/

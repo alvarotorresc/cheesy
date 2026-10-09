@@ -17,14 +17,14 @@
 // 5. The app routes (`/en/analysis`, the practice of every opening, the puzzles): a 200 rewrite to
 //    the app shell `/index.csr`.
 //
-// The slash twins are there because Cloudflare, unlike Netlify, does not fold the trailing slash:
+// The slash twins are there because Cloudflare does not fold the trailing slash:
 // without them `/openings/` is a 404 and `/es/aperturas/` a 307 of `html_handling`. The shell is
 // `/index.csr` and never `/index.csr.html`: a rewrite to the `.html` file gets that 307 too, and
 // the address in the browser breaks. There is no catch-all and no dynamic rule: any other address
 // that is no file gets `404.html` with status 404 (`not_found_handling: "404-page"`). A 301 keeps
 // the query (`/analysis?fen=…`), and the browser keeps the fragment (`/glossary#pin`).
 //
-// `_headers` sets the security headers of every response (the CSP, the same as in `netlify.toml`)
+// `_headers` sets the security headers of every response (the CSP)
 // and keeps the app routes and the shell out of search engines with a few `X-Robots-Tag: noindex`
 // patterns (`/en/openings/:opening/practice`, `/en/learn/puzzles/*`), within the 100 rules of
 // Workers static assets.
@@ -45,7 +45,7 @@ export const REDIRECTS_FILE = '_redirects';
 /** The file of the build with the response headers of Workers static assets. */
 export const HEADERS_FILE = '_headers';
 
-/** The headers of every response of the site, as `[name, value]`, the same as in `netlify.toml`. */
+/** The headers of every response of the site, as `[name, value]`. */
 export const GLOBAL_HEADERS = [
   [
     'Content-Security-Policy',
@@ -165,7 +165,7 @@ export const appRoutePaths = (sources = loadSources()) => {
   );
 };
 
-/** `/x/` → `/x` for each path: Cloudflare, unlike Netlify, does not fold the trailing slash. */
+/** `/x/` → `/x` for each path: Cloudflare does not fold the trailing slash. */
 export const slashRules = (paths) => paths.map((path) => [`${path}/`, path]);
 
 /** The lines of `_redirects`, first match wins: files, slashes, old addresses, app routes. */
