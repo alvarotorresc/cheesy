@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "tsc && vitest run",
+    "test": "tsc && vitest run && node --test 'scripts/*.test.mjs'",
     "typecheck": "tsc",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
