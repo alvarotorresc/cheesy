@@ -1,4 +1,5 @@
-import { inject, Injectable, InjectionToken, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { PROGRESS_CLEARED } from './progress-cleared';
 import { isContentId, isPuzzleId } from '../content/content-id';
 import {
   applyResult,
@@ -34,24 +35,14 @@ import type {
   PuzzleResult,
 } from './progress.types';
 
+export { PROGRESS_CLEARED } from './progress-cleared';
+
 /**
  * `unknown`: the store has not been opened yet. `ready`: progress is read and saved.
  * `unavailable`: the browser refused the store, or an operation on it failed; the app goes on
  * without saved progress.
  */
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
-
-/**
- * Told when a section is cleared, with the time. Nothing by default; the sync provides it to note
- * the clear in the progress document, so the rows do not come back from the server. It is called
- * inside the transaction that deletes the rows, before they go, so it must be synchronous (the
- * sync state lives in `localStorage`). If the deletion then fails, the mark stays: it only
- * deletes, on the next merge, rows the user already asked to delete.
- */
-export const PROGRESS_CLEARED = new InjectionToken<(section: ProgressSection, at: number) => void>(
-  'PROGRESS_CLEARED',
-  { providedIn: 'root', factory: () => () => undefined },
-);
 
 /**
  * The valid rows of the tables as a canonical document, with no marks. Rows that fail their

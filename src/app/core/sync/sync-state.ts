@@ -1,7 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isDate } from '../progress/progress-record';
-import { type ClearedAt, PROGRESS_SECTIONS } from './sync-document';
+import type { ProgressSection } from '../progress/progress.types';
+import { type ClearedAt, FUTURE_SLACK, PROGRESS_SECTIONS } from './sync-document';
 
 export const SYNC_STORAGE_KEY = 'cheesy.sync';
 const PROBE_KEY = 'cheesy.sync.probe';
@@ -134,3 +135,22 @@ export class SyncStateStore {
     }
   }
 }
+
+/**
+ * Notes that `section` was cleared at `at`, only while an account is linked: without one, a mark
+ * would later delete progress of whatever account this browser joins. The mark is bounded to a day
+ * ahead of the server clock (as last seen), like any date from outside, so a clock set in the
+ * future cannot delete progress made elsewhere afterwards. Marks only grow.
+ */
+export const noteClear = (
+  states: SyncStateStore,
+  section: ProgressSection,
+  at: number,
+  now = Date.now(),
+): void => {
+  const state = states.read();
+  if (!state) return;
+  const mark = Math.min(at, now + (state.skew ?? 0) + FUTURE_SLACK);
+  if (!isDate(mark) || (state.cleared[section] ?? -1) >= mark) return;
+  states.write({ ...state, cleared: { ...state.cleared, [section]: mark } });
+};
