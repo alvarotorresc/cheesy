@@ -14,11 +14,11 @@ describe('SiteFooter', () => {
 
   afterEach(() => localStorage.clear());
 
-  it('should promise no accounts and no cookies, in Spanish', async () => {
+  it('should promise no cookies or sign-up, in Spanish', async () => {
     const element = await render('es');
 
     expect(element.querySelector('p')?.textContent).toContain(
-      'Cheesy es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
+      'Cheesy es de código abierto. Sin cookies ni registro: tu progreso se queda en tu navegador, salvo que decidas sincronizarlo con un código.',
     );
     expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe('Pie de página');
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([
@@ -34,7 +34,7 @@ describe('SiteFooter', () => {
     const element = await render('en');
 
     expect(element.querySelector('p')?.textContent).toContain(
-      'Cheesy is open source. No accounts, no cookies: your progress stays in your browser.',
+      'Cheesy is open source. No cookies or sign-up: your progress stays in your browser, unless you choose to sync it with a code.',
     );
     expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe('Footer');
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([

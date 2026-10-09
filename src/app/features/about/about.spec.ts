@@ -66,9 +66,9 @@ describe('About', () => {
     const element = await open();
 
     expect(Array.from(element.querySelectorAll('.file li p'), (p) => p.textContent)).toEqual([
-      'Tu progreso se queda en tu navegador.',
-      'Solo las posiciones de los finales salen, hacia Lichess.',
-      'Sin cuentas ni cookies.',
+      'Tu progreso se queda en tu navegador, salvo que lo sincronices con un código.',
+      'Sale la posición de los finales, hacia Lichess, y tu progreso si lo sincronizas.',
+      'Sin cookies, sin email y sin contraseña.',
       'Código abierto, con licencia GPL-3.',
     ]);
     expect(
@@ -81,17 +81,46 @@ describe('About', () => {
   it('should say what is saved and how to clear it, section by section', async () => {
     const element = await open();
 
-    expect(element.querySelectorAll('.stays li')).toHaveLength(7);
-    expect(text(element.querySelector('.stays li:nth-child(6)'))).toContain('El modo de lectura');
-    expect(text(element.querySelector('.stays li:nth-child(2)'))).toContain(
+    expect(element.querySelectorAll('.pane:not(.sync) .stays li')).toHaveLength(7);
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(6)'))).toContain(
+      'El modo de lectura',
+    );
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(2)'))).toContain(
       'Las lecciones completadas',
     );
-    expect(text(element.querySelector('.stays li:nth-child(3)'))).toContain(
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(3)'))).toContain(
       'Los problemas de Practica más',
     );
     expect(text(element.querySelector('.erase p'))).toBe(
       'Borrar el progreso, en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     );
+  });
+
+  it('should say what syncing with a code stores, where, for how long and what if the code is lost', async () => {
+    const element = await open();
+
+    const sync = element.querySelector('#privacidad .sync');
+    expect(text(sync?.querySelector('h3'))).toBe('Si sincronizas con un código');
+    expect(sync?.querySelectorAll('.stays li')).toHaveLength(6);
+    const body = text(sync) ?? '';
+    expect(body).toContain('Cloudflare');
+    expect(body).toContain('encargado del tratamiento');
+    expect(body).toContain('12 meses');
+    expect(body).toContain('Borrar del servidor');
+    expect(body).toContain('No hay forma de recuperarlo');
+    expect(body).toContain('sigue en tu dispositivo');
+  });
+
+  it('should say the same about syncing in English', async () => {
+    const element = await open({ lang: 'en' });
+
+    const body = text(element.querySelector('#privacidad .sync')) ?? '';
+    expect(body).toContain('If you sync with a code');
+    expect(body).toContain('Cloudflare');
+    expect(body).toContain('data processor');
+    expect(body).toContain('12 months');
+    expect(body).toContain('Delete from the server');
+    expect(body).toContain('no way to get it back');
   });
 
   it('should say that every position of the endgame goes to Lichess', async () => {

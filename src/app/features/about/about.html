@@ -64,6 +64,21 @@
       </div>
     </article>
 
+    <article class="pane sync" id="sincronizar" aria-labelledby="about-sync">
+      <h3 id="about-sync">{{ a.syncTitle }}</h3>
+      <p class="prose">{{ a.syncIntro }}</p>
+      <ul class="stays">
+        @for (item of a.syncItems; track $index) {
+          <li>
+            <div>
+              <b>{{ item.title }}</b
+              ><span>{{ item.text }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </article>
+
     <article class="pane sends" aria-labelledby="about-sends">
       <h3 id="about-sends">{{ a.sendsTitle }}</h3>
       <div class="prose">
