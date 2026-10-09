@@ -273,6 +273,7 @@ describe('pull, push and delete', () => {
       env.DB.prepare('SELECT last_seen_at FROM accounts WHERE id = ?1')
         .bind(id)
         .first<number>('last_seen_at');
+    const pending: Promise<unknown>[] = [];
     const pull = (now: number) =>
       handleSync(
         new Request(`${ORIGIN}/api/sync/pull`, {
@@ -282,8 +283,11 @@ describe('pull, push and delete', () => {
         }),
         env,
         'pull',
-        { now: () => now },
-      );
+        { now: () => now, waitUntil: (promise) => pending.push(promise) },
+      ).then(async (res) => {
+        await Promise.all(pending.splice(0));
+        return res;
+      });
 
     expect((await pull(T + DAY - 1)).status).toBe(200);
     expect(await lastSeen()).toBe(T);
@@ -327,4 +331,37 @@ describe('failures', () => {
       expect(logged).not.toContain(GZ);
     },
   );
+
+  it('still answers a pull when marking it as seen fails, in the background', async () => {
+    const code = 'zoom-cactus-zoom-cactus';
+    const id = await accountId(env.PEPPER, code);
+    await insertAccount(env.DB, id, new Uint8Array([0x1f, 0x8b]), 1_000);
+    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const noUpdates = {
+      ...env,
+      DB: {
+        prepare: (sql: string) => {
+          if (sql.startsWith('UPDATE')) throw new Error('D1_ERROR: too many writes');
+          return env.DB.prepare(sql);
+        },
+      } as unknown as D1Database,
+    };
+    const pending: Promise<unknown>[] = [];
+    const res = await handleSync(
+      new Request(`${ORIGIN}/api/sync/pull`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ code }),
+      }),
+      noUpdates,
+      'pull',
+      { waitUntil: (promise) => pending.push(promise) },
+    );
+    expect(res.status).toBe(200);
+    expect(await body(res)).toMatchObject({ code, version: 1 });
+    expect(pending).toHaveLength(1);
+    await Promise.all(pending);
+    expect(error).toHaveBeenCalledTimes(1);
+    expect(error).toHaveBeenCalledWith(JSON.stringify({ event: 'touch-error' }));
+  });
 });

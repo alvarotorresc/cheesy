@@ -15,9 +15,11 @@ export interface Env {
  * `/api/sync/{create,pull,push,delete}` is the sync API; any other API path is a JSON 404.
  */
 export default {
-  async fetch(request, env): Promise<Response> {
+  async fetch(request, env, ctx): Promise<Response> {
     const route = syncRoute(new URL(request.url).pathname);
-    if (route) return handleSync(request, env, route);
+    if (route) {
+      return handleSync(request, env, route, { waitUntil: (promise) => ctx.waitUntil(promise) });
+    }
     return json({ error: 'not-found', now: Date.now() }, 404);
   },
 

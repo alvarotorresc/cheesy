@@ -32,6 +32,8 @@ export interface SyncEnv {
 export interface SyncDeps {
   generate?: () => string;
   now?: () => number;
+  /** Keeps background work alive after the response (`ctx.waitUntil` in the Worker). */
+  waitUntil?: (promise: Promise<unknown>) => void;
 }
 
 /** Codes drawn before `create` gives up on collisions (each one is 1 in 3.7 × 10^15). */
@@ -122,7 +124,13 @@ export const handleSync = async (
         const row = await readAccount(env.DB, id);
         if (!row) throw NOT_FOUND;
         // At most one write a day per account for pulls.
-        if (row.lastSeenAt < now - DAY) await touchAccount(env.DB, id, now);
+        // Best effort, after answering: the pull already read what it needs.
+        if (row.lastSeenAt < now - DAY) {
+          const touch = touchAccount(env.DB, id, now).catch(() => {
+            console.error(JSON.stringify({ event: 'touch-error' }));
+          });
+          (deps.waitUntil ?? (() => undefined))(touch);
+        }
         return reply(200, {
           code,
           version: row.version,
