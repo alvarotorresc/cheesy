@@ -1,0 +1,16 @@
+/* The Worker: runs on workerd, tested inside it with the Workers Vitest plugin. */
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types", "@cloudflare/vitest-plugin/types"]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "vitest.config.ts"]
+}
