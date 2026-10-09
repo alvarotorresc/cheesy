@@ -1,20 +1,13 @@
 import { isDate } from '../progress/progress-record';
 import type { ProgressSection } from '../progress/progress.types';
 import { combineRows, SYNC_TABLES, type SyncTable, type SyncTables } from './rows';
+import { FUTURE_SLACK, PROGRESS_SECTIONS } from './sections';
 
 export type { SyncRow, SyncTable, SyncTables } from './rows';
+export { FUTURE_SLACK, PROGRESS_SECTIONS } from './sections';
 
 export const SYNC_FORMAT = 'cheesy-progress';
 export const SYNC_VERSION = 1;
-
-/** The sections in the order the document writes their marks. */
-export const PROGRESS_SECTIONS: readonly ProgressSection[] = [
-  'openings',
-  'endgames',
-  'positions',
-  'lessons',
-  'puzzles',
-];
 
 /** The table that holds the progress of each section. */
 export const SECTION_TABLE: Readonly<Record<ProgressSection, SyncTable>> = {
@@ -41,13 +34,6 @@ export interface SyncDocument extends SyncTables {
 export type ParsedDocument =
   | { ok: true; doc: SyncDocument; dropped: number }
   | { ok: false; reason: 'not-a-document' | 'newer-version' };
-
-/**
- * How far in the future a date from another device may be: a day covers clocks set wrong and time
- * zones. A later date is not believable, and a row or mark with one would win every merge (or
- * delete everything up to it) for years, so input from outside drops it.
- */
-export const FUTURE_SLACK = 24 * 60 * 60 * 1000;
 
 export const emptyDocument = (): SyncDocument => ({
   format: SYNC_FORMAT,

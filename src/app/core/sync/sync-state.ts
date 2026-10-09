@@ -2,7 +2,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isDate } from '../progress/progress-record';
 import type { ProgressSection } from '../progress/progress.types';
-import { type ClearedAt, FUTURE_SLACK, PROGRESS_SECTIONS } from './sync-document';
+import { FUTURE_SLACK, PROGRESS_SECTIONS } from './sections';
+import type { ClearedAt } from './sync-document';
 
 export const SYNC_STORAGE_KEY = 'cheesy.sync';
 const PROBE_KEY = 'cheesy.sync.probe';
