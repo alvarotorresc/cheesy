@@ -1,24 +1,33 @@
-// The permanent redirects of `netlify.toml`, written from the content catalogues and the slugs.
+// The edge rules of the site on Cloudflare Workers static assets: `_redirects` and `_headers`,
+// written into the build from the content catalogues and the slugs, never by hand.
 //
-// Before the languages, pages lived at `/openings/italian-game`, `/positions/3`, `/learn/beginner`,
-// `/glossary`, `/acerca`... Each of those addresses now answers with a 301 to the same page in
-// English (`/en/openings/italian-game`). The rules are generated, never written by hand: one per
-// old address, from the catalogues and the slugs, between the two marker lines of `netlify.toml`.
+//   node scripts/edge-rules.mjs --built   after the build: fails if a page is missing, a target has
+//                                         no page in dist/cheesy/browser, or an old address or an
+//                                         app route is a file; then writes `_redirects` and
+//                                         `_headers` next to the pages
 //
-//   node scripts/edge-rules.mjs           rewrites the three blocks in netlify.toml
-//   node scripts/edge-rules.mjs --check   fails if a block is not up to date
-//   node scripts/edge-rules.mjs --built   after the build: fails if a target has no page in
-//                                                dist/cheesy/browser, or an old address or an app
-//                                                route is a file
+// `_redirects`, in this order (the first rule that matches wins, over any file):
 //
-// Two more blocks are generated the same way. One sends the `.html` file of each page to the page
-// (`/es/aperturas.html` → `/es/aperturas`). The other holds the pages of the app shell
-// (`/en/analysis`, the practice of every opening, the puzzles): a rewrite to `index.csr.html` for
-// each, and a `noindex` header for each and for the shell. There is no catch-all: any other address
-// that is no file gets Netlify's own 404 page.
+// 1. The `.html` file of each page to the page (`/es/aperturas.html` → `/es/aperturas`), a 301.
+// 2. Each page with a trailing slash to the page (`/es/aperturas/` → `/es/aperturas`).
+// 3. The old addresses. Before the languages, pages lived at `/openings/italian-game`,
+//    `/positions/3`, `/learn/beginner`, `/glossary`, `/acerca`... Each answers with a 301 to the
+//    same page in English (`/en/openings/italian-game`), and so does its trailing-slash twin.
+// 4. Each app route with a trailing slash to the route (`/es/analisis/` → `/es/analisis`).
+// 5. The app routes (`/en/analysis`, the practice of every opening, the puzzles): a 200 rewrite to
+//    the app shell `/index.csr`.
 //
-// Netlify keeps the query (`/analysis?fen=…`) and the browser keeps the fragment (`/glossary#pin`).
-// It matches `/openings` and `/openings/` alike, so one rule covers both.
+// The slash twins are there because Cloudflare, unlike Netlify, does not fold the trailing slash:
+// without them `/openings/` is a 404 and `/es/aperturas/` a 307 of `html_handling`. The shell is
+// `/index.csr` and never `/index.csr.html`: a rewrite to the `.html` file gets that 307 too, and
+// the address in the browser breaks. There is no catch-all and no dynamic rule: any other address
+// that is no file gets `404.html` with status 404 (`not_found_handling: "404-page"`). A 301 keeps
+// the query (`/analysis?fen=…`), and the browser keeps the fragment (`/glossary#pin`).
+//
+// `_headers` sets the security headers of every response (the CSP, the same as in `netlify.toml`)
+// and keeps the app routes and the shell out of search engines with a few `X-Robots-Tag: noindex`
+// patterns (`/en/openings/:opening/practice`, `/en/learn/puzzles/*`), within the 100 rules of
+// Workers static assets.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -126,8 +135,8 @@ export const redirectRules = (sources = loadSources()) => {
 
 /**
  * The rules `[from, to]` that send the file of each prerendered page (`/es/aperturas.html`) to its
- * address (`/es/aperturas`), in both languages. Netlify serves the file at both, and the app boots
- * on `.html` as a route the router does not know.
+ * address (`/es/aperturas`), in both languages. The file would be served at both, and the app
+ * boots on `.html` as a route the router does not know.
  */
 export const pageFileRules = (sources = loadSources()) => {
   const urls = createPageUrls(sources.slugs);
@@ -231,7 +240,7 @@ export const pageFileOf = (to, sources) => {
 
 /**
  * After the build: every target is a prerendered page (or a page of the app shell), and no old
- * address is a file of the build, which Netlify would serve instead of the redirect.
+ * address is a file of the build, which its redirect would hide.
  */
 export const checkBuilt = (browser, sources = loadSources(), paths = appRoutePaths(sources)) => {
   const problems = [];

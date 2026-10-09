@@ -76,8 +76,8 @@ export class LearnHome {
     this.wait(() => this.load());
     this.wait(() => this.loadPuzzles());
 
-    // Before the lessons, Learn was the glossary, and links to a term (`/learn#pin`, which Netlify
-    // now sends to `/en/learn#pin`) are out there. They still land on the term. It happens once the
+    // Before the lessons, Learn was the glossary, and links to a term (`/learn#pin`, which the edge
+    // rules now send to `/en/learn#pin`) are out there. They still land on the term. It happens once the
     // page is on screen, so the prerendered page hydrates as it is.
     const route = inject(ActivatedRoute);
     const router = inject(Router);

@@ -42,7 +42,7 @@ const FIXED_NOW = new Date('2026-09-28T08:30:00Z');
 
 // The scenes name each page by its address of before the languages (`/openings/ruy-lopez`), the
 // same for both; this is that page in a language (`/es/aperturas/apertura-espanola`), through the
-// redirect Netlify answers the old address with. `/` stays the home page in English.
+// redirect the site answers the old address with (`_redirects`). `/` stays the home page in English.
 export function pathIn(path, lang) {
   const [, bare, tail] = /^([^?#]*)(.*)$/.exec(path);
   const sources = loadSources();
@@ -85,7 +85,7 @@ async function answers(url) {
   }
 }
 
-// File for a request path, as Netlify picks it: the file itself, the prerendered page of the
+// File for a request path, as the host picks it: the file itself, the prerendered page of the
 // route (`route.html`, see scripts/flatten-prerender.mjs) with or without a trailing slash, and
 // for any other path without an extension the app shell, index.csr.html (the router owns those
 // paths). A missing file with an extension (an asset) gives null, which is answered with a 404.

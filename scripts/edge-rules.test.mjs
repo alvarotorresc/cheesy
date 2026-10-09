@@ -413,7 +413,7 @@ describe('checkBuilt', () => {
     );
   });
 
-  it('should fail when a rewrite path is a file of the build, which Netlify would serve', () => {
+  it('should fail when a rewrite path is a file of the build, which the rewrite would hide', () => {
     writeAllPages();
     write('en/analysis.html');
     assert.throws(() => checkBuilt(dir, sources), /\/en\/analysis is a file/);
@@ -428,7 +428,7 @@ describe('checkBuilt', () => {
     assert.throws(() => checkBuilt(dir, sources), /lucena-position/);
   });
 
-  it('should fail when an old address is a file, which Netlify would serve instead', () => {
+  it('should fail when an old address is a file, which the redirect would hide', () => {
     writeAllPages();
     write('openings/italian-game.html');
     assert.throws(() => checkBuilt(dir, sources), /openings\/italian-game is a file/);

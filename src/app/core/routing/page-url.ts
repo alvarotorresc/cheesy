@@ -3,8 +3,8 @@
 // Pure functions over the slugs of `content/authoring/slugs.ts` (`slugs.json`), with no Angular and
 // only type imports: the routes, the links, the language switcher and the build scripts (Node.js,
 // which strips the types) share them. Addresses never end with a slash: `/es`, `/es/aperturas`,
-// `/es/aperturas/apertura-italiana` (pages are written as `route.html`, which Netlify serves at
-// `/route` and sends `/route/` to).
+// `/es/aperturas/apertura-italiana` (pages are written as `route.html`, served at `/route`, and
+// `/route/` and `/route.html` answer with a 301 there: see `scripts/edge-rules.mjs`).
 import type { LessonLevel } from '../content/content.types';
 import type { Lang } from '../i18n/i18n.types';
 
