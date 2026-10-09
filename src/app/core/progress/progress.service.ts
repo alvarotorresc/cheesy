@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, InjectionToken, signal } from '@angular/core';
 import { isContentId, isPuzzleId } from '../content/content-id';
 import {
   applyResult,
@@ -10,7 +10,16 @@ import {
   parsePuzzleProgress,
   progressKey,
 } from './progress-record';
-import { PROGRESS_STORE_LOADER, type ProgressStore } from './progress-store';
+import { mergeDocuments } from '../sync/merge';
+import {
+  emptyDocument,
+  parseSyncDocument,
+  SECTION_TABLE,
+  SYNC_FORMAT,
+  SYNC_VERSION,
+  type SyncDocument,
+} from '../sync/sync-document';
+import { PROGRESS_STORE_LOADER, type ProgressStore, type StoredTables } from './progress-store';
 import type {
   EndgameProgress,
   LessonProgress,
@@ -31,8 +40,46 @@ import type {
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 
 /**
- * Progress of the practised lines, endgames, positions, lessons and puzzles, kept only in this
- * browser (IndexedDB). Nothing is ever sent anywhere.
+ * Told when a section is cleared, with the time. Nothing by default; the sync provides it to note
+ * the clear in the progress document, so the rows do not come back from the server.
+ */
+export const PROGRESS_CLEARED = new InjectionToken<(section: ProgressSection, at: number) => void>(
+  'PROGRESS_CLEARED',
+  { providedIn: 'root', factory: () => () => undefined },
+);
+
+/** The valid rows of the tables as a canonical document, with no marks. */
+const documentOf = (tables: StoredTables): SyncDocument => {
+  const parsed = parseSyncDocument({
+    format: SYNC_FORMAT,
+    v: SYNC_VERSION,
+    cleared: {},
+    // A stored line must match its own key: the document derives the key again.
+    lines: tables.lines.flatMap((row) => parseLineProgress(row) ?? []),
+    endgames: tables.endgames,
+    positions: tables.positions,
+    lessons: tables.lessons,
+    puzzles: tables.puzzles,
+  });
+  return parsed.ok ? parsed.doc : emptyDocument();
+};
+
+/** The rows of a document as they are stored: lines get their key back. */
+const tablesOf = (doc: SyncDocument): StoredTables => ({
+  lines: doc.lines.map((row) => ({
+    key: progressKey(row.openingId, row.color, row.lineId),
+    ...row,
+  })),
+  endgames: [...doc.endgames],
+  positions: [...doc.positions],
+  lessons: [...doc.lessons],
+  puzzles: [...doc.puzzles],
+});
+
+/**
+ * Progress of the practised lines, endgames, positions, lessons and puzzles, kept in this browser
+ * (IndexedDB). It sends nothing itself: the sync reads it with `snapshot` and writes what comes
+ * from the server with `mergeRemote`.
  *
  * Storage is best effort: every method resolves, never rejects. When the store cannot be opened
  * or an operation fails, reads return nothing, writes are dropped, and `status` turns
@@ -42,12 +89,19 @@ export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 export class ProgressService {
   private readonly loader = inject(PROGRESS_STORE_LOADER);
   private readonly state = signal<ProgressStatus>('unknown');
+  private readonly onCleared = inject(PROGRESS_CLEARED);
   private readonly changes = signal(0);
+  private readonly localChanges = signal(0);
   private store: Promise<ProgressStore | undefined> | undefined;
 
   readonly status = this.state.asReadonly();
   /** Bumped after every change, so views showing progress can read it again. */
   readonly revision = this.changes.asReadonly();
+  /**
+   * Bumped only by changes made in this browser (recording, clearing, importing), never by data
+   * merged from the server: the sync uploads after it, and must not upload what it just got.
+   */
+  readonly localRevision = this.localChanges.asReadonly();
 
   /** Every valid row of the lines. Rows that fail validation are ignored, not deleted. */
   async lines(): Promise<LineProgress[]> {
@@ -107,12 +161,19 @@ export class ProgressService {
    * Notes that a mistake, a hint or the solution came before the first solve. It does nothing once
    * the position has been solved: "first try" is fixed by then.
    */
-  async markPositionSpoiled(positionId: string): Promise<void> {
+  async markPositionSpoiled(positionId: string, now = Date.now()): Promise<void> {
     if (!isContentId(positionId)) return;
     await this.save(async (store) => {
       const previous = parsePositionProgress(await store.positions.get(positionId));
       if (previous && previous.solves > 0) return undefined;
-      const next: PositionProgress = { positionId, solves: 0, firstTry: false, spoiled: true };
+      const next: PositionProgress = {
+        positionId,
+        solves: 0,
+        firstTry: false,
+        spoiled: true,
+        // The first time it was spoiled: later spoils do not move it.
+        spoiledAt: previous?.spoiledAt ?? now,
+      };
       await store.positions.put(next);
       return next;
     });
@@ -134,6 +195,7 @@ export class ProgressService {
         firstTry: first ? !spoiled : (previous?.firstTry ?? false),
         spoiled,
         lastSolvedAt: now,
+        ...(previous?.spoiledAt === undefined ? {} : { spoiledAt: previous.spoiledAt }),
       };
       await store.positions.put(next);
       return next;
@@ -187,28 +249,86 @@ export class ProgressService {
     });
   }
 
-  /** Deletes the progress of one section, and only that one. Resolves with false on failure. */
-  async clear(section: ProgressSection): Promise<boolean> {
-    const table = {
-      openings: 'lines',
-      endgames: 'endgames',
-      positions: 'positions',
-      lessons: 'lessons',
-      puzzles: 'puzzles',
-    } as const;
+  /**
+   * Deletes the progress of one section, and only that one, and tells `PROGRESS_CLEARED`.
+   * Resolves with false on failure.
+   */
+  async clear(section: ProgressSection, now = Date.now()): Promise<boolean> {
     const cleared = await this.run(async (store) => {
-      await store[table[section]].clear();
+      await store[SECTION_TABLE[section]].clear();
       return true;
     });
-    if (cleared) this.changes.update((value) => value + 1);
-    return cleared ?? false;
+    if (!cleared) return false;
+    this.bumpLocal();
+    this.onCleared(section, now);
+    return true;
   }
 
-  /** Runs a write and bumps the revision when it produced something. */
+  /** The valid rows of every table as a canonical document, or undefined without a store. */
+  async snapshot(): Promise<SyncDocument | undefined> {
+    const tables = await this.run(async (store) => {
+      const [lines, endgames, positions, lessons, puzzles] = await Promise.all([
+        store.lines.all(),
+        store.endgames.all(),
+        store.positions.all(),
+        store.lessons.all(),
+        store.puzzles.all(),
+      ]);
+      return { lines, endgames, positions, lessons, puzzles };
+    });
+    return tables && documentOf(tables);
+  }
+
+  /**
+   * Writes a document from the server: merged with the progress kept here (its marks delete the
+   * rows they cover), or in place of it with `replace`. All in one transaction. Bumps `revision`
+   * so the views read again, but not `localRevision`: it is not a change made here. Resolves with
+   * the document written, or undefined on failure.
+   */
+  async mergeRemote(
+    remote: SyncDocument,
+    mode: 'merge' | 'replace' = 'merge',
+  ): Promise<SyncDocument | undefined> {
+    const written = await this.write(remote, mode);
+    if (written) this.changes.update((value) => value + 1);
+    return written;
+  }
+
+  /**
+   * Merges a copy exported from a file. Its marks are ignored: importing a copy never deletes
+   * anything. It is a change made here, so the sync uploads it. Resolves with false on failure.
+   */
+  async importDocument(doc: SyncDocument): Promise<boolean> {
+    const written = await this.write({ ...doc, cleared: {} }, 'merge');
+    if (written) this.bumpLocal();
+    return written !== undefined;
+  }
+
+  private async write(
+    incoming: SyncDocument,
+    mode: 'merge' | 'replace',
+  ): Promise<SyncDocument | undefined> {
+    let result: SyncDocument | undefined;
+    const written = await this.run((store) =>
+      store.rewrite((current) => {
+        const base = mode === 'replace' ? emptyDocument() : documentOf(current);
+        result = mergeDocuments(base, incoming);
+        return tablesOf(result);
+      }),
+    );
+    return written && result;
+  }
+
+  /** Runs a write made here and bumps both revisions when it produced something. */
   private async save<T>(operation: (store: ProgressStore) => Promise<T>): Promise<T | undefined> {
     const saved = await this.run(operation);
-    if (saved !== undefined) this.changes.update((value) => value + 1);
+    if (saved !== undefined) this.bumpLocal();
     return saved;
+  }
+
+  private bumpLocal(): void {
+    this.changes.update((value) => value + 1);
+    this.localChanges.update((value) => value + 1);
   }
 
   /** Runs an operation on the store, turning any failure into `unavailable`. */

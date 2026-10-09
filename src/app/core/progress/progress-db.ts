@@ -5,7 +5,7 @@ import type {
   PositionProgress,
   PuzzleProgress,
 } from './progress.types';
-import type { ProgressStore, StoredLineProgress, TableStore } from './progress-store';
+import type { ProgressStore, StoredLineProgress, StoredTables, TableStore } from './progress-store';
 
 export const PROGRESS_DB_NAME = 'cheesy';
 
@@ -57,6 +57,8 @@ const tableOf = <Row>(table: Table<Row, string>): TableStore<Row> => ({
   clear: () => table.clear(),
 });
 
+const TABLES = ['lines', 'endgames', 'positions', 'lessons', 'puzzles'] as const;
+
 /**
  * Opens the progress database. Rejects when IndexedDB is missing or refuses to open (private
  * browsing, blocked site data, a quota error), and the caller carries on without saved progress.
@@ -78,5 +80,18 @@ export const openProgressStore = async (
       ...tableOf(db.puzzles),
       ofLesson: (lessonId) => db.puzzles.where('lessonId').equals(lessonId).toArray(),
     },
+    rewrite: (change) =>
+      db.transaction('rw', [...TABLES.map((name) => db.table(name))], async () => {
+        const read = await Promise.all(TABLES.map((name) => db.table(name).toArray()));
+        const current = Object.fromEntries(
+          TABLES.map((name, index) => [name, read[index]]),
+        ) as unknown as StoredTables;
+        const next = change(current);
+        for (const name of TABLES) {
+          await db.table(name).clear();
+          await db.table(name).bulkPut(next[name]);
+        }
+        return next;
+      }),
   };
 };

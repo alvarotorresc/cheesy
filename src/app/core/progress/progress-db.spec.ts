@@ -2,7 +2,7 @@ import Dexie from 'dexie';
 import { IDBFactory, IDBKeyRange } from 'fake-indexeddb';
 import { openProgressStore } from './progress-db';
 import { isMastered, parseLineProgress, progressKey } from './progress-record';
-import type { StoredLineProgress } from './progress-store';
+import type { StoredLineProgress, StoredTables } from './progress-store';
 
 const row = (lineId: string, openingId = 'ruy-lopez'): StoredLineProgress => ({
   key: progressKey(openingId, 'white', lineId),
@@ -79,6 +79,73 @@ describe('openProgressStore', () => {
     await store.positions.clear();
     expect(await store.positions.all()).toEqual([]);
     expect(await store.endgames.all()).toHaveLength(1);
+  });
+
+  describe('rewrite', () => {
+    const lesson = { lessonId: 'knight-moves', completedAt: 5, exercises: 4, firstTry: 3 };
+    const endgame = {
+      endgameId: 'lucena',
+      completions: 1,
+      firstCompletedAt: 1,
+      lastCompletedAt: 1,
+    };
+
+    it('should hand every table over and write back exactly what it gets', async () => {
+      const store = await open();
+      await store.lines.put(row('e2e4'));
+      await store.lessons.put(lesson);
+      const change = vi.fn((current: StoredTables) => ({
+        ...current,
+        lines: [],
+        endgames: [endgame],
+        lessons: [...current.lessons, { ...lesson, lessonId: 'pins' }],
+      }));
+
+      const written = await store.rewrite(change);
+
+      expect(change).toHaveBeenCalledWith({
+        lines: [row('e2e4')],
+        endgames: [],
+        positions: [],
+        lessons: [lesson],
+        puzzles: [],
+      });
+      expect(written).toEqual(change.mock.results[0].value);
+      expect(await store.lines.all()).toEqual([]);
+      expect(await store.endgames.all()).toEqual([endgame]);
+      expect(await store.lessons.all()).toEqual([lesson, { ...lesson, lessonId: 'pins' }]);
+    });
+
+    it('should change nothing when the change throws', async () => {
+      const store = await open();
+      await store.lines.put(row('e2e4'));
+      await store.lessons.put(lesson);
+
+      await expect(
+        store.rewrite(() => {
+          throw new Error('bad merge');
+        }),
+      ).rejects.toThrow('bad merge');
+
+      expect(await store.lines.all()).toEqual([row('e2e4')]);
+      expect(await store.lessons.all()).toEqual([lesson]);
+    });
+
+    it('should change nothing when writing a row fails half way', async () => {
+      const store = await open();
+      await store.lines.put(row('e2e4'));
+
+      await expect(
+        store.rewrite((current) => ({
+          ...current,
+          lines: [],
+          endgames: [endgame, { completions: 1 }],
+        })),
+      ).rejects.toThrow();
+
+      expect(await store.lines.all()).toEqual([row('e2e4')]);
+      expect(await store.endgames.all()).toEqual([]);
+    });
   });
 
   it('should create version 4 of the schema', async () => {

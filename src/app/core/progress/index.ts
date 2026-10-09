@@ -1,11 +1,12 @@
 export { emptyProgressStoreLoader } from './empty-progress-store';
-export { ProgressService, type ProgressStatus } from './progress.service';
+export { PROGRESS_CLEARED, ProgressService, type ProgressStatus } from './progress.service';
 export {
   PROGRESS_STORE_LOADER,
   type ProgressStore,
   type ProgressStoreLoader,
   type PuzzleTableStore,
   type StoredLineProgress,
+  type StoredTables,
   type TableStore,
 } from './progress-store';
 export {

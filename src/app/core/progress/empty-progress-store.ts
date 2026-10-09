@@ -18,6 +18,8 @@ export const emptyProgressStore: ProgressStore = {
   positions: emptyTable(),
   lessons: emptyTable(),
   puzzles: { ...emptyTable(), ofLesson: async () => [] },
+  rewrite: async (change) =>
+    change({ lines: [], endgames: [], positions: [], lessons: [], puzzles: [] }),
 };
 
 export const emptyProgressStoreLoader: ProgressStoreLoader = async () => emptyProgressStore;

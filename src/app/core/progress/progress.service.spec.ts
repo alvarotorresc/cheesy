@@ -8,8 +8,10 @@ import {
   type ProgressStoreLoader,
   type TableStore,
 } from './progress-store';
-import { ProgressService } from './progress.service';
-import type { LineResult } from './progress.types';
+import { PROGRESS_CLEARED, ProgressService } from './progress.service';
+import type { Mock } from 'vitest';
+import type { LessonProgress, LineProgress, LineResult, ProgressSection } from './progress.types';
+import { emptyDocument, type SyncDocument } from '../sync/sync-document';
 
 const LINE = 'e2e4 e7e5 g1f3';
 
@@ -25,10 +27,16 @@ describe('ProgressService', () => {
   let service: ProgressService;
   let store: ProgressStore;
 
-  const setup = (loader: ProgressStoreLoader): void => {
+  const setup = (
+    loader: ProgressStoreLoader,
+    onCleared?: (section: ProgressSection, at: number) => void,
+  ): void => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      providers: [{ provide: PROGRESS_STORE_LOADER, useValue: loader }],
+      providers: [
+        { provide: PROGRESS_STORE_LOADER, useValue: loader },
+        ...(onCleared ? [{ provide: PROGRESS_CLEARED, useValue: onCleared }] : []),
+      ],
     });
     service = TestBed.inject(ProgressService);
   };
@@ -360,9 +368,9 @@ describe('ProgressService', () => {
     });
 
     it('should not count as first try a position spoiled before its first solve', async () => {
-      await service.markPositionSpoiled('legal-mate');
+      await service.markPositionSpoiled('legal-mate', 5);
       expect(await service.positions()).toEqual([
-        { positionId: 'legal-mate', solves: 0, firstTry: false, spoiled: true },
+        { positionId: 'legal-mate', solves: 0, firstTry: false, spoiled: true, spoiledAt: 5 },
       ]);
 
       const saved = await service.recordPositionSolve('legal-mate', 10);
@@ -444,6 +452,196 @@ describe('ProgressService', () => {
       expect(await service.lines()).toHaveLength(1);
       expect(await service.endgames()).toHaveLength(1);
       expect(await service.positions()).toHaveLength(1);
+    });
+  });
+
+  describe('sync', () => {
+    const LESSON: LessonProgress = {
+      lessonId: 'the-board',
+      completedAt: 100,
+      exercises: 2,
+      firstTry: 1,
+    };
+    const LINE_ROW: LineProgress = {
+      openingId: 'ruy-lopez',
+      color: 'white',
+      lineId: LINE,
+      practiced: 1,
+      clean: 1,
+      streak: 1,
+      lastPracticed: 100,
+      bestMistakes: 0,
+    };
+    const doc = (overrides: Partial<SyncDocument> = {}): SyncDocument => ({
+      ...emptyDocument(),
+      ...overrides,
+    });
+    let onCleared: Mock<(section: ProgressSection, at: number) => void>;
+
+    beforeEach(async () => {
+      store = await openProgressStore({ indexedDB: new IDBFactory(), IDBKeyRange }, 'sync');
+      onCleared = vi.fn();
+      setup(async () => store, onCleared);
+    });
+
+    it('should date a spoiled position the first time and keep the date when solved', async () => {
+      await service.markPositionSpoiled('legal-mate', 5);
+      await service.markPositionSpoiled('legal-mate', 9);
+      expect(await service.positions()).toEqual([
+        { positionId: 'legal-mate', solves: 0, firstTry: false, spoiled: true, spoiledAt: 5 },
+      ]);
+
+      expect(await service.recordPositionSolve('legal-mate', 10)).toEqual({
+        positionId: 'legal-mate',
+        solves: 1,
+        firstTry: false,
+        spoiled: true,
+        lastSolvedAt: 10,
+        spoiledAt: 5,
+      });
+    });
+
+    it('should count local changes apart from every change', async () => {
+      expect(service.localRevision()).toBe(0);
+
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+      await service.markPositionSpoiled('legal-mate');
+      await service.recordPositionSolve('legal-mate');
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 });
+      await service.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-board', firstTry: true });
+      await service.clear('openings');
+      expect(await service.importDocument(doc({ lessons: [LESSON] }))).toBe(true);
+
+      expect(service.localRevision()).toBe(8);
+      expect(service.revision()).toBe(8);
+    });
+
+    it('should not count data from the server as a local change', async () => {
+      await service.recordLine(result());
+
+      const merged = await service.mergeRemote(doc({ lessons: [LESSON] }));
+
+      expect(service.revision()).toBe(2);
+      expect(service.localRevision()).toBe(1);
+      expect(merged?.lessons).toEqual([LESSON]);
+      expect(merged?.lines).toHaveLength(1);
+      expect(await service.lessons()).toEqual([LESSON]);
+    });
+
+    it('should merge rows from the server with the local ones and write lines with their key', async () => {
+      await service.recordLine(result({ mistakes: 2 }), 300);
+
+      await service.mergeRemote(doc({ lines: [{ ...LINE_ROW, practiced: 4, clean: 3 }] }));
+
+      expect(await service.lines()).toEqual([
+        { ...LINE_ROW, practiced: 4, clean: 3, streak: 0, lastPracticed: 300 },
+      ]);
+      expect(await store.lines.get(progressKey('ruy-lopez', 'white', LINE))).toBeDefined();
+    });
+
+    it('should apply the marks from the server to the local rows', async () => {
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+      await service.recordLesson({ lessonId: 'pins', exercises: 2, firstTry: 1 }, 300);
+
+      const merged = await service.mergeRemote(doc({ cleared: { lessons: 200 } }));
+
+      expect((await service.lessons()).map((row) => row.lessonId)).toEqual(['pins']);
+      expect(merged?.cleared).toEqual({ lessons: 200 });
+      expect(service.localRevision()).toBe(2);
+    });
+
+    it('should keep only what the server holds when replacing', async () => {
+      await service.recordLine(result());
+      await service.recordEndgame('lucena');
+
+      const replaced = await service.mergeRemote(doc({ lessons: [LESSON] }), 'replace');
+
+      expect(await service.lines()).toEqual([]);
+      expect(await service.endgames()).toEqual([]);
+      expect(await service.lessons()).toEqual([LESSON]);
+      expect(replaced).toEqual(doc({ lessons: [LESSON] }));
+      expect(service.localRevision()).toBe(2);
+      expect(onCleared).not.toHaveBeenCalled();
+    });
+
+    it('should never delete anything when importing a copy', async () => {
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+
+      await service.importDocument(
+        doc({ cleared: { lessons: 1000 }, lessons: [{ ...LESSON, lessonId: 'pins' }] }),
+      );
+
+      expect((await service.lessons()).map((row) => row.lessonId)).toEqual(['pins', 'the-board']);
+      expect((await service.snapshot())?.cleared).toEqual({});
+    });
+
+    it('should take a snapshot of the valid rows, in canonical order', async () => {
+      await service.recordLine(result({ color: 'black' }), 100);
+      await service.recordLine(result(), 100);
+      await service.recordPositionSolve('legal-mate', 7);
+      await store.lines.put({ ...LINE_ROW, key: 'x', lineId: 'd2d4' });
+      await store.lessons.put({ ...LESSON, firstTry: 9 });
+
+      const snapshot = await service.snapshot();
+
+      expect(snapshot).toEqual(
+        doc({
+          lines: [{ ...LINE_ROW, color: 'black' }, LINE_ROW],
+          positions: [
+            {
+              positionId: 'legal-mate',
+              solves: 1,
+              firstTry: true,
+              spoiled: false,
+              lastSolvedAt: 7,
+            },
+          ],
+        }),
+      );
+      expect(Object.keys(snapshot?.lines[0] ?? {})).not.toContain('key');
+    });
+
+    it('should tell the sync about a cleared section', async () => {
+      await service.clear('lessons', 300);
+      expect(onCleared).toHaveBeenCalledWith('lessons', 300);
+    });
+
+    it('should do nothing on its own when a section is cleared', async () => {
+      setup(async () => store);
+      expect(await service.clear('lessons')).toBe(true);
+    });
+
+    it('should not tell the sync about a clear that failed', async () => {
+      setup(
+        async () => ({
+          ...store,
+          lessons: { ...store.lessons, clear: () => Promise.reject(new Error('x')) },
+        }),
+        onCleared,
+      );
+
+      expect(await service.clear('lessons', 300)).toBe(false);
+      expect(onCleared).not.toHaveBeenCalled();
+    });
+
+    it('should resolve without a document when the store cannot be used', async () => {
+      setup(() => Promise.reject(new Error('blocked')));
+
+      expect(await service.snapshot()).toBeUndefined();
+      expect(await service.mergeRemote(doc({ lessons: [LESSON] }))).toBeUndefined();
+      expect(await service.importDocument(doc({ lessons: [LESSON] }))).toBe(false);
+      expect(service.revision()).toBe(0);
+      expect(service.localRevision()).toBe(0);
+    });
+
+    it('should leave the rows as they were when the rewrite fails', async () => {
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+      setup(async () => ({ ...store, rewrite: () => Promise.reject(new Error('quota')) }));
+
+      expect(await service.mergeRemote(doc({ cleared: { lessons: 200 } }))).toBeUndefined();
+      expect(service.status()).toBe('unavailable');
+      expect(service.revision()).toBe(0);
     });
   });
 
