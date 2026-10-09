@@ -57,6 +57,8 @@ export interface ProgressStore {
    * `key`.
    */
   rewrite(change: (current: StoredTables) => StoredTables): Promise<StoredTables>;
+  /** Reads every table in one transaction, so no write lands between two of them. */
+  readAll(): Promise<StoredTables>;
 }
 
 /** Opens the store. May reject: IndexedDB can be missing, blocked or full. */

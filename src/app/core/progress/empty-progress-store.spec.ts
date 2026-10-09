@@ -31,7 +31,7 @@ describe('emptyProgressStoreLoader', () => {
     const progress = TestBed.inject(ProgressService);
     const lesson = { lessonId: 'the-board', completedAt: 1, exercises: 1, firstTry: 1 };
 
-    await progress.mergeRemote({ ...emptyDocument(), lessons: [lesson] });
+    await progress.mergeRemote({ ...emptyDocument(), lessons: [lesson] }, { cleared: () => ({}) });
 
     expect(await progress.lessons()).toEqual([]);
   });

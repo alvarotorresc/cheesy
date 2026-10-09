@@ -19,6 +19,7 @@ export const emptyProgressStore: ProgressStore = {
   positions: emptyTable(),
   lessons: emptyTable(),
   puzzles: { ...emptyTable(), ofLesson: async () => [] },
+  readAll: async () => ({ lines: [], endgames: [], positions: [], lessons: [], puzzles: [] }),
   rewrite: async (change) =>
     change({ lines: [], endgames: [], positions: [], lessons: [], puzzles: [] }),
 };

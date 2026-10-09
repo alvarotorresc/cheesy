@@ -86,6 +86,13 @@ export const openProgressStore = async (
       ...tableOf(db, db.puzzles),
       ofLesson: (lessonId) => db.puzzles.where('lessonId').equals(lessonId).toArray(),
     },
+    readAll: () =>
+      db.transaction('r', [...TABLES.map((name) => db.table(name))], async () => {
+        const read = await Promise.all(TABLES.map((name) => db.table(name).toArray()));
+        return Object.fromEntries(
+          TABLES.map((name, index) => [name, read[index]]),
+        ) as unknown as StoredTables;
+      }),
     rewrite: (change) =>
       db.transaction('rw', [...TABLES.map((name) => db.table(name))], async () => {
         const read = await Promise.all(TABLES.map((name) => db.table(name).toArray()));

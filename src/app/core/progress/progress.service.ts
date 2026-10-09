@@ -10,13 +10,15 @@ import {
   parsePuzzleProgress,
   progressKey,
 } from './progress-record';
-import { mergeDocuments } from '../sync/merge';
+import { latestMarks, mergeDocuments } from '../sync/merge';
 import {
+  dropFutureDates,
   emptyDocument,
   parseSyncDocument,
   SECTION_TABLE,
   SYNC_FORMAT,
   SYNC_VERSION,
+  type ClearedAt,
   type SyncDocument,
 } from '../sync/sync-document';
 import { PROGRESS_STORE_LOADER, type ProgressStore, type StoredTables } from './progress-store';
@@ -41,14 +43,21 @@ export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
 
 /**
  * Told when a section is cleared, with the time. Nothing by default; the sync provides it to note
- * the clear in the progress document, so the rows do not come back from the server.
+ * the clear in the progress document, so the rows do not come back from the server. It is called
+ * inside the transaction that deletes the rows, before they go, so it must be synchronous (the
+ * sync state lives in `localStorage`). If the deletion then fails, the mark stays: it only
+ * deletes, on the next merge, rows the user already asked to delete.
  */
 export const PROGRESS_CLEARED = new InjectionToken<(section: ProgressSection, at: number) => void>(
   'PROGRESS_CLEARED',
   { providedIn: 'root', factory: () => () => undefined },
 );
 
-/** The valid rows of the tables as a canonical document, with no marks. */
+/**
+ * The valid rows of the tables as a canonical document, with no marks. Rows that fail their
+ * `parse*` are left out: they are never uploaded, and a rewrite built from this document deletes
+ * them from this browser too (they were already ignored by every read).
+ */
 const documentOf = (tables: StoredTables): SyncDocument => {
   const parsed = parseSyncDocument({
     format: SYNC_FORMAT,
@@ -254,65 +263,73 @@ export class ProgressService {
    * Resolves with false on failure.
    */
   async clear(section: ProgressSection, now = Date.now()): Promise<boolean> {
-    const cleared = await this.run(async (store) => {
-      await store[SECTION_TABLE[section]].clear();
-      return true;
-    });
+    // One transaction: a merge with data from the server either sees the mark or runs after the
+    // rows are gone, never in between.
+    const cleared = await this.run((store) =>
+      store.rewrite((current) => {
+        this.onCleared(section, now);
+        return { ...current, [SECTION_TABLE[section]]: [] };
+      }),
+    );
     if (!cleared) return false;
     this.bumpLocal();
-    this.onCleared(section, now);
     return true;
   }
 
   /** The valid rows of every table as a canonical document, or undefined without a store. */
   async snapshot(): Promise<SyncDocument | undefined> {
-    const tables = await this.run(async (store) => {
-      const [lines, endgames, positions, lessons, puzzles] = await Promise.all([
-        store.lines.all(),
-        store.endgames.all(),
-        store.positions.all(),
-        store.lessons.all(),
-        store.puzzles.all(),
-      ]);
-      return { lines, endgames, positions, lessons, puzzles };
-    });
+    const tables = await this.run((store) => store.readAll());
     return tables && documentOf(tables);
   }
 
   /**
-   * Writes a document from the server: merged with the progress kept here (its marks delete the
-   * rows they cover), or in place of it with `replace`. All in one transaction. Bumps `revision`
-   * so the views read again, but not `localRevision`: it is not a change made here. Resolves with
-   * the document written, or undefined on failure.
+   * Writes a document from the server, in one transaction: merged with the progress kept here, or
+   * in place of it with `replace`. The marks applied are the server's and the pending ones, which
+   * `cleared` reads inside the transaction (clears made here and not uploaded yet), so a section
+   * cleared offline never comes back. Rows and marks dated more than a day ahead of `now` are
+   * dropped (see `FUTURE_SLACK`). Bumps `revision` so the views read again, but not
+   * `localRevision`: it is not a change made here. Resolves with the document written, with every
+   * mark, ready to upload; or undefined on failure.
    */
   async mergeRemote(
     remote: SyncDocument,
-    mode: 'merge' | 'replace' = 'merge',
+    options: {
+      mode?: 'merge' | 'replace';
+      cleared: () => ClearedAt;
+      now?: number;
+    },
   ): Promise<SyncDocument | undefined> {
-    const written = await this.write(remote, mode);
+    const { mode = 'merge', cleared, now = Date.now() } = options;
+    const written = await this.write(mode, now, () => ({
+      ...remote,
+      cleared: latestMarks(remote.cleared, cleared()),
+    }));
     if (written) this.changes.update((value) => value + 1);
     return written;
   }
 
   /**
    * Merges a copy exported from a file. Its marks are ignored: importing a copy never deletes
-   * anything. It is a change made here, so the sync uploads it. Resolves with false on failure.
+   * anything. Rows dated more than a day ahead of `now` are dropped. It is a change made here, so
+   * the sync uploads it. Resolves with false on failure.
    */
-  async importDocument(doc: SyncDocument): Promise<boolean> {
-    const written = await this.write({ ...doc, cleared: {} }, 'merge');
+  async importDocument(doc: SyncDocument, now = Date.now()): Promise<boolean> {
+    const written = await this.write('merge', now, () => ({ ...doc, cleared: {} }));
     if (written) this.bumpLocal();
     return written !== undefined;
   }
 
+  /** Rewrites the tables with the merge of what they hold and `incoming`, read in the transaction. */
   private async write(
-    incoming: SyncDocument,
     mode: 'merge' | 'replace',
+    now: number,
+    incoming: () => SyncDocument,
   ): Promise<SyncDocument | undefined> {
     let result: SyncDocument | undefined;
     const written = await this.run((store) =>
       store.rewrite((current) => {
         const base = mode === 'replace' ? emptyDocument() : documentOf(current);
-        result = mergeDocuments(base, incoming);
+        result = mergeDocuments(base, dropFutureDates(incoming(), now));
         return tablesOf(result);
       }),
     );

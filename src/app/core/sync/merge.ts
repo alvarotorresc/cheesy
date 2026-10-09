@@ -52,7 +52,8 @@ export const applyCleared = (doc: SyncDocument): SyncDocument => {
   return result as unknown as SyncDocument;
 };
 
-const latestMarks = (a: ClearedAt, b: ClearedAt): ClearedAt => {
+/** The latest mark of each section of the two. */
+export const latestMarks = (a: ClearedAt, b: ClearedAt): ClearedAt => {
   const cleared: Partial<Record<ProgressSection, number>> = {};
   for (const section of PROGRESS_SECTIONS) {
     const at = Math.max(a[section] ?? -1, b[section] ?? -1);

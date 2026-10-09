@@ -11,7 +11,7 @@ import {
 import { PROGRESS_CLEARED, ProgressService } from './progress.service';
 import type { Mock } from 'vitest';
 import type { LessonProgress, LineProgress, LineResult, ProgressSection } from './progress.types';
-import { emptyDocument, type SyncDocument } from '../sync/sync-document';
+import { emptyDocument, type ClearedAt, type SyncDocument } from '../sync/sync-document';
 
 const LINE = 'e2e4 e7e5 g1f3';
 
@@ -476,6 +476,8 @@ describe('ProgressService', () => {
       ...emptyDocument(),
       ...overrides,
     });
+    const none = (): ClearedAt => ({});
+    const DAY = 24 * 60 * 60 * 1000;
     let onCleared: Mock<(section: ProgressSection, at: number) => void>;
 
     beforeEach(async () => {
@@ -520,7 +522,7 @@ describe('ProgressService', () => {
     it('should not count data from the server as a local change', async () => {
       await service.recordLine(result());
 
-      const merged = await service.mergeRemote(doc({ lessons: [LESSON] }));
+      const merged = await service.mergeRemote(doc({ lessons: [LESSON] }), { cleared: none });
 
       expect(service.revision()).toBe(2);
       expect(service.localRevision()).toBe(1);
@@ -532,7 +534,9 @@ describe('ProgressService', () => {
     it('should merge rows from the server with the local ones and write lines with their key', async () => {
       await service.recordLine(result({ mistakes: 2 }), 300);
 
-      await service.mergeRemote(doc({ lines: [{ ...LINE_ROW, practiced: 4, clean: 3 }] }));
+      await service.mergeRemote(doc({ lines: [{ ...LINE_ROW, practiced: 4, clean: 3 }] }), {
+        cleared: none,
+      });
 
       expect(await service.lines()).toEqual([
         { ...LINE_ROW, practiced: 4, clean: 3, streak: 0, lastPracticed: 300 },
@@ -544,7 +548,9 @@ describe('ProgressService', () => {
       await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
       await service.recordLesson({ lessonId: 'pins', exercises: 2, firstTry: 1 }, 300);
 
-      const merged = await service.mergeRemote(doc({ cleared: { lessons: 200 } }));
+      const merged = await service.mergeRemote(doc({ cleared: { lessons: 200 } }), {
+        cleared: none,
+      });
 
       expect((await service.lessons()).map((row) => row.lessonId)).toEqual(['pins']);
       expect(merged?.cleared).toEqual({ lessons: 200 });
@@ -555,7 +561,10 @@ describe('ProgressService', () => {
       await service.recordLine(result());
       await service.recordEndgame('lucena');
 
-      const replaced = await service.mergeRemote(doc({ lessons: [LESSON] }), 'replace');
+      const replaced = await service.mergeRemote(doc({ lessons: [LESSON] }), {
+        mode: 'replace',
+        cleared: none,
+      });
 
       expect(await service.lines()).toEqual([]);
       expect(await service.endgames()).toEqual([]);
@@ -610,11 +619,119 @@ describe('ProgressService', () => {
         service.recordLine(result(), 200),
         service.mergeRemote(
           doc({ lines: [{ ...LINE_ROW, practiced: 10, clean: 10, streak: 10 }] }),
+          { cleared: none },
         ),
       ]);
 
       const [row] = await service.lines();
       expect(row.practiced).toBeGreaterThanOrEqual(10);
+    });
+
+    it('should not bring back a section cleared offline when the server answers with a conflict', async () => {
+      let pending: ClearedAt = {};
+      setup(
+        async () => store,
+        (section, at) => (pending = { ...pending, [section]: at }),
+      );
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+      await service.clear('lessons', 300);
+
+      // The server still holds the lesson from before the clear.
+      const merged = await service.mergeRemote(doc({ lessons: [LESSON] }), {
+        cleared: () => pending,
+      });
+
+      expect(await service.lessons()).toEqual([]);
+      expect(merged?.lessons).toEqual([]);
+      expect(merged?.cleared).toEqual({ lessons: 300 });
+    });
+
+    it('should read the pending marks inside the transaction that writes', async () => {
+      const read: string[] = [];
+      setup(async () => ({
+        ...store,
+        rewrite: (change) => {
+          read.push('transaction');
+          return store.rewrite(change);
+        },
+      }));
+
+      await service.mergeRemote(doc(), {
+        cleared: () => {
+          read.push('marks');
+          return {};
+        },
+      });
+
+      expect(read).toEqual(['transaction', 'marks']);
+    });
+
+    it('should keep a clear made while data from the server is written', async () => {
+      let pending: ClearedAt = {};
+      setup(
+        async () => store,
+        (section, at) => (pending = { ...pending, [section]: at }),
+      );
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+
+      await Promise.all([
+        service.clear('lessons', 300),
+        service.mergeRemote(doc({ lessons: [LESSON] }), { cleared: () => pending }),
+      ]);
+
+      expect(await service.lessons()).toEqual([]);
+    });
+
+    it('should ignore marks and rows dated more than a day ahead', async () => {
+      const now = 1_000_000;
+      await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
+
+      const merged = await service.mergeRemote(
+        doc({
+          cleared: { lessons: now + DAY + 1 },
+          lines: [{ ...LINE_ROW, lastPracticed: now + DAY + 1 }],
+          endgames: [
+            {
+              endgameId: 'lucena',
+              completions: 1,
+              firstCompletedAt: now,
+              lastCompletedAt: now + DAY,
+            },
+          ],
+        }),
+        { cleared: () => ({ puzzles: now + DAY + 1, endgames: now }), now },
+      );
+
+      expect(await service.lessons()).toHaveLength(1);
+      expect(await service.lines()).toEqual([]);
+      expect(await service.endgames()).toHaveLength(1);
+      expect(merged?.cleared).toEqual({ endgames: now });
+    });
+
+    it('should not import rows dated more than a day ahead', async () => {
+      const now = 1_000_000;
+      await service.importDocument(
+        doc({
+          lessons: [
+            { ...LESSON, completedAt: now + DAY + 1 },
+            { ...LESSON, lessonId: 'pins' },
+          ],
+        }),
+        now,
+      );
+
+      expect((await service.lessons()).map((row) => row.lessonId)).toEqual(['pins']);
+    });
+
+    it('should take the snapshot in one read of every table', async () => {
+      const readAll = vi.spyOn(store, 'readAll');
+      const all = vi.spyOn(store.lines, 'all');
+      await service.recordLine(result(), 100);
+
+      await service.snapshot();
+
+      expect(readAll).toHaveBeenCalledTimes(1);
+      expect(all).not.toHaveBeenCalled();
     });
 
     it('should tell the sync about a cleared section', async () => {
@@ -631,7 +748,7 @@ describe('ProgressService', () => {
       setup(
         async () => ({
           ...store,
-          lessons: { ...store.lessons, clear: () => Promise.reject(new Error('x')) },
+          rewrite: () => Promise.reject(new Error('x')),
         }),
         onCleared,
       );
@@ -644,7 +761,9 @@ describe('ProgressService', () => {
       setup(() => Promise.reject(new Error('blocked')));
 
       expect(await service.snapshot()).toBeUndefined();
-      expect(await service.mergeRemote(doc({ lessons: [LESSON] }))).toBeUndefined();
+      expect(
+        await service.mergeRemote(doc({ lessons: [LESSON] }), { cleared: none }),
+      ).toBeUndefined();
       expect(await service.importDocument(doc({ lessons: [LESSON] }))).toBe(false);
       expect(service.revision()).toBe(0);
       expect(service.localRevision()).toBe(0);
@@ -654,7 +773,9 @@ describe('ProgressService', () => {
       await service.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 1 }, 100);
       setup(async () => ({ ...store, rewrite: () => Promise.reject(new Error('quota')) }));
 
-      expect(await service.mergeRemote(doc({ cleared: { lessons: 200 } }))).toBeUndefined();
+      expect(
+        await service.mergeRemote(doc({ cleared: { lessons: 200 } }), { cleared: none }),
+      ).toBeUndefined();
       expect(service.status()).toBe('unavailable');
       expect(service.revision()).toBe(0);
     });
@@ -731,7 +852,11 @@ describe('ProgressService', () => {
     });
 
     it('should report a failed deletion', async () => {
-      setup(failing('clear'));
+      const working = await openProgressStore({ indexedDB: new IDBFactory(), IDBKeyRange }, 'f');
+      setup(async () => ({
+        ...working,
+        rewrite: () => Promise.reject(new DOMException('Quota exceeded', 'QuotaExceededError')),
+      }));
 
       expect(await service.clear('openings')).toBe(false);
       expect(service.status()).toBe('unavailable');

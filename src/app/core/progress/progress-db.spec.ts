@@ -125,6 +125,20 @@ describe('openProgressStore', () => {
     });
   });
 
+  it('should read every table at once', async () => {
+    const store = await open();
+    await store.lines.put(row('e2e4'));
+    await store.lessons.put({ lessonId: 'pins', completedAt: 5, exercises: 1, firstTry: 1 });
+
+    expect(await store.readAll()).toEqual({
+      lines: [row('e2e4')],
+      endgames: [],
+      positions: [],
+      lessons: [{ lessonId: 'pins', completedAt: 5, exercises: 1, firstTry: 1 }],
+      puzzles: [],
+    });
+  });
+
   describe('rewrite', () => {
     const lesson = { lessonId: 'knight-moves', completedAt: 5, exercises: 4, firstTry: 3 };
     const endgame = {
