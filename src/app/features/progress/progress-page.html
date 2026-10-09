@@ -1,0 +1,314 @@
+@let p = t().progressPage;
+@let status = sync.status();
+@let unavailable = status === 'unavailable';
+@let canExport = progress.status() !== 'unavailable';
+
+<section class="intro" aria-labelledby="progress-title">
+  <div class="intro-text">
+    <h1 id="progress-title">{{ p.title }}</h1>
+    <p class="lead">{{ p.lead }}</p>
+    <a class="about-link" [routerLink]="links.about()" fragment="sincronizar">{{
+      p.privacyLink
+    }}</a>
+  </div>
+
+  <section class="ledger" aria-labelledby="ledger-title">
+    <h2 id="ledger-title" class="ledger-title">{{ p.ledgerTitle }}</h2>
+    <ul class="file">
+      <li>
+        <span class="cell"><i class="pc piece pc-wP" aria-hidden="true"></i></span>
+        <div class="row-text">
+          <b>{{ p.thisBrowser }}</b>
+          <span>{{ localSummary() ?? p.loading }}</span>
+        </div>
+      </li>
+      <li class="sync-row" [attr.data-status]="linked() || status !== 'idle' ? status : 'off'">
+        <span class="cell"><i class="pc piece pc-bR" aria-hidden="true"></i></span>
+        <div class="row-text">
+          <b>{{ p.syncTitle }}</b>
+          <span class="status" aria-live="polite"
+            >{{ statusText() }}
+            @if (statusDetail()) {
+              <span class="detail">{{ statusDetail() }}</span>
+            }
+          </span>
+          @if (lastSynced()) {
+            <span class="ago">{{ lastSynced() }}</span>
+          }
+        </div>
+        @if (linked() && status !== 'outdated') {
+          <button
+            type="button"
+            class="button sync-now"
+            [disabled]="busy() !== undefined || status === 'syncing'"
+            (click)="syncNow()"
+          >
+            {{ p.syncNow }}
+          </button>
+        }
+      </li>
+    </ul>
+  </section>
+</section>
+
+@if (unavailable) {
+  <section class="block" aria-labelledby="unavailable-title">
+    <div class="block-head">
+      <h2 id="unavailable-title">{{ p.unavailableTitle }}</h2>
+      <p>{{ p.unavailableText }}</p>
+    </div>
+  </section>
+} @else if (linked()) {
+  <section class="block account" aria-labelledby="code-title">
+    <div class="block-head">
+      <h2 id="code-title">{{ p.codeTitle }}</h2>
+    </div>
+    <div class="code-card">
+      <div class="code-main">
+        <ol class="code" [attr.aria-label]="shown() ? null : p.codeHidden">
+          @for (word of words(); track $index) {
+            <li class="tile">
+              <span class="n" aria-hidden="true">{{ $index + 1 }}</span>
+              @if (shown()) {
+                <span class="word">{{ word }}</span>
+              } @else {
+                <span class="word masked" aria-hidden="true">•••••</span>
+              }
+            </li>
+          }
+        </ol>
+        <div class="code-actions">
+          <button
+            type="button"
+            class="button"
+            [attr.aria-pressed]="shown()"
+            (click)="shown.set(!shown())"
+          >
+            {{ p.show }}
+          </button>
+          <button #copyButton type="button" class="button primary" (click)="copy(sync.code())">
+            {{ p.copy }}
+          </button>
+        </div>
+      </div>
+      <p class="warning">{{ p.warning }}</p>
+    </div>
+    <p class="message" role="status">{{ message() }}</p>
+    <div class="manage">
+      <button type="button" class="button" [disabled]="busy() !== undefined" (click)="askLeave()">
+        {{ p.leave }}
+      </button>
+      <button
+        type="button"
+        class="button danger-outline"
+        [disabled]="busy() !== undefined"
+        (click)="askDelete()"
+      >
+        {{ p.deleteRemote }}
+      </button>
+    </div>
+  </section>
+} @else {
+  <section class="block start">
+    @if (sync.error() === 'gone') {
+      <p class="gone">{{ p.gone }}</p>
+    }
+    <p class="message" role="status">{{ message() }}</p>
+    <div class="panes">
+      <article class="pane" aria-labelledby="create-title">
+        <h2 id="create-title">{{ p.createTitle }}</h2>
+        <p class="pane-text">{{ p.createText }}</p>
+        <div>
+          <button
+            type="button"
+            class="button primary"
+            [disabled]="busy() !== undefined"
+            (click)="create()"
+          >
+            @if (busy() === 'create') {
+              {{ p.creating }}
+            } @else if (sync.error() === 'gone') {
+              {{ p.createNew }}
+            } @else {
+              {{ p.create }}
+            }
+          </button>
+        </div>
+      </article>
+
+      <form class="pane" aria-labelledby="join-title" (submit)="enter($event)">
+        <h2 id="join-title">{{ p.joinTitle }}</h2>
+        <app-code-field
+          [label]="p.codeLabel"
+          [hint]="p.joinText"
+          [placeholder]="p.codePlaceholder"
+          [error]="codeError()"
+          [(value)]="codeInput"
+        />
+        <div>
+          <button type="submit" class="button" [disabled]="busy() !== undefined">
+            {{ busy() === 'join' ? p.joining : p.join }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+}
+
+<section class="block files" aria-labelledby="file-title">
+  <div class="block-head">
+    <h2 id="file-title">{{ p.fileTitle }}</h2>
+    <p>{{ p.fileText }}</p>
+  </div>
+  @if (canExport) {
+    <div class="file-actions">
+      <button type="button" class="button" [disabled]="busy() !== undefined" (click)="exportFile()">
+        {{ p.export }}
+      </button>
+      @if (!unavailable) {
+        <label class="button import">
+          <input
+            class="visually-hidden"
+            type="file"
+            accept="application/json,.json"
+            [disabled]="busy() !== undefined"
+            (change)="importFile($event)"
+          />
+          {{ p.import }}
+        </label>
+      }
+    </div>
+  }
+  <p class="message" role="status">{{ fileMessage() }}</p>
+</section>
+
+@if (!unavailable) {
+  <dialog
+    #createDialog
+    class="reveal"
+    aria-labelledby="reveal-title"
+    aria-describedby="reveal-text"
+    (cancel)="holdCreated($event)"
+    (close)="createdClosed()"
+  >
+    <h2 id="reveal-title">{{ p.revealTitle }}</h2>
+    <p id="reveal-text" class="reveal-text">{{ p.revealText }}</p>
+    <ol class="code">
+      @for (word of createdWords(); track $index) {
+        <li class="tile">
+          <span class="n" aria-hidden="true">{{ $index + 1 }}</span>
+          <span class="word">{{ word }}</span>
+        </li>
+      }
+    </ol>
+    <div class="reveal-copy">
+      <button type="button" class="button" data-autofocus (click)="copy(created())">
+        {{ p.copy }}
+      </button>
+      <p class="message" role="status">{{ message() }}</p>
+    </div>
+    <p class="warning">{{ p.warning }}</p>
+    <label class="saved">
+      <input type="checkbox" [checked]="savedIt()" (change)="savedIt.set(!savedIt())" />
+      {{ p.saved }}
+    </label>
+    <div class="dialog-actions">
+      @if (!savedIt()) {
+        <p class="hold" id="reveal-hold">{{ p.savedFirst }}</p>
+      }
+      <button
+        type="button"
+        class="button primary"
+        [disabled]="!savedIt()"
+        [attr.aria-describedby]="savedIt() ? null : 'reveal-hold'"
+        (click)="closeCreated()"
+      >
+        {{ p.done }}
+      </button>
+    </div>
+  </dialog>
+
+  <dialog
+    #chooseDialog
+    class="choose"
+    aria-labelledby="choose-title"
+    (close)="choice.set(undefined)"
+  >
+    <h2 id="choose-title">{{ p.chooseTitle }}</h2>
+    @if (choice(); as c) {
+      <dl class="sides">
+        <div>
+          <dt>{{ p.inAccount }}</dt>
+          <dd>{{ p.rows(c.remote) }}</dd>
+        </div>
+        <div>
+          <dt>{{ p.inBrowser }}</dt>
+          <dd>{{ p.rows(c.local) }}</dd>
+        </div>
+      </dl>
+    }
+    <p>{{ p.chooseText }}</p>
+    <div class="options">
+      <div class="option">
+        <button
+          type="button"
+          class="button primary"
+          aria-describedby="merge-text"
+          data-autofocus
+          (click)="choose('merge')"
+        >
+          {{ p.merge }}
+        </button>
+        <p id="merge-text">{{ p.mergeText }}</p>
+      </div>
+      <div class="option">
+        <button
+          type="button"
+          class="button"
+          aria-describedby="replace-text"
+          (click)="choose('replace')"
+        >
+          {{ p.replace }}
+        </button>
+        <p>
+          <span id="replace-text">{{ p.replaceText }}</span>
+          <button type="button" class="text-button" (click)="exportFile()">
+            {{ p.exportFirst }}
+          </button>
+        </p>
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="button quiet" (click)="chooseDialog.close()">
+        {{ p.cancel }}
+      </button>
+    </div>
+  </dialog>
+
+  <dialog #leaveDialog aria-labelledby="leave-title" aria-describedby="leave-text">
+    <h2 id="leave-title">{{ p.leaveTitle }}</h2>
+    <p id="leave-text">{{ p.leaveText }}</p>
+    <div class="dialog-actions stacked">
+      <button type="button" class="button quiet" (click)="leaveDialog.close()">
+        {{ p.cancel }}
+      </button>
+      <button type="button" class="button" (click)="leave(false)">{{ p.erase }}</button>
+      <button type="button" class="button primary" data-autofocus (click)="leave(true)">
+        {{ p.keep }}
+      </button>
+    </div>
+  </dialog>
+
+  <dialog #deleteDialog aria-labelledby="delete-title" aria-describedby="delete-text">
+    <h2 id="delete-title">{{ p.deleteTitle }}</h2>
+    <p id="delete-text">{{ p.deleteText }}</p>
+    <div class="dialog-actions">
+      <button type="button" class="button" data-autofocus (click)="deleteDialog.close()">
+        {{ p.cancel }}
+      </button>
+      <button type="button" class="button danger" (click)="deleteRemote()">
+        {{ p.deleteRemote }}
+      </button>
+    </div>
+  </dialog>
+}

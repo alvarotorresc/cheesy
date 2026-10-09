@@ -38,6 +38,7 @@ export const es: Messages = {
     privacy: 'Privacidad',
     about: 'Acerca de',
     glossary: 'Glosario',
+    progress: 'Tu progreso',
   },
   glossary: {
     title: 'Glosario',
@@ -478,6 +479,137 @@ export const es: Messages = {
   },
   progressPage: {
     title: 'Tu progreso',
+    lead: 'Guarda tu progreso con un código de cuatro palabras y sigue en otro navegador.',
+    privacyLink: 'Qué se guarda en el servidor y cuánto tiempo',
+    loading: 'Cargando…',
+    ledgerTitle: 'Dónde está tu progreso',
+    thisBrowser: 'En este navegador',
+    rows: (counts: Record<'lines' | 'endgames' | 'positions' | 'lessons' | 'puzzles', number>) =>
+      [
+        counts.lessons && (counts.lessons === 1 ? '1 lección' : `${counts.lessons} lecciones`),
+        counts.puzzles && (counts.puzzles === 1 ? '1 problema' : `${counts.puzzles} problemas`),
+        counts.lines &&
+          (counts.lines === 1 ? '1 línea de apertura' : `${counts.lines} líneas de apertura`),
+        counts.endgames && (counts.endgames === 1 ? '1 final' : `${counts.endgames} finales`),
+        counts.positions &&
+          (counts.positions === 1 ? '1 posición' : `${counts.positions} posiciones`),
+      ]
+        .filter(Boolean)
+        .join(', ') || 'Nada todavía',
+    syncTitle: 'Sincronización',
+    status: {
+      unavailable: 'No disponible en este navegador',
+      off: 'Solo aquí: sin sincronizar con un código',
+      idle: 'Sincronizado',
+      syncing: 'Sincronizando…',
+      offline: 'Sin conexión: se sincronizará al volver',
+      error: 'No se ha podido sincronizar',
+      outdated: 'Guardado por un Cheesy más nuevo',
+    },
+    errorDetail: {
+      conflict: 'Otro dispositivo estaba guardando a la vez. Prueba «Sincronizar ahora».',
+      'too-large': 'Tu progreso no cabe en el servidor. Exporta un fichero para no perderlo.',
+      unavailable:
+        'El servidor no responde. Cheesy lo intentará más tarde; también puedes «Sincronizar ahora».',
+      gone: '',
+    },
+    outdatedDetail: 'Recarga la página para seguir sincronizando.',
+    syncedAgo: (ago: string) => `Última sincronización: ${ago}`,
+    justNow: 'hace un momento',
+    syncNow: 'Sincronizar ahora',
+    createTitle: 'Consigue un código',
+    createText:
+      'Cheesy elige cuatro palabras para ti. Quien las escriba, en cualquier navegador, abre este progreso y lo mantiene al día.',
+    create: 'Crear mi código',
+    creating: 'Creando…',
+    createFailed: {
+      linked: 'Este navegador ya se sincroniza con un código.',
+      offline: 'Sin conexión. Inténtalo de nuevo cuando vuelvas a tenerla.',
+      'too-large': 'Tu progreso no cabe en el servidor. Exporta un fichero en su lugar.',
+      unavailable: 'El servidor no responde. Inténtalo dentro de un rato.',
+    },
+    joinTitle: '¿Ya tienes un código?',
+    joinText:
+      'Escribe sus cuatro palabras. Da igual que uses mayúsculas, tildes, espacios o guiones.',
+    codeLabel: 'Tu código',
+    codePlaceholder: 'cuatro palabras',
+    join: 'Entrar',
+    joining: 'Comprobando…',
+    ordinals: ['primera', 'segunda', 'tercera', 'cuarta'],
+    wordCount: (count: number) =>
+      count === 1
+        ? 'Un código tiene cuatro palabras; aquí hay 1.'
+        : `Un código tiene cuatro palabras; aquí hay ${count}.`,
+    badWord: (ordinal: string) => `La ${ordinal} palabra no está en la lista.`,
+    badCode: 'Eso no es un código. Revisa las cuatro palabras.',
+    joinFailed: {
+      'not-found': 'No hay progreso guardado con ese código. Revisa las palabras.',
+      offline: 'Sin conexión. Inténtalo de nuevo cuando vuelvas a tenerla.',
+      unavailable: 'El servidor no responde. Inténtalo dentro de un rato.',
+      outdated:
+        'Ese progreso lo guardó un Cheesy más nuevo. Recarga la página e inténtalo de nuevo.',
+      linked: 'Este navegador ya se sincroniza con un código. Deja de sincronizar aquí primero.',
+    },
+    joined: 'Listo: este navegador se sincroniza con tu código.',
+    chooseTitle: 'Este navegador ya tiene progreso',
+    chooseText: '¿Qué hacemos con él?',
+    inAccount: 'En la cuenta',
+    inBrowser: 'En este navegador',
+    merge: 'Unir',
+    mergeText: 'Se queda todo lo de los dos lados, aquí y en el servidor.',
+    replace: 'Usar solo la cuenta',
+    replaceText: 'Se borra el progreso de este navegador.',
+    exportFirst: 'Exportarlo antes',
+    cancel: 'Cancelar',
+    gone: 'Esta cuenta ya no existe en el servidor. Tu progreso sigue en este navegador.',
+    createNew: 'Crear un código nuevo',
+    revealTitle: 'Tu código',
+    revealText: 'Cópialo o apúntalo ahora. Si lo pierdes, no hay forma de recuperarlo.',
+    saved: 'Lo he guardado',
+    savedFirst: 'Marca «Lo he guardado» para cerrar.',
+    done: 'Hecho',
+    codeTitle: 'Tu código',
+    codeHidden: 'Oculto',
+    wordLabel: (position: number) => `Palabra ${position}`,
+    show: 'Mostrar',
+    copy: 'Copiar',
+    copied: 'Código copiado.',
+    copyFailed: 'No se ha podido copiar. Muestra el código y copia las palabras a mano.',
+    warning:
+      'Quien tenga el código puede ver y cambiar tu progreso. Si lo pierdes, no hay forma de recuperarlo: guárdalo en tu gestor de contraseñas o exporta un fichero.',
+    leave: 'Dejar de sincronizar aquí',
+    deleteRemote: 'Borrar del servidor',
+    leaveTitle: '¿Dejar tu progreso en este navegador?',
+    leaveText:
+      'En los dos casos, este navegador olvida el código. El servidor conserva tu progreso y el código sigue funcionando en tus otros dispositivos.',
+    keep: 'Mantenerlo',
+    erase: 'Borrarlo de este navegador',
+    left: 'Este navegador ya no se sincroniza.',
+    deleteTitle: '¿Borrar tu progreso del servidor?',
+    deleteText:
+      'Se borra tu progreso del servidor. Este navegador lo conserva. El código deja de funcionar en todos tus dispositivos.',
+    deleted: 'Borrado del servidor. Este navegador conserva tu progreso.',
+    deleteFailed: 'No se ha podido borrar: el servidor no ha respondido. No ha cambiado nada.',
+    fileTitle: 'Una copia en un fichero',
+    fileText:
+      'Descarga tu progreso para guardarlo o para llevarlo a otro navegador sin código. Al importar un fichero se une con lo que hay aquí: no se borra nada.',
+    export: 'Exportar',
+    import: 'Importar un fichero',
+    exported: (name: string) => `Descargado ${name}.`,
+    exportFailed: 'No se ha podido leer el progreso de este navegador.',
+    imported: (count: number) => (count === 1 ? 'Importada 1 fila.' : `Importadas ${count} filas.`),
+    importFailed: {
+      'too-big': 'Ese fichero pasa de 1 MB: no es una exportación de Cheesy.',
+      'not-json': 'Ese fichero no es una exportación de Cheesy.',
+      'not-a-document': 'Ese fichero no es una exportación de Cheesy.',
+      'newer-version':
+        'Ese fichero lo exportó un Cheesy más nuevo. Recarga la página e inténtalo de nuevo.',
+      failed: 'No se ha podido guardar el fichero en este navegador. No ha cambiado nada.',
+    },
+    unavailableTitle: 'La sincronización no funciona en este navegador',
+    unavailableText:
+      'Este navegador no deja a Cheesy guardar datos (una ventana privada o datos de sitios bloqueados), así que aquí no hay nada que sincronizar.',
+    fromNotice: 'Sincronizar o exportar',
   },
   analysis: {
     title: 'Tablero de análisis',
