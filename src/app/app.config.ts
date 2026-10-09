@@ -6,6 +6,7 @@ import { provideUmami } from './core/analytics';
 import { PageTitle } from './core/page-title';
 import { provideLangFromUrl } from './core/routing';
 import { providePageMeta } from './core/seo';
+import { provideSync } from './core/sync/provide-sync';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +20,6 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useExisting: PageTitle },
     providePageMeta(),
     provideUmami(),
+    provideSync(),
   ],
 };
