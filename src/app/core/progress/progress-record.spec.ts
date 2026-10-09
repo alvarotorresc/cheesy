@@ -280,6 +280,30 @@ describe('parsePositionProgress', () => {
   it('should reject a date on a position that was never solved', () => {
     expect(parsePositionProgress({ ...spoiledOnly, lastSolvedAt: 3 })).toBeUndefined();
   });
+
+  it('should keep when the position was spoiled, solved or not', () => {
+    const seen = { ...spoiledOnly, spoiledAt: 5 };
+    const late = { ...solved, firstTry: false, spoiled: true, spoiledAt: 5 };
+    expect(parsePositionProgress(seen)).toEqual(seen);
+    expect(parsePositionProgress(late)).toEqual(late);
+  });
+
+  it.each([-1, Number.NaN, '5', null])('should reject a spoiled date of %s', (spoiledAt) => {
+    expect(parsePositionProgress({ ...spoiledOnly, spoiledAt })).toBeUndefined();
+    expect(parsePositionProgress({ ...solved, spoiledAt })).toBeUndefined();
+  });
+
+  it('should write the fields in a fixed order', () => {
+    const row = { spoiledAt: 5, lastSolvedAt: 7, spoiled: true, firstTry: false, solves: 1 };
+    expect(Object.keys(parsePositionProgress({ ...row, positionId: 'legal-mate' }) ?? {})).toEqual([
+      'positionId',
+      'solves',
+      'firstTry',
+      'spoiled',
+      'lastSolvedAt',
+      'spoiledAt',
+    ]);
+  });
 });
 
 describe('parsePuzzleProgress', () => {

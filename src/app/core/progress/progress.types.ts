@@ -1,3 +1,6 @@
+/** The parts of the app that keep progress, each one deleted on its own. */
+export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons' | 'puzzles';
+
 /** Side the line was practised with. */
 export type ProgressColor = 'white' | 'black';
 
@@ -56,6 +59,11 @@ export interface PositionProgress {
   /** A mistake, hint or the solution came before the first solve. */
   readonly spoiled: boolean;
   readonly lastSolvedAt?: number;
+  /**
+   * When it was first spoiled, kept by later solves. Rows saved before v0.4.0 do not have it. It
+   * dates a position that was only seen, so a deleted section can be compared with it.
+   */
+  readonly spoiledAt?: number;
 }
 
 /** What is kept about one lesson: it is done once there is a row. Doing it again replaces it. */

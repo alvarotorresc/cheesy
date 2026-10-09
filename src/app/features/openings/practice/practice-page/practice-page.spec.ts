@@ -594,7 +594,8 @@ describe('PracticePage', () => {
 
     it('should still show the streak when the result could not be saved', async () => {
       seedStreak(2);
-      memory.store.lines.put = () => Promise.reject(new DOMException('full', 'QuotaExceededError'));
+      memory.store.lines.update = () =>
+        Promise.reject(new DOMException('full', 'QuotaExceededError'));
       await create();
       await chooseLineAndStart(MAIN);
       await finishMain();

@@ -4,6 +4,7 @@ const emptyTable = <Row>(): TableStore<Row> => ({
   all: async () => [],
   get: async () => undefined,
   put: async () => undefined,
+  update: async (_key, change) => change(undefined),
   clear: async () => undefined,
 });
 
@@ -18,6 +19,9 @@ export const emptyProgressStore: ProgressStore = {
   positions: emptyTable(),
   lessons: emptyTable(),
   puzzles: { ...emptyTable(), ofLesson: async () => [] },
+  readAll: async () => ({ lines: [], endgames: [], positions: [], lessons: [], puzzles: [] }),
+  rewrite: async (change) =>
+    change({ lines: [], endgames: [], positions: [], lessons: [], puzzles: [] }),
 };
 
 export const emptyProgressStoreLoader: ProgressStoreLoader = async () => emptyProgressStore;

@@ -20,12 +20,27 @@ export interface TableStore<Row> {
   all(): Promise<unknown[]>;
   get(key: string): Promise<unknown>;
   put(row: Row): Promise<void>;
+  /**
+   * Reads the row of `key`, passes it to `change` and writes what it returns (nothing when it
+   * returns undefined), in one transaction: no other write can land between the read and the
+   * write. `change` must be synchronous. Resolves with what `change` returned.
+   */
+  update(key: string, change: (current: unknown) => Row | undefined): Promise<Row | undefined>;
   clear(): Promise<void>;
 }
 
 /** The puzzles, which are also read one lesson at a time (by the index on the lesson). */
 export interface PuzzleTableStore extends TableStore<PuzzleProgress> {
   ofLesson(lessonId: string): Promise<unknown[]>;
+}
+
+/** Every row of every table, unchecked: see `TableStore`. */
+export interface StoredTables {
+  readonly lines: unknown[];
+  readonly endgames: unknown[];
+  readonly positions: unknown[];
+  readonly lessons: unknown[];
+  readonly puzzles: unknown[];
 }
 
 /** One table per section of the app. */
@@ -35,6 +50,15 @@ export interface ProgressStore {
   readonly positions: TableStore<PositionProgress>;
   readonly lessons: TableStore<LessonProgress>;
   readonly puzzles: PuzzleTableStore;
+  /**
+   * Reads every table, applies `change` and writes its result in place of what there was, all in
+   * one transaction: nothing else writes in between, and when anything fails nothing changes.
+   * `change` must be synchronous, or the transaction would end before it. Lines must carry their
+   * `key`.
+   */
+  rewrite(change: (current: StoredTables) => StoredTables): Promise<StoredTables>;
+  /** Reads every table in one transaction, so no write lands between two of them. */
+  readAll(): Promise<StoredTables>;
 }
 
 /** Opens the store. May reject: IndexedDB can be missing, blocked or full. */

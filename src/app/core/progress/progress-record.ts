@@ -45,7 +45,7 @@ const isCount = (value: unknown): value is number =>
 /** Latest time a JavaScript `Date` can hold: anything later cannot be shown. */
 const MAX_DATE = 8.64e15;
 
-const isDate = (value: unknown): value is number =>
+export const isDate = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= MAX_DATE;
 
 /**
@@ -88,16 +88,21 @@ export const parseEndgameProgress = (value: unknown): EndgameProgress | undefine
 /** Checks a position row read from the database. Only the known fields are copied. */
 export const parsePositionProgress = (value: unknown): PositionProgress | undefined => {
   if (typeof value !== 'object' || value === null) return undefined;
-  const { positionId, solves, firstTry, spoiled, lastSolvedAt } = value as Record<string, unknown>;
+  const { positionId, solves, firstTry, spoiled, lastSolvedAt, spoiledAt } = value as Record<
+    string,
+    unknown
+  >;
   if (!isContentId(positionId) || !isCount(solves)) return undefined;
   if (typeof firstTry !== 'boolean' || typeof spoiled !== 'boolean') return undefined;
+  if (spoiledAt !== undefined && !isDate(spoiledAt)) return undefined;
+  const spoiledDate = spoiledAt === undefined ? {} : { spoiledAt };
   if (solves === 0) {
     if (firstTry || lastSolvedAt !== undefined) return undefined;
-    return { positionId, solves, firstTry, spoiled };
+    return { positionId, solves, firstTry, spoiled, ...spoiledDate };
   }
   // Once solved, "first try" is fixed at the first solve and is the opposite of "spoiled".
   if (!isDate(lastSolvedAt) || firstTry === spoiled) return undefined;
-  return { positionId, solves, firstTry, spoiled, lastSolvedAt };
+  return { positionId, solves, firstTry, spoiled, lastSolvedAt, ...spoiledDate };
 };
 
 /** Checks a result before it is stored: it comes from the app, but a bad one must not be saved. */

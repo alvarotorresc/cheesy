@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { emptyProgressStoreLoader } from './empty-progress-store';
 import { ProgressService } from './progress.service';
 import { PROGRESS_STORE_LOADER } from './progress-store';
+import { emptyDocument } from '../sync/sync-document';
 
 describe('emptyProgressStoreLoader', () => {
   beforeEach(() => {
@@ -24,5 +25,14 @@ describe('emptyProgressStoreLoader', () => {
     await progress.recordEndgame('lucena-position');
 
     expect(await progress.endgames()).toEqual([]);
+  });
+
+  it('should keep nothing that comes from the server either', async () => {
+    const progress = TestBed.inject(ProgressService);
+    const lesson = { lessonId: 'the-board', completedAt: 1, exercises: 1, firstTry: 1 };
+
+    await progress.mergeRemote({ ...emptyDocument(), lessons: [lesson] }, { cleared: () => ({}) });
+
+    expect(await progress.lessons()).toEqual([]);
   });
 });
