@@ -4,6 +4,7 @@ const emptyTable = <Row>(): TableStore<Row> => ({
   all: async () => [],
   get: async () => undefined,
   put: async () => undefined,
+  update: async (_key, change) => change(undefined),
   clear: async () => undefined,
 });
 

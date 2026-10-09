@@ -123,9 +123,12 @@ export class ProgressService {
     if (!isValidResult(result)) return undefined;
     const key = progressKey(result.openingId, result.color, result.lineId);
     return this.save(async (store) => {
-      const next = applyResult(parseLineProgress(await store.lines.get(key)), result, now);
-      await store.lines.put({ key, ...next });
-      return next;
+      let next: LineProgress | undefined;
+      const stored = await store.lines.update(key, (current) => {
+        next = applyResult(parseLineProgress(current), result, now);
+        return { key, ...next };
+      });
+      return stored && next;
     });
   }
 
@@ -139,15 +142,15 @@ export class ProgressService {
   async recordEndgame(endgameId: string, now = Date.now()): Promise<EndgameProgress | undefined> {
     if (!isContentId(endgameId)) return undefined;
     return this.save(async (store) => {
-      const previous = parseEndgameProgress(await store.endgames.get(endgameId));
-      const next: EndgameProgress = {
-        endgameId,
-        completions: (previous?.completions ?? 0) + 1,
-        firstCompletedAt: previous?.firstCompletedAt ?? now,
-        lastCompletedAt: Math.max(now, previous?.firstCompletedAt ?? now),
-      };
-      await store.endgames.put(next);
-      return next;
+      return store.endgames.update(endgameId, (current) => {
+        const previous = parseEndgameProgress(current);
+        return {
+          endgameId,
+          completions: (previous?.completions ?? 0) + 1,
+          firstCompletedAt: previous?.firstCompletedAt ?? now,
+          lastCompletedAt: Math.max(now, previous?.firstCompletedAt ?? now),
+        };
+      });
     });
   }
 
@@ -163,20 +166,20 @@ export class ProgressService {
    */
   async markPositionSpoiled(positionId: string, now = Date.now()): Promise<void> {
     if (!isContentId(positionId)) return;
-    await this.save(async (store) => {
-      const previous = parsePositionProgress(await store.positions.get(positionId));
-      if (previous && previous.solves > 0) return undefined;
-      const next: PositionProgress = {
-        positionId,
-        solves: 0,
-        firstTry: false,
-        spoiled: true,
-        // The first time it was spoiled: later spoils do not move it.
-        spoiledAt: previous?.spoiledAt ?? now,
-      };
-      await store.positions.put(next);
-      return next;
-    });
+    await this.save((store) =>
+      store.positions.update(positionId, (current) => {
+        const previous = parsePositionProgress(current);
+        if (previous && previous.solves > 0) return undefined;
+        return {
+          positionId,
+          solves: 0,
+          firstTry: false,
+          spoiled: true,
+          // The first time it was spoiled: later spoils do not move it.
+          spoiledAt: previous?.spoiledAt ?? now,
+        };
+      }),
+    );
   }
 
   /** Counts one more solve. The first one decides whether it was on the first try. */
@@ -185,21 +188,21 @@ export class ProgressService {
     now = Date.now(),
   ): Promise<PositionProgress | undefined> {
     if (!isContentId(positionId)) return undefined;
-    return this.save(async (store) => {
-      const previous = parsePositionProgress(await store.positions.get(positionId));
-      const first = !previous || previous.solves === 0;
-      const spoiled = previous?.spoiled ?? false;
-      const next: PositionProgress = {
-        positionId,
-        solves: (previous?.solves ?? 0) + 1,
-        firstTry: first ? !spoiled : (previous?.firstTry ?? false),
-        spoiled,
-        lastSolvedAt: now,
-        ...(previous?.spoiledAt === undefined ? {} : { spoiledAt: previous.spoiledAt }),
-      };
-      await store.positions.put(next);
-      return next;
-    });
+    return this.save((store) =>
+      store.positions.update(positionId, (current) => {
+        const previous = parsePositionProgress(current);
+        const first = !previous || previous.solves === 0;
+        const spoiled = previous?.spoiled ?? false;
+        return {
+          positionId,
+          solves: (previous?.solves ?? 0) + 1,
+          firstTry: first ? !spoiled : (previous?.firstTry ?? false),
+          spoiled,
+          lastSolvedAt: now,
+          ...(previous?.spoiledAt === undefined ? {} : { spoiledAt: previous.spoiledAt }),
+        };
+      }),
+    );
   }
 
   /** Every valid row of the lessons. */
@@ -235,18 +238,15 @@ export class ProgressService {
     if (!isPuzzleId(puzzleId) || !isContentId(lessonId) || typeof firstTry !== 'boolean') {
       return undefined;
     }
-    return this.save(async (store) => {
-      const previous = parsePuzzleProgress(await store.puzzles.get(puzzleId));
-      const next: PuzzleProgress = {
+    return this.save((store) =>
+      store.puzzles.update(puzzleId, (current) => ({
         puzzleId,
         lessonId,
-        tries: (previous?.tries ?? 0) + 1,
+        tries: (parsePuzzleProgress(current)?.tries ?? 0) + 1,
         lastFirstTry: firstTry,
         lastPlayedAt: now,
-      };
-      await store.puzzles.put(next);
-      return next;
-    });
+      })),
+    );
   }
 
   /**

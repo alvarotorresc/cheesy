@@ -25,6 +25,13 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
         if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
         rows.set(keyOf(row), row);
       },
+      update: async (key, change) => {
+        const next = change(rows.get(key));
+        if (next === undefined) return undefined;
+        if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
+        rows.set(keyOf(next), next);
+        return next;
+      },
       clear: async () => rows.clear(),
     };
     return { rows, store, keyOf };

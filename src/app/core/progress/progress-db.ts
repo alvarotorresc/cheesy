@@ -48,12 +48,18 @@ const declareSchema = (db: Dexie): void => {
   db.version(4).stores({ puzzles: 'puzzleId, lessonId' });
 };
 
-const tableOf = <Row>(table: Table<Row, string>): TableStore<Row> => ({
+const tableOf = <Row>(db: Dexie, table: Table<Row, string>): TableStore<Row> => ({
   all: () => table.toArray(),
   get: (key) => table.get(key),
   put: async (row) => {
     await table.put(row);
   },
+  update: (key, change) =>
+    db.transaction('rw', table, async () => {
+      const next = change(await table.get(key));
+      if (next !== undefined) await table.put(next);
+      return next;
+    }),
   clear: () => table.clear(),
 });
 
@@ -72,12 +78,12 @@ export const openProgressStore = async (
   declareSchema(db);
   await db.open();
   return {
-    lines: tableOf(db.lines),
-    endgames: tableOf(db.endgames),
-    positions: tableOf(db.positions),
-    lessons: tableOf(db.lessons),
+    lines: tableOf(db, db.lines),
+    endgames: tableOf(db, db.endgames),
+    positions: tableOf(db, db.positions),
+    lessons: tableOf(db, db.lessons),
     puzzles: {
-      ...tableOf(db.puzzles),
+      ...tableOf(db, db.puzzles),
       ofLesson: (lessonId) => db.puzzles.where('lessonId').equals(lessonId).toArray(),
     },
     rewrite: (change) =>

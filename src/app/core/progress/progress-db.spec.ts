@@ -81,6 +81,50 @@ describe('openProgressStore', () => {
     expect(await store.endgames.all()).toHaveLength(1);
   });
 
+  describe('update', () => {
+    it('should write what the change returns from the row there was', async () => {
+      const store = await open();
+      await store.lines.put(row('e2e4'));
+
+      const written = await store.lines.update(row('e2e4').key, (current) => ({
+        ...(current as StoredLineProgress),
+        practiced: 2,
+      }));
+
+      expect(written).toEqual({ ...row('e2e4'), practiced: 2 });
+      expect(await store.lines.all()).toEqual([{ ...row('e2e4'), practiced: 2 }]);
+    });
+
+    it('should write nothing when the change returns nothing', async () => {
+      const store = await open();
+      const change = vi.fn(() => undefined);
+
+      expect(await store.lines.update('missing', change)).toBeUndefined();
+      expect(change).toHaveBeenCalledWith(undefined);
+      expect(await store.lines.all()).toEqual([]);
+    });
+
+    it('should not let a rewrite in between the read and the write', async () => {
+      const store = await open();
+      await store.lines.put(row('e2e4'));
+
+      await Promise.all([
+        store.lines.update(row('e2e4').key, (current) => ({
+          ...(current as StoredLineProgress),
+          practiced: (current as StoredLineProgress).practiced + 1,
+        })),
+        store.rewrite((current) => ({
+          ...current,
+          lines: current.lines.map((line) => ({ ...(line as object), practiced: 10 })),
+        })),
+      ]);
+
+      expect(
+        (await store.lines.all()).map((line) => (line as StoredLineProgress).practiced),
+      ).toEqual([10]);
+    });
+  });
+
   describe('rewrite', () => {
     const lesson = { lessonId: 'knight-moves', completedAt: 5, exercises: 4, firstTry: 3 };
     const endgame = {

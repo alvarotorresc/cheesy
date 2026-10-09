@@ -602,6 +602,21 @@ describe('ProgressService', () => {
       expect(Object.keys(snapshot?.lines[0] ?? {})).not.toContain('key');
     });
 
+    it('should not lose a run recorded while data from the server is written', async () => {
+      await service.recordLine(result(), 100);
+      await service.recordLine(result(), 100);
+
+      await Promise.all([
+        service.recordLine(result(), 200),
+        service.mergeRemote(
+          doc({ lines: [{ ...LINE_ROW, practiced: 10, clean: 10, streak: 10 }] }),
+        ),
+      ]);
+
+      const [row] = await service.lines();
+      expect(row.practiced).toBeGreaterThanOrEqual(10);
+    });
+
     it('should tell the sync about a cleared section', async () => {
       await service.clear('lessons', 300);
       expect(onCleared).toHaveBeenCalledWith('lessons', 300);
@@ -701,7 +716,7 @@ describe('ProgressService', () => {
     };
 
     it('should report a write that fails and resolve without a result', async () => {
-      setup(failing('put'));
+      setup(failing('update'));
 
       expect(await service.recordLine(result())).toBeUndefined();
       expect(service.status()).toBe('unavailable');

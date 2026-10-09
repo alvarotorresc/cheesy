@@ -20,6 +20,12 @@ export interface TableStore<Row> {
   all(): Promise<unknown[]>;
   get(key: string): Promise<unknown>;
   put(row: Row): Promise<void>;
+  /**
+   * Reads the row of `key`, passes it to `change` and writes what it returns (nothing when it
+   * returns undefined), in one transaction: no other write can land between the read and the
+   * write. `change` must be synchronous. Resolves with what `change` returned.
+   */
+  update(key: string, change: (current: unknown) => Row | undefined): Promise<Row | undefined>;
   clear(): Promise<void>;
 }
 
