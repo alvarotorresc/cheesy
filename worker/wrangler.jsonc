@@ -13,4 +13,22 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"],
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cheesy",
+      // Placeholder: replace with the id printed by `wrangler d1 create cheesy` before deploying.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations",
+    },
+  ],
+  // Daily purge of accounts idle for 12 months (03:17 UTC).
+  "triggers": { "crons": ["17 3 * * *"] },
+  // PEPPER: base64 of 32 random bytes; locally it comes from `.dev.vars`.
+  "secrets": { "required": ["PEPPER"] },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": { "invocation_logs": false },
+  },
 }
