@@ -309,7 +309,7 @@ export const es: Messages = {
       {
         title: 'Tus derechos',
         before:
-          'Puedes acceder a tus datos, corregirlos, borrarlos, oponerte a su uso y llevártelos (con «Exportar» bajas un fichero). Lo más rápido es hacerlo tú en la página, con «Borrar del servidor». Si prefieres escribirme, no sé quién eres sin tu código (no guardo nombre ni email), así que tendrás que enviármelo; con él localizo lo tuyo. No te pediré nada más.',
+          'Puedes acceder a tus datos, corregirlos, borrarlos, limitar su uso, oponerte a él y llevártelos (con «Exportar» bajas un fichero). Lo más rápido es hacerlo tú en la página, con «Borrar del servidor». Si prefieres escribirme, no sé quién eres sin tu código (no guardo nombre ni email), así que tendrás que enviármelo; con él localizo lo tuyo. No te pediré nada más.',
         link: '',
         href: '',
         after: '',

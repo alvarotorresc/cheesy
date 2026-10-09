@@ -312,7 +312,7 @@ export const en = {
       {
         title: 'Your rights',
         before:
-          'You can access, correct and delete your data, object to its use and take it with you («Export» downloads a file). The fastest way is to do it yourself on the page, with «Delete from the server». If you would rather write to me, I cannot tell who you are without your code (I store no name or email), so you will need to send it; with it I can find your data. I will not ask for anything else.',
+          'You can access, correct and delete your data, restrict its use, object to it and take it with you («Export» downloads a file). The fastest way is to do it yourself on the page, with «Delete from the server». If you would rather write to me, I cannot tell who you are without your code (I store no name or email), so you will need to send it; with it I can find your data. I will not ask for anything else.',
         link: '',
         href: '',
         after: '',

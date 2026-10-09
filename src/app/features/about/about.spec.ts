@@ -115,6 +115,7 @@ describe('About', () => {
     expect(body).toContain('Marco de Privacidad de Datos UE-EE. UU.');
     expect(body).toContain('cláusulas contractuales tipo');
     expect(body).toContain('no sé quién eres sin tu código');
+    expect(body).toContain('limitar su uso');
     expect(body).toContain('«Exportar»');
     expect(Array.from(sync?.querySelectorAll('a') ?? [], (a) => a.getAttribute('href'))).toEqual([
       'mailto:alvarotc.dev@protonmail.com',
@@ -134,6 +135,7 @@ describe('About', () => {
     expect(body).toContain('Delete from the server');
     expect(body).toContain('no way to get it back');
     expect(body).toContain('your consent');
+    expect(body).toContain('restrict its use');
     expect(body).toContain('under 14');
     expect(body).toContain('EU-US Data Privacy Framework');
     expect(body).toContain('standard contractual clauses');
