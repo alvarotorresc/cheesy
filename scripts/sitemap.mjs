@@ -9,7 +9,7 @@
 //
 // `lastmod` is the date of the last git commit touching the content files of the page, the same
 // for both languages. When git is not available, a file has no commit, or the clone is shallow it
-// is the build date: Netlify may clone shallow, and then every file would carry the date of the
+// is the build date: CI may clone shallow, and then every file would carry the date of the
 // one commit that was cloned, which tells crawlers nothing true.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';

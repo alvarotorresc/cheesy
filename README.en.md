@@ -93,7 +93,7 @@ Only two things leave the browser:
 ## Development
 
 Angular 22 with standalone components, signals and zoneless change detection.
-Hosted as a static site on Netlify.
+Hosted as a static site on Cloudflare Workers.
 
 - [Angular](https://angular.dev) 22
 - [chessground](https://github.com/lichess-org/chessground) for the board

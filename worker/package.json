@@ -1,0 +1,18 @@
+{
+  "name": "cheesy-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsc && vitest run",
+    "typecheck": "tsc",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.4.0",
+    "@cloudflare/workers-types": "^5.20261008.1",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0",
+    "wrangler": "4.149.0"
+  }
+}

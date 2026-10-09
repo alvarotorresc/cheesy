@@ -23,6 +23,11 @@ __screenshots__/
 # Netlify
 .netlify
 
+# Cloudflare Workers: local state, local secrets and a local preview config
+.wrangler/
+worker/.dev.vars
+worker/wrangler.preview.jsonc
+
 # Editors
 .idea/
 .vscode/*
