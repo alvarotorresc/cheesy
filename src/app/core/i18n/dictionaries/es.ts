@@ -144,7 +144,7 @@ export const es: Messages = {
     clearProgress: 'Borrar el progreso',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todas las lecciones completadas y los problemas de Practica más guardados en este navegador. No se puede deshacer.',
+      'Se borran todas las lecciones completadas y los problemas de Practica más guardados en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     nothingSaved: 'No hay progreso guardado.',
@@ -225,7 +225,7 @@ export const es: Messages = {
       'Sin cookies, sin email y sin contraseña.',
       'Código abierto, con licencia GPL-3.',
     ],
-    privacyClaim: 'Sin cookies ni datos personales.',
+    privacyClaim: 'Sin cookies, sin cuentas con email y con el mínimo de datos.',
     privacyIntro: 'Esto es lo que se guarda en tu navegador y lo que puede salir de él.',
     staysTitle: 'Se queda en tu navegador',
     stays: [
@@ -242,6 +242,10 @@ export const es: Messages = {
         title: 'Finales superados y posiciones resueltas',
         text: 'Y cuáles resolviste a la primera.',
       },
+      {
+        title: 'Tu código, si sincronizas',
+        text: 'Las cuatro palabras, para sincronizar solo. Cualquiera con acceso a este navegador puede leerlas; «Dejar de sincronizar aquí» las olvida.',
+      },
       { title: 'El idioma', text: 'Si eliges español o inglés.' },
       { title: 'El modo de lectura', text: 'Si lees las jugadas en Palabras o en Notación.' },
       { title: 'El panel de la tablebase', text: 'Si lo quieres abierto o plegado en Finales.' },
@@ -255,15 +259,15 @@ export const es: Messages = {
       'Para borrarlo todo de una vez, borra los datos de este sitio desde la configuración de tu navegador.',
     syncTitle: 'Si sincronizas con un código',
     syncIntro:
-      'Es opcional. Si creas un código de cuatro palabras, Cheesy guarda una copia de tu progreso en un servidor para que puedas seguir en otro navegador u ordenador. Sin código, no se guarda nada fuera de tu dispositivo.',
+      'Es opcional. Si creas un código de cuatro palabras, Cheesy guarda una copia de tu progreso en un servidor para que puedas seguir en otro navegador u ordenador. Sin código, tu progreso no sale de tu dispositivo.',
     syncItems: [
       {
         title: 'Qué se guarda',
-        text: 'Tu progreso (lo de la lista de arriba, salvo el idioma, el modo de lectura y el panel), las fechas de creación, último cambio y último uso, y una huella del código que no permite recuperarlo. Nada más: ni nombre, ni email, ni contraseña.',
+        text: 'Tu progreso (lo de la lista de arriba, salvo el idioma, el modo de lectura y el panel), las fechas de creación, último cambio y último uso, y una huella del código que no permite recuperarlo. Nada más que te identifique: ni nombre, ni email, ni contraseña.',
       },
       {
         title: 'Dónde',
-        text: 'En Cloudflare (Workers y D1), que actúa como encargado del tratamiento. Como en cualquier web, Cloudflare ve tu IP al servir la petición; Cheesy no la guarda. Los registros de errores del servidor no incluyen el código ni tu progreso y se borran a los 3 días.',
+        text: 'En Cloudflare (Workers y D1), que actúa como encargado del tratamiento. Como en cualquier web, Cloudflare ve tu IP al servir la petición; Cheesy no la guarda. Si un dispositivo hace demasiadas peticiones, Cloudflare anota su IP, navegador y ruta en su registro de seguridad durante 31 días. Los registros de errores no incluyen el código ni tu progreso y se borran a los 3 días. Las copias de seguridad automáticas de la base de datos guardan lo borrado hasta 7 días más.',
       },
       {
         title: 'Cuánto tiempo',
@@ -294,7 +298,7 @@ export const es: Messages = {
       {
         title: 'Para qué y con qué permiso',
         before:
-          'Guardar tu progreso para que lo recuperes en otro dispositivo. Lo haces tú al crear o usar un código (tu consentimiento), y puedes retirarlo cuando quieras borrando la cuenta o dejando de sincronizar. Es opcional: sin código todo funciona y no se envía nada. Si tienes menos de 14 años, hazlo con un adulto.',
+          'Guardar tu progreso para que lo recuperes en otro dispositivo. Lo haces tú al crear o usar un código (tu consentimiento), y puedes retirarlo cuando quieras borrando la cuenta o dejando de sincronizar. Es opcional: sin código todo funciona y tu progreso no sale de tu dispositivo. Si tienes menos de 14 años, hazlo con un adulto.',
         link: '',
         href: '',
         after: '',
@@ -349,9 +353,9 @@ export const es: Messages = {
     umamiTitle: 'Contamos visitas con Umami',
     umamiText: 'Una analítica sencilla, alojada en un servidor propio y con la conexión cifrada.',
     umamiFacts: [
-      { label: 'Mide', value: 'Visitas y páginas vistas' },
+      { label: 'Mide', value: 'Visitas, páginas vistas y si se crea o usa un código' },
       { label: 'Sin', value: 'Cookies' },
-      { label: 'Nunca', value: 'Datos personales' },
+      { label: 'Nunca', value: 'Datos que te identifiquen' },
     ],
     creditsIntro: 'Cheesy se apoya en trabajo abierto de otras personas. Gracias.',
     credit: {
@@ -756,7 +760,7 @@ export const es: Messages = {
     progressTitle: 'Tu progreso',
     clearTitle: '¿Borrar el progreso?',
     clearText:
-      'Se borra el progreso de las aperturas guardado en este navegador, con blancas y con negras. El de finales y posiciones no se toca. No se puede deshacer.',
+      'Se borra el progreso de las aperturas guardado en este navegador, con blancas y con negras. El de finales y posiciones no se toca. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     noProgress: 'No hay progreso guardado.',
     loading: 'Cargando aperturas…',
     loadError: 'No se han podido cargar las aperturas.',
@@ -938,7 +942,7 @@ export const es: Messages = {
     clear: 'Borrar el progreso',
     clearTitle: '¿Borrar el progreso?',
     clearBody:
-      'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. No se puede deshacer.',
+      'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     confirmClearAction: 'Borrar',
     cancel: 'Cancelar',
     cleared: 'Progreso borrado.',
@@ -1083,7 +1087,7 @@ export const es: Messages = {
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todas las posiciones resueltas guardadas en este navegador. No se puede deshacer.',
+      'Se borran todas las posiciones resueltas guardadas en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     findMove: (moves: number) =>
@@ -1211,7 +1215,7 @@ export const es: Messages = {
     clearProgress: 'Borrar el progreso',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todos los finales superados guardados en este navegador. No se puede deshacer.',
+      'Se borran todos los finales superados guardados en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     nothingSaved: 'No hay progreso guardado.',
