@@ -476,6 +476,9 @@ export const es: Messages = {
     analysisButton: (name: string) => `Reproducir la ${name} con la barra de evaluación`,
     illustrativeBar: 'barra ilustrativa',
   },
+  progressPage: {
+    title: 'Tu progreso',
+  },
   analysis: {
     title: 'Tablero de análisis',
     whiteToMove: 'Juegan blancas',

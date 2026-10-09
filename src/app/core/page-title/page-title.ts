@@ -14,6 +14,7 @@ const SECTIONS = {
   analysis: (t) => t.nav.analysis,
   about: (t) => t.nav.about,
   glossary: (t) => t.glossary.title,
+  progress: (t) => t.progressPage.title,
   puzzles: (t) => t.learn.puzzles.title,
   notFound: (t) => t.seo.titles.notFound,
 } satisfies Record<string, (t: Messages) => string>;

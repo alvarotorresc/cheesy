@@ -79,6 +79,8 @@ describe('serverRoutes', () => {
   it.each([
     'en/analysis',
     'es/analisis',
+    'en/your-progress',
+    'es/tu-progreso',
     'en/openings/:id/practice',
     'es/aperturas/:id/practica',
     'en/learn/puzzles',

@@ -150,7 +150,7 @@ export const pageFileRules = (sources = loadSources()) => {
 
 /**
  * The addresses answered with the app shell, in both languages: the pages the browser renders
- * (analysis, the puzzles, and the practice and puzzle page of every opening and lesson). None of
+ * (analysis, your progress, the puzzles, and the practice and puzzle page of every opening and lesson). None of
  * them is prerendered, so no file of the build shadows them.
  */
 export const appRoutePaths = (sources = loadSources()) => {
@@ -158,6 +158,7 @@ export const appRoutePaths = (sources = loadSources()) => {
   return urls.langs.flatMap((lang) =>
     [
       { kind: 'analysis' },
+      { kind: 'progress' },
       { kind: 'puzzles' },
       ...sources.openings.map(({ id }) => ({ kind: 'practice', id })),
       ...sources.lessons.map(({ id }) => ({ kind: 'puzzle', lesson: id })),
@@ -190,7 +191,7 @@ export const redirectLines = (sources = loadSources()) => {
 
 /**
  * The paths kept out of search engines, as few `_headers` patterns: the shell, and per language the
- * analysis, the puzzles (the list and each lesson) and the practice of any opening.
+ * analysis, your progress, the puzzles (the list and each lesson) and the practice of any opening.
  */
 export const noindexPatterns = (sources = loadSources()) => {
   const { sections, app } = sources.slugs;
@@ -199,6 +200,7 @@ export const noindexPatterns = (sources = loadSources()) => {
   return [
     SHELL,
     ...each((lang) => `/${lang}/${app.analysis[lang]}`),
+    ...each((lang) => `/${lang}/${app.progress[lang]}`),
     ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}`),
     ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}/*`),
     ...each((lang) => `/${lang}/${sections.openings[lang]}/:opening/${app.practice[lang]}`),
@@ -234,7 +236,9 @@ export const headersText = (sources = loadSources()) =>
 export const pageFileOf = (to, sources) => {
   const located = createPageUrls(sources.slugs).pageOf(to);
   if (!located) throw new Error(`${to} is no page of the site`);
-  const shell = ['analysis', 'practice', 'puzzles', 'puzzle'].includes(located.page.kind);
+  const shell = ['analysis', 'progress', 'practice', 'puzzles', 'puzzle'].includes(
+    located.page.kind,
+  );
   return shell ? null : `${to.slice(1)}.html`;
 };
 

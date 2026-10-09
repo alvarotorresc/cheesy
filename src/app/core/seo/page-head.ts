@@ -60,7 +60,7 @@ export interface HeadInput {
 
 export interface PageHead {
   readonly lang: Lang;
-  /** Undefined for the states of the app (analysis, practice, puzzles): they keep their own. */
+  /** Undefined for the states of the app (analysis, progress, practice, puzzles): they keep their own. */
   readonly title: string | undefined;
   readonly description: string;
   readonly canonical: string | undefined;
@@ -88,7 +88,13 @@ const entityIdOf = (page: Page): string | undefined => {
   }
 };
 
-const APP_STATES: readonly Page['kind'][] = ['analysis', 'practice', 'puzzles', 'puzzle'];
+const APP_STATES: readonly Page['kind'][] = [
+  'analysis',
+  'progress',
+  'practice',
+  'puzzles',
+  'puzzle',
+];
 
 const absolute = (path: string): string => `${SITE_ORIGIN}${path}`;
 

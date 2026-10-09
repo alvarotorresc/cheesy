@@ -479,6 +479,9 @@ export const en = {
     analysisButton: (name: string) => `Play the ${name} with the evaluation bar`,
     illustrativeBar: 'illustrative bar',
   },
+  progressPage: {
+    title: 'Your progress',
+  },
   analysis: {
     title: 'Analysis board',
     whiteToMove: 'White to move',
