@@ -55,6 +55,9 @@ export type PreviewResult =
 export type JoinResult =
   { ok: true } | { ok: false; reason: ReadFailure | 'choose' | 'linked'; word?: number };
 
+const UNAVAILABLE_CREATE = { ok: false, error: 'unavailable' } as const;
+const UNAVAILABLE_READ = { ok: false, reason: 'unavailable' } as const;
+
 /** Pushes per trigger when they keep colliding with other devices. */
 export const MAX_ATTEMPTS = 3;
 /** Quiet time after a change before pushing it, so a session of practice goes up in one push. */
@@ -104,6 +107,13 @@ const unsent = (pending: ClearedAt, sent: ClearedAt): ClearedAt => {
   return left;
 };
 
+/** Whether this browser has what the sync needs: gzip streams and Web Crypto. */
+const supported = (): boolean =>
+  typeof CompressionStream === 'function' &&
+  typeof DecompressionStream === 'function' &&
+  typeof crypto === 'object' &&
+  typeof crypto?.subtle?.digest === 'function';
+
 /**
  * Keeps the progress of this browser in step with the account of a code. The server holds one
  * gzipped document per account with a version; every write is conditional on it, and a collision
@@ -117,7 +127,7 @@ export class SyncService {
   private readonly states = inject(SyncStateStore);
   private readonly progress = inject(ProgressService);
   private readonly window = inject(DOCUMENT).defaultView ?? undefined;
-  private readonly usable = this.browser && this.states.available();
+  private readonly usable = this.browser && supported() && this.states.available();
 
   private readonly state = signal<SyncStatus>('unavailable');
   private readonly failure = signal<SyncError | undefined>(undefined);
@@ -209,12 +219,20 @@ export class SyncService {
       this.settle('idle');
       trackEvent('sync-create', this.window);
       return { ok: true, code: created.value.code };
-    });
+    }, UNAVAILABLE_CREATE);
   }
 
   /** Reads an account without linking it, so the page can show both sides before joining. */
   async preview(input: string): Promise<PreviewResult> {
-    if (!this.usable) return { ok: false, reason: 'unavailable' };
+    if (!this.usable) return UNAVAILABLE_READ;
+    try {
+      return await this.peek(input);
+    } catch (error) {
+      return this.crashed(error, UNAVAILABLE_READ);
+    }
+  }
+
+  private async peek(input: string): Promise<PreviewResult> {
     const pulled = await this.api.pull(input);
     if (pulled.kind !== 'ok') return this.readFailure(pulled);
     const read = await this.read(pulled.value.data, pulled.now);
@@ -261,7 +279,7 @@ export class SyncService {
       trackEvent('sync-join', this.window);
       await this.upload(code, merged, false);
       return { ok: true };
-    });
+    }, UNAVAILABLE_READ);
   }
 
   /**
@@ -280,7 +298,7 @@ export class SyncService {
           cleared: () => ({}),
         });
       }
-    });
+    }, undefined);
   }
 
   /** Deletes the account on the server and unlinks; the progress of this browser stays. */
@@ -298,7 +316,7 @@ export class SyncService {
       this.failure.set(undefined);
       this.refresh();
       return true;
-    });
+    }, false);
   }
 
   /** Pulls, merges and pushes now, whatever the backoff says. */
@@ -307,7 +325,7 @@ export class SyncService {
     return this.exclusive(() => {
       this.pending = false;
       return this.cycle(true, false);
-    });
+    }, undefined);
   }
 
   /** Notes the clear of a section for the linked account (nothing when none is linked). */
@@ -342,7 +360,7 @@ export class SyncService {
       if (waiting && trigger !== 'online') return;
       this.pending = false;
       await this.cycle(trigger === 'open', trigger === 'hide');
-    });
+    }, undefined);
   }
 
   /**
@@ -585,10 +603,19 @@ export class SyncService {
    * `cheesy-sync` so no other tab syncs meanwhile (without `navigator.locks`, this tab only).
    * Every task reads the stored state again, so it sees what another tab did before it.
    */
-  private exclusive<T>(task: () => Promise<T>): Promise<T> {
+  private exclusive<T>(task: () => Promise<T>, fallback: T): Promise<T> {
     const locks = (this.window?.navigator as { locks?: LockManager } | undefined)?.locks;
-    const run = this.queue.then(() => (locks ? locks.request(LOCK_NAME, task) : task()));
-    this.queue = run.catch((error: unknown) => console.error(error));
+    const run = this.queue
+      .then(() => (locks ? locks.request(LOCK_NAME, task) : task()))
+      .catch((error: unknown) => this.crashed(error, fallback));
+    this.queue = run;
     return run as Promise<T>;
+  }
+
+  /** Anything unexpected ends the task as an error, never as a rejected promise. */
+  private crashed<T>(error: unknown, fallback: T): T {
+    console.error(error);
+    this.settle('error', 'unavailable');
+    return fallback;
   }
 }

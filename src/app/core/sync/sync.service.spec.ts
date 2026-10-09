@@ -386,6 +386,33 @@ describe('SyncService: accounts', () => {
     });
   });
 
+  describe('unexpected failures', () => {
+    it('turns an exception into an error state, never a rejected promise', async () => {
+      await link();
+      const sync = await start();
+      server.pull.mockRejectedValueOnce(new Error('boom'));
+      await expect(sync.syncNow()).resolves.toBeUndefined();
+      expect(sync.status()).toBe('error');
+      expect(sync.error()).toBe('unavailable');
+      localStorage.removeItem(SYNC_STORAGE_KEY);
+      server.create.mockRejectedValueOnce(new Error('boom'));
+      await expect(sync.create()).resolves.toEqual({ ok: false, error: 'unavailable' });
+    });
+
+    it('is unavailable without gzip streams or Web Crypto', async () => {
+      await link();
+      vi.stubGlobal('CompressionStream', undefined);
+      try {
+        const sync = await start();
+        expect(sync.status()).toBe('unavailable');
+        expect(await sync.create()).toEqual({ ok: false, error: 'unavailable' });
+        expect(server.pull).not.toHaveBeenCalled();
+      } finally {
+        vi.unstubAllGlobals();
+      }
+    });
+  });
+
   describe('in prerender', () => {
     it('stays unavailable and never calls the API', async () => {
       await link();
