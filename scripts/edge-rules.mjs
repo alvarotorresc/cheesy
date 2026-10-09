@@ -32,6 +32,25 @@ export const SHELL = '/index.csr';
 
 /** The file of the build with the redirects and rewrites of Workers static assets. */
 export const REDIRECTS_FILE = '_redirects';
+
+/** The file of the build with the response headers of Workers static assets. */
+export const HEADERS_FILE = '_headers';
+
+/** The headers of every response of the site, as `[name, value]`, the same as in `netlify.toml`. */
+export const GLOBAL_HEADERS = [
+  [
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://analytics.alvarotc.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://tablebase.lichess.ovh https://analytics.alvarotc.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+  ],
+  ['X-Content-Type-Options', 'nosniff'],
+  ['Referrer-Policy', 'strict-origin-when-cross-origin'],
+  [
+    'Permissions-Policy',
+    'camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=(), hid=(), midi=(), browsing-topics=()',
+  ],
+  ['Cross-Origin-Opener-Policy', 'same-origin'],
+  ['X-Frame-Options', 'DENY'],
+];
 /**
  * The numbers of the positions in the gallery of v0.2.0, the last version with `/positions/:n`
  * (`orderPositions` over the content of then). Frozen: a position added later would move the
@@ -161,6 +180,45 @@ export const redirectLines = (sources = loadSources()) => {
 };
 
 /**
+ * The paths kept out of search engines, as few `_headers` patterns: the shell, and per language the
+ * analysis, the puzzles (the list and each lesson) and the practice of any opening.
+ */
+export const noindexPatterns = (sources = loadSources()) => {
+  const { sections, app } = sources.slugs;
+  const langs = createPageUrls(sources.slugs).langs;
+  const each = (pattern) => langs.map(pattern);
+  return [
+    SHELL,
+    ...each((lang) => `/${lang}/${app.analysis[lang]}`),
+    ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}`),
+    ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}/*`),
+    ...each((lang) => `/${lang}/${sections.openings[lang]}/:opening/${app.practice[lang]}`),
+  ];
+};
+
+/** Whether a `_headers` pattern matches a path: `:name` is one segment, `*` the rest. */
+export const matchesPattern = (pattern, path) => {
+  const source = pattern
+    .split(/(:\w+|\*)/)
+    .map((part) => {
+      if (part === '*') return '.*';
+      if (part.startsWith(':')) return '[^/]+';
+      return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    })
+    .join('');
+  return new RegExp(`^${source}$`).test(path);
+};
+
+/** The text of `_headers`: the global headers on `/*`, then `noindex` on each pattern. */
+export const headersText = (sources = loadSources()) =>
+  [
+    '/*',
+    ...GLOBAL_HEADERS.map(([name, value]) => `  ${name}: ${value}`),
+    ...noindexPatterns(sources).flatMap((pattern) => [pattern, '  X-Robots-Tag: noindex']),
+    '',
+  ].join('\n');
+
+/**
  * The page file a target address is served from in the build (`/en/openings` →
  * `en/openings.html`), or null for the pages the browser renders from the app shell.
  */
@@ -226,4 +284,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const lines = redirectLines();
   writeFileSync(join(browser, REDIRECTS_FILE), `${lines.join('\n')}\n`);
   console.log(`Wrote ${lines.length} rules to ${REDIRECTS_FILE}.`);
+  writeFileSync(join(browser, HEADERS_FILE), headersText());
+  console.log(`Wrote ${1 + noindexPatterns().length} rules to ${HEADERS_FILE}.`);
 }

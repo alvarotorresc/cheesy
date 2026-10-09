@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
 import { orderPositions } from '../src/app/features/positions/position-order.ts';
@@ -9,7 +10,11 @@ import {
   appRoutePaths,
   checkBuilt,
   checkPages,
+  GLOBAL_HEADERS,
+  headersText,
   loadSources,
+  matchesPattern,
+  noindexPatterns,
   OLD_POSITION_NUMBERS,
   pageFileOf,
   pageFileRules,
@@ -18,6 +23,7 @@ import {
   SHELL,
 } from './edge-rules.mjs';
 
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const sources = loadSources();
 const urls = createPageUrls(sources.slugs);
 const rules = redirectRules(sources);
@@ -173,6 +179,67 @@ describe('_redirects', () => {
       'only static rules',
     );
     assert.ok(lines.every((l) => l.length <= 1000));
+  });
+});
+
+describe('_headers', () => {
+  it('should carry the CSP and the global headers exactly as netlify.toml has them', () => {
+    const toml = readFileSync(join(ROOT, 'netlify.toml'), 'utf8');
+    for (const [name, value] of GLOBAL_HEADERS) {
+      assert.ok(toml.includes(`    ${name} = "${value}"\n`), name);
+    }
+    assert.equal(GLOBAL_HEADERS.length, 6);
+  });
+
+  it('should keep every app route and the shell out of search engines', () => {
+    const patterns = noindexPatterns(sources);
+    for (const path of [...paths, '/index.csr']) {
+      assert.ok(
+        patterns.some((pattern) => matchesPattern(pattern, path)),
+        path,
+      );
+    }
+  });
+
+  it('should never mark an indexable page noindex', () => {
+    const patterns = noindexPatterns(sources);
+    for (const lang of urls.langs) {
+      for (const page of urls.indexablePages()) {
+        const path = urls.pathOf(page, lang);
+        const hit = patterns.find((pattern) => matchesPattern(pattern, path));
+        assert.equal(hit, undefined, `${path} matches ${hit}`);
+      }
+    }
+  });
+
+  it('should have at most 100 rules, the global one first, each line at most 2000 characters', () => {
+    const text = headersText(sources);
+    const lines = text.split('\n');
+    const rules = lines.filter((line) => line.startsWith('/'));
+    assert.ok(rules.length <= 100, `${rules.length} rules`);
+    assert.equal(rules[0], '/*');
+    assert.equal(rules.length, 1 + noindexPatterns(sources).length);
+    assert.ok(lines.every((line) => line.length <= 2000));
+    assert.ok(lines.every((line) => line === '' || line.startsWith('/') || line.startsWith('  ')));
+  });
+
+  it('should write each noindex pattern with its header, after the global ones', () => {
+    const text = headersText(sources);
+    assert.ok(text.startsWith(`/*\n  Content-Security-Policy: default-src 'self';`));
+    assert.ok(text.includes('\n/index.csr\n  X-Robots-Tag: noindex\n'));
+    assert.ok(text.includes('\n/es/aperturas/:opening/practica\n  X-Robots-Tag: noindex\n'));
+    assert.ok(text.includes('\n/en/learn/puzzles/*\n  X-Robots-Tag: noindex\n'));
+    assert.ok(text.endsWith('\n') && !text.endsWith('\n\n'));
+  });
+
+  it('should match a pattern as Cloudflare does: a placeholder is one segment, a splat the rest', () => {
+    assert.ok(matchesPattern('/es/aperturas/:opening/practica', '/es/aperturas/x/practica'));
+    assert.ok(!matchesPattern('/es/aperturas/:opening/practica', '/es/aperturas/x'));
+    assert.ok(!matchesPattern('/es/aperturas/:opening/practica', '/es/aperturas/x/y/practica'));
+    assert.ok(matchesPattern('/en/learn/puzzles/*', '/en/learn/puzzles/forks'));
+    assert.ok(!matchesPattern('/en/learn/puzzles/*', '/en/learn/beginner/the-board'));
+    assert.ok(matchesPattern('/en/analysis', '/en/analysis'));
+    assert.ok(!matchesPattern('/en/analysis', '/en/analysis-x'));
   });
 });
 
