@@ -93,7 +93,7 @@ Solo salen dos cosas del navegador:
 ## Desarrollo
 
 Angular 22 con componentes standalone, señales y detección de cambios sin zone.js.
-Alojado como sitio estático en Netlify.
+Alojado como sitio estático en Cloudflare (Workers).
 
 - [Angular](https://angular.dev) 22
 - [chessground](https://github.com/lichess-org/chessground) para el tablero
