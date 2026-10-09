@@ -267,10 +267,31 @@ describe('SyncService: accounts', () => {
       server.accounts.set(CODE, { data: await newerDocument(), version: 1 });
       const sync = await start();
       expect(await sync.join(CODE, 'merge')).toEqual({ ok: false, reason: 'outdated' });
-      expect(sync.status()).toBe('outdated');
       expect(states.read()).toBeUndefined();
       expect(server.push).not.toHaveBeenCalled();
       expect(await sync.preview(CODE)).toEqual({ ok: false, reason: 'outdated' });
+      // Only the linked account can make this browser outdated, not a code someone typed.
+      expect(sync.status()).toBe('off');
+    });
+
+    it('still syncs its own account after previewing a newer one', async () => {
+      server.accounts.set(OTHER, { data: await newerDocument(), version: 1 });
+      await link();
+      const sync = await start();
+      expect(await sync.preview(OTHER)).toEqual({ ok: false, reason: 'outdated' });
+      await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 }, 20);
+      await sync.syncNow();
+      expect(sync.status()).toBe('idle');
+      expect(server.push).toHaveBeenCalledTimes(1);
+    });
+
+    it('becomes outdated when its own account was written by a newer Cheesy', async () => {
+      await link();
+      server.accounts.set(CODE, { data: await newerDocument(), version: 2 });
+      const sync = await start();
+      await sync.syncNow();
+      expect(sync.status()).toBe('outdated');
+      expect(server.push).not.toHaveBeenCalled();
     });
   });
 
@@ -305,6 +326,18 @@ describe('SyncService: accounts', () => {
       expect(server.accounts.has(CODE)).toBe(false);
       expect(states.read()).toBeUndefined();
       expect(memory.lessonRows.size).toBe(1);
+    });
+
+    it('forgets an old error when another tab links an account', async () => {
+      const sync = await start();
+      await link();
+      server.accounts.delete(CODE);
+      await sync.syncNow();
+      expect(sync.error()).toBe('gone');
+      await link();
+      window.dispatchEvent(new StorageEvent('storage', { key: SYNC_STORAGE_KEY }));
+      expect(sync.error()).toBeUndefined();
+      expect(sync.status()).toBe('idle');
     });
 
     it('stays linked when the deletion does not reach the server', async () => {

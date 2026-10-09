@@ -410,6 +410,11 @@ export class SyncService {
     const read = await this.read(data, serverNow);
     if (!read.ok) {
       if (read.reason === 'unavailable') this.failed(code, { kind: 'unavailable' });
+      else {
+        // The linked account was written by a newer Cheesy: upload nothing until a reload.
+        this.outdated = true;
+        this.state.set('outdated');
+      }
       return undefined;
     }
     const merged = await this.mergeFromServer(read.remote, serverNow, 'merge');
@@ -446,7 +451,10 @@ export class SyncService {
     });
   }
 
-  /** Decodes and checks a document of the server against the server clock. */
+  /**
+   * Decodes and checks a document of the server against the server clock. No side effects: a
+   * code typed in a preview must not change the state of the linked account.
+   */
   private async read(data: string, serverNow: number): Promise<Read> {
     let value: unknown;
     try {
@@ -458,10 +466,6 @@ export class SyncService {
     const held = parseSyncDocument(value);
     if (!usable.ok || !held.ok) {
       const reason = usable.ok || usable.reason !== 'newer-version' ? 'unavailable' : 'outdated';
-      if (reason === 'outdated') {
-        this.outdated = true;
-        this.state.set('outdated');
-      }
       return { ok: false, reason };
     }
     return { ok: true, remote: { held: held.doc, usable: usable.doc } };
@@ -569,7 +573,11 @@ export class SyncService {
     if (this.outdated) return;
     const status = this.state();
     if (!state) this.state.set('off');
-    else if (status === 'off' || status === 'unavailable') this.state.set('idle');
+    else if (status === 'off' || status === 'unavailable') {
+      // Linked now (here or in another tab): an error from before no longer applies.
+      this.state.set('idle');
+      this.failure.set(undefined);
+    }
   }
 
   /**
