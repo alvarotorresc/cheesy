@@ -16,6 +16,8 @@ import {
   type SyncDocument,
 } from './sync-document';
 
+import { TABLE_RULES } from './rows';
+
 export { mergeEndgame, mergeLesson, mergeLine, mergePosition, mergePuzzle } from './rows';
 
 /** The kind of row each section keeps. */
@@ -27,18 +29,9 @@ export interface SectionRow {
   puzzles: PuzzleProgress;
 }
 
-const ACTIVITY: { readonly [S in ProgressSection]: (row: SectionRow[S]) => number } = {
-  openings: (row) => row.lastPracticed,
-  endgames: (row) => row.lastCompletedAt,
-  // A position only seen before v0.4.0 has no date: it counts as 0, older than any mark.
-  positions: (row) => Math.max(row.lastSolvedAt ?? 0, row.spoiledAt ?? 0),
-  lessons: (row) => row.completedAt,
-  puzzles: (row) => row.lastPlayedAt,
-};
-
 /** When a row was last active, to compare it with the mark of its section. */
 export const lastActivity = <S extends ProgressSection>(section: S, row: SectionRow[S]): number =>
-  (ACTIVITY[section] as (row: SectionRow[S]) => number)(row);
+  (TABLE_RULES[SECTION_TABLE[section]].activity as (row: SectionRow[S]) => number)(row);
 
 /**
  * Drops the rows that the marks of the document cover: those whose last activity is not later

@@ -2,7 +2,9 @@ import type { LineProgress, PositionProgress } from '../progress/progress.types'
 import {
   canonicalDocument,
   documentHash,
+  dropFutureDates,
   emptyDocument,
+  FUTURE_SLACK,
   parseSyncDocument,
   SECTION_TABLE,
   type SyncDocument,
@@ -95,11 +97,79 @@ describe('parseSyncDocument', () => {
     });
   });
 
-  it('should take a missing table as an empty one', () => {
-    expect(parseSyncDocument({ format: 'cheesy-progress', v: 1 })).toEqual({
-      ok: true,
-      doc: emptyDocument(),
-      dropped: 0,
+  it.each(['lines', 'endgames', 'positions', 'lessons', 'puzzles'])(
+    'should not take a document whose %s are missing or not a list',
+    (table) => {
+      const missing: Record<string, unknown> = { ...emptyDocument() };
+      delete missing[table];
+      expect(parseSyncDocument(missing)).toEqual({ ok: false, reason: 'not-a-document' });
+      expect(parseSyncDocument({ ...emptyDocument(), [table]: {} })).toEqual({
+        ok: false,
+        reason: 'not-a-document',
+      });
+    },
+  );
+
+  describe('with the current time', () => {
+    const NOW = 1_000_000_000;
+    const LIMIT = NOW + FUTURE_SLACK;
+
+    it('should allow a day of clock difference and no more', () => {
+      expect(FUTURE_SLACK).toBe(24 * 60 * 60 * 1000);
+    });
+
+    it('should drop rows dated after the limit and count them', () => {
+      const result = parseSyncDocument(
+        {
+          ...emptyDocument(),
+          lines: [
+            line({ lastPracticed: LIMIT }),
+            line({ color: 'black', lastPracticed: LIMIT + 1 }),
+          ],
+          positions: [pos({ lastSolvedAt: 5, spoiledAt: LIMIT + 1 })],
+        },
+        NOW,
+      );
+      expect(result).toEqual({
+        ok: true,
+        doc: doc({ lines: [line({ lastPracticed: LIMIT })] }),
+        dropped: 2,
+      });
+    });
+
+    it('should ignore marks dated after the limit', () => {
+      const result = parseSyncDocument(
+        { ...emptyDocument(), cleared: { lessons: LIMIT, puzzles: LIMIT + 1 } },
+        NOW,
+      );
+      expect(result).toEqual({ ok: true, doc: doc({ cleared: { lessons: LIMIT } }), dropped: 0 });
+    });
+
+    it('should keep far dates when no time is given', () => {
+      const far = doc({ lines: [line({ lastPracticed: 8e15 })], cleared: { lessons: 8e15 } });
+      expect(parseSyncDocument(far)).toEqual({ ok: true, doc: far, dropped: 0 });
+    });
+  });
+
+  describe('dropFutureDates', () => {
+    it('should drop the rows and marks of a document dated after the limit', () => {
+      const NOW = 1_000;
+      const LIMIT = NOW + FUTURE_SLACK;
+      expect(
+        dropFutureDates(
+          doc({
+            cleared: { openings: LIMIT + 1, endgames: 3 },
+            lines: [line({ lastPracticed: LIMIT + 1 })],
+            lessons: [{ lessonId: 'pins', completedAt: LIMIT, exercises: 1, firstTry: 1 }],
+          }),
+          NOW,
+        ),
+      ).toEqual(
+        doc({
+          cleared: { endgames: 3 },
+          lessons: [{ lessonId: 'pins', completedAt: LIMIT, exercises: 1, firstTry: 1 }],
+        }),
+      );
     });
   });
 

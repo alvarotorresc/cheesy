@@ -42,6 +42,13 @@ export type ParsedDocument =
   | { ok: true; doc: SyncDocument; dropped: number }
   | { ok: false; reason: 'not-a-document' | 'newer-version' };
 
+/**
+ * How far in the future a date from another device may be: a day covers clocks set wrong and time
+ * zones. A later date is not believable, and a row or mark with one would win every merge (or
+ * delete everything up to it) for years, so input from outside drops it.
+ */
+export const FUTURE_SLACK = 24 * 60 * 60 * 1000;
+
 export const emptyDocument = (): SyncDocument => ({
   format: SYNC_FORMAT,
   v: SYNC_VERSION,
@@ -53,32 +60,40 @@ export const emptyDocument = (): SyncDocument => ({
   puzzles: [],
 });
 
-/** Only known sections with a valid date, in a fixed order. */
-const parseCleared = (value: unknown): ClearedAt => {
+/** Only known sections with a valid date not after `latest`, in a fixed order. */
+const parseCleared = (value: unknown, latest: number): ClearedAt => {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return {};
   const marks = value as Record<string, unknown>;
   const cleared: Partial<Record<ProgressSection, number>> = {};
   for (const section of PROGRESS_SECTIONS) {
     const at = marks[section];
-    if (isDate(at)) cleared[section] = at;
+    if (isDate(at) && at <= latest) cleared[section] = at;
   }
   return cleared;
 };
 
-/** Checks every row and mark, and writes them in the canonical order. */
-const readDocument = (value: Record<string, unknown>): { doc: SyncDocument; dropped: number } => {
+/**
+ * Checks every row and mark, and writes them in the canonical order. Rows and marks dated after
+ * `latest` are dropped. Undefined when a table is not a list: such a document is broken as a
+ * whole, and reading it as empty could empty the progress it replaces.
+ */
+const readDocument = (
+  value: Record<string, unknown>,
+  latest = Number.POSITIVE_INFINITY,
+): { doc: SyncDocument; dropped: number } | undefined => {
   let dropped = 0;
   const tables = {} as Record<SyncTable, unknown[]>;
   for (const table of SYNC_TABLES) {
     const rows = value[table];
-    const combined = combineRows(table, Array.isArray(rows) ? rows : []);
+    if (!Array.isArray(rows)) return undefined;
+    const combined = combineRows(table, rows, latest);
     tables[table] = combined.rows;
     dropped += combined.dropped;
   }
   const doc = {
     format: SYNC_FORMAT,
     v: SYNC_VERSION,
-    cleared: parseCleared(value['cleared']),
+    cleared: parseCleared(value['cleared'], latest),
     ...(tables as unknown as SyncTables),
   } satisfies SyncDocument;
   return { doc, dropped };
@@ -87,9 +102,11 @@ const readDocument = (value: Record<string, unknown>): { doc: SyncDocument; drop
 /**
  * Reads a document from the server, a file or the merge. Bad rows are dropped and counted, rows
  * that share a key are merged, and only marks of known sections with a valid date are kept. A
- * document written by a newer Cheesy is told apart so that nothing is uploaded over it.
+ * document written by a newer Cheesy is told apart so that nothing is uploaded over it, and one
+ * with a table that is not a list is not a document. With `now`, rows and marks dated more than
+ * `FUTURE_SLACK` after it are dropped too: pass it for input from another device or a file.
  */
-export const parseSyncDocument = (value: unknown): ParsedDocument => {
+export const parseSyncDocument = (value: unknown, now?: number): ParsedDocument => {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     return { ok: false, reason: 'not-a-document' };
   }
@@ -98,7 +115,11 @@ export const parseSyncDocument = (value: unknown): ParsedDocument => {
     return { ok: false, reason: 'not-a-document' };
   }
   if (v > SYNC_VERSION) return { ok: false, reason: 'newer-version' };
-  return { ok: true, ...readDocument(value as Record<string, unknown>) };
+  const read = readDocument(
+    value as Record<string, unknown>,
+    now === undefined ? undefined : now + FUTURE_SLACK,
+  );
+  return read ? { ok: true, ...read } : { ok: false, reason: 'not-a-document' };
 };
 
 /**
@@ -106,7 +127,12 @@ export const parseSyncDocument = (value: unknown): ParsedDocument => {
  * marks in a fixed order. Two documents with the same content give the same JSON.
  */
 export const canonicalDocument = (doc: SyncDocument): SyncDocument =>
-  readDocument(doc as unknown as Record<string, unknown>).doc;
+  readDocument(doc as unknown as Record<string, unknown>)?.doc ?? emptyDocument();
+
+/** The canonical document without the rows and marks dated more than `FUTURE_SLACK` after `now`. */
+export const dropFutureDates = (doc: SyncDocument, now: number): SyncDocument =>
+  readDocument(doc as unknown as Record<string, unknown>, now + FUTURE_SLACK)?.doc ??
+  emptyDocument();
 
 /** SHA-256 of the canonical JSON, in hex: it identifies the content of a document. */
 export const documentHash = async (doc: SyncDocument): Promise<string> => {

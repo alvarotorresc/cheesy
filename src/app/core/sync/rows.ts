@@ -123,6 +123,8 @@ interface TableRules<Row> {
   readonly parse: (value: unknown) => Row | undefined;
   readonly key: (row: Row) => string;
   readonly merge: (a: Row, b: Row) => Row;
+  /** When the row was last active: the latest of its dates. */
+  readonly activity: (row: Row) => number;
 }
 
 /** How the rows of each table are checked, identified and merged. */
@@ -131,28 +133,52 @@ export const TABLE_RULES: { readonly [T in SyncTable]: TableRules<SyncRow<T>> } 
     parse: parseSyncLine,
     key: (row) => progressKey(row.openingId, row.color, row.lineId),
     merge: mergeLine,
+    activity: (row) => row.lastPracticed,
   },
-  endgames: { parse: parseEndgameProgress, key: (row) => row.endgameId, merge: mergeEndgame },
-  positions: { parse: parsePositionProgress, key: (row) => row.positionId, merge: mergePosition },
-  lessons: { parse: parseLessonProgress, key: (row) => row.lessonId, merge: mergeLesson },
-  puzzles: { parse: parsePuzzleProgress, key: (row) => row.puzzleId, merge: mergePuzzle },
+  endgames: {
+    parse: parseEndgameProgress,
+    key: (row) => row.endgameId,
+    merge: mergeEndgame,
+    activity: (row) => row.lastCompletedAt,
+  },
+  positions: {
+    parse: parsePositionProgress,
+    key: (row) => row.positionId,
+    merge: mergePosition,
+    // A position only seen before v0.4.0 has no date: it counts as 0, older than any mark.
+    activity: (row) => Math.max(row.lastSolvedAt ?? 0, row.spoiledAt ?? 0),
+  },
+  lessons: {
+    parse: parseLessonProgress,
+    key: (row) => row.lessonId,
+    merge: mergeLesson,
+    activity: (row) => row.completedAt,
+  },
+  puzzles: {
+    parse: parsePuzzleProgress,
+    key: (row) => row.puzzleId,
+    merge: mergePuzzle,
+    activity: (row) => row.lastPlayedAt,
+  },
 };
 
 /**
  * Checks the rows of one table, merges those that share a key and sorts them by key. The merged
  * rows are checked again: the merge keeps every invariant, and a row that broke one would be
- * dropped rather than saved. `dropped` counts the rows that failed.
+ * dropped rather than saved. With `latest`, a row last active after it is dropped too. `dropped`
+ * counts the rows that failed.
  */
 export const combineRows = <T extends SyncTable>(
   table: T,
   rows: readonly unknown[],
+  latest = Number.POSITIVE_INFINITY,
 ): { rows: SyncRow<T>[]; dropped: number } => {
   const rules = TABLE_RULES[table] as TableRules<SyncRow<T>>;
   const byKey = new Map<string, SyncRow<T>>();
   let dropped = 0;
   for (const value of rows) {
     const row = rules.parse(value);
-    if (!row) {
+    if (!row || rules.activity(row) > latest) {
       dropped++;
       continue;
     }
