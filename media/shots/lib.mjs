@@ -85,10 +85,10 @@ async function answers(url) {
   }
 }
 
-// File for a request path, as the host picks it: the file itself, the prerendered page of the
-// route (`route.html`, see scripts/flatten-prerender.mjs) with or without a trailing slash, and
-// for any other path without an extension the app shell, index.csr.html (the router owns those
-// paths). A missing file with an extension (an asset) gives null, which is answered with a 404.
+// File for a request path, close to how the site is served but looser: the file itself, the
+// prerendered page of the route (`route.html`, see scripts/flatten-prerender.mjs) with or without
+// a trailing slash, and for any other path without an extension the app shell, index.csr.html (the
+// router owns those paths). A missing file with an extension (an asset) gives null, which is answered with a 404.
 // Nothing outside the build directory is ever served.
 function fileFor(pathname) {
   const index = join(DIST, 'index.csr.html');

@@ -38,8 +38,9 @@ for l in ['es', 'en']:
 ## How the screenshots are taken
 
 - **Server:** `pnpm build`, then `lib.mjs` serves `dist/cheesy/browser` on `localhost:4791` with a
-  fallback to the app shell, as Cloudflare does: a prerendered page as `route.html`, anything else
-  `index.csr.html` (`MEDIA_PORT` changes the port). It refuses to start if the port already answers.
+  fallback to the app shell, close to the edge rules of the site but looser: a prerendered page as
+  `route.html`, any other path `index.csr.html` (`MEDIA_PORT` changes the port). It refuses to
+  start if the port already answers.
 - **Viewports:** desktop 1600x1000; mobile 360x780 at 3x, which gives 1080x2340.
 - **Language:** written to `localStorage['cheesy.lang']` before the app starts.
 - **Theme:** the browser colour scheme, since the app has no theme switch.
