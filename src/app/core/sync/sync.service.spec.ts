@@ -844,17 +844,36 @@ describe('SyncService: triggers', () => {
       Object.defineProperty(document, 'visibilityState', { value: 'visible', configurable: true });
     });
 
-    it('pushes pending changes at once with keepalive', async () => {
+    it('sends the prepared push at once, in the same task, with keepalive', async () => {
       await linked();
       await open();
       await practise('pins');
       await wait(1000);
       hide();
-      await wait(0);
+      // Synchronous: no lock, no IndexedDB, no hashing or gzip once the page is going away.
       expect(server.push).toHaveBeenCalledTimes(1);
+      expect(server.push.mock.calls[0][1]).toBe(1);
       expect(server.push.mock.calls[0][3]).toBe(true);
+      expect((await server.pushed(0)).lessons.map((row) => row.lessonId)).toEqual(['pins']);
       await wait(DEBOUNCE_MS);
       expect(server.push).toHaveBeenCalledTimes(1);
+      expect(states.read()?.version).toBe(2);
+    });
+
+    it('sends it even while a sync is running', async () => {
+      await linked();
+      await open();
+      await practise('pins');
+      await wait(1000);
+      let release: (value: Awaited<ReturnType<FakeSyncServer['pull']>>) => void = () => undefined;
+      server.pull.mockImplementationOnce(() => new Promise((resolve) => (release = resolve)));
+      const running = sync.syncNow();
+      await vi.advanceTimersByTimeAsync(0);
+      hide();
+      expect(server.push).toHaveBeenCalledTimes(1);
+      expect(server.push.mock.calls[0][3]).toBe(true);
+      release({ kind: 'offline' });
+      await running;
     });
 
     it('sends nothing when nothing changed', async () => {

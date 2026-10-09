@@ -81,7 +81,7 @@ export const backoffMs = (failures: number): number =>
   Math.min(60_000 * 2 ** (Math.max(1, failures) - 1), 3_600_000);
 
 /** What started a sync on its own: `open` pulls first, `online` ignores the backoff. */
-type Trigger = 'open' | 'change' | 'hide' | 'online';
+type Trigger = 'open' | 'change' | 'online';
 
 /** A document read from the server: as it is there (for its hash) and fit to merge. */
 interface Remote {
@@ -89,6 +89,16 @@ interface Remote {
   held: SyncDocument;
   /** Without rows and marks dated more than a day after the server clock. */
   usable: SyncDocument;
+}
+
+/** A push built ahead, ready to leave in the same task when the page is hidden. */
+interface Prepared {
+  code: string;
+  /** The version its document was built on: if the server moved on, it answers 409. */
+  version: number;
+  data: string;
+  hash: string;
+  cleared: ClearedAt;
 }
 
 type Read = { ok: true; remote: Remote } | { ok: false; reason: 'outdated' | 'unavailable' };
@@ -149,6 +159,9 @@ export class SyncService {
   /** A local change not pushed yet (waiting for the debounce, the backoff or the network). */
   private pending = false;
   private timer: ReturnType<typeof setTimeout> | undefined;
+  private prepared: Prepared | undefined;
+  private preparing: Promise<void> | undefined;
+  private prepareAgain = false;
 
   readonly status = this.state.asReadonly();
   readonly error = this.failure.asReadonly();
@@ -175,10 +188,7 @@ export class SyncService {
     const view = this.window;
     const document = view?.document;
     const onVisibility = (): void => {
-      if (document?.visibilityState !== 'hidden' || !this.pending) return;
-      clearTimeout(this.timer);
-      this.timer = undefined;
-      void this.trigger('hide');
+      if (document?.visibilityState === 'hidden') this.sendPrepared();
     };
     const onOnline = (): void => {
       if (this.pending || (this.states.read()?.failures ?? 0) > 0) void this.trigger('online');
@@ -289,7 +299,7 @@ export class SyncService {
       if (!stored) return { ok: false, reason: 'unavailable' };
       this.settle('idle');
       trackEvent('sync-join', this.window);
-      await this.upload(code, merged, false);
+      await this.upload(code, merged);
       return { ok: true };
     }, UNAVAILABLE_READ);
   }
@@ -308,7 +318,7 @@ export class SyncService {
         clearTimeout(this.timer);
         this.timer = undefined;
         this.pending = false;
-        await this.cycle(false, false);
+        await this.cycle(false);
         const after = this.states.read();
         if (after?.code === state.code && !(await this.uploaded(after))) {
           return { ok: false, reason: 'unsynced' };
@@ -353,7 +363,7 @@ export class SyncService {
     if (!this.usable) return Promise.resolve();
     return this.exclusive(() => {
       this.pending = false;
-      return this.cycle(true, false);
+      return this.cycle(true);
     }, undefined);
   }
 
@@ -362,14 +372,16 @@ export class SyncService {
     if (this.usable) noteClear(this.states, section, at);
   }
 
-  /** Resolves once every sync started so far has finished. */
-  idle(): Promise<void> {
-    return this.queue.then(() => undefined);
+  /** Resolves once every sync started so far has finished, and the next push is prepared. */
+  async idle(): Promise<void> {
+    await this.queue;
+    await this.preparing;
   }
 
   /** A change made here: push it once things have been quiet for `DEBOUNCE_MS`. */
   private changed(): void {
     this.pending = true;
+    this.prepare();
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.timer = undefined;
@@ -388,15 +400,15 @@ export class SyncService {
       const waiting = state.retryAt !== undefined && Date.now() < state.retryAt;
       if (waiting && trigger !== 'online') return;
       this.pending = false;
-      await this.cycle(trigger === 'open', trigger === 'hide');
+      await this.cycle(trigger === 'open');
     }, undefined);
   }
 
   /**
    * One sync of the linked account: with `pull`, read the server first and merge; then push what
-   * the server lacks. `keepalive` lets the push outlive the page.
+   * the server lacks.
    */
-  private async cycle(pull: boolean, keepalive: boolean): Promise<void> {
+  private async cycle(pull: boolean): Promise<void> {
     const state = this.states.read();
     this.refresh();
     if (!state || this.outdated) return;
@@ -409,14 +421,14 @@ export class SyncService {
     } else {
       doc = await this.localDocument(state);
     }
-    if (doc) await this.upload(state.code, doc, keepalive);
+    if (doc) await this.upload(state.code, doc);
   }
 
   /**
    * Pushes `doc` unless the server already holds it. A collision merges what the server has now
    * and tries again, up to `MAX_ATTEMPTS` pushes; then it waits for the next trigger.
    */
-  private async upload(code: string, doc: SyncDocument, keepalive: boolean): Promise<void> {
+  private async upload(code: string, doc: SyncDocument): Promise<void> {
     let pushes = 0;
     for (;;) {
       const state = this.states.read();
@@ -427,7 +439,7 @@ export class SyncService {
       const data = await encodeDocument(doc);
       if (dataBytes(data) > MAX_DATA_BYTES) return this.settle('error', 'too-large');
       pushes++;
-      const pushed = await this.api.push(code, state.version, data, keepalive);
+      const pushed = await this.api.push(code, state.version, data);
       if (pushed.kind === 'ok') {
         return this.done(code, doc.cleared, {
           version: pushed.value.version,
@@ -526,6 +538,76 @@ export class SyncService {
     const latest = Date.now() + (state.skew ?? 0);
     const cleared = latestMarks(state.remoteCleared ?? {}, boundMarks(state.cleared, latest));
     return mergeDocuments(local, { ...emptyDocument(), cleared });
+  }
+
+  /**
+   * Builds the next push ahead of time (after every change and every sync), so that hiding the
+   * page can send it at once: by then there may be no time for IndexedDB, hashing or gzip.
+   * Runs outside the queue and the lock, since it only reads; calls made meanwhile build again.
+   */
+  private prepare(): void {
+    if (this.preparing) {
+      this.prepareAgain = true;
+      return;
+    }
+    this.preparing = (async () => {
+      do {
+        this.prepareAgain = false;
+        this.prepared = await this.build();
+      } while (this.prepareAgain);
+    })()
+      .catch((error: unknown) => {
+        console.error(error);
+        this.prepared = undefined;
+      })
+      .finally(() => (this.preparing = undefined));
+  }
+
+  private async build(): Promise<Prepared | undefined> {
+    const state = this.states.read();
+    if (!state || this.outdated) return undefined;
+    const doc = await this.localDocument(state);
+    if (!doc) return undefined;
+    const hash = await documentHash(doc);
+    if (hash === state.pushedHash) return undefined;
+    const data = await encodeDocument(doc);
+    if (dataBytes(data) > MAX_DATA_BYTES) return undefined;
+    return { code: state.code, version: state.version, data, hash, cleared: doc.cleared };
+  }
+
+  /**
+   * The page is being hidden (maybe for good): send the prepared push now, in this same task,
+   * with keepalive, even while a sync is running. A collision is left for the next open.
+   */
+  private sendPrepared(): void {
+    const prepared = this.prepared;
+    const state = this.states.read();
+    if (!prepared || state?.code !== prepared.code || prepared.hash === state.pushedHash) return;
+    if (state.retryAt !== undefined && Date.now() < state.retryAt) return;
+    this.prepared = undefined;
+    clearTimeout(this.timer);
+    this.timer = undefined;
+    this.pending = false;
+    const { code, version, data, hash, cleared } = prepared;
+    void this.api
+      .push(code, version, data, true)
+      .then((pushed) => {
+        if (pushed.kind !== 'ok') {
+          this.pending = true;
+          return;
+        }
+        // If the page lives on, keep the new version (unless a sync moved it meanwhile).
+        void this.exclusive(async () => {
+          if (this.states.read()?.version !== version) return;
+          this.done(code, cleared, {
+            version: pushed.value.version,
+            pushedHash: hash,
+            remoteCleared: cleared,
+            now: pushed.now,
+          });
+        }, undefined);
+      })
+      .catch(() => (this.pending = true));
   }
 
   /** Whether the server holds everything of this browser: no pending marks, the same hash. */
@@ -644,7 +726,8 @@ export class SyncService {
     const locks = (this.window?.navigator as { locks?: LockManager } | undefined)?.locks;
     const run = this.queue
       .then(() => (locks ? locks.request(LOCK_NAME, task) : task()))
-      .catch((error: unknown) => this.crashed(error, fallback));
+      .catch((error: unknown) => this.crashed(error, fallback))
+      .finally(() => this.prepare());
     this.queue = run;
     return run as Promise<T>;
   }
