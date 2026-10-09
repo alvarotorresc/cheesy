@@ -71,6 +71,8 @@ describe('SyncApi', () => {
     const inits = fetchMock.mock.calls.map((call) => (call as [string, RequestInit])[1]);
     expect(inits[0].keepalive).toBeFalsy();
     expect(inits[1].keepalive).toBe(true);
+    // A tab that is only hidden lives on: a stalled push must not hold the sync forever.
+    expect(inits[1].signal).toBeInstanceOf(AbortSignal);
   });
 
   it('turns a 409 into a conflict that carries the server data and time', async () => {

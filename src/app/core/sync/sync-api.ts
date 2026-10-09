@@ -110,7 +110,10 @@ export class SyncApi {
         credentials: 'omit',
         referrerPolicy: 'no-referrer',
         cache: 'no-store',
-        ...(keepalive ? { keepalive: true } : { signal: AbortSignal.timeout(TIMEOUT_MS) }),
+        // With keepalive too: if the page only went to the background, a stalled request must
+        // not hold the sync lock; if it is unloading, the request goes out all the same.
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+        ...(keepalive ? { keepalive: true } : {}),
       });
     } catch (error) {
       // A timeout means the server did not answer in time; a TypeError, that there is no network.
