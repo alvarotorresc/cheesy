@@ -121,22 +121,8 @@ describe('SyncService: accounts', () => {
         throw new Error('full');
       });
       expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: false });
-      expect(write).toHaveBeenCalledTimes(2); // one retry
+      expect(write).toHaveBeenCalledTimes(1);
       expect(server.accounts.has(CODE)).toBe(true);
-    });
-
-    it('keeps the code when the second write works', async () => {
-      const sync = await start();
-      const original = Storage.prototype.setItem;
-      vi.spyOn(Storage.prototype, 'setItem')
-        .mockImplementationOnce(() => {
-          throw new Error('busy');
-        })
-        .mockImplementation(function (this: Storage, key: string, value: string) {
-          original.call(this, key, value);
-        });
-      expect(await sync.create()).toEqual({ ok: true, code: CODE, saved: true });
-      expect(states.read()?.code).toBe(CODE);
     });
 
     it('does not create a second account when one is linked', async () => {
@@ -478,6 +464,15 @@ describe('SyncService: accounts', () => {
       localStorage.removeItem(SYNC_STORAGE_KEY);
       server.create.mockRejectedValueOnce(new Error('boom'));
       await expect(sync.create()).resolves.toEqual({ ok: false, error: 'unavailable' });
+    });
+
+    it('does not let a failed preview put the linked account in error', async () => {
+      await link();
+      const sync = await start();
+      server.pull.mockRejectedValueOnce(new Error('boom'));
+      expect(await sync.preview(OTHER)).toEqual({ ok: false, reason: 'unavailable' });
+      expect(sync.status()).toBe('idle');
+      expect(sync.error()).toBeUndefined();
     });
 
     it('is unavailable without gzip streams or Web Crypto', async () => {

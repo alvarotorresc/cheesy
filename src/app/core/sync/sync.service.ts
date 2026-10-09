@@ -243,7 +243,7 @@ export class SyncService {
         skew: Math.round(created.now - Date.now()),
       };
       // The account exists now: whatever happens here, the code must reach the user.
-      const saved = this.states.write(state) || this.states.write(state);
+      const saved = this.states.write(state);
       if (saved) this.settle('idle');
       trackEvent('sync-create', this.window);
       return { ok: true, code: created.value.code, saved };
@@ -256,7 +256,9 @@ export class SyncService {
     try {
       return await this.peek(input);
     } catch (error) {
-      return this.crashed(error, UNAVAILABLE_READ);
+      // A code typed by the user: its failure says nothing about the linked account.
+      console.error(error);
+      return UNAVAILABLE_READ;
     }
   }
 
