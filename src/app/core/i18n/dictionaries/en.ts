@@ -358,6 +358,11 @@ export const en = {
         license: 'OFL 1.1',
         text: 'The typeface of the whole site.',
       },
+      wordlist: {
+        name: 'EFF wordlist',
+        license: 'CC BY 3.0 US / 4.0',
+        text: 'The words that make up the four-word code for syncing your progress.',
+      },
       phosphor: {
         name: 'Phosphor Icons',
         license: 'MIT',

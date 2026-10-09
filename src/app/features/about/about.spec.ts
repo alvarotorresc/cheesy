@@ -123,6 +123,16 @@ describe('About', () => {
     expect(body).toContain('no way to get it back');
   });
 
+  it('should credit the EFF wordlist with its licence', async () => {
+    const element = await open();
+
+    const credit = Array.from(element.querySelectorAll('.credits .item')).find((item) =>
+      text(item)?.includes('Lista de palabras de la EFF'),
+    );
+    expect(text(credit)).toContain('CC BY 3.0 US / 4.0');
+    expect(credit?.querySelector('a')?.getAttribute('href')).toContain('eff.org');
+  });
+
   it('should say that every position of the endgame goes to Lichess', async () => {
     const element = await open();
 

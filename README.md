@@ -227,3 +227,4 @@ Hecha por [Alvaro Torres](https://github.com/alvarotorresc). Licencia
 - [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), nombres y códigos ECO de las aperturas, usados para comprobar el contenido, dedicados al dominio público con CC0.
 - La [base abierta de problemas de Lichess](https://database.lichess.org), dedicada al dominio público con CC0, de la que salen los problemas de «Practica más».
 - La [tablebase de Lichess](https://tablebase.lichess.ovh) y [Stockfish](https://stockfishchess.org), usados para verificar los finales y las posiciones.
+- La [lista de palabras de la EFF](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), con licencia CC BY 3.0 US / 4.0, de la que salen las palabras del código para sincronizar el progreso.

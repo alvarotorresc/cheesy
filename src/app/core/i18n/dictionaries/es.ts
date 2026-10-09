@@ -355,6 +355,11 @@ export const es: Messages = {
         license: 'OFL 1.1',
         text: 'La tipografía de toda la web.',
       },
+      wordlist: {
+        name: 'Lista de palabras de la EFF',
+        license: 'CC BY 3.0 US / 4.0',
+        text: 'Las palabras con las que se forma el código de cuatro palabras para sincronizar tu progreso.',
+      },
       phosphor: {
         name: 'Phosphor Icons',
         license: 'MIT',

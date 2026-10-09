@@ -225,3 +225,4 @@ Made by [Alvaro Torres](https://github.com/alvarotorresc). Licensed under
 - [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
 - [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), names and ECO codes of openings used to check the content, dedicated to the public domain under CC0.
 - The [Lichess tablebase](https://tablebase.lichess.ovh) and [Stockfish](https://stockfishchess.org), used to verify the endgames and the positions.
+- The [EFF wordlist](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), licensed under CC BY 3.0 US / 4.0, which gives the words of the code for syncing progress.
