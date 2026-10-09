@@ -256,6 +256,27 @@ describe('pull, push and delete', () => {
     expect(await body(over)).toMatchObject({ error: 'bad-data' });
   });
 
+  it('lets exactly one of several simultaneous pushes of the same version through', async () => {
+    const { code } = await create();
+    const datas = Array.from({ length: 8 }, () => gzipLike(64));
+    const results = await Promise.all(
+      datas.map(async (data) => {
+        const res = await post('push', { code, version: 1, data });
+        return { status: res.status, value: await body(res), data };
+      }),
+    );
+    const won = results.filter((r) => r.status === 200);
+    const lost = results.filter((r) => r.status === 409);
+    expect(won).toHaveLength(1);
+    expect(lost).toHaveLength(datas.length - 1);
+    expect(won[0].value).toMatchObject({ version: 2 });
+    for (const r of lost) expect(r.value).toMatchObject({ version: 2, data: won[0].data });
+    expect(await body(await post('pull', { code }))).toMatchObject({
+      version: 2,
+      data: won[0].data,
+    });
+  });
+
   it('deletes an account, after which it is not found', async () => {
     const { code } = await create();
     const res = await post('delete', { code });
