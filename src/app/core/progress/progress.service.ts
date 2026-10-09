@@ -11,7 +11,7 @@ import {
   parsePuzzleProgress,
   progressKey,
 } from './progress-record';
-import { latestMarks, mergeDocuments } from '../sync/merge';
+import { lastActivity, latestMarks, mergeDocuments, type SectionRow } from '../sync/merge';
 import {
   dropFutureDates,
   emptyDocument,
@@ -258,7 +258,11 @@ export class ProgressService {
     // rows are gone, never in between.
     const cleared = await this.run((store) =>
       store.rewrite((current) => {
-        this.onCleared(section, now);
+        const rows = documentOf(current)[
+          SECTION_TABLE[section]
+        ] as readonly SectionRow[typeof section][];
+        const latest = rows.reduce((at, row) => Math.max(at, lastActivity(section, row)), 0);
+        this.onCleared(section, now, latest);
         return { ...current, [SECTION_TABLE[section]]: [] };
       }),
     );

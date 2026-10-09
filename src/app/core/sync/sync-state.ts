@@ -142,17 +142,19 @@ export class SyncStateStore {
  * Notes that `section` was cleared at `at`, only while an account is linked: without one, a mark
  * would later delete progress of whatever account this browser joins. The mark is bounded to the
  * server clock (as estimated from the last answer), so a clock set in the future cannot delete
- * progress made elsewhere afterwards. Marks only grow.
+ * progress made elsewhere afterwards; but never below `latest`, the latest activity of the rows
+ * deleted here, which this browser may have uploaded with its own clock ahead. Marks only grow.
  */
 export const noteClear = (
   states: SyncStateStore,
   section: ProgressSection,
   at: number,
+  latest = 0,
   now = Date.now(),
 ): void => {
   const state = states.read();
   if (!state) return;
-  const mark = Math.min(at, now + (state.skew ?? 0));
+  const mark = Math.min(at, Math.max(now + (state.skew ?? 0), latest));
   if (!isDate(mark) || (state.cleared[section] ?? -1) >= mark) return;
   states.write({ ...state, cleared: { ...state.cleared, [section]: mark } });
 };

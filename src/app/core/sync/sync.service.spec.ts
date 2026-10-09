@@ -6,7 +6,7 @@ import type { LessonProgress, LineProgress } from '../progress/progress.types';
 import { provideSync } from './provide-sync';
 import { SyncApi } from './sync-api';
 import { encodeDocument } from './sync-codec';
-import { emptyDocument, type SyncDocument } from './sync-document';
+import { emptyDocument, FUTURE_SLACK, type SyncDocument } from './sync-document';
 import { SyncStateStore, SYNC_STORAGE_KEY, type StoredSync } from './sync-state';
 import { FakeSyncServer } from './sync-testing';
 import { backoffMs, DEBOUNCE_MS, MAX_ATTEMPTS, SyncService } from './sync.service';
@@ -437,12 +437,33 @@ describe('SyncService: accounts', () => {
       expect(states.read()?.cleared.openings).toBeLessThanOrEqual(server.now + 1000);
     });
 
-    it('bounds pending marks to the server clock when it sends them', async () => {
+    it('deletes rows it uploaded with a clock ahead of the server', async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      try {
+        // This clock runs twelve hours ahead of the server's.
+        vi.setSystemTime(server.now + 12 * HOUR);
+        await link();
+        const sync = await start();
+        await progress.recordLesson({ lessonId: 'pins', exercises: 4, firstTry: 3 });
+        await sync.syncNow();
+        expect((await server.document(CODE)).lessons).toHaveLength(1);
+
+        await progress.clear('lessons');
+        await sync.syncNow();
+
+        expect(memory.lessonRows.size).toBe(0);
+        expect((await server.document(CODE)).lessons).toEqual([]);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('keeps a stored mark far ahead from being dropped on the way', async () => {
       await link({ cleared: { lessons: 8.64e15 } });
       await start();
       await TestBed.inject(SyncService).syncNow();
       const sent = await server.document(CODE);
-      expect(sent.cleared.lessons).toBe(server.now);
+      expect(sent.cleared.lessons).toBe(server.now + FUTURE_SLACK);
     });
   });
 

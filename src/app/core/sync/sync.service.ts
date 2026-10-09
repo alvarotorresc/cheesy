@@ -20,6 +20,7 @@ import { dataBytes, decodeDocument, encodeDocument, MAX_DATA_BYTES } from './syn
 import {
   documentHash,
   emptyDocument,
+  FUTURE_SLACK,
   parseSyncDocument,
   PROGRESS_SECTIONS,
   type ClearedAt,
@@ -106,8 +107,9 @@ type Read = { ok: true; remote: Remote } | { ok: false; reason: 'outdated' | 'un
 const hasRows = (doc: SyncDocument): boolean => SYNC_TABLES.some((table) => doc[table].length > 0);
 
 /**
- * Marks bounded to `latest` (the server clock): a later mark would delete what other devices do
- * next, and one far ahead would be dropped on the way, losing the clear.
+ * Marks bounded to `latest`, a day after the server clock: `noteClear` already bounds them, and
+ * this only keeps a stored mark from being dropped on the way (dates more than a day ahead are),
+ * which would lose the clear.
  */
 const boundMarks = (marks: ClearedAt, latest: number): ClearedAt => {
   const bounded: Partial<Record<ProgressSection, number>> = {};
@@ -368,8 +370,8 @@ export class SyncService {
   }
 
   /** Notes the clear of a section for the linked account (nothing when none is linked). */
-  noteClear(section: ProgressSection, at: number): void {
-    if (this.usable) noteClear(this.states, section, at);
+  noteClear(section: ProgressSection, at: number, latest = 0): void {
+    if (this.usable) noteClear(this.states, section, at, latest);
   }
 
   /** Resolves once every sync started so far has finished, and the next push is prepared. */
@@ -505,7 +507,9 @@ export class SyncService {
       // The pending marks, read inside the transaction so a clear noted meanwhile counts too.
       // While joining nothing is linked yet, so there are none.
       cleared: () =>
-        mode === 'replace' ? {} : boundMarks(this.states.read()?.cleared ?? {}, serverNow),
+        mode === 'replace'
+          ? {}
+          : boundMarks(this.states.read()?.cleared ?? {}, serverNow + FUTURE_SLACK),
       now: serverNow,
     });
   }
@@ -534,8 +538,7 @@ export class SyncService {
   private async localDocument(state: StoredSync): Promise<SyncDocument | undefined> {
     const local = await this.progress.snapshot();
     if (!local) return this.noProgress(undefined);
-    // A mark is never later than the server clock: it would delete what other devices do next.
-    const latest = Date.now() + (state.skew ?? 0);
+    const latest = Date.now() + (state.skew ?? 0) + FUTURE_SLACK;
     const cleared = latestMarks(state.remoteCleared ?? {}, boundMarks(state.cleared, latest));
     return mergeDocuments(local, { ...emptyDocument(), cleared });
   }
