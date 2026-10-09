@@ -1,5 +1,5 @@
 export { emptyProgressStoreLoader } from './empty-progress-store';
-export { ProgressService, type ProgressSection, type ProgressStatus } from './progress.service';
+export { ProgressService, type ProgressStatus } from './progress.service';
 export {
   PROGRESS_STORE_LOADER,
   type ProgressStore,
@@ -8,7 +8,16 @@ export {
   type StoredLineProgress,
   type TableStore,
 } from './progress-store';
-export { isMastered, lineIdOf, progressKey } from './progress-record';
+export {
+  isMastered,
+  lineIdOf,
+  parseEndgameProgress,
+  parseLessonProgress,
+  parseLineProgress,
+  parsePositionProgress,
+  parsePuzzleProgress,
+  progressKey,
+} from './progress-record';
 export {
   MASTERY_STREAK,
   type EndgameProgress,
@@ -18,6 +27,7 @@ export {
   type LineResult,
   type PositionProgress,
   type ProgressColor,
+  type ProgressSection,
   type PuzzleProgress,
   type PuzzleResult,
 } from './progress.types';

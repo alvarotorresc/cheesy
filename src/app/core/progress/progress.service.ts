@@ -18,6 +18,7 @@ import type {
   LineProgress,
   LineResult,
   PositionProgress,
+  ProgressSection,
   PuzzleProgress,
   PuzzleResult,
 } from './progress.types';
@@ -28,9 +29,6 @@ import type {
  * without saved progress.
  */
 export type ProgressStatus = 'unknown' | 'ready' | 'unavailable';
-
-/** The parts of the app that keep progress, each one deleted on its own. */
-export type ProgressSection = 'openings' | 'endgames' | 'positions' | 'lessons' | 'puzzles';
 
 /**
  * Progress of the practised lines, endgames, positions, lessons and puzzles, kept only in this
