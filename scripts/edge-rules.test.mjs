@@ -1,68 +1,28 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createPageUrls } from '../src/app/core/routing/page-url.ts';
 import { orderPositions } from '../src/app/features/positions/position-order.ts';
 import {
-  APP_BEGIN,
-  APP_END,
-  appRouteBlock,
   appRoutePaths,
-  BEGIN,
   checkBuilt,
-  FILE_BEGIN,
-  FILE_END,
-  pageFileBlock,
-  pageFileRules,
-  OLD_POSITION_NUMBERS,
   checkPages,
-  END,
   loadSources,
-  NETLIFY_TOML,
+  OLD_POSITION_NUMBERS,
   pageFileOf,
-  redirectBlock,
+  pageFileRules,
+  redirectLines,
   redirectRules,
   SHELL,
-  withBlock,
-  withBlocks,
 } from './edge-rules.mjs';
 
 const sources = loadSources();
 const urls = createPageUrls(sources.slugs);
 const rules = redirectRules(sources);
-const toml = readFileSync(NETLIFY_TOML, 'utf8');
 
 const paths = appRoutePaths(sources);
-
-/** The `[[redirects]]` of netlify.toml, in order, as Netlify reads them. */
-const tomlRedirects = toml
-  .split('[[redirects]]')
-  .slice(1)
-  .map((block) => {
-    const field = (name) =>
-      /^\s*(\w+)\s*=\s*"?([^"\n]*)"?\s*$/m.exec(
-        block.split('\n').find((line) => line.trim().startsWith(`${name} `)) ?? '',
-      )?.[2];
-    return {
-      from: field('from'),
-      to: field('to'),
-      status: Number(field('status')),
-      force: field('force') === 'true',
-    };
-  });
-
-/** The first rule that matches a path on the site's own domain (Netlify ignores a final slash). */
-const firstMatch = (path) => {
-  const bare = path.length > 1 ? path.replace(/\/$/, '') : path;
-  return tomlRedirects.find(({ from }) => {
-    if (from.startsWith('https://')) return false;
-    if (from.endsWith('/*'))
-      return bare.startsWith(from.slice(0, -1)) || bare === from.slice(0, -2);
-    return from === bare;
-  });
-};
 
 /** The old addresses, listed straight from the catalogues as the old routes were. */
 const expectedOldAddresses = () => {
@@ -139,62 +99,44 @@ describe('redirects of the old addresses', () => {
   });
 });
 
-describe('netlify.toml', () => {
-  it('should carry the generated block as it is now (run node scripts/netlify-redirects.mjs)', () => {
-    assert.equal(
-      withBlocks(toml, redirectBlock(rules), appRouteBlock(paths), pageFileBlock()),
-      toml,
+describe('_redirects', () => {
+  it('should answer the app routes with /index.csr, never with the .html file', () => {
+    assert.equal(SHELL, '/index.csr');
+    for (const line of redirectLines()) assert.ok(!line.includes('index.csr.html'), line);
+  });
+
+  it('should give every page file, page and old address its trailing-slash twin', () => {
+    const lines = new Set(redirectLines());
+    assert.ok(lines.has('/es/aperturas.html /es/aperturas 301'));
+    assert.ok(lines.has('/es/aperturas/ /es/aperturas 301'));
+    assert.ok(lines.has('/openings /en/openings 301'));
+    assert.ok(lines.has('/openings/ /en/openings 301'));
+    assert.ok(lines.has('/es/analisis/ /es/analisis 301'));
+    assert.ok(lines.has('/es/analisis /index.csr 200'));
+  });
+
+  it('should put the page files first and the rewrites last', () => {
+    const lines = redirectLines();
+    const isFile = (line) => line.split(' ')[0].endsWith('.html');
+    const isRewrite = (line) => line.endsWith(' 200');
+    const firstOther = lines.findIndex((line) => !isFile(line));
+    assert.ok(
+      lines.slice(firstOther).every((line) => !isFile(line)),
+      'a .html rule after the others',
     );
-    assert.ok(toml.includes(BEGIN) && toml.includes(END));
-    assert.ok(toml.includes(APP_BEGIN) && toml.includes(APP_END));
-    assert.ok(toml.includes(FILE_BEGIN) && toml.includes(FILE_END));
+    const firstRewrite = lines.findIndex(isRewrite);
+    assert.ok(lines.slice(firstRewrite).every(isRewrite), 'a 301 after the rewrites');
   });
 
-  it('should be found out of date when either block is stale', () => {
-    const stale = (block) => toml.replace(block, `# stale\n${block}`);
-    assert.notEqual(withBlocks(stale(END)), stale(END));
-    assert.notEqual(withBlocks(stale(APP_END)), stale(APP_END));
-    assert.notEqual(withBlocks(stale(FILE_END)), stale(FILE_END));
-    assert.throws(() => withBlock('', 'x', APP_BEGIN, APP_END), /no block/);
-  });
-
-  it('should send the Netlify domain to the real one first, forced, keeping the path', () => {
-    const [first] = tomlRedirects;
-    assert.deepEqual(first, {
-      from: 'https://playcheesy.netlify.app/*',
-      to: 'https://cheesy.alvarotc.com/:splat',
-      status: 301,
-      force: true,
-    });
-  });
-
-  it('should answer every old address with its own 301, before the app shell', () => {
-    for (const [from, to] of rules) {
-      for (const path of [from, `${from}/`]) {
-        const rule = firstMatch(path);
-        assert.deepEqual(rule && [rule.to, rule.status], [to, 301], path);
-      }
-    }
-  });
-
-  it('should have no catch-all: unknown addresses get the 404 page', () => {
-    assert.ok(!tomlRedirects.some(({ from }) => from === '/*'));
-    for (const path of ['/', '/en', '/es/aperturas/apertura-italiana', '/en/nothing-here']) {
-      assert.equal(firstMatch(path), undefined, path);
-    }
-  });
-
-  it('should answer the app routes with the shell, keeping them out of search engines', () => {
-    for (const path of paths) assert.equal(firstMatch(path)?.to, SHELL, path);
-    const noindex = [
-      ...toml.matchAll(
-        /\[\[headers\]\]\n  for = "([^"]+)"\n  \[headers\.values\]\n    X-Robots-Tag = "noindex"/g,
-      ),
-    ];
-    assert.deepEqual(
-      noindex.map(([, path]) => path),
-      [...paths, SHELL],
+  it('should stay within the limits of Workers static assets', () => {
+    const lines = redirectLines();
+    assert.ok(lines.length <= 2000, `${lines.length} rules`);
+    assert.equal(new Set(lines.map((l) => l.split(' ')[0])).size, lines.length, 'a source twice');
+    assert.ok(
+      lines.every((l) => !l.includes('*') && !l.includes(':')),
+      'only static rules',
     );
+    assert.ok(lines.every((l) => l.length <= 1000));
   });
 });
 
@@ -210,20 +152,6 @@ describe('page files', () => {
       assert.equal(from, `${to}.html`);
       assert.ok(urls.pageOf(to), to);
     }
-  });
-
-  it('should force a 301 to the address, after the domain rule and before the old addresses', () => {
-    const block = pageFileBlock([['/es/aperturas.html', '/es/aperturas']]);
-    assert.equal(
-      block,
-      `${FILE_BEGIN}\n[[redirects]]\n  from = "/es/aperturas.html"\n  to = "/es/aperturas"\n  status = 301\n  force = true\n${FILE_END}`,
-    );
-    assert.ok(toml.indexOf(FILE_BEGIN) > tomlRedirects[0].from.length);
-    assert.ok(toml.indexOf('https://playcheesy') < toml.indexOf(FILE_BEGIN));
-    assert.ok(toml.indexOf(FILE_END) < toml.indexOf(BEGIN));
-    const rule = firstMatch('/es/aperturas.html');
-    assert.deepEqual([rule.to, rule.status, rule.force], ['/es/aperturas', 301, true]);
-    assert.equal(firstMatch('/es/aperturas'), undefined);
   });
 });
 
@@ -262,21 +190,6 @@ describe('app routes', () => {
     assert.ok(paths.includes('/es/aprender/problemas') && paths.includes('/en/learn/puzzles'));
     assert.ok(paths.includes('/es/aperturas/apertura-italiana/practica'));
     assert.ok(paths.includes('/en/openings/italian-game/practice'));
-  });
-
-  it('should write a rewrite and a noindex header for each path, and a header for the shell', () => {
-    const block = appRouteBlock(['/en/analysis', '/es/analisis']);
-    const body = [
-      '[[redirects]]\n  from = "/en/analysis"\n  to = "/index.csr.html"\n  status = 200',
-      '[[redirects]]\n  from = "/es/analisis"\n  to = "/index.csr.html"\n  status = 200',
-      '[[headers]]\n  for = "/en/analysis"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
-      '[[headers]]\n  for = "/es/analisis"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
-      '[[headers]]\n  for = "/index.csr.html"\n  [headers.values]\n    X-Robots-Tag = "noindex"',
-    ].join('\n\n');
-    assert.equal(block, `${APP_BEGIN}\n${body}\n${APP_END}`);
-    const full = appRouteBlock(paths);
-    assert.equal(full.split('status = 200').length - 1, paths.length);
-    assert.equal(full.split('X-Robots-Tag').length - 1, paths.length + 1);
   });
 
   it('should target every shell redirect with a rewrite', () => {
