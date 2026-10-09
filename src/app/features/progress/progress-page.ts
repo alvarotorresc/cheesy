@@ -186,7 +186,8 @@ export class ProgressPage {
 
   protected createdClosed(): void {
     this.created.set(undefined);
-    if (!this.linked()) this.message.set(this.t().progressPage.notSaved);
+    // The only thing said here so far is «Code copied.»: it does not outlive its dialog.
+    this.message.set(this.linked() ? '' : this.t().progressPage.notSaved);
     this.focusAfterRender(this.linked() ? '.code-actions .button.primary' : '#create-button');
   }
 

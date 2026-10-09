@@ -151,6 +151,26 @@ describe('ProgressPage', () => {
       expect(element.querySelector('dialog[open]')).toBeNull();
     });
 
+    it('should not leave «Code copied.» behind when the dialog closes', async () => {
+      const writeText = vi.fn(async () => undefined);
+      Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+      const { fixture, element } = await render();
+
+      byText(element, 'Create my code').click();
+      await settle(fixture);
+      const dialog = openDialog(element);
+      byText(dialog, 'Copy').click();
+      await settle(fixture);
+      expect(dialog.textContent).toContain('Code copied.');
+
+      dialog.querySelector<HTMLInputElement>('input[type="checkbox"]')!.click();
+      fixture.detectChanges();
+      byText(dialog, 'Done').click();
+      await settle(fixture);
+
+      expect(element.querySelector('.page-message')?.textContent?.trim()).toBe('');
+    });
+
     it('should insist on writing the code down when this browser could not keep it', async () => {
       const sync = new FakeProgressSync();
       sync.create.mockResolvedValueOnce({ ok: true, code: CODE, saved: false });
