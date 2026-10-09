@@ -25,6 +25,10 @@ export default {
 
   /** Daily (`triggers.crons`): deletes the accounts idle for 12 months. */
   async scheduled(_controller, env): Promise<void> {
-    await purgeAccounts(env.DB, Date.now());
+    try {
+      await purgeAccounts(env.DB, Date.now());
+    } catch {
+      console.error(JSON.stringify({ event: 'purge-error' }));
+    }
   },
 } satisfies ExportedHandler<Env>;

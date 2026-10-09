@@ -95,11 +95,33 @@ export const deleteAccount = async (db: D1Database, id: string): Promise<boolean
   return meta.changes > 0;
 };
 
-/** Deletes the accounts not seen for longer than `RETENTION`; how many. */
-export const purgeAccounts = async (db: D1Database, now: number): Promise<number> => {
-  const { meta } = await db
-    .prepare('DELETE FROM accounts WHERE last_seen_at < ?1')
-    .bind(now - RETENTION)
-    .run();
-  return meta.changes;
+export interface PurgeOptions {
+  /** Rows deleted per statement. */
+  batch?: number;
+  /** Statements per run: whatever is left waits for the next day. */
+  maxBatches?: number;
+}
+
+/**
+ * Deletes the accounts not seen for longer than `RETENTION`, in batches so that no statement
+ * deletes thousands of rows at once; how many.
+ */
+export const purgeAccounts = async (
+  db: D1Database,
+  now: number,
+  { batch = 1000, maxBatches = 50 }: PurgeOptions = {},
+): Promise<number> => {
+  const statement = db
+    .prepare(
+      'DELETE FROM accounts WHERE id IN ' +
+        '(SELECT id FROM accounts WHERE last_seen_at < ?1 LIMIT ?2)',
+    )
+    .bind(now - RETENTION, batch);
+  let deleted = 0;
+  for (let i = 0; i < maxBatches; i++) {
+    const { meta } = await statement.run();
+    deleted += meta.changes;
+    if (meta.changes < batch) break;
+  }
+  return deleted;
 };

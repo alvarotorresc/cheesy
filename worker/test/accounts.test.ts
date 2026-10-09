@@ -110,6 +110,18 @@ describe('accounts', () => {
     expect(await readAccount(db, `${id}-new`)).toBeDefined();
   });
 
+  it('purges in batches, up to a number of them per run', async () => {
+    // Before the rows of the other purge test, so it only sees its own.
+    const now = 5 * RETENTION;
+    const old = Array.from({ length: 5 }, (_, i) => `${id}-old-${i}`);
+    for (const oldId of old) await insertAccount(db, oldId, bytes(1), now - RETENTION - 1);
+    await insertAccount(db, `${id}-new`, bytes(1), now);
+    expect(await purgeAccounts(db, now, { batch: 2, maxBatches: 2 })).toBe(4);
+    expect(await purgeAccounts(db, now, { batch: 2, maxBatches: 10 })).toBe(1);
+    for (const oldId of old) expect(await readAccount(db, oldId)).toBeUndefined();
+    expect(await readAccount(db, `${id}-new`)).toBeDefined();
+  });
+
   it('stores 48 000 bytes of data and reads them back unchanged', async () => {
     const data = new Uint8Array(48_000);
     crypto.getRandomValues(data.subarray(0, 40_000));
