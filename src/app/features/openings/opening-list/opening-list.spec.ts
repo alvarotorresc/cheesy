@@ -55,7 +55,14 @@ describe('OpeningList', () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
 
+  // jsdom has no <dialog> methods and the prototype is shared with the specs that run after this
+  // one in the same worker: what a test stubs on it must not outlive the test.
+  const dialogProto = HTMLDialogElement.prototype;
+  const dialogMethods = { showModal: dialogProto.showModal, close: dialogProto.close };
+
   afterEach(() => {
+    dialogProto.showModal = dialogMethods.showModal;
+    dialogProto.close = dialogMethods.close;
     localStorage.clear();
     vi.restoreAllMocks();
   });
