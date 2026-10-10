@@ -35,6 +35,7 @@ import { injectPrerenderWait } from '../../../core/prerender';
 import { PageLinks, routeId, routeLang, type Page } from '../../../core/routing';
 import { PageMeta } from '../../../core/seo';
 import { Breadcrumbs } from '../../../shared/breadcrumbs';
+import { Icon } from '../../../shared/icon';
 
 type LessonState =
   | { readonly status: 'loading' }
@@ -84,6 +85,7 @@ const practiceLink = (
     ChoiceStepView,
     ExplainStepView,
     FindMoveStepView,
+    Icon,
     NgTemplateOutlet,
     PlayOutStepView,
     ReachStepView,
@@ -147,6 +149,13 @@ export class LessonPage {
   protected readonly firstTries = computed(
     () => [...this.outcomes().values()].filter(Boolean).length,
   );
+  /** One mark per exercise, in the order of the lesson: whether it was done at the first try. */
+  protected readonly marks = computed(() => {
+    const outcomes = this.outcomes();
+    return this.steps().flatMap((step, index) =>
+      step.kind === 'explain' ? [] : [outcomes.get(index) === true],
+    );
+  });
   protected readonly canGoBack = computed(() => this.index() > 0);
   protected readonly canGoOn = computed(() => {
     const step = this.step();
@@ -277,6 +286,12 @@ export class LessonPage {
 
   protected previous(): void {
     if (this.canGoBack()) this.index.update((index) => index - 1);
+  }
+
+  /** Back to the first step with nothing done: the exercises count again from scratch. */
+  protected repeat(): void {
+    this.outcomes.set(new Map());
+    this.index.set(0);
   }
 
   protected next(): void {
