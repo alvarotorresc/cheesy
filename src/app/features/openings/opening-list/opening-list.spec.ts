@@ -296,10 +296,10 @@ describe('OpeningList', () => {
       expect(element.querySelector('.privacy')?.textContent).toContain(
         'Your progress is saved in this browser, with no cookies or sign-up',
       );
-      expect(element.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+      expect(element.querySelector('.privacy a.sync-progress')?.getAttribute('href')).toBe(
         '/en/your-progress',
       );
-      await click(element.querySelector('.privacy .text-button'));
+      await click(element.querySelector('.privacy button.clear-progress'));
       expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe(
         'There is no saved progress.',
       );
@@ -313,7 +313,7 @@ describe('OpeningList', () => {
       await create();
       await settle();
 
-      await click(element.querySelector('.privacy .text-button'));
+      await click(element.querySelector('.privacy button.clear-progress'));
       expect(showModal).toHaveBeenCalled();
       await click(element.querySelector('dialog .button.danger'));
       await settle();

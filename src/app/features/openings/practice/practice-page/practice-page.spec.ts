@@ -204,9 +204,9 @@ describe('PracticePage', () => {
       expect(text('app-practice-clear')).toContain(
         'Your progress is saved in this browser, with no cookies or sign-up',
       );
-      expect(element.querySelector('app-practice-clear a.text-button')?.getAttribute('href')).toBe(
-        '/en/your-progress',
-      );
+      expect(
+        element.querySelector('app-practice-clear a.sync-progress')?.getAttribute('href'),
+      ).toBe('/en/your-progress');
     });
 
     it('should choose the colour of the player', async () => {
