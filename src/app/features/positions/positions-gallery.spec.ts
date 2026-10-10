@@ -206,6 +206,9 @@ describe('PositionsGallery', () => {
     dialog.showModal = vi.fn();
     dialog.close = vi.fn();
 
+    expect(page.element.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+      '/en/your-progress',
+    );
     page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
     expect(dialog.showModal).toHaveBeenCalled();
     page.element.querySelector<HTMLButtonElement>('dialog .danger')?.click();

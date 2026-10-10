@@ -187,7 +187,7 @@ describe('App', () => {
     expect(document.title).toBe('Practicar · Cheesy');
   });
 
-  it('should show the footer with its four links on every page', async () => {
+  it('should show the footer with its links on every page', async () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({ providers: appConfig.providers });
     const fixture = TestBed.createComponent(App);
@@ -200,6 +200,7 @@ describe('App', () => {
       expect(Array.from(links, (link) => link.getAttribute('href'))).toEqual([
         'https://github.com/alvarotorresc/cheesy',
         '/en/about#privacidad',
+        '/en/your-progress',
         '/en/learn/glossary',
         '/en/about',
         'https://alvarotc.com',

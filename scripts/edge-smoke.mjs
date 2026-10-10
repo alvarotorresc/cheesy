@@ -108,6 +108,25 @@ export const smokeCases = (sources = loadSources()) => {
       status: 404,
       expectHeaders: { 'content-type': /^application\/json/, 'cache-control': 'no-store' },
     },
+    {
+      name: 'api pull text/plain',
+      method: 'POST',
+      path: '/api/sync/pull',
+      headers: { 'content-type': 'text/plain' },
+      status: 415,
+      expectHeaders: { 'content-type': /^application\/json/, 'cache-control': 'no-store' },
+    },
+    {
+      name: 'api pull GET',
+      method: 'GET',
+      path: '/api/sync/pull',
+      status: 405,
+      expectHeaders: {
+        'content-type': /^application\/json/,
+        'cache-control': 'no-store',
+        allow: 'POST',
+      },
+    },
     { name: 'same robots.txt', path: '/robots.txt', status: 200, sameAsFile: 'robots.txt' },
     { name: 'same home en', path: '/en', status: 200, sameAsFile: 'en.html' },
     {
@@ -124,6 +143,30 @@ const headerMatches = (expected, actual) => {
   if (expected === null) return actual === null;
   if (actual === null) return false;
   return expected instanceof RegExp ? expected.test(actual) : actual === expected;
+};
+
+const NETWORK_RETRY_MS = 3000;
+const NETWORK_TIMEOUT_MS = 60_000;
+
+/**
+ * Waits until the site answers at all (any HTTP status). A new domain takes a few seconds to
+ * resolve, so a network error (ENOTFOUND, ECONNREFUSED...) is retried every `intervalMs` up to
+ * `timeoutMs`. Returns whether the site answered.
+ */
+export const waitForSite = async (
+  base,
+  { timeoutMs = NETWORK_TIMEOUT_MS, intervalMs = NETWORK_RETRY_MS, fetcher = fetch } = {},
+) => {
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    try {
+      await fetcher(new URL('/', base), { redirect: 'manual' });
+      return true;
+    } catch {
+      if (Date.now() + intervalMs > deadline) return false;
+      await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+  }
 };
 
 /** Runs a case against `base` and returns the list of failures (empty if it passes). */
@@ -176,6 +219,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (!base || (flag !== -1 && !dist)) {
     console.error('Usage: node scripts/edge-smoke.mjs <base> [--dist <dir>]');
     process.exit(2);
+  }
+  if (!(await waitForSite(base))) {
+    console.error(`FAIL ${base} did not answer in ${NETWORK_TIMEOUT_MS / 1000} s`);
+    process.exit(1);
   }
   const cases = smokeCases().filter((c) => c.sameAsFile === undefined || dist !== undefined);
   const failures = (await Promise.all(cases.map((c) => runCase(base, c, dist)))).flat();

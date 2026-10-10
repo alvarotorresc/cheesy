@@ -1,6 +1,6 @@
 import { DOCUMENT, PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideUmami, UMAMI_ORIGIN, UMAMI_WEBSITE_ID, umamiEnabled } from './umami';
+import { provideUmami, trackEvent, UMAMI_ORIGIN, UMAMI_WEBSITE_ID, umamiEnabled } from './umami';
 
 describe('Umami', () => {
   const scripts = (): HTMLScriptElement[] =>
@@ -63,5 +63,39 @@ describe('Umami', () => {
   it('should know it is enabled when there is an id', () => {
     expect(umamiEnabled('abc')).toBe(true);
     expect(umamiEnabled('')).toBe(false);
+  });
+});
+
+describe('trackEvent', () => {
+  type Tracked = Window & { umami?: { track: (...args: unknown[]) => void } };
+
+  it('sends only the event name to Umami', () => {
+    const track = vi.fn();
+    const view = { umami: { track } } as unknown as Tracked;
+    trackEvent('sync-create', view);
+    trackEvent('sync-join', view);
+    expect(track.mock.calls).toEqual([['sync-create'], ['sync-join']]);
+  });
+
+  it('does nothing without the Umami script or without a window', () => {
+    expect(() => trackEvent('sync-create', {} as Window)).not.toThrow();
+    expect(() => trackEvent('sync-create', undefined)).not.toThrow();
+  });
+
+  it('does nothing when counting is off', () => {
+    const track = vi.fn();
+    trackEvent('sync-join', { umami: { track } } as unknown as Tracked, '');
+    expect(track).not.toHaveBeenCalled();
+  });
+
+  it('never lets an analytics failure reach the caller', () => {
+    const view = {
+      umami: {
+        track: () => {
+          throw new Error('blocked');
+        },
+      },
+    } as unknown as Tracked;
+    expect(() => trackEvent('sync-create', view)).not.toThrow();
   });
 });

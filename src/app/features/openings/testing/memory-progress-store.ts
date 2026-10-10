@@ -6,6 +6,7 @@ import type {
   ProgressStoreLoader,
   PuzzleProgress,
   StoredLineProgress,
+  StoredTables,
   TableStore,
 } from '../../../core/progress';
 
@@ -24,15 +25,28 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
         if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
         rows.set(keyOf(row), row);
       },
+      update: async (key, change) => {
+        const next = change(rows.get(key));
+        if (next === undefined) return undefined;
+        if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
+        rows.set(keyOf(next), next);
+        return next;
+      },
       clear: async () => rows.clear(),
     };
-    return { rows, store };
+    return { rows, store, keyOf };
   };
   const lines = table<StoredLineProgress>((row) => row.key);
   const endgames = table<EndgameProgress>((row) => row.endgameId);
   const positions = table<PositionProgress>((row) => row.positionId);
   const lessons = table<LessonProgress>((row) => row.lessonId);
   const puzzles = table<PuzzleProgress>((row) => row.puzzleId);
+  const tables = { lines, endgames, positions, lessons, puzzles } as const;
+  const names = Object.keys(tables) as (keyof typeof tables)[];
+  const readAll = () =>
+    Object.fromEntries(
+      names.map((name) => [name, [...tables[name].rows.values()]]),
+    ) as unknown as StoredTables;
   const store: ProgressStore = {
     lines: lines.store,
     endgames: endgames.store,
@@ -42,6 +56,22 @@ export const memoryProgressStore = (options: { failWrites?: boolean } = {}) => {
       ...puzzles.store,
       ofLesson: async (lessonId) =>
         [...puzzles.rows.values()].filter((row) => row.lessonId === lessonId),
+    },
+    // Builds every new table before touching the maps, so a failure leaves them as they were.
+    readAll: async () => readAll(),
+    rewrite: async (change) => {
+      const next = change(readAll());
+      if (options.failWrites) throw new DOMException('Quota exceeded', 'QuotaExceededError');
+      const keyed = names.map((name) => {
+        const keyOf = tables[name].keyOf as (row: unknown) => string;
+        return new Map(next[name].map((row) => [keyOf(row), row]));
+      });
+      names.forEach((name, index) => {
+        const rows = tables[name].rows as Map<string, unknown>;
+        rows.clear();
+        for (const [key, row] of keyed[index]) rows.set(key, row);
+      });
+      return next;
     },
   };
   const loader: ProgressStoreLoader = async () => store;

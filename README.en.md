@@ -7,14 +7,14 @@ with short lessons, play openings and endgames against the computer, find the
 move in tactical positions and analyse with an engine. All in plain language:
 moves read as words (“knight to f3”) and, if you prefer, in notation. It is for
 anyone who wants to learn and practise chess at their own pace: there is
-no account to create, nothing to install and no ads, and your progress stays on
-your device.
+no sign-up, nothing to install and no ads, and your progress stays on your
+device unless you choose to sync it with a code.
 
 [![Open Cheesy](https://img.shields.io/badge/Open%20Cheesy-cheesy.alvarotc.com-f4c542?style=for-the-badge&labelColor=13222d)](https://cheesy.alvarotc.com)
 
 ![21 openings · 14 endgames · 13 positions](https://img.shields.io/badge/21%20openings%20%C2%B7%2014%20endgames-13%20positions-f4c542?style=flat-square&labelColor=13222d)
 ![Español / English](https://img.shields.io/badge/Espa%C3%B1ol-English-f4c542?style=flat-square&labelColor=13222d)
-![No accounts · No ads](https://img.shields.io/badge/No%20accounts-No%20ads-f4c542?style=flat-square&labelColor=13222d)
+![No sign-up · No ads](https://img.shields.io/badge/No%20sign--up-No%20ads-f4c542?style=flat-square&labelColor=13222d)
 ![Licence GPL-3.0](https://img.shields.io/badge/licence-GPL--3.0-f4c542?style=flat-square&labelColor=13222d)
 [![CI](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarotorresc/cheesy/actions/workflows/ci.yml)
 
@@ -77,18 +77,33 @@ your device.
 
 ## Privacy
 
-There is no server of our own, no account and no cookies. Your progress is saved
-in your browser (IndexedDB), and the About page explains it inside the app,
-including how to clear it.
+No cookies, no email and no password. Your progress is saved in your browser
+(IndexedDB) and, if you do not create a code, it never leaves it. If you create one, the four words are also saved in the
+browser so it syncs by itself; "Stop syncing here" forgets them. The About page
+explains it inside the app, including how to clear it.
 
-Only two things leave the browser:
+- **Sync with a code (optional).** If you create a four-word code, Cheesy keeps a
+  copy of your progress at Cloudflare (Workers and D1, acting as data processor)
+  so you can carry on in another browser. What is stored is your progress, the
+  dates it was created, last changed and last used, and a fingerprint of the code
+  that cannot be turned back into it; no name, email or password. Cloudflare sees
+  your IP when it serves the request and Cheesy does not store it; if a device
+  sends too many requests, Cloudflare logs its IP, browser and path in its
+  security log for 31 days. Error logs carry neither the code nor your progress
+  and are deleted after 3 days. The database's automatic backups keep deleted
+  data for up to 7 more days. The copy is deleted with "Delete from the server" or 12 months after it was last used.
+  Anyone with the code can see and change your progress, and if you lose it there
+  is no way to get it back. Your progress also stays on the device.
+
+Apart from that, two things leave the browser:
 
 - **In Endgames**, the position is looked up in the
   [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or
   referrer.
 - **In production**, visits are counted with a self-hosted
-  [Umami](https://umami.is), without cookies or personal data and respecting Do
-  Not Track. It is not loaded on `localhost`.
+  [Umami](https://umami.is), without cookies or data that identifies you and respecting Do
+  Not Track. It measures visits, page views and whether a code is created or
+  used. It is not loaded on `localhost`.
 
 ## Development
 
@@ -214,3 +229,4 @@ Made by [Alvaro Torres](https://github.com/alvarotorresc). Licensed under
 - [Lichess](https://lichess.org), whose open source work makes this project possible. The piece set is cburnett's, as bundled with chessground.
 - [lichess-org/chess-openings](https://github.com/lichess-org/chess-openings), names and ECO codes of openings used to check the content, dedicated to the public domain under CC0.
 - The [Lichess tablebase](https://tablebase.lichess.ovh) and [Stockfish](https://stockfishchess.org), used to verify the endgames and the positions.
+- The [EFF wordlist](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), licensed under CC BY 3.0 US / 4.0, which gives the words of the code for syncing progress.

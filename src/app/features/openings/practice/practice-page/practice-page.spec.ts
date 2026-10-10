@@ -201,7 +201,12 @@ describe('PracticePage', () => {
     });
 
     it('should say that progress stays in the browser', () => {
-      expect(text('app-practice-clear')).toContain('Your progress is saved in this browser only');
+      expect(text('app-practice-clear')).toContain(
+        'Your progress is saved in this browser, with no cookies or sign-up',
+      );
+      expect(element.querySelector('app-practice-clear a.text-button')?.getAttribute('href')).toBe(
+        '/en/your-progress',
+      );
     });
 
     it('should choose the colour of the player', async () => {
@@ -594,7 +599,8 @@ describe('PracticePage', () => {
 
     it('should still show the streak when the result could not be saved', async () => {
       seedStreak(2);
-      memory.store.lines.put = () => Promise.reject(new DOMException('full', 'QuotaExceededError'));
+      memory.store.lines.update = () =>
+        Promise.reject(new DOMException('full', 'QuotaExceededError'));
       await create();
       await chooseLineAndStart(MAIN);
       await finishMain();

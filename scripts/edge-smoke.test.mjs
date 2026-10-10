@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, it } from 'node:test';
 import { GLOBAL_HEADERS } from './edge-rules.mjs';
-import { runCase, smokeCases } from './edge-smoke.mjs';
+import { runCase, smokeCases, waitForSite } from './edge-smoke.mjs';
 
 /** Serves `reply(req)` = `[status, headers, body]` on a free port and runs `check(base)`. */
 const withServer = async (reply, check) => {
@@ -53,9 +53,29 @@ describe('smokeCases', () => {
       'robots',
       'engine wasm',
       'api 404',
+      'api pull text/plain',
+      'api pull GET',
     ]) {
       assert.ok(names.includes(name), name);
     }
+  });
+
+  it('should smoke the sync API: 415 for a non-JSON body and 405 with Allow for a GET', () => {
+    const json = { 'content-type': /^application\/json/, 'cache-control': 'no-store' };
+    assert.deepEqual(
+      [named('api pull text/plain'), named('api pull GET')].map((c) => [
+        c.method,
+        c.path,
+        c.status,
+      ]),
+      [
+        ['POST', '/api/sync/pull', 415],
+        ['GET', '/api/sync/pull', 405],
+      ],
+    );
+    assert.equal(named('api pull text/plain').headers['content-type'], 'text/plain');
+    assert.deepEqual(named('api pull text/plain').expectHeaders, json);
+    assert.deepEqual(named('api pull GET').expectHeaders, { ...json, allow: 'POST' });
   });
 
   it('should expect the files that are no pages to go to the page without the extension', () => {
@@ -152,5 +172,38 @@ describe('runCase', () => {
   it('should report a server that does not answer instead of throwing', async () => {
     const failures = await runCase('http://localhost:1', { name: 't', path: '/', status: 200 });
     assert.equal(failures.length, 1);
+  });
+});
+
+describe('waitForSite', () => {
+  const networkError = (code) => Object.assign(new TypeError('fetch failed'), { cause: { code } });
+  const options = { timeoutMs: 1000, intervalMs: 1 };
+
+  it('should retry while the host does not resolve or refuses, then resolve', async () => {
+    const errors = [networkError('ENOTFOUND'), networkError('ECONNREFUSED')];
+    let calls = 0;
+    const fetcher = async () => {
+      calls++;
+      if (errors.length > 0) throw errors.shift();
+      return new Response('ok', { status: 404 });
+    };
+    assert.equal(await waitForSite('http://x.test', { ...options, fetcher }), true);
+    assert.equal(calls, 3);
+  });
+
+  it('should treat any HTTP answer as the site being up', async () => {
+    const fetcher = async () => new Response('', { status: 500 });
+    assert.equal(await waitForSite('http://x.test', { ...options, fetcher }), true);
+  });
+
+  it('should give up after the timeout', async () => {
+    let calls = 0;
+    const fetcher = async () => {
+      calls++;
+      throw networkError('ENOTFOUND');
+    };
+    const up = await waitForSite('http://x.test', { timeoutMs: 20, intervalMs: 5, fetcher });
+    assert.equal(up, false);
+    assert.ok(calls > 1);
   });
 });

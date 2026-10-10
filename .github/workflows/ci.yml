@@ -63,6 +63,13 @@ jobs:
       - run: pnpm build
 
       # The wrangler of the lockfile (the one the Worker is tested with), without a third-party action.
+      # Migrations first: the new code never runs against an old schema. In CI wrangler does not ask.
+      - name: Apply D1 migrations
+        run: pnpm --filter cheesy-worker exec wrangler d1 migrations apply cheesy --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Deploy
         run: pnpm --filter cheesy-worker exec wrangler deploy
         env:

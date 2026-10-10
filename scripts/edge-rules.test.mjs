@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -183,11 +183,14 @@ describe('_redirects', () => {
 });
 
 describe('_headers', () => {
-  it('should carry the CSP and the global headers exactly as netlify.toml has them', () => {
-    const toml = readFileSync(join(ROOT, 'netlify.toml'), 'utf8');
-    for (const [name, value] of GLOBAL_HEADERS) {
-      assert.ok(toml.includes(`    ${name} = "${value}"\n`), name);
-    }
+  it('should carry the CSP and the global headers', () => {
+    const headers = new Map(GLOBAL_HEADERS);
+    assert.equal(
+      headers.get('Content-Security-Policy'),
+      "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://analytics.alvarotc.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://tablebase.lichess.ovh https://analytics.alvarotc.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    );
+    assert.equal(headers.get('X-Content-Type-Options'), 'nosniff');
+    assert.equal(headers.get('X-Frame-Options'), 'DENY');
     assert.equal(GLOBAL_HEADERS.length, 6);
   });
 
@@ -228,6 +231,8 @@ describe('_headers', () => {
     assert.ok(text.startsWith(`/*\n  Content-Security-Policy: default-src 'self';`));
     assert.ok(text.includes('\n/index.csr\n  X-Robots-Tag: noindex\n'));
     assert.ok(text.includes('\n/es/aperturas/:opening/practica\n  X-Robots-Tag: noindex\n'));
+    assert.ok(text.includes('\n/es/tu-progreso\n  X-Robots-Tag: noindex\n'));
+    assert.ok(text.includes('\n/en/your-progress\n  X-Robots-Tag: noindex\n'));
     assert.ok(text.includes('\n/en/learn/puzzles/*\n  X-Robots-Tag: noindex\n'));
     assert.ok(text.endsWith('\n') && !text.endsWith('\n\n'));
   });
@@ -280,6 +285,14 @@ describe('Workers static assets routing', () => {
       status: 301,
       location: '/es/analisis?x=1',
     });
+  });
+
+  it('should treat the progress page like any app route, with and without the slash', () => {
+    assert.deepEqual(resolve('/es/tu-progreso'), { status: 200, file: 'index.csr.html' });
+    assert.deepEqual(resolve('/es/tu-progreso/'), { status: 301, location: '/es/tu-progreso' });
+    assert.deepEqual(resolve('/en/your-progress'), { status: 200, file: 'index.csr.html' });
+    assert.deepEqual(resolve('/en/your-progress/'), { status: 301, location: '/en/your-progress' });
+    assert.deepEqual(resolve('/es/tu-progreso.html'), { status: 404, file: '404.html' });
   });
 
   it('should serve a page at its address and send its .html and its slash there', () => {
@@ -341,13 +354,14 @@ describe('app routes', () => {
   const lessonIds = sources.lessons.map(({ id }) => id);
 
   it('should list both languages, one practice per opening and one puzzle page per lesson', () => {
-    assert.equal(paths.length, 2 * (2 + sources.openings.length + lessonIds.length));
+    assert.equal(paths.length, 2 * (3 + sources.openings.length + lessonIds.length));
     for (const lang of urls.langs) {
       const pages = paths
         .map((path) => urls.pageOf(path))
         .filter((located) => located?.lang === lang)
         .map(({ page }) => page);
       assert.equal(pages.filter(({ kind }) => kind === 'analysis').length, 1);
+      assert.equal(pages.filter(({ kind }) => kind === 'progress').length, 1);
       assert.equal(pages.filter(({ kind }) => kind === 'puzzles').length, 1);
       assert.deepEqual(
         pages.filter(({ kind }) => kind === 'practice').map(({ id }) => id),
@@ -369,6 +383,7 @@ describe('app routes', () => {
       assert.equal(urls.pathOf(located.page, located.lang), path);
     }
     assert.ok(paths.includes('/es/analisis') && paths.includes('/en/analysis'));
+    assert.ok(paths.includes('/es/tu-progreso') && paths.includes('/en/your-progress'));
     assert.ok(paths.includes('/es/aprender/problemas') && paths.includes('/en/learn/puzzles'));
     assert.ok(paths.includes('/es/aperturas/apertura-italiana/practica'));
     assert.ok(paths.includes('/en/openings/italian-game/practice'));

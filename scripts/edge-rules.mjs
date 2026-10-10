@@ -17,14 +17,14 @@
 // 5. The app routes (`/en/analysis`, the practice of every opening, the puzzles): a 200 rewrite to
 //    the app shell `/index.csr`.
 //
-// The slash twins are there because Cloudflare, unlike Netlify, does not fold the trailing slash:
+// The slash twins are there because Cloudflare does not fold the trailing slash:
 // without them `/openings/` is a 404 and `/es/aperturas/` a 307 of `html_handling`. The shell is
 // `/index.csr` and never `/index.csr.html`: a rewrite to the `.html` file gets that 307 too, and
 // the address in the browser breaks. There is no catch-all and no dynamic rule: any other address
 // that is no file gets `404.html` with status 404 (`not_found_handling: "404-page"`). A 301 keeps
 // the query (`/analysis?fen=…`), and the browser keeps the fragment (`/glossary#pin`).
 //
-// `_headers` sets the security headers of every response (the CSP, the same as in `netlify.toml`)
+// `_headers` sets the security headers of every response (the CSP)
 // and keeps the app routes and the shell out of search engines with a few `X-Robots-Tag: noindex`
 // patterns (`/en/openings/:opening/practice`, `/en/learn/puzzles/*`), within the 100 rules of
 // Workers static assets.
@@ -45,7 +45,7 @@ export const REDIRECTS_FILE = '_redirects';
 /** The file of the build with the response headers of Workers static assets. */
 export const HEADERS_FILE = '_headers';
 
-/** The headers of every response of the site, as `[name, value]`, the same as in `netlify.toml`. */
+/** The headers of every response of the site, as `[name, value]`. */
 export const GLOBAL_HEADERS = [
   [
     'Content-Security-Policy',
@@ -150,7 +150,7 @@ export const pageFileRules = (sources = loadSources()) => {
 
 /**
  * The addresses answered with the app shell, in both languages: the pages the browser renders
- * (analysis, the puzzles, and the practice and puzzle page of every opening and lesson). None of
+ * (analysis, your progress, the puzzles, and the practice and puzzle page of every opening and lesson). None of
  * them is prerendered, so no file of the build shadows them.
  */
 export const appRoutePaths = (sources = loadSources()) => {
@@ -158,6 +158,7 @@ export const appRoutePaths = (sources = loadSources()) => {
   return urls.langs.flatMap((lang) =>
     [
       { kind: 'analysis' },
+      { kind: 'progress' },
       { kind: 'puzzles' },
       ...sources.openings.map(({ id }) => ({ kind: 'practice', id })),
       ...sources.lessons.map(({ id }) => ({ kind: 'puzzle', lesson: id })),
@@ -165,7 +166,7 @@ export const appRoutePaths = (sources = loadSources()) => {
   );
 };
 
-/** `/x/` → `/x` for each path: Cloudflare, unlike Netlify, does not fold the trailing slash. */
+/** `/x/` → `/x` for each path: Cloudflare does not fold the trailing slash. */
 export const slashRules = (paths) => paths.map((path) => [`${path}/`, path]);
 
 /** The lines of `_redirects`, first match wins: files, slashes, old addresses, app routes. */
@@ -190,7 +191,7 @@ export const redirectLines = (sources = loadSources()) => {
 
 /**
  * The paths kept out of search engines, as few `_headers` patterns: the shell, and per language the
- * analysis, the puzzles (the list and each lesson) and the practice of any opening.
+ * analysis, your progress, the puzzles (the list and each lesson) and the practice of any opening.
  */
 export const noindexPatterns = (sources = loadSources()) => {
   const { sections, app } = sources.slugs;
@@ -199,6 +200,7 @@ export const noindexPatterns = (sources = loadSources()) => {
   return [
     SHELL,
     ...each((lang) => `/${lang}/${app.analysis[lang]}`),
+    ...each((lang) => `/${lang}/${app.progress[lang]}`),
     ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}`),
     ...each((lang) => `/${lang}/${sections.learn[lang]}/${app.puzzles[lang]}/*`),
     ...each((lang) => `/${lang}/${sections.openings[lang]}/:opening/${app.practice[lang]}`),
@@ -234,7 +236,9 @@ export const headersText = (sources = loadSources()) =>
 export const pageFileOf = (to, sources) => {
   const located = createPageUrls(sources.slugs).pageOf(to);
   if (!located) throw new Error(`${to} is no page of the site`);
-  const shell = ['analysis', 'practice', 'puzzles', 'puzzle'].includes(located.page.kind);
+  const shell = ['analysis', 'progress', 'practice', 'puzzles', 'puzzle'].includes(
+    located.page.kind,
+  );
   return shell ? null : `${to.slice(1)}.html`;
 };
 

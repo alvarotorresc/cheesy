@@ -36,6 +36,7 @@ describe('page addresses', () => {
     [{ kind: 'glossary' }, '/es/aprender/glosario', '/en/learn/glossary'],
     [{ kind: 'about' }, '/es/acerca', '/en/about'],
     [{ kind: 'analysis' }, '/es/analisis', '/en/analysis'],
+    [{ kind: 'progress' }, '/es/tu-progreso', '/en/your-progress'],
     [{ kind: 'puzzles' }, '/es/aprender/problemas', '/en/learn/puzzles'],
     [
       { kind: 'puzzle', lesson: 'the-fork' },

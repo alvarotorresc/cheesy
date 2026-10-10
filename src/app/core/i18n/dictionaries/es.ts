@@ -31,12 +31,14 @@ export const es: Messages = {
     about: 'Acerca de',
   },
   footer: {
-    tagline: 'es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
+    tagline:
+      'es de código abierto. Sin cookies ni registro: tu progreso se queda en tu navegador, salvo que decidas sincronizarlo con un código.',
     navigation: 'Pie de página',
     source: 'Código fuente (GPL-3)',
     privacy: 'Privacidad',
     about: 'Acerca de',
     glossary: 'Glosario',
+    progress: 'Tu progreso',
   },
   glossary: {
     title: 'Glosario',
@@ -136,13 +138,13 @@ export const es: Messages = {
     homeBand: { title: '¿Empiezas desde cero?', cta: 'Aprende a jugar' },
     progressTitle: 'Tu progreso',
     privacy:
-      'Las lecciones completadas y los problemas se guardan solo en este navegador. Sin cuentas ni cookies: si borras los datos del navegador, se pierden.',
+      'Las lecciones completadas y los problemas se guardan en este navegador, sin cookies ni registro. Si borras los datos del navegador y no los has sincronizado con un código, se pierden.',
     progressUnavailable:
       'Este navegador no deja guardar el progreso. Puedes seguir aprendiendo sin él.',
     clearProgress: 'Borrar el progreso',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todas las lecciones completadas y los problemas de Practica más guardados en este navegador. No se puede deshacer.',
+      'Se borran todas las lecciones completadas y los problemas de Practica más guardados en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     nothingSaved: 'No hay progreso guardado.',
@@ -218,13 +220,13 @@ export const es: Messages = {
     toc: 'En esta página',
     briefTitle: 'En corto',
     brief: [
-      'Tu progreso se queda en tu navegador.',
-      'Solo las posiciones de los finales salen, hacia Lichess.',
-      'Sin cuentas ni cookies.',
+      'Tu progreso se queda en tu navegador, salvo que lo sincronices con un código.',
+      'Sale la posición de los finales, hacia Lichess, y tu progreso si lo sincronizas.',
+      'Sin cookies, sin email y sin contraseña.',
       'Código abierto, con licencia GPL-3.',
     ],
-    privacyClaim: 'Sin cuentas ni cookies.',
-    privacyIntro: 'Esto es lo que se guarda en tu navegador y lo único que sale de él.',
+    privacyClaim: 'Sin cookies, sin cuentas con email y con el mínimo de datos.',
+    privacyIntro: 'Esto es lo que se guarda en tu navegador y lo que puede salir de él.',
     staysTitle: 'Se queda en tu navegador',
     stays: [
       { title: 'Tu progreso en Aperturas', text: 'Qué líneas has practicado y cuáles dominas.' },
@@ -240,17 +242,91 @@ export const es: Messages = {
         title: 'Finales superados y posiciones resueltas',
         text: 'Y cuáles resolviste a la primera.',
       },
+      {
+        title: 'Tu código, si sincronizas',
+        text: 'Las cuatro palabras, para sincronizar solo. Cualquiera con acceso a este navegador puede leerlas; «Dejar de sincronizar aquí» las olvida.',
+      },
       { title: 'El idioma', text: 'Si eliges español o inglés.' },
       { title: 'El modo de lectura', text: 'Si lees las jugadas en Palabras o en Notación.' },
       { title: 'El panel de la tablebase', text: 'Si lo quieres abierto o plegado en Finales.' },
     ],
     staysNote:
-      'Nada de esto sale de tu dispositivo. Si cambias de navegador o de ordenador, empiezas de cero.',
+      'Si no usas un código, nada de esto sale de tu dispositivo. Si cambias de navegador sin código, empiezas de cero.',
     eraseTitle: 'Cómo borrarlo',
     eraseButton: 'Borrar el progreso',
     eraseButtonText: ', en Aprender, Aperturas, Finales y Posiciones, borra el de esa sección.',
     eraseAll:
       'Para borrarlo todo de una vez, borra los datos de este sitio desde la configuración de tu navegador.',
+    syncTitle: 'Si sincronizas con un código',
+    syncIntro:
+      'Es opcional. Si creas un código de cuatro palabras, Cheesy guarda una copia de tu progreso en un servidor para que puedas seguir en otro navegador u ordenador. Sin código, tu progreso no sale de tu dispositivo.',
+    syncItems: [
+      {
+        title: 'Qué se guarda',
+        text: 'Tu progreso (lo de la lista de arriba, salvo el idioma, el modo de lectura y el panel), las fechas de creación, último cambio y último uso, y una huella del código que no permite recuperarlo. Nada más que te identifique: ni nombre, ni email, ni contraseña.',
+      },
+      {
+        title: 'Dónde',
+        text: 'En Cloudflare (Workers y D1), que actúa como encargado del tratamiento. Como en cualquier web, Cloudflare ve tu IP al servir la petición; Cheesy no la guarda. Si un dispositivo hace demasiadas peticiones, Cloudflare anota su IP, navegador y ruta en su registro de seguridad durante 31 días. Los registros de errores no incluyen el código ni tu progreso y se borran a los 3 días. Las copias de seguridad automáticas de la base de datos guardan lo borrado hasta 7 días más.',
+      },
+      {
+        title: 'Cuánto tiempo',
+        text: 'Hasta que lo borres con «Borrar del servidor», o 12 meses después del último uso.',
+      },
+      {
+        title: 'Quién puede verlo',
+        text: 'Cualquiera que tenga tu código: puede ver y cambiar tu progreso. No lo compartas.',
+      },
+      {
+        title: 'Si pierdes el código',
+        text: 'No hay forma de recuperarlo: el progreso del servidor queda inaccesible hasta que se purgue. Guárdalo en tu gestor de contraseñas o exporta un fichero.',
+      },
+      {
+        title: 'Tu progreso sigue en tu dispositivo',
+        text: 'La copia del servidor es solo eso, una copia. Borrarla del servidor no toca lo que tienes guardado en este navegador.',
+      },
+    ],
+    syncLegal: [
+      {
+        title: 'Quién es el responsable',
+        before:
+          'Cheesy la hace y mantiene Álvaro Torres Carrasco. Para cualquier duda o petición sobre tus datos, escribe a ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Para qué y con qué permiso',
+        before:
+          'Guardar tu progreso para que lo recuperes en otro dispositivo. Lo haces tú al crear o usar un código (tu consentimiento), y puedes retirarlo cuando quieras borrando la cuenta o dejando de sincronizar. Es opcional: sin código todo funciona y tu progreso no sale de tu dispositivo. Si tienes menos de 14 años, hazlo con un adulto.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Fuera de la Unión Europea',
+        before:
+          'Cloudflare es una empresa de EE. UU. La transferencia se ampara en el Marco de Privacidad de Datos UE-EE. UU. y, si dejara de valer, en las cláusulas contractuales tipo de su contrato de encargado. Puedes pedirme una copia en ',
+        link: 'alvarotc.dev@protonmail.com',
+        href: 'mailto:alvarotc.dev@protonmail.com',
+        after: '.',
+      },
+      {
+        title: 'Tus derechos',
+        before:
+          'Puedes acceder a tus datos, corregirlos, borrarlos, limitar su uso, oponerte a él y llevártelos (con «Exportar» bajas un fichero). Lo más rápido es hacerlo tú en la página, con «Borrar del servidor». Si prefieres escribirme, no sé quién eres sin tu código (no guardo nombre ni email), así que tendrás que enviármelo; con él localizo lo tuyo. No te pediré nada más.',
+        link: '',
+        href: '',
+        after: '',
+      },
+      {
+        title: 'Si crees que no se tratan bien',
+        before: 'Puedes reclamar ante la ',
+        link: 'Agencia Española de Protección de Datos',
+        href: 'https://www.aepd.es',
+        after: '.',
+      },
+    ],
     sendsTitle: 'Sale hacia Lichess',
     sendsIntro: {
       before: 'En Finales, el rival juega lo que dice la ',
@@ -277,9 +353,9 @@ export const es: Messages = {
     umamiTitle: 'Contamos visitas con Umami',
     umamiText: 'Una analítica sencilla, alojada en un servidor propio y con la conexión cifrada.',
     umamiFacts: [
-      { label: 'Mide', value: 'Visitas y páginas vistas' },
+      { label: 'Mide', value: 'Visitas, páginas vistas y si se crea o usa un código' },
       { label: 'Sin', value: 'Cookies' },
-      { label: 'Nunca', value: 'Datos personales' },
+      { label: 'Nunca', value: 'Datos que te identifiquen' },
     ],
     creditsIntro: 'Cheesy se apoya en trabajo abierto de otras personas. Gracias.',
     credit: {
@@ -324,6 +400,11 @@ export const es: Messages = {
       bricolage: {
         license: 'OFL 1.1',
         text: 'La tipografía de toda la web.',
+      },
+      wordlist: {
+        name: 'Lista de palabras de la EFF',
+        license: 'CC BY 3.0 US / 4.0',
+        text: 'Las palabras con las que se forma el código de cuatro palabras para sincronizar tu progreso.',
       },
       phosphor: {
         name: 'Phosphor Icons',
@@ -399,6 +480,152 @@ export const es: Messages = {
       `${name} tras ${moves}, con una barra de evaluación ilustrativa.`,
     analysisButton: (name: string) => `Reproducir la ${name} con la barra de evaluación`,
     illustrativeBar: 'barra ilustrativa',
+  },
+  progressPage: {
+    title: 'Tu progreso',
+    lead: 'Guarda tu progreso con un código de cuatro palabras y sigue en otro navegador.',
+    privacyLink: 'Qué se guarda en el servidor y cuánto tiempo',
+    loading: 'Cargando…',
+    ledgerTitle: 'Dónde está tu progreso',
+    thisBrowser: 'En este navegador',
+    rows: (counts: Record<'lines' | 'endgames' | 'positions' | 'lessons' | 'puzzles', number>) =>
+      [
+        counts.lessons && (counts.lessons === 1 ? '1 lección' : `${counts.lessons} lecciones`),
+        counts.puzzles && (counts.puzzles === 1 ? '1 problema' : `${counts.puzzles} problemas`),
+        counts.lines &&
+          (counts.lines === 1 ? '1 línea de apertura' : `${counts.lines} líneas de apertura`),
+        counts.endgames && (counts.endgames === 1 ? '1 final' : `${counts.endgames} finales`),
+        counts.positions &&
+          (counts.positions === 1 ? '1 posición' : `${counts.positions} posiciones`),
+      ]
+        .filter(Boolean)
+        .join(', ') || 'Nada todavía',
+    syncTitle: 'Sincronización',
+    status: {
+      unavailable: 'No disponible en este navegador',
+      off: 'Solo aquí: sin sincronizar con un código',
+      idle: 'Sincronizado',
+      syncing: 'Sincronizando…',
+      offline: 'Sin conexión: se sincronizará al volver',
+      error: 'No se ha podido sincronizar',
+      outdated: 'Guardado por un Cheesy más nuevo',
+    },
+    errorDetail: {
+      conflict: 'Otro dispositivo estaba guardando a la vez. Prueba «Sincronizar ahora».',
+      'too-large': 'Tu progreso no cabe en el servidor. Exporta un fichero para no perderlo.',
+      unavailable:
+        'El servidor no responde. Cheesy lo intentará más tarde; también puedes «Sincronizar ahora».',
+      gone: '',
+    },
+    outdatedDetail: 'Recarga la página para seguir sincronizando.',
+    syncedAgo: (ago: string) => `Última sincronización: ${ago}`,
+    justNow: 'hace un momento',
+    syncNow: 'Sincronizar ahora',
+    createTitle: 'Consigue un código',
+    createText:
+      'Cheesy elige cuatro palabras para ti. Quien las escriba, en cualquier navegador, abre este progreso y lo mantiene al día.',
+    create: 'Crear mi código',
+    creating: 'Creando…',
+    createFailed: {
+      linked: 'Este navegador ya se sincroniza con un código.',
+      offline: 'Sin conexión. Inténtalo de nuevo cuando vuelvas a tenerla.',
+      'too-large': 'Tu progreso no cabe en el servidor. Exporta un fichero en su lugar.',
+      unavailable: 'El servidor no responde. Inténtalo dentro de un rato.',
+    },
+    joinTitle: '¿Ya tienes un código?',
+    joinText:
+      'Escribe sus cuatro palabras. Da igual que uses mayúsculas, tildes, espacios o guiones.',
+    codeLabel: 'Tu código',
+    codePlaceholder: 'cuatro palabras',
+    join: 'Entrar',
+    joining: 'Comprobando…',
+    ordinals: ['primera', 'segunda', 'tercera', 'cuarta'],
+    wordCount: (count: number) =>
+      count === 1
+        ? 'Un código tiene cuatro palabras; aquí hay 1.'
+        : `Un código tiene cuatro palabras; aquí hay ${count}.`,
+    badWord: (ordinal: string) => `La ${ordinal} palabra no está en la lista.`,
+    badCode: 'Eso no es un código. Revisa las cuatro palabras.',
+    joinFailed: {
+      'not-found': 'No hay progreso guardado con ese código. Revisa las palabras.',
+      offline: 'Sin conexión. Inténtalo de nuevo cuando vuelvas a tenerla.',
+      unavailable: 'El servidor no responde. Inténtalo dentro de un rato.',
+      outdated:
+        'Ese progreso lo guardó un Cheesy más nuevo. Recarga la página e inténtalo de nuevo.',
+      linked: 'Este navegador ya se sincroniza con un código. Deja de sincronizar aquí primero.',
+    },
+    chooseAgain:
+      'Ha cambiado el progreso de este navegador mientras tanto. Vuelve a escribir el código.',
+    joined: 'Listo: este navegador se sincroniza con tu código.',
+    chooseTitle: 'Este navegador ya tiene progreso',
+    chooseText: '¿Qué hacemos con él?',
+    inAccount: 'En la cuenta',
+    inBrowser: 'En este navegador',
+    merge: 'Unir',
+    mergeText: 'Se queda todo lo de los dos lados, aquí y en el servidor.',
+    replace: 'Usar solo la cuenta',
+    replaceText: 'Se borra el progreso de este navegador.',
+    exportFirst: 'Exportarlo antes',
+    cancel: 'Cancelar',
+    gone: 'Esta cuenta ya no existe en el servidor. Tu progreso sigue en este navegador.',
+    createNew: 'Crear un código nuevo',
+    revealTitle: 'Tu código',
+    revealText: 'Cópialo o apúntalo ahora. Si lo pierdes, no hay forma de recuperarlo.',
+    saved: 'Lo he guardado',
+    notSaved:
+      'Este navegador no ha podido guardar el código, así que aquí no se sincroniza. Apúntalo ahora: es la única forma de volver a tu progreso del servidor.',
+    savedFirst: 'Marca «Lo he guardado» para cerrar.',
+    done: 'Hecho',
+    codeTitle: 'Tu código',
+    codeHidden: 'Código oculto',
+    show: 'Mostrar',
+    hide: 'Ocultar',
+    copy: 'Copiar',
+    copied: 'Código copiado.',
+    copyFailed: 'No se ha podido copiar. Muestra el código y copia las palabras a mano.',
+    warning:
+      'Quien tenga el código puede ver y cambiar tu progreso. Si lo pierdes, no hay forma de recuperarlo: guárdalo en tu gestor de contraseñas o exporta un fichero.',
+    leave: 'Dejar de sincronizar aquí',
+    deleteRemote: 'Borrar del servidor',
+    leaveTitle: '¿Dejar tu progreso en este navegador?',
+    leaveText:
+      'En los dos casos, este navegador olvida el código. El servidor conserva tu progreso y el código sigue funcionando en tus otros dispositivos.',
+    keep: 'Mantenerlo',
+    erase: 'Borrarlo de este navegador',
+    left: 'Este navegador ya no se sincroniza.',
+    unsyncedTitle: 'Hay cambios sin subir',
+    unsyncedText:
+      'Lo último que has hecho en este navegador aún no ha llegado al servidor (sin conexión o el servidor no responde). Si sales ahora, ya no llegará.',
+    unsyncedErase: 'Y como vas a borrarlo de este navegador, se perderá.',
+    leaveAnyway: 'Salir igualmente',
+    deleteTitle: '¿Borrar tu progreso del servidor?',
+    deleteText:
+      'Se borra tu progreso del servidor. Este navegador lo conserva. El código deja de funcionar en todos tus dispositivos.',
+    deleted: 'Borrado del servidor. Este navegador conserva tu progreso.',
+    deleteFailed: 'No se ha podido borrar: el servidor no ha respondido. No ha cambiado nada.',
+    fileTitle: 'Una copia en un fichero',
+    fileText:
+      'Descarga tu progreso para guardarlo o para llevarlo a otro navegador sin código. Al importar un fichero se une con lo que hay aquí: no se borra nada.',
+    export: 'Exportar',
+    import: 'Importar un fichero',
+    exported: (name: string) => `Descargado ${name}.`,
+    exportFailed: 'No se ha podido leer el progreso de este navegador.',
+    imported: (count: number) =>
+      count === 1
+        ? 'Fichero importado: 1 fila leída.'
+        : `Fichero importado: ${count} filas leídas.`,
+    importFailed: {
+      'too-big': 'Ese fichero pasa de 1 MB: no es una exportación de Cheesy.',
+      'not-json': 'Ese fichero no es una exportación de Cheesy.',
+      'not-a-document': 'Ese fichero no es una exportación de Cheesy.',
+      'newer-version':
+        'Ese fichero lo exportó un Cheesy más nuevo. Recarga la página e inténtalo de nuevo.',
+      failed: 'No se ha podido guardar el fichero en este navegador. No ha cambiado nada.',
+    },
+    unavailableTitle: 'La sincronización no funciona en este navegador',
+    unavailableText:
+      'Este navegador no deja a Cheesy guardar datos (una ventana privada o datos de sitios bloqueados), así que aquí no hay nada que sincronizar.',
+    fromNotice: 'Sincronizar o exportar',
   },
   analysis: {
     title: 'Tablero de análisis',
@@ -533,7 +760,7 @@ export const es: Messages = {
     progressTitle: 'Tu progreso',
     clearTitle: '¿Borrar el progreso?',
     clearText:
-      'Se borra el progreso de las aperturas guardado en este navegador, con blancas y con negras. El de finales y posiciones no se toca. No se puede deshacer.',
+      'Se borra el progreso de las aperturas guardado en este navegador, con blancas y con negras. El de finales y posiciones no se toca. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     noProgress: 'No hay progreso guardado.',
     loading: 'Cargando aperturas…',
     loadError: 'No se han podido cargar las aperturas.',
@@ -709,13 +936,13 @@ export const es: Messages = {
     saveFailed: 'No se ha podido guardar este resultado en este navegador.',
     errorHint: 'Comprueba la conexión y vuelve a intentarlo.',
     privacy:
-      'Tu progreso se guarda solo en este navegador. No hay cuentas ni cookies y tu progreso no sale de este dispositivo; si borras los datos del navegador, se pierde.',
+      'Tu progreso se guarda en este navegador, sin cookies ni registro. Solo sale de este dispositivo si lo sincronizas con un código; si borras los datos del navegador y no lo has sincronizado, se pierde.',
     unavailable:
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
     clear: 'Borrar el progreso',
     clearTitle: '¿Borrar el progreso?',
     clearBody:
-      'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. No se puede deshacer.',
+      'Se borra todo el progreso de las aperturas guardado en este navegador, con blancas y con negras. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     confirmClearAction: 'Borrar',
     cancel: 'Cancelar',
     cleared: 'Progreso borrado.',
@@ -851,7 +1078,7 @@ export const es: Messages = {
     noMatches: 'Ninguna posición cumple estos filtros.',
     noMatchesHint: 'Prueba con otro color, otro número de jugadas u otro estado.',
     progressNote:
-      'Tu progreso se guarda solo en este navegador, sin cuentas ni cookies. Si borras los datos del navegador, se pierde.',
+      'Tu progreso se guarda en este navegador, sin cookies ni registro. Si borras los datos del navegador y no lo has sincronizado con un código, se pierde.',
     clearProgress: 'Borrar el progreso',
     nothingToClear: 'No hay progreso guardado.',
     progressCleared: 'Progreso borrado.',
@@ -860,7 +1087,7 @@ export const es: Messages = {
       'Este navegador no nos deja guardar el progreso (navegación privada o almacenamiento bloqueado). Todo lo demás funciona.',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todas las posiciones resueltas guardadas en este navegador. No se puede deshacer.',
+      'Se borran todas las posiciones resueltas guardadas en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     findMove: (moves: number) =>
@@ -982,13 +1209,13 @@ export const es: Messages = {
     notFound: 'Este final no existe.',
     progressTitle: 'Tu progreso',
     privacy:
-      'Los finales superados se guardan solo en este navegador. Sin cuentas ni cookies: si borras los datos del navegador, se pierden.',
+      'Los finales superados se guardan en este navegador, sin cookies ni registro. Si borras los datos del navegador y no los has sincronizado con un código, se pierden.',
     progressUnavailable:
       'Este navegador no deja guardar el progreso. Puedes seguir practicando sin él.',
     clearProgress: 'Borrar el progreso',
     confirmTitle: '¿Borrar el progreso?',
     confirmBody:
-      'Se borran todos los finales superados guardados en este navegador. No se puede deshacer.',
+      'Se borran todos los finales superados guardados en este navegador. Si sincronizas con un código, se borra también en el servidor y en tus otros dispositivos. No se puede deshacer.',
     cancel: 'Cancelar',
     confirmClear: 'Borrar',
     nothingSaved: 'No hay progreso guardado.',
@@ -1105,7 +1332,7 @@ export const es: Messages = {
       glossary:
         'Las palabras del ajedrez explicadas en llano, de la horquilla y la clavada a la oposición y el zugzwang, cada una con un tablero que enseña la idea.',
       about:
-        'Qué es Cheesy y quién lo hace: un entrenador de ajedrez libre y gratuito que guarda tu progreso en tu navegador, sin cuentas, sin cookies y sin anuncios.',
+        'Qué es Cheesy y quién lo hace: un entrenador de ajedrez libre y gratuito que guarda tu progreso en tu navegador, sin cookies, sin registro y sin anuncios.',
       notFound: 'Esta dirección no es una página de Cheesy.',
     },
     breadcrumb: 'Ruta de navegación',

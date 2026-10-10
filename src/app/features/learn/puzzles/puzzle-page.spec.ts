@@ -326,9 +326,9 @@ describe('PuzzlePage', () => {
     beforeEach(() => {
       setup();
       const held: (() => void)[] = [];
-      const put = memory.store.puzzles.put;
-      memory.store.puzzles.put = (row) =>
-        new Promise((resolve) => held.push(() => resolve(put(row))));
+      const update = memory.store.puzzles.update;
+      memory.store.puzzles.update = (key, change) =>
+        new Promise((resolve) => held.push(() => resolve(update(key, change))));
       release = () => held.splice(0).forEach((resolve) => resolve());
     });
 

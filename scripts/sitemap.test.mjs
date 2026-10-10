@@ -35,7 +35,7 @@ describe('sitemapEntries', () => {
   it('should not list the root nor the client routes', () => {
     assert.ok(!byLoc.has(`${ORIGIN}/`));
     assert.ok(!byLoc.has(ORIGIN));
-    for (const kind of ['analysis', 'puzzles']) {
+    for (const kind of ['analysis', 'progress', 'puzzles']) {
       for (const lang of urls.langs) {
         assert.ok(!byLoc.has(ORIGIN + urls.pathOf({ kind }, lang)), `${kind} ${lang}`);
       }

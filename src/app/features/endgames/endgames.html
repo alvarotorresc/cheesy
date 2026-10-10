@@ -223,6 +223,9 @@
       <button type="button" class="text-button" (click)="askToClear()">
         {{ t.clearProgress }}
       </button>
+      <a class="text-button" [routerLink]="links.progress()">{{
+        i18n.t().progressPage.fromNotice
+      }}</a>
     </div>
     <p class="status-msg" role="status">{{ message() }}</p>
   </section>

@@ -55,7 +55,14 @@ describe('OpeningList', () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
 
+  // jsdom has no <dialog> methods and the prototype is shared with the specs that run after this
+  // one in the same worker: what a test stubs on it must not outlive the test.
+  const dialogProto = HTMLDialogElement.prototype;
+  const dialogMethods = { showModal: dialogProto.showModal, close: dialogProto.close };
+
   afterEach(() => {
+    dialogProto.showModal = dialogMethods.showModal;
+    dialogProto.close = dialogMethods.close;
     localStorage.clear();
     vi.restoreAllMocks();
   });
@@ -287,7 +294,10 @@ describe('OpeningList', () => {
       await settle();
 
       expect(element.querySelector('.privacy')?.textContent).toContain(
-        'Your progress is saved in this browser only',
+        'Your progress is saved in this browser, with no cookies or sign-up',
+      );
+      expect(element.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+        '/en/your-progress',
       );
       await click(element.querySelector('.privacy .text-button'));
       expect(element.querySelector('.status-msg')?.textContent?.trim()).toBe(

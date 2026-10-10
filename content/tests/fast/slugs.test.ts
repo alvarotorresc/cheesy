@@ -106,7 +106,12 @@ describe('slug format and uniqueness', () => {
   });
 
   it('names the pages of the app that are not indexed, apart from the levels and sections', () => {
-    expect(sorted(Object.keys(slugData.app))).toEqual(['analysis', 'practice', 'puzzles']);
+    expect(sorted(Object.keys(slugData.app))).toEqual([
+      'analysis',
+      'practice',
+      'progress',
+      'puzzles',
+    ]);
     for (const lang of SLUG_LANGS) {
       const values = [
         ...Object.values(slugData.levels).map((s) => s[lang]),

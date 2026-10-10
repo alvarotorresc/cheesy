@@ -75,6 +75,10 @@ export class PageLinks {
   puzzle(lesson: string): string {
     return this.to({ kind: 'puzzle', lesson });
   }
+
+  progress(): string {
+    return this.to({ kind: 'progress' });
+  }
 }
 
 /**

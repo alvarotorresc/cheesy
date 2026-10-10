@@ -50,6 +50,7 @@ const langServerRoutes = (lang: Lang): ServerRoute[] => {
   const puzzles = `${learn}/${slugs.app.puzzles[lang]}`;
   return [
     { path: `${lang}/${slugs.app.analysis[lang]}`, renderMode: RenderMode.Client },
+    { path: `${lang}/${slugs.app.progress[lang]}`, renderMode: RenderMode.Client },
     { path: `${openings}/:id/${slugs.app.practice[lang]}`, renderMode: RenderMode.Client },
     { path: puzzles, renderMode: RenderMode.Client },
     { path: `${puzzles}/:lesson`, renderMode: RenderMode.Client },

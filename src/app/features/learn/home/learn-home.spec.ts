@@ -239,6 +239,9 @@ describe('LearnHome', () => {
       await progress.recordEndgame('lucena');
       const root = await render('/learn');
       expect(root.querySelector('.continue')).not.toBeNull();
+      expect(root.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+        '/en/your-progress',
+      );
 
       const showModal = openDialog(root);
       expect(showModal).toHaveBeenCalled();
@@ -259,7 +262,16 @@ describe('LearnHome', () => {
       await progress.recordLesson({ lessonId: 'the-board', exercises: 2, firstTry: 2 });
       await progress.recordPuzzle({ puzzleId: 'KEPe0', lessonId: 'the-fork', firstTry: true });
       vi.spyOn(console, 'error').mockImplementation(() => undefined);
-      memory.store.puzzles.clear = () => Promise.reject(new DOMException('Blocked', 'AbortError'));
+      // Clearing a section rewrites the tables: fail the rewrite that would empty the puzzles.
+      const rewrite = memory.store.rewrite;
+      memory.store.rewrite = (change) =>
+        rewrite((current) => {
+          const next = change(current);
+          if (current.puzzles.length > 0 && next.puzzles.length === 0) {
+            throw new DOMException('Blocked', 'AbortError');
+          }
+          return next;
+        });
       const root = await render('/learn');
       expect(root.querySelector('.continue')).not.toBeNull();
 

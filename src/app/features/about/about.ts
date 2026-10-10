@@ -8,10 +8,12 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { parseFen } from 'chessops/fen';
 import { umamiEnabled } from '../../core/analytics';
 import { ContentService } from '../../core/content';
 import { I18nService } from '../../core/i18n';
+import { PageLinks } from '../../core/routing';
 import { AboutCredits } from './credits/about-credits';
 import { tablebaseRequestUrl } from '../../core/tablebase';
 import {
@@ -57,7 +59,7 @@ interface SentPosition {
  */
 @Component({
   selector: 'app-about',
-  imports: [AboutCredits, MiniBoard],
+  imports: [AboutCredits, MiniBoard, RouterLink],
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
@@ -66,6 +68,7 @@ export class About {
   /** Keeps the prerender waiting until the content is on the page. */
   private readonly wait = injectPrerenderWait();
   protected readonly t = this.i18n.t;
+  protected readonly links = inject(PageLinks);
   private readonly content = inject(ContentService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -87,6 +90,29 @@ export class About {
       const figure = this.figure();
       if (figure) this.sweepOnFirstView(figure.nativeElement);
     });
+  }
+
+  /**
+   * Cuts a sentence at the buttons of the page «Your progress» it names between «», so each one
+   * can link to the page where it is.
+   */
+  protected segments(text: string): readonly { text: string; link: boolean }[] {
+    const p = this.t().progressPage;
+    const labels = [p.export, p.deleteRemote].map((label) => `«${label}»`);
+    const parts: { text: string; link: boolean }[] = [];
+    let rest = text;
+    while (rest) {
+      const found = labels
+        .map((label) => ({ label, at: rest.indexOf(label) }))
+        .filter((hit) => hit.at >= 0)
+        .sort((a, b) => a.at - b.at)[0];
+      if (!found) break;
+      if (found.at > 0) parts.push({ text: rest.slice(0, found.at), link: false });
+      parts.push({ text: found.label, link: true });
+      rest = rest.slice(found.at + found.label.length);
+    }
+    if (rest) parts.push({ text: rest, link: false });
+    return parts;
   }
 
   protected show(rank: number | undefined): void {

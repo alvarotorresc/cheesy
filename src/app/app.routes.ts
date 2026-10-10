@@ -46,6 +46,12 @@ export const langRoutes = (lang: Lang): Routes => [
     loadComponent: () => import('./features/analysis/analysis').then((m) => m.Analysis),
   },
   {
+    path: slugs.app.progress[lang],
+    title: 'progress' satisfies PageSection,
+    data: { main: 'about' } satisfies RouteData,
+    loadComponent: () => import('./features/progress/progress-page').then((m) => m.ProgressPage),
+  },
+  {
     path: slugs.sections.learn[lang],
     loadChildren: () => import('./features/learn/learn.routes').then((m) => m.learnRoutes(lang)),
   },

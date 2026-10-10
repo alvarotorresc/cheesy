@@ -14,16 +14,17 @@ describe('SiteFooter', () => {
 
   afterEach(() => localStorage.clear());
 
-  it('should promise no accounts and no cookies, in Spanish', async () => {
+  it('should promise no cookies or sign-up, in Spanish', async () => {
     const element = await render('es');
 
     expect(element.querySelector('p')?.textContent).toContain(
-      'Cheesy es de código abierto. Sin cuentas ni cookies: tu progreso se queda en tu navegador.',
+      'Cheesy es de código abierto. Sin cookies ni registro: tu progreso se queda en tu navegador, salvo que decidas sincronizarlo con un código.',
     );
     expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe('Pie de página');
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([
       'Código fuente (GPL-3)',
       'Privacidad',
+      'Tu progreso',
       'Glosario',
       'Acerca de',
       'alvarotc.com',
@@ -34,12 +35,13 @@ describe('SiteFooter', () => {
     const element = await render('en');
 
     expect(element.querySelector('p')?.textContent).toContain(
-      'Cheesy is open source. No accounts, no cookies: your progress stays in your browser.',
+      'Cheesy is open source. No cookies or sign-up: your progress stays in your browser, unless you choose to sync it with a code.',
     );
     expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe('Footer');
     expect(Array.from(element.querySelectorAll('a'), (link) => link.textContent?.trim())).toEqual([
       'Source code (GPL-3)',
       'Privacy',
+      'Your progress',
       'Glossary',
       'About',
       'alvarotc.com',
@@ -48,11 +50,12 @@ describe('SiteFooter', () => {
 
   it('should send Privacy to its anchor and About to the top of the About page', async () => {
     const element = await render('en');
-    const [, privacy, glossary, about] = Array.from(element.querySelectorAll('a'));
+    const [, privacy, progress, glossary, about] = Array.from(element.querySelectorAll('a'));
 
     expect(glossary.getAttribute('href')).toBe('/en/learn/glossary');
     expect(privacy.getAttribute('href')).toBe('/en/about#privacidad');
     expect(about.getAttribute('href')).toBe('/en/about');
+    expect(progress.getAttribute('href')).toBe('/en/your-progress');
   });
 
   it('should never mention analytics', async () => {
