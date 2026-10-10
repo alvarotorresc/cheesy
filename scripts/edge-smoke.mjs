@@ -4,9 +4,9 @@
 //
 //   node scripts/edge-smoke.mjs <base> [--dist <dir>]
 //
-// With `--dist` some responses are also compared byte by byte with the files of the build, which
-// shows a zone feature that rewrites the HTML. It exits with 1 and lists every failure if any case
-// fails.
+// With `--dist` it first waits (up to 90 s) for the site to serve this build, and some responses
+// are also compared byte by byte with the files of the build, which shows a zone feature that
+// rewrites the HTML. It exits with 1 and lists every failure if any case fails.
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -169,6 +169,39 @@ export const waitForSite = async (
   }
 };
 
+const BUILD_RETRY_MS = 5000;
+const BUILD_TIMEOUT_MS = 90_000;
+
+/**
+ * Waits until `base` serves THIS build. After a deploy the edge keeps answering with the previous
+ * version for a few seconds, so it requests the `main-*.js` bundle referenced by the shell of the
+ * build (its name has a hash, so it only exists in the new one) every `intervalMs` up to
+ * `timeoutMs` and compares it byte by byte with the file of `dist`. Returns whether it is served.
+ */
+export const waitForBuild = async (
+  base,
+  dist,
+  { timeoutMs = BUILD_TIMEOUT_MS, intervalMs = BUILD_RETRY_MS, fetcher = fetch } = {},
+) => {
+  const shell = readFileSync(join(dist, 'index.csr.html'), 'utf8');
+  const bundle = shell.match(/\bmain-[A-Za-z0-9_-]+\.js\b/)?.[0];
+  if (!bundle) throw new Error(`No main-*.js bundle is referenced by ${dist}/index.csr.html`);
+  const expected = readFileSync(join(dist, bundle));
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    try {
+      const response = await fetcher(new URL(`/${bundle}`, base), { redirect: 'manual' });
+      if (response.status === 200 && Buffer.from(await response.arrayBuffer()).equals(expected)) {
+        return true;
+      }
+    } catch {
+      // Network error: retried like a different build.
+    }
+    if (Date.now() + intervalMs > deadline) return false;
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+};
+
 /** Runs a case against `base` and returns the list of failures (empty if it passes). */
 export const runCase = async (base, c, dist) => {
   const failures = [];
@@ -215,7 +248,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const flag = args.indexOf('--dist');
   const dist = flag === -1 ? undefined : args[flag + 1];
-  const base = args.find((arg, index) => !arg.startsWith('--') && index !== flag + 1);
+  const base = args.find(
+    (arg, index) => !arg.startsWith('--') && (flag === -1 || index !== flag + 1),
+  );
   if (!base || (flag !== -1 && !dist)) {
     console.error('Usage: node scripts/edge-smoke.mjs <base> [--dist <dir>]');
     process.exit(2);
@@ -224,8 +259,15 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.error(`FAIL ${base} did not answer in ${NETWORK_TIMEOUT_MS / 1000} s`);
     process.exit(1);
   }
+  const stale =
+    dist !== undefined && !(await waitForBuild(base, dist))
+      ? [`build: production still serves an older build (waited ${BUILD_TIMEOUT_MS / 1000} s)`]
+      : [];
   const cases = smokeCases().filter((c) => c.sameAsFile === undefined || dist !== undefined);
-  const failures = (await Promise.all(cases.map((c) => runCase(base, c, dist)))).flat();
+  const failures = [
+    ...stale,
+    ...(await Promise.all(cases.map((c) => runCase(base, c, dist)))).flat(),
+  ];
   for (const failure of failures) console.error(`FAIL ${failure}`);
   console.log(`${cases.length} cases, ${failures.length} failures.`);
   process.exit(failures.length > 0 ? 1 : 0);

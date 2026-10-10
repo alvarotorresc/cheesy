@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, it } from 'node:test';
 import { GLOBAL_HEADERS } from './edge-rules.mjs';
-import { runCase, smokeCases, waitForSite } from './edge-smoke.mjs';
+import { runCase, smokeCases, waitForBuild, waitForSite } from './edge-smoke.mjs';
 
 /** Serves `reply(req)` = `[status, headers, body]` on a free port and runs `check(base)`. */
 const withServer = async (reply, check) => {
@@ -205,5 +205,75 @@ describe('waitForSite', () => {
     const up = await waitForSite('http://x.test', { timeoutMs: 20, intervalMs: 5, fetcher });
     assert.equal(up, false);
     assert.ok(calls > 1);
+  });
+});
+
+describe('waitForBuild', () => {
+  const makeDist = () => {
+    const dist = mkdtempSync(join(tmpdir(), 'smoke-dist-'));
+    writeFileSync(
+      join(dist, 'index.csr.html'),
+      '<script src="main-ABC123.js" type="module"></script>',
+    );
+    writeFileSync(join(dist, 'main-ABC123.js'), 'console.log("new")');
+    return dist;
+  };
+  const options = { timeoutMs: 1000, intervalMs: 1 };
+
+  it('should retry until the main bundle of this build is served', async () => {
+    const dist = makeDist();
+    try {
+      let calls = 0;
+      const fetcher = async (url) => {
+        calls++;
+        assert.equal(new URL(url).pathname, '/main-ABC123.js');
+        return calls < 3
+          ? new Response('<html>spa fallback</html>', { status: 200 })
+          : new Response('console.log("new")', { status: 200 });
+      };
+      assert.equal(await waitForBuild('http://x.test', dist, { ...options, fetcher }), true);
+      assert.equal(calls, 3);
+    } finally {
+      rmSync(dist, { recursive: true });
+    }
+  });
+
+  it('should give up after the timeout when production keeps serving the old build', async () => {
+    const dist = makeDist();
+    try {
+      const fetcher = async () => new Response('', { status: 404 });
+      const served = await waitForBuild('http://x.test', dist, {
+        timeoutMs: 20,
+        intervalMs: 5,
+        fetcher,
+      });
+      assert.equal(served, false);
+    } finally {
+      rmSync(dist, { recursive: true });
+    }
+  });
+
+  it('should keep waiting through network errors', async () => {
+    const dist = makeDist();
+    try {
+      let calls = 0;
+      const fetcher = async () => {
+        if (calls++ === 0) throw new TypeError('fetch failed');
+        return new Response('console.log("new")');
+      };
+      assert.equal(await waitForBuild('http://x.test', dist, { ...options, fetcher }), true);
+    } finally {
+      rmSync(dist, { recursive: true });
+    }
+  });
+
+  it('should fail clearly when the build has no main bundle', async () => {
+    const dist = mkdtempSync(join(tmpdir(), 'smoke-dist-'));
+    writeFileSync(join(dist, 'index.csr.html'), '<html></html>');
+    try {
+      await assert.rejects(waitForBuild('http://x.test', dist, options), /main-\*\.js/);
+    } finally {
+      rmSync(dist, { recursive: true });
+    }
   });
 });
