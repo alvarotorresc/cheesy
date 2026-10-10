@@ -159,7 +159,7 @@ describe('Endgames list', () => {
     dialog.showModal = showModal;
     dialog.close = vi.fn();
 
-    element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    element.querySelector<HTMLButtonElement>('.privacy button.clear-progress')?.click();
     expect(showModal).toHaveBeenCalled();
     element.querySelector<HTMLButtonElement>('dialog .button.danger')?.click();
     await fixture.whenStable();
@@ -173,11 +173,11 @@ describe('Endgames list', () => {
   it('should say there is nothing to delete when no progress is saved', async () => {
     const { fixture, element } = await render(async () => [LUCENA]);
 
-    element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    element.querySelector<HTMLButtonElement>('.privacy button.clear-progress')?.click();
     await fixture.whenStable();
 
     expect(element.querySelector('.status-msg')?.textContent).toBe('There is no saved progress.');
-    const sync = element.querySelector('.privacy a.text-button');
+    const sync = element.querySelector('.privacy a.sync-progress');
     expect(sync?.textContent?.trim()).toBe('Sync or export');
     expect(sync?.getAttribute('href')).toBe('/en/your-progress');
   });

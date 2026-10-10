@@ -268,6 +268,60 @@ describe('LessonPage', () => {
       await goToFirstExercise();
       expect(nextButton()!.disabled).toBe(true);
     });
+
+    it('should name the next lesson on its button', async () => {
+      await render('/en/learn/beginner/the-board');
+      await solveEveryStep();
+      const link = root().querySelector('.summary a.next-lesson');
+      expect(link?.textContent?.trim()).toBe('Next lesson: Knight moves');
+    });
+
+    it('should mark each exercise of the summary, the first tries apart', async () => {
+      await render('/learn/beginner/knight-moves');
+      // solveEveryStep misses the first exercise and gets the other two at the first try.
+      await solveEveryStep();
+      const marks = root().querySelectorAll('.summary .score .mark');
+      expect(marks).toHaveLength(3);
+      expect(root().querySelectorAll('.summary .score .mark.clean')).toHaveLength(2);
+      expect(marks[0].classList.contains('clean')).toBe(false);
+      // The marks are a picture of the sentence next to them, which says it in words.
+      expect(root().querySelector('.summary .score .marks')?.getAttribute('aria-hidden')).toBe(
+        'true',
+      );
+      expect(root().querySelector('.summary .first-try')?.textContent).toContain(
+        '2 of 3 exercises on the first try',
+      );
+    });
+
+    it('should repeat the lesson from its first step, counting afresh', async () => {
+      const record = vi.spyOn(progress, 'recordLesson');
+      await render('/learn/beginner/knight-moves');
+      await solveEveryStep();
+      const repeat = root().querySelector<HTMLButtonElement>('.summary button.repeat')!;
+      expect(repeat.textContent?.trim()).toBe('Repeat the lesson');
+      repeat.click();
+      await settle();
+      expect(root().querySelector('.summary')).toBeNull();
+      expect(stepOf()).toBe('Step 1 of 5');
+      expect(document.activeElement).toBe(root().querySelector('h1'));
+      await goToFirstExercise();
+      // A done exercise does not carry over: it has to be done again.
+      expect(nextButton()!.disabled).toBe(true);
+      while (!root().querySelector('.summary')) {
+        if (exercise()) await finishExercise(true);
+        await clickNext();
+      }
+      expect(root().querySelector('.summary .first-try')?.textContent).toContain(
+        '3 of 3 exercises on the first try',
+      );
+      expect(record).toHaveBeenCalledTimes(2);
+      expect(record).toHaveBeenLastCalledWith({
+        lessonId: 'knight-moves',
+        exercises: 3,
+        firstTry: 3,
+      });
+      expect(await progress.lessons()).toHaveLength(1);
+    });
   });
 
   it('should lead from the last lesson of a level to the first one of the next level', async () => {

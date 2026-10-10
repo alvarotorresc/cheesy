@@ -49,51 +49,68 @@
   @case ('ready') {
     @if (onSummary()) {
       <section class="summary">
-        <!-- The lesson stays the h1 of the page; the focus goes to "Lesson complete" below it. -->
-        <h1 class="lesson-title">{{ i18n.localize(current.lesson.title) }}</h1>
-        <h2 data-step-heading tabindex="-1">{{ t.summaryTitle }}</h2>
-        @if (exercises() > 0) {
-          <p class="first-try">{{ t.firstTry(firstTries(), exercises()) }}</p>
-        }
-        @if (current.terms.length > 0) {
-          <section class="terms" aria-labelledby="learned-terms">
-            <h3 id="learned-terms">{{ t.learnedTerms }}</h3>
-            <ul>
-              @for (term of current.terms; track term.id) {
-                <li>
-                  <a [routerLink]="links.glossary()" [fragment]="term.id">{{
-                    i18n.localize(term.name)
-                  }}</a>
-                </li>
-              }
-            </ul>
-          </section>
-        }
-        <div class="summary-actions">
+        <div class="summary-card">
+          <span class="done-mark" aria-hidden="true"><app-icon name="check-bold" /></span>
+          <!-- The lesson stays the h1 of the page; the focus goes to "Lesson complete" below it. -->
+          <h1 class="lesson-title">{{ i18n.localize(current.lesson.title) }}</h1>
+          <h2 data-step-heading tabindex="-1">{{ t.summaryTitle }}</h2>
+          @if (exercises() > 0) {
+            <div class="score">
+              <!-- A square per exercise, filled when it was done at the first try. -->
+              <ol class="marks" aria-hidden="true">
+                @for (firstTry of marks(); track $index) {
+                  <li class="mark" [class.clean]="firstTry"></li>
+                }
+              </ol>
+              <p class="first-try">{{ t.firstTry(firstTries(), exercises()) }}</p>
+            </div>
+          }
+          @if (current.terms.length > 0) {
+            <section class="terms" aria-labelledby="learned-terms">
+              <h3 id="learned-terms">{{ t.learnedTerms }}</h3>
+              <ul>
+                @for (term of current.terms; track term.id) {
+                  <li>
+                    <a [routerLink]="links.glossary()" [fragment]="term.id">{{
+                      i18n.localize(term.name)
+                    }}</a>
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+        </div>
+        <nav class="summary-actions" [attr.aria-label]="t.whatNext">
           @if (current.next; as nextLesson) {
             <a
               class="button primary next-lesson"
               [routerLink]="links.lesson(nextLesson.level, nextLesson.id)"
-              >{{ t.nextLessonButton }}</a
+              >{{ t.nextLessonNamed(i18n.localize(nextLesson.title)) }}</a
             >
           }
-          @if (hasPuzzles()) {
-            <a class="button puzzles" [routerLink]="links.puzzle(current.lesson.id)">{{
-              t.puzzles.lessonButton
-            }}</a>
-          }
-          @if (practice(); as link) {
-            <a
-              class="button practise"
-              [routerLink]="links.to(link.page)"
-              [queryParams]="link.queryParams"
-              >{{ t.practise }}</a
-            >
-          }
-          <a class="button back-to-level" [routerLink]="links.level(level())">{{
-            t.backToLevel(levelName)
-          }}</a>
-        </div>
+          <div class="more">
+            <button type="button" class="button repeat" (click)="repeat()">
+              <app-icon name="arrow-counter-clockwise" />
+              {{ t.repeatLesson }}
+            </button>
+            @if (hasPuzzles()) {
+              <a class="button puzzles" [routerLink]="links.puzzle(current.lesson.id)">{{
+                t.puzzles.lessonButton
+              }}</a>
+            }
+            @if (practice(); as link) {
+              <a
+                class="button practise"
+                [routerLink]="links.to(link.page)"
+                [queryParams]="link.queryParams"
+                >{{ t.practise }}</a
+              >
+            }
+          </div>
+          <a class="back back-to-level" [routerLink]="links.level(level())"
+            >← {{ t.backToLevel(levelName) }}</a
+          >
+        </nav>
       </section>
     } @else {
       <div class="play-stage">
