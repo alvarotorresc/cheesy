@@ -139,7 +139,7 @@ export const en = {
     clearProgress: 'Delete progress',
     confirmTitle: 'Delete progress?',
     confirmBody:
-      'This deletes every completed lesson and every puzzle of Practise more saved in this browser. It cannot be undone.',
+      'This deletes every completed lesson and every puzzle of Practise more saved in this browser. If you sync with a code, it is also deleted on the server and on your other devices. It cannot be undone.',
     cancel: 'Cancel',
     confirmClear: 'Delete',
     nothingSaved: 'There is no saved progress.',
@@ -221,7 +221,7 @@ export const en = {
       'No cookies, no email and no password.',
       'Open source, under the GPL-3 licence.',
     ],
-    privacyClaim: 'No cookies and no personal data.',
+    privacyClaim: 'No cookies, no email accounts and as little data as possible.',
     privacyIntro: 'This is what is saved in your browser and what can leave it.',
     staysTitle: 'Stays in your browser',
     stays: [
@@ -241,6 +241,10 @@ export const en = {
         title: 'Endgames passed and positions solved',
         text: 'And which ones you solved at the first try.',
       },
+      {
+        title: 'Your code, if you sync',
+        text: 'The four words, so it syncs by itself. Anyone with access to this browser can read them; "Stop syncing here" forgets them.',
+      },
       { title: 'The language', text: 'Whether you choose Spanish or English.' },
       {
         title: 'The reading mode',
@@ -258,15 +262,15 @@ export const en = {
       'To delete everything at once, clear the data of this site from your browser settings.',
     syncTitle: 'If you sync with a code',
     syncIntro:
-      'It is optional. If you create a four-word code, Cheesy keeps a copy of your progress on a server so you can carry on in another browser or computer. Without a code, nothing is saved outside your device.',
+      'It is optional. If you create a four-word code, Cheesy keeps a copy of your progress on a server so you can carry on in another browser or computer. Without a code, your progress never leaves your device.',
     syncItems: [
       {
         title: 'What is saved',
-        text: 'Your progress (what is in the list above, except the language, the reading mode and the panel), the dates it was created, last changed and last used, and a fingerprint of the code that cannot be turned back into it. Nothing else: no name, no email, no password.',
+        text: 'Your progress (what is in the list above, except the language, the reading mode and the panel), the dates it was created, last changed and last used, and a fingerprint of the code that cannot be turned back into it. Nothing else that identifies you: no name, no email, no password.',
       },
       {
         title: 'Where',
-        text: 'At Cloudflare (Workers and D1), which acts as data processor. As on any website, Cloudflare sees your IP address when it serves the request; Cheesy does not store it. The server error logs do not include the code or your progress and are deleted after 3 days.',
+        text: "At Cloudflare (Workers and D1), which acts as data processor. As on any website, Cloudflare sees your IP address when it serves the request; Cheesy does not store it. If a device sends too many requests, Cloudflare logs its IP, browser and path in its security log for 31 days. Error logs do not include the code or your progress and are deleted after 3 days. The database's automatic backups keep deleted data for up to 7 more days.",
       },
       {
         title: 'For how long',
@@ -297,7 +301,7 @@ export const en = {
       {
         title: 'Why, and on what basis',
         before:
-          'To keep your progress so you can pick it up on another device. You do it yourself when you create or use a code (your consent), and you can withdraw it at any time by deleting the account or stopping the sync. It is optional: without a code everything works and nothing is sent. If you are under 14, do it with an adult.',
+          'To keep your progress so you can pick it up on another device. You do it yourself when you create or use a code (your consent), and you can withdraw it at any time by deleting the account or stopping the sync. It is optional: without a code everything works and your progress never leaves your device. If you are under 14, do it with an adult.',
         link: '',
         href: '',
         after: '',
@@ -352,9 +356,9 @@ export const en = {
     umamiTitle: 'We count visits with Umami',
     umamiText: 'A simple analytics tool, hosted on our own server over an encrypted connection.',
     umamiFacts: [
-      { label: 'Measures', value: 'Visits and page views' },
+      { label: 'Measures', value: 'Visits, page views and whether a code is created or used' },
       { label: 'Without', value: 'Cookies' },
-      { label: 'Never', value: 'Personal data' },
+      { label: 'Never', value: 'Data that identifies you' },
     ],
     creditsIntro: 'Cheesy builds on the open work of other people. Thank you.',
     credit: {
@@ -745,7 +749,7 @@ export const en = {
     progressTitle: 'Your progress',
     clearTitle: 'Delete the progress?',
     clearText:
-      'The openings progress saved in this browser is deleted, with White and with Black. Endgames and positions are not touched. This cannot be undone.',
+      'The openings progress saved in this browser is deleted, with White and with Black. Endgames and positions are not touched. If you sync with a code, it is also deleted on the server and on your other devices. This cannot be undone.',
     noProgress: 'There is no saved progress.',
     loading: 'Loading openings…',
     loadError: 'The openings could not be loaded.',
@@ -923,7 +927,7 @@ export const en = {
     clear: 'Delete progress',
     clearTitle: 'Delete the progress?',
     clearBody:
-      'This deletes all the openings progress saved in this browser, as white and as black. It cannot be undone.',
+      'This deletes all the openings progress saved in this browser, as white and as black. If you sync with a code, it is also deleted on the server and on your other devices. It cannot be undone.',
     confirmClearAction: 'Delete',
     cancel: 'Cancel',
     cleared: 'Progress deleted.',
@@ -1061,7 +1065,8 @@ export const en = {
     storageUnavailable:
       'This browser does not let us keep your progress (private browsing or blocked storage). Everything else works.',
     confirmTitle: 'Clear the progress?',
-    confirmBody: 'Every solved position saved in this browser is deleted. This cannot be undone.',
+    confirmBody:
+      'Every solved position saved in this browser is deleted. If you sync with a code, it is also deleted on the server and on your other devices. This cannot be undone.',
     cancel: 'Cancel',
     confirmClear: 'Clear',
     findMove: (moves: number) =>
@@ -1186,7 +1191,8 @@ export const en = {
       'This browser does not let progress be saved. You can keep practising without it.',
     clearProgress: 'Delete progress',
     confirmTitle: 'Delete progress?',
-    confirmBody: 'This deletes every passed endgame saved in this browser. It cannot be undone.',
+    confirmBody:
+      'This deletes every passed endgame saved in this browser. If you sync with a code, it is also deleted on the server and on your other devices. It cannot be undone.',
     cancel: 'Cancel',
     confirmClear: 'Delete',
     nothingSaved: 'There is no saved progress.',

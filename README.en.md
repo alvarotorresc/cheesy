@@ -78,7 +78,8 @@ device unless you choose to sync it with a code.
 ## Privacy
 
 No cookies, no email and no password. Your progress is saved in your browser
-(IndexedDB) and, if you do not create a code, it never leaves it. The About page
+(IndexedDB) and, if you do not create a code, it never leaves it. If you create one, the four words are also saved in the
+browser so it syncs by itself; "Stop syncing here" forgets them. The About page
 explains it inside the app, including how to clear it.
 
 - **Sync with a code (optional).** If you create a four-word code, Cheesy keeps a
@@ -86,20 +87,23 @@ explains it inside the app, including how to clear it.
   so you can carry on in another browser. What is stored is your progress, the
   dates it was created, last changed and last used, and a fingerprint of the code
   that cannot be turned back into it; no name, email or password. Cloudflare sees
-  your IP when it serves the request and Cheesy does not store it; the error logs
-  carry neither the code nor your progress and are deleted after 3 days. The copy
-  is deleted with "Delete from the server" or 12 months after it was last used.
+  your IP when it serves the request and Cheesy does not store it; if a device
+  sends too many requests, Cloudflare logs its IP, browser and path in its
+  security log for 31 days. Error logs carry neither the code nor your progress
+  and are deleted after 3 days. The database's automatic backups keep deleted
+  data for up to 7 more days. The copy is deleted with "Delete from the server" or 12 months after it was last used.
   Anyone with the code can see and change your progress, and if you lose it there
   is no way to get it back. Your progress also stays on the device.
 
-Apart from that, only two things leave the browser:
+Apart from that, two things leave the browser:
 
 - **In Endgames**, the position is looked up in the
   [Lichess tablebase](https://tablebase.lichess.ovh), without cookies or
   referrer.
 - **In production**, visits are counted with a self-hosted
-  [Umami](https://umami.is), without cookies or personal data and respecting Do
-  Not Track. It is not loaded on `localhost`.
+  [Umami](https://umami.is), without cookies or data that identifies you and respecting Do
+  Not Track. It measures visits, page views and whether a code is created or
+  used. It is not loaded on `localhost`.
 
 ## Development
 

@@ -81,8 +81,14 @@ describe('About', () => {
   it('should say what is saved and how to clear it, section by section', async () => {
     const element = await open();
 
-    expect(element.querySelectorAll('.pane:not(.sync) .stays li')).toHaveLength(7);
-    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(6)'))).toContain(
+    expect(element.querySelectorAll('.pane:not(.sync) .stays li')).toHaveLength(8);
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(5)'))).toContain(
+      'Tu código, si sincronizas',
+    );
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(5)'))).toContain(
+      '«Dejar de sincronizar aquí» las olvida',
+    );
+    expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(7)'))).toContain(
       'El modo de lectura',
     );
     expect(text(element.querySelector('.pane:not(.sync) .stays li:nth-child(2)'))).toContain(
@@ -106,6 +112,9 @@ describe('About', () => {
     expect(body).toContain('Cloudflare');
     expect(body).toContain('encargado del tratamiento');
     expect(body).toContain('12 meses');
+    expect(body).toContain('31 días');
+    expect(body).toContain('hasta 7 días más');
+    expect(body).toContain('Nada más que te identifique');
     expect(body).toContain('Borrar del servidor');
     expect(body).toContain('No hay forma de recuperarlo');
     expect(body).toContain('sigue en tu dispositivo');

@@ -7,7 +7,7 @@ import {
   type EnvironmentProviders,
 } from '@angular/core';
 
-/** Where the visits are counted: a self-hosted Umami, without cookies or personal data. */
+/** Where the visits are counted: a self-hosted Umami, without cookies or data that identifies you. */
 export const UMAMI_ORIGIN = 'https://analytics.alvarotc.com';
 
 /** The site as registered in Umami. Empty would load nothing. */

@@ -79,7 +79,9 @@ salvo que decidas sincronizarlo con un código.
 ## Privacidad
 
 Sin cookies, sin email y sin contraseña. Tu progreso se guarda en tu navegador
-(IndexedDB) y, si no creas un código, no sale de ahí. La página Acerca de lo
+(IndexedDB) y, si no creas un código, no sale de ahí. Si creas uno, las cuatro
+palabras también se guardan en el navegador para sincronizar solas; «Dejar de
+sincronizar aquí» las olvida. La página Acerca de lo
 explica dentro de la app, con cómo borrarlo.
 
 - **Sincronizar con un código (opcional).** Si creas un código de cuatro palabras,
@@ -87,20 +89,24 @@ explica dentro de la app, con cómo borrarlo.
   como encargado del tratamiento) para que sigas en otro navegador. Se guarda tu
   progreso, las fechas de creación, último cambio y último uso, y una huella del
   código que no permite recuperarlo; no se guarda nombre, email ni contraseña.
-  Cloudflare ve tu IP al servir la petición y Cheesy no la guarda; los registros
-  de errores no llevan el código ni tu progreso y se borran a los 3 días. La copia
-  se borra con «Borrar del servidor» o 12 meses después del último uso. Quien
+  Cloudflare ve tu IP al servir la petición y Cheesy no la guarda; si un
+  dispositivo hace demasiadas peticiones, Cloudflare anota su IP, navegador y
+  ruta en su registro de seguridad durante 31 días. Los registros de errores no
+  llevan el código ni tu progreso y se borran a los 3 días. Las copias de
+  seguridad automáticas de la base de datos guardan lo borrado hasta 7 días más.
+  La copia se borra con «Borrar del servidor» o 12 meses después del último uso. Quien
   tenga el código puede ver y cambiar tu progreso, y si lo pierdes no hay forma
   de recuperarlo. Tu progreso sigue también en el dispositivo.
 
-Aparte de eso, solo salen dos cosas del navegador:
+Aparte de eso, salen dos cosas del navegador:
 
 - **En Finales**, la posición se consulta en la
   [tablebase de Lichess](https://tablebase.lichess.ovh), sin cookies ni
   referrer.
 - **En producción**, las visitas se cuentan con un [Umami](https://umami.is)
-  autoalojado, sin cookies ni datos personales y respetando Do Not Track. No se
-  carga en `localhost`.
+  autoalojado, sin cookies ni datos que te identifiquen y respetando Do Not
+  Track. Mide visitas, páginas vistas y si se crea o usa un código. No se carga
+  en `localhost`.
 
 ## Desarrollo
 
