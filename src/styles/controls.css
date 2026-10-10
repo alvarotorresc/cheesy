@@ -77,6 +77,37 @@
   }
 }
 
+/*
+ * The two actions under a note about saved progress: take it elsewhere (sync or export) and
+ * delete it. Real buttons, so they are found, but at the size of the note so they do not outshine
+ * the page. Deleting is the quieter of the two: red text with no box until hovered, and it still
+ * asks first.
+ */
+.progress-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.progress-actions .button {
+  padding-inline: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.progress-actions .clear-progress {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-danger);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.progress-actions .clear-progress:hover {
+  background: var(--color-danger-soft);
+}
+
 /* Square button that holds a single glyph. */
 .button.icon {
   min-width: var(--tap);

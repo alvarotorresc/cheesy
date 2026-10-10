@@ -2,11 +2,13 @@
 
 <div class="progress-note">
   <p>{{ t.privacy }}</p>
-  <div class="links">
-    <button #clearButton type="button" class="text-button" (click)="ask()">{{ t.clear }}</button>
-    <a class="text-button" [routerLink]="links.progress()">{{
+  <div class="progress-actions">
+    <a class="button sync-progress" [routerLink]="links.progress()">{{
       i18n.t().progressPage.fromNotice
     }}</a>
+    <button #clearButton type="button" class="button clear-progress" (click)="ask()">
+      {{ t.clear }}
+    </button>
   </div>
   <p role="status">{{ result() }}</p>
 </div>

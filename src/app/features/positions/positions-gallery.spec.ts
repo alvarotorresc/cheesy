@@ -206,10 +206,10 @@ describe('PositionsGallery', () => {
     dialog.showModal = vi.fn();
     dialog.close = vi.fn();
 
-    expect(page.element.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+    expect(page.element.querySelector('.privacy a.sync-progress')?.getAttribute('href')).toBe(
       '/en/your-progress',
     );
-    page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    page.element.querySelector<HTMLButtonElement>('.privacy button.clear-progress')?.click();
     expect(dialog.showModal).toHaveBeenCalled();
     page.element.querySelector<HTMLButtonElement>('dialog .danger')?.click();
 
@@ -235,7 +235,7 @@ describe('PositionsGallery', () => {
     const dialog = page.element.querySelector('dialog') as HTMLDialogElement;
     dialog.showModal = vi.fn();
 
-    page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    page.element.querySelector<HTMLButtonElement>('.privacy button.clear-progress')?.click();
     release();
 
     await vi.waitFor(() => expect(dialog.showModal).toHaveBeenCalled());
@@ -248,7 +248,7 @@ describe('PositionsGallery', () => {
   it('should say there is nothing to clear when no progress is saved', async () => {
     const page = await ready();
 
-    page.element.querySelector<HTMLButtonElement>('.privacy .text-button')?.click();
+    page.element.querySelector<HTMLButtonElement>('.privacy button.clear-progress')?.click();
     page.harness.detectChanges();
 
     expect(page.element.querySelector('.status-msg')?.textContent).toBe(

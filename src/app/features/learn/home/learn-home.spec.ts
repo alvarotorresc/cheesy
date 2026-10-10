@@ -229,7 +229,7 @@ describe('LearnHome', () => {
       const showModal = vi.fn();
       dialog.showModal = showModal;
       dialog.close = vi.fn();
-      root.querySelector<HTMLButtonElement>('.privacy .text-button')!.click();
+      root.querySelector<HTMLButtonElement>('.privacy button.clear-progress')!.click();
       return showModal;
     };
 
@@ -239,7 +239,7 @@ describe('LearnHome', () => {
       await progress.recordEndgame('lucena');
       const root = await render('/learn');
       expect(root.querySelector('.continue')).not.toBeNull();
-      expect(root.querySelector('.privacy a.text-button')?.getAttribute('href')).toBe(
+      expect(root.querySelector('.privacy a.sync-progress')?.getAttribute('href')).toBe(
         '/en/your-progress',
       );
 

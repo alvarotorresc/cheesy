@@ -79,12 +79,6 @@
   font-size: var(--text-sm);
 }
 
-.actions-inline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-}
-
 .status-msg {
   min-height: 1.5em;
   font-weight: 600;
