@@ -81,16 +81,24 @@ describe('timeAgo', () => {
 });
 
 describe('ProgressPage', () => {
+  // jsdom has no <dialog> methods. Other specs stub them on the shared prototype and some never
+  // put them back (nor fire «close»), so this one sets its own and restores what it found.
+  const proto = HTMLDialogElement.prototype;
+  const original = { showModal: proto.showModal, close: proto.close };
+
   beforeAll(() => {
-    // jsdom has no <dialog> methods.
-    const proto = HTMLDialogElement.prototype;
-    proto.showModal ??= function (this: HTMLDialogElement) {
+    proto.showModal = function (this: HTMLDialogElement) {
       this.setAttribute('open', '');
     };
-    proto.close ??= function (this: HTMLDialogElement) {
+    proto.close = function (this: HTMLDialogElement) {
       this.removeAttribute('open');
       this.dispatchEvent(new Event('close'));
     };
+  });
+
+  afterAll(() => {
+    proto.showModal = original.showModal;
+    proto.close = original.close;
   });
 
   afterEach(() => vi.restoreAllMocks());
